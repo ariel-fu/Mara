@@ -1,80 +1,469 @@
+
+// import 'package:english_words/english_words.dart';
+// import 'package:animated_flip_card/animated_flip_card.dart';
+import 'package:flip_card/flip_card.dart';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'dart:math';
+
+import 'launch_screen.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (context) => MyAppState(),
+//       child: MaterialApp(
+//         title: 'Mara App',
+//         theme: ThemeData(
+//           useMaterial3: true,
+//           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+//         ),
+//         home: MyHomePage(),
+//       ),
+//     );
+//   }
+// }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue, 
+    return ChangeNotifierProvider(
+      create: (context) => MyAppState(),
+      child: MaterialApp(
+        title: 'Cat Care',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
+        ),
+        home: LaunchScreen(), // Change this to LaunchScreen
       ),
-      home: HomeScreen(),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class MyAppState extends ChangeNotifier {
+  late String current;
+  var favorites = <String>[];
+  var nonfavorites = <String>[];
+  var index = 0;
+  final List<String> catImages = [
+    'assets/images/image1.png',
+    'assets/images/image2.png',
+    'assets/images/image3.png',
+    'assets/images/image4.png'
+  ];
+
+  final List<String> captions = ['Kibble', 'Vitamins', 'Litter box', 'Toys'];
+  final List<String> descriptions= ['Kibble is really healthy for cats. It is yummy. It is delicious. It is krunchy.', 
+                                  'Vitamins are necessary for cats. Cats will be shiny. Cats will be healthy. Cats will be happy.', 
+                                  'Litter box is a must for you. The house will be clean. The house will be sparkling. The house will be amazing.', 
+                                  'Toys are wanted by cats. Cats love to play. Cats love to chase. Cats love to nap.'];
+
+  MyAppState() {
+    current = getCatImage();
+  }
+
+  String getCatImage() {
+    
+    var indexNow = index;
+    index++;
+    index = index % catImages.length;
+    return catImages[indexNow];
+  }
+
+  void getNext() {
+    String curr = getCurrentCaption();
+    if (!nonfavorites.contains(curr)) {
+      nonfavorites.add(curr);
+    }
+
+    current = getCatImage();
+    notifyListeners();
+  }
+
+  void toggleFavorite() {
+    final currentCaption = getCurrentCaption();
+    if (!favorites.contains(currentCaption)) {
+      favorites.add(currentCaption);
+    } else {
+      favorites.remove(currentCaption);
+    }
+    notifyListeners();
+  }
+
+  String getCurrentCaption() {
+    return captions[catImages.indexOf(current)];
+  }
+
+  String getCurrentDescription() {
+    return descriptions[catImages.indexOf(current)];
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  var selectedIndex = 0;
+  bool isSpanish = false;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget page;
+    switch (selectedIndex) {
+      case 0:
+        page = GeneratorPage();
+        break;
+      case 1:
+        page = FavoritesPage();
+        break;
+      case 2:
+        page = ExcludedPage();
+        break;
+      case 3:
+        page = FastFactsPage(); // Add the Q&A page
+        break;
+      case 4:
+        page = QuizScreen();
+        break;
+      case 5:
+        page = FAQScreen();
+        break;
+      default:
+        throw UnimplementedError('no widget for $selectedIndex');
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          body: Row(
+            children: [
+              SafeArea(
+                child: NavigationRail(
+                  extended: constraints.maxWidth >= 600,
+                  destinations: [
+                    NavigationRailDestination(
+                      icon: Icon(Icons.home),
+                      label: Text('Cat Needs'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.favorite),
+                      label: Text('Favorites'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.clear),
+                      label: Text('Discovered'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.grade),
+                      label: Text('Fast Facts'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.question_answer),
+                      label: Text('Q&A'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.note),
+                      label: Text('FAQ'),
+                    ),
+                  ],
+                  selectedIndex: selectedIndex,
+                  onDestinationSelected: (value) {
+                    setState(() {
+                      selectedIndex = value;
+                    });
+                  },
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  child: page,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ExcludedPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+
+    if (appState.nonfavorites.isEmpty) {
+      return Center(
+        child: Text('No excluded yet.'),
+      );
+    }
+
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child:
+              Text('You have ${appState.nonfavorites.length} non-favorites:'),
+        ),
+        for (var imageUrl in appState.nonfavorites)
+          ListTile(
+            leading: Icon(Icons.delete_outline),
+            title: Text(imageUrl),
+          ),
+      ],
+    );
+  }
+}
+
+class FavoritesPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+
+    if (appState.favorites.isEmpty) {
+      return Center(
+        child: Text('No favorites yet.'),
+      );
+    }
+
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Text('You have ${appState.favorites.length} favorites:'),
+        ),
+        for (var imageUrl in appState.favorites)
+          ListTile(
+            leading: Icon(Icons.favorite),
+            title: Text(imageUrl),
+          ),
+      ],
+    );
+  }
+}
+
+class GeneratorPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+
+    IconData icon;
+    if (appState.favorites.contains(appState.current)) {
+      icon = Icons.favorite;
+    } else {
+      icon = Icons.favorite_border;
+    }
+
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 20), // Add margin for spacing
+            child: Text(
+              "Learn more about cats and their needs",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          BigCard(
+            imagePath: appState.current,
+            caption: appState.captions[appState.catImages.indexOf(appState.current)],
+            appState: appState,
+            description: appState.descriptions[appState.catImages.indexOf(appState.current)]
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton.icon(
+                onPressed: () {
+                  appState.toggleFavorite();
+                  appState.getNext();
+                },
+                icon: Icon(icon),
+                label: Text('Like'),
+              ),
+              SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () {
+                  appState.getNext();
+                },
+                child: Text('Next'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class FastFactsPage extends StatefulWidget {
+  @override
+  State<FastFactsPage> createState() => _FastFactsPageState();
+}
+
+class _FastFactsPageState extends State<FastFactsPage> {
+  bool isSpanish = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cats'),
+        title: Text('Fast Facts About Cats (In Spanish Too!)'),
       ),
-      drawer: AppDrawer(), 
-      body: Center(
-        child: Text(
-          'All things cats!',
-          style: TextStyle(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
+      body: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                isSpanish = !isSpanish;
+              });
+            },
+            child: Text(isSpanish ? 'Switch to English' : 'Cambiar a Español'),
           ),
+          Expanded(
+            child: ListView(
+              children: [
+                QACard(
+                  question: isSpanish ? '¿Cómo ronronean los gatos?' : 'How do cats purr?',
+                  answer: isSpanish
+                      ? 'Los gatos producen el sonido del ronroneo utilizando sus cuerdas vocales.'
+                      : 'Cats produce the sound of purring by using their vocal cords.',
+                ),
+                QACard(
+                  question: isSpanish ? '¿Cuál es la esperanza de vida promedio de un gato?' : 'What is a cat\'s average lifespan?',
+                  answer: isSpanish
+                      ? 'La esperanza de vida promedio de un gato es de alrededor de 12-15 años.'
+                      : 'The average lifespan of a cat is around 12-15 years.',
+                ),
+                // Add more QACard widgets with different questions and answers
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class QACard extends StatelessWidget {
+  final String question;
+  final String answer;
+
+  const QACard({
+    Key? key,
+    required this.question,
+    required this.answer,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Q: $question',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text('A: $answer'),
+          ],
         ),
       ),
     );
   }
 }
 
-class AppDrawer extends StatelessWidget {
+
+class BigCard extends StatelessWidget {
+  const BigCard({
+    Key? key,
+    required this.imagePath,
+    required this.caption,
+    required this.appState,
+    required this.description
+  }) : super(key: key);
+
+  final String imagePath;
+  final String caption;
+  final MyAppState appState;
+  final String description;
+
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.lightGreen,
-            ),
-            child: Text(
-              'Menu',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
+    return FlipCard(
+      front: _buildCardSide(imagePath, context),
+      back: _buildBackCardSide(context, description), // Replace with your text
+    );
+  }
+
+  Card _buildCardSide(String imageUrl, BuildContext context) {
+    return Card(
+      color: Theme.of(context).colorScheme.primary,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Image.asset(
+              imagePath,
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
             ),
           ),
-          ListTile(
-            title: Text('Quiz Section'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => QuizScreen()));
-            },
-          ),
-                   ListTile(
-            title: Text('FAQ Section'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => FAQScreen()));
-            },
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(caption, style: TextStyle(fontSize: 16, color: Colors.white)),
           ),
         ],
       ),
     );
   }
+
+Widget _buildBackCardSide(BuildContext context, String textContent) {
+  return Card(
+    color: Theme.of(context).colorScheme.primary,
+    child: Container(
+      width: 220,
+      height: 220,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Center(
+          child: Text(
+            textContent,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+
 }
 
 class QuizScreen extends StatefulWidget {
@@ -257,5 +646,3 @@ class _FAQItemState extends State<FAQItem> {
     );
   }
 }
-
-
