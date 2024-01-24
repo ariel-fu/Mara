@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 import 'package:just_audio/just_audio.dart';
+import 'package:video_player/video_player.dart';
 import 'launch_screen.dart';
 
 void main() {
@@ -235,35 +236,152 @@ class AudioPage extends StatefulWidget {
 }
 
 class _AudioPage extends State<AudioPage> {
-  AudioPlayer player = AudioPlayer();
-  bool isPlaying = false;
+  AudioPlayer player1 = AudioPlayer();
+  bool isPlaying1 = false;
+
+  AudioPlayer player2 = AudioPlayer();
+  bool isPlaying2 = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(
-        title: Text('Audio Page: Piano'),
+        title: Text('Cats react to things with noises!'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Piano Audio File'),
-            IconButton(
-              icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-              onPressed: () async {
-                if (isPlaying) {
-                  await player.pause();
-                  isPlaying = false;
-                } else {
-                  await player.setAsset('assets/audio/piano.mp3');
-                  player.play();
-                  isPlaying = true;
-                }
-              },
+            Row(
+              children: [
+                Text('Cats purr when they are happy!'),
+                IconButton(
+                  icon: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow),
+                  onPressed: () async {
+                    if (isPlaying1) {
+                      await player1.pause();
+                      isPlaying1 = false;
+                    } else {
+                      await player1.setAsset('assets/audio/purr.mp3');
+                      player1.play();
+                      isPlaying1 = true;
+                    }
+                  },
+                ),
+              ],
             ),
+          Row(
+            children: [
+              Text('Cats make screechy meows when they are distressed!'),
+              IconButton(icon: Icon(isPlaying2 ? Icons.pause : Icons.play_arrow),
+                onPressed: () async {
+                  if (isPlaying2) {
+                    await player2.pause();
+                    isPlaying2 = false;
+                  } else {
+                    await player2.setAsset('assets/audio/meow.mp3');
+                    player2.play();
+                    isPlaying2 = true;
+                  }
+                },
+              ),
+            ],
+           ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class VideoPage extends StatefulWidget {
+  @override
+  State<VideoPage> createState() => _VideoPage();
+}
+
+class _VideoPage extends State<VideoPage> {
+  late VideoPlayerController youtube;
+  late VideoPlayerController local;
+
+  @override
+  void initState() {
+    super.initState();
+
+    youtube = VideoPlayerController.network(
+      'https://youtu.be/0eaBEs01heA?si=a1V4UZkRpwXCt7oF',
+    );
+
+    local = VideoPlayerController.asset(
+      'assets/video/funnyCat.mp4',
+    );
+
+    // Initialize asynchronously with error handling
+    Future.wait([
+      youtube.initialize().then((_) {
+        // Handle completion for youtube
+        setState(() {}); // Trigger rebuild to display video
+      }).catchError((error) {
+        // Handle errors for youtube
+        print('Error initializing youtube: $error');
+      }),
+      local.initialize().then((_) {
+        // Handle completion for controller2
+        setState(() {}); // Trigger rebuild to display video
+      }).catchError((error) {
+        // Handle errors for local
+        print('Error initializing local: $error');
+      }),
+    ]);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    //releasing resources
+    youtube.dispose();
+    local.dispose();
+  }
+
+  void _onPressedYoutube() {
+    setState(() {
+      youtube.value.isPlaying ? youtube.pause() : youtube.play();
+    });
+  }
+
+  void _onPressedLocal() {
+    setState(() {
+      local.value.isPlaying ? local.pause() : local.play();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    youtube.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                  ),
+                  onPressed: () => _onPressedYoutube(),
+                ),
+                VideoPlayer(youtube),
+              ],
+            ),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    local.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                  ),
+                  onPressed: () => _onPressedLocal(),
+                ),
+                VideoPlayer(local),
+              ],
+            ),
+        ],
       ),
     );
   }
