@@ -2,11 +2,10 @@
 // import 'package:english_words/english_words.dart';
 // import 'package:animated_flip_card/animated_flip_card.dart';
 import 'package:flip_card/flip_card.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
-
+import 'package:just_audio/just_audio.dart';
 import 'launch_screen.dart';
 
 void main() {
@@ -139,6 +138,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 5:
         page = FAQScreen();
         break;
+      case 6:
+        page = AudioPage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -223,6 +225,46 @@ class ExcludedPage extends StatelessWidget {
             title: Text(imageUrl),
           ),
       ],
+    );
+  }
+}
+
+class AudioPage extends StatefulWidget {
+  @override
+  State<AudioPage> createState() => _AudioPage();
+}
+
+class _AudioPage extends State<AudioPage> {
+  AudioPlayer player = AudioPlayer();
+  bool isPlaying = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold (
+      appBar: AppBar(
+        title: Text('Audio Page: Piano'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Piano Audio File'),
+            IconButton(
+              icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+              onPressed: () async {
+                if (isPlaying) {
+                  await player.pause();
+                  isPlaying = false;
+                } else {
+                  await player.setAsset('assets/audio/piano.mp3');
+                  player.play();
+                  isPlaying = true;
+                }
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
