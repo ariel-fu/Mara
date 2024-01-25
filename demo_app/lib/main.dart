@@ -292,26 +292,31 @@ class _AudioPage extends State<AudioPage> {
       body: Container(
               padding: EdgeInsets.all(10.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     children: [
                       Text('Cats purr when they are happy!', style: TextStyle(
                         fontSize: 18.0, fontWeight:FontWeight.bold
                       ),),
-                      Text(' Listen Here: ', style: TextStyle(
-                        fontSize: 18.0)),
-                      IconButton(
-                        icon: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow),
-                        onPressed: () async {
-                          await _toggleAudio1();
-                        },
-        ),
+                      Row (children: [
+                        Text(' Listen Here: ', style: TextStyle(
+                          fontSize: 18.0)),
+                        IconButton(
+                          icon: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow),
+                          onPressed: () async {
+                            await _toggleAudio1();
+                          },
+                          style: IconButton.styleFrom(
+                            foregroundColor: Colors.lightBlue,
+                            backgroundColor: Colors.grey[300],
+                          ),
+                        ),
+                      ])
                     ],
                   ),
 
-                Text('For many years, researchers have been puzzled on how cats manage to generate the low-frequency vocalizations'),
-                Text('typically between 20 and 30 hertz (Hz)—involved in purring.'),
+                Text('For many years, researchers have been puzzled on how cats manage to generate the low-frequency vocalizations typically between 20 and 30 hertz (Hz)—involved in purring.'),
 
                 SizedBox(width: 30, height: 50),
 
@@ -320,19 +325,24 @@ class _AudioPage extends State<AudioPage> {
                     Text('Cats make screechy meows when they are distressed!', style: TextStyle(
                       fontSize: 18.0, fontWeight:FontWeight.bold
                     ),),
-                    Text(' Listen Here: ', style: TextStyle(
+                    Row (children: [
+                      Text(' Listen Here: ', style: TextStyle(
                       fontSize: 18.0)),
                     
-                    IconButton(
-                      icon: Icon(isPlaying2 ? Icons.pause : Icons.play_arrow),
-                      onPressed: () async {
-                        await _toggleAudio2();
-                      },
-                    ),
+                      IconButton(
+                        icon: Icon(isPlaying2 ? Icons.pause : Icons.play_arrow),
+                        onPressed: () async {
+                          await _toggleAudio2();
+                        },
+                        style: IconButton.styleFrom(
+                          foregroundColor: Colors.lightBlue,
+                          backgroundColor: Colors.grey[300],
+                        ),
+                      ),
+                    ]),
                   ],
                 ),
-                Text('Why is your cat distressed? There are many, many factors that could have caused this.'),
-                Text('Perhaps you forgot to feed your cat lunch. Or, maybe your cat is just moody!'),
+                Text('Why is your cat distressed? There are many, many factors that could have caused this. Perhaps you forgot to feed your cat lunch. Or, maybe your cat is just moody!'),
               ],   
             ),
         ),
@@ -415,8 +425,8 @@ class _VideoPage extends State<VideoPage> {
                 ),),
                 
                 SizedBox(
-                  width: 300,
-                  height: 200,
+                  width: 525,
+                  height: 350,
                   child: VideoPlayer(cat1),
                 ),
                 
@@ -425,6 +435,10 @@ class _VideoPage extends State<VideoPage> {
                     cat1.value.isPlaying ? Icons.pause : Icons.play_arrow,
                   ),
                   onPressed: () => _onPressedCat1(),
+                  style: IconButton.styleFrom(
+                  foregroundColor: Colors.lightBlue,
+                  backgroundColor: Colors.grey[300],
+                  ),
                 ),
 
                 VideoProgressIndicator(
@@ -437,13 +451,13 @@ class _VideoPage extends State<VideoPage> {
             SizedBox(width: 40, height:40),
             Column(
               children: [
-                Text('Black Cat With The Coolest Eye', style: TextStyle(
+                Text('Black Cat With The Coolest Eyes', style: TextStyle(
                   fontSize: 18.0, fontWeight:FontWeight.bold
                 )),
 
                 SizedBox(
-                  width: 300,
-                  height: 200,
+                  width: 525,
+                  height: 350,
                   child: VideoPlayer(cat2),
                 ),
 
@@ -452,6 +466,10 @@ class _VideoPage extends State<VideoPage> {
                     cat2.value.isPlaying ? Icons.pause : Icons.play_arrow,
                   ),
                   onPressed: () => _onPressedCat2(),
+                  style: IconButton.styleFrom(
+                    foregroundColor: Colors.lightBlue,
+                    backgroundColor: Colors.grey[300],
+                  ),
                 ),
 
                 VideoProgressIndicator(
