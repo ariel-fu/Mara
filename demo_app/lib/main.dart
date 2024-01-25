@@ -247,73 +247,94 @@ class AudioPage extends StatefulWidget {
 }
 
 class _AudioPage extends State<AudioPage> {
-  AudioPlayer player1 = AudioPlayer();
+  final AudioPlayer player1 = AudioPlayer();
   bool isPlaying1 = false;
 
-  AudioPlayer player2 = AudioPlayer();
+  final AudioPlayer player2 = AudioPlayer();
   bool isPlaying2 = false;
 
-  // void _togglePlayback(isPlaying) {
-  //   setState(() {
-  //     isPlaying = !isPlaying;
-  //     if (isPlaying) {
-  //       // Start playback
-  //     } else {
-  //       // Pause playback
-  //     }
-  //   });
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    //releasing resources
+    player1.dispose();
+    player2.dispose();
+  }
 
+  Future<void> _toggleAudio1() async {
+    if (isPlaying1) {
+      await player1.pause();
+      setState(() => isPlaying1 = false);
+    } else {
+      await player1.setAsset('assets/audio/purr.mp3');
+      setState(() => isPlaying1 = true);
+      await player1.play();
+    }
+  }
+
+  Future<void> _toggleAudio2() async {
+    if (isPlaying2) {
+      await player2.pause();
+      setState(() => isPlaying2 = false);
+    } else {
+      await player2.setAsset('assets/audio/meow.mp3');
+      setState(() => isPlaying2 = true);
+      await player2.play();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar(
-        title: Text('Cats react to things with noises!'),
+        title: Text('Cat Sounds!'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Text('Cats purr when they are happy!'),
-                IconButton(
-                  icon: Icon(isPlaying1 ? Icons.pause: Icons.play_arrow),
-                  onPressed: () async {
-                    if (isPlaying1) {
-                      await player1.pause();
-                      isPlaying1 = false;
-                    } else {
-                      await player1.setAsset('assets/audio/purr.mp3');
-                      player1.play();
-                      isPlaying1 = true;
-                    }
-                  },
-                ),
-              ],
-            ),
-          Row(
-            children: [
-              Text('Cats make screechy meows when they are distressed!'),
-              IconButton(icon: Icon(isPlaying2 ? Icons.pause : Icons.play_arrow),
-                onPressed: () async {
-                  if (isPlaying2) {
-                    await player2.pause();
-                    isPlaying2 = false;
-                  } else {
-                    await player2.setAsset('assets/audio/meow.mp3');
-                    player2.play();
-                    isPlaying2 = true;
-                  }
-                },
-              ),
-            ],
-           ),
-          ],
+      body: Container(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text('Cats purr when they are happy!', style: TextStyle(
+                        fontSize: 18.0, fontWeight:FontWeight.bold
+                      ),),
+                      Text(' Listen Here: ', style: TextStyle(
+                        fontSize: 18.0)),
+                      IconButton(
+                        icon: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow),
+                        onPressed: () async {
+                          await _toggleAudio1();
+                        },
         ),
-      ),
-    );
+                    ],
+                  ),
+
+                Text('For many years, researchers have been puzzled on how cats manage to generate the low-frequency vocalizations'),
+                Text('typically between 20 and 30 hertz (Hz)—involved in purring.'),
+
+                Row(
+                  children: [
+                    Text('Cats make screechy meows when they are distressed!', style: TextStyle(
+                      fontSize: 18.0, fontWeight:FontWeight.bold
+                    ),),
+                    Text(' Listen Here: ', style: TextStyle(
+                      fontSize: 18.0)),
+                    
+                    IconButton(
+                      icon: Icon(isPlaying2 ? Icons.pause : Icons.play_arrow),
+                      onPressed: () async {
+                        await _toggleAudio2();
+                      },
+                    ),
+                  ],
+                ),
+                Text('Why is your cat distressed? There are many, many factors that could have caused this.'),
+                Text('Perhaps you forgot to feed your cat lunch. Or, maybe your cat is just moody!'),
+              ],   
+            ),
+        ),
+      );
   }
 }
 
@@ -323,7 +344,6 @@ class VideoPage extends StatefulWidget {
 }
 
 class _VideoPage extends State<VideoPage> {
-  // late VideoPlayerController youtube;
   late VideoPlayerController cat1;
   late VideoPlayerController cat2;
 
@@ -381,17 +401,22 @@ class _VideoPage extends State<VideoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Funny Cat Videos!'),
+      ),
       body: Column(
         children: [
             Row(
               children: [
+                Text('Cat With Red Bandana Has Fun', style: TextStyle(
+                  fontSize: 18.0, fontWeight:FontWeight.bold
+                ),),
                 IconButton(
                   icon: Icon(
                     cat1.value.isPlaying ? Icons.pause : Icons.play_arrow,
                   ),
                   onPressed: () => _onPressedCat1(),
                 ),
-
                 SizedBox(
                   width: 300,
                   height: 200,
@@ -401,6 +426,9 @@ class _VideoPage extends State<VideoPage> {
             ),
             Row(
               children: [
+                Text('Black Cat With The Coolest Eyes', style: TextStyle(
+                  fontSize: 18.0, fontWeight:FontWeight.bold
+                )),
                 IconButton(
                   icon: Icon(
                     cat2.value.isPlaying ? Icons.pause : Icons.play_arrow,
@@ -415,9 +443,8 @@ class _VideoPage extends State<VideoPage> {
                 )
               ],
             ),
-        ],
-      ),
-    );
+          ]),
+      );
   }
 }
 
