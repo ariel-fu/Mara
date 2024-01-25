@@ -426,7 +426,7 @@ class _VideoPage extends State<VideoPage> {
             ),
             Row(
               children: [
-                Text('Black Cat With The Coolest Eyes', style: TextStyle(
+                Text('Black Cat With The Coolest Eye', style: TextStyle(
                   fontSize: 18.0, fontWeight:FontWeight.bold
                 )),
                 IconButton(
