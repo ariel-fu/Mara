@@ -142,6 +142,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 6:
         page = AudioPage();
         break;
+      case 7:
+        page = VideoPage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -178,6 +181,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     NavigationRailDestination(
                       icon: Icon(Icons.note),
                       label: Text('FAQ'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.audio_file),
+                      label: Text('Sounds'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.video_camera_front),
+                      label: Text('Videos'),
                     ),
                   ],
                   selectedIndex: selectedIndex,
@@ -242,6 +253,18 @@ class _AudioPage extends State<AudioPage> {
   AudioPlayer player2 = AudioPlayer();
   bool isPlaying2 = false;
 
+  // void _togglePlayback(isPlaying) {
+  //   setState(() {
+  //     isPlaying = !isPlaying;
+  //     if (isPlaying) {
+  //       // Start playback
+  //     } else {
+  //       // Pause playback
+  //     }
+  //   });
+  // }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold (
@@ -256,7 +279,7 @@ class _AudioPage extends State<AudioPage> {
               children: [
                 Text('Cats purr when they are happy!'),
                 IconButton(
-                  icon: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow),
+                  icon: Icon(isPlaying1 ? Icons.pause: Icons.play_arrow),
                   onPressed: () async {
                     if (isPlaying1) {
                       await player1.pause();
@@ -300,36 +323,37 @@ class VideoPage extends StatefulWidget {
 }
 
 class _VideoPage extends State<VideoPage> {
-  late VideoPlayerController youtube;
-  late VideoPlayerController local;
+  // late VideoPlayerController youtube;
+  late VideoPlayerController cat1;
+  late VideoPlayerController cat2;
 
   @override
   void initState() {
     super.initState();
 
-    youtube = VideoPlayerController.network(
-      'https://youtu.be/0eaBEs01heA?si=a1V4UZkRpwXCt7oF',
+    cat1 = VideoPlayerController.asset(
+      'assets/video/funnyCat.mp4',
     );
 
-    local = VideoPlayerController.asset(
-      'assets/video/funnyCat.mp4',
+    cat2 = VideoPlayerController.asset(
+      'assets/video/funnyCat2.mp4',
     );
 
     // Initialize asynchronously with error handling
     Future.wait([
-      youtube.initialize().then((_) {
-        // Handle completion for youtube
+      cat2.initialize().then((_) {
+        // Handle completion for cat2
         setState(() {}); // Trigger rebuild to display video
       }).catchError((error) {
-        // Handle errors for youtube
-        print('Error initializing youtube: $error');
+        // Handle errors for cat2
+        print('Error initializing cat2: $error');
       }),
-      local.initialize().then((_) {
-        // Handle completion for controller2
+      cat1.initialize().then((_) {
+        // Handle completion for cat1
         setState(() {}); // Trigger rebuild to display video
       }).catchError((error) {
-        // Handle errors for local
-        print('Error initializing local: $error');
+        // Handle errors for cat1
+        print('Error initializing cat1: $error');
       }),
     ]);
   }
@@ -338,19 +362,19 @@ class _VideoPage extends State<VideoPage> {
   void dispose() {
     super.dispose();
     //releasing resources
-    youtube.dispose();
-    local.dispose();
+    cat2.dispose();
+    cat1.dispose();
   }
 
-  void _onPressedYoutube() {
+  void _onPressedCat1() {
     setState(() {
-      youtube.value.isPlaying ? youtube.pause() : youtube.play();
+      cat1.value.isPlaying ? cat1.pause() : cat1.play();
     });
   }
 
-  void _onPressedLocal() {
+  void _onPressedCat2() {
     setState(() {
-      local.value.isPlaying ? local.pause() : local.play();
+      cat2.value.isPlaying ? cat2.pause() : cat2.play();
     });
   }
 
@@ -363,22 +387,32 @@ class _VideoPage extends State<VideoPage> {
               children: [
                 IconButton(
                   icon: Icon(
-                    youtube.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                    cat1.value.isPlaying ? Icons.pause : Icons.play_arrow,
                   ),
-                  onPressed: () => _onPressedYoutube(),
+                  onPressed: () => _onPressedCat1(),
                 ),
-                VideoPlayer(youtube),
+
+                SizedBox(
+                  width: 300,
+                  height: 200,
+                  child: VideoPlayer(cat1),
+                )
               ],
             ),
             Row(
               children: [
                 IconButton(
                   icon: Icon(
-                    local.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                    cat2.value.isPlaying ? Icons.pause : Icons.play_arrow,
                   ),
-                  onPressed: () => _onPressedLocal(),
+                  onPressed: () => _onPressedCat2(),
                 ),
-                VideoPlayer(local),
+
+                SizedBox(
+                  width: 300,
+                  height: 200,
+                  child: VideoPlayer(cat2),
+                )
               ],
             ),
         ],
