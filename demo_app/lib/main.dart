@@ -294,7 +294,7 @@ class _AudioPage extends State<AudioPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  Column(
                     children: [
                       Text('Cats purr when they are happy!', style: TextStyle(
                         fontSize: 18.0, fontWeight:FontWeight.bold
@@ -313,7 +313,9 @@ class _AudioPage extends State<AudioPage> {
                 Text('For many years, researchers have been puzzled on how cats manage to generate the low-frequency vocalizations'),
                 Text('typically between 20 and 30 hertz (Hz)—involved in purring.'),
 
-                Row(
+                SizedBox(width: 30, height: 50),
+
+                Column(
                   children: [
                     Text('Cats make screechy meows when they are distressed!', style: TextStyle(
                       fontSize: 18.0, fontWeight:FontWeight.bold
@@ -406,29 +408,45 @@ class _VideoPage extends State<VideoPage> {
       ),
       body: Column(
         children: [
-            Row(
+            Column(
               children: [
                 Text('Cat With Red Bandana Has Fun', style: TextStyle(
                   fontSize: 18.0, fontWeight:FontWeight.bold
                 ),),
+                
+                SizedBox(
+                  width: 300,
+                  height: 200,
+                  child: VideoPlayer(cat1),
+                ),
+                
                 IconButton(
                   icon: Icon(
                     cat1.value.isPlaying ? Icons.pause : Icons.play_arrow,
                   ),
                   onPressed: () => _onPressedCat1(),
                 ),
-                SizedBox(
-                  width: 300,
-                  height: 200,
-                  child: VideoPlayer(cat1),
-                )
+
+                VideoProgressIndicator(
+                  cat1,
+                  allowScrubbing: true, // Enable scrubbing for seeking
+                  padding: const EdgeInsets.all(8.0),
+                ),
               ],
             ),
-            Row(
+            SizedBox(width: 40, height:40),
+            Column(
               children: [
                 Text('Black Cat With The Coolest Eye', style: TextStyle(
                   fontSize: 18.0, fontWeight:FontWeight.bold
                 )),
+
+                SizedBox(
+                  width: 300,
+                  height: 200,
+                  child: VideoPlayer(cat2),
+                ),
+
                 IconButton(
                   icon: Icon(
                     cat2.value.isPlaying ? Icons.pause : Icons.play_arrow,
@@ -436,11 +454,11 @@ class _VideoPage extends State<VideoPage> {
                   onPressed: () => _onPressedCat2(),
                 ),
 
-                SizedBox(
-                  width: 300,
-                  height: 200,
-                  child: VideoPlayer(cat2),
-                )
+                VideoProgressIndicator(
+                  cat2,
+                  allowScrubbing: true, // Enable scrubbing for seeking
+                  padding: const EdgeInsets.all(8.0),
+                ),
               ],
             ),
           ]),
