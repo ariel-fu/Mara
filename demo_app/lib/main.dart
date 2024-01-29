@@ -8,6 +8,10 @@ import 'dart:math';
 import 'package:just_audio/just_audio.dart';
 import 'package:video_player/video_player.dart';
 import 'launch_screen.dart';
+import 'usa_detail_screen.dart';
+import 'china_detail_screen.dart';
+import 'brazil_detail_screen.dart';
+import 'france_detail_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -768,6 +772,37 @@ class _QuizScreenState extends State<QuizScreen> {
     });
   }
 
+  void navigateToOptionDetail(String option) {
+    switch (option) {
+      case 'USA':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => USADetailScreen()), // Navigate to the USA detail screen
+        );
+        break;
+      // Add cases for other options (China, Brazil, France) as needed
+      case 'France':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FranceDetailScreen()), // Navigate to the France detail screen
+        );
+        break;
+      case 'Brazil':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BrazilDetailScreen()), // Navigate to the Brazil detail screen
+        );
+        break;
+      case 'China':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChinaDetailScreen()), // Navigate to the USA detail screen
+        );
+        break;
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> currentQuestion = questions[currentQuestionIndex];
@@ -807,6 +842,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   groupValue: selectedAnswer,
                   onChanged: (value) {
                     checkAnswer(value.toString());
+                    navigateToOptionDetail(value.toString()); // Navigate to the appropriate detail screen
                   },
                 );
               }),
