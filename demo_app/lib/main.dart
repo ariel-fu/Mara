@@ -780,7 +780,6 @@ class _QuizScreenState extends State<QuizScreen> {
           MaterialPageRoute(builder: (context) => USADetailScreen()), // Navigate to the USA detail screen
         );
         break;
-      // Add cases for other options (China, Brazil, France) as needed
       case 'France':
         Navigator.push(
           context,
@@ -842,7 +841,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   groupValue: selectedAnswer,
                   onChanged: (value) {
                     checkAnswer(value.toString());
-                    navigateToOptionDetail(value.toString()); // Navigate to the appropriate detail screen
+                    navigateToOptionDetail(value.toString()); // Navigate to the any detail screen
                   },
                 );
               }),
