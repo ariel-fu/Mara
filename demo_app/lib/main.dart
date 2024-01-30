@@ -6,6 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 import 'launch_screen.dart';
+import 'audio_screen.dart';
+import 'video_screen.dart';
+import 'brazil_detail_screen.dart';
+import 'china_detail_screen.dart';
+import 'france_detail_screen.dart';
+import 'usa_detail_screen.dart';
 
 void main() {
   runApp(MyApp());
