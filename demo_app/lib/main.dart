@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 import 'launch_screen.dart';
-import 'audio_screen.dart';
-import 'video_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -506,6 +504,36 @@ class _QuizScreenState extends State<QuizScreen> {
     });
   }
 
+  void navigateToOptionDetail(String option) {
+    switch (option) {
+      case 'USA':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => USADetailScreen()), // Navigate to the USA detail screen
+        );
+        break;
+      case 'France':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FranceDetailScreen()), // Navigate to the France detail screen
+        );
+        break;
+      case 'Brazil':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BrazilDetailScreen()), // Navigate to the Brazil detail screen
+        );
+        break;
+      case 'China':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChinaDetailScreen()), // Navigate to the USA detail screen
+        );
+        break;
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> currentQuestion = questions[currentQuestionIndex];
@@ -545,6 +573,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   groupValue: selectedAnswer,
                   onChanged: (value) {
                     checkAnswer(value.toString());
+                    navigateToOptionDetail(value.toString()); // Navigate to the any detail screen
                   },
                 );
               }),
