@@ -5,9 +5,12 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
+
 import 'launch_screen.dart';
 import 'audio_screen.dart';
 import 'video_screen.dart';
+import 'settings.dart';
+
 import 'brazil_detail_screen.dart';
 import 'china_detail_screen.dart';
 import 'france_detail_screen.dart';
@@ -130,6 +133,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 7:
         page = VideoPage();
         break;
+      case 8:
+        page = SettingsPage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -174,6 +180,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     NavigationRailDestination(
                       icon: Icon(Icons.video_camera_front),
                       label: Text('Videos'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.settings),
+                      label: Text('Settings'),
                     ),
                   ],
                   selectedIndex: selectedIndex,
