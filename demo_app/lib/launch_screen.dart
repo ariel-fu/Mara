@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'main.dart'; // Import your main.dart file
 
 class LaunchScreen extends StatefulWidget {
+  final VoidCallback onThemeToggle;
+  const LaunchScreen({Key? key, required this.onThemeToggle});
   @override
-  _LaunchScreenState createState() => _LaunchScreenState();
+  State<LaunchScreen> createState() => _LaunchScreenState();
 }
 
 class _LaunchScreenState extends State<LaunchScreen> {
@@ -28,9 +30,13 @@ class _LaunchScreenState extends State<LaunchScreen> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(actions: [
+            IconButton(icon: Icon(Icons.sunny), onPressed: widget.onThemeToggle,),
+      ],),
       backgroundColor: isDarkMode ? Color.fromARGB(255, 54, 54, 54) : Colors.white,
       body: Center(
         child: Column(

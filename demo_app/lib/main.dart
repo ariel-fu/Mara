@@ -9,7 +9,6 @@ import 'dart:math';
 import 'launch_screen.dart';
 import 'audio_screen.dart';
 import 'video_screen.dart';
-import 'settings.dart';
 
 import 'brazil_detail_screen.dart';
 import 'china_detail_screen.dart';
@@ -20,21 +19,33 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isDarkMode = false;
+  ThemeMode themeMode = ThemeMode.system;
+
+  void toggleTheme() {
+    setState(() {
+      isDarkMode = !isDarkMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
         title: 'Cat Care',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
-        ),
-        home: LaunchScreen(), // Change this to LaunchScreen
+        theme: isDarkMode ? ThemeData.dark() : ThemeData.light(),
+        home: LaunchScreen(onThemeToggle: toggleTheme), // pass this into LaunchScreen
       ),
     );
-  }
+   }
 }
 
 class MyAppState extends ChangeNotifier {
@@ -133,9 +144,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 7:
         page = VideoPage();
         break;
-      case 8:
-        page = SettingsPage();
-        break;
+      // case 8:
+      //   page = SettingsPage();
+      //   break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -181,10 +192,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.video_camera_front),
                       label: Text('Videos'),
                     ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.settings),
-                      label: Text('Settings'),
-                    ),
+                    // NavigationRailDestination(
+                    //   icon: Icon(Icons.settings),
+                    //   label: Text('Settings'),
+                    // ),
                   ],
                   selectedIndex: selectedIndex,
                   onDestinationSelected: (value) {
