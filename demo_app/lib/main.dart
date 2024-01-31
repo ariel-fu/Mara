@@ -5,49 +5,49 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
-import 'package:just_audio/just_audio.dart';
-import 'package:video_player/video_player.dart';
+
 import 'launch_screen.dart';
+import 'audio_screen.dart';
+import 'video_screen.dart';
+
+import 'brazil_detail_screen.dart';
+import 'china_detail_screen.dart';
+import 'france_detail_screen.dart';
+import 'usa_detail_screen.dart';
+
 import 'cat_gallery.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return ChangeNotifierProvider(
-//       create: (context) => MyAppState(),
-//       child: MaterialApp(
-//         title: 'Mara App',
-//         theme: ThemeData(
-//           useMaterial3: true,
-//           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-//         ),
-//         home: MyHomePage(),
-//       ),
-//     );
-//   }
-// }
+class _MyAppState extends State<MyApp> {
+  bool isDarkMode = false;
+  ThemeMode themeMode = ThemeMode.system;
 
-class MyApp extends StatelessWidget {
+  void toggleTheme() {
+    setState(() {
+      isDarkMode = !isDarkMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
         title: 'Cat Care',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
-        ),
-        home: LaunchScreen(), // Change this to LaunchScreen
+        theme: isDarkMode ? ThemeData.dark() : ThemeData.light(),
+        home: LaunchScreen(onThemeToggle: toggleTheme), // pass this into LaunchScreen
       ),
     );
-  }
+   }
 }
 
 class MyAppState extends ChangeNotifier {
@@ -155,11 +155,17 @@ class _MyHomePageState extends State<MyHomePage> {
         page = FAQScreen();
         break;
       case 6:
-        page = CatGallery();
-        break;
-      case 7:
         page = AudioPage();
         break;
+      case 7:
+        page = VideoPage();
+        break;
+      case 8:
+        page = CatGallery();
+        break;
+      // case 8:
+      //   page = SettingsPage();
+      //   break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -198,8 +204,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       label: Text('FAQ'),
                     ),
                     NavigationRailDestination(
+                      icon: Icon(Icons.audio_file),
+                      label: Text('Sounds'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.video_camera_front),
+                      label: Text('Videos'),
+                    ),
+                    NavigationRailDestination(
                       icon: Icon(Icons.camera_alt_sharp),
                       label: Text('Cat Gallery')),
+                    ),
+                    // NavigationRailDestination(
+                    //   icon: Icon(Icons.settings),
+                    //   label: Text('Settings'),
+                    // ),
                   ],
                   selectedIndex: selectedIndex,
                   onDestinationSelected: (value) {
@@ -247,163 +266,6 @@ class ExcludedPage extends StatelessWidget {
             title: Text(imageUrl),
           ),
       ],
-    );
-  }
-}
-
-class AudioPage extends StatefulWidget {
-  @override
-  State<AudioPage> createState() => _AudioPage();
-}
-
-class _AudioPage extends State<AudioPage> {
-  AudioPlayer player1 = AudioPlayer();
-  bool isPlaying1 = false;
-
-  AudioPlayer player2 = AudioPlayer();
-  bool isPlaying2 = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold (
-      appBar: AppBar(
-        title: Text('Cats react to things with noises!'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Text('Cats purr when they are happy!'),
-                IconButton(
-                  icon: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow),
-                  onPressed: () async {
-                    if (isPlaying1) {
-                      await player1.pause();
-                      isPlaying1 = false;
-                    } else {
-                      await player1.setAsset('assets/audio/purr.mp3');
-                      player1.play();
-                      isPlaying1 = true;
-                    }
-                  },
-                ),
-              ],
-            ),
-          Row(
-            children: [
-              Text('Cats make screechy meows when they are distressed!'),
-              IconButton(icon: Icon(isPlaying2 ? Icons.pause : Icons.play_arrow),
-                onPressed: () async {
-                  if (isPlaying2) {
-                    await player2.pause();
-                    isPlaying2 = false;
-                  } else {
-                    await player2.setAsset('assets/audio/meow.mp3');
-                    player2.play();
-                    isPlaying2 = true;
-                  }
-                },
-              ),
-            ],
-           ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class VideoPage extends StatefulWidget {
-  @override
-  State<VideoPage> createState() => _VideoPage();
-}
-
-class _VideoPage extends State<VideoPage> {
-  late VideoPlayerController youtube;
-  late VideoPlayerController local;
-
-  @override
-  void initState() {
-    super.initState();
-
-    youtube = VideoPlayerController.network(
-      'https://youtu.be/0eaBEs01heA?si=a1V4UZkRpwXCt7oF',
-    );
-
-    local = VideoPlayerController.asset(
-      'assets/video/funnyCat.mp4',
-    );
-
-    // Initialize asynchronously with error handling
-    Future.wait([
-      youtube.initialize().then((_) {
-        // Handle completion for youtube
-        setState(() {}); // Trigger rebuild to display video
-      }).catchError((error) {
-        // Handle errors for youtube
-        print('Error initializing youtube: $error');
-      }),
-      local.initialize().then((_) {
-        // Handle completion for controller2
-        setState(() {}); // Trigger rebuild to display video
-      }).catchError((error) {
-        // Handle errors for local
-        print('Error initializing local: $error');
-      }),
-    ]);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    //releasing resources
-    youtube.dispose();
-    local.dispose();
-  }
-
-  void _onPressedYoutube() {
-    setState(() {
-      youtube.value.isPlaying ? youtube.pause() : youtube.play();
-    });
-  }
-
-  void _onPressedLocal() {
-    setState(() {
-      local.value.isPlaying ? local.pause() : local.play();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(
-                    youtube.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                  ),
-                  onPressed: () => _onPressedYoutube(),
-                ),
-                VideoPlayer(youtube),
-              ],
-            ),
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(
-                    local.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                  ),
-                  onPressed: () => _onPressedLocal(),
-                ),
-                VideoPlayer(local),
-              ],
-            ),
-        ],
-      ),
     );
   }
 }
@@ -705,6 +567,36 @@ class _QuizScreenState extends State<QuizScreen> {
     });
   }
 
+  void navigateToOptionDetail(String option) {
+    switch (option) {
+      case 'USA':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => USADetailScreen()), // Navigate to the USA detail screen
+        );
+        break;
+      case 'France':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FranceDetailScreen()), // Navigate to the France detail screen
+        );
+        break;
+      case 'Brazil':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BrazilDetailScreen()), // Navigate to the Brazil detail screen
+        );
+        break;
+      case 'China':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChinaDetailScreen()), // Navigate to the USA detail screen
+        );
+        break;
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> currentQuestion = questions[currentQuestionIndex];
@@ -744,6 +636,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   groupValue: selectedAnswer,
                   onChanged: (value) {
                     checkAnswer(value.toString());
+                    navigateToOptionDetail(value.toString()); // Navigate to the any detail screen
                   },
                 );
               }),
