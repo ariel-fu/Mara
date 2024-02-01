@@ -15,6 +15,8 @@ import 'china_detail_screen.dart';
 import 'france_detail_screen.dart';
 import 'usa_detail_screen.dart';
 
+import 'cat_gallery.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -69,23 +71,37 @@ class MyAppState extends ChangeNotifier {
   MyAppState() {
     current = getCatImage();
   }
-
+  
   String getCatImage() {
-    
-    var indexNow = index;
-    index++;
-    index = index % catImages.length;
-    return catImages[indexNow];
+    // var indexNow = index;
+    // index++;
+    // index = index % catImages.length;
+    return catImages[index];
   }
 
-  void getNext() {
-    String curr = getCurrentCaption();
-    if (!nonfavorites.contains(curr)) {
-      nonfavorites.add(curr);
+  // TODO - refactor this to move to CatGallery widget
+  void getPrevious() {
+    if (index > 0) {
+      index--;
+      String curr = getCurrentCaption();
+      if (!nonfavorites.contains(curr)) {
+        nonfavorites.add(curr);
+      }
+      current = getCatImage();
+      notifyListeners();
     }
-
-    current = getCatImage();
-    notifyListeners();
+  }
+  
+  void getNext() {
+    if (index < catImages.length - 1) {
+      index++;
+      String curr = getCurrentCaption();
+      if (!nonfavorites.contains(curr)) {
+        nonfavorites.add(curr);
+      }
+      current = getCatImage();
+      notifyListeners();
+    }
   }
 
   void toggleFavorite() {
@@ -144,6 +160,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 7:
         page = VideoPage();
         break;
+      case 8:
+        page = CatGallery();
+        break;
       // case 8:
       //   page = SettingsPage();
       //   break;
@@ -192,6 +211,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.video_camera_front),
                       label: Text('Videos'),
                     ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.camera_alt_sharp),
+                      label: Text('Cat Gallery')),
+                    ),
                     // NavigationRailDestination(
                     //   icon: Icon(Icons.settings),
                     //   label: Text('Settings'),
@@ -226,7 +249,7 @@ class ExcludedPage extends StatelessWidget {
 
     if (appState.nonfavorites.isEmpty) {
       return Center(
-        child: Text('No excluded yet.'),
+        child: Text('None excluded yet.'),
       );
     }
 
@@ -310,6 +333,16 @@ class GeneratorPage extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              if (appState.index > 0)
+                ElevatedButton(
+                  onPressed: () {
+                    appState.getPrevious();
+                  },
+                  child: Text('Previous'),
+                )
+              else
+                SizedBox(width: 100), // Fixed width for spacing
+              SizedBox(width: 10),
               ElevatedButton.icon(
                 onPressed: () {
                   appState.toggleFavorite();
@@ -319,12 +352,15 @@ class GeneratorPage extends StatelessWidget {
                 label: Text('Like'),
               ),
               SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  appState.getNext();
-                },
-                child: Text('Next'),
-              ),
+              if (appState.index < appState.catImages.length - 1)
+                ElevatedButton(
+                  onPressed: () {
+                    appState.getNext();
+                  },
+                  child: Text('Next'),
+                )
+              else
+                SizedBox(width: 100), // Fixed width for spacing
             ],
           ),
         ],
