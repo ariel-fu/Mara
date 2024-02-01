@@ -95,10 +95,6 @@ class MyAppState extends ChangeNotifier {
   void getNext() {
     if (index < catImages.length - 1) {
       index++;
-      String curr = getCurrentCaption();
-      if (!nonfavorites.contains(curr)) {
-        nonfavorites.add(curr);
-      }
       current = getCatImage();
       notifyListeners();
     }
@@ -108,8 +104,12 @@ class MyAppState extends ChangeNotifier {
     final currentCaption = getCurrentCaption();
     if (!favorites.contains(currentCaption)) {
       favorites.add(currentCaption);
+      if (nonfavorites.contains(currentCaption)) {
+        nonfavorites.remove(currentCaption);
+      }
     } else {
       favorites.remove(currentCaption);
+      nonfavorites.add(currentCaption);
     }
     notifyListeners();
   }
@@ -213,7 +213,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     NavigationRailDestination(
                       icon: Icon(Icons.camera_alt_sharp),
-                      label: Text('Cat Gallery')),
+                      label: Text('Cat Gallery'),
                     ),
                     // NavigationRailDestination(
                     //   icon: Icon(Icons.settings),
@@ -341,14 +341,15 @@ class GeneratorPage extends StatelessWidget {
                   child: Text('Previous'),
                 )
               else
-                SizedBox(width: 100), // Fixed width for spacing
+                SizedBox(width: 103), // Fixed width for spacing
               SizedBox(width: 10),
               ElevatedButton.icon(
                 onPressed: () {
                   appState.toggleFavorite();
-                  appState.getNext();
                 },
-                icon: Icon(icon),
+                icon: appState.favorites.contains(appState.getCurrentCaption())
+                    ? Icon(Icons.favorite)
+                    : Icon(Icons.favorite_border),
                 label: Text('Like'),
               ),
               SizedBox(width: 10),
@@ -360,7 +361,7 @@ class GeneratorPage extends StatelessWidget {
                   child: Text('Next'),
                 )
               else
-                SizedBox(width: 100), // Fixed width for spacing
+                SizedBox(width: 77), // Fixed width for spacing
             ],
           ),
         ],
