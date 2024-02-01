@@ -10,13 +10,6 @@ class LaunchScreen extends StatefulWidget {
 
 class _LaunchScreenState extends State<LaunchScreen> {
   double fontSize = 24;
-  bool isDarkMode = false;
-
-  void toggleDarkMode() {
-    setState(() {
-      isDarkMode = !isDarkMode;
-    });
-  }
 
   void increaseFontSize() {
     setState(() {
@@ -34,10 +27,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: [
-            IconButton(icon: Icon(Icons.sunny), onPressed: widget.onThemeToggle,),
-      ],),
-      backgroundColor: isDarkMode ? Color.fromARGB(255, 54, 54, 54) : Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +36,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
               style: TextStyle(
                 fontSize: fontSize,
                 fontWeight: FontWeight.bold,
-                color: isDarkMode ? Color.fromARGB(255, 220, 220, 220) : Colors.black,
               ),
             ),
             SizedBox(height: 20),
@@ -58,9 +46,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
                   MaterialPageRoute(builder: (context) => MyHomePage()),
                 );
               },
-              style: ElevatedButton.styleFrom(
-                primary: isDarkMode ? Color.fromARGB(255, 255, 255, 255) : Color.fromARGB(255, 200, 230, 255),
-              ),
               child: Text('Get Started 😺'),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.2), // 20% margin
@@ -69,7 +54,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: Colors.grey,
@@ -78,13 +62,11 @@ class _LaunchScreenState extends State<LaunchScreen> {
                   child: IconButton(
                     onPressed: () => increaseFontSize(),
                     icon: Icon(Icons.add),
-                    color: isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
                 SizedBox(width: 8), // Add spacing between buttons
                 Container(
                   decoration: BoxDecoration(
-                    color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: Colors.grey,
@@ -93,26 +75,23 @@ class _LaunchScreenState extends State<LaunchScreen> {
                   child: IconButton(
                     onPressed: () => decreaseFontSize(),
                     icon: Icon(Icons.remove),
-                    color: isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
                 SizedBox(width: 8),
                 Container(
                   decoration: BoxDecoration(
-                    color: isDarkMode ? Colors.grey[800] : Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: IconButton(
-                    onPressed: () => toggleDarkMode(),
-                    icon: Icon(Icons.brightness_4),
-                    color: isDarkMode ? Colors.white : Colors.black,
+                    icon: Icon(Icons.sunny), 
+                    onPressed: widget.onThemeToggle,
                   ),
                 ),
               ],
             ),
           ],
         ),
-      ),
+      )
     );
   }
 }
