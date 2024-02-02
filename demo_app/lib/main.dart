@@ -213,12 +213,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     NavigationRailDestination(
                       icon: Icon(Icons.camera_alt_sharp),
-                      label: Text('Cat Gallery')),
+                      label: Text('Cat Gallery')
                     ),
-                    // NavigationRailDestination(
-                    //   icon: Icon(Icons.settings),
-                    //   label: Text('Settings'),
-                    // ),
                   ],
                   selectedIndex: selectedIndex,
                   onDestinationSelected: (value) {
