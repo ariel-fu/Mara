@@ -33,7 +33,7 @@ class _MaraAppState extends State<MaraApp> {
       initialRoute: '/launch',
       routes: {
         '/launch': (BuildContext context) => const LaunchScreen(),
-        '/': (BuildContext context) => const HomePage(),
+        '/home': (BuildContext context) => const HomePage(),
         '/options': (BuildContext context) => const OptionsPage(),
         '/bleeding_pattern': (BuildContext context) => const PatternPage(),
         '/time': (BuildContext context) => const TimePage(),

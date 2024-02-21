@@ -63,7 +63,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: selectedButtonIndex == 0 ? Colors.grey : null,
+                    backgroundColor: selectedButtonIndex == 0 ? Colors.grey : null,
                   ),
                   child: Text(
                     languages[0].isNotEmpty ? languages[0][0] : '',
@@ -77,7 +77,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: selectedButtonIndex == 1 ? Colors.grey : null,
+                    backgroundColor: selectedButtonIndex == 1 ? Colors.grey : null,
                   ),
                   child: Text(
                     languages[1].isNotEmpty ? languages[1][0] : '',
@@ -91,7 +91,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: selectedButtonIndex == 2 ? Colors.grey : null,
+                    backgroundColor: selectedButtonIndex == 2 ? Colors.grey : null,
                   ),
                   child: Text(
                     languages[2].isNotEmpty ? languages[2][0] : '',
@@ -104,9 +104,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
               child: Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.of(context).pushNamed('/home', arguments: selectedButtonIndex);
                   },
-                  child: new Text(languages[selectedButtonIndex][1]),
+                  child: Text(languages[selectedButtonIndex][1]),
                 ),
               ),
             ),
