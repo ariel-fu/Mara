@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'home.dart';
 import 'home.dart';
-import 'launch_screen.dart';
+import 'launch_screen2.dart';
 import 'options_page.dart';
 import 'pattern_page.dart';
 import 'time_page.dart';

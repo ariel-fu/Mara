@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'video.dart';
 
 class PatternPage extends StatelessWidget {
   const PatternPage({super.key});
@@ -13,17 +14,25 @@ class PatternPage extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Bleeding Pattern')
+        title: Text('Bleeding Pattern Page')
       ),
-      body: Center(
-        child: Text(
-          'Bleeding Pattern Page',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+      body: Center (
+        child: VideoWidget(videoAsset: 'videos/funnyCat.mp4'),
       ),
+      // body: VideoWidget(videoAsset: 'videos/funnyCat.mp4'),
+      // body: Row(
+      //   children: 
+      //   [
+      //     Text(
+      //       'Bleeding Pattern Page',
+      //       style: TextStyle(
+      //         fontSize: 30,
+      //         fontWeight: FontWeight.bold,
+      //       ),
+      //     ),
+      //     VideoWidget(videoAsset: 'assets/video/funnyCat.mp4'),
+      //   ]
+      // ),
     );
   }
 }
