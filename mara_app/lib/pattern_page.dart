@@ -1,6 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:excel/excel.dart';
+import 'video.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -73,13 +74,7 @@ class _PatternPageState extends State<PatternPage> {
         title: Text('Bleeding Pattern')
       ),
       body: Center(
-        child: Text(
-          'Bleeding Pattern Page',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: VideoWidget(videoAsset: "assets/videos/funnyCat.mp4"),
       ),
     );
   }
