@@ -52,14 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
   String? _selectedDetails;
   String _language = 'English'; // Default language
 
-  // A sample map of translations for demonstration purposes
   final Map<String, Map<String, String>> translations = {
     'Method 1': {
       'English': 'Details about Method 1',
       'Kiswahili': 'Maelezo kuhusu Njia 1',
       'Dholuo': 'Wach mar Jodong’ 1',
     },
-    // Add other methods and their translations here
   };
 
   void _showContraceptiveInfo(String contraceptiveName) {
@@ -71,13 +69,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.transparent, // Make sure the modal background is transparent
+    backgroundColor: Colors.transparent, 
     builder: (BuildContext context) {
       return Container(
-        color: Colors.transparent, // Ensuring the background is transparent
+        color: Colors.transparent, 
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.grey[300], // Light gray color for the box
+            color: Colors.grey[300],
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(25.0),
               topRight: Radius.circular(25.0),
@@ -128,7 +126,6 @@ Widget languageButton(String language) {
     setState(() {
       _language = lang;
       if (_selectedMethod != null) {
-        // Update the details for the currently selected method
         _selectedDetails = translations[_selectedMethod!]?[_language];
       }
     });
