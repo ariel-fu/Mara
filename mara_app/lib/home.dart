@@ -178,26 +178,6 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             const SizedBox(height: 12.0),
-            ElevatedButton(
-              child: const Text('What is my chance of getting pregnant?'),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/time');
-              },
-            ),
-            const SizedBox(height: 12.0),
-            ElevatedButton(
-              child: const Text('Can I keep it private?'),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/time');
-              },
-            ),
-            const SizedBox(height: 12.0),
-            ElevatedButton(
-              child: const Text('What if I am ready to have a baby?'),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/time');
-              },
-            ),
           ],
         ),
       ),

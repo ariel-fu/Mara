@@ -15,7 +15,7 @@ class LaunchScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.of(context).pushReplacementNamed('/home');
               },
               child: const Text('Learn more about your options'),
             ),
