@@ -3,6 +3,7 @@
 // import 'package:animated_flip_card/animated_flip_card.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:mara/usa_detail_screen_gsheet.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
@@ -564,13 +565,20 @@ class _QuizScreenState extends State<QuizScreen> {
     });
   }
 
-  void navigateToOptionDetail(String option) {
+  void navigateToOptionDetail(String option, bool isGSheetdemo) {
     switch (option) {
       case 'USA':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => USADetailScreen()), // Navigate to the USA detail screen
-        );
+        if (!isGSheetdemo) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => USADetailScreen()), // Navigate to the USA detail screen
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => USADetailScreenGSheet()), // Navigate to the USA detail screen
+          );
+        }
         break;
       case 'France':
         Navigator.push(
@@ -626,14 +634,13 @@ class _QuizScreenState extends State<QuizScreen> {
               children: List<Widget>.generate(currentQuestion['options'].length, (index) {
                 String option = currentQuestion['options'][index];
                 bool isSelected = option == selectedAnswer;
-
                 return RadioListTile(
                   title: Text(option),
                   value: option,
                   groupValue: selectedAnswer,
                   onChanged: (value) {
                     checkAnswer(value.toString());
-                    navigateToOptionDetail(value.toString()); // Navigate to the any detail screen
+                    navigateToOptionDetail(value.toString(), true); // Navigate to the any detail screen
                   },
                 );
               }),
