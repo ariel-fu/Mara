@@ -70,7 +70,7 @@ class _OptionsPageState extends State<OptionsPage> {
         leading: IconButton(
           icon: const Icon(Icons.home),
           onPressed: () {
-            Navigator.of(context).pushNamed('/home', arguments: selectedButtonIndex);
+            Navigator.of(context).pushReplacementNamed('/home', arguments: selectedButtonIndex);
           },
         ),
         title: const Text('Options'),
@@ -122,7 +122,41 @@ class _OptionsPageState extends State<OptionsPage> {
           ),
         ],
       ),
-      body: IconButton(
+      body: SafeArea(
+        child: Container(
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: 300,
+                left: 104,
+                child: IconButtonExample(),
+              ),
+              // Positioned(
+              //   top: 200,
+              //   left: 200,
+              //   child: IconButton(
+              //     onPressed: () {},
+              //     icon: Icon(Icons.emoji_food_beverage),  // replace with image
+              //   ),
+              // )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/* TODO - rename and convert to a custom placeable widget,
+perhaps based on align
+Move 'x' to the top right
+*/
+class IconButtonExample extends StatelessWidget {
+  const IconButtonExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -146,7 +180,6 @@ class _OptionsPageState extends State<OptionsPage> {
         ),
       ),
       icon: Icon(Icons.house),  // replace with image
-    ),
     );
   }
 }
