@@ -640,7 +640,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   groupValue: selectedAnswer,
                   onChanged: (value) {
                     checkAnswer(value.toString());
-                    navigateToOptionDetail(value.toString(), true); // Navigate to the any detail screen
+                    navigateToOptionDetail(value.toString(), true); // Navigate to the any detail screen, 2nd paramter 'isGHseetdemo'
                   },
                 );
               }),
