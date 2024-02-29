@@ -1,11 +1,9 @@
-// TODO Implement this library.
-
 import 'package:flutter/material.dart';
 import 'main.dart'; // Import your main.dart file
 import 'package:video_player/video_player.dart';
 
 
-//TO-DO: make video a separate widget that you could easily reference in any other file.
+//make video a separate widget that you could easily reference in any other file.
 //video widget would have a asset parameter you would pass in, this would be unique to whatever video you want
 //goal: make it as easy as possible to make many videos without having to re-use code (same goes for audio)
 
@@ -18,29 +16,32 @@ class VideoWidget extends StatefulWidget {
 
 class _VideoWidgetState extends State<VideoWidget> {
   late VideoPlayerController ourVideo;
+  late Future<void> _initializeVideoPlayerFuture;
   @override
   void initState() {
     super.initState();
-
     ourVideo = VideoPlayerController.asset(widget.videoAsset);
-
+    _initializeVideoPlayerFuture = ourVideo.initialize().catchError((error) {
+      print('Error initializing video player: $error');
+    });
     // Initialize asynchronously with error handling
-    Future.wait([
-      ourVideo.initialize().then((_) {
-        // Handle completion for ourVideo
-        setState(() {}); // Trigger rebuild to display video
-      }).catchError((error) {
-        // Handle errors for ourVideo
-        print('Error initializing ourVideo: $error');
-      }),
-    ]); 
+    // Future.wait([
+    //   ourVideo.initialize().then((_) {
+
+    //     // Handle completion for ourVideo
+    //     setState(() {}); // Trigger rebuild to display video
+    //   }).catchError((error) {
+    //     // Handle errors for ourVideo
+    //     print('Error initializing ourVideo: $error');
+    //   }),
+    // ]); 
   }
 
   @override
   void dispose() {
-    super.dispose();
     //releasing resources
     ourVideo.dispose();
+    super.dispose();
   }
 
   void _onPressedVideo() {
@@ -56,11 +57,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Videos'),
-      ),
       body: Column(
-        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
             width: 500,
@@ -75,10 +72,19 @@ class _VideoWidgetState extends State<VideoWidget> {
                 Text('{Video Title Placeholder}', style: TextStyle(
                   fontSize: 18.0, fontWeight:FontWeight.bold
                 ),),
-                VideoProgressIndicator(
-                  ourVideo,
-                  allowScrubbing: true,
-                  padding: const EdgeInsets.all(8.0),
+                FutureBuilder<void>(
+                  future: _initializeVideoPlayerFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return VideoProgressIndicator(
+                        ourVideo,
+                        allowScrubbing: true,
+                        padding: const EdgeInsets.all(8.0),
+                      );
+                    } else {
+                      return CircularProgressIndicator(); // or any other loading indicator
+                    }
+                  },
                 ),
                 IconButton(
                   icon: Icon(
@@ -95,7 +101,6 @@ class _VideoWidgetState extends State<VideoWidget> {
           ),
         ],
       )
-      
     );
   }
 }
