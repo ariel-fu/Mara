@@ -21,17 +21,6 @@ class _AudioWidgetState extends State<AudioWidget> {
     player1.dispose();
   }
 
-  // Future<void> _toggleAudio1() async {
-  //   if (isPlaying1) {
-  //     await player1.pause();
-  //     setState(() => isPlaying1 = false);
-  //   } else {
-  //     await player1.setAsset(widget.audioAsset);
-  //     setState(() => isPlaying1 = true);
-  //     await player1.play();
-  //   }
-  // }
-
   void _toggleAudio1() {
     setState(() {
       if (isPlaying1) {
@@ -51,7 +40,7 @@ class _AudioWidgetState extends State<AudioWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-      body: Row(
+      body: Expanded(child: Row(
             children: [
               Text(' Listen Here: ', style: TextStyle(
                 fontSize: 12.0)),
@@ -65,6 +54,6 @@ class _AudioWidgetState extends State<AudioWidget> {
               ),
           ]
         )
-      );
+      ));
   }
 }

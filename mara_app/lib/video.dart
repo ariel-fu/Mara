@@ -50,14 +50,14 @@ class _VideoWidgetState extends State<VideoWidget> {
       body: Column(
         children: [
           SizedBox(
-            width: 500,
-            height: 500,
+            width: 300,
+            height: 300,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 AspectRatio(
                   aspectRatio: ourVideo.value.aspectRatio,
-                  child: VideoPlayer(ourVideo),
+                  child:Expanded(child: VideoPlayer(ourVideo)),
                 ),
                 Text(widget.title, style: TextStyle(
                   fontSize: 18.0, fontWeight:FontWeight.bold

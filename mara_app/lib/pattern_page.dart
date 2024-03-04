@@ -55,7 +55,7 @@ class _PatternPageState extends State<PatternPage> {
     final int? routeArgumentIndex =
         ModalRoute.of(context)?.settings.arguments as int?;
 
-    String methodContent = "HELLOOOO";
+    String methodContent = "METHOD CONTENT";
     
     // Update selectedButtonIndex if a valid value is provided from the route
     if (routeArgumentIndex != null &&
@@ -86,7 +86,12 @@ class _PatternPageState extends State<PatternPage> {
                 SizedBox(
                   child: IconButton(
                     icon:Image.asset('assets/string-resources/method_1.png'),
-                    onPressed: () {setState(() {methodContent = "Method 1!";});},
+                    onPressed: () {
+                      print("hello!");
+                      setState(() {
+                        methodContent = "Method 1!";
+                      });
+                     },
                   ),
                   width:80,
                   height:80,
@@ -96,7 +101,7 @@ class _PatternPageState extends State<PatternPage> {
                     icon:Image.asset('assets/string-resources/method_2.png'),
                     onPressed: () {
                       setState(() {
-                        methodContent = "Method 1!";
+                        methodContent = "Method 2!";
                       });
                     },
                   ),
@@ -106,7 +111,47 @@ class _PatternPageState extends State<PatternPage> {
                 SizedBox(
                   child: IconButton(
                     icon:Image.asset('assets/string-resources/method_3.png'),
-                    onPressed: () {methodContent = "Method 3!";},
+                    onPressed: () {
+                      setState(() {
+                        methodContent = "Method 3!";
+                      });
+                    },
+                  ),
+                  width:80,
+                  height:80,
+                ),
+                SizedBox(
+                  child: IconButton(
+                    icon:Image.asset('assets/string-resources/method_4.png'),
+                    onPressed: () {
+                      setState(() {
+                        methodContent = "Method 4!";
+                      });
+                    },
+                  ),
+                  width:80,
+                  height:80,
+                ),
+                SizedBox(
+                  child: IconButton(
+                    icon:Image.asset('assets/string-resources/method_5.png'),
+                    onPressed: () {
+                      setState(() {
+                        methodContent = "Method 5!";
+                      });
+                    },
+                  ),
+                  width:80,
+                  height:80,
+                ),
+                SizedBox(
+                  child: IconButton(
+                    icon:Image.asset('assets/string-resources/method_6.png'),
+                    onPressed: () {
+                      setState(() {
+                        methodContent = "Method 6!";
+                      });
+                    },
                   ),
                   width:80,
                   height:80,
@@ -115,22 +160,38 @@ class _PatternPageState extends State<PatternPage> {
             ),
           ),
           Container(
-            alignment: Alignment.center,
-            child: Text(methodContent, style: TextStyle(
-                  fontSize: 18.0),
-            ),
-          ),
-        
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: VideoWidget(videoAsset: "videoAudio/videos/chimes.mp4", title: "Wind Chimes"),
-          //     ),
-          //     Expanded(
-          //       child: VideoWidget(videoAsset: "videoAudio/videos/funnyCat.mp4", title: "Funny Cat"),
-          //     ),
-          //   ]
+            alignment:Alignment.bottomCenter,
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(methodContent, style: TextStyle(
+                    fontSize: 18.0)),
+                // AudioWidget(audioAsset: 'videoAudio/audio/purr.mp3'),
+              ],
+          ),),
+
+          // Container(
+          //   alignment: Alignment.topCenter,
+          //   child: Text(methodContent, style: TextStyle(
+          //         fontSize: 18.0),
+          //   ),
           // ),
+          
+          Expanded (
+            child: Row(
+              children: [
+                Expanded(
+                  child: VideoWidget(videoAsset: "videoAudio/videos/chimes.mp4", title: "Wind Chimes"),
+                ),
+                Expanded(
+                  child: VideoWidget(videoAsset: "videoAudio/videos/funnyCat.mp4", title: "Funny Cat"),
+                ),
+                Expanded(
+                  child: VideoWidget(videoAsset: "videoAudio/videos/funnyCat2.mp4", title: "Cool Cat"),
+                ),
+              ]
+          ),
+        ),
         ]
       )
     );
