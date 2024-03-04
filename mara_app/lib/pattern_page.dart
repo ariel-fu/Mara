@@ -55,6 +55,8 @@ class _PatternPageState extends State<PatternPage> {
     final int? routeArgumentIndex =
         ModalRoute.of(context)?.settings.arguments as int?;
 
+    String methodContent = "HELLOOOO";
+    
     // Update selectedButtonIndex if a valid value is provided from the route
     if (routeArgumentIndex != null &&
         routeArgumentIndex >= 0 &&
@@ -74,25 +76,63 @@ class _PatternPageState extends State<PatternPage> {
         ),
         title: Text('What will happen to my periods?')
       ),
-      body: Row(
+      body: Column(
         children: [
-          Expanded(
-            child: AudioWidget(audioAsset: 'videoAudio/audio/purr.mp3'),
+          Container(
+            alignment: Alignment.topCenter,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children:[
+                SizedBox(
+                  child: IconButton(
+                    icon:Image.asset('assets/string-resources/method_1.png'),
+                    onPressed: () {setState(() {methodContent = "Method 1!";});},
+                  ),
+                  width:80,
+                  height:80,
+                ),
+                SizedBox(
+                  child: IconButton(
+                    icon:Image.asset('assets/string-resources/method_2.png'),
+                    onPressed: () {
+                      setState(() {
+                        methodContent = "Method 1!";
+                      });
+                    },
+                  ),
+                  width:80,
+                  height:80,
+                ),
+                SizedBox(
+                  child: IconButton(
+                    icon:Image.asset('assets/string-resources/method_3.png'),
+                    onPressed: () {methodContent = "Method 3!";},
+                  ),
+                  width:80,
+                  height:80,
+                ),
+              ],
+            ),
           ),
-          Expanded(
-            child: AudioWidget(audioAsset: 'videoAudio/audio/crickets.mp3'),
+          Container(
+            alignment: Alignment.center,
+            child: Text(methodContent, style: TextStyle(
+                  fontSize: 18.0),
+            ),
           ),
-          Expanded(
-            child: VideoWidget(videoAsset: "videoAudio/videos/chimes.mp4", title: "Wind Chimes"),
-          ),
-          Expanded(
-            child: VideoWidget(videoAsset: "videoAudio/videos/funnyCat.mp4", title: "Funny Cat"),
-          ),
-          Expanded(
-            child: VideoWidget(videoAsset: "videoAudio/videos/funnyCat2.mp4", title: "Cool Cat"),
-          ),
+        
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       child: VideoWidget(videoAsset: "videoAudio/videos/chimes.mp4", title: "Wind Chimes"),
+          //     ),
+          //     Expanded(
+          //       child: VideoWidget(videoAsset: "videoAudio/videos/funnyCat.mp4", title: "Funny Cat"),
+          //     ),
+          //   ]
+          // ),
         ]
-      ),
+      )
     );
   }
 }
