@@ -9,7 +9,8 @@ import 'package:video_player/video_player.dart';
 
 class VideoWidget extends StatefulWidget {
   final String videoAsset;
-  VideoWidget({Key? key, required this.videoAsset}) : super(key:key);
+  final String title;
+  VideoWidget({Key? key, required this.videoAsset, required this.title}) : super(key:key);
   @override
   State<VideoWidget> createState() => _VideoWidgetState();
 }
@@ -24,17 +25,6 @@ class _VideoWidgetState extends State<VideoWidget> {
     _initializeVideoPlayerFuture = ourVideo.initialize().catchError((error) {
       print('Error initializing video player: $error');
     });
-    // Initialize asynchronously with error handling
-    // Future.wait([
-    //   ourVideo.initialize().then((_) {
-
-    //     // Handle completion for ourVideo
-    //     setState(() {}); // Trigger rebuild to display video
-    //   }).catchError((error) {
-    //     // Handle errors for ourVideo
-    //     print('Error initializing ourVideo: $error');
-    //   }),
-    // ]); 
   }
 
   @override
@@ -69,7 +59,7 @@ class _VideoWidgetState extends State<VideoWidget> {
                   aspectRatio: ourVideo.value.aspectRatio,
                   child: VideoPlayer(ourVideo),
                 ),
-                Text('{Video Title Placeholder}', style: TextStyle(
+                Text(widget.title, style: TextStyle(
                   fontSize: 18.0, fontWeight:FontWeight.bold
                 ),),
                 FutureBuilder<void>(

@@ -72,21 +72,24 @@ class _PatternPageState extends State<PatternPage> {
             Navigator.of(context).pushNamed('/home', arguments: selectedButtonIndex);
           },
         ),
-        title: Text('Bleeding Pattern')
+        title: Text('What will happen to my periods?')
       ),
       body: Row(
         children: [
           Expanded(
-            child: AudioWidget(audioAsset: 'purr.mp3'),
+            child: AudioWidget(audioAsset: 'videoAudio/audio/purr.mp3'),
           ),
           Expanded(
-            child: AudioWidget(audioAsset: 'crickets.mp3'),
+            child: AudioWidget(audioAsset: 'videoAudio/audio/crickets.mp3'),
           ),
           Expanded(
-            child: VideoWidget(videoAsset: "videos/funnyCat.mp4"),
+            child: VideoWidget(videoAsset: "videoAudio/videos/chimes.mp4", title: "Wind Chimes"),
           ),
           Expanded(
-            child: VideoWidget(videoAsset: "videos/funnyCat2.mp4"),
+            child: VideoWidget(videoAsset: "videoAudio/videos/funnyCat.mp4", title: "Funny Cat"),
+          ),
+          Expanded(
+            child: VideoWidget(videoAsset: "videoAudio/videos/funnyCat2.mp4", title: "Cool Cat"),
           ),
         ]
       ),
