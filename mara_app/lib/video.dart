@@ -50,8 +50,8 @@ class _VideoWidgetState extends State<VideoWidget> {
       body: Column(
         children: [
           SizedBox(
-            width: 300,
-            height: 300,
+            width: 350,
+            height: 350,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

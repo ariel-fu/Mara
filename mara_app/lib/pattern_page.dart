@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as flutter;
 import 'package:excel/excel.dart';
 import 'video.dart';
 import 'audio.dart';
@@ -16,6 +17,39 @@ class _PatternPageState extends State<PatternPage> {
   int selectedButtonIndex = 0; // Default value
 
   List<List<String>> languages = List.generate(3, (_) => <String>[]);
+
+  var languageVideoMap = { //would have a similar map on every page with videos involved
+    'videoNames': {
+      'video1': {
+        'english': {
+          'video': 'english_video1.mp4',
+          'text': 'English Video #1',
+        },
+        'kiswahili': {
+          'video': 'kiswahili_video1.mp4',
+          'text': 'Kiswahili Video #1',
+        },
+        'luo': {
+          'video': 'luo_video1.mp4',
+          'text': 'Luo Video #1',
+        },
+      },
+      'video2': {
+        'english': {
+          'video': 'english_video2.mp4',
+          'text': 'English Video #2',
+        },
+        'kiswahili': {
+          'video': 'kiswahili_video2.mp4',
+          'text': 'Kiswahili Video #2',
+        },
+        'luo': {
+          'video': 'luo_video2.mp4',
+          'text': 'Luo Video #2',
+        },
+      },
+    } 
+  };
 
   @override
   void initState() {
@@ -159,23 +193,21 @@ class _PatternPageState extends State<PatternPage> {
               ],
             ),
           ),
-          Container(
-            alignment:Alignment.bottomCenter,
-            child:Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(methodContent, style: TextStyle(
-                    fontSize: 18.0)),
-                // AudioWidget(audioAsset: 'videoAudio/audio/purr.mp3'),
-              ],
-          ),),
-
           // Container(
-          //   alignment: Alignment.topCenter,
-          //   child: Text(methodContent, style: TextStyle(
-          //         fontSize: 18.0),
-          //   ),
+          //   alignment:Alignment.center,
+          //   child: AudioWidget(audioAsset: 'purr.mp3'),
           // ),
+          Container(
+            decoration: BoxDecoration(
+              border: flutter.Border.all(
+                color: Colors.black,
+                width: 2.0,
+              ),
+            ),
+            alignment:Alignment.bottomCenter,
+            child: Text(methodContent, style: TextStyle(
+                    fontSize: 18.0)),
+          ),
           
           Expanded (
             child: Row(
