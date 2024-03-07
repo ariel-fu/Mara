@@ -78,6 +78,7 @@ flutter:
     - assets/string-resources/method_4.png
     - assets/string-resources/method_5.png
     - assets/string-resources/method_6.png
+    - assets/woman.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

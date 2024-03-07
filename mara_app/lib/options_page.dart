@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:excel/excel.dart';
 import 'option_pages/pills.dart';
+import 'options_button.dart';
 
+import 'icons/mara_icons_icons.dart' show MaraIcons;
 
 class OptionsPage extends StatefulWidget {
   const OptionsPage({Key? key}) : super(key: key);
@@ -17,38 +16,8 @@ class _OptionsPageState extends State<OptionsPage> {
   int selectedButtonIndex = 0; // Default value
 
   List<List<String>> languages = List.generate(3, (_) => <String>[]);
-
-  @override
-  void initState() {
-    super.initState();
-    loadTranslations();
-  }
-
-  Future<void> loadTranslations() async {
-    await parseExcelFile('assets/string-resources/dummy.xlsx');
-  }
-
-  Future<void> parseExcelFile(String filePath) async {
-    var bytes = File(filePath).readAsBytesSync();
-    var excel = Excel.decodeBytes(bytes);
-
-    List<List<String>> arrays = List.generate(3, (_) => <String>[]);
-
-    for (var table in excel.tables.keys) {
-      for (var row in excel.tables[table]!.rows) {
-        for (int i = 0; i < row.length; i++) {
-          CellValue? val = row[i]?.value;
-          if (val != null) {
-            arrays[i].add(val.toString());
-          }
-        }
-      }
-    }
-
-    setState(() {
-      languages = arrays;
-    });
-  }
+  // Change value to set aspect ratio
+  final double _aspectRatio = 16 / 10;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +33,13 @@ class _OptionsPageState extends State<OptionsPage> {
       selectedButtonIndex = routeArgumentIndex;
     }
 
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
     // var selectedButtonIndex = input == null ? input : 0;
     return Scaffold(
       appBar: AppBar(
@@ -122,64 +98,79 @@ class _OptionsPageState extends State<OptionsPage> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Container(
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                top: 300,
-                left: 104,
-                child: IconButtonExample(),
+      // body
+      body: Container(
+        width: containerWidth,
+        height: containerHeight,
+        // color: Colors.blue, // Set background color or use an image
+        child: Stack(
+          // alignment: Alignment.center,
+          children: <Widget>[
+            Positioned(
+              top: 0.1 * containerHeight,
+              left: -0.1 * containerWidth,
+              child: Image.asset('assets/woman.png', height: 0.7 * containerHeight),
+                // icon: SvgPicture.asset('assets/options-icons/noun-contraceptive-implant-2860656.svg', height: 50),  // replace with image
               ),
-              // Positioned(
-              //   top: 200,
-              //   left: 200,
-              //   child: IconButton(
-              //     onPressed: () {},
-              //     icon: Icon(Icons.emoji_food_beverage),  // replace with image
-              //   ),
-              // )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/* TODO - rename and convert to a custom placeable widget,
-perhaps based on align
-Move 'x' to the top right
-*/
-class IconButtonExample extends StatelessWidget {
-  const IconButtonExample({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: const Text('AlertDialog description'),
-          actions: <Widget>[
-            TextButton(
-              // onPressed: () => Navigator.pop(context, 'Next'),
-              // TODO - pop the dialog here, or pop it from each subpage
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const PillInfo()),
-              ),
-              child: const Text('Learn More'),
+            // Icons on top of the background image
+            Positioned(
+              top: containerHeight * 0.05, // 5% from the top
+              left: containerWidth * 0.7, // 5% from the left
+              child: OptionsIconButton(
+                icon: MaraIcons.birth_control_pills, size: containerWidth * 0.2,
+                methodTitle: 'Pills', description: 'Pills description'),
             ),
-            IconButton(
-              onPressed: () => Navigator.pop(context, 'Close'),
-              icon: Icon(Icons.close),
+            Positioned(
+              top: containerHeight * 0.05,
+              left: containerWidth * 0.1,
+              child: OptionsIconButton(
+                icon: MaraIcons.contraceptive_implant, size: containerWidth * 0.2,
+                methodTitle: 'Implant', description: 'Implant description',
+              ),
+            ),
+            Positioned(
+              top: containerHeight * 0.28,
+              left: containerWidth * 0.75,
+              child: OptionsIconButton(
+                icon: MaraIcons.double_pills, size: containerWidth * 0.15,
+                methodTitle: 'Pills 2', description: 'Pills 2 description',
+              ),
+            ),
+            Positioned(
+              top: containerHeight * 0.5,
+              left: containerWidth * 0.7,
+              child: OptionsIconButton(
+                icon: MaraIcons.condom, size: containerWidth * 0.2,
+                methodTitle: 'Condom', description: 'Condom description',
+              ),
+            ),
+            Positioned(
+              top: containerHeight * 0.7,
+              left: containerWidth * 0.65,
+              child: OptionsIconButton(
+                icon: MaraIcons.female_condom, size: containerWidth * 0.25,
+                methodTitle: 'Female Condom', description: 'Female condom description',
+              ),
+            ),
+            Positioned(
+              top: containerHeight * 0.3,
+              left: containerWidth * 0.05,
+              child: OptionsIconButton(
+                icon: MaraIcons.syringe, size: containerWidth * 0.2,
+                methodTitle: 'Injection', description: 'Injection description',
+              ),
+            ),
+            Positioned(
+              top: containerHeight * 0.6,
+              left: containerWidth * 0.02,
+              child: OptionsIconButton(
+                icon: MaraIcons.iud, size: containerWidth * 0.25,
+                methodTitle: 'IUD', description: 'IUD description',
+              ),
             ),
           ],
         ),
       ),
-      icon: Icon(Icons.house),  // replace with image
     );
   }
 }
