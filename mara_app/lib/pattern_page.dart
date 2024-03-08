@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' as flutter;
 import 'package:excel/excel.dart';
 import 'video.dart';
 import 'audio.dart';
+import 'icons/mara_icons_icons.dart' show MaraIcons;
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -117,9 +118,9 @@ class _PatternPageState extends State<PatternPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:[
-                SizedBox(
-                  child: IconButton(
-                    icon:Image.asset('assets/string-resources/method_1.png'),
+                IconButton(
+                    // icon:Image.asset('assets/string-resources/method_1.png'),
+                    icon:Icon(MaraIcons.condom, size: 50),
                     onPressed: () {
                       print("hello!");
                       setState(() {
@@ -127,70 +128,67 @@ class _PatternPageState extends State<PatternPage> {
                       });
                      },
                   ),
-                  width:80,
-                  height:80,
-                ),
-                SizedBox(
-                  child: IconButton(
-                    icon:Image.asset('assets/string-resources/method_2.png'),
+               
+                IconButton(
+                    // icon:Image.asset('assets/string-resources/method_2.png'),
+                    icon:Icon(MaraIcons.female_condom, size:50),
                     onPressed: () {
                       setState(() {
                         methodContent = "Method 2!";
                       });
                     },
-                  ),
-                  width:80,
-                  height:80,
                 ),
-                SizedBox(
-                  child: IconButton(
-                    icon:Image.asset('assets/string-resources/method_3.png'),
+                  
+               IconButton(
+                    // icon:Image.asset('assets/string-resources/method_3.png'),
+                    icon:Icon(MaraIcons.birth_control_pills, size:50),
                     onPressed: () {
                       setState(() {
                         methodContent = "Method 3!";
                       });
                     },
-                  ),
-                  width:80,
-                  height:80,
                 ),
-                SizedBox(
-                  child: IconButton(
-                    icon:Image.asset('assets/string-resources/method_4.png'),
+                  
+               IconButton(
+                    // icon:Image.asset('assets/string-resources/method_4.png'),
+                    icon:Icon(MaraIcons.syringe, size:50),
                     onPressed: () {
                       setState(() {
                         methodContent = "Method 4!";
                       });
                     },
-                  ),
-                  width:80,
-                  height:80,
                 ),
-                SizedBox(
-                  child: IconButton(
-                    icon:Image.asset('assets/string-resources/method_5.png'),
+            
+                IconButton(
+                    icon:Icon(MaraIcons.contraceptive_implant, size:50),
                     onPressed: () {
                       setState(() {
                         methodContent = "Method 5!";
                       });
                     },
                   ),
-                  width:80,
-                  height:80,
-                ),
-                SizedBox(
-                  child: IconButton(
-                    icon:Image.asset('assets/string-resources/method_6.png'),
+                
+                  
+                IconButton(
+                    icon:Icon(MaraIcons.iud, size:50),
                     onPressed: () {
                       setState(() {
                         methodContent = "Method 6!";
                       });
                     },
                   ),
-                  width:80,
-                  height:80,
+
+                  IconButton(
+                    // icon:Image.asset('assets/string-resources/method_5.png'),
+                    icon:Icon(MaraIcons.double_pills, size:50),
+                    onPressed: () {
+                      setState(() {
+                        methodContent = "Method 7!";
+                      });
+                    },
                 ),
-              ],
+                ],
+
             ),
           ),
           // Container(
