@@ -19,7 +19,7 @@ class MaraApp extends StatefulWidget {
 
 class _MaraAppState extends State<MaraApp> {
   bool _isDarkMode = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

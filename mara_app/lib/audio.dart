@@ -40,7 +40,7 @@ class _AudioWidgetState extends State<AudioWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-      body: Expanded(child: Row(
+      body: Row(
             children: [
               Text(' Listen Here: ', style: TextStyle(
                 fontSize: 12.0)),
@@ -54,6 +54,6 @@ class _AudioWidgetState extends State<AudioWidget> {
               ),
           ]
         )
-      ));
+      );
   }
 }
