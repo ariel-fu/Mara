@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 
-class PrivatePage extends StatefulWidget {
-  const PrivatePage({Key? key}) : super(key: key);
+class TemplatePage extends StatefulWidget {
+  const TemplatePage({Key? key}) : super(key: key);
 
   @override
-  State<PrivatePage> createState() => _PrivatePageState();
+  State<TemplatePage> createState() => _TemplatePageState();
 }
 
-class _PrivatePageState extends State<PrivatePage> {
+class _TemplatePageState extends State<TemplatePage> {
   Widget methodContent = Text('DUMMY');
+  // TODO - replace the language/content with a hashmap?
   int methodIndex = -1; // Index of the selected icon button, -1 for none
-  int languageIndex = -1;
+  int languageIndex = -1; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   final content = [
     "method 1",
@@ -109,6 +110,7 @@ class _PrivatePageState extends State<PrivatePage> {
                 height: boxHeight,
                 color: Colors.blue,
                 child: Center(
+                  // TODO - this methodContent is the first text/video/audio content associated with the method
                   child: methodContent,
                 ),
               ),
@@ -118,6 +120,7 @@ class _PrivatePageState extends State<PrivatePage> {
                 height: boxHeight,
                 color: Colors.green,
                 child: Center(
+                  // TODO - this methodContent is the second text/video/audio content associated with the method
                   child: methodContent,
                 ),
               ),
@@ -179,6 +182,7 @@ class _PrivatePageState extends State<PrivatePage> {
 
   void updateMethodContent() {
     // TODO: content[methodIndex] is the text/audio/video content for method i (methodIndex)
+    // TODO: dynamically update the content here based on the language chosen and the method chosen
     methodContent = Text(
         languageIndex != -1
             ? (languages[languageIndex] + " | " + content[methodIndex])
