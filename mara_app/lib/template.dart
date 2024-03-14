@@ -15,6 +15,9 @@ class _TemplatePageState extends State<TemplatePage> {
   int languageIndex = -1; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   final content = [
+    //TODO: one of these content Strings could be a videoWidget
+    //but the asset passed into the videoWidget would vary based 
+    //on language and method so we'd need a HashMap to manage that
     "method 1",
     "method 2",
     "method 3",
