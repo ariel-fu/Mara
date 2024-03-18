@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               child: const Text('Can I keep it private?'),
               onPressed: () {
-                Navigator.of(context).pushNamed('/time', arguments: selectedButtonIndex);
+                Navigator.of(context).pushNamed('/private', arguments: selectedButtonIndex);
               },
             ),
             const SizedBox(height: 12.0),
