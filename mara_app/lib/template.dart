@@ -1,69 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
-import 'video.dart';
+import 'package:mara_app/video.dart';
 
-class TemplatePage extends StatefulWidget {
-  const TemplatePage({Key? key}) : super(key: key);
+class PrivatePage extends StatefulWidget {
+  const PrivatePage({Key? key}) : super(key: key);
 
   @override
-  State<TemplatePage> createState() => _TemplatePageState();
+  State<PrivatePage> createState() => _PrivatePageState();
 }
 
-class _TemplatePageState extends State<TemplatePage> {
+class _PrivatePageState extends State<PrivatePage> {
   Widget methodContent = Text('DUMMY');
-  String videoAsset1 = 'funnyCat.mp4';
-  String videoTitle1 = 'Video 1 Language Not Selected';
-  String videoAsset2 = 'funnyCat2.mp4';
-  String videoTitle2 = 'Video 2 Language Not Selected';
-
-  int methodIndex = -1; // Index of the selected icon button, -1 for none
-  int languageIndex = -1; // similar indexing for language
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-  final content = [
-    "method 1",
-    "method 2",
-    "method 3",
-    "method 4",
-    "method 5",
-    "method 6"
-  ];
 
-  //Video HashMap: specifies video asset and text/title based on language and video
-  final Map<String, Map<String, Map<String, String>>> languageToVideo = { 
-      'video1': {
-        '0': {
-          'video': 'chimes.mp4',
-          'text': 'English Video #1',
-        },
-        '1': {
-          'video': 'funnyCat.mp4',
-          'text': 'Kiswahili Video #1',
-        },
-        '2': {
-          'video': 'funnyCat2.mp4',
-          'text': 'Luo Video #1',
-        },
-      },
-      'video2': {
-        '0': {
-          'video': 'chimes.mp4',
-          'text': 'English Video #2',
-        },
-        '1': {
-          'video': 'funnyCat.mp4',
-          'text': 'Kiswahili Video #2',
-        },
-        '2': {
-          'video': 'funnyCat2.mp4',
-          'text': 'Luo Video #2',
-        },
-      },
+  final Map<String, List<String>> videoContentMap = {
+    "Kiswahili": [
+      "AiVTXTke8Vk",
+      "hH3uUP_w6oM",
+      "MBuDPNRkvIM",
+      "bmxsQ_WS2kg",
+      "1CXmnm_epTM",
+      "CsqZ7iLRjyk",
+      "something"
+    ],
+    "Dholuo": [
+      "sD3bXzHgzd0",
+      "vTrLEhFObCc",
+      "mKAqrA3weA",
+      "CVdkGFNCXAA",
+      "uEuIMup4QhY",
+      "N9QAG30UYRQ",
+      "something"
+    ],
+    "English": [
+      "KjmuBo8xoCU",
+      "_MQNjeLgQtk",
+      "mSHveDq0Idk",
+      "h7k6P12gfic",
+      "yfvNM_opeJc",
+      "EXSjzlTddho",
+      "something"
+    ],
+  };
+
+  final Map<String, List<String>> contentDescriptionMap = {
+    "Kiswahili": [
+      "method 1 in Kiswahili",
+      "method 2 in Kiswahili",
+      "method 3 in Kiswahili",
+      "method 4 in Kiswahili",
+      "method 5 in Kiswahili",
+      "method 6 in Kiswahili",
+      "method 7 in Kiswahili"
+    ],
+    "Dholuo": [
+      "method 1 in Dholuo",
+      "method 2 in Dholuo",
+      "method 3 in Dholuo",
+      "method 4 in Dholuo",
+      "method 5 in Dholuo",
+      "method 6 in Dholuo",
+      "method 7 in Dholuo"
+    ],
+    "English": [
+      "method 1 in English",
+      "method 2 in English",
+      "method 3 in English",
+      "method 4 in English",
+      "method 5 in English",
+      "method 6 in English",
+      "method 7 in English"
+    ],
   };
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double boxWidth = screenWidth * 0.85;
+
+    double screenHeight = MediaQuery.of(context).size.height;
+    double availableHeight = screenHeight;
+    double boxHeight = availableHeight * 0.25;
 
     double screenHeight = MediaQuery.of(context).size.height;
     double availableHeight = screenHeight;
@@ -77,7 +96,7 @@ class _TemplatePageState extends State<TemplatePage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('ANY TITLE HERE!'),
+        title: Text('Can I keep it private?'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,7 +113,6 @@ class _TemplatePageState extends State<TemplatePage> {
                         setState(() {
                           languageIndex = 0;
                           updateMethodContent();
-                          updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -108,7 +126,6 @@ class _TemplatePageState extends State<TemplatePage> {
                         setState(() {
                           languageIndex = 1;
                           updateMethodContent();
-                          updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -122,7 +139,6 @@ class _TemplatePageState extends State<TemplatePage> {
                         setState(() {
                           languageIndex = 2;
                           updateMethodContent();
-                          updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -136,25 +152,29 @@ class _TemplatePageState extends State<TemplatePage> {
               )),
           SizedBox(height: 20.0),
           Container(
+            alignment: Alignment.center,
             height: availableHeight * 0.1,
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            width: boxWidth,
+            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildIconButton(MaraIcons.iud, 0),
-                  buildIconButton(MaraIcons.birth_control_pills, 1),
-                  buildIconButton(MaraIcons.condom, 2),
-                  buildIconButton(MaraIcons.contraceptive_implant, 3),
-                  buildIconButton(MaraIcons.syringe, 4),
-                  buildIconButton(MaraIcons.female_condom, 5),
+                  buildIconButton(MaraIcons.condom, 0),
+                  buildIconButton(MaraIcons.female_condom, 1),
+                  buildIconButton(MaraIcons.birth_control_pills, 2),
+                  buildIconButton(MaraIcons.syringe, 3),
+                  buildIconButton(MaraIcons.contraceptive_implant, 4),
+                  buildIconButton(MaraIcons.iud, 5),
+                  buildIconButton(MaraIcons.double_pills, 6),
+                  
                 ],
               ),
             ),
           ),
           SizedBox(height: 20.0),
-          Container (
+          Container(
             height: availableHeight * 0.6, // Adjust as needed
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -167,26 +187,14 @@ class _TemplatePageState extends State<TemplatePage> {
                     child: methodContent,
                   ),
                 ),
-                
-                Row(
-                  children: [
-                    Container(
-                      width: boxWidth,
-                      height: availableHeight * 0.25 - 10,
-                      color: Colors.green,
-                      child: Center(
-                        child: VideoWidget(videoAsset: videoAsset1, title:videoTitle1), 
-                      ),
-                    ),
-                    Container(
-                      width: boxWidth,
-                      height: availableHeight * 0.25 - 10,
-                      color: Colors.green,
-                      child: Center(
-                        child: VideoWidget(videoAsset: videoAsset2, title:videoTitle2), 
-                      ),
-                    ),
-                  ]
+                // SizedBox(height: 10.0),
+                Container(
+                  width: boxWidth * 0.75,
+                  height: availableHeight * 0.25 - 10,
+                  color: Colors.green,
+                  child: Center(
+                    child: buildYoutubePlayer(),
+                  ),
                 ),
               ],
             ),
@@ -194,6 +202,20 @@ class _TemplatePageState extends State<TemplatePage> {
         ],
       ),
     );
+  }
+
+  Widget buildYoutubePlayer() {
+    String videoId = videoContentMap[languages[languageIndex]]![methodIndex];
+    return Text("some text here " + videoId);
+  }
+
+  Widget buildVideoContent() {
+    return Container(
+        alignment: Alignment.center,
+        child: VideoWidget(
+            videoAsset: videoContentMap[languages[languageIndex]]![methodIndex],
+            title:
+                contentDescriptionMap[languages[languageIndex]]![methodIndex]));
   }
 
   Widget buildIconButton(IconData iconData, int index) {
@@ -205,7 +227,7 @@ class _TemplatePageState extends State<TemplatePage> {
         IconButton(
           icon: Icon(
             iconData,
-            size: isSelected ? 100 : 60,
+            size: isSelected ? 60 : 60,
             color: isSelected ? Colors.black : Colors.grey,
           ),
           onPressed: () {
@@ -215,7 +237,7 @@ class _TemplatePageState extends State<TemplatePage> {
             });
           },
           color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 100 : 60,
+          iconSize: isSelected ? 60 : 60,
           padding: EdgeInsets.all(10),
           splashRadius: 40,
           splashColor: Colors.grey.withOpacity(0.5),
@@ -227,13 +249,11 @@ class _TemplatePageState extends State<TemplatePage> {
 
   void updateMethodContent() {
     methodContent = Text(
-      languageIndex != -1
-          ? (languages[languageIndex] + " | " + content[methodIndex])
-          : "no content",
+      contentDescriptionMap[languages[languageIndex]]![methodIndex],
       style: TextStyle(
         fontSize: 20.0,
         color: Colors.white,
-      ),
+      )
     );
   }
 

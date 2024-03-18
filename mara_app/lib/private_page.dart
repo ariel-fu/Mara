@@ -2,18 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
 
-class TimePage extends StatefulWidget {
-  const TimePage({Key? key}) : super(key: key);
+class PrivatePage extends StatefulWidget {
+  const PrivatePage({Key? key}) : super(key: key);
 
   @override
-  State<TimePage> createState() => _TimePageState();
+  State<PrivatePage> createState() => _PrivatePageState();
 }
 
-class _TimePageState extends State<TimePage> {
+class _PrivatePageState extends State<PrivatePage> {
   Widget methodContent = Text('DUMMY');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+
+  final Map<String, List<String>> videoContentMap = {
+    "Kiswahili": [
+      "AiVTXTke8Vk",
+      "hH3uUP_w6oM",
+      "MBuDPNRkvIM",
+      "bmxsQ_WS2kg",
+      "1CXmnm_epTM",
+      "CsqZ7iLRjyk",
+      "something"
+    ],
+    "Dholuo": [
+      "sD3bXzHgzd0",
+      "vTrLEhFObCc",
+      "mKAqrA3weA",
+      "CVdkGFNCXAA",
+      "uEuIMup4QhY",
+      "N9QAG30UYRQ",
+      "something"
+    ],
+    "English": [
+      "KjmuBo8xoCU",
+      "_MQNjeLgQtk",
+      "mSHveDq0Idk",
+      "h7k6P12gfic",
+      "yfvNM_opeJc",
+      "EXSjzlTddho",
+      "something"
+    ],
+  };
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -62,7 +92,7 @@ class _TimePageState extends State<TimePage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('How long will it last?'),
+        title: Text('Can I keep it private?'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -159,7 +189,7 @@ class _TimePageState extends State<TimePage> {
                   height: availableHeight * 0.25 - 10,
                   color: Colors.green,
                   child: Center(
-                    child: buildSecondaryContent(),
+                    child: buildYoutubePlayer(),
                   ),
                 ),
               ],
@@ -170,9 +200,18 @@ class _TimePageState extends State<TimePage> {
     );
   }
 
-  Widget buildSecondaryContent() {
-    String content = contentDescriptionMap[languages[languageIndex]]![methodIndex];
-    return Text("some text here " + content);
+  Widget buildYoutubePlayer() {
+    String videoId = videoContentMap[languages[languageIndex]]![methodIndex];
+    return Text("some text here " + videoId);
+  }
+
+  Widget buildVideoContent() {
+    return Container(
+        alignment: Alignment.center,
+        child: VideoWidget(
+            videoAsset: videoContentMap[languages[languageIndex]]![methodIndex],
+            title:
+                contentDescriptionMap[languages[languageIndex]]![methodIndex]));
   }
 
   Widget buildIconButton(IconData iconData, int index) {
