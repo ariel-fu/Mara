@@ -10,6 +10,7 @@ import 'time_page.dart';
 import 'private_page.dart';
 import 'ready_to_have_baby.dart';
 import 'learn_more.dart';
+import 'private_page.dart';
 
 void main() {
   runApp(MaraApp());
@@ -24,6 +25,7 @@ class MaraApp extends StatefulWidget {
 
 class _MaraAppState extends State<MaraApp> {
   bool _isDarkMode = false;
+  
   
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,8 @@ class _MaraAppState extends State<MaraApp> {
         '/ready_baby': (BuildContext context) => ReadyPage(),
         '/quiz': (BuildContext context) => QuizScreen(),
         '/learnmore': (BuildContext context) => const LearnMoreFertility(),
+        '/private': (BuildContext context) => const PrivatePage(),
+        
       },
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
     );

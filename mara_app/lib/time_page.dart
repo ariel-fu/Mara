@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'package:mara_app/video.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({Key? key}) : super(key: key);
@@ -12,7 +13,39 @@ class _TimePageState extends State<TimePage> {
   Widget methodContent = Text('DUMMY');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 0; // similar indexing for language
+  Widget methodContent = Text('DUMMY');
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+
+  final Map<String, List<String>> contentDescriptionMap = {
+    "Kiswahili": [
+      "method 1 in Kiswahili",
+      "method 2 in Kiswahili",
+      "method 3 in Kiswahili",
+      "method 4 in Kiswahili",
+      "method 5 in Kiswahili",
+      "method 6 in Kiswahili",
+      "method 7 in Kiswahili"
+    ],
+    "Dholuo": [
+      "method 1 in Dholuo",
+      "method 2 in Dholuo",
+      "method 3 in Dholuo",
+      "method 4 in Dholuo",
+      "method 5 in Dholuo",
+      "method 6 in Dholuo",
+      "method 7 in Dholuo"
+    ],
+    "English": [
+      "method 1 in English",
+      "method 2 in English",
+      "method 3 in English",
+      "method 4 in English",
+      "method 5 in English",
+      "method 6 in English",
+      "method 7 in English"
+    ],
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -61,7 +94,7 @@ class _TimePageState extends State<TimePage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('How Long Will It Last?'),
+        title: Text('How long will it last?'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -118,14 +151,26 @@ class _TimePageState extends State<TimePage> {
           SizedBox(height: 20.0),
           Container(
             alignment: Alignment.center,
+            alignment: Alignment.center,
             height: availableHeight * 0.1,
+            width: boxWidth,
+            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
             width: boxWidth,
             // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  buildIconButton(MaraIcons.condom, 0),
+                  buildIconButton(MaraIcons.female_condom, 1),
+                  buildIconButton(MaraIcons.birth_control_pills, 2),
+                  buildIconButton(MaraIcons.syringe, 3),
+                  buildIconButton(MaraIcons.contraceptive_implant, 4),
+                  buildIconButton(MaraIcons.iud, 5),
+                  buildIconButton(MaraIcons.double_pills, 6),
+                  
                   buildIconButton(MaraIcons.condom, 0),
                   buildIconButton(MaraIcons.female_condom, 1),
                   buildIconButton(MaraIcons.birth_control_pills, 2),
@@ -140,6 +185,7 @@ class _TimePageState extends State<TimePage> {
           ),
           SizedBox(height: 20.0),
           Container(
+          Container(
             height: availableHeight * 0.6, // Adjust as needed
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -153,12 +199,13 @@ class _TimePageState extends State<TimePage> {
                   ),
                 ),
                 // SizedBox(height: 10.0),
+                // SizedBox(height: 10.0),
                 Container(
                   width: boxWidth * 0.75,
                   height: availableHeight * 0.25 - 10,
                   color: Colors.green,
                   child: Center(
-                    child: buildSecondaryContext(),
+                    child: buildSecondaryContent(),
                   ),
                 ),
               ],
@@ -169,9 +216,9 @@ class _TimePageState extends State<TimePage> {
     );
   }
 
-  Widget buildSecondaryContext() {
-    return Text("ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " + 
-      contentDescriptionMap[languages[languageIndex]]![methodIndex]);
+  Widget buildSecondaryContent() {
+    String content = contentDescriptionMap[languages[languageIndex]]![methodIndex];
+    return Text("some text here " + content);
   }
 
   Widget buildIconButton(IconData iconData, int index) {
@@ -184,6 +231,7 @@ class _TimePageState extends State<TimePage> {
           icon: Icon(
             iconData,
             size: isSelected ? 60 : 60,
+            size: isSelected ? 60 : 60,
             color: isSelected ? Colors.black : Colors.grey,
           ),
           onPressed: () {
@@ -193,6 +241,7 @@ class _TimePageState extends State<TimePage> {
             });
           },
           color: isSelected ? Colors.black : Colors.transparent,
+          iconSize: isSelected ? 60 : 60,
           iconSize: isSelected ? 60 : 60,
           padding: EdgeInsets.all(10),
           splashRadius: 40,
@@ -206,9 +255,11 @@ class _TimePageState extends State<TimePage> {
   void updateMethodContent() {
     methodContent = Text(
       contentDescriptionMap[languages[languageIndex]]![methodIndex],
+      contentDescriptionMap[languages[languageIndex]]![methodIndex],
       style: TextStyle(
         fontSize: 20.0,
         color: Colors.white,
+      )
       )
     );
   }
