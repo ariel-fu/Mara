@@ -28,7 +28,7 @@ class _TemplatePageState extends State<TemplatePage> {
     "method 6"
   ];
 
-  //HashMap: specifies video asset and text/title based on language and video
+  //Video HashMap: specifies video asset and text/title based on language and video
   final Map<String, Map<String, Map<String, String>>> languageToVideo = { 
       'video1': {
         '0': {

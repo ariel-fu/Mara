@@ -19,39 +19,6 @@ class _PatternPageState extends State<PatternPage> {
 
   List<List<String>> languages = List.generate(3, (_) => <String>[]);
 
-  var languageVideoMap = { //would have a similar map on every page with videos involved
-    'videoNames': {
-      'video1': {
-        'english': {
-          'video': 'english_video1.mp4',
-          'text': 'English Video #1',
-        },
-        'kiswahili': {
-          'video': 'kiswahili_video1.mp4',
-          'text': 'Kiswahili Video #1',
-        },
-        'luo': {
-          'video': 'luo_video1.mp4',
-          'text': 'Luo Video #1',
-        },
-      },
-      'video2': {
-        'english': {
-          'video': 'english_video2.mp4',
-          'text': 'English Video #2',
-        },
-        'kiswahili': {
-          'video': 'kiswahili_video2.mp4',
-          'text': 'Kiswahili Video #2',
-        },
-        'luo': {
-          'video': 'luo_video2.mp4',
-          'text': 'Luo Video #2',
-        },
-      },
-    } 
-  };
-
   @override
   void initState() {
     super.initState();
