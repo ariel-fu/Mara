@@ -1,49 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
-import 'package:mara_app/video.dart';
 
-class PrivatePage extends StatefulWidget {
-  const PrivatePage({Key? key}) : super(key: key);
+class TemplatePage extends StatefulWidget {
+  const TemplatePage({Key? key}) : super(key: key);
 
   @override
-  State<PrivatePage> createState() => _PrivatePageState();
+  State<TemplatePage> createState() => _TemplatePageState();
 }
 
-class _PrivatePageState extends State<PrivatePage> {
+class _TemplatePageState extends State<TemplatePage> {
   Widget methodContent = Text('DUMMY');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-
-  final Map<String, List<String>> videoContentMap = {
-    "Kiswahili": [
-      "AiVTXTke8Vk",
-      "hH3uUP_w6oM",
-      "MBuDPNRkvIM",
-      "bmxsQ_WS2kg",
-      "1CXmnm_epTM",
-      "CsqZ7iLRjyk",
-      "something"
-    ],
-    "Dholuo": [
-      "sD3bXzHgzd0",
-      "vTrLEhFObCc",
-      "mKAqrA3weA",
-      "CVdkGFNCXAA",
-      "uEuIMup4QhY",
-      "N9QAG30UYRQ",
-      "something"
-    ],
-    "English": [
-      "KjmuBo8xoCU",
-      "_MQNjeLgQtk",
-      "mSHveDq0Idk",
-      "h7k6P12gfic",
-      "yfvNM_opeJc",
-      "EXSjzlTddho",
-      "something"
-    ],
-  };
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -193,7 +162,7 @@ class _PrivatePageState extends State<PrivatePage> {
                   height: availableHeight * 0.25 - 10,
                   color: Colors.green,
                   child: Center(
-                    child: buildYoutubePlayer(),
+                    child: buildSecondaryContext(),
                   ),
                 ),
               ],
@@ -204,18 +173,9 @@ class _PrivatePageState extends State<PrivatePage> {
     );
   }
 
-  Widget buildYoutubePlayer() {
-    String videoId = videoContentMap[languages[languageIndex]]![methodIndex];
-    return Text("some text here " + videoId);
-  }
-
-  Widget buildVideoContent() {
-    return Container(
-        alignment: Alignment.center,
-        child: VideoWidget(
-            videoAsset: videoContentMap[languages[languageIndex]]![methodIndex],
-            title:
-                contentDescriptionMap[languages[languageIndex]]![methodIndex]));
+  Widget buildSecondaryContext() {
+    return Text("some text here " + 
+      contentDescriptionMap[languages[languageIndex]]![methodIndex]);
   }
 
   Widget buildIconButton(IconData iconData, int index) {
