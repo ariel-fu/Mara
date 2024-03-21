@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
-import 'package:mara_app/video.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({Key? key}) : super(key: key);
@@ -94,7 +93,7 @@ class _TimePageState extends State<TimePage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('How long will it last?'),
+        title: Text('Can I keep it private?'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -205,7 +204,7 @@ class _TimePageState extends State<TimePage> {
                   height: availableHeight * 0.25 - 10,
                   color: Colors.green,
                   child: Center(
-                    child: buildSecondaryContent(),
+                    child: buildSecondaryContext(),
                   ),
                 ),
               ],
@@ -216,9 +215,9 @@ class _TimePageState extends State<TimePage> {
     );
   }
 
-  Widget buildSecondaryContent() {
-    String content = contentDescriptionMap[languages[languageIndex]]![methodIndex];
-    return Text("some text here " + content);
+  Widget buildSecondaryContext() {
+    return Text("some text here " + 
+      contentDescriptionMap[languages[languageIndex]]![methodIndex]);
   }
 
   Widget buildIconButton(IconData iconData, int index) {
