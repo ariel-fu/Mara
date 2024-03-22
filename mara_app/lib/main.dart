@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'home.dart';
+import 'package:mara_app/home.dart';
 import 'home.dart';
+import 'home2.dart';
 import 'launch_screen2.dart';
 import 'options_page.dart';
 import 'pattern_page.dart';
@@ -27,7 +28,7 @@ class _MaraAppState extends State<MaraApp> {
       initialRoute: '/launch',
       routes: {
         '/launch': (BuildContext context) => const LaunchScreen(),
-        '/home': (BuildContext context) => const HomePage(),
+        '/home': (BuildContext context) => const HomePage(), // replace with home2 for march 26 demo
         '/options': (BuildContext context) => const OptionsPage(),
         '/bleeding_pattern': (BuildContext context) => const PatternPage(),
         '/time': (BuildContext context) => const TimePage(),
