@@ -1,0 +1,119 @@
+import 'package:flutter/material.dart';
+import 'package:mara_app/options_page.dart';
+import 'package:mara_app/pattern_page.dart';
+import 'package:mara_app/time_page.dart';
+
+void main() => runApp(home2());
+
+class home2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'mara',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: mainScreen(),
+    );
+  }
+}
+
+class mainScreen extends StatefulWidget {
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<mainScreen> {
+  List<bool> _selections = List.generate(6, (_) => false);
+  bool get _allSelected => _selections.every((bool selected) => selected);
+  void _handleTap(int index) {
+    setState(() {
+      _selections[index] = true;
+    });
+  if (index == 0) {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => OptionsPage()),
+  );
+  } else if (index == 1) {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => PatternPage()),
+  );
+  } else if (index == 2) {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => TimePage()),
+  );
+  }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('mara'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.language),
+            onPressed: () {
+              // language changer
+            },
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.info_outline),
+              title: Text('What are my options?'),
+              onTap: () => _handleTap(0), 
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.calendar_today),
+              title: Text('What will happen to my period?'),
+              onTap: () => _handleTap(1),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.hourglass_empty),
+              title: Text('How long will it last?'),
+              onTap: () => _handleTap(2),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.pregnant_woman),
+              title: Text('What is my chance of getting pregnant?'),
+              onTap: () => _handleTap(3),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.lock_outline),
+              title: Text('Can I keep it private?'),
+              onTap: () => _handleTap(4),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.baby_changing_station),
+              title: Text('What if I’m ready to have a baby?'),
+              onTap: () => _handleTap(5),
+            ),
+            Divider(),
+            
+            if (_allSelected)
+              ListTile(
+                leading: Icon(Icons.question_answer),
+                title: Text('Take the Quiz'),
+                onTap: () {
+                  // Handle Quiz tap
+                },
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
