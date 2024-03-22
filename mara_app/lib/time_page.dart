@@ -77,7 +77,7 @@ class _TimePageState extends State<TimePage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('ANY TITLE HERE!'),
+        title: Text('How Long Will It Last?'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -167,27 +167,35 @@ class _TimePageState extends State<TimePage> {
                     child: methodContent,
                   ),
                 ),
-                
-                Row(
-                  children: [
-                    Container(
+                Container(
                       width: boxWidth,
                       height: availableHeight * 0.25 - 10,
                       color: Colors.green,
                       child: Center(
-                        child: VideoWidget(videoAsset: videoAsset1, title:videoTitle1), 
+                        child: Text('ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'), 
                       ),
-                    ),
-                    Container(
-                      width: boxWidth,
-                      height: availableHeight * 0.25 - 10,
-                      color: Colors.green,
-                      child: Center(
-                        child: VideoWidget(videoAsset: videoAsset2, title:videoTitle2), 
-                      ),
-                    ),
-                  ]
                 ),
+                
+                // Row(
+                //   children: [
+                //     Container(
+                //       width: boxWidth,
+                //       height: availableHeight * 0.25 - 10,
+                //       color: Colors.green,
+                //       child: Center(
+                //         child: VideoWidget(videoAsset: videoAsset1, title:videoTitle1), 
+                //       ),
+                //     ),
+                //     Container(
+                //       width: boxWidth,
+                //       height: availableHeight * 0.25 - 10,
+                //       color: Colors.green,
+                //       child: Center(
+                //         child: VideoWidget(videoAsset: videoAsset2, title:videoTitle2), 
+                //       ),
+                //     ),
+                //   ]
+                // ),
               ],
             ),
           ),
