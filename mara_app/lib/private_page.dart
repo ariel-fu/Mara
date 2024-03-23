@@ -27,13 +27,13 @@ class _PrivatePageState extends State<PrivatePage> {
       "videoAudio/videos/funnyCat.mp4"  // method 7 - double pills
     ],
     "Dholuo": [
-      "videoAudio/videos/funnyCat.mp4", // method 1 - condom
-      "videoAudio/videos/funnyCat.mp4", // method 2 - female condom
-      "videoAudio/videos/funnyCat.mp4", // method 3 - birth control pills
-      "videoAudio/videos/funnyCat.mp4", // method 4 - syringe
-      "videoAudio/videos/funnyCat.mp4", // method 5 - contraceptive implant
-      "videoAudio/videos/funnyCat.mp4", // method 6 - iud
-      "videoAudio/videos/funnyCat.mp4"  // method 7 - double pills
+      "videoAudio/videos/chimes.mp4", // method 1 - condom
+      "videoAudio/videos/chimes.mp4", // method 2 - female condom
+      "videoAudio/videos/chimes.mp4", // method 3 - birth control pills
+      "videoAudio/videos/chimes.mp4", // method 4 - syringe
+      "videoAudio/videos/chimes.mp4", // method 5 - contraceptive implant
+      "videoAudio/videos/chimes.mp4", // method 6 - iud
+      "videoAudio/videos/chimes.mp4"  // method 7 - double pills
     ],
     "English": [
       "videoAudio/videos/funnyCat2.mp4", // method 1 - condom
@@ -243,7 +243,7 @@ class _PrivatePageState extends State<PrivatePage> {
                   SizedBox(height: 20.0),
                   SizedBox(
                     width: boxWidth,
-                    height: availableHeight * 0.6 * 0.5,
+                    height: availableHeight * 0.6 * 0.5 - 6.5,
                     child: Center(
                       child: getVideoContent(),
                     ),

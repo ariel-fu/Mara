@@ -10,16 +10,9 @@ class TemplatePage extends StatefulWidget {
 
 class _TemplatePageState extends State<TemplatePage> {
   Widget methodContent = Text('DUMMY');
-
-  String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
-  String videoTitle1 = 'Video 1 Language Not Selected';
-  String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
-  String videoTitle2 = 'Video 2 Language Not Selected';
-
-  int methodIndex = -1; // Index of the selected icon button, -1 for none
-  int languageIndex = -1; // similar indexing for language
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-
   bool overrideIndex = false;
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -51,16 +44,11 @@ class _TemplatePageState extends State<TemplatePage> {
     ],
   };
 
-  final content = [
-    "method 1",
-    "method 2",
-    "method 3",
-    "method 4",
-    "method 5",
-    "method 6"
-  ];
+  String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
+  String videoTitle1 = 'Video 1 Language Not Selected';
+  String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
+  String videoTitle2 = 'Video 2 Language Not Selected';
 
-  //Video HashMap: specifies video asset and text/title based on language and video
   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
   'video1': {
     '0': { // Language code 0
@@ -282,23 +270,32 @@ class _TemplatePageState extends State<TemplatePage> {
   String _getTitle(String videoKey, String language) {
     return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   }
-
-  void updateVideoContent() {
+    
+  Widget updateVideoContent1() {
       if (languageIndex == 0) {
         videoAsset1 = _getAsset('video1', '0');
         videoTitle1 = _getTitle('video1', '0');
-        videoAsset2 = _getAsset('video2', '0');
-        videoTitle2 = _getTitle('video2', '0');
       } else if (languageIndex == 1) {
           videoAsset1 = _getAsset('video1', '1');
           videoTitle1 = _getTitle('video1', '1');
-          videoAsset2 = _getAsset('video2', '1');
-          videoTitle2 = _getTitle('video2', '1');
       } else if (languageIndex == 2) {
           videoAsset1 = _getAsset('video1', '2');
           videoTitle1 = _getTitle('video1', '2');
+      }
+      return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+  }
+
+  Widget updateVideoContent2() {
+    if (languageIndex == 0) {
+        videoAsset2 = _getAsset('video2', '0');
+        videoTitle2 = _getTitle('video2', '0');
+      } else if (languageIndex == 1) {
+          videoAsset2 = _getAsset('video2', '1');
+          videoTitle2 = _getTitle('video2', '1');
+      } else if (languageIndex == 2) {
           videoAsset2 = _getAsset('video2', '2');
           videoTitle2 = _getTitle('video2', '2');
       }
+      return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
   }
 }
