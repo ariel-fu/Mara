@@ -11,69 +11,54 @@ class TemplatePage extends StatefulWidget {
 class _TemplatePageState extends State<TemplatePage> {
   Widget methodContent = Text('DUMMY');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
-  bool overrideIndex = false;
-  int languageIndex = 0; // similar ind
+  int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-  final content = [
-    "method 1",
-    "method 2",
-    "method 3",
-    "method 4",
-    "method 5",
-    "method 6"
-  ];
-
-  //Video HashMap: specifies video asset and text/title based on language and video
-  final Map<String, Map<String, Map<String, String>>> languageToVideo = { 
-      'video1': {
-        '0': {
-          'video': 'chimes.mp4',
-          'text': 'Kiswahili Video #1',
-        },
-        '1': {
-          'video': 'funnyCat.mp4',
-          'text': 'Dholuo Video #1',
-        },
-        '2': {
-          'video': 'funnyCat2.mp4',
-          'text': 'English Video #1',
-        },
-      },
-      'video2': {
-        '0': {
-          'video': 'chimes.mp4',
-          'text': 'Kiswahili Video #2',
-        },
-        '1': {
-          'video': 'funnyCat.mp4',
-          'text': 'Dholuo Video #2',
-        },
-        '2': {
-          'video': 'funnyCat2.mp4',
-          'text': 'English Video #2',
-        },
-      },
+  bool overrideIndex = false;
+  final Map<String, List<String>> contentDescriptionMap = {
+    "Kiswahili": [
+      "method 1 in Kiswahili",
+      "method 2 in Kiswahili",
+      "method 3 in Kiswahili",
+      "method 4 in Kiswahili",
+      "method 5 in Kiswahili",
+      "method 6 in Kiswahili",
+      "method 7 in Kiswahili"
+    ],
+    "Dholuo": [
+      "method 1 in Dholuo",
+      "method 2 in Dholuo",
+      "method 3 in Dholuo",
+      "method 4 in Dholuo",
+      "method 5 in Dholuo",
+      "method 6 in Dholuo",
+      "method 7 in Dholuo"
+    ],
+    "English": [
+      "method 1 in English",
+      "method 2 in English",
+      "method 3 in English",
+      "method 4 in English",
+      "method 5 in English",
+      "method 6 in English",
+      "method 7 in English"
+    ],
   };
 
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
-    ModalRoute.of(context)?.settings.arguments as int?;
+  ModalRoute.of(context)?.settings.arguments as int?;
 
-    // Update languageIndex if a valid value is provided from the route
-    if (routeArgumentIndex != null &&
-        routeArgumentIndex >= 0 &&
-        routeArgumentIndex < languages.length &&
-        !overrideIndex) {
-      languageIndex = routeArgumentIndex;
-    }
+  // Update languageIndex if a valid value is provided from the route
+  if (routeArgumentIndex != null &&
+      routeArgumentIndex >= 0 &&
+      routeArgumentIndex < languages.length &&
+      !overrideIndex) {
+    languageIndex = routeArgumentIndex;
+  }
 
     double screenWidth = MediaQuery.of(context).size.width;
     double boxWidth = screenWidth * 0.85;
-
-    double screenHeight = MediaQuery.of(context).size.height;
-    double availableHeight = screenHeight;
-    double boxHeight = availableHeight * 0.25;
 
     double screenHeight = MediaQuery.of(context).size.height;
     double availableHeight = screenHeight;
@@ -109,7 +94,7 @@ class _TemplatePageState extends State<TemplatePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            languageIndex == 0 ? Colors.grey : null,
+                        languageIndex == 0 ? Colors.grey : null,
                       ),
                       child: Text('Kiswahili'),
                     ),
@@ -123,7 +108,7 @@ class _TemplatePageState extends State<TemplatePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            languageIndex == 1 ? Colors.grey : null,
+                        languageIndex == 1 ? Colors.grey : null,
                       ),
                       child: Text('Dholuo'),
                     ),
@@ -137,7 +122,7 @@ class _TemplatePageState extends State<TemplatePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            languageIndex == 2 ? Colors.grey : null,
+                        languageIndex == 2 ? Colors.grey : null,
                       ),
                       child: Text('English'),
                     ),
@@ -162,75 +147,7 @@ class _TemplatePageState extends State<TemplatePage> {
                   buildIconButton(MaraIcons.contraceptive_implant, 4),
                   buildIconButton(MaraIcons.iud, 5),
                   buildIconButton(MaraIcons.double_pills, 6),
-                  
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            height: availableHeight * 0.6, // Adjust as needed
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      languageIndex = 0;
-                      updateMethodContent();
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: languageIndex == 0 ? Colors.grey : null,
-                  ),
-                  child: Text('Kiswahili'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      languageIndex = 1;
-                      updateMethodContent();
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: languageIndex == 1 ? Colors.grey : null,
-                  ),
-                  child: Text('Dholuo'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      languageIndex = 2;
-                      updateMethodContent();
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: languageIndex == 2 ? Colors.grey : null,
-                  ),
-                  child: Text('English'),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            alignment: Alignment.center,
-            height: availableHeight * 0.1,
-            width: boxWidth,
-            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  buildIconButton(MaraIcons.condom, 0),
-                  buildIconButton(MaraIcons.female_condom, 1),
-                  buildIconButton(MaraIcons.birth_control_pills, 2),
-                  buildIconButton(MaraIcons.syringe, 3),
-                  buildIconButton(MaraIcons.contraceptive_implant, 4),
-                  buildIconButton(MaraIcons.iud, 5),
-                  buildIconButton(MaraIcons.double_pills, 6),
-                  
+
                 ],
               ),
             ),
@@ -267,8 +184,8 @@ class _TemplatePageState extends State<TemplatePage> {
   }
 
   Widget buildSecondaryContext() {
-    return Text("some text here " + 
-      contentDescriptionMap[languages[languageIndex]]![methodIndex]);
+    return Text("some text here " +
+        contentDescriptionMap[languages[languageIndex]]![methodIndex]);
   }
 
   Widget buildIconButton(IconData iconData, int index) {
@@ -302,16 +219,12 @@ class _TemplatePageState extends State<TemplatePage> {
 
   void updateMethodContent() {
     methodContent = Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.white,
-      )
+        contentDescriptionMap[languages[languageIndex]]![methodIndex],
+        style: TextStyle(
+          fontSize: 20.0,
+          color: Colors.white,
+        )
     );
-  }
-
-  String _getAsset(String videoKey, String language) {
-    return (languageToVideo[videoKey]?[language] ?? 'video').toString();
   }
 
   String _getTitle(String videoKey, String language) {
