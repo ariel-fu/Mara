@@ -14,35 +14,45 @@ class _TemplatePageState extends State<TemplatePage> {
   bool overrideIndex = false;
   int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+  final content = [
+    "method 1",
+    "method 2",
+    "method 3",
+    "method 4",
+    "method 5",
+    "method 6"
+  ];
 
-  final Map<String, List<String>> contentDescriptionMap = {
-    "Kiswahili": [
-      "method 1 in Kiswahili",
-      "method 2 in Kiswahili",
-      "method 3 in Kiswahili",
-      "method 4 in Kiswahili",
-      "method 5 in Kiswahili",
-      "method 6 in Kiswahili",
-      "method 7 in Kiswahili"
-    ],
-    "Dholuo": [
-      "method 1 in Dholuo",
-      "method 2 in Dholuo",
-      "method 3 in Dholuo",
-      "method 4 in Dholuo",
-      "method 5 in Dholuo",
-      "method 6 in Dholuo",
-      "method 7 in Dholuo"
-    ],
-    "English": [
-      "method 1 in English",
-      "method 2 in English",
-      "method 3 in English",
-      "method 4 in English",
-      "method 5 in English",
-      "method 6 in English",
-      "method 7 in English"
-    ],
+  //Video HashMap: specifies video asset and text/title based on language and video
+  final Map<String, Map<String, Map<String, String>>> languageToVideo = { 
+      'video1': {
+        '0': {
+          'video': 'chimes.mp4',
+          'text': 'Kiswahili Video #1',
+        },
+        '1': {
+          'video': 'funnyCat.mp4',
+          'text': 'Dholuo Video #1',
+        },
+        '2': {
+          'video': 'funnyCat2.mp4',
+          'text': 'English Video #1',
+        },
+      },
+      'video2': {
+        '0': {
+          'video': 'chimes.mp4',
+          'text': 'Kiswahili Video #2',
+        },
+        '1': {
+          'video': 'funnyCat.mp4',
+          'text': 'Dholuo Video #2',
+        },
+        '2': {
+          'video': 'funnyCat2.mp4',
+          'text': 'English Video #2',
+        },
+      },
   };
 
   @override
