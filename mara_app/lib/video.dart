@@ -34,6 +34,19 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.dispose();
   }
 
+  @override
+  void didUpdateWidget(covariant VideoWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.videoAsset != widget.videoAsset) {
+      ourVideo = VideoPlayerController.asset(widget.videoAsset);
+      _initializeVideoPlayerFuture =
+          ourVideo.initialize().catchError((error) {
+        print('Error initializing video player: $error');
+      });
+      setState(() {});
+    }
+  }
+
   void _onPressedVideo() {
     setState(() {
       if (ourVideo.value.isPlaying) {
