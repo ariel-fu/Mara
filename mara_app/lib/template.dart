@@ -11,6 +11,7 @@ class TemplatePage extends StatefulWidget {
 class _TemplatePageState extends State<TemplatePage> {
   Widget methodContent = Text('DUMMY');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
+  bool overrideIndex = false;
   int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
@@ -46,6 +47,17 @@ class _TemplatePageState extends State<TemplatePage> {
 
   @override
   Widget build(BuildContext context) {
+    final int? routeArgumentIndex =
+    ModalRoute.of(context)?.settings.arguments as int?;
+
+    // Update languageIndex if a valid value is provided from the route
+    if (routeArgumentIndex != null &&
+        routeArgumentIndex >= 0 &&
+        routeArgumentIndex < languages.length &&
+        !overrideIndex) {
+      languageIndex = routeArgumentIndex;
+    }
+
     double screenWidth = MediaQuery.of(context).size.width;
     double boxWidth = screenWidth * 0.85;
 
@@ -81,6 +93,7 @@ class _TemplatePageState extends State<TemplatePage> {
                       onPressed: () {
                         setState(() {
                           languageIndex = 0;
+                          overrideIndex = true;
                           updateMethodContent();
                         });
                       },
@@ -94,6 +107,7 @@ class _TemplatePageState extends State<TemplatePage> {
                       onPressed: () {
                         setState(() {
                           languageIndex = 1;
+                          overrideIndex = true;
                           updateMethodContent();
                         });
                       },
@@ -107,6 +121,7 @@ class _TemplatePageState extends State<TemplatePage> {
                       onPressed: () {
                         setState(() {
                           languageIndex = 2;
+                          overrideIndex = true;
                           updateMethodContent();
                         });
                       },
