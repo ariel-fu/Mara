@@ -61,7 +61,7 @@ class _TimePageState extends State<TimePage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('Can I keep it private?'),
+        title: Text('How Long Will It Last?'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,7 +203,7 @@ class _TimePageState extends State<TimePage> {
   }
 
   Widget buildSecondaryContext() {
-    return Text("some text here " + 
+    return Text("ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " + 
       contentDescriptionMap[languages[languageIndex]]![methodIndex]);
   }
 
