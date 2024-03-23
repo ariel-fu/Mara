@@ -49,18 +49,12 @@ class _VideoWidgetState extends State<VideoWidget> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            width: 350,
-            height: 350,
+          Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                AspectRatio(
-                  aspectRatio: ourVideo.value.aspectRatio,
-                  child:Expanded(child: VideoPlayer(ourVideo)),
-                ),
+                Expanded(child: VideoPlayer(ourVideo)),
                 Text(widget.title, style: TextStyle(
-                  fontSize: 18.0, fontWeight:FontWeight.bold
+                  fontSize: 12.0, fontWeight:FontWeight.bold
                 ),),
                 FutureBuilder<void>(
                   future: _initializeVideoPlayerFuture,
@@ -86,6 +80,7 @@ class _VideoWidgetState extends State<VideoWidget> {
                   backgroundColor: Colors.grey[300],
                   ),
                 ),
+                
               ],
             )
           ),

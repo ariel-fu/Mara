@@ -10,7 +10,7 @@ class TimePage extends StatefulWidget {
 }
 
 class _TimePageState extends State<TimePage> {
-  Widget methodContent = Text('How Long Will It Last?');
+  Widget methodContent = Text('method content');
   String videoAsset1 = 'funnyCat.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
   String videoAsset2 = 'funnyCat2.mp4';
@@ -28,37 +28,6 @@ class _TimePageState extends State<TimePage> {
     "method 6"
   ];
 
-  //HashMap: specifies video asset and text/title based on language and video
-  final Map<String, Map<String, Map<String, String>>> languageToVideo = { 
-      'video1': {
-        '0': {
-          'video': 'chimes.mp4',
-          'text': 'English Video #1',
-        },
-        '1': {
-          'video': 'funnyCat.mp4',
-          'text': 'Kiswahili Video #1',
-        },
-        '2': {
-          'video': 'funnyCat2.mp4',
-          'text': 'Luo Video #1',
-        },
-      },
-      'video2': {
-        '0': {
-          'video': 'chimes.mp4',
-          'text': 'English Video #2',
-        },
-        '1': {
-          'video': 'funnyCat.mp4',
-          'text': 'Kiswahili Video #2',
-        },
-        '2': {
-          'video': 'funnyCat2.mp4',
-          'text': 'Luo Video #2',
-        },
-      },
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +63,6 @@ class _TimePageState extends State<TimePage> {
                         setState(() {
                           languageIndex = 0;
                           updateMethodContent();
-                          updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -108,7 +76,6 @@ class _TimePageState extends State<TimePage> {
                         setState(() {
                           languageIndex = 1;
                           updateMethodContent();
-                          updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -122,7 +89,6 @@ class _TimePageState extends State<TimePage> {
                         setState(() {
                           languageIndex = 2;
                           updateMethodContent();
-                          updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -175,27 +141,6 @@ class _TimePageState extends State<TimePage> {
                         child: Text('ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'), 
                       ),
                 ),
-                
-                // Row(
-                //   children: [
-                //     Container(
-                //       width: boxWidth,
-                //       height: availableHeight * 0.25 - 10,
-                //       color: Colors.green,
-                //       child: Center(
-                //         child: VideoWidget(videoAsset: videoAsset1, title:videoTitle1), 
-                //       ),
-                //     ),
-                //     Container(
-                //       width: boxWidth,
-                //       height: availableHeight * 0.25 - 10,
-                //       color: Colors.green,
-                //       child: Center(
-                //         child: VideoWidget(videoAsset: videoAsset2, title:videoTitle2), 
-                //       ),
-                //     ),
-                //   ]
-                // ),
               ],
             ),
           ),
@@ -243,32 +188,5 @@ class _TimePageState extends State<TimePage> {
         color: Colors.white,
       ),
     );
-  }
-
-  String _getAsset(String videoKey, String language) {
-    return (languageToVideo[videoKey]?[language] ?? 'video').toString();
-  }
-
-  String _getTitle(String videoKey, String language) {
-      return (languageToVideo[videoKey]?[language] ?? 'text').toString();
-  }
-
-  void updateVideoContent() {
-      if (languageIndex == 0) {
-        videoAsset1 = _getAsset('video1', '0');
-        videoTitle1 = _getTitle('video1', '0');
-        videoAsset2 = _getAsset('video2', '0');
-        videoTitle2 = _getTitle('video2', '0');
-      } else if (languageIndex == 1) {
-          videoAsset1 = _getAsset('video1', '1');
-          videoTitle1 = _getTitle('video1', '1');
-          videoAsset2 = _getAsset('video2', '1');
-          videoTitle2 = _getTitle('video2', '1');
-      } else if (languageIndex == 2) {
-          videoAsset1 = _getAsset('video1', '2');
-          videoTitle1 = _getTitle('video1', '2');
-          videoAsset2 = _getAsset('video2', '2');
-          videoTitle2 = _getTitle('video2', '2');
-      }
   }
 }

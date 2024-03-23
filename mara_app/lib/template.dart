@@ -33,29 +33,29 @@ class _TemplatePageState extends State<TemplatePage> {
       'video1': {
         '0': {
           'video': 'chimes.mp4',
-          'text': 'English Video #1',
+          'text': 'Kiswahili Video #1',
         },
         '1': {
           'video': 'funnyCat.mp4',
-          'text': 'Kiswahili Video #1',
+          'text': 'Dholuo Video #1',
         },
         '2': {
           'video': 'funnyCat2.mp4',
-          'text': 'Luo Video #1',
+          'text': 'English Video #1',
         },
       },
       'video2': {
         '0': {
           'video': 'chimes.mp4',
-          'text': 'English Video #2',
+          'text': 'Kiswahili Video #2',
         },
         '1': {
           'video': 'funnyCat.mp4',
-          'text': 'Kiswahili Video #2',
+          'text': 'Dholuo Video #2',
         },
         '2': {
           'video': 'funnyCat2.mp4',
-          'text': 'Luo Video #2',
+          'text': 'English Video #2',
         },
       },
   };
