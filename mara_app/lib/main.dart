@@ -6,6 +6,7 @@ import 'launch_screen2.dart';
 import 'options_page.dart';
 import 'pattern_page.dart';
 import 'time_page.dart';
+import 'private_page.dart';
 
 void main() {
   runApp(MaraApp());
@@ -20,7 +21,7 @@ class MaraApp extends StatefulWidget {
 
 class _MaraAppState extends State<MaraApp> {
   bool _isDarkMode = false;
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,6 +33,8 @@ class _MaraAppState extends State<MaraApp> {
         '/options': (BuildContext context) => const OptionsPage(),
         '/bleeding_pattern': (BuildContext context) => const PatternPage(),
         '/time': (BuildContext context) => const TimePage(),
+        '/private': (BuildContext context) => const PrivatePage(),
+        
       },
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
     );

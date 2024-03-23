@@ -48,6 +48,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Column(
