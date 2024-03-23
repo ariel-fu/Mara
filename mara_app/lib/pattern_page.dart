@@ -12,9 +12,9 @@ class PatternPage extends StatefulWidget {
 
 class _PatternPageState extends State<PatternPage> {
   Widget methodContent = Text('method content');
-  String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
+  String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
-  String videoAsset2 = 'videoAudio/videos/peer/peer1E.mp4';
+  String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
   String videoTitle2 = 'Video 2 Language Not Selected';
 
   Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider1E.mp4', title:'Video - A Doctor Explains');
@@ -67,30 +67,30 @@ class _PatternPageState extends State<PatternPage> {
   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
   'video1': {
     '0': { // Language code 0
-      'video': 'videoAudio/videos/provider/provider1KS.mp4',
-      'text': 'Video - Daktari Aeleza',
+      'video': 'videoAudio/videos/chimes.mp4',
+      'text': 'Kiswahili Video #1',
     },
     '1': { // Language code 1
-      'video': 'videoAudio/videos/provider/provider1DL.mp4',
-      'text': 'Vidio - Laktar Wuoyo',
+      'video': 'videoAudio/videos/funnyCat.mp4',
+      'text': 'Dhuluo Video #1',
     },
     '2': { // Language code 2
-      'video': 'videoAudio/videos/provider/provider1E.mp4',
-      'text': 'Video - A Doctor Explains',
+      'video': 'videoAudio/videos/funnyCat2.mp4',
+      'text': 'English Video #1',
     },
   },
   'video2': {
     '0': {
-      'video': 'videoAudio/videos/peer/peer1KS.mp4',
-      'text': 'Video - Mtazamo wa Rika',
+      'video': 'videoAudio/videos/chimes.mp4',
+      'text': 'Kiswahili Video #2',
     },
     '1': {
-      'video': 'videoAudio/videos/peer/peer1DL.mp4',
-      'text': 'Vidio - Kaka Jowetegi Neno Gik Moko',
+      'video': 'videoAudio/videos/funnyCat.mp4',
+      'text': 'Dholuo Video #2',
     },
     '2': {
-      'video': 'videoAudio/videos/peer/peer1E.mp4',
-      'text': 'Video - A Peer Perspective',
+      'video': 'videoAudio/videos/funnyCat2.mp4',
+      'text': 'English Video #2',
     },
   },
 };
@@ -212,36 +212,29 @@ class _PatternPageState extends State<PatternPage> {
                   width: boxWidth,
                   height: boxHeight * 0.6 * 0.5,
                   color: Colors.blue,
-                  child: Column(
-                    children: [
-                      methodContent,
-                        IconButton(
-                              icon: const Icon(Icons.search),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => BleedingPage()),
-                                );
-                              },
-                      ),
-                    ]
+                  child: Center(
+                    child: methodContent,
                   ),
                 ),
-                
-                Row(children: [
-                  SizedBox(width:15.0),
-                  SizedBox(
-                    width:boxWidth / 2,
-                    height: boxHeight * 0.5 * 0.6,
-                    child: Center(child: video1),
-                  ),
-                  SizedBox(width:10.0),
-                  SizedBox(
-                    width:boxWidth / 2 - 8,
-                    height: boxHeight * 0.5 * 0.6,
-                    child: Center(child: video2),
-                  ),
-                ],),
+
+                Container(
+                      width: boxWidth,
+                      height: boxHeight / 0.25 - 500,
+                      color: Colors.green,
+                      child: Expanded(child:Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment:CrossAxisAlignment.end,
+                        
+                        children: [
+                          Expanded(// Adjust the aspect ratio as needed
+                              child: VideoWidget(videoAsset: videoAsset1, title: videoTitle1),
+                          ),
+                          Expanded(
+                              child: VideoWidget(videoAsset: videoAsset2, title: videoTitle2),
+                          ),
+                        ],
+                      ),),
+                ),
               ],
             ),
           ),
@@ -291,13 +284,15 @@ class _PatternPageState extends State<PatternPage> {
 
   String _getAsset(String videoKey, String language) {
       return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+      return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
   }
 
   String _getTitle(String videoKey, String language) {
     return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
+    return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   }
-
-  Widget updateVideoContent1() {
+    
+  void updateVideoContent() {
       if (languageIndex == 0) {
         videoAsset1 = _getAsset('video1', '0');
         videoTitle1 = _getTitle('video1', '0');
