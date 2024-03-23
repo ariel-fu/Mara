@@ -10,9 +10,9 @@ class TemplatePage extends StatefulWidget {
 
 class _TemplatePageState extends State<TemplatePage> {
   Widget methodContent = Text('DUMMY');
-  // TODO - replace the language/content with a hashmap?
-  int methodIndex = -1; // Index of the selected icon button, -1 for none
-  int languageIndex = -1; // similar indexing for language
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  bool overrideIndex = false;
+  int languageIndex = 0; // similar ind
   final languages = ["Kiswahili", "Dholuo", "English"];
   final content = [
     //TODO: one of these content Strings could be a videoWidget
@@ -27,6 +27,17 @@ class _TemplatePageState extends State<TemplatePage> {
   ];
   @override
   Widget build(BuildContext context) {
+    final int? routeArgumentIndex =
+    ModalRoute.of(context)?.settings.arguments as int?;
+
+    // Update languageIndex if a valid value is provided from the route
+    if (routeArgumentIndex != null &&
+        routeArgumentIndex >= 0 &&
+        routeArgumentIndex < languages.length &&
+        !overrideIndex) {
+      languageIndex = routeArgumentIndex;
+    }
+
     double screenWidth = MediaQuery.of(context).size.width;
     double boxWidth = screenWidth * 0.85;
     double boxHeight = boxWidth * 0.5;
@@ -45,8 +56,84 @@ class _TemplatePageState extends State<TemplatePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
+              height: availableHeight * 0.1,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          languageIndex = 0;
+                          overrideIndex = true;
+                          updateMethodContent();
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            languageIndex == 0 ? Colors.grey : null,
+                      ),
+                      child: Text('Kiswahili'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          languageIndex = 1;
+                          overrideIndex = true;
+                          updateMethodContent();
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            languageIndex == 1 ? Colors.grey : null,
+                      ),
+                      child: Text('Dholuo'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          languageIndex = 2;
+                          overrideIndex = true;
+                          updateMethodContent();
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            languageIndex == 2 ? Colors.grey : null,
+                      ),
+                      child: Text('English'),
+                    ),
+                  ],
+                ),
+              )),
+          SizedBox(height: 20.0),
+          Container(
+            alignment: Alignment.center,
+            height: availableHeight * 0.1,
+            width: boxWidth,
+            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buildIconButton(MaraIcons.condom, 0),
+                  buildIconButton(MaraIcons.female_condom, 1),
+                  buildIconButton(MaraIcons.birth_control_pills, 2),
+                  buildIconButton(MaraIcons.syringe, 3),
+                  buildIconButton(MaraIcons.contraceptive_implant, 4),
+                  buildIconButton(MaraIcons.iud, 5),
+                  buildIconButton(MaraIcons.double_pills, 6),
+                  
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 20.0),
+          Container(
+            height: availableHeight * 0.6, // Adjust as needed
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
