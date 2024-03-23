@@ -16,7 +16,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   void initState() {
     super.initState();
-    loadTranslations();
   }
 
   Future<void> parseExcelFile(String filePath) async {
@@ -39,10 +38,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
     setState(() {
       languages = arrays;
     });
-  }
-
-  Future<void> loadTranslations() async {
-    await parseExcelFile('assets/string-resources/dummy.xlsx');
   }
 
   @override

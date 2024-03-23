@@ -10,6 +10,7 @@ class PrivatePage extends StatefulWidget {
 }
 
 class _PrivatePageState extends State<PrivatePage> {
+  bool overrideIndex = false;
   Widget methodContent = Text('DUMMY');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 0; // similar indexing for language
@@ -17,73 +18,125 @@ class _PrivatePageState extends State<PrivatePage> {
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
-      "AiVTXTke8Vk",
-      "hH3uUP_w6oM",
-      "MBuDPNRkvIM",
-      "bmxsQ_WS2kg",
-      "1CXmnm_epTM",
-      "CsqZ7iLRjyk",
-      "something"
+      "videoAudio/videos/funnyCat.mp4", // method 1 - condom
+      "videoAudio/videos/funnyCat.mp4", // method 2 - female condom
+      "videoAudio/videos/funnyCat.mp4", // method 3 - birth control pills
+      "videoAudio/videos/funnyCat.mp4", // method 4 - syringe
+      "videoAudio/videos/funnyCat.mp4", // method 5 - contraceptive implant
+      "videoAudio/videos/funnyCat.mp4", // method 6 - iud
+      "videoAudio/videos/funnyCat.mp4"  // method 7 - double pills
     ],
     "Dholuo": [
-      "sD3bXzHgzd0",
-      "vTrLEhFObCc",
-      "mKAqrA3weA",
-      "CVdkGFNCXAA",
-      "uEuIMup4QhY",
-      "N9QAG30UYRQ",
-      "something"
+      "videoAudio/videos/funnyCat.mp4", // method 1 - condom
+      "videoAudio/videos/funnyCat.mp4", // method 2 - female condom
+      "videoAudio/videos/funnyCat.mp4", // method 3 - birth control pills
+      "videoAudio/videos/funnyCat.mp4", // method 4 - syringe
+      "videoAudio/videos/funnyCat.mp4", // method 5 - contraceptive implant
+      "videoAudio/videos/funnyCat.mp4", // method 6 - iud
+      "videoAudio/videos/funnyCat.mp4"  // method 7 - double pills
     ],
     "English": [
-      "KjmuBo8xoCU",
-      "_MQNjeLgQtk",
-      "mSHveDq0Idk",
-      "h7k6P12gfic",
-      "yfvNM_opeJc",
-      "EXSjzlTddho",
-      "something"
+      "videoAudio/videos/funnyCat2.mp4", // method 1 - condom
+      "videoAudio/videos/funnyCat2.mp4", // method 2 - female condom
+      "videoAudio/videos/funnyCat2.mp4", // method 3 - birth control pills
+      "videoAudio/videos/funnyCat2.mp4", // method 4 - syringe
+      "videoAudio/videos/funnyCat2.mp4", // method 5 - contraceptive implant
+      "videoAudio/videos/funnyCat2.mp4", // method 6 - iud
+      "videoAudio/videos/funnyCat2.mp4"  // method 7 - double pills
+    ],
+  };
+
+  final Map<String, List<String>> videoTitleMap = {
+    "Kiswahili": [
+      "title 1 - condom in Kiswahili",
+      "title 2 - female condom in Kiswahili",
+      "title 3 - birth control pills in Kiswahili",
+      "title 4 - syringe in Kiswahili",
+      "title 5 - contraceptive implant in Kiswahili",
+      "title 6 - iud in Kiswahili",
+      "title 7 - double pills in Kiswahili"
+    ],
+    "Dholuo": [
+      "title 1 - condom in Dholuo",
+      "title 2 - female condom in Dholuo",
+      "title 3 - birth control pills in Dholuo",
+      "title 4 - syringe in Dholuo",
+      "title 5 - contraceptive implant in Dholuo",
+      "title 6 - iud in Dholuo",
+      "title 7 - double pills in Dholuo"
+    ],
+    "English": [
+      "title 1 - condom in English",
+      "title 2 - female condom in English",
+      "title 3 - birth control pills in English",
+      "title 4 - syringe in English",
+      "title 5 - contraceptive implant in English",
+      "title 6 - iud in English",
+      "title 7 - double pills in English"
     ],
   };
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
-      "method 1 in Kiswahili",
-      "method 2 in Kiswahili",
-      "method 3 in Kiswahili",
-      "method 4 in Kiswahili",
-      "method 5 in Kiswahili",
-      "method 6 in Kiswahili",
-      "method 7 in Kiswahili"
+      "method 1 - condom in Kiswahili",
+      "method 2 - female condom in Kiswahili",
+      "method 3 - birth control pills in Kiswahili",
+      "method 4 - syringe in Kiswahili",
+      "method 5 - contraceptive implant in Kiswahili",
+      "method 6 - iud in Kiswahili",
+      "method 7 - double pills in Kiswahili"
     ],
     "Dholuo": [
-      "method 1 in Dholuo",
-      "method 2 in Dholuo",
-      "method 3 in Dholuo",
-      "method 4 in Dholuo",
-      "method 5 in Dholuo",
-      "method 6 in Dholuo",
-      "method 7 in Dholuo"
+      "method 1 - condom in Dholuo",
+      "method 2 - female condom in Dholuo",
+      "method 3 - birth control pills in Dholuo",
+      "method 4 - syringe in Dholuo",
+      "method 5 - contraceptive implant in Dholuo",
+      "method 6 - iud in Dholuo",
+      "method 7 - double pills in Dholuo"
     ],
     "English": [
-      "method 1 in English",
-      "method 2 in English",
-      "method 3 in English",
-      "method 4 in English",
-      "method 5 in English",
-      "method 6 in English",
-      "method 7 in English"
+       "method 1 - condom in English",
+      "method 2 - female condom in English",
+      "method 3 - birth control pills in English",
+      "method 4 - syringe in English",
+      "method 5 - contraceptive implant in English",
+      "method 6 - iud in English",
+      "method 7 - double pills in English"
     ],
   };
+  final double _aspectRatio = 16 / 10;
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double boxWidth = screenWidth * 0.85;
+    final int? routeArgumentIndex =
+    ModalRoute.of(context)?.settings.arguments as int?;
 
-    double screenHeight = MediaQuery.of(context).size.height;
-    double availableHeight = screenHeight;
-    double boxHeight = availableHeight * 0.25;
+    // Update languageIndex if a valid value is provided from the route
+    if (routeArgumentIndex != null &&
+        routeArgumentIndex >= 0 &&
+        routeArgumentIndex < languages.length &&
+        !overrideIndex) {
+      languageIndex = routeArgumentIndex;
+    }
 
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
+
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    // double screenWidth = MediaQuery.of(context).size.width;
+    // double boxWidth = screenWidth * 0.85;
+    //
+    // double screenHeight = MediaQuery.of(context).size.height;
+    double availableHeight = boxHeight;
+    // double boxHeight = availableHeight * 0.25;
+    
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -97,56 +150,59 @@ class _PrivatePageState extends State<PrivatePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-              height: availableHeight * 0.1,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 0;
-                          updateMethodContent();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 0 ? Colors.grey : null,
-                      ),
-                      child: Text('Kiswahili'),
+          SizedBox(
+              height: availableHeight*0.1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        languageIndex = 0;
+                        overrideIndex = true;
+
+                        updateMethodContent();
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          languageIndex == 0 ? Colors.grey : null,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 1;
-                          updateMethodContent();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 1 ? Colors.grey : null,
-                      ),
-                      child: Text('Dholuo'),
+                    child: Text('Kiswahili'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        languageIndex = 1;
+                        overrideIndex = true;
+
+                        updateMethodContent();
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          languageIndex == 1 ? Colors.grey : null,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 2;
-                          updateMethodContent();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 2 ? Colors.grey : null,
-                      ),
-                      child: Text('English'),
+                    child: Text('Dholuo'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        languageIndex = 2;
+                        overrideIndex = true;
+
+                        updateMethodContent();
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          languageIndex == 2 ? Colors.grey : null,
                     ),
-                  ],
-                ),
+                    child: Text('English'),
+                  ),
+                ],
               )),
-          SizedBox(height: 20.0),
+          // SizedBox(height: availableHeight*0.01),
           Container(
             alignment: Alignment.center,
             height: availableHeight * 0.1,
@@ -163,55 +219,47 @@ class _PrivatePageState extends State<PrivatePage> {
                   buildIconButton(MaraIcons.syringe, 3),
                   buildIconButton(MaraIcons.contraceptive_implant, 4),
                   buildIconButton(MaraIcons.iud, 5),
-                  buildIconButton(MaraIcons.double_pills, 6),
-                  
+                  buildIconButton(MaraIcons.double_pills, 6),                  
                 ],
               ),
             ),
           ),
-          SizedBox(height: 20.0),
-          Container(
-            height: availableHeight * 0.6, // Adjust as needed
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: boxWidth,
-                  height: boxHeight,
-                  color: Colors.blue,
-                  child: Center(
-                    child: methodContent,
+          SizedBox(height: 15.0),
+          SizedBox(
+            height: availableHeight * 0.70, // Adjust as needed
+                child: Flex(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                direction: Axis.vertical,
+                children: [
+                  Container(
+                    width: boxWidth,
+                    height: availableHeight * 0.6 * 0.5,
+                    color: Colors.blue,
+                    child: Center(
+                      child: methodContent,
+                    ),
                   ),
-                ),
-                // SizedBox(height: 10.0),
-                Container(
-                  width: boxWidth * 0.75,
-                  height: availableHeight * 0.25 - 10,
-                  color: Colors.green,
-                  child: Center(
-                    child: buildYoutubePlayer(),
+                  SizedBox(height: 20.0),
+                  SizedBox(
+                    width: boxWidth,
+                    height: availableHeight * 0.6 * 0.5,
+                    child: Center(
+                      child: getVideoContent(),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
   }
 
-  Widget buildYoutubePlayer() {
-    String videoId = videoContentMap[languages[languageIndex]]![methodIndex];
-    return Text("some text here " + videoId);
-  }
-
-  Widget buildVideoContent() {
-    return Container(
-        alignment: Alignment.center,
-        child: VideoWidget(
-            videoAsset: videoContentMap[languages[languageIndex]]![methodIndex],
-            title:
-                contentDescriptionMap[languages[languageIndex]]![methodIndex]));
+  Widget getVideoContent() {
+    String asset = videoContentMap[languages[languageIndex]]![methodIndex];
+    String title = videoTitleMap[languages[languageIndex]]![methodIndex];
+    return VideoWidget(videoAsset: asset, title: title);
   }
 
   Widget buildIconButton(IconData iconData, int index) {
