@@ -9,24 +9,40 @@ class TimePage extends StatefulWidget {
 }
 
 class _TimePageState extends State<TimePage> {
-  Widget methodContent = Text('method content');
-  String videoAsset1 = 'funnyCat.mp4';
-  String videoTitle1 = 'Video 1 Language Not Selected';
-  String videoAsset2 = 'funnyCat2.mp4';
-  String videoTitle2 = 'Video 2 Language Not Selected';
-
-  int methodIndex = -1; // Index of the selected icon button, -1 for none
-  int languageIndex = -1; // similar indexing for language
+  Widget methodContent = Text('DUMMY');
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-  final content = [
-    "method 1",
-    "method 2",
-    "method 3",
-    "method 4",
-    "method 5",
-    "method 6"
-  ];
 
+  final Map<String, List<String>> contentDescriptionMap = {
+    "Kiswahili": [
+      "method 1 in Kiswahili",
+      "method 2 in Kiswahili",
+      "method 3 in Kiswahili",
+      "method 4 in Kiswahili",
+      "method 5 in Kiswahili",
+      "method 6 in Kiswahili",
+      "method 7 in Kiswahili"
+    ],
+    "Dholuo": [
+      "method 1 in Dholuo",
+      "method 2 in Dholuo",
+      "method 3 in Dholuo",
+      "method 4 in Dholuo",
+      "method 5 in Dholuo",
+      "method 6 in Dholuo",
+      "method 7 in Dholuo"
+    ],
+    "English": [
+      "method 1 in English",
+      "method 2 in English",
+      "method 3 in English",
+      "method 4 in English",
+      "method 5 in English",
+      "method 6 in English",
+      "method 7 in English"
+    ],
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +136,25 @@ class _TimePageState extends State<TimePage> {
                   
                 ],
               ),
+            alignment: Alignment.center,
+            height: availableHeight * 0.1,
+            width: boxWidth,
+            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buildIconButton(MaraIcons.condom, 0),
+                  buildIconButton(MaraIcons.female_condom, 1),
+                  buildIconButton(MaraIcons.birth_control_pills, 2),
+                  buildIconButton(MaraIcons.syringe, 3),
+                  buildIconButton(MaraIcons.contraceptive_implant, 4),
+                  buildIconButton(MaraIcons.iud, 5),
+                  buildIconButton(MaraIcons.double_pills, 6),
+                  
+                ],
+              ),
             ),
           ),
           SizedBox(height: 20.0),
@@ -138,12 +173,12 @@ class _TimePageState extends State<TimePage> {
                 ),
                 // SizedBox(height: 10.0),
                 Container(
-                      width: boxWidth,
-                      height: availableHeight * 0.25 - 10,
-                      color: Colors.green,
-                      child: Center(
-                        child: Text('ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'), 
-                      ),
+                  width: boxWidth * 0.75,
+                  height: availableHeight * 0.25 - 10,
+                  color: Colors.green,
+                  child: Center(
+                    child: buildSecondaryContext(),
+                  ),
                 ),
               ],
             ),
