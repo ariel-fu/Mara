@@ -11,14 +11,48 @@ class TemplatePage extends StatefulWidget {
 
 class _TemplatePageState extends State<TemplatePage> {
   Widget methodContent = Text('DUMMY');
-  // TODO - replace the language/content with a hashmap?
+
+  String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
+  String videoTitle1 = 'Video 1 Language Not Selected';
+  String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
+  String videoTitle2 = 'Video 2 Language Not Selected';
+
   int methodIndex = -1; // Index of the selected icon button, -1 for none
   int languageIndex = -1; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+
+  bool overrideIndex = false;
+  final Map<String, List<String>> contentDescriptionMap = {
+    "Kiswahili": [
+      "method 1 in Kiswahili",
+      "method 2 in Kiswahili",
+      "method 3 in Kiswahili",
+      "method 4 in Kiswahili",
+      "method 5 in Kiswahili",
+      "method 6 in Kiswahili",
+      "method 7 in Kiswahili"
+    ],
+    "Dholuo": [
+      "method 1 in Dholuo",
+      "method 2 in Dholuo",
+      "method 3 in Dholuo",
+      "method 4 in Dholuo",
+      "method 5 in Dholuo",
+      "method 6 in Dholuo",
+      "method 7 in Dholuo"
+    ],
+    "English": [
+      "method 1 in English",
+      "method 2 in English",
+      "method 3 in English",
+      "method 4 in English",
+      "method 5 in English",
+      "method 6 in English",
+      "method 7 in English"
+    ],
+  };
+
   final content = [
-    //TODO: one of these content Strings could be a videoWidget
-    //but the asset passed into the videoWidget would vary based 
-    //on language and method so we'd need a HashMap to manage that
     "method 1",
     "method 2",
     "method 3",
@@ -26,6 +60,39 @@ class _TemplatePageState extends State<TemplatePage> {
     "method 5",
     "method 6"
   ];
+
+  //Video HashMap: specifies video asset and text/title based on language and video
+  final Map<String, Map<String, Map<String, String>>> languageToVideo = {
+  'video1': {
+    '0': { // Language code 0
+      'video': 'videoAudio/videos/chimes.mp4',
+      'text': 'Kiswahili Video #1',
+    },
+    '1': { // Language code 1
+      'video': 'videoAudio/videos/funnyCat.mp4',
+      'text': 'Dhuluo Video #1',
+    },
+    '2': { // Language code 2
+      'video': 'videoAudio/videos/funnyCat2.mp4',
+      'text': 'English Video #1',
+    },
+  },
+  'video2': {
+    '0': {
+      'video': 'videoAudio/videos/chimes.mp4',
+      'text': 'Kiswahili Video #2',
+    },
+    '1': {
+      'video': 'videoAudio/videos/funnyCat.mp4',
+      'text': 'Dholuo Video #2',
+    },
+    '2': {
+      'video': 'videoAudio/videos/funnyCat2.mp4',
+      'text': 'English Video #2',
+    },
+  },
+};
+
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
@@ -216,11 +283,11 @@ class _TemplatePageState extends State<TemplatePage> {
   }
 
   String _getAsset(String videoKey, String language) {
-    return (languageToVideo[videoKey]?[language] ?? 'video').toString();
+      return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
   }
 
   String _getTitle(String videoKey, String language) {
-      return (languageToVideo[videoKey]?[language] ?? 'text').toString();
+    return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   }
 
   void updateVideoContent() {
