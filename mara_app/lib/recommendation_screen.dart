@@ -545,6 +545,17 @@ Widget build(BuildContext context) {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontSize: 16),
                                 ),
+                                ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ShortSummariesScreen(methodName: trimmedRec),
+                                          ),
+                                        );
+                                      },
+                                      child: Text('Learn More'),
+                                    ),
                               ],
                             ),
                           );
