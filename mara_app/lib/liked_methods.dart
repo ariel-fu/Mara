@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'short_summaries.dart';
 import 'recommendation_model.dart';
+import 'short_summaries.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 class LikedMethodsScreen extends StatefulWidget {
@@ -49,144 +50,55 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
     }
   }
 
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back), 
-          onPressed: () => Navigator.of(context).pop(), 
-        ),
-        title: Text(_t("Liked Methods")), // or use _t('liked_methods') for translations
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                _languageButton('Kiswahili'),
-                _languageButton('Dholuo'),
-                _languageButton('English'),
-              ],
-            ),
-          ),
-          Expanded(
-            child: widget.likedMethods.isNotEmpty
-              ? ListView.builder(
-    itemCount: widget.likedMethods.length,
-    itemBuilder: (context, index) {
-        String method = widget.likedMethods.elementAt(index);
-        // Convert the method name to the corresponding JSON key
-        String methodKey;
-        switch (method.toLowerCase()) {
-            // Add any specific mappings here
-            default:
-                methodKey = method.toLowerCase();
-        }
-
-        return ListTile(
-            leading: Image.asset(
-                RecommendationModel.getImageForRecommendation(method),
-                width: 50,
-                height: 50,
-            ),
-            title: Text(_t(method)),
-            trailing: Wrap(
-                spacing: 8, // Space between two widgets
-                children: <Widget>[
-                    ElevatedButton(
-                        onPressed: () async {
-                            final methodDetails = await _methodDetailsFuture;
-                            if (methodDetails[methodKey] != null) {
-                                Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (context) => MethodDetailsScreen(
-                                            methodName: method,
-                                            methodDetails: methodDetails[methodKey],
-                                            currentLanguage: currentLanguage,
-                                            translations: widget.translations,
-                                            onChangeLanguage: (newLang) {
-                                                setState(() {
-                                                    currentLanguage = newLang;
-                                                });
-                                                // Optionally, handle other actions needed on language change
-                                            },
-                                        ),
-                                    ),
-                                );
-                            }
-                        },
-                        child: Text('Learn More'),
-                    ),
-                    IconButton(
-                        icon: Icon(Icons.delete, color: Colors.red),
-                        onPressed: () => _handleMethodRemoval(method),
-                    ),
-                ],
-            ),
-        );
-    },
-)
-
-              : Center(
-                  child: Text(
-                    'No liked methods', // or use _t('no_liked_methods') for translations
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-          ),
-        ],
-      ),
-    );
-  }
-
-
-
-Widget _languageButton(String language) {
-    bool isSelected = currentLanguage == language; // Use the local currentLanguage
-    return ElevatedButton(
-      onPressed: () {
-        if (!isSelected) {
-          _changeLanguage(language); // Call the local _changeLanguage method
-        }
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected ? Colors.grey : null,
-      ),
-      child: Text(language),
-    );
-  }
-
-  void _handleMethodRemoval(String method) {
-    setState(() {
-      widget.likedMethods.remove(method);
-    });
-    widget.onMethodsChanged(widget.likedMethods);
-  }
-
-  void _navigateToSummary(String method) async {
-  final methodDetails = await _methodDetailsFuture;
-  print("Method Details for $method: ${methodDetails[method]}");
-  if (methodDetails[method] != null) {
+  void _navigateToSummary(String method) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => MethodDetailsScreen(
-          methodName: method,
-          methodDetails: methodDetails[method],
-          currentLanguage: currentLanguage,
-          translations: widget.translations,
-          onChangeLanguage: (newLang) {
-            setState(() {
-              currentLanguage = newLang;
-            });
-          },
-        ),
+        builder: (context) => ShortSummariesScreen(methodName: method),
       ),
     );
   }
+
+  @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text("Liked Methods"), 
+    ),
+    body: widget.likedMethods.isNotEmpty
+        ? ListView(
+            children: widget.likedMethods.map((method) {
+              return ListTile(
+                leading: Image.asset(
+                  RecommendationModel.getImageForRecommendation(method),
+                  width: 50,
+                  height: 50,
+                ),
+                title: Text(_t(method)),
+                trailing: Wrap(
+                  spacing: 8, // Space between two widgets
+                  children: <Widget>[
+                    ElevatedButton(
+                      onPressed: () => _navigateToSummary(method),
+                      child: Text('Learn More'),
+                      style: ElevatedButton.styleFrom(
+                        
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.delete, color: Colors.red),
+                      onPressed: () => _handleMethodRemoval(method),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          )
+        : Center(
+            child: Text(
+              'No liked methods', 
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+  );
 }
 }
