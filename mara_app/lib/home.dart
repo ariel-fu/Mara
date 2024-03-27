@@ -22,7 +22,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> loadTranslations() async {
-    await parseExcelFile('assets/string-resources/dummy.xlsx');
+    //cant compile without commenting this out
+    //await parseExcelFile('assets/string-resources/dummy.xlsx');
   }
 
   Future<void> parseExcelFile(String filePath) async {
