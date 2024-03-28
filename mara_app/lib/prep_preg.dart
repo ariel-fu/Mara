@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
 class PrepPage extends StatefulWidget {
+class PrepPage extends StatefulWidget {
   final String initialLanguage;
 
+  PrepPage({Key? key, required this.initialLanguage}) : super(key: key);
   PrepPage({Key? key, required this.initialLanguage}) : super(key: key);
 
   @override
   _PrepPageState createState() => _PrepPageState();
+  _PrepPageState createState() => _PrepPageState();
 }
 
 class _PrepPageState extends State<PrepPage> {
+  List<bool> _isOpen = [false, false, false, false];
   late String _currentLanguage;
 
   @override
