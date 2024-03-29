@@ -113,7 +113,7 @@ final Map<String, Map<String, String>> _translations = {
 void navigateToRecommendationScreen(BuildContext context, String pregnancyTiming) {
   // Get recommendations based on the user's answer to the second question
   List<String> recommendations = RecommendationModel.getRecommendationsBasedOnPregnancyTiming(pregnancyTiming);
-  
+  print('Recommendations: $recommendations'); // Add this line to debug
   // Dummy introductory texts for demonstration purposes, replace with actual logic to generate introTexts
   List<String> introTexts = List<String>.generate(recommendations.length, (index) => 'Introductory text ${index + 1}');
   List<String> outroTexts = List<String>.generate(recommendations.length, (index) => 'Outro text ${index + 1}');
@@ -164,14 +164,20 @@ Map<String, String> getReverseLookupMap(String language) {
 }
 
 
-void _handleOptionSelection(String questionKey, String optionKey) {
-  setState(() {
-    // Using the raw question key because the _selectedOptions map uses them as keys
-    _selectedOptions[questionKey] = optionKey;
-    print('Selected options: $_selectedOptions');
-  });
-}
+// void _handleOptionSelection(String questionKey, String optionKey) {
+//   setState(() {
+//     // Using the raw question key because the _selectedOptions map uses them as keys
+//     _selectedOptions[questionKey] = optionKey;
+//     print('Selected options: $_selectedOptions');
+//   });
+// }
 
+void _handleOptionSelection(String questionKey, String optionKey) {
+    setState(() {
+      _selectedOptions[questionKey] = optionKey;
+    });
+    print("Option selected: $questionKey = $optionKey");
+  }
 
 
 
@@ -203,24 +209,30 @@ void _submitQuiz() {
     return; // Exit the function without navigating if not all questions are answered
   }
   // Get the user's selection for question 1
-  String subq11 = _selectedOptions[_t('Light, irregular periods')] ?? '';
-  // String subq11 = _selectedOptions['subq1'] ?? '';
+  // String subq11 = _selectedOptions[_t('Light, irregular periods')] ?? '';
 
-  // print('subquestion1: $subq11');
-  String subq13 = _selectedOptions[_t('Periods might get heavier')] ?? '';
-  String subq12 = _selectedOptions[_t('Periods might stop')] ?? '';
+  String subq11 = _selectedOptions['subq1'] ?? '';
+
+  print('subquestion1: $subq11');
+  // String subq13 = _selectedOptions[_t('Periods might get heavier')] ?? '';
+  String subq13 = _selectedOptions['subq3'] ?? '';
+  print('subquestion1: $subq13');
+  // String subq12 = _selectedOptions[_t('Periods might stop')] ?? '';
+  String subq12 = _selectedOptions['subq2'] ?? '';
+  print('subquestion1: $subq12');
   // get user's selection for q3
-  String subq31 = _selectedOptions[_t('Use method every time you have sex')] ?? '';
-  String subq32 = _selectedOptions[_t('3 months or less')] ?? '';
-  String subq33 = _selectedOptions[_t('Lasts more than a year')] ?? '';
-  String pregnancyTiming = _selectedOptions[_t('If you had to guess, when do you think you might want a pregnancy?')] ?? '';
+  // String subq31 = _selectedOptions[_t('Use method every time you have sex')] ?? '';
+  String subq31 = _selectedOptions['q3sub1'] ?? '';
+  String subq32 = _selectedOptions['q3sub2'] ?? '';
+  String subq33 = _selectedOptions['q3sub3'] ?? '';
+  String pregnancyTiming = _selectedOptions['q2'] ?? '';
   // Get the user's selection for question 4
-  String privacyImportance = _selectedOptions[_t('How important is it to you to keep your method private from your parents or partner?')] ?? '';
-  String factors = _selectedOptions[_t('Which of the below factors is most important to you when choosing a method?')] ?? '';
+  String privacyImportance = _selectedOptions['q4'] ?? '';
+  String factors = _selectedOptions['q5'] ?? '';
   List<String> recommendations = [];
   List<String> introTexts = []; // List to store introductory texts
   List<String> outroTexts = [];
-
+  print('Navigating with recommendations: $recommendations');
   switch (subq11) {
     case 'option1': // 'Could be OK'
       recommendations.addAll(['Depo, Implant']);
@@ -311,7 +323,7 @@ void _submitQuiz() {
       break;
   }
 
-
+  print('Navigating with recommendations: $recommendations');
   
 
   switch (subq31) {
@@ -334,6 +346,8 @@ void _submitQuiz() {
       break;
   }
 
+  print('Navigating with recommendations: $recommendations');
+
   switch (subq32) {
     case 'option1': // 'Could be OK'
       recommendations.addAll(['Depo, Pills, Condoms']);
@@ -354,6 +368,8 @@ void _submitQuiz() {
       break;
   }
 
+  print('Navigating with recommendations: $recommendations');
+
   switch (subq33) {
     case 'option1': // 'Could be OK'
       recommendations.addAll(['Implant, IUCD']);
@@ -373,6 +389,8 @@ void _submitQuiz() {
     default:
       break;
   }
+
+  print('Navigating with recommendations: $recommendations');
 
   // Decision tree for question 4
   switch (privacyImportance) {
@@ -478,24 +496,19 @@ void _submitQuiz() {
 }
 
 bool _areAllQuestionsAnswered() {
-  // Check if the main questions have a non-empty answer.
-  List<String> mainQuestions = ['q2', 'q4', 'q5'];  // Note: 'q1' is not included since it's a header, not a question.
-
+  // Assuming 'q1', 'q2', etc. are the constant keys for your questions
+  List<String> mainQuestions = ['q2', 'q4', 'q5'];
   for (var key in mainQuestions) {
-    String translatedKey = _t(key);
-    if (_selectedOptions[translatedKey]?.isEmpty ?? true) {
-      print("Unanswered main question: $translatedKey");
+    if (_selectedOptions[key]?.isEmpty ?? true) {
+      print("Unanswered main question: $key");
       return false;
     }
   }
 
-  // Check if subquestions have a non-empty answer.
   List<String> subQuestions = ['subq1', 'subq2', 'subq3', 'q3sub1', 'q3sub2', 'q3sub3'];
-
   for (var key in subQuestions) {
-    String translatedKey = _t(key);
-    if (_selectedOptions[translatedKey]?.isEmpty ?? true) {
-      print("Unanswered subquestion: $translatedKey");
+    if (_selectedOptions[key]?.isEmpty ?? true) {
+      print("Unanswered subquestion: $key");
       return false;
     }
   }
@@ -504,162 +517,150 @@ bool _areAllQuestionsAnswered() {
 }
 
 
-
-
-
 @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: Text(_t('title')), // call translation method
-    ),
-    body: Column(
-      children: <Widget>[
-        // Language selection buttons
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            languageButton('Kiswahili'),
-            languageButton('Dholuo'),
-            languageButton('English'),
-          ],
-        ),
-        Expanded(
-          child: ListView(
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_t('title')),
+      ),
+      body: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // Main question
-              quizSection(context, _t('q1'), []),
-              // Subquestions
-              subQuestionSection(context, _t('subq1'), ['option1', 'option2', 'option3']),
-              subQuestionSection(context, _t('subq2'), ['option1', 'option2', 'option3']),
-              subQuestionSection(context, _t('subq3'), ['option1', 'option2', 'option3']),
-              quizSection(context, _t('q2'), ['op1', 'op2', 'op3']),
-
-              quizSection(context, _t('q3'), []),
-              subQuestionSection(context, _t('q3sub1'), ['option1', 'option2', 'option3']),
-              subQuestionSection(context, _t('q3sub2'), ['option1', 'option2', 'option3']),
-              subQuestionSection(context, _t('q3sub3'), ['option1', 'option2', 'option3']),
-              quizSection(context, _t('q4'), ['o1', 'o2', 'o3']), 
-              quizSection(context, _t('q5'), ['o51', 'o52', 'o53', 'o54']), 
-              // Submit button here
-              Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Center(
-              child: ElevatedButton(
-              onPressed: _submitQuiz,  // Updated onPressed function
-              child: Text('Submit Quiz'),
-              ),
-              ),
-              ),
+              languageButton('Kiswahili'),
+              languageButton('Dholuo'),
+              languageButton('English'),
             ],
           ),
-        ),
-      ],
-    ),
-  );
-}
+          Expanded(
+            child: ListView(
+              children: <Widget>[
+                quizSection(context, 'q1', []),
+                subQuestionSection(context, 'subq1', ['option1', 'option2', 'option3']),
+                subQuestionSection(context, 'subq2', ['option1', 'option2', 'option3']),
+                subQuestionSection(context, 'subq3', ['option1', 'option2', 'option3']),
+                quizSection(context, 'q2', ['op1', 'op2', 'op3']),
+                quizSection(context, 'q3', []),
+                subQuestionSection(context, 'q3sub1', ['option1', 'option2', 'option3']),
+                subQuestionSection(context, 'q3sub2', ['option1', 'option2', 'option3']),
+                subQuestionSection(context, 'q3sub3', ['option1', 'option2', 'option3']),
+                quizSection(context, 'q4', ['o1', 'o2', 'o3']),
+                quizSection(context, 'q5', ['o51', 'o52', 'o53', 'o54']),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: Center(
+                    child: ElevatedButton(
+                      onPressed: _submitQuiz,
+                      child: Text('Submit Quiz'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
 
 
 Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return OutlinedButton(
-      onPressed: () => _changeLanguage(language),
-      child: Text(language),
-      style: OutlinedButton.styleFrom(
-        backgroundColor: isSelected ? Colors.grey : Colors.white,
-        foregroundColor: Colors.black, // Changed from primary to foregroundColor
-        side: BorderSide(color: isSelected ? Colors.black : Colors.grey),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      ),
-    );
-}
-
-
-/////////////////////////-----------///////////
-Widget subQuestionSection(BuildContext context, String subQuestionText, List<String> options) {
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(48.0, 8.0, 16.0, 8.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          subQuestionText, 
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey.shade700),
-        ),
-        SizedBox(height: 4),
-        Wrap(
-          spacing: 8.0,
-          children: options.map((option) {
-            String selectedOptionKey = _selectedOptions[subQuestionText] ?? '';
-            return ChoiceChip(
-              label: Text(
-                _t(option),
-                style: TextStyle(fontSize: 16),
-              ),
-              selected: selectedOptionKey == option,
-              onSelected: (selected) {
-                _handleOptionSelection(subQuestionText, option);
-              },
-              selectedColor: Colors.purple.shade200,
-              backgroundColor: Colors.white, // Set background color to white
-            );
-          }).toList(),
-        ),
-      ],
+  bool isSelected = _currentLanguage == language;
+  return ElevatedButton(
+    onPressed: () => _changeLanguage(language),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: isSelected ? Colors.grey : null,
+      foregroundColor: isSelected ? Colors.white : Colors.black, // Optional: change text color based on selection
     ),
+    child: Text(language),
   );
 }
 
 
 
 
-
-
-Widget quizSection(BuildContext context, String questionTextKey, List<String> options) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-    child: Container(
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      padding: EdgeInsets.all(16.0),
+Widget subQuestionSection(BuildContext context, String questionKey, List<String> options) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(48.0, 8.0, 16.0, 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _t(questionTextKey),
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+            _t(questionKey), 
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey.shade700),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 4),
           Wrap(
             spacing: 8.0,
             children: options.map((option) {
-              String selectedOptionKey = _selectedOptions[questionTextKey] ?? '';
+              String selectedOptionKey = _selectedOptions[questionKey] ?? '';
               return ChoiceChip(
                 label: Text(
                   _t(option),
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(fontSize: 16),
                 ),
                 selected: selectedOptionKey == option,
                 onSelected: (selected) {
-                  _handleOptionSelection(questionTextKey, option);
+                  _handleOptionSelection(questionKey, option);
                 },
                 selectedColor: Colors.purple.shade200,
-                backgroundColor: Colors.white, // Set background color to white
+                backgroundColor: Colors.white,
               );
             }).toList(),
           ),
         ],
       ),
-    ),
-  );
-}
+    );
+  }
+
+
+
+ Widget quizSection(BuildContext context, String questionKey, List<String> options) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              _t(questionKey),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 8),
+            Wrap(
+              spacing: 8.0,
+              children: options.map((option) {
+                String selectedOptionKey = _selectedOptions[questionKey] ?? '';
+                return ChoiceChip(
+                  label: Text(
+                    _t(option),
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  selected: selectedOptionKey == option,
+                  onSelected: (selected) {
+                    _handleOptionSelection(questionKey, option);
+                  },
+                  selectedColor: Colors.purple.shade200,
+                  backgroundColor: Colors.white,
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
 
 
