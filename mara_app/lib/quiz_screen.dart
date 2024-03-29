@@ -238,6 +238,7 @@ void navigateToRecommendationScreen(BuildContext context, String pregnancyTiming
   // Get recommendations based on the user's answer to the second question
   List<String> recommendations = RecommendationModel.getRecommendationsBasedOnPregnancyTiming(pregnancyTiming);
   print('Recommendations: $recommendations'); // Add this line to debug
+  print('Recommendations: $recommendations'); // Add this line to debug
   // Dummy introductory texts for demonstration purposes, replace with actual logic to generate introTexts
   List<String> introTexts = List<String>.generate(recommendations.length, (index) => 'Introductory text ${index + 1}');
   List<String> outroTexts = List<String>.generate(recommendations.length, (index) => 'Outro text ${index + 1}');
@@ -296,7 +297,20 @@ Map<String, String> getReverseLookupMap(String language) {
 //   });
 // }
 
+// void _handleOptionSelection(String questionKey, String optionKey) {
+//   setState(() {
+//     // Using the raw question key because the _selectedOptions map uses them as keys
+//     _selectedOptions[questionKey] = optionKey;
+//     print('Selected options: $_selectedOptions');
+//   });
+// }
+
 void _handleOptionSelection(String questionKey, String optionKey) {
+    setState(() {
+      _selectedOptions[questionKey] = optionKey;
+    });
+    print("Option selected: $questionKey = $optionKey");
+  }
     setState(() {
       _selectedOptions[questionKey] = optionKey;
     });
@@ -336,7 +350,17 @@ void _submitQuiz() {
   // String subq11 = _selectedOptions[_t('Light, irregular periods')] ?? '';
 
   String subq11 = _selectedOptions['subq1'] ?? '';
+  // String subq11 = _selectedOptions[_t('Light, irregular periods')] ?? '';
 
+  String subq11 = _selectedOptions['subq1'] ?? '';
+
+  print('subquestion1: $subq11');
+  // String subq13 = _selectedOptions[_t('Periods might get heavier')] ?? '';
+  String subq13 = _selectedOptions['subq3'] ?? '';
+  print('subquestion1: $subq13');
+  // String subq12 = _selectedOptions[_t('Periods might stop')] ?? '';
+  String subq12 = _selectedOptions['subq2'] ?? '';
+  print('subquestion1: $subq12');
   print('subquestion1: $subq11');
   // String subq13 = _selectedOptions[_t('Periods might get heavier')] ?? '';
   String subq13 = _selectedOptions['subq3'] ?? '';
@@ -350,12 +374,20 @@ void _submitQuiz() {
   String subq32 = _selectedOptions['q3sub2'] ?? '';
   String subq33 = _selectedOptions['q3sub3'] ?? '';
   String pregnancyTiming = _selectedOptions['q2'] ?? '';
+  // String subq31 = _selectedOptions[_t('Use method every time you have sex')] ?? '';
+  String subq31 = _selectedOptions['q3sub1'] ?? '';
+  String subq32 = _selectedOptions['q3sub2'] ?? '';
+  String subq33 = _selectedOptions['q3sub3'] ?? '';
+  String pregnancyTiming = _selectedOptions['q2'] ?? '';
   // Get the user's selection for question 4
+  String privacyImportance = _selectedOptions['q4'] ?? '';
+  String factors = _selectedOptions['q5'] ?? '';
   String privacyImportance = _selectedOptions['q4'] ?? '';
   String factors = _selectedOptions['q5'] ?? '';
   List<String> recommendations = [];
   List<String> introTexts = []; // List to store introductory texts
   List<String> outroTexts = [];
+  print('Navigating with recommendations: $recommendations');
   print('Navigating with recommendations: $recommendations');
   switch (subq11) {
     case 'option1': // 'Could be OK'
@@ -460,6 +492,7 @@ void _submitQuiz() {
   }
 
   print('Navigating with recommendations: $recommendations');
+  print('Navigating with recommendations: $recommendations');
   
 
   switch (subq31) {
@@ -484,6 +517,8 @@ void _submitQuiz() {
     default:
       break;
   }
+
+  print('Navigating with recommendations: $recommendations');
 
   print('Navigating with recommendations: $recommendations');
 
@@ -512,6 +547,8 @@ void _submitQuiz() {
 
   print('Navigating with recommendations: $recommendations');
 
+  print('Navigating with recommendations: $recommendations');
+
   switch (subq33) {
     case 'option1': // 'Could be OK'
       recommendations.addAll(['Implant, IUCD']);
@@ -534,6 +571,8 @@ void _submitQuiz() {
     default:
       break;
   }
+
+  print('Navigating with recommendations: $recommendations');
 
   print('Navigating with recommendations: $recommendations');
 
@@ -650,7 +689,11 @@ void _submitQuiz() {
 bool _areAllQuestionsAnswered() {
   // Assuming 'q1', 'q2', etc. are the constant keys for your questions
   List<String> mainQuestions = ['q2', 'q4', 'q5'];
+  // Assuming 'q1', 'q2', etc. are the constant keys for your questions
+  List<String> mainQuestions = ['q2', 'q4', 'q5'];
   for (var key in mainQuestions) {
+    if (_selectedOptions[key]?.isEmpty ?? true) {
+      print("Unanswered main question: $key");
     if (_selectedOptions[key]?.isEmpty ?? true) {
       print("Unanswered main question: $key");
       return false;
@@ -661,12 +704,15 @@ bool _areAllQuestionsAnswered() {
   for (var key in subQuestions) {
     if (_selectedOptions[key]?.isEmpty ?? true) {
       print("Unanswered subquestion: $key");
+    if (_selectedOptions[key]?.isEmpty ?? true) {
+      print("Unanswered subquestion: $key");
       return false;
     }
   }
 
   return true;
 }
+
 
 @override
   Widget build(BuildContext context) {
@@ -677,7 +723,7 @@ bool _areAllQuestionsAnswered() {
       body: Column(
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               languageButton('Kiswahili'),
               languageButton('Dholuo'),
@@ -727,7 +773,18 @@ Widget languageButton(String language) {
     ),
     child: Text(language),
   );
+  bool isSelected = _currentLanguage == language;
+  return ElevatedButton(
+    onPressed: () => _changeLanguage(language),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: isSelected ? Colors.grey : null,
+      foregroundColor: isSelected ? Colors.white : Colors.black, // Optional: change text color based on selection
+    ),
+    child: Text(language),
+  );
 }
+
+
 
 
 Widget subQuestionSection(BuildContext context, String questionKey, List<String> options) {
@@ -763,6 +820,8 @@ Widget subQuestionSection(BuildContext context, String questionKey, List<String>
       ),
     );
   }
+
+
 
  Widget quizSection(BuildContext context, String questionKey, List<String> options) {
     return Padding(
