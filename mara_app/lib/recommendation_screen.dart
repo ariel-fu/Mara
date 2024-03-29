@@ -55,6 +55,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   }
 
 
+
 @override
 Widget build(BuildContext context) {
   return Scaffold(
@@ -119,8 +120,8 @@ Widget build(BuildContext context) {
                                       right: -9,
                                       child: IconButton(
                                         icon: Icon(
-                                          likedMethods.contains(trimmedRec) ? Icons.favorite : Icons.favorite_border,
-                                          color: likedMethods.contains(trimmedRec) ? Colors.red : Colors.grey,
+                                          likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
+                                          color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.brown[400],
                                         ),
                                         onPressed: () {
                                           setState(() {
@@ -193,7 +194,6 @@ Widget build(BuildContext context) {
 }
 
 
-
 Widget languageButton(String language) {
   bool isSelected = _currentLanguage == language;
   return Padding(
@@ -208,21 +208,25 @@ Widget languageButton(String language) {
   );
 }
 
+
+
 void navigateToLikedMethodsScreen() {
   Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) => LikedMethodsScreen(
         likedMethods: likedMethods,
-        currentLanguage: _currentLanguage,
+        initialLanguage: _currentLanguage, // Use initialLanguage instead of currentLanguage
         translations: widget.translations,
         onMethodsChanged: (updatedMethods) {
           setState(() {
             likedMethods = updatedMethods;
           });
         },
+        // Removed onLanguageChanged as it's no longer needed
       ),
     ),
   );
 }
+
 }
