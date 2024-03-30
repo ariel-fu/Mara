@@ -132,21 +132,17 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: OutlinedButton(
-        onPressed: () => _changeLanguage(language),
-        child: Text(language),
-        style: OutlinedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : Colors.white,
-          foregroundColor: Colors.black,
-          side: BorderSide(color: isSelected ? Colors.black : Colors.grey),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        ),
+Widget languageButton(String language) {
+  bool isSelected = _currentLanguage == language;
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    child: ElevatedButton(
+      onPressed: () => _changeLanguage(language),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
       ),
-    );
-  }
+      child: Text(language),
+    ),
+  );
+}
 }
