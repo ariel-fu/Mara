@@ -125,45 +125,17 @@ class _PrepPageState extends State<PrepPage> {
       ),
     );
   }
-
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ElevatedButton(
-        onPressed: () => _changeLanguage(language),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : null,
-        ),
-        child: Text(language),
+Widget languageButton(String language) {
+  bool isSelected = _currentLanguage == language;
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    child: ElevatedButton(
+      onPressed: () => _changeLanguage(language),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
       ),
-    );
-  }
-
-  Widget contentBox(String contentKey) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-            SizedBox(width: 10.0),
-            Expanded(
-              child: Text(
-                _t(contentKey),
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+      child: Text(language),
+    ),
+  );
+}
 }
