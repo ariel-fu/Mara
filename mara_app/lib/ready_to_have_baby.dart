@@ -20,32 +20,10 @@ class _ReadyPageState extends State<ReadyPage> {
       'English': 'Family Planning Guide',
     },
     'What if I\'m ready to have a baby?': {
-      'Kiswahili': 'Kama niko tayari kupata mtoto?',
-      'Dholuo': 'Ango nyithindo mabeyo manyalo wuonwa?',
-      'English': 'What if I\'m ready to have a baby?',
+      // Add translations
     },
-    'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!': {
-      'Kiswahili': 'Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!', 
-      'Dholuo': 'HEY! MA EN GIMA BER NG\'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng\'o kute mag ayaki kod nyae mamoko!', 
-      'English': 'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'
-    }
-
+    // Add other translations as needed
   };
-
-  final Map<String, Map<String, String>> _videos = {
-    'assets': {
-      'Kiswahili': 'videoAudio/videos/provider/provider4KS.mp4',
-      'Dholuo': 'videoAudio/videos/provider/provider4DL.mp4',
-      'English': 'videoAudio/videos/provider/provider4E.mp4',
-    },
-    'titles': {
-      'Kiswahili': 'Video - Daktari Aeleza',
-      'Dholuo': 'Vidio - Laktar Wuoyo',
-      'English': 'Video: A Doctor Explains',
-    }
-  };
-
-  final double _aspectRatio = 16 / 10;
 
   String _t(String key) {
     return _translations[key]?[_currentLanguage] ?? key;
@@ -121,19 +99,22 @@ class _ReadyPageState extends State<ReadyPage> {
     );
   }
 
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ElevatedButton(
-        onPressed: () => _changeLanguage(language),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : null,
-        ),
-        child: Text(language),
+
+
+Widget languageButton(String language) {
+  bool isSelected = _currentLanguage == language;
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    child: ElevatedButton(
+      onPressed: () => _changeLanguage(language),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
       ),
-    );
-  }
+      child: Text(language),
+    ),
+  );
+}
+
 
   @override
 Widget build(BuildContext context) {
@@ -151,59 +132,57 @@ Widget build(BuildContext context) {
 
   return Scaffold(
     appBar: AppBar(
-      leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
+      title: Text(_t('Family Planning Guide')),
+    ),
+    body: ListView(
+      children: [
+        // Language selection buttons
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: ['Kiswahili', 'Dholuo', 'English']
+              .map((language) => languageButton(language))
+              .toList(),
+        ),
+       
+        customListTile(
+          imagePath: 'assets/preg_woman.png',
+          header: _t('What if I\'m ready to have a baby?'),
+          title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
+        ),
+        
+        ListTile(
+          leading: Icon(Icons.play_circle_fill),
+          title: Text(_t('Video - a doctor explains')),
+          onTap: () {
+            // Navigate to video playback screen
           },
         ),
-        title: Text(_t('Family Planning Guide')),
-      ),
-      body: ListView(
-        children: [
-          // Language selection buttons
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: ['Kiswahili', 'Dholuo', 'English']
-                .map((language) => languageButton(language))
-                .toList(),
+        ListTile(
+          leading: Icon(Icons.search),
+          title: Text(_t('LEARN MORE about the fertility considerations of each method')),
+          onTap: () {
+          // Navigate to TemplatePage when this ListTile is tapped
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TemplatePage()),
+          );
+        },
+      ), 
+        ListTile(
+        leading: Icon(Icons.check_circle),
+        title: Text(_t('Preparing for a healthy pregnancy')),
+        onTap: () {
+          Navigator.push(
+          context,
+          MaterialPageRoute(
+          builder: (context) => MyHomePage(initialLanguage: _currentLanguage),
           ),
-          customListTile(
-            imagePath: 'assets/preg_woman_new.png',
-            header: _t('What if I\'m ready to have a baby?'),
-            title: _t('HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'),
-          ),
-
-          SizedBox(width:boxWidth, height:boxHeight * 0.5 * 0.6, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
-
-          ListTile(
-            leading: Icon(Icons.search),
-            title: Text(_t('LEARN MORE about the fertility considerations of each method')),
-            onTap: () {
-              int languageIndex = languages.indexOf(_currentLanguage);
-              Navigator.pushNamed(
-                context,
-                '/learnmore',
-                arguments: languageIndex
-              );
-            },
-          ),
-
-          ListTile(
-            leading: Icon(Icons.check_circle),
-            title: Text(_t('Preparing for a healthy pregnancy')),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PrepPage(initialLanguage: _currentLanguage),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
+        );
+        },
+        ),
+      ],
+    ),
+  );
+}
 }
 
