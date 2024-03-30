@@ -19,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     'What if I\'m ready to have a baby?': {
       // Add translations
     },
-    
+    // Add other translations as needed
   };
 
   String _t(String key) {
@@ -81,22 +81,22 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: OutlinedButton(
-        onPressed: () => _changeLanguage(language),
-        child: Text(language),
-        style: OutlinedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : Colors.white,
-          foregroundColor: Colors.black,
-          side: BorderSide(color: isSelected ? Colors.black : Colors.grey),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        ),
+
+
+Widget languageButton(String language) {
+  bool isSelected = _currentLanguage == language;
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    child: ElevatedButton(
+      onPressed: () => _changeLanguage(language),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
       ),
-    );
-  }
+      child: Text(language),
+    ),
+  );
+}
+
 
   @override
 Widget build(BuildContext context) {
@@ -131,13 +131,13 @@ Widget build(BuildContext context) {
           leading: Icon(Icons.search),
           title: Text(_t('LEARN MORE about the fertility considerations of each method')),
           onTap: () {
-            // Navigate to TemplatePage when this ListTile is tapped
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TemplatePage()),
-            );
-          },
-        ),
+          // Navigate to TemplatePage when this ListTile is tapped
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TemplatePage()),
+          );
+        },
+      ), 
         ListTile(
         leading: Icon(Icons.check_circle),
         title: Text(_t('Preparing for a healthy pregnancy')),
