@@ -102,56 +102,59 @@ Widget languageButton(String language) {
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
-      title: Text(_t('Family Planning Guide')),
-    ),
-    body: ListView(
-      children: [
-        // Language selection buttons
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: ['Kiswahili', 'Dholuo', 'English']
-              .map((language) => languageButton(language))
-              .toList(),
-        ),
-       
-        customListTile(
-          imagePath: 'assets/preg_woman.png',
-          header: _t('What if I\'m ready to have a baby?'),
-          title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
-        ),
-        
-        ListTile(
-          leading: Icon(Icons.play_circle_fill),
-          title: Text(_t('Video - a doctor explains')),
-          onTap: () {
-            // Navigate to video playback screen
+      leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/home');
           },
         ),
-        ListTile(
-          leading: Icon(Icons.search),
-          title: Text(_t('LEARN MORE about the fertility considerations of each method')),
-          onTap: () {
-          // Navigate to TemplatePage when this ListTile is tapped
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => TemplatePage()),
-          );
-        },
-      ), 
-        ListTile(
-        leading: Icon(Icons.check_circle),
-        title: Text(_t('Preparing for a healthy pregnancy')),
-        onTap: () {
-          Navigator.push(
-          context,
-          MaterialPageRoute(
-          builder: (context) => MyHomePage(initialLanguage: _currentLanguage),
-          ),
-        );
-        },
-        ),
-      ],
+      title: Text(_t('Family Planning Guide')),
     ),
-  );
-}
+    body: Column (children: [
+      ListView(
+        children: [
+          // Language selection buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: ['Kiswahili', 'Dholuo', 'English']
+                .map((language) => languageButton(language))
+                .toList(),
+          ),
+        
+          customListTile(
+            imagePath: 'assets/preg_woman.png',
+            header: _t('What if I\'m ready to have a baby?'),
+            title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
+          ),
+
+          ListTile(
+            leading: Icon(Icons.search),
+            title: Text(_t('LEARN MORE about the fertility considerations of each method')),
+            onTap: () {
+            // Navigate to TemplatePage when this ListTile is tapped
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TemplatePage()),
+            );
+          },
+        ), 
+          ListTile(
+            leading: Icon(Icons.check_circle),
+            title: Text(_t('Preparing for a healthy pregnancy')),
+            onTap: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(
+              builder: (context) => PrepPage(initialLanguage: _currentLanguage),
+              ),
+            );
+            },
+          ),
+        ],
+      ),
+      VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title: 'hello'),
+    ],
+  )
+ );
+ }
 }
