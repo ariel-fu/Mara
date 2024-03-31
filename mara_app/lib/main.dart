@@ -8,9 +8,7 @@ import 'options_page.dart';
 import 'pattern_page.dart';
 import 'time_page.dart';
 import 'private_page.dart';
-import 'ready_to_have_baby.dart';
-import 'learn_more.dart';
-import 'private_page.dart';
+import 'prep_preg.dart';
 
 void main() {
   runApp(MaraApp());
@@ -39,11 +37,7 @@ class _MaraAppState extends State<MaraApp> {
         '/bleeding_pattern': (BuildContext context) => const PatternPage(),
         '/time': (BuildContext context) => const TimePage(),
         '/private': (BuildContext context) => const PrivatePage(),
-        '/ready_baby': (BuildContext context) => ReadyPage(),
-        '/quiz': (BuildContext context) => QuizScreen(),
-        '/learnmore': (BuildContext context) => const LearnMoreFertility(),
-        '/private': (BuildContext context) => const PrivatePage(),
-        
+        // '/prep_preg': (BuildContext context) => const PrepPage(),
       },
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
     );
