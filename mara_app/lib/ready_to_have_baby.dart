@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 //import 'learn_more.dart';
 import 'prep_preg.dart';
+import 'video.dart';
+import 'audio.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -9,6 +11,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   String _currentLanguage = 'English';
+  // String asset = 'videoAudio/videos/chimes.mp4';
+  // String videoTitle = 'Choose a Language';
 
   final Map<String, Map<String, String>> _translations = {
     'Family Planning Guide': {
@@ -22,8 +26,30 @@ class _MainScreenState extends State<MainScreen> {
     // Add other translations as needed
   };
 
+  final Map<String, Map<String, String>> _videos = {
+    'assets': {
+      'Kiswahili': 'videoAudio/videos/funnyCat.mp4',
+      'Dholuo': 'videoAudio/videos/funnyCat2.mp4',
+      'English': 'videoAudio/videos/chimes.mp4',
+    },
+    'titles': {
+      'Kiswahili': 'Video: A Doctor Explains [KISWAHILI]',
+      'Dholuo': 'Video: A Doctor Explains [DHOLUO]',
+      'English': 'Video: A Doctor Explains [ENGLISH]',
+
+    }
+  };
+
   String _t(String key) {
     return _translations[key]?[_currentLanguage] ?? key;
+  }
+
+  String _getAsset() {
+      return _videos['assets']?[_currentLanguage] ?? 'Asset not found';
+  }
+
+  String _getTitle() {
+      return _videos['titles']?[_currentLanguage] ?? 'Title not found';
   }
 
   void _changeLanguage(String language) {
@@ -110,8 +136,7 @@ Widget build(BuildContext context) {
         ),
       title: Text(_t('Family Planning Guide')),
     ),
-    body: Column (children: [
-      ListView(
+    body: ListView(
         children: [
           // Language selection buttons
           Row(
@@ -126,6 +151,8 @@ Widget build(BuildContext context) {
             header: _t('What if I\'m ready to have a baby?'),
             title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
           ),
+
+          SizedBox(width:50, height:120, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
 
           ListTile(
             leading: Icon(Icons.search),
@@ -152,9 +179,6 @@ Widget build(BuildContext context) {
           ),
         ],
       ),
-      VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title: 'hello'),
-    ],
-  )
- );
+  );
  }
 }
