@@ -126,6 +126,9 @@ flutter:
     - videoAudio/videos/provider/provider4DL.mp4
     - videoAudio/videos/provider/provider4E.mp4
 
+    - assets/options-icons/
+    - assets/string-resources/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
