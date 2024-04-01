@@ -9,7 +9,7 @@ class PillInfo extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           // TODO - change icons
-          icon: const Icon(Icons.home),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             /* TODO - add navigation directly to options_page
              and hide the dialogue */
