@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'option_pages/pills.dart';
 import 'options_button.dart';
+import 'model/method_repository.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'icons/mara_icons_icons.dart' show MaraIcons;
@@ -20,6 +21,7 @@ class _OptionsPageState extends State<OptionsPage> {
   bool overrideIndex = false;
   int _languageIndex = 0; // Default value
   final languages = ["Kiswahili", "Dholuo", "English"];
+  final methods = MethodRepository.loadMethods();
   final content = [
     'IUD',
     'Pills',
@@ -136,7 +138,7 @@ class _OptionsPageState extends State<OptionsPage> {
                   left: containerWidth * 0.52,
                   child: Visibility(
                     visible: methodIndex == 1,
-                    child: SvgPicture.asset('assets/options-icons/arrow_pills1.svg', height: containerHeight * 0.15)
+                    child: SvgPicture.asset('assets/options-icons/arrow_birth_control_pills.svg', height: containerHeight * 0.15)
                   ),
               ),
               Positioned(
@@ -161,7 +163,7 @@ class _OptionsPageState extends State<OptionsPage> {
                 left: containerWidth * 0.1,
                 child: Visibility(
                   visible: methodIndex == 3,
-                  child: SvgPicture.asset('assets/options-icons/arrow_implant.svg', height: containerHeight * 0.2),
+                  child: SvgPicture.asset('assets/options-icons/arrow_contraceptive_implant.svg', height: containerHeight * 0.2),
                 ),
               ),
               Positioned(
@@ -178,7 +180,7 @@ class _OptionsPageState extends State<OptionsPage> {
                 left: containerWidth * 0.52,
                 child: Visibility(
                   visible: methodIndex == 6,
-                  child: SvgPicture.asset('assets/options-icons/arrow_pill2.svg', height: containerHeight * 0.2)
+                  child: SvgPicture.asset('assets/options-icons/arrow_double_pills.svg', height: containerHeight * 0.2)
                 ),
               ),
               Positioned(
@@ -221,7 +223,7 @@ class _OptionsPageState extends State<OptionsPage> {
                 left: containerWidth * 0.04,
                 child: Visibility(
                   visible: methodIndex == 4,
-                  child: SvgPicture.asset('assets/options-icons/arrow_depo.svg', height: containerHeight * 0.16),
+                  child: SvgPicture.asset('assets/options-icons/arrow_syringe.svg', height: containerHeight * 0.16),
                 ),
               ),
               Positioned(
