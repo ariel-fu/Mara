@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'learn_more.dart';
 import 'prep_preg.dart';
+import 'video.dart';
+import 'audio.dart';
 
-class MainScreen extends StatefulWidget {
+class ReadyPage extends StatefulWidget {
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _ReadyPageState createState() => _ReadyPageState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _ReadyPageState extends State<ReadyPage> {
   String _currentLanguage = 'English';
+  // String asset = 'videoAudio/videos/chimes.mp4';
+  // String videoTitle = 'Choose a Language';
 
   final Map<String, Map<String, String>> _translations = {
     'Family Planning Guide': {
@@ -22,8 +26,30 @@ class _MainScreenState extends State<MainScreen> {
     // Add other translations as needed
   };
 
+  final Map<String, Map<String, String>> _videos = {
+    'assets': {
+      'Kiswahili': 'videoAudio/videos/funnyCat.mp4',
+      'Dholuo': 'videoAudio/videos/funnyCat2.mp4',
+      'English': 'videoAudio/videos/chimes.mp4',
+    },
+    'titles': {
+      'Kiswahili': 'Video: A Doctor Explains [KISWAHILI]',
+      'Dholuo': 'Video: A Doctor Explains [DHOLUO]',
+      'English': 'Video: A Doctor Explains [ENGLISH]',
+
+    }
+  };
+
   String _t(String key) {
     return _translations[key]?[_currentLanguage] ?? key;
+  }
+
+  String _getAsset() {
+      return _videos['assets']?[_currentLanguage] ?? 'Asset not found';
+  }
+
+  String _getTitle() {
+      return _videos['titles']?[_currentLanguage] ?? 'Title not found';
   }
 
   void _changeLanguage(String language) {
@@ -102,56 +128,57 @@ Widget languageButton(String language) {
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
+      leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/home');
+          },
+        ),
       title: Text(_t('Family Planning Guide')),
     ),
     body: ListView(
-      children: [
-        // Language selection buttons
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: ['Kiswahili', 'Dholuo', 'English']
-              .map((language) => languageButton(language))
-              .toList(),
-        ),
-       
-        customListTile(
-          imagePath: 'assets/preg_woman.png',
-          header: _t('What if I\'m ready to have a baby?'),
-          title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
-        ),
-        
-        ListTile(
-          leading: Icon(Icons.play_circle_fill),
-          title: Text(_t('Video - a doctor explains')),
-          onTap: () {
-            // Navigate to video playback screen
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.search),
-          title: Text(_t('LEARN MORE about the fertility considerations of each method')),
-          onTap: () {
-          // Navigate to TemplatePage when this ListTile is tapped
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => TemplatePage()),
-          );
-        },
-      ), 
-        ListTile(
-        leading: Icon(Icons.check_circle),
-        title: Text(_t('Preparing for a healthy pregnancy')),
-        onTap: () {
-          Navigator.push(
-          context,
-          MaterialPageRoute(
-          builder: (context) => MyHomePage(initialLanguage: _currentLanguage),
+        children: [
+          // Language selection buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: ['Kiswahili', 'Dholuo', 'English']
+                .map((language) => languageButton(language))
+                .toList(),
           ),
-        );
-        },
-        ),
-      ],
-    ),
+        
+          customListTile(
+            imagePath: 'assets/preg_woman.png',
+            header: _t('What if I\'m ready to have a baby?'),
+            title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
+          ),
+
+          SizedBox(width:50, height:120, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
+
+          ListTile(
+            leading: Icon(Icons.search),
+            title: Text(_t('LEARN MORE about the fertility considerations of each method')),
+            onTap: () {
+            // Navigate to TemplatePage when this ListTile is tapped
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TemplatePage()),
+            );
+          },
+        ), 
+          ListTile(
+            leading: Icon(Icons.check_circle),
+            title: Text(_t('Preparing for a healthy pregnancy')),
+            onTap: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(
+              builder: (context) => PrepPage(initialLanguage: _currentLanguage),
+              ),
+            );
+            },
+          ),
+        ],
+      ),
   );
-}
+ }
 }
