@@ -34,6 +34,7 @@ dependencies:
   excel: ^4.0.2
   csv: ^5.1.1
   path_provider: ^2.1.2
+  flutter_svg: ^2.0.10
 
   flutter:
     sdk: flutter
@@ -88,6 +89,9 @@ flutter:
     - assets/woman.png
     - assets/maralogo.png
     - assets/imlaunchscreenimg.png
+
+    - assets/options-icons/
+    - assets/string-resources/
 
   #   - images/a_dot_ham.jpeg
 
