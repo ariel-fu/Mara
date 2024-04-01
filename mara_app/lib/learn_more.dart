@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/icons/mara_icons_icons.dart';
 
 class TemplatePage extends StatefulWidget {
   const TemplatePage({Key? key}) : super(key: key);
@@ -121,12 +122,20 @@ class _TemplatePageState extends State<TemplatePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  buildIconButton(IconOrImage.image('assets/IUD.png'), 0),
-                  buildIconButton(IconOrImage.image('assets/pills.png'), 1),
-                  buildIconButton(IconOrImage.image('assets/condom.png'), 2),
-                  buildIconButton(IconOrImage.image('assets/implant.png'), 3),
-                  buildIconButton(IconOrImage.image('assets/emergency.png'), 4),
-                  buildIconButton(IconOrImage.image('assets/female_condom.png'), 5),
+
+                  buildIconButton(MaraIcons.iud, 0),
+                  buildIconButton(MaraIcons.birth_control_pills, 1),
+                  buildIconButton(MaraIcons.condom, 2),
+                  buildIconButton(MaraIcons.contraceptive_implant, 3),
+                  buildIconButton(MaraIcons.syringe, 4),
+                  buildIconButton(MaraIcons.female_condom, 5),
+
+                  // buildIconButton(IconOrImage.image('assets/IUD.png'), 0),
+                  // buildIconButton(IconOrImage.image('assets/pills.png'), 1),
+                  // buildIconButton(IconOrImage.image('assets/condom.png'), 2),
+                  // buildIconButton(IconOrImage.image('assets/implant.png'), 3),
+                  // buildIconButton(IconOrImage.image('assets/emergency.png'), 4),
+                  // buildIconButton(IconOrImage.image('assets/female_condom.png'), 5),
                 ],
               ),
             ),
@@ -163,30 +172,32 @@ class _TemplatePageState extends State<TemplatePage> {
     );
   }
 
-   Widget buildIconButton(IconOrImage iconOrImage, int index) {
+   Widget buildIconButton(IconData iconData, int index) {
     bool isSelected = index == methodIndex;
 
-    return IconButton(
-      icon: iconOrImage.iconData != null
-          ? Icon(
-              iconOrImage.iconData,
-              size: isSelected ? 100 : 60,
-              color: isSelected ? Colors.black : Colors.grey,
-            )
-          : Image.asset(
-              iconOrImage.imagePath!,
-              width: isSelected ? 100 : 60,
-              height: isSelected ? 100 : 60,
-            ),
-      onPressed: () {
-        setState(() {
-          methodIndex = index;
-          updateMethodContent();
-        });
-      },
-      iconSize: isSelected ? 100 : 60,
-      padding: EdgeInsets.all(10),
-      splashRadius: 40,
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        IconButton(
+          icon: Icon(
+            iconData,
+            size: isSelected ? 100 : 60,
+            color: isSelected ? Colors.black : Colors.grey,
+          ),
+          onPressed: () {
+            setState(() {
+              methodIndex = index;
+              updateMethodContent();
+            });
+          },
+          color: isSelected ? Colors.black : Colors.transparent,
+          iconSize: isSelected ? 100 : 60,
+          padding: EdgeInsets.all(10),
+          splashRadius: 40,
+          splashColor: Colors.grey.withOpacity(0.5),
+          highlightColor: Colors.transparent,
+        ),
+      ],
     );
   }
 
