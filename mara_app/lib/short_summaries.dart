@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MethodDetailsScreen extends StatefulWidget {
+
+class MethodDetailsScreen extends StatefulWidget {
   final String methodName;
-  final Map<String, dynamic>? methodDetails;
+  final Map<String, dynamic>? methodDetails; // Allow null for methodDetails
   final String currentLanguage;
   final Map<String, Map<String, String>> translations;
   final Function(String) onChangeLanguage;
@@ -16,39 +18,21 @@ class MethodDetailsScreen extends StatefulWidget {
     required this.onChangeLanguage,
   }) : super(key: key);
 
+
   @override
   _MethodDetailsScreenState createState() => _MethodDetailsScreenState();
 }
 
 class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
+  Map<String, bool> contentVisible = {
+    'how_it_works': false,
+    'side_effects': false,
+    'preg_chances': false,
+  'privacy': false,
+  'periods': false,
+    // Add other categories as needed
+  };
   late String _currentLanguage;
-
-  final Map<String, Map<String, String>> translations = {
-  'English': {
-    'how_it_works': 'How It Works',
-    'side_effects': 'What will happen to my period?',
-    'lasts': 'How long does the method work?', 
-    'effectiveness': 'How effective is it?',
-    'privacy': 'Can I keep it private?', 
-    'fertility': 'What if I\'m ready to have a baby?'
-  },
-  'Kiswahili': {
-    'how_it_works': 'Jinsi Inavyofanya Kazi',
-    'side_effects': 'Nini kitafanyikia hedhi zangu?',
-    'lasts': 'Mbinu hiyo inafanya kazi kwa muda gani?', 
-    'effectiveness': 'How effective is it?',
-    'privacy': 'Je, ninaweza kuiweka kwa usiri?', 
-    'fertility': 'Je, itakuaje ikiwa niko tayari kupata mtoto?'
-  },
-  'Dholuo': {
-    'how_it_works': 'Jinsi Inavyofanya Kazi',
-    'side_effects': 'En ang\'o mabiro timore ne remba mar dwe?',
-    'lasts': 'Yor ni tiyo kuom kinde marom nade?', 
-    'effectiveness': 'How effective is it?',
-    'privacy': 'Bende anyalo kete mopondo?', 
-    'fertility': 'To ka ayikora mar mako ich to?'
-  }
-};
 
   @override
   void initState() {
@@ -56,35 +40,41 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     _currentLanguage = widget.currentLanguage;
   }
 
-  String _t(String key) {
-    return widget.translations[_currentLanguage]?[key] ?? key;
-}
 
-
-  Widget _languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ElevatedButton(
-        onPressed: () {
-          if (!isSelected) {
-            setState(() {
-              _currentLanguage = language;
-            });
-            widget.onChangeLanguage(language);
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : null,
-        ),
-        child: Text(language),
-      ),
-    );
+  void toggleContentVisibility(String category) {
+    setState(() {
+      contentVisible[category] = !(contentVisible[category] ?? false);
+    });
   }
 
 
-  @override
+
+  Widget _languageButton(String language) {
+  bool isSelected = _currentLanguage == language;
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    child: ElevatedButton(
+      onPressed: () {
+        if (!isSelected) {
+          setState(() {
+            _currentLanguage = language;
+          });
+          widget.onChangeLanguage(language);
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null, // Grey if selected
+      ),
+      child: Text(language),
+    ),
+  );
+}
+
+  
+
+@override
 Widget build(BuildContext context) {
+  // Check if methodDetails is null
   if (widget.methodDetails == null) {
     return Scaffold(
       appBar: AppBar(
@@ -94,48 +84,71 @@ Widget build(BuildContext context) {
     );
   }
 
-  String methodName = widget.methodDetails?['name']?[_currentLanguage] ?? widget.methodName;
-  String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
 
+  String howItWorks = widget.methodDetails?['how_it_works'] ?? 'No information available';
+  String sideEffects = widget.methodDetails?['side_effects'] ?? 'No information available';
+  String periodsEffects = widget.methodDetails?['periods'] ?? 'No information available';
+  String pregEffects = widget.methodDetails?['preg_chances'] ?? 'No information available';
+  String privacyEffects = widget.methodDetails?['privacy'] ?? 'No information available';
+  // Extract the icon path
+  String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_1.png'; // default icon if not available
+  // String imagePath = widget.methodDetails?['use_image'] ?? 'assets/birth_control.png'; // default image if not available
   return Scaffold(
     appBar: AppBar(
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back), 
-        onPressed: () => Navigator.of(context).pop(), 
-      ),
-      title: Text('Summary of $methodName'),
+      title: Text('Learn More About ${widget.methodName}'),
     ),
     body: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        
+        // Language Buttons
         Padding(
           padding: EdgeInsets.all(8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: ['Kiswahili', 'Dholuo', 'English'].map(_languageButton).toList(),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _languageButton('Kiswahili'),
+              _languageButton('Dholuo'),
+              _languageButton('English'),
+            ],
           ),
         ),
+        // Method Title and Icon centered
+        // Method Title and Icon in the center
+        Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min, // Aligns the row's children in the center
+              children: [
+                Image.asset(iconPath, width: 50, height: 50), // Icon
+                SizedBox(width: 10), // Space between icon and text
+                Text(widget.methodName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)), // Method Name
+                // SizedBox(width: 10), // Space between text and image
+                // Image.asset(imagePath, width: 50, height: 50), // Additional Imag
+              ],
+            ),
+          ),
+        ),
+      //   Container(
+      //   padding: EdgeInsets.all(16.0),
+      //   child: Row(
+      //     children: [
+      //       Image.asset(iconPath, width: 50, height: 50),
+      //       SizedBox(width: 10),
+      //       Text(widget.methodName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      //     ],
+      //   ),
+      // ),
         Expanded(
           child: ListView(
             padding: EdgeInsets.all(8.0),
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(iconPath, width: 50, height: 50),
-                    SizedBox(width: 10),
-                    Text(methodName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ),
-              buildContentCard('assets/birth_control_new.png', 'how_it_works_title', 'how_it_works'),
-              buildContentCard('assets/period_new.png', 'what_period', 'side_effects'),
-              buildContentCard('assets/calendar_new.png', 'how_long', 'lasts'),
-              buildContentCard('assets/chance_new.png', 'how_effective', 'effectiveness'),
-              buildContentCard('assets/privacy_new.png', 'can_private', 'privacy'),
-              buildContentCard('assets/preg_woman_new.png', 'ready_to_have_baby', 'fertility'),
+              buildToggleCard('how_it_works', Icons.medical_information, 'How It Works', howItWorks),
+              buildToggleCard('side_effects', Icons.warning, 'Side Effects', sideEffects),
+              buildToggleCard('periods', Icons.water_drop, 'Period Effects', periodsEffects), 
+              buildToggleCard('privacy', Icons.remove_red_eye, 'Privacy', privacyEffects),
+               buildToggleCard('preg_chances', Icons.pregnant_woman, 'Pregnancy chances', pregEffects),
+              // Add more cards as needed
             ],
           ),
         ),
@@ -145,44 +158,111 @@ Widget build(BuildContext context) {
 }
 
 
-Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
-  // Fetch the translated title and content based on the current language
-  String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? 'No title available';
-  String content = widget.methodDetails?[contentKey]?[_currentLanguage] ?? 'No information available';
-
-  return Container(
-    margin: EdgeInsets.only(bottom: 10),
-    padding: EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      color: Colors.grey.shade200,
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Icon(icon, size: 44, color: Theme.of(context).primaryColor),
-        Image.asset(iconPath, width: 44, height: 44),
-        SizedBox(width: 10),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                translatedTitle, // Using the translated title from the JSON
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+Widget buildToggleCard(String category, IconData icon, String tooltip, String content) {
+  return Card(
+    margin: EdgeInsets.all(10.0),
+    child: InkWell(
+      onTap: () => toggleContentVisibility(category),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(icon, size: 44), // Icon
+            SizedBox(width: 10), // Space between icon and text
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    tooltip,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  Visibility(
+                    visible: contentVisible[category] ?? false,
+                    child: Text(
+                      content,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 8),
-              Text(
-                content, // Displaying content in the current language from the JSON
-                style: TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     ),
   );
 }
 
 
+
+
+
+IconData getCategoryIcon(String category) {
+  switch (category) {
+    case 'how_it_works':
+      return Icons.info_outline; 
+    case 'side_effects':
+      return Icons.warning_amber_outlined; 
+    case 'preg_chances':
+      return Icons.pregnant_woman; 
+    case 'periods':
+      return Icons.water_drop;
+    case 'privacy':
+      return Icons.remove_red_eye; 
+    // Add other cases for each category
+    default:
+      return Icons.help_outline; // Fallback icon
+  }
+}
+
+String getCategoryTooltip(String category) {
+  switch (category) {
+    case 'how_it_works':
+      return 'How It Works'; 
+    case 'side_effects':
+      return 'Side Effects';
+    case 'preg_chances':
+      return 'Pregnancy chances'; 
+    case 'periods':
+      return 'Periods';
+    case 'privacy':
+      return 'Privacy'; 
+    // Add other cases for each category
+    default:
+      return 'Info'; // Fallback tooltip
+  }
+}
+
+
+  Widget buildToggleIcon(String category, IconData icon, String tooltip) {
+    return GestureDetector(
+      onTap: () => toggleContentVisibility(category),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 50),
+          Text(tooltip, textAlign: TextAlign.center),
+        ],
+      ),
+    );
+  }
+
+  Widget buildContent(String category, String content) {
+    return Visibility(
+      visible: contentVisible[category] ?? false,
+      child: Container(
+        padding: const EdgeInsets.all(10.0),
+        alignment: Alignment.center,
+        child: Text(
+          content,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+    );
+  }
 }
