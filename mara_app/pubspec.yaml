@@ -78,7 +78,16 @@ flutter:
     - assets/string-resources/method_4.png
     - assets/string-resources/method_5.png
     - assets/string-resources/method_6.png
+    - assets/female_condom.png
+    - assets/condom.png
+    - assets/emergency.png
+    - assets/pills.png
+    - assets/IUD.png
+    - assets/depo.png
+    - assets/implant.png
     - assets/woman.png
+    - assets/preg_woman.png
+    - assets/methods.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

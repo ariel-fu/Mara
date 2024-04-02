@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               child: const Text('What if I am ready to have a baby?'),
               onPressed: () {
-                Navigator.of(context).pushNamed('/time', arguments: selectedButtonIndex);
+                Navigator.of(context).pushNamed('/ready_baby', arguments: selectedButtonIndex);
               },
             ),
             const SizedBox(height: 12.0),

@@ -34,6 +34,19 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.dispose();
   }
 
+  @override
+  void didUpdateWidget(covariant VideoWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.videoAsset != widget.videoAsset) {
+      ourVideo = VideoPlayerController.asset(widget.videoAsset);
+      _initializeVideoPlayerFuture =
+          ourVideo.initialize().catchError((error) {
+        print('Error initializing video player: $error');
+      });
+      setState(() {});
+    }
+  }
+
   void _onPressedVideo() {
     setState(() {
       if (ourVideo.value.isPlaying) {
@@ -50,49 +63,41 @@ class _VideoWidgetState extends State<VideoWidget> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-                width: 350,
-                height: 350,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AspectRatio(
-                      aspectRatio: ourVideo.value.aspectRatio,
-                      child:Expanded(child: VideoPlayer(ourVideo)),
-                    ),
-                    Text(widget.title, style: TextStyle(
-                        fontSize: 18.0, fontWeight:FontWeight.bold
-                    ),),
-                    FutureBuilder<void>(
-                      future: _initializeVideoPlayerFuture,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return VideoProgressIndicator(
-                            ourVideo,
-                            allowScrubbing: true,
-                            padding: const EdgeInsets.all(8.0),
-                          );
-                        } else {
-                          return CircularProgressIndicator(); // or any other loading indicator
-                        }
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        ourVideo.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                      ),
-                      onPressed: () => _onPressedVideo(),
-                      style: IconButton.styleFrom(
-                        foregroundColor: Colors.lightBlue,
-                        backgroundColor: Colors.grey[300],
-                      ),
-                    ),
-                  ],
-                )
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(child: VideoPlayer(ourVideo)),
+                Text(widget.title, style: TextStyle(
+                  fontSize: 12.0, fontWeight:FontWeight.bold
+                ),),
+                FutureBuilder<void>(
+                  future: _initializeVideoPlayerFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return VideoProgressIndicator(
+                        ourVideo,
+                        allowScrubbing: true,
+                        padding: const EdgeInsets.all(8.0),
+                      );
+                    } else {
+                      return CircularProgressIndicator(); // or any other loading indicator
+                    }
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    ourVideo.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                  ),
+                  onPressed: () => _onPressedVideo(),
+                  style: IconButton.styleFrom(
+                  foregroundColor: Colors.lightBlue,
+                  backgroundColor: Colors.grey[300],
+                  ),
+                ),
+                
+              ],
             )
-          )
+          ),
         ],
       )
     );

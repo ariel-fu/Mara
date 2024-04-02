@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'video.dart';
 
 class TemplatePage extends StatefulWidget {
   const TemplatePage({Key? key}) : super(key: key);
@@ -11,10 +12,9 @@ class TemplatePage extends StatefulWidget {
 class _TemplatePageState extends State<TemplatePage> {
   Widget methodContent = Text('DUMMY');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
-  bool overrideIndex = false;
   int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-
+  bool overrideIndex = false;
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
       "method 1 in Kiswahili",
@@ -43,6 +43,42 @@ class _TemplatePageState extends State<TemplatePage> {
       "method 6 in English",
       "method 7 in English"
     ],
+  };
+
+  String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
+  String videoTitle1 = 'Video 1 Language Not Selected';
+  String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
+  String videoTitle2 = 'Video 2 Language Not Selected';
+
+  final Map<String, Map<String, Map<String, String>>> languageToVideo = {
+    'video1': {
+      '0': { // Language code 0
+        'video': 'videoAudio/videos/chimes.mp4',
+        'text': 'Kiswahili Video #1',
+      },
+      '1': { // Language code 1
+        'video': 'videoAudio/videos/funnyCat.mp4',
+        'text': 'Dhuluo Video #1',
+      },
+      '2': { // Language code 2
+        'video': 'videoAudio/videos/funnyCat2.mp4',
+        'text': 'English Video #1',
+      },
+    },
+    'video2': {
+      '0': {
+        'video': 'videoAudio/videos/chimes.mp4',
+        'text': 'Kiswahili Video #2',
+      },
+      '1': {
+        'video': 'videoAudio/videos/funnyCat.mp4',
+        'text': 'Dholuo Video #2',
+      },
+      '2': {
+        'video': 'videoAudio/videos/funnyCat2.mp4',
+        'text': 'English Video #2',
+      },
+    },
   };
 
   @override
@@ -95,7 +131,7 @@ class _TemplatePageState extends State<TemplatePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            languageIndex == 0 ? Colors.grey : null,
+                        languageIndex == 0 ? Colors.grey : null,
                       ),
                       child: Text('Kiswahili'),
                     ),
@@ -109,7 +145,7 @@ class _TemplatePageState extends State<TemplatePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            languageIndex == 1 ? Colors.grey : null,
+                        languageIndex == 1 ? Colors.grey : null,
                       ),
                       child: Text('Dholuo'),
                     ),
@@ -123,7 +159,7 @@ class _TemplatePageState extends State<TemplatePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            languageIndex == 2 ? Colors.grey : null,
+                        languageIndex == 2 ? Colors.grey : null,
                       ),
                       child: Text('English'),
                     ),
@@ -148,7 +184,7 @@ class _TemplatePageState extends State<TemplatePage> {
                   buildIconButton(MaraIcons.contraceptive_implant, 4),
                   buildIconButton(MaraIcons.iud, 5),
                   buildIconButton(MaraIcons.double_pills, 6),
-                  
+
                 ],
               ),
             ),
@@ -185,8 +221,8 @@ class _TemplatePageState extends State<TemplatePage> {
   }
 
   Widget buildSecondaryContext() {
-    return Text("some text here " + 
-      contentDescriptionMap[languages[languageIndex]]![methodIndex]);
+    return Text("some text here " +
+        contentDescriptionMap[languages[languageIndex]]![methodIndex]);
   }
 
   Widget buildIconButton(IconData iconData, int index) {
@@ -220,11 +256,47 @@ class _TemplatePageState extends State<TemplatePage> {
 
   void updateMethodContent() {
     methodContent = Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.white,
-      )
+        contentDescriptionMap[languages[languageIndex]]![methodIndex],
+        style: TextStyle(
+          fontSize: 20.0,
+          color: Colors.white,
+        )
     );
+  }
+
+  String _getAsset(String videoKey, String language) {
+    return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+  }
+
+  String _getTitle(String videoKey, String language) {
+    return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
+  }
+
+  Widget updateVideoContent1() {
+    if (languageIndex == 0) {
+      videoAsset1 = _getAsset('video1', '0');
+      videoTitle1 = _getTitle('video1', '0');
+    } else if (languageIndex == 1) {
+      videoAsset1 = _getAsset('video1', '1');
+      videoTitle1 = _getTitle('video1', '1');
+    } else if (languageIndex == 2) {
+      videoAsset1 = _getAsset('video1', '2');
+      videoTitle1 = _getTitle('video1', '2');
+    }
+    return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+  }
+
+  Widget updateVideoContent2() {
+    if (languageIndex == 0) {
+      videoAsset2 = _getAsset('video2', '0');
+      videoTitle2 = _getTitle('video2', '0');
+    } else if (languageIndex == 1) {
+      videoAsset2 = _getAsset('video2', '1');
+      videoTitle2 = _getTitle('video2', '1');
+    } else if (languageIndex == 2) {
+      videoAsset2 = _getAsset('video2', '2');
+      videoTitle2 = _getTitle('video2', '2');
+    }
+    return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
   }
 }
