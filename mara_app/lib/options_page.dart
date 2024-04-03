@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'option_pages/pills.dart';
-import 'model/method_repository.dart';
 import 'options_image.dart';
 
 class OptionsPage extends StatefulWidget {
@@ -16,7 +15,6 @@ class _OptionsPageState extends State<OptionsPage> {
   bool overrideIndex = false;
   int _languageIndex = 0; // Default value
   final languages = ["Kiswahili", "Dholuo", "English"];
-  final methods = MethodRepository.loadMethods();
   final content = [
     'IUD',
     'Pills',
@@ -116,16 +114,20 @@ class _OptionsPageState extends State<OptionsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          children: [
-            methodIndex == null ? SizedBox(height: 20.0) :
-                Text(content[methodIndex!],
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.volume_up), onPressed: null),
+                methodIndex == null ? Text("Please select a method to learn more") : Text(content[methodIndex!],
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-            methodIndex == null ? Text("Please select a method to learn more") : Text("description"),
+              ]
+            ),
+            methodIndex == null ? SizedBox(height: 20.0) : Text("description"),
             SizedBox(height: 70.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(icon: Icon(Icons.volume_up), onPressed: () => {}),
                 SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: () => {
