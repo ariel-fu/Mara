@@ -242,11 +242,37 @@ class _PatternPageState extends State<PatternPage> {
                   width: boxWidth,
                   height: boxHeight * 0.6 * 0.5,
                   color: Colors.blue,
-                  child: Center(
-                    child: methodContent,
+                  child: Column(
+                    children: [
+                      methodContent,
+                        IconButton(
+                              icon: const Icon(Icons.search),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => BleedingPage()),
+                                );
+                              },
+                      ),
+                    ]
                   ),
                 ),
-
+                // Container(
+                //   width: boxWidth,
+                //   height: 5,
+                //   // color: Colors.orange,
+                //   child: Center(
+                //     child: IconButton(
+                //             icon: const Icon(Icons.search),
+                //             onPressed: () {
+                //               Navigator.push(
+                //                 context,
+                //                 MaterialPageRoute(builder: (context) => BleedingPage()),
+                //               );
+                //             },
+                //     ),
+                //   ),
+                // ),
                 Container(
                       width: boxWidth,
                       height: boxHeight / 0.25 - 500,
@@ -258,14 +284,11 @@ class _PatternPageState extends State<PatternPage> {
                         children: [
                           Expanded(// Adjust the aspect ratio as needed
                               child:video1,
-                              // child: updateVideoContent1(),
-                              //VideoWidget(videoAsset: videoAsset1, title: videoTitle1),
                           ),
                           Expanded(
                               child:video2,
-                              // child: updateVideoContent2(),
-                              // child: VideoWidget(videoAsset: videoAsset2, title: videoTitle2),
                           ),
+                          
                         ],
                       ),),
                 ),
