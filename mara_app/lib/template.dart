@@ -51,48 +51,48 @@ class _TemplatePageState extends State<TemplatePage> {
   String videoTitle2 = 'Video 2 Language Not Selected';
 
   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
-  'video1': {
-    '0': { // Language code 0
-      'video': 'videoAudio/videos/chimes.mp4',
-      'text': 'Kiswahili Video #1',
+    'video1': {
+      '0': { // Language code 0
+        'video': 'videoAudio/videos/chimes.mp4',
+        'text': 'Kiswahili Video #1',
+      },
+      '1': { // Language code 1
+        'video': 'videoAudio/videos/funnyCat.mp4',
+        'text': 'Dhuluo Video #1',
+      },
+      '2': { // Language code 2
+        'video': 'videoAudio/videos/funnyCat2.mp4',
+        'text': 'English Video #1',
+      },
     },
-    '1': { // Language code 1
-      'video': 'videoAudio/videos/funnyCat.mp4',
-      'text': 'Dhuluo Video #1',
+    'video2': {
+      '0': {
+        'video': 'videoAudio/videos/chimes.mp4',
+        'text': 'Kiswahili Video #2',
+      },
+      '1': {
+        'video': 'videoAudio/videos/funnyCat.mp4',
+        'text': 'Dholuo Video #2',
+      },
+      '2': {
+        'video': 'videoAudio/videos/funnyCat2.mp4',
+        'text': 'English Video #2',
+      },
     },
-    '2': { // Language code 2
-      'video': 'videoAudio/videos/funnyCat2.mp4',
-      'text': 'English Video #1',
-    },
-  },
-  'video2': {
-    '0': {
-      'video': 'videoAudio/videos/chimes.mp4',
-      'text': 'Kiswahili Video #2',
-    },
-    '1': {
-      'video': 'videoAudio/videos/funnyCat.mp4',
-      'text': 'Dholuo Video #2',
-    },
-    '2': {
-      'video': 'videoAudio/videos/funnyCat2.mp4',
-      'text': 'English Video #2',
-    },
-  },
-};
+  };
 
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
-  ModalRoute.of(context)?.settings.arguments as int?;
+    ModalRoute.of(context)?.settings.arguments as int?;
 
-  // Update languageIndex if a valid value is provided from the route
-  if (routeArgumentIndex != null &&
-      routeArgumentIndex >= 0 &&
-      routeArgumentIndex < languages.length &&
-      !overrideIndex) {
-    languageIndex = routeArgumentIndex;
-  }
+    // Update languageIndex if a valid value is provided from the route
+    if (routeArgumentIndex != null &&
+        routeArgumentIndex >= 0 &&
+        routeArgumentIndex < languages.length &&
+        !overrideIndex) {
+      languageIndex = routeArgumentIndex;
+    }
 
     double screenWidth = MediaQuery.of(context).size.width;
     double boxWidth = screenWidth * 0.85;
@@ -265,38 +265,38 @@ class _TemplatePageState extends State<TemplatePage> {
   }
 
   String _getAsset(String videoKey, String language) {
-      return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+    return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
   }
 
   String _getTitle(String videoKey, String language) {
     return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   }
-    
+
   Widget updateVideoContent1() {
-      if (languageIndex == 0) {
-        videoAsset1 = _getAsset('video1', '0');
-        videoTitle1 = _getTitle('video1', '0');
-      } else if (languageIndex == 1) {
-          videoAsset1 = _getAsset('video1', '1');
-          videoTitle1 = _getTitle('video1', '1');
-      } else if (languageIndex == 2) {
-          videoAsset1 = _getAsset('video1', '2');
-          videoTitle1 = _getTitle('video1', '2');
-      }
-      return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+    if (languageIndex == 0) {
+      videoAsset1 = _getAsset('video1', '0');
+      videoTitle1 = _getTitle('video1', '0');
+    } else if (languageIndex == 1) {
+      videoAsset1 = _getAsset('video1', '1');
+      videoTitle1 = _getTitle('video1', '1');
+    } else if (languageIndex == 2) {
+      videoAsset1 = _getAsset('video1', '2');
+      videoTitle1 = _getTitle('video1', '2');
+    }
+    return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
   }
 
   Widget updateVideoContent2() {
     if (languageIndex == 0) {
-        videoAsset2 = _getAsset('video2', '0');
-        videoTitle2 = _getTitle('video2', '0');
-      } else if (languageIndex == 1) {
-          videoAsset2 = _getAsset('video2', '1');
-          videoTitle2 = _getTitle('video2', '1');
-      } else if (languageIndex == 2) {
-          videoAsset2 = _getAsset('video2', '2');
-          videoTitle2 = _getTitle('video2', '2');
-      }
-      return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
+      videoAsset2 = _getAsset('video2', '0');
+      videoTitle2 = _getTitle('video2', '0');
+    } else if (languageIndex == 1) {
+      videoAsset2 = _getAsset('video2', '1');
+      videoTitle2 = _getTitle('video2', '1');
+    } else if (languageIndex == 2) {
+      videoAsset2 = _getAsset('video2', '2');
+      videoTitle2 = _getTitle('video2', '2');
+    }
+    return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
   }
 }
