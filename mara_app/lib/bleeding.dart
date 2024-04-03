@@ -1,68 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'video.dart';
-import 'bleeding.dart';
 
-class PatternPage extends StatefulWidget {
-  const PatternPage({Key? key}) : super(key: key);
+class BleedingPage extends StatefulWidget {
+  const BleedingPage({Key? key}) : super(key: key);
 
   @override
-  State<PatternPage> createState() => _PatternPageState();
+  State<BleedingPage> createState() => _BleedingPageState();
 }
 
-class _PatternPageState extends State<PatternPage> {
-  Widget methodContent = Text('method content');
+class _BleedingPageState extends State<BleedingPage> {
+  Widget methodContent = Text('DUMMY');
+  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 0; // similar indexing for language
+  final languages = ["Kiswahili", "Dholuo", "English"];
+  bool overrideIndex = false;
+  final Map<String, List<String>> contentDescriptionMap = {
+    "Kiswahili": [
+      "method 1 in Kiswahili",
+      "method 2 in Kiswahili",
+      "method 3 in Kiswahili",
+      "method 4 in Kiswahili",
+      "method 5 in Kiswahili",
+      "method 6 in Kiswahili",
+      "method 7 in Kiswahili"
+    ],
+    "Dholuo": [
+      "method 1 in Dholuo",
+      "method 2 in Dholuo",
+      "method 3 in Dholuo",
+      "method 4 in Dholuo",
+      "method 5 in Dholuo",
+      "method 6 in Dholuo",
+      "method 7 in Dholuo"
+    ],
+    "English": [
+      "method 1 in English",
+      "method 2 in English",
+      "method 3 in English",
+      "method 4 in English",
+      "method 5 in English",
+      "method 6 in English",
+      "method 7 in English"
+    ],
+  };
+
   String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
   String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
   String videoTitle2 = 'Video 2 Language Not Selected';
 
-  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
-  Widget video2 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat2.mp4', title:'Video 2 Language Not Selected');
-  
-  int methodIndex = -1; // Index of the selected icon button, -1 for none
-  int languageIndex = -1; // similar indexing for language
-  final languages = ["Kiswahili", "Dholuo", "English"];
-  final content = [
-    "method 1",
-    "method 2",
-    "method 3",
-    "method 4",
-    "method 5",
-    "method 6"
-  ];
-
-  final Map<String, List<String>> contentDescriptionMap = {
-    "Kiswahili": [
-      "method 1 - condom in Kiswahili",
-      "method 2 - female condom in Kiswahili",
-      "method 3 - birth control pills in Kiswahili",
-      "method 4 - syringe in Kiswahili",
-      "method 5 - contraceptive implant in Kiswahili",
-      "method 6 - iud in Kiswahili",
-      "method 7 - double pills in Kiswahili"
-    ],
-    "Dholuo": [
-      "method 1 - condom in Dholuo",
-      "method 2 - female condom in Dholuo",
-      "method 3 - birth control pills in Dholuo",
-      "method 4 - syringe in Dholuo",
-      "method 5 - contraceptive implant in Dholuo",
-      "method 6 - iud in Dholuo",
-      "method 7 - double pills in Dholuo"
-    ],
-    "English": [
-       "method 1 - condom in English",
-      "method 2 - female condom in English",
-      "method 3 - birth control pills in English",
-      "method 4 - syringe in English",
-      "method 5 - contraceptive implant in English",
-      "method 6 - iud in English",
-      "method 7 - double pills in English"
-    ],
-  };
-
-  //Video HashMap: specifies video asset and text/title based on language and video
   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
   'video1': {
     '0': { // Language code 0
@@ -84,11 +72,11 @@ class _PatternPageState extends State<PatternPage> {
       'text': 'Kiswahili Video #2',
     },
     '1': {
-      'video': 'videoAudio/videos/funnyCat2.mp4',
+      'video': 'videoAudio/videos/funnyCat.mp4',
       'text': 'Dholuo Video #2',
     },
     '2': {
-      'video': 'videoAudio/videos/chimes.mp4',
+      'video': 'videoAudio/videos/funnyCat2.mp4',
       'text': 'English Video #2',
     },
   },
@@ -96,6 +84,17 @@ class _PatternPageState extends State<PatternPage> {
 
   @override
   Widget build(BuildContext context) {
+    final int? routeArgumentIndex =
+  ModalRoute.of(context)?.settings.arguments as int?;
+
+  // Update languageIndex if a valid value is provided from the route
+  if (routeArgumentIndex != null &&
+      routeArgumentIndex >= 0 &&
+      routeArgumentIndex < languages.length &&
+      !overrideIndex) {
+    languageIndex = routeArgumentIndex;
+  }
+
     double screenWidth = MediaQuery.of(context).size.width;
     double boxWidth = screenWidth * 0.85;
 
@@ -111,7 +110,7 @@ class _PatternPageState extends State<PatternPage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('What Will Happen To My Period?'),
+        title: Text('Bleeding Changes EXPLAINED'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,14 +126,14 @@ class _PatternPageState extends State<PatternPage> {
                       onPressed: () {
                         setState(() {
                           languageIndex = 0;
+                          overrideIndex = true;
                           updateMethodContent();
                           video1 = updateVideoContent1();
-                          video2 = updateVideoContent2();
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            languageIndex == 0 ? Colors.grey : null,
+                        languageIndex == 0 ? Colors.grey : null,
                       ),
                       child: Text('Kiswahili'),
                     ),
@@ -142,14 +141,14 @@ class _PatternPageState extends State<PatternPage> {
                       onPressed: () {
                         setState(() {
                           languageIndex = 1;
+                          overrideIndex = true;
                           updateMethodContent();
                           video1 = updateVideoContent1();
-                          video2 = updateVideoContent2();
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            languageIndex == 1 ? Colors.grey : null,
+                        languageIndex == 1 ? Colors.grey : null,
                       ),
                       child: Text('Dholuo'),
                     ),
@@ -157,14 +156,14 @@ class _PatternPageState extends State<PatternPage> {
                       onPressed: () {
                         setState(() {
                           languageIndex = 2;
+                          overrideIndex = true;
                           updateMethodContent();
                           video1 = updateVideoContent1();
-                          video2 = updateVideoContent2();
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            languageIndex == 2 ? Colors.grey : null,
+                        languageIndex == 2 ? Colors.grey : null,
                       ),
                       child: Text('English'),
                     ),
@@ -173,19 +172,20 @@ class _PatternPageState extends State<PatternPage> {
               )),
           SizedBox(height: 20.0),
           Container(
+            alignment: Alignment.center,
             height: availableHeight * 0.1,
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            width: boxWidth,
+            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildIconButton(MaraIcons.iud, 0),
-                  buildIconButton(MaraIcons.birth_control_pills, 1),
-                  buildIconButton(MaraIcons.condom, 2),
-                  buildIconButton(MaraIcons.contraceptive_implant, 3),
-                  buildIconButton(MaraIcons.syringe, 4),
-                  buildIconButton(MaraIcons.female_condom, 5),
+                  buildIconButton(MaraIcons.syringe, 3),
+                  buildIconButton(MaraIcons.contraceptive_implant, 4),
+                  buildIconButton(MaraIcons.iud, 5),
+                  buildIconButton(MaraIcons.double_pills, 6),
+                  buildIconButton(MaraIcons.birth_control_pills, 2),
                 ],
               ),
             ),
@@ -195,43 +195,7 @@ class _PatternPageState extends State<PatternPage> {
             height: availableHeight * 0.6, // Adjust as needed
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment:CrossAxisAlignment.center,
               children: [
-                Container(
-                  width: boxWidth,
-                  height: boxHeight,
-                  color: Colors.blue,
-                  child: Column(
-                    children: [
-                      methodContent,
-                        IconButton(
-                              icon: const Icon(Icons.search),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => BleedingPage()),
-                                );
-                              },
-                      ),
-                    ]
-                  ),
-                ),
-                // Container(
-                //   width: boxWidth,
-                //   height: 5,
-                //   // color: Colors.orange,
-                //   child: Center(
-                //     child: IconButton(
-                //             icon: const Icon(Icons.search),
-                //             onPressed: () {
-                //               Navigator.push(
-                //                 context,
-                //                 MaterialPageRoute(builder: (context) => BleedingPage()),
-                //               );
-                //             },
-                //     ),
-                //   ),
-                // ),
                 Container(
                       width: boxWidth,
                       height: boxHeight / 0.25 - 500,
@@ -244,12 +208,16 @@ class _PatternPageState extends State<PatternPage> {
                           Expanded(// Adjust the aspect ratio as needed
                               child:video1,
                           ),
-                          Expanded(
-                              child:video2,
-                          ),
-                          
                         ],
-                      ),),
+                      ),),                      
+                ),
+                Container(
+                  width: boxWidth,
+                  height: boxHeight,
+                  color: Colors.blue,
+                  child: Center(
+                    child: methodContent,
+                  ),
                 ),
               ],
             ),
@@ -257,6 +225,11 @@ class _PatternPageState extends State<PatternPage> {
         ],
       ),
     );
+  }
+
+  Widget buildSecondaryContext() {
+    return Text("some text here " +
+        contentDescriptionMap[languages[languageIndex]]![methodIndex]);
   }
 
   Widget buildIconButton(IconData iconData, int index) {
@@ -268,7 +241,7 @@ class _PatternPageState extends State<PatternPage> {
         IconButton(
           icon: Icon(
             iconData,
-            size: isSelected ? 100 : 60,
+            size: isSelected ? 60 : 60,
             color: isSelected ? Colors.black : Colors.grey,
           ),
           onPressed: () {
@@ -278,7 +251,7 @@ class _PatternPageState extends State<PatternPage> {
             });
           },
           color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 100 : 60,
+          iconSize: isSelected ? 60 : 60,
           padding: EdgeInsets.all(10),
           splashRadius: 40,
           splashColor: Colors.grey.withOpacity(0.5),
@@ -290,11 +263,11 @@ class _PatternPageState extends State<PatternPage> {
 
   void updateMethodContent() {
     methodContent = Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.white,
-      )
+        contentDescriptionMap[languages[languageIndex]]![methodIndex],
+        style: TextStyle(
+          fontSize: 20.0,
+          color: Colors.white,
+        )
     );
   }
 
@@ -305,7 +278,7 @@ class _PatternPageState extends State<PatternPage> {
   String _getTitle(String videoKey, String language) {
     return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   }
-
+    
   Widget updateVideoContent1() {
       if (languageIndex == 0) {
         videoAsset1 = _getAsset('video1', '0');
@@ -318,19 +291,5 @@ class _PatternPageState extends State<PatternPage> {
           videoTitle1 = _getTitle('video1', '2');
       }
       return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
-  }
-
-  Widget updateVideoContent2() {
-    if (languageIndex == 0) {
-        videoAsset2 = _getAsset('video2', '0');
-        videoTitle2 = _getTitle('video2', '0');
-      } else if (languageIndex == 1) {
-          videoAsset2 = _getAsset('video2', '1');
-          videoTitle2 = _getTitle('video2', '1');
-      } else if (languageIndex == 2) {
-          videoAsset2 = _getAsset('video2', '2');
-          videoTitle2 = _getTitle('video2', '2');
-      }
-      return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
   }
 }
