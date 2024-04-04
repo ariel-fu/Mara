@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'learn_more.dart';
+//import 'learn_more.dart';
 import 'prep_preg.dart';
 import 'video.dart';
 import 'audio.dart';
@@ -159,10 +159,10 @@ Widget build(BuildContext context) {
             title: Text(_t('LEARN MORE about the fertility considerations of each method')),
             onTap: () {
             // Navigate to TemplatePage when this ListTile is tapped
-            Navigator.push(
+            /*Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => TemplatePage()),
-            );
+            );*/
           },
         ), 
           ListTile(

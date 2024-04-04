@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/options_page.dart';
 import 'package:mara_app/pattern_page.dart';
+import 'package:mara_app/quiz_screen.dart';
+import 'package:mara_app/ready_to_have_baby.dart';
 import 'package:mara_app/time_page.dart';
 
 void main() => runApp(home2());
 
-class home2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'mara',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: mainScreen(),
-    );
-  }
-}
 
-class mainScreen extends StatefulWidget {
+
+class home2 extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<mainScreen> {
+class _MainScreenState extends State<home2> {
   List<bool> _selections = List.generate(6, (_) => false);
   bool get _allSelected => _selections.every((bool selected) => selected);
   void _handleTap(int index) {
@@ -46,6 +36,11 @@ class _MainScreenState extends State<mainScreen> {
     context,
     MaterialPageRoute(builder: (context) => TimePage()),
   );
+  } else if (index == 5) {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => MainScreen()), //need a better name for that screen
+  );
   }
   }
 
@@ -53,14 +48,36 @@ class _MainScreenState extends State<mainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('mara'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.language),
+        leading: Container(),
+         actions: [
+          Spacer(),
+          ElevatedButton(
             onPressed: () {
-              // language changer
+              //do something
             },
+            child: Text(
+              'English',
+            ),
           ),
+          const SizedBox(width: 20),
+          ElevatedButton(
+            onPressed: () {
+              //do something else
+            },
+            child: Text(
+              'Swahili',
+            ),
+          ),
+          const SizedBox(width: 20),
+          ElevatedButton(
+            onPressed: () {
+              //different still
+            },      
+            child: Text(
+              'Guo',
+            ),
+          ),
+          Spacer(),
         ],
       ),
       body: SingleChildScrollView(
@@ -101,14 +118,17 @@ class _MainScreenState extends State<mainScreen> {
               title: Text('What if I’m ready to have a baby?'),
               onTap: () => _handleTap(5),
             ),
-            Divider(),
+            Divider(),  
             
             if (_allSelected)
               ListTile(
                 leading: Icon(Icons.question_answer),
                 title: Text('Take the Quiz'),
                 onTap: () {
-                  // Handle Quiz tap
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => QuizScreen()),
+                  );
                 },
               ),
           ],

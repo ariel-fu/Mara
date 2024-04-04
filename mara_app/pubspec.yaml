@@ -90,7 +90,9 @@ flutter:
     - assets/options-icons/
     - assets/preg_woman.png
     - assets/methods.json
-  
+    - assets/maralogo.png
+    - assets/imlaunchscreenimg.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
