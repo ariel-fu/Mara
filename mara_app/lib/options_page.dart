@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'option_pages/pills.dart';
-import 'options_button.dart';
-
-import 'icons/mara_icons_icons.dart' show MaraIcons;
+import 'options_image.dart';
 
 class OptionsPage extends StatefulWidget {
   const OptionsPage({Key? key}) : super(key: key);
@@ -12,10 +10,21 @@ class OptionsPage extends StatefulWidget {
 }
 
 class _OptionsPageState extends State<OptionsPage> {
+  // String? _selectedMethod;
+  int? methodIndex;
   bool overrideIndex = false;
-  int selectedButtonIndex = 0; // Default value
+  int _languageIndex = 0; // Default value
+  final languages = ["Kiswahili", "Dholuo", "English"];
+  final content = [
+    'IUD',
+    'Pills',
+    'Condom',
+    'Implant',
+    'Depo Injection',
+    'Female Condom',
+    '2-Pill',];
 
-  List<List<String>> languages = List.generate(3, (_) => <String>[]);
+  // List<List<String>> languages = List.generate(3, (_) => <String>[]);
   // Change value to set aspect ratio
   final double _aspectRatio = 16 / 10;
 
@@ -30,11 +39,11 @@ class _OptionsPageState extends State<OptionsPage> {
         routeArgumentIndex >= 0 &&
         routeArgumentIndex < languages.length &&
         !overrideIndex) {
-      selectedButtonIndex = routeArgumentIndex;
+      _languageIndex = routeArgumentIndex;
     }
 
-    double containerWidth = MediaQuery.of(context).size.width;
-    double containerHeight = MediaQuery.of(context).size.height;
+    double containerWidth = MediaQuery.of(context).size.width * 0.8;
+    double containerHeight = MediaQuery.of(context).size.height * 0.8;
     if (containerHeight / containerWidth > _aspectRatio) {
       containerHeight = containerWidth * _aspectRatio;
     } else {
@@ -46,7 +55,7 @@ class _OptionsPageState extends State<OptionsPage> {
         leading: IconButton(
           icon: const Icon(Icons.home),
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/home', arguments: selectedButtonIndex);
+            Navigator.of(context).pushReplacementNamed('/home', arguments: _languageIndex);
           },
         ),
         title: const Text('Options'),
@@ -56,14 +65,14 @@ class _OptionsPageState extends State<OptionsPage> {
             onPressed: () {
               setState(() {
                 overrideIndex = true;
-                selectedButtonIndex = 0;
+                _languageIndex = 0;
               });
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: selectedButtonIndex == 0 ? Colors.grey : null,
+              backgroundColor: _languageIndex == 0 ? Colors.grey : null,
             ),
             child: Text(
-              languages.isNotEmpty && languages[0].isNotEmpty ? languages[0][0] : '',
+              languages.isNotEmpty && languages[0].isNotEmpty ? languages[0] : '',
             ),
           ),
           const SizedBox(width: 20),
@@ -71,14 +80,14 @@ class _OptionsPageState extends State<OptionsPage> {
             onPressed: () {
               setState(() {
                 overrideIndex = true;
-                selectedButtonIndex = 1;
+                _languageIndex = 1;
               });
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: selectedButtonIndex == 1 ? Colors.grey : null,
+              backgroundColor: _languageIndex == 1 ? Colors.grey : null,
             ),
             child: Text(
-              languages.isNotEmpty && languages[1].isNotEmpty ? languages[1][0] : '',
+              languages.isNotEmpty && languages[1].isNotEmpty ? languages[1] : '',
             ),
           ),
           const SizedBox(width: 20),
@@ -86,92 +95,81 @@ class _OptionsPageState extends State<OptionsPage> {
             onPressed: () {
               setState(() {
                 overrideIndex = true;
-                selectedButtonIndex = 2;
+                _languageIndex = 2;
               });
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: selectedButtonIndex == 2 ? Colors.grey : null,
+              backgroundColor: _languageIndex == 2 ? Colors.grey : null,
             ),
             child: Text(
-              languages.isNotEmpty && languages[2].isNotEmpty ? languages[2][0] : '',
+              languages.isNotEmpty && languages[2].isNotEmpty ? languages[2] : '',
             ),
           ),
         ],
       ),
       // body
-      body: Container(
-        width: containerWidth,
-        height: containerHeight,
-        // color: Colors.blue, // Set background color or use an image
-        child: Stack(
-          // alignment: Alignment.center,
+      body: OptionsImage(containerWidth, containerHeight, methodIndex, updateIndex),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Positioned(
-              top: 0.1 * containerHeight,
-              left: -0.1 * containerWidth,
-              child: Image.asset('assets/woman.png', height: 0.7 * containerHeight),
-                // icon: SvgPicture.asset('assets/options-icons/noun-contraceptive-implant-2860656.svg', height: 50),  // replace with image
-              ),
-            // Icons on top of the background image
-            Positioned(
-              top: containerHeight * 0.05, // 5% from the top
-              left: containerWidth * 0.7, // 5% from the left
-              child: OptionsIconButton(
-                icon: MaraIcons.birth_control_pills, size: containerWidth * 0.2,
-                methodTitle: 'Pills', description: 'Pills description'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.volume_up), onPressed: null),
+                methodIndex == null ? Text("Please select a method to learn more") : Text(content[methodIndex!],
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+              ]
             ),
-            Positioned(
-              top: containerHeight * 0.05,
-              left: containerWidth * 0.1,
-              child: OptionsIconButton(
-                icon: MaraIcons.contraceptive_implant, size: containerWidth * 0.2,
-                methodTitle: 'Implant', description: 'Implant description',
-              ),
+            methodIndex == null ? SizedBox(height: 20.0) : Text("description"),
+            SizedBox(height: 70.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(width: 20),
+                ElevatedButton(
+                  onPressed: () => {
+                    setState(() {
+                      methodIndex = null;
+                    })
+                  },
+                  child: Text('Clear'),
+                ),
+                SizedBox(width: 20),
+                ElevatedButton(
+                  onPressed: methodIndex == null ? null : () => {
+                    methodIndex = null,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PillInfo()),
+                    )
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.green,
+                  ),
+                  child: Text('Learn more'),
+                ),
+              ],
             ),
-            Positioned(
-              top: containerHeight * 0.28,
-              left: containerWidth * 0.75,
-              child: OptionsIconButton(
-                icon: MaraIcons.double_pills, size: containerWidth * 0.15,
-                methodTitle: 'Pills 2', description: 'Pills 2 description',
-              ),
-            ),
-            Positioned(
-              top: containerHeight * 0.5,
-              left: containerWidth * 0.7,
-              child: OptionsIconButton(
-                icon: MaraIcons.condom, size: containerWidth * 0.2,
-                methodTitle: 'Condom', description: 'Condom description',
-              ),
-            ),
-            Positioned(
-              top: containerHeight * 0.7,
-              left: containerWidth * 0.65,
-              child: OptionsIconButton(
-                icon: MaraIcons.female_condom, size: containerWidth * 0.25,
-                methodTitle: 'Female Condom', description: 'Female condom description',
-              ),
-            ),
-            Positioned(
-              top: containerHeight * 0.3,
-              left: containerWidth * 0.05,
-              child: OptionsIconButton(
-                icon: MaraIcons.syringe, size: containerWidth * 0.2,
-                methodTitle: 'Injection', description: 'Injection description',
-              ),
-            ),
-            Positioned(
-              top: containerHeight * 0.6,
-              left: containerWidth * 0.02,
-              child: OptionsIconButton(
-                icon: MaraIcons.iud, size: containerWidth * 0.25,
-                methodTitle: 'IUD', description: 'IUD description',
-              ),
-            ),
+            SizedBox(height: 20.0),
           ],
         ),
       ),
     );
   }
+
+  void updateIndex(int index) {
+    setState(() {
+      methodIndex = index;
+      // _updateMethodContent();
+    });
+  }
+
+  // void _updateMethodContent() {
+  //   //
+  // }
 }
 
