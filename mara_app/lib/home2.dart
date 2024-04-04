@@ -21,19 +21,16 @@ class _HomePage2State extends State<HomePage2> {
   final List<bool> _selections = List.generate(6, (_) => false);
   bool get _allSelected => _selections.every((bool selected) => selected);
   void _handleTap(int index) {
-    setState(() {
-      _selections[index] = true;
-    });
   if (index == 0) {
     Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => OptionsPage()),
-  );
+  ).then((_) { setState(() { _selections[index] = true; }); });
   } else if (index == 1) {
     Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => PatternPage()),
-  );
+  ).then((_) { setState(() { _selections[index] = true; }); });
   } else if (index == 2) {
     Navigator.push(
     context,
