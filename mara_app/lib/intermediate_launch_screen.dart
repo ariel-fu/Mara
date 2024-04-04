@@ -88,7 +88,7 @@ class imLaunchScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => home2()),
+                    MaterialPageRoute(builder: (context) => HomePage2()),
                   );
                 },
                 child: const Text('continue'),

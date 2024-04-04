@@ -1,10 +1,14 @@
+import 'package:flutter/material.dart';
+import 'recommendation_model.dart';
+import 'recommendation_screen.dart';
+
 class QuizScreen extends StatefulWidget {
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  Map<String, String> _selectedOptions = {};
+  final Map<String, String> _selectedOptions = {};
   String _currentLanguage = 'English';
 
   final List<String> subQuestionKeys = [
