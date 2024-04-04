@@ -23,12 +23,12 @@ class _MainScreenState extends State<home2> {
     Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => OptionsPage()),
-  );
+  ).then((_) { setState(() { _selections[index] = true; }); });
   } else if (index == 1) {
     Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => PatternPage()),
-  );
+  ).then((_) { setState(() { _selections[index] = true; }); });
   } else if (index == 2) {
     Navigator.push(
     context,
