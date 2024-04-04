@@ -18,29 +18,27 @@ class _MainScreenState extends State<home2> {
   List<bool> _selections = List.generate(6, (_) => false);
   bool get _allSelected => _selections.every((bool selected) => selected);
   void _handleTap(int index) {
-    setState(() {
-      _selections[index] = true;
-    });
   if (index == 0) {
     Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => OptionsPage()),
-  );
+  ).then((_) { setState(() { _selections[index] = true; }); });
   } else if (index == 1) {
     Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => PatternPage()),
-  );
+  ).then((_) { setState(() { _selections[index] = true; }); });
   } else if (index == 2) {
     Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => TimePage()),
-  );
+  ).then((_) { setState(() { _selections[index] = true; }); });
   } else if (index == 5) {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => MainScreen()), //need a better name for that screen
-  );
+    //Navigator.push(
+    //context,
+    //MaterialPageRoute(builder: (context) => MainScreen()), //need a better name for that screen
+    
+  //).then((_) { setState(() { _selections[index] = true; }); });
   }
   }
 
@@ -120,7 +118,7 @@ class _MainScreenState extends State<home2> {
             ),
             Divider(),  
             
-            if (_allSelected)
+            if (_selections.every((bool selected) => selected))
               ListTile(
                 leading: Icon(Icons.question_answer),
                 title: Text('Take the Quiz'),
