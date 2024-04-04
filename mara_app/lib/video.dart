@@ -34,6 +34,19 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.dispose();
   }
 
+  @override
+  void didUpdateWidget(covariant VideoWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.videoAsset != widget.videoAsset) {
+      ourVideo = VideoPlayerController.asset(widget.videoAsset);
+      _initializeVideoPlayerFuture =
+          ourVideo.initialize().catchError((error) {
+        print('Error initializing video player: $error');
+      });
+      setState(() {});
+    }
+  }
+
   void _onPressedVideo() {
     setState(() {
       if (ourVideo.value.isPlaying) {
@@ -48,19 +61,14 @@ class _VideoWidgetState extends State<VideoWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 350,
-            height: 350,
+          Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                AspectRatio(
-                  aspectRatio: ourVideo.value.aspectRatio,
-                  child:Expanded(child: VideoPlayer(ourVideo)),
-                ),
+                Expanded(child: VideoPlayer(ourVideo)),
                 Text(widget.title, style: TextStyle(
-                  fontSize: 18.0, fontWeight:FontWeight.bold
+                  fontSize: 12.0, fontWeight:FontWeight.bold
                 ),),
                 FutureBuilder<void>(
                   future: _initializeVideoPlayerFuture,
@@ -86,6 +94,7 @@ class _VideoWidgetState extends State<VideoWidget> {
                   backgroundColor: Colors.grey[300],
                   ),
                 ),
+                
               ],
             )
           ),

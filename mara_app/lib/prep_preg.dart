@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 
 
-class MyHomePage extends StatefulWidget {
+class PrepPage extends StatefulWidget {
   final String initialLanguage;
 
-  MyHomePage({Key? key, required this.initialLanguage}) : super(key: key);
+  PrepPage({Key? key, required this.initialLanguage}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _PrepPageState createState() => _PrepPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _PrepPageState extends State<PrepPage> {
   List<bool> _isOpen = [false, false, false, false];
   late String _currentLanguage;
 
@@ -132,21 +132,17 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: OutlinedButton(
-        onPressed: () => _changeLanguage(language),
-        child: Text(language),
-        style: OutlinedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : Colors.white,
-          foregroundColor: Colors.black,
-          side: BorderSide(color: isSelected ? Colors.black : Colors.grey),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        ),
+Widget languageButton(String language) {
+  bool isSelected = _currentLanguage == language;
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    child: ElevatedButton(
+      onPressed: () => _changeLanguage(language),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
       ),
-    );
-  }
+      child: Text(language),
+    ),
+  );
+}
 }

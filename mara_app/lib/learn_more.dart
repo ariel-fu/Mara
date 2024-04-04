@@ -1,48 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 
-class TimePage extends StatefulWidget {
-  const TimePage({Key? key}) : super(key: key);
+class TemplatePage extends StatefulWidget {
+  const TemplatePage({Key? key}) : super(key: key);
 
   @override
-  State<TimePage> createState() => _TimePageState();
+  State<TemplatePage> createState() => _TemplatePageState();
 }
 
-class _TimePageState extends State<TimePage> {
-  Widget methodContent = Text('DUMMY');
-  int methodIndex = 0; // Index of the selected icon button, 0 for default
-  int languageIndex = 0; // similar indexing for language
-  final languages = ["Kiswahili", "Dholuo", "English"];
+@immutable
+class IconOrImage {
+  final IconData? iconData;
+  final String? imagePath;
 
-  final Map<String, List<String>> contentDescriptionMap = {
-    "Kiswahili": [
-      "method 1 in Kiswahili",
-      "method 2 in Kiswahili",
-      "method 3 in Kiswahili",
-      "method 4 in Kiswahili",
-      "method 5 in Kiswahili",
-      "method 6 in Kiswahili",
-      "method 7 in Kiswahili"
-    ],
-    "Dholuo": [
-      "method 1 in Dholuo",
-      "method 2 in Dholuo",
-      "method 3 in Dholuo",
-      "method 4 in Dholuo",
-      "method 5 in Dholuo",
-      "method 6 in Dholuo",
-      "method 7 in Dholuo"
-    ],
-    "English": [
-      "method 1 in English",
-      "method 2 in English",
-      "method 3 in English",
-      "method 4 in English",
-      "method 5 in English",
-      "method 6 in English",
-      "method 7 in English"
-    ],
-  };
+  const IconOrImage.icon(this.iconData) : imagePath = null;
+  const IconOrImage.image(this.imagePath) : iconData = null;
+}
+
+class _TemplatePageState extends State<TemplatePage> {
+  Widget methodContent = Text('DUMMY');
+  int methodIndex = -1; // Index of the selected icon button, -1 for none
+  int languageIndex = -1; // similar indexing for language
+  final languages = ["Kiswahili", "Dholuo", "English"];
+  final content = [
+    "method 1",
+    "method 2",
+    "method 3",
+    "method 4",
+    "method 5",
+    "method 6"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +42,28 @@ class _TimePageState extends State<TimePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
-        title: Text('How Long Will It Last?'),
+        
+        title: Text('What if I\'m ready to have a baby'),
       ),
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.search, size: 20), // Magnifying glass icon
+                  SizedBox(width: 8), // Space between icon and text
+                  Text(
+                    'Tap each method to learn more about its fertility consideration',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
           Container(
               height: availableHeight * 0.1,
               child: Container(
@@ -117,29 +115,33 @@ class _TimePageState extends State<TimePage> {
               )),
           SizedBox(height: 20.0),
           Container(
-            alignment: Alignment.center,
             height: availableHeight * 0.1,
-            width: boxWidth,
-            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  buildIconButton(MaraIcons.condom, 0),
-                  buildIconButton(MaraIcons.female_condom, 1),
-                  buildIconButton(MaraIcons.birth_control_pills, 2),
-                  buildIconButton(MaraIcons.syringe, 3),
-                  buildIconButton(MaraIcons.contraceptive_implant, 4),
-                  buildIconButton(MaraIcons.iud, 5),
-                  buildIconButton(MaraIcons.double_pills, 6),
-                  
+
+                  buildIconButton(MaraIcons.iud, 0),
+                  buildIconButton(MaraIcons.birth_control_pills, 1),
+                  buildIconButton(MaraIcons.condom, 2),
+                  buildIconButton(MaraIcons.contraceptive_implant, 3),
+                  buildIconButton(MaraIcons.syringe, 4),
+                  buildIconButton(MaraIcons.female_condom, 5),
+
+                  // buildIconButton(IconOrImage.image('assets/IUD.png'), 0),
+                  // buildIconButton(IconOrImage.image('assets/pills.png'), 1),
+                  // buildIconButton(IconOrImage.image('assets/condom.png'), 2),
+                  // buildIconButton(IconOrImage.image('assets/implant.png'), 3),
+                  // buildIconButton(IconOrImage.image('assets/emergency.png'), 4),
+                  // buildIconButton(IconOrImage.image('assets/female_condom.png'), 5),
                 ],
               ),
             ),
           ),
           SizedBox(height: 20.0),
-          Container(
+          Container (
             height: availableHeight * 0.6, // Adjust as needed
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -154,11 +156,11 @@ class _TimePageState extends State<TimePage> {
                 ),
                 // SizedBox(height: 10.0),
                 Container(
-                  width: boxWidth * 0.75,
+                  width: boxWidth,
                   height: availableHeight * 0.25 - 10,
                   color: Colors.green,
                   child: Center(
-                    child: buildSecondaryContext(),
+                    child: methodContent,
                   ),
                 ),
               ],
@@ -166,15 +168,11 @@ class _TimePageState extends State<TimePage> {
           ),
         ],
       ),
+      )
     );
   }
 
-  Widget buildSecondaryContext() {
-    return Text("ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " + 
-      contentDescriptionMap[languages[languageIndex]]![methodIndex]);
-  }
-
-  Widget buildIconButton(IconData iconData, int index) {
+   Widget buildIconButton(IconData iconData, int index) {
     bool isSelected = index == methodIndex;
 
     return Stack(
@@ -183,7 +181,7 @@ class _TimePageState extends State<TimePage> {
         IconButton(
           icon: Icon(
             iconData,
-            size: isSelected ? 60 : 60,
+            size: isSelected ? 100 : 60,
             color: isSelected ? Colors.black : Colors.grey,
           ),
           onPressed: () {
@@ -193,7 +191,7 @@ class _TimePageState extends State<TimePage> {
             });
           },
           color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 60 : 60,
+          iconSize: isSelected ? 100 : 60,
           padding: EdgeInsets.all(10),
           splashRadius: 40,
           splashColor: Colors.grey.withOpacity(0.5),
@@ -203,13 +201,28 @@ class _TimePageState extends State<TimePage> {
     );
   }
 
+
   void updateMethodContent() {
+  // Check if the methodIndex is within the valid range
+  if (methodIndex >= 0 && methodIndex < content.length) {
     methodContent = Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+      languageIndex != -1
+        ? "${languages[languageIndex]} | ${content[methodIndex]}"
+        : "No content",
       style: TextStyle(
         fontSize: 20.0,
         color: Colors.white,
-      )
+      ),
+    );
+  } else {
+    // If methodIndex is not valid, show some default content
+    methodContent = Text(
+      "Select a method to see details",
+      style: TextStyle(
+        fontSize: 20.0,
+        color: Colors.white,
+      ),
     );
   }
+}
 }

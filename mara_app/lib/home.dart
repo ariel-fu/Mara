@@ -13,40 +13,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedButtonIndex = 0; // Default value
   bool overrideIndex = false;
-  List<List<String>> languages = List.generate(3, (_) => <String>[]);
+  // List<String> languages = [""]
+  final languages = ["Kiswahili", "Dholuo", "English"];
 
   @override
   void initState() {
     super.initState();
-    loadTranslations();
   }
 
-  Future<void> loadTranslations() async {
-    //cant compile without commenting this out
-    //await parseExcelFile('assets/string-resources/dummy.xlsx');
-  }
-
-  Future<void> parseExcelFile(String filePath) async {
-    var bytes = File(filePath).readAsBytesSync();
-    var excel = Excel.decodeBytes(bytes);
-
-    List<List<String>> arrays = List.generate(3, (_) => <String>[]);
-
-    for (var table in excel.tables.keys) {
-      for (var row in excel.tables[table]!.rows) {
-        for (int i = 0; i < row.length; i++) {
-          CellValue? val = row[i]?.value;
-          if (val != null) {
-            arrays[i].add(val.toString());
-          }
-        }
-      }
-    }
-
-    setState(() {
-      languages = arrays;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                         selectedButtonIndex == 0 ? Colors.grey : null,
                   ),
                   child: Text(
-                    languages[0].isNotEmpty ? languages[0][0] : '',
+                    languages[0],
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -100,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                         selectedButtonIndex == 1 ? Colors.grey : null,
                   ),
                   child: Text(
-                    languages[1].isNotEmpty ? languages[1][0] : '',
+                    languages[1],
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -116,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                         selectedButtonIndex == 2 ? Colors.grey : null,
                   ),
                   child: Text(
-                    languages[2].isNotEmpty ? languages[2][0] : '',
+                    languages[2],
                   ),
                 ),
               ],
@@ -168,14 +142,14 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               child: const Text('Can I keep it private?'),
               onPressed: () {
-                Navigator.of(context).pushNamed('/time', arguments: selectedButtonIndex);
+                Navigator.of(context).pushNamed('/private', arguments: selectedButtonIndex);
               },
             ),
             const SizedBox(height: 12.0),
             ElevatedButton(
               child: const Text('What if I am ready to have a baby?'),
               onPressed: () {
-                Navigator.of(context).pushNamed('/time', arguments: selectedButtonIndex);
+                Navigator.of(context).pushNamed('/ready_baby', arguments: selectedButtonIndex);
               },
             ),
             const SizedBox(height: 12.0),

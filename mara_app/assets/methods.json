@@ -1,0 +1,68 @@
+{
+    "implant": {
+      "how_it_works": "Detailed explanation of how the implant works...",
+      "side_effects": "Potential side effects of the implant...",
+      "preg_chances": "implant chances of getting pregnant",
+      "privacy": "implant privacy",  
+      "periods": "implant effect on periods", 
+      "icon": "assets/implant.png"
+      
+    },
+    "depo": {
+      "how_it_works": "Information on how the injection works...",
+      "side_effects": "Possible side effects of the injection...",
+      "preg_chances": "depo chances of getting pregnant", 
+      "privacy": "depo privacy", 
+      "periods": "depo effect on periods", 
+      "icon": "assets/depo.png"
+      
+    },
+    "iucd": {
+      "how_it_works": "Details about the Intrauterine Contraceptive Device (IUCD)...",
+      "side_effects": "Side effects one might experience with an IUCD...",
+      "preg_chances": "iucd chances of getting pregnant", 
+      "privacy": "iucd privacy", 
+      "periods": "iucd effect on periods", 
+      "icon": "assets/IUD.png"
+      
+    }, 
+
+    "pills": {
+        "how_it_works": "Details about the Pills...",
+        "side_effects": "Side effects one might experience with a pill...",
+        "preg_chances": "pills chances of getting pregnant", 
+        "privacy": "pills privacy", 
+        "periods": "pills effect on periods", 
+        "icon": "assets/pills.png" 
+        
+    }, 
+    "emergency": {
+        "how_it_works": "Details about the Emergency pill...",
+        "side_effects": "Side effects one might experience with an emergency...",
+        "preg_chances": "emergency chances of getting pregnant", 
+        "privacy": "emergency privacy", 
+        "periods": "emergency effect on periods", 
+        "icon": "assets/emergency.png" 
+        
+    }, 
+    "condoms": {
+        "how_it_works": "Details about the male condom...",
+        "side_effects": "Side effects one might experience with an male condom...",
+        "preg_chances": "male condom chances of getting pregnant", 
+        "privacy": "male condom privacy", 
+        "periods": "male condom effect on periods", 
+        "icon": "assets/condom.png" 
+        
+        
+    }, 
+    "female_condom": {
+        "how_it_works": "Details about the female condom...",
+        "side_effects": "Side effects one might experience with a female condom...",
+        "preg_chances": "female condom chances of getting pregnant",
+        "privacy": "female condom privacy",  
+        "periods": "female condom effect on periods", 
+        "icon": "assets/female_condom.png" 
+        
+    } 
+}
+  
