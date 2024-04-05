@@ -92,7 +92,7 @@ class _imLaunchState extends State<imLaunchScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage2()),
+                    MaterialPageRoute(builder: (context) => home2()),
                   );
                 },
                 child: const Text('continue'),

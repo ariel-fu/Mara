@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-
 import 'package:mara_app/options_page.dart';
 import 'package:mara_app/pattern_page.dart';
 import 'package:mara_app/quiz_screen.dart';
 import 'package:mara_app/ready_to_have_baby.dart';
 import 'package:mara_app/time_page.dart';
-import 'package:mara_app/private_page.dart';
 
-void main() => runApp(HomePage2());
+void main() => runApp(home2());
 
 
-class HomePage2 extends StatefulWidget {
-  const HomePage2({Key? key}) : super(key: key);
-  
+
+class home2 extends StatefulWidget {
   @override
-  State<HomePage2> createState() => _HomePage2State();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _HomePage2State extends State<HomePage2> {
-  final List<bool> _selections = List.generate(6, (_) => false);
+class _MainScreenState extends State<home2> {
+  List<bool> _selections = List.generate(6, (_) => false);
   bool get _allSelected => _selections.every((bool selected) => selected);
   void _handleTap(int index) {
   setState(() { _selections[index] = true; });
