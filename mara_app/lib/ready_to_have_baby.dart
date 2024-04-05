@@ -1,8 +1,9 @@
+
 import 'package:flutter/material.dart';
-//import 'learn_more.dart';
 import 'prep_preg.dart';
 import 'video.dart';
 import 'audio.dart';
+import 'learn_more.dart';
 
 class ReadyPage extends StatefulWidget {
   @override
@@ -11,9 +12,7 @@ class ReadyPage extends StatefulWidget {
 
 class _ReadyPageState extends State<ReadyPage> {
   String _currentLanguage = 'English';
-  // String asset = 'videoAudio/videos/chimes.mp4';
-  // String videoTitle = 'Choose a Language';
-
+  final List<String> languages = ["Kiswahili", "Dholuo", "English"];
   final Map<String, Map<String, String>> _translations = {
     'Family Planning Guide': {
       'Kiswahili': 'Mwongozo wa Mipango ya Familia',
@@ -21,7 +20,9 @@ class _ReadyPageState extends State<ReadyPage> {
       'English': 'Family Planning Guide',
     },
     'What if I\'m ready to have a baby?': {
-      // Add translations
+      'Kiswahili': 'Kama niko tayari kupata mtoto?',
+      'Dholuo': 'Ango nyithindo mabeyo manyalo wuonwa?',
+      'English': 'What if I\'m ready to have a baby?',
     },
     // Add other translations as needed
   };
@@ -36,7 +37,6 @@ class _ReadyPageState extends State<ReadyPage> {
       'Kiswahili': 'Video: A Doctor Explains [KISWAHILI]',
       'Dholuo': 'Video: A Doctor Explains [DHOLUO]',
       'English': 'Video: A Doctor Explains [ENGLISH]',
-
     }
   };
 
@@ -45,11 +45,11 @@ class _ReadyPageState extends State<ReadyPage> {
   }
 
   String _getAsset() {
-      return _videos['assets']?[_currentLanguage] ?? 'Asset not found';
+    return _videos['assets']?[_currentLanguage] ?? 'Asset not found';
   }
 
   String _getTitle() {
-      return _videos['titles']?[_currentLanguage] ?? 'Title not found';
+    return _videos['titles']?[_currentLanguage] ?? 'Title not found';
   }
 
   void _changeLanguage(String language) {
@@ -58,7 +58,7 @@ class _ReadyPageState extends State<ReadyPage> {
     });
   }
 
-    Widget customListTile({required String imagePath, required String header, required String title}) {
+  Widget customListTile({required String imagePath, required String header, required String title}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Column(
@@ -107,36 +107,33 @@ class _ReadyPageState extends State<ReadyPage> {
     );
   }
 
-
-
-Widget languageButton(String language) {
-  bool isSelected = _currentLanguage == language;
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-    child: ElevatedButton(
-      onPressed: () => _changeLanguage(language),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected ? Colors.grey : null,
+  Widget languageButton(String language) {
+    bool isSelected = _currentLanguage == language;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: ElevatedButton(
+        onPressed: () => _changeLanguage(language),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: isSelected ? Colors.grey : null,
+        ),
+        child: Text(language),
       ),
-      child: Text(language),
-    ),
-  );
-}
-
+    );
+  }
 
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      leading: IconButton(
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
           icon: const Icon(Icons.home),
           onPressed: () {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-      title: Text(_t('Family Planning Guide')),
-    ),
-    body: ListView(
+        title: Text(_t('Family Planning Guide')),
+      ),
+      body: ListView(
         children: [
           // Language selection buttons
           Row(
@@ -145,40 +142,50 @@ Widget build(BuildContext context) {
                 .map((language) => languageButton(language))
                 .toList(),
           ),
-        
           customListTile(
             imagePath: 'assets/preg_woman.png',
             header: _t('What if I\'m ready to have a baby?'),
             title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
           ),
+          SizedBox(
+            width: 50,
+            height: 120,
+            child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
+          ),
 
-          SizedBox(width:50, height:120, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
+ListTile(
+  leading: Icon(Icons.search),
+  title: Text(_t('LEARN MORE about the fertility considerations of each method')),
+  onTap: () {
+    int languageIndex = languages.indexOf(_currentLanguage);
+    Navigator.pushNamed(
+      context,
+      '/learnmore',
+      arguments: languageIndex
+    );
+  },
+),
+// Navigator.pushNamed(
+//   context,
+//   '/learnmore',
+//   arguments: languages.indexOf(_currentLanguage),
+// );
 
-          ListTile(
-            leading: Icon(Icons.search),
-            title: Text(_t('LEARN MORE about the fertility considerations of each method')),
-            onTap: () {
-            // Navigate to TemplatePage when this ListTile is tapped
-            /*Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TemplatePage()),
-            );*/
-          },
-        ), 
           ListTile(
             leading: Icon(Icons.check_circle),
             title: Text(_t('Preparing for a healthy pregnancy')),
             onTap: () {
               Navigator.push(
-              context,
-              MaterialPageRoute(
-              builder: (context) => PrepPage(initialLanguage: _currentLanguage),
-              ),
-            );
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PrepPage(initialLanguage: _currentLanguage),
+                ),
+              );
             },
           ),
         ],
       ),
-  );
- }
+    );
+  }
 }
+
