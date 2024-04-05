@@ -18,9 +18,9 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
-      "method 1 in Kiswahili",
-      "method 2 in Kiswahili",
-      "method 3 in Kiswahili", 
+      "Kondomu haina athari kwenye mwili wako zaidi ya kuzuia mbegu za mpenzi wako kuingia ndani ya mwili wako. Ikiwa unatumia kondomu na uko tayari kupata mtoto, unaweza kuacha tu kuzitumia. Kumbuka, hata hivyo, kwamba ukiacha kutumia kondomu huwezi kulindwa dhidi ya Virusi Vya Ukimwi au magonjwa mengine ya zinaa.",
+      "Kondomu haina athari kwenye mwili wako zaidi ya kuzuia mbegu za mpenzi wako kuingia ndani ya mwili wako. Ikiwa unatumia kondomu na uko tayari kupata mtoto, unaweza kuacha tu kuzitumia. Kumbuka, hata hivyo, kwamba ukiacha kutumia kondomu huwezi kulindwa dhidi ya Virusi Vya Ukimwi au magonjwa mengine ya zinaa.",
+      "Siku chache baada ya kuacha dawa za kila siku, mwili wako utarudi kwenye kiwango chako cha kawaida cha uzazi. Hata kama hujawahi kupata mimba, au ikiwa unatumia vidonge kwa miaka mingi, haitakuwa vigumu zaidi kupata mimba baadaye kwa kutumia vidonge.", 
       "method 4 in Kiswahili", 
       "method 5 in Kiswahili", 
       "method 6 in Kiswahili", 
@@ -28,9 +28,9 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       
     ],
     "Dholuo": [
-      "method 1 in Dholuo",
-      "method 2 in Dholuo",
-      "method 3 in Dholuo",
+      "Rabo yunga onge gi rach moro amora e dendi kopogore gi geng'o pi nyodo mar jaherani donjo ei dendi. Ka itiyo gi rabo yunga kendo iyikori mar yudo nyathi, inyalo mana weyo tiyo kodgi. Ng'e gi pachi ni, ka iweyo tiyo gi rabo yunga ok ibi bedo ni igeng'ori kuom yudo kute mag ayaki kata nyae mamoko. ",
+      "Rabo yunga onge gi rach moro amora e dendi kopogore gi geng'o pi nyodo mar jaherani donjo ei dendi. Ka itiyo gi rabo yunga kendo iyikori mar yudo nyathi, inyalo mana weyo tiyo kodgi. Ng'e gi pachi ni, ka iweyo tiyo gi rabo yunga ok ibi bedo ni igeng'ori kuom yudo kute mag ayaki kata nyae mamoko. ",
+      "Ndalo machuok bang weyo muonyo pills mapile ka pile, dendi biro dok e nyaloni mar mako ich mapile. Kata ka pok ne imakoga ich, kata ka isetiyo gi pills kuom higni mang'eny, ok bi bedo matek mako ich e ndalo mabiro ka itiyo gi pills. ",
       "method 4 in Dholuo",
       "method 5 in Dholuo",
       "method 6 in Dholuo",
@@ -38,9 +38,9 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       // ... other methods in Dholuo
     ],
     "English": [
-      "method 1 in English",
-      "method 2 in English",
-      "method 3 in English",
+      "Condoms have no effect on your body other than to block your partner's sperm from going inside your body. If you use condoms and are ready to have a baby, you can just stop using them. Keep in mind, though, that if you stop using condoms you won't be protected from HIV or other STIs. ",
+      "Condoms have no effect on your body other than to block your partner's sperm from going inside your body. If you use condoms and are ready to have a baby, you can just stop using them. Keep in mind, though, that if you stop using condoms you won't be protected from HIV or other STIs.",
+      "A few days after stopping daily pills, your body will return to your normal level of fertility. Even if you have never had a pregnancy, or if use pills for many years, it will not be more difficult to get pregnant later using pills.",
       "method 4 in English",
       "method 5 in English",
       "method 6 in English",
@@ -168,33 +168,37 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
     );
   }
 
+  
+
   Widget buildContentArea(double boxHeight, double boxWidth) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            width: boxWidth,
-            height: boxHeight,
-            color: Colors.blue,
-            child: Center(
-              child: methodContent,
-            ),
-          ),
-          Container(
-            width: boxWidth * 0.75,
-            height: MediaQuery.of(context).size.height * 0.25 - 10,
-            color: Colors.green,
-            child: Center(
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            SizedBox(width: 10.0),
+            Expanded(
               child: Text(
-                  contentDescriptionMap[languages[languageIndex]]![methodIndex]),
+                contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                style: TextStyle(fontSize: 16.0),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+
+  
+
 
   void updateMethodContent() {
     setState(() {
