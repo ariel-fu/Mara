@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:excel/excel.dart';
 
-class OldHomePage extends StatefulWidget {
-  const OldHomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<OldHomePage> createState() => _OldHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _OldHomePageState extends State<OldHomePage> {
+class _HomePageState extends State<HomePage> {
   int selectedButtonIndex = 0; // Default value
   bool overrideIndex = false;
   // List<String> languages = [""]
@@ -153,12 +153,6 @@ class _OldHomePageState extends State<OldHomePage> {
               },
             ),
             const SizedBox(height: 12.0),
-            ElevatedButton(
-              child: const Text('Quiz'),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/quiz', arguments: selectedButtonIndex);
-              },
-            )
           ],
         ),
       ),
