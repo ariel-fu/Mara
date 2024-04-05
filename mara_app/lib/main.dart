@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/home.dart';
 import 'package:mara_app/quiz_screen.dart';
 // import 'home.dart';
+import 'package:mara_app/quiz_screen.dart';
+// import 'home.dart';
 import 'home2.dart';
 import 'launch_screen2.dart';
 import 'options_page.dart';
@@ -37,7 +39,8 @@ class _MaraAppState extends State<MaraApp> {
         '/bleeding_pattern': (BuildContext context) => const PatternPage(),
         '/time': (BuildContext context) => const TimePage(),
         '/private': (BuildContext context) => const PrivatePage(),
-        // '/prep_preg': (BuildContext context) => const PrepPage(),
+        '/ready_baby': (BuildContext context) => ReadyPage(),
+        '/quiz': (BuildContext context) => QuizScreen(),
       },
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
     );
