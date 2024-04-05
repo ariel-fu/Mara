@@ -34,13 +34,12 @@ class _MaraAppState extends State<MaraApp> {
       initialRoute: '/launch',
       routes: {
         '/launch': (BuildContext context) => const LaunchScreen(),
-        '/home': (BuildContext context) => const HomePage2(), // home2 is the latest version
+        '/home': (BuildContext context) => home2(), // home2 is the latest version
         '/options': (BuildContext context) => const OptionsPage(),
         '/bleeding_pattern': (BuildContext context) => const PatternPage(),
         '/time': (BuildContext context) => const TimePage(),
         '/private': (BuildContext context) => const PrivatePage(),
         '/ready_baby': (BuildContext context) => ReadyPage(),
-        '/quiz': (BuildContext context) => QuizScreen(),
       },
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
     );
