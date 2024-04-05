@@ -11,7 +11,7 @@ class PrivatePage extends StatefulWidget {
 
 class _PrivatePageState extends State<PrivatePage> {
   bool overrideIndex = false;
-  Widget methodContent = Text('DUMMY');
+  // Widget methodContent = updateMethodContent();
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
@@ -130,105 +130,124 @@ class _PrivatePageState extends State<PrivatePage> {
 
     double boxWidth = containerWidth;
     double boxHeight = containerHeight;
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double boxWidth = screenWidth * 0.85;
-    //
-    // double screenHeight = MediaQuery.of(context).size.height;
     double availableHeight = boxHeight;
-    // double boxHeight = availableHeight * 0.25;
     
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
-        title: Text('Can I keep it private?'),
+          leading: IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/home');
+            },
+          ),
+          title: Text('Can I keep it private?'),
+          actions: <Widget>[
+            Container(
+                height: availableHeight * 0.1,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0), // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              languageIndex = 0;
+                              overrideIndex = true;
+                              updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: languageIndex == 0 ? Colors.grey : null,
+                          ),
+                          child: Text('Kiswahili'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0), // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              languageIndex = 1;
+                              overrideIndex = true;
+                              updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: languageIndex == 1 ? Colors.grey : null,
+                          ),
+                          child: Text('Dholuo'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0), // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              languageIndex = 2;
+                              overrideIndex = true;
+                              updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: languageIndex == 2 ? Colors.grey : null,
+                          ),
+                          child: Text('English'),
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+          ]
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-              height: availableHeight*0.1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        languageIndex = 0;
-                        overrideIndex = true;
-
-                        updateMethodContent();
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          languageIndex == 0 ? Colors.grey : null,
-                    ),
-                    child: Text('Kiswahili'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        languageIndex = 1;
-                        overrideIndex = true;
-
-                        updateMethodContent();
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          languageIndex == 1 ? Colors.grey : null,
-                    ),
-                    child: Text('Dholuo'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        languageIndex = 2;
-                        overrideIndex = true;
-
-                        updateMethodContent();
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          languageIndex == 2 ? Colors.grey : null,
-                    ),
-                    child: Text('English'),
-                  ),
-                ],
-              )),
           // SizedBox(height: availableHeight*0.01),
+          Container (
+              width: boxWidth*0.8,
+              child: Padding (
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy.",
+                    softWrap: true, // Wrap text to the next line if needed
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                      fontSize: 18.0
+                    ),
+                  )
+              )
+
+          ),
           Container(
             alignment: Alignment.center,
-            height: availableHeight * 0.1,
-            width: boxWidth,
+            // height: availableHeight * 0.15,
+            // width: boxWidth,
             // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildIconButton(MaraIcons.condom, 0),
-                  buildIconButton(MaraIcons.female_condom, 1),
-                  buildIconButton(MaraIcons.birth_control_pills, 2),
-                  buildIconButton(MaraIcons.syringe, 3),
-                  buildIconButton(MaraIcons.contraceptive_implant, 4),
-                  buildIconButton(MaraIcons.iud, 5),
-                  buildIconButton(MaraIcons.double_pills, 6),                  
+                  buildIconButton(MaraIcons.condom, "Condom", 0),
+                  buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+                  buildIconButton(MaraIcons.birth_control_pills, "Birth Control Pills", 2),
+                  buildIconButton(MaraIcons.syringe, "Syringe", 3),
+                  buildIconButton(MaraIcons.contraceptive_implant, "Contraceptive Implant", 4),
+                  buildIconButton(MaraIcons.iud, "IUD", 5),
+                  buildIconButton(MaraIcons.double_pills, "Emergency Contraceptive Pills", 6),
                 ],
               ),
             ),
           ),
+
           SizedBox(height: 15.0),
           SizedBox(
             height: availableHeight * 0.70, // Adjust as needed
                 child: Flex(
-                // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 direction: Axis.vertical,
                 children: [
@@ -237,7 +256,7 @@ class _PrivatePageState extends State<PrivatePage> {
                     height: availableHeight * 0.6 * 0.5,
                     color: Colors.blue,
                     child: Center(
-                      child: methodContent,
+                      child: updateMethodContent(),
                     ),
                   ),
                   SizedBox(height: 20.0),
@@ -262,37 +281,54 @@ class _PrivatePageState extends State<PrivatePage> {
     return VideoWidget(videoAsset: asset, title: title);
   }
 
-  Widget buildIconButton(IconData iconData, int index) {
+  Widget buildIconButton(IconData iconData, String caption, int index) {
     bool isSelected = index == methodIndex;
 
     return Stack(
       alignment: Alignment.center,
       children: [
-        IconButton(
-          icon: Icon(
-            iconData,
-            size: isSelected ? 60 : 60,
-            color: isSelected ? Colors.black : Colors.grey,
-          ),
-          onPressed: () {
-            setState(() {
-              methodIndex = index;
-              updateMethodContent();
-            });
-          },
-          color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 60 : 60,
-          padding: EdgeInsets.all(10),
-          splashRadius: 40,
-          splashColor: Colors.grey.withOpacity(0.5),
-          highlightColor: Colors.transparent,
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: Icon(
+                iconData,
+                size: isSelected ? 60 : 60,
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  methodIndex = index;
+                  updateMethodContent();
+                });
+              },
+              color: isSelected ? Colors.black : Colors.transparent,
+              iconSize: isSelected ? 60 : 60,
+              padding: EdgeInsets.all(10),
+              splashRadius: 40,
+              splashColor: Colors.grey.withOpacity(0.5),
+              highlightColor: Colors.transparent,
+            ),
+            SizedBox(height: 5),
+            Container (
+                width: 100,
+                child: Text(
+                  caption,
+                  softWrap: true, // Wrap text to the next line if needed
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: isSelected ? Colors.black : Colors.grey,
+                  ),
+                )
+            )
+          ],
         ),
       ],
     );
   }
 
-  void updateMethodContent() {
-    methodContent = Text(
+  Widget updateMethodContent() {
+    return Text(
       contentDescriptionMap[languages[languageIndex]]![methodIndex],
       style: TextStyle(
         fontSize: 20.0,
