@@ -1,38 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'video.dart';
 
-class TemplatePage extends StatefulWidget {
-  const TemplatePage({Key? key}) : super(key: key);
+class LearnMoreFertility extends StatefulWidget {
+  const LearnMoreFertility({Key? key}) : super(key: key);
 
   @override
-  State<TemplatePage> createState() => _TemplatePageState();
+  State<LearnMoreFertility> createState() => _LearnMoreFertilityState();
 }
 
-@immutable
-class IconOrImage {
-  final IconData? iconData;
-  final String? imagePath;
-
-  const IconOrImage.icon(this.iconData) : imagePath = null;
-  const IconOrImage.image(this.imagePath) : iconData = null;
-}
-
-class _TemplatePageState extends State<TemplatePage> {
+class _LearnMoreFertilityState extends State<LearnMoreFertility> {
   Widget methodContent = Text('DUMMY');
-  int methodIndex = -1; // Index of the selected icon button, -1 for none
-  int languageIndex = -1; // similar indexing for language
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 0; // Index for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-  final content = [
-    "method 1",
-    "method 2",
-    "method 3",
-    "method 4",
-    "method 5",
-    "method 6"
-  ];
+  bool overrideIndex = false; // Used to override language selection from route
+
+  final Map<String, List<String>> contentDescriptionMap = {
+    "Kiswahili": [
+      "method 1 in Kiswahili",
+      "method 2 in Kiswahili",
+      "method 3 in Kiswahili", 
+      "method 4 in Kiswahili", 
+      "method 5 in Kiswahili", 
+      "method 6 in Kiswahili", 
+      "method 7 in Kiswahili", 
+      
+    ],
+    "Dholuo": [
+      "method 1 in Dholuo",
+      "method 2 in Dholuo",
+      "method 3 in Dholuo",
+      "method 4 in Dholuo",
+      "method 5 in Dholuo",
+      "method 6 in Dholuo",
+      "method 7 in Dholuo",
+      // ... other methods in Dholuo
+    ],
+    "English": [
+      "method 1 in English",
+      "method 2 in English",
+      "method 3 in English",
+      "method 4 in English",
+      "method 5 in English",
+      "method 6 in English",
+      "method 7 in English",
+      // ... other methods in English
+    ],
+  };
 
   @override
   Widget build(BuildContext context) {
+    final int? routeArgumentIndex =
+        ModalRoute.of(context)?.settings.arguments as int?;
+
+    // Update languageIndex if a valid value is provided from the route
+    if (routeArgumentIndex != null &&
+        routeArgumentIndex >= 0 &&
+        routeArgumentIndex < languages.length &&
+        !overrideIndex) {
+      languageIndex = routeArgumentIndex;
+    }
+
     double screenWidth = MediaQuery.of(context).size.width;
     double boxWidth = screenWidth * 0.85;
 
@@ -42,187 +71,138 @@ class _TemplatePageState extends State<TemplatePage> {
 
     return Scaffold(
       appBar: AppBar(
-        
-        title: Text('What if I\'m ready to have a baby'),
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/home');
+          },
+        ),
+        title: Text('Can I keep it private?'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.search, size: 20), // Magnifying glass icon
-                  SizedBox(width: 8), // Space between icon and text
-                  Text(
-                    'Tap each method to learn more about its fertility consideration',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
-            ),
-          Container(
-              height: availableHeight * 0.1,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 0;
-                          updateMethodContent();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 0 ? Colors.grey : null,
-                      ),
-                      child: Text('Kiswahili'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 1;
-                          updateMethodContent();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 1 ? Colors.grey : null,
-                      ),
-                      child: Text('Dholuo'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 2;
-                          updateMethodContent();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 2 ? Colors.grey : null,
-                      ),
-                      child: Text('English'),
-                    ),
-                  ],
-                ),
-              )),
-          SizedBox(height: 20.0),
           Container(
             height: availableHeight * 0.1,
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-
-                  buildIconButton(MaraIcons.iud, 0),
-                  buildIconButton(MaraIcons.birth_control_pills, 1),
-                  buildIconButton(MaraIcons.condom, 2),
-                  buildIconButton(MaraIcons.contraceptive_implant, 3),
-                  buildIconButton(MaraIcons.syringe, 4),
-                  buildIconButton(MaraIcons.female_condom, 5),
-
-                  // buildIconButton(IconOrImage.image('assets/IUD.png'), 0),
-                  // buildIconButton(IconOrImage.image('assets/pills.png'), 1),
-                  // buildIconButton(IconOrImage.image('assets/condom.png'), 2),
-                  // buildIconButton(IconOrImage.image('assets/implant.png'), 3),
-                  // buildIconButton(IconOrImage.image('assets/emergency.png'), 4),
-                  // buildIconButton(IconOrImage.image('assets/female_condom.png'), 5),
+                  languageButton('Kiswahili', 0),
+                  languageButton('Dholuo', 1),
+                  languageButton('English', 2),
                 ],
               ),
             ),
           ),
           SizedBox(height: 20.0),
-          Container (
-            height: availableHeight * 0.6, // Adjust as needed
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: boxWidth,
-                  height: boxHeight,
-                  color: Colors.blue,
-                  child: Center(
-                    child: methodContent,
-                  ),
-                ),
-                // SizedBox(height: 10.0),
-                Container(
-                  width: boxWidth,
-                  height: availableHeight * 0.25 - 10,
-                  color: Colors.green,
-                  child: Center(
-                    child: methodContent,
-                  ),
-                ),
-              ],
+          buildMethodSelectionRow(boxWidth),
+          SizedBox(height: 20.0),
+          buildContentArea(boxHeight, boxWidth),
+        ],
+      ),
+    );
+  }
+
+  Widget languageButton(String language, int index) {
+    bool isSelected = languageIndex == index;
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+          updateMethodContent();
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
+
+  Widget buildMethodSelectionRow(double boxWidth) {
+    return Container(
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height * 0.1,
+      width: boxWidth,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            buildIconButton(MaraIcons.condom, 0),
+            buildIconButton(MaraIcons.female_condom, 1),
+            buildIconButton(MaraIcons.birth_control_pills, 2),
+            buildIconButton(MaraIcons.syringe, 3),
+            buildIconButton(MaraIcons.contraceptive_implant, 4),
+            buildIconButton(MaraIcons.iud, 5),
+            buildIconButton(MaraIcons.double_pills, 6),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildIconButton(IconData iconData, int index) {
+    bool isSelected = index == methodIndex;
+    return IconButton(
+      icon: Icon(
+        iconData,
+        size: isSelected ? 60 : 60,
+        color: isSelected ? Colors.black : Colors.grey,
+      ),
+      onPressed: () {
+        setState(() {
+          methodIndex = index;
+          updateMethodContent();
+        });
+      },
+      color: isSelected ? Colors.black : Colors.transparent,
+      iconSize: isSelected ? 60 : 60,
+      padding: EdgeInsets.all(10),
+      splashRadius: 40,
+      splashColor: Colors.grey.withOpacity(0.5),
+      highlightColor: Colors.transparent,
+    );
+  }
+
+  Widget buildContentArea(double boxHeight, double boxWidth) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.6,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            width: boxWidth,
+            height: boxHeight,
+            color: Colors.blue,
+            child: Center(
+              child: methodContent,
+            ),
+          ),
+          Container(
+            width: boxWidth * 0.75,
+            height: MediaQuery.of(context).size.height * 0.25 - 10,
+            color: Colors.green,
+            child: Center(
+              child: Text(
+                  contentDescriptionMap[languages[languageIndex]]![methodIndex]),
             ),
           ),
         ],
       ),
-      )
     );
   }
-
-   Widget buildIconButton(IconData iconData, int index) {
-    bool isSelected = index == methodIndex;
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IconButton(
-          icon: Icon(
-            iconData,
-            size: isSelected ? 100 : 60,
-            color: isSelected ? Colors.black : Colors.grey,
-          ),
-          onPressed: () {
-            setState(() {
-              methodIndex = index;
-              updateMethodContent();
-            });
-          },
-          color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 100 : 60,
-          padding: EdgeInsets.all(10),
-          splashRadius: 40,
-          splashColor: Colors.grey.withOpacity(0.5),
-          highlightColor: Colors.transparent,
-        ),
-      ],
-    );
-  }
-
 
   void updateMethodContent() {
-  // Check if the methodIndex is within the valid range
-  if (methodIndex >= 0 && methodIndex < content.length) {
-    methodContent = Text(
-      languageIndex != -1
-        ? "${languages[languageIndex]} | ${content[methodIndex]}"
-        : "No content",
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.white,
-      ),
-    );
-  } else {
-    // If methodIndex is not valid, show some default content
-    methodContent = Text(
-      "Select a method to see details",
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.white,
-      ),
-    );
+    setState(() {
+      methodContent = Text(
+        contentDescriptionMap[languages[languageIndex]]![methodIndex],
+        style: TextStyle(fontSize: 20.0, color: Colors.white),
+      );
+    });
   }
 }
-}
+
