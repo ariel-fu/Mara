@@ -38,6 +38,7 @@ class _MaraAppState extends State<MaraApp> {
         '/private': (BuildContext context) => const PrivatePage(),
         '/ready_baby': (BuildContext context) => ReadyPage(),
         '/quiz': (BuildContext context) => QuizScreen(),
+        '/learnmore': (BuildContext context) => const LearnMoreFertility(),
       },
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
     );
