@@ -77,7 +77,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('Can I keep it private?'),
+        title: Text('What if I\'m ready to have a baby? '),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
