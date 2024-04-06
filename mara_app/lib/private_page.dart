@@ -18,31 +18,31 @@ class _PrivatePageState extends State<PrivatePage> {
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
-      "videoAudio/videos/funnyCat.mp4", // method 1 - condom
-      "videoAudio/videos/funnyCat.mp4", // method 2 - female condom
-      "videoAudio/videos/funnyCat.mp4", // method 3 - birth control pills
-      "videoAudio/videos/funnyCat.mp4", // method 4 - syringe
-      "videoAudio/videos/funnyCat.mp4", // method 5 - contraceptive implant
-      "videoAudio/videos/funnyCat.mp4", // method 6 - iud
-      "videoAudio/videos/funnyCat.mp4"  // method 7 - double pills
+      "videoAudio/videos/peer/peer2KS.mp4", 
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
     ],
     "Dholuo": [
-      "videoAudio/videos/chimes.mp4", // method 1 - condom
-      "videoAudio/videos/chimes.mp4", // method 2 - female condom
-      "videoAudio/videos/chimes.mp4", // method 3 - birth control pills
-      "videoAudio/videos/chimes.mp4", // method 4 - syringe
-      "videoAudio/videos/chimes.mp4", // method 5 - contraceptive implant
-      "videoAudio/videos/chimes.mp4", // method 6 - iud
-      "videoAudio/videos/chimes.mp4"  // method 7 - double pills
+      "videoAudio/videos/peer/peer2DL.mp4", 
+      "videoAudio/videos/peer/peer2DL.mp4", 
+      "videoAudio/videos/peer/peer2DL.mp4", 
+      "videoAudio/videos/peer/peer2DL.mp4", 
+      "videoAudio/videos/peer/peer2DL.mp4", 
+      "videoAudio/videos/peer/peer2DL.mp4", 
+      "videoAudio/videos/peer/peer2DL.mp4",
     ],
     "English": [
-      "videoAudio/videos/funnyCat2.mp4", // method 1 - condom
-      "videoAudio/videos/funnyCat2.mp4", // method 2 - female condom
-      "videoAudio/videos/funnyCat2.mp4", // method 3 - birth control pills
-      "videoAudio/videos/funnyCat2.mp4", // method 4 - syringe
-      "videoAudio/videos/funnyCat2.mp4", // method 5 - contraceptive implant
-      "videoAudio/videos/funnyCat2.mp4", // method 6 - iud
-      "videoAudio/videos/funnyCat2.mp4"  // method 7 - double pills
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
     ],
   };
 
@@ -130,12 +130,7 @@ class _PrivatePageState extends State<PrivatePage> {
 
     double boxWidth = containerWidth;
     double boxHeight = containerHeight;
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double boxWidth = screenWidth * 0.85;
-    //
-    // double screenHeight = MediaQuery.of(context).size.height;
     double availableHeight = boxHeight;
-    // double boxHeight = availableHeight * 0.25;
     
     return Scaffold(
       appBar: AppBar(
@@ -243,7 +238,7 @@ class _PrivatePageState extends State<PrivatePage> {
                   SizedBox(height: 20.0),
                   SizedBox(
                     width: boxWidth,
-                    height: availableHeight * 0.6 * 0.5 - 6.5,
+                    height: availableHeight * 0.6 * 0.5,
                     child: Center(
                       child: getVideoContent(),
                     ),

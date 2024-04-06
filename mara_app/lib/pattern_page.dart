@@ -22,6 +22,7 @@ class _PatternPageState extends State<PatternPage> {
   
   int methodIndex = -1; // Index of the selected icon button, -1 for none
   int languageIndex = -1; // similar indexing for language
+  final double _aspectRatio = 16/10;
   final languages = ["Kiswahili", "Dholuo", "English"];
   final content = [
     "method 1",
@@ -74,21 +75,21 @@ class _PatternPageState extends State<PatternPage> {
       'text': 'Dholuo Video #1',
     },
     '2': { // Language code 2
-      'video': 'videoAudio/videos/funnyCat2.mp4',
+      'video': 'videoAudio/videos/chimes.mp4',
       'text': 'English Video #1',
     },
   },
   'video2': {
     '0': {
-      'video': 'videoAudio/videos/chimes.mp4',
+      'video': 'videoAudio/videos/peer/peer1KS.mp4',
       'text': 'Kiswahili Video #2',
     },
     '1': {
-      'video': 'videoAudio/videos/funnyCat2.mp4',
+      'video': 'videoAudio/videos/peer/peer1DL.mp4',
       'text': 'Dholuo Video #2',
     },
     '2': {
-      'video': 'videoAudio/videos/chimes.mp4',
+      'video': 'videoAudio/videos/peer/peer1E.mp4',
       'text': 'English Video #2',
     },
   },
@@ -96,12 +97,22 @@ class _PatternPageState extends State<PatternPage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double boxWidth = screenWidth * 0.85;
+    // double screenWidth = MediaQuery.of(context).size.width;
+    // double boxWidth = screenWidth * 0.85;
 
-    double screenHeight = MediaQuery.of(context).size.height;
-    double availableHeight = screenHeight;
-    double boxHeight = availableHeight * 0.25;
+    // double screenHeight = MediaQuery.of(context).size.height;
+    // double availableHeight = screenHeight;
+    // double boxHeight = availableHeight * 0.25;
+
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
 
     return Scaffold(
       appBar: AppBar(
@@ -117,7 +128,7 @@ class _PatternPageState extends State<PatternPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-              height: availableHeight * 0.1,
+              height: containerHeight * 0.1,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: Row(
@@ -173,7 +184,7 @@ class _PatternPageState extends State<PatternPage> {
               )),
           SizedBox(height: 20.0),
           Container(
-            height: availableHeight * 0.1,
+            height: containerHeight * 0.1,
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -192,14 +203,14 @@ class _PatternPageState extends State<PatternPage> {
           ),
           SizedBox(height: 20.0),
           Container (
-            height: availableHeight * 0.6, // Adjust as needed
+            height: containerHeight * 0.6, // Adjust as needed
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment:CrossAxisAlignment.center,
               children: [
                 Container(
                   width: boxWidth,
-                  height: boxHeight,
+                  height: boxHeight * 0.6 * 0.5,
                   color: Colors.blue,
                   child: Column(
                     children: [
@@ -216,41 +227,21 @@ class _PatternPageState extends State<PatternPage> {
                     ]
                   ),
                 ),
-                // Container(
-                //   width: boxWidth,
-                //   height: 5,
-                //   // color: Colors.orange,
-                //   child: Center(
-                //     child: IconButton(
-                //             icon: const Icon(Icons.search),
-                //             onPressed: () {
-                //               Navigator.push(
-                //                 context,
-                //                 MaterialPageRoute(builder: (context) => BleedingPage()),
-                //               );
-                //             },
-                //     ),
-                //   ),
-                // ),
-                Container(
-                      width: boxWidth,
-                      height: boxHeight / 0.25 - 500,
-                      color: Colors.green,
-                      child: Expanded(child:Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment:CrossAxisAlignment.end,
-                        
-                        children: [
-                          Expanded(// Adjust the aspect ratio as needed
-                              child:video1,
-                          ),
-                          Expanded(
-                              child:video2,
-                          ),
-                          
-                        ],
-                      ),),
-                ),
+                
+                Row(children: [
+                  SizedBox(width:15.0),
+                  SizedBox(
+                    width:boxWidth / 2,
+                    height: boxHeight * 0.5 * 0.6,
+                    child: Center(child: video1),
+                  ),
+                  SizedBox(width:10.0),
+                  SizedBox(
+                    width:boxWidth / 2 - 8,
+                    height: boxHeight * 0.5 * 0.6,
+                    child: Center(child: video2),
+                  ),
+                ],),
               ],
             ),
           ),

@@ -154,7 +154,7 @@ class _TimePageState extends State<TimePage> {
                 ),
                 // SizedBox(height: 10.0),
                 Container(
-                  width: boxWidth * 0.75,
+                  width: boxWidth,
                   height: availableHeight * 0.25 - 10,
                   color: Colors.green,
                   child: Center(

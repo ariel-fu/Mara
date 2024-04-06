@@ -8,6 +8,7 @@ import 'pattern_page.dart';
 import 'time_page.dart';
 import 'private_page.dart';
 import 'ready_to_have_baby.dart';
+import 'whatIfPregnant.dart';
 
 void main() {
   runApp(MaraApp());
@@ -34,6 +35,7 @@ class _MaraAppState extends State<MaraApp> {
         '/options': (BuildContext context) => const OptionsPage(),
         '/bleeding_pattern': (BuildContext context) => const PatternPage(),
         '/time': (BuildContext context) => const TimePage(),
+        '/pregnant': (BuildContext context) => whatIfPreg(),
         '/private': (BuildContext context) => const PrivatePage(),
         '/ready_baby': (BuildContext context) => ReadyPage(),
       },

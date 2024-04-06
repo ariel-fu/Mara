@@ -87,7 +87,14 @@ flutter:
     - assets/implant.png
     - assets/woman.png
     - assets/preg_woman.png
-  #   - images/a_dot_ham.jpeg
+
+    - videoAudio/videos/peer/peer1E.mp4
+    - videoAudio/videos/peer/peer1DL.mp4
+    - videoAudio/videos/peer/peer1KS.mp4
+    - videoAudio/videos/peer/peer2E.mp4
+    - videoAudio/videos/peer/peer2DL.mp4
+    - videoAudio/videos/peer/peer2KS.mp4
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

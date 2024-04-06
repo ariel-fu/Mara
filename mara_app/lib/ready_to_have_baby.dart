@@ -40,6 +40,8 @@ class _ReadyPageState extends State<ReadyPage> {
     }
   };
 
+  final double _aspectRatio = 16 / 10;
+
   String _t(String key) {
     return _translations[key]?[_currentLanguage] ?? key;
   }
@@ -126,6 +128,18 @@ Widget languageButton(String language) {
 
   @override
 Widget build(BuildContext context) {
+
+  double containerWidth = MediaQuery.of(context).size.width;
+  double containerHeight = MediaQuery.of(context).size.height;
+  if (containerHeight / containerWidth > _aspectRatio) {
+    containerHeight = containerWidth * _aspectRatio;
+  } else {
+    containerWidth = containerHeight / _aspectRatio;
+  }
+
+  double boxWidth = containerWidth;
+  double boxHeight = containerHeight;
+
   return Scaffold(
     appBar: AppBar(
       leading: IconButton(
@@ -152,7 +166,14 @@ Widget build(BuildContext context) {
             title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
           ),
 
-          SizedBox(width:50, height:120, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
+          SizedBox(
+                    width: boxWidth,
+                    height: boxHeight * 0.6 * 0.5,
+                    child: Center(
+                      child: VideoWidget(videoAsset: _getAsset(), title: _getTitle()),
+                    ),
+          ),
+
 
           ListTile(
             leading: Icon(Icons.search),

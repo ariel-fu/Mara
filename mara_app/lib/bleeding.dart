@@ -51,6 +51,8 @@ class _BleedingPageState extends State<BleedingPage> {
   String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
   String videoTitle2 = 'Video 2 Language Not Selected';
 
+  final double _aspectRatio = 16 / 10;
+
   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
   'video1': {
     '0': { // Language code 0
@@ -95,19 +97,22 @@ class _BleedingPageState extends State<BleedingPage> {
     languageIndex = routeArgumentIndex;
   }
 
-    double screenWidth = MediaQuery.of(context).size.width;
-    double boxWidth = screenWidth * 0.85;
-
-    double screenHeight = MediaQuery.of(context).size.height;
-    double availableHeight = screenHeight;
-    double boxHeight = availableHeight * 0.25;
+  double containerWidth = MediaQuery.of(context).size.width;
+  double containerHeight = MediaQuery.of(context).size.height;
+  if (containerHeight / containerWidth > _aspectRatio) {
+    containerHeight = containerWidth * _aspectRatio;
+  } else {
+    containerWidth = containerHeight / _aspectRatio;
+  }
+  double boxWidth = containerWidth;
+  double boxHeight = containerHeight;
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.home),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pushNamed('/home');
+            Navigator.of(context).pushNamed('/bleeding_pattern');
           },
         ),
         title: Text('Bleeding Changes EXPLAINED'),
@@ -116,7 +121,7 @@ class _BleedingPageState extends State<BleedingPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-              height: availableHeight * 0.1,
+              height: containerHeight * 0.1,
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: Row(
@@ -173,7 +178,7 @@ class _BleedingPageState extends State<BleedingPage> {
           SizedBox(height: 20.0),
           Container(
             alignment: Alignment.center,
-            height: availableHeight * 0.1,
+            height: containerHeight * 0.1,
             width: boxWidth,
             // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
             child: SingleChildScrollView(
@@ -192,28 +197,21 @@ class _BleedingPageState extends State<BleedingPage> {
           ),
           SizedBox(height: 20.0),
           Container (
-            height: availableHeight * 0.6, // Adjust as needed
+            height: containerHeight * 0.6, // Adjust as needed
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                      width: boxWidth,
-                      height: boxHeight / 0.25 - 500,
-                      color: Colors.green,
-                      child: Expanded(child:Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment:CrossAxisAlignment.end,
-                        
-                        children: [
-                          Expanded(// Adjust the aspect ratio as needed
-                              child:video1,
-                          ),
-                        ],
-                      ),),                      
-                ),
+                SizedBox(
+                    width: boxWidth,
+                    height: boxHeight * 0.6 * 0.5,
+                    child: Center(
+                      child: video1,
+                    ),
+                ),         
+                
                 Container(
                   width: boxWidth,
-                  height: boxHeight,
+                  height: boxHeight * 0.6 * 0.5,
                   color: Colors.blue,
                   child: Center(
                     child: methodContent,
