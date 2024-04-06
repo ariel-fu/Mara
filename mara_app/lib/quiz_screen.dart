@@ -525,7 +525,7 @@ bool _areAllQuestionsAnswered() {
       body: Column(
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               languageButton('Kiswahili'),
               languageButton('Dholuo'),
