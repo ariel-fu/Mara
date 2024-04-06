@@ -153,23 +153,18 @@ class _ReadyPageState extends State<ReadyPage> {
             child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
           ),
 
-ListTile(
-  leading: Icon(Icons.search),
-  title: Text(_t('LEARN MORE about the fertility considerations of each method')),
-  onTap: () {
-    int languageIndex = languages.indexOf(_currentLanguage);
-    Navigator.pushNamed(
-      context,
-      '/learnmore',
-      arguments: languageIndex
-    );
-  },
-),
-// Navigator.pushNamed(
-//   context,
-//   '/learnmore',
-//   arguments: languages.indexOf(_currentLanguage),
-// );
+          ListTile(
+            leading: Icon(Icons.search),
+            title: Text(_t('LEARN MORE about the fertility considerations of each method')),
+            onTap: () {
+              int languageIndex = languages.indexOf(_currentLanguage);
+              Navigator.pushNamed(
+                context,
+                '/learnmore',
+                arguments: languageIndex
+              );
+            },
+          ),
 
           ListTile(
             leading: Icon(Icons.check_circle),
