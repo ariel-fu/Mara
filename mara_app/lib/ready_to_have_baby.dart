@@ -137,7 +137,7 @@ class _ReadyPageState extends State<ReadyPage> {
         children: [
           // Language selection buttons
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: ['Kiswahili', 'Dholuo', 'English']
                 .map((language) => languageButton(language))
                 .toList(),
