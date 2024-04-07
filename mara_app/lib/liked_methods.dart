@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 class LikedMethodsScreen extends StatefulWidget {
   final Set<String> likedMethods;
-  final String initialLanguage; // renamed from currentLanguage for clarity
+  final String initialLanguage; 
   final Map<String, Map<String, String>> translations;
   final Function(Set<String>) onMethodsChanged;
 
@@ -109,7 +109,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                                 setState(() {
                                                     currentLanguage = newLang;
                                                 });
-                                                // Optionally, handle other actions needed on language change
+                                                
                                             },
                                         ),
                                     ),
