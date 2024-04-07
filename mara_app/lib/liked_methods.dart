@@ -55,10 +55,6 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back), 
-          onPressed: () => Navigator.of(context).pop(), 
-        ), 
         title: Text(_t("Liked Methods")), // or use _t('liked_methods') for translations
       ),
       body: Column(
@@ -66,7 +62,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 _languageButton('Kiswahili'),
                 _languageButton('Dholuo'),
@@ -80,7 +76,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
     itemCount: widget.likedMethods.length,
     itemBuilder: (context, index) {
         String method = widget.likedMethods.elementAt(index);
-        
+        // Convert the method name to the corresponding JSON key
         String methodKey;
         switch (method.toLowerCase()) {
             // Add any specific mappings here
@@ -113,7 +109,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                                 setState(() {
                                                     currentLanguage = newLang;
                                                 });
-                                                
+                                                // Optionally, handle other actions needed on language change
                                             },
                                         ),
                                     ),
