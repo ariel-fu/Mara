@@ -35,6 +35,36 @@
       "English": "This method must must be removed by a provider. Your fertility will return to normal within a few days of removal.", 
       "Kiswahili": "Njia hii lazima iondolewe na mtoaji. Uwezo wako wa kuzaa utarudi kwa kawaida ndani ya siku chache baada ya kuondolewa.", 
       "Dholuo": "Yor ni nyaka gol gi jachiw thieth. Nyaloni mar mako ich biro duogo kaka chon kuom ndalo matin bang gole."
+    }, 
+    "how_it_works_title": {
+      "English": "How It Works",
+      "Kiswahili": "Jinsi Inavyofanya Kazi",
+      "Dholuo": "Jinsi Inavyofanya Kazi"
+    }, 
+    "what_period": {
+      "English": "What will happen to my period?", 
+      "Kiswahili": "Nini kitafanyikia hedhi zangu", 
+      "Dholuo": "En ang'o mabiro timore ne remba mar dwe?"
+    }, 
+    "how_long": {
+      "English": "How long does the method work?", 
+      "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
+      "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+    }, 
+    "can_private": {
+      "English": "Can I keep it private?", 
+      "Kiswahili": "Je, ninaweza kuiweka kwa usiri?", 
+      "Dholuo": "Bende anyalo kete mopondo?"
+    }, 
+    "ready_to_have_baby": {
+      "English": "What if I'm ready to have a baby?", 
+      "Kiswahili": "Je, itakuaje ikiwa niko tayari kupata mtoto?", 
+      "Dholuo": "To ka ayikora mar mako ich to?"
+    }, 
+    "how_effective": {
+      "English": "How effective is it?", 
+      "Kiswahili": "ina ufanisi gani?", 
+      "Dholuo": "How effective is it?"
     }
   },
   "depo": {
@@ -73,6 +103,36 @@
       "English:": "If you want to get pregnant, stop getting the injection and let it wear off. Most people return to their normal fertility soon after the next injection was due, but for some people it takes longer, up to about 6 months.", 
       "Kiswahili": "Ikiwa unataka kupata mjamzito, acha kupata sindano na uiruhusu kuzima. Watu wengi hurudi kwenye uwezo wao wa kushika mimba mara tu baada ya kudungwa sindano inayofuata, lakini kwa baadhi ya watu huchukua muda mrefu zaidi, hadi takriban miezi 6.", 
       "Dholuo": "Ka idwaro mako ich, we dhi e sindan bange obiro rumo e dendi. Ng'eny ji dok e nyalogi mar moko ich machiegni bang weyo dhi e sindan machielo, to ne joma moko nyalo kao kinde mang'eny, nyaka madirom dweche 6."
+    }, 
+    "how_it_works_title": {
+      "English": "How It Works",
+      "Kiswahili": "Jinsi Inavyofanya Kazi",
+      "Dholuo": "Jinsi Inavyofanya Kazi"
+    }, 
+    "what_period": {
+      "English": "What will happen to my period?", 
+      "Kiswahili": "Nini kitafanyikia hedhi zangu", 
+      "Dholuo": "En ang'o mabiro timore ne remba mar dwe?"
+    }, 
+    "how_long": {
+      "English": "How long does the method work?", 
+      "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
+      "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+    }, 
+    "can_private": {
+      "English": "Can I keep it private?", 
+      "Kiswahili": "Je, ninaweza kuiweka kwa usiri?", 
+      "Dholuo": "Bende anyalo kete mopondo?"
+    }, 
+    "ready_to_have_baby": {
+      "English": "What if I'm ready to have a baby?", 
+      "Kiswahili": "Je, itakuaje ikiwa niko tayari kupata mtoto?", 
+      "Dholuo": "To ka ayikora mar mako ich to?"
+    }, 
+    "how_effective": {
+      "English": "How effective is it?", 
+      "Kiswahili": "ina ufanisi gani?", 
+      "Dholuo": "How effective is it?"
     }
   },
   "iucd": {
@@ -111,6 +171,36 @@
       "English": "The IUCD should be removed by a provider. You can get pregnant right away after having an IUCD (coil) removed! ", 
       "Kiswahili": "IUCD inapaswa kuondolewa na mtoa huduma. Unaweza kupata mimba mara moja baada ya kuondolewa kwa IUCD (coil)!", 
       "Dholuo": "IUCD onego gol gi jachiw thieth. Inyalo mako ich sano sano bang golo IUCD [koil]"
+    }, 
+    "how_it_works_title": {
+      "English": "How It Works",
+      "Kiswahili": "Jinsi Inavyofanya Kazi",
+      "Dholuo": "Jinsi Inavyofanya Kazi"
+    }, 
+    "what_period": {
+      "English": "What will happen to my period?", 
+      "Kiswahili": "Nini kitafanyikia hedhi zangu", 
+      "Dholuo": "En ang'o mabiro timore ne remba mar dwe?"
+    }, 
+    "how_long": {
+      "English": "How long does the method work?", 
+      "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
+      "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+    }, 
+    "can_private": {
+      "English": "Can I keep it private?", 
+      "Kiswahili": "Je, ninaweza kuiweka kwa usiri?", 
+      "Dholuo": "Bende anyalo kete mopondo?"
+    }, 
+    "ready_to_have_baby": {
+      "English": "What if I'm ready to have a baby?", 
+      "Kiswahili": "Je, itakuaje ikiwa niko tayari kupata mtoto?", 
+      "Dholuo": "To ka ayikora mar mako ich to?"
+    }, 
+    "how_effective": {
+      "English": "How effective is it?", 
+      "Kiswahili": "ina ufanisi gani?", 
+      "Dholuo": "How effective is it?"
     }
   },
   "pills": {
@@ -149,6 +239,36 @@
       "English": "You can stop pills anytime on your own. A few days after stopping daily pills, your body will return to your normal level of fertility.", 
       "Kiswahili": "Unaweza kuacha dawa wakati wowote peke yako. Siku chache baada ya kuacha dawa za kila siku, mwili wako utarudi kwenye kiwango chako cha kawaida cha uzazi.", 
       "Dholuo": "Inyalo weyo muonyo pills saa asaya kendi. Ndalo matin bang weyo muonyo pills ma pile ka pile, dendi biro dok kaka ne en e nyaloni mar mako ich. "
+    }, 
+    "how_it_works_title": {
+      "English": "How It Works",
+      "Kiswahili": "Jinsi Inavyofanya Kazi",
+      "Dholuo": "Jinsi Inavyofanya Kazi"
+    }, 
+    "what_period": {
+      "English": "What will happen to my period?", 
+      "Kiswahili": "Nini kitafanyikia hedhi zangu", 
+      "Dholuo": "En ang'o mabiro timore ne remba mar dwe?"
+    }, 
+    "how_long": {
+      "English": "How long does the method work?", 
+      "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
+      "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+    }, 
+    "can_private": {
+      "English": "Can I keep it private?", 
+      "Kiswahili": "Je, ninaweza kuiweka kwa usiri?", 
+      "Dholuo": "Bende anyalo kete mopondo?"
+    }, 
+    "ready_to_have_baby": {
+      "English": "What if I'm ready to have a baby?", 
+      "Kiswahili": "Je, itakuaje ikiwa niko tayari kupata mtoto?", 
+      "Dholuo": "To ka ayikora mar mako ich to?"
+    }, 
+    "how_effective": {
+      "English": "How effective is it?", 
+      "Kiswahili": "ina ufanisi gani?", 
+      "Dholuo": "How effective is it?"
     }
   },
   "emergency": {
@@ -187,6 +307,36 @@
       "English": "The E-pill is very short-acting. Even if you take it a lot, it won't make you less able to get pregnant in the future. The E-pill doesn't damage your body in any way, but also does not work well to prevent pregnancy with regular use. ", 
       "Kiswahili": "E-pill ni ya muda mfupi sana. Hata ukiichukua sana, haitakufanya ushindwe kupata mimba katika siku zijazo. E-pill haidhuru mwili wako kwa njia yoyote, lakini pia haifanyi kazi vizuri kuzuia mimba kwa matumizi ya kawaida.", 
       "Dholuo": "E-pill en yath matiyo e kinde matin. Kata ka imuonyo mang'eny, ok obi miyo ibed ni ok inyal mako ich e ndalo mabiro. E-pill ok keth dendi e yo moro amora, to bende ok oti maber e gengo ich ka itiyo kode anuoya."
+    }, 
+    "how_it_works_title": {
+      "English": "How It Works",
+      "Kiswahili": "Jinsi Inavyofanya Kazi",
+      "Dholuo": "Jinsi Inavyofanya Kazi"
+    }, 
+    "what_period": {
+      "English": "What will happen to my period?", 
+      "Kiswahili": "Nini kitafanyikia hedhi zangu", 
+      "Dholuo": "En ang'o mabiro timore ne remba mar dwe?"
+    }, 
+    "how_long": {
+      "English": "How long does the method work?", 
+      "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
+      "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+    }, 
+    "can_private": {
+      "English": "Can I keep it private?", 
+      "Kiswahili": "Je, ninaweza kuiweka kwa usiri?", 
+      "Dholuo": "Bende anyalo kete mopondo?"
+    }, 
+    "ready_to_have_baby": {
+      "English": "What if I'm ready to have a baby?", 
+      "Kiswahili": "Je, itakuaje ikiwa niko tayari kupata mtoto?", 
+      "Dholuo": "To ka ayikora mar mako ich to?"
+    }, 
+    "how_effective": {
+      "English": "How effective is it?", 
+      "Kiswahili": "ina ufanisi gani?", 
+      "Dholuo": "How effective is it?"
     }
   },
   "condoms": {
@@ -225,6 +375,36 @@
       "English": "Condoms have no effect on your body other than to block your partner's sperm from going inside your body. If you use condoms and are ready to have a baby, you can just stop using them. Keep in mind, though, that if you stop using condoms you won't be protected from HIV or other STIs. ", 
       "Kiswahili": "Kondomu haina athari kwenye mwili wako zaidi ya kuzuia mbegu za mpenzi wako kuingia ndani ya mwili wako. Ikiwa unatumia kondomu na uko tayari kupata mtoto, unaweza kuacha tu kuzitumia. Kumbuka, hata hivyo, kwamba ukiacha kutumia kondomu huwezi kulindwa dhidi ya Virusi Vya Ukimwi au magonjwa mengine ya zinaa.", 
       "Dholuo": "Rabo yunga onge gi rach moro amora e dendi kopogore gi geng'o pi nyodo mar jaherani donjo ei dendi. Ka itiyo gi rabo yunga kendo iyikori mar yudo nyathi, inyalo mana weyo tiyo kodgi. Ng'e gi pachi ni, ka iweyo tiyo gi rabo yunga ok ibi bedo ni igeng'ori kuom yudo kute mag ayaki kata nyae mamoko. "
+    }, 
+    "how_it_works_title": {
+      "English": "How It Works",
+      "Kiswahili": "Jinsi Inavyofanya Kazi",
+      "Dholuo": "Jinsi Inavyofanya Kazi"
+    }, 
+    "what_period": {
+      "English": "What will happen to my period?", 
+      "Kiswahili": "Nini kitafanyikia hedhi zangu", 
+      "Dholuo": "En ang'o mabiro timore ne remba mar dwe?"
+    }, 
+    "how_long": {
+      "English": "How long does the method work?", 
+      "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
+      "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+    }, 
+    "can_private": {
+      "English": "Can I keep it private?", 
+      "Kiswahili": "Je, ninaweza kuiweka kwa usiri?", 
+      "Dholuo": "Bende anyalo kete mopondo?"
+    }, 
+    "ready_to_have_baby": {
+      "English": "What if I'm ready to have a baby?", 
+      "Kiswahili": "Je, itakuaje ikiwa niko tayari kupata mtoto?", 
+      "Dholuo": "To ka ayikora mar mako ich to?"
+    }, 
+    "how_effective": {
+      "English": "How effective is it?", 
+      "Kiswahili": "ina ufanisi gani?", 
+      "Dholuo": "How effective is it?"
     }
   },
   "female_condom": {
@@ -263,6 +443,36 @@
       "English": "Condoms have no effect on your body other than to block your partner's sperm from going inside your body. If you use condoms and are ready to have a baby, you can just stop using them. Keep in mind, though, that if you stop using condoms you won't be protected from HIV or other STIs. ", 
       "Kiswahili": "Kondomu haina athari kwenye mwili wako zaidi ya kuzuia mbegu za mpenzi wako kuingia ndani ya mwili wako. Ikiwa unatumia kondomu na uko tayari kupata mtoto, unaweza kuacha tu kuzitumia. Kumbuka, hata hivyo, kwamba ukiacha kutumia kondomu huwezi kulindwa dhidi ya Virusi Vya Ukimwi au magonjwa mengine ya zinaa.", 
       "Dholuo": "Rabo yunga onge gi rach moro amora e dendi kopogore gi geng'o pi nyodo mar jaherani donjo ei dendi. Ka itiyo gi rabo yunga kendo iyikori mar yudo nyathi, inyalo mana weyo tiyo kodgi. Ng'e gi pachi ni, ka iweyo tiyo gi rabo yunga ok ibi bedo ni igeng'ori kuom yudo kute mag ayaki kata nyae mamoko. "
+    }, 
+    "how_it_works_title": {
+      "English": "How It Works",
+      "Kiswahili": "Jinsi Inavyofanya Kazi",
+      "Dholuo": "Jinsi Inavyofanya Kazi"
+    }, 
+    "what_period": {
+      "English": "What will happen to my period?", 
+      "Kiswahili": "Nini kitafanyikia hedhi zangu", 
+      "Dholuo": "En ang'o mabiro timore ne remba mar dwe?"
+    }, 
+    "how_long": {
+      "English": "How long does the method work?", 
+      "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
+      "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+    }, 
+    "can_private": {
+      "English": "Can I keep it private?", 
+      "Kiswahili": "Je, ninaweza kuiweka kwa usiri?", 
+      "Dholuo": "Bende anyalo kete mopondo?"
+    }, 
+    "ready_to_have_baby": {
+      "English": "What if I'm ready to have a baby?", 
+      "Kiswahili": "Je, itakuaje ikiwa niko tayari kupata mtoto?", 
+      "Dholuo": "To ka ayikora mar mako ich to?"
+    }, 
+    "how_effective": {
+      "English": "How effective is it?", 
+      "Kiswahili": "ina ufanisi gani?", 
+      "Dholuo": "How effective is it?"
     }
   }
 }
