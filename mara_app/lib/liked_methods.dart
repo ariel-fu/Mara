@@ -55,6 +55,10 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), 
+          onPressed: () => Navigator.of(context).pop(), 
+        ), 
         title: Text(_t("Liked Methods")), // or use _t('liked_methods') for translations
       ),
       body: Column(
