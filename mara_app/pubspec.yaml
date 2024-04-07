@@ -94,6 +94,13 @@ flutter:
     - videoAudio/videos/peer/peer2E.mp4
     - videoAudio/videos/peer/peer2DL.mp4
     - videoAudio/videos/peer/peer2KS.mp4
+    - videoAudio/videos/peer/peer3E.mp4
+    - videoAudio/videos/peer/peer3DL.mp4
+    - videoAudio/videos/peer/peer3KS.mp4
+
+    - videoAudio/videos/provider/provider1E.mp4
+    - videoAudio/videos/provider/provider1DL.mp4
+    - videoAudio/videos/provider/provider1KS.mp4
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

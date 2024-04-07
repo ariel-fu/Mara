@@ -12,13 +12,13 @@ class PatternPage extends StatefulWidget {
 
 class _PatternPageState extends State<PatternPage> {
   Widget methodContent = Text('method content');
-  String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
+  String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
-  String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
+  String videoAsset2 = 'videoAudio/videos/peer/peer1E.mp4';
   String videoTitle2 = 'Video 2 Language Not Selected';
 
-  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
-  Widget video2 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat2.mp4', title:'Video 2 Language Not Selected');
+  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider1E.mp4', title:'Video 1 Language Not Selected');
+  Widget video2 = VideoWidget(videoAsset: 'videoAudio/videos/peer/peer1E.mp4', title:'Video 2 Language Not Selected');
   
   int methodIndex = -1; // Index of the selected icon button, -1 for none
   int languageIndex = -1; // similar indexing for language
@@ -67,15 +67,15 @@ class _PatternPageState extends State<PatternPage> {
   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
   'video1': {
     '0': { // Language code 0
-      'video': 'videoAudio/videos/chimes.mp4',
+      'video': 'videoAudio/videos/provider/provider1KS.mp4',
       'text': 'Kiswahili Video #1',
     },
     '1': { // Language code 1
-      'video': 'videoAudio/videos/funnyCat.mp4',
+      'video': 'videoAudio/videos/provider/provider1DL.mp4',
       'text': 'Dholuo Video #1',
     },
     '2': { // Language code 2
-      'video': 'videoAudio/videos/chimes.mp4',
+      'video': 'videoAudio/videos/provider/provider1E.mp4',
       'text': 'English Video #1',
     },
   },
