@@ -8,7 +8,7 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  final Map<String, String> _selectedOptions = {};
+  Map<String, String> _selectedOptions = {};
   String _currentLanguage = 'English';
 
   final List<String> subQuestionKeys = [
@@ -84,6 +84,9 @@ final Map<String, Map<String, String>> _translations = {
     'outroText1': 'Condoms are the best way to prevent HIV and other infections, but may not be the best method for preventing pregnancy for a long period of time.',
     'outroText2': 'The following method may also be a good option, but there may be a delay of 3-6 months in fertility after stopping: Depo', 
     'outroText3': 'We also recommend you start a prenatal vitamin for good pregnancy health.', 
+    'outroText4': 'The following methods may be less private, but you might also want to consider them: Condoms, Pills. Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.', 
+
+    'recommendationTitle': 'Here are some recommendations that might be right for you!', 
     // 'learnMore': 'Learn More',
   },
   'Kiswahili': {
@@ -103,10 +106,18 @@ final Map<String, Map<String, String>> _translations = {
     'Condoms': 'kondomu', 
     'pills': 'dawa', 
     'Pills': 'dawa', 
+    'recommendationTitle': 'Haya hapa ni baadhi ya mapendekezo ambayo yanaweza kuwa sawa kwako!',
+    'outroText1': 'Kondomu ni njia bora ya kuzuia Virusi Vya Ukimwi na maambukizo mengine, lakini inaweza isiwe njia bora ya kuzuia mimba kwa muda mrefu.',  
+    'outroText2': 'Njia ifuatayo inaweza pia kuwa chaguo nzuri, lakini kunaweza kuwa na kuchelewa kwa miezi 3-6 katika uzazi baada ya kuacha:', 
+    'outroText3': 'Tunapendekeza pia uanzishe vitamini katika ujauzito kwa afya bora ya ujauzito.', 
     // 'learnMore': 'Jifunze Zaidi',
   },
   'Dholuo': {
-    // add all the luo translations 
+    'title1': 'Ng\'eyo', 
+    'recommendationTitle': 'Erigo gikmoko mawaneno ni nyalo bedo maber kodi!', 
+     'outroText1': 'Rabo yunga e yo maber mar geng\'o kute mag ayaki kod tuoche mamoko, to ok nyalo bedo yo maber mar geng\'o ich kuom kinde malach.', 
+      'outroText2': 'Yore moluwogi bende nyalo bedo yiero maber, to deko nyalo bete mar dweche 3-6 e nyaloni mar mako ich bang weyo:', 
+      'outroText3': 'Wa ng\'ado ni rieko bende ni mondo ichak muonyo antenatal vitamins mondo iting ich man gi ngima maber', 
   }
 };
 
@@ -525,7 +536,7 @@ bool _areAllQuestionsAnswered() {
       body: Column(
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               languageButton('Kiswahili'),
               languageButton('Dholuo'),
