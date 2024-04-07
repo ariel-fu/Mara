@@ -207,6 +207,10 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
+            leading: IconButton(
+          icon: Icon(Icons.arrow_back), 
+          onPressed: () => Navigator.of(context).pop(), 
+        ), 
       title: Text(_t('title1')), // Use _t method for translation
       actions: <Widget>[
         IconButton(
