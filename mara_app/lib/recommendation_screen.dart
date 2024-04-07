@@ -45,9 +45,15 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     widget.onChangeLanguage(language);
   }
 
+  // String _t(String key) {
+  //   return widget.translations[_currentLanguage]?[key] ?? key;
+  // }
+
   String _t(String key) {
-    return widget.translations[_currentLanguage]?[key] ?? key;
-  }
+  String translation = widget.translations[_currentLanguage]?[key] ?? key;
+  print('Key: $key, Language: $_currentLanguage, Translation: $translation');
+  return translation;
+}
 
   Future<Map<String, dynamic>> loadMethodDetails() async {
     final String jsonString = await rootBundle.loadString('assets/methods.json');
@@ -65,152 +71,14 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   }
 
 
-
-@override
-// Widget build(BuildContext context) {
-//   return Scaffold(
-//     appBar: AppBar(
-//       title: Text(_t('title1')), // Use _t method for translation
-//       actions: <Widget>[
-//         IconButton(
-//           icon: Icon(Icons.favorite),
-//           onPressed: navigateToLikedMethodsScreen,
-//         ),
-//       ],
-//     ),
-//     body: Center(
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               languageButton('Kiswahili'),
-//               languageButton('Dholuo'),
-//               languageButton('English'),
-//             ],
-//           ),
-//           SizedBox(height: 20),
-//           Expanded(
-//             child: ListView.builder(
-//               itemCount: widget.recommendations.length,
-//               itemBuilder: (context, index) {
-//                 List<String> individualRecommendations = widget.recommendations[index].split(', ');
-
-//                 return Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: Text(
-//                         widget.introTexts.length > index ? _t(widget.introTexts[index]) : '',
-//                         textAlign: TextAlign.center,
-//                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//                       ),
-//                     ),
-//                     SingleChildScrollView(
-//                       scrollDirection: Axis.horizontal,
-//                       child: Row(
-//                         children: individualRecommendations.map((rec) {
-//                           String trimmedRec = rec.trim();
-//                           return Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: Column(
-//                               children: [
-//                                 Stack(
-//                                   alignment: Alignment.center,
-//                                   children: [
-//                                     Image.asset(
-//                                       RecommendationModel.getImageForRecommendation(trimmedRec), 
-//                                       width: 100, 
-//                                       height: 100
-//                                     ),
-//                                     Positioned(
-//                                       top: -9,
-//                                       right: -9,
-//                                       child: IconButton(
-//                                         icon: Icon(
-//                                           likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
-//                                           color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.brown[400],
-//                                         ),
-//                                         onPressed: () {
-//                                           setState(() {
-//                                             if (likedMethods.contains(trimmedRec)) {
-//                                               likedMethods.remove(trimmedRec);
-//                                             } else {
-//                                               likedMethods.add(trimmedRec);
-//                                             }
-//                                           });
-//                                         },
-//                                       ),
-//                                     ),
-//                                   ],
-//                                 ),
-//                                 Text(
-//                                   _t(trimmedRec),
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(fontSize: 16),
-//                                 ),
-//                                 ElevatedButton(
-//                                       onPressed: () {
-//                                         Navigator.push(
-//                                           context,
-//                                           MaterialPageRoute(
-//                                             builder: (context) => ShortSummariesScreen(methodName: trimmedRec),
-//                                           ),
-//                                         );
-//                                       },
-//                                       child: Text('Learn More'),
-//                                     ),
-//                               ],
-//                             ),
-//                           );
-//                         }).toList(),
-//                       ),
-//                     ),
-//                     Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: Container(
-//                         padding: const EdgeInsets.all(10.0),
-//                         decoration: BoxDecoration(
-//                           color: Colors.grey.shade200,
-//                           borderRadius: BorderRadius.circular(8.0),
-//                         ),
-//                         child: Row(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: <Widget>[
-//                             Icon(Icons.lightbulb_outline, color: Colors.amber),
-//                             SizedBox(width: 8),
-//                             Expanded(
-//                               child: Text(
-//                                 widget.outroTexts.length > index ? _t(widget.outroTexts[index]) : '',
-//                                 style: TextStyle(fontSize: 16),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                     Divider(),
-//                   ],
-//                 );
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }
-
 @override
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
-            leading: IconButton(
+      leading: IconButton(
           icon: Icon(Icons.arrow_back), 
           onPressed: () => Navigator.of(context).pop(), 
-        ), 
+        ),
       title: Text(_t('title1')), // Use _t method for translation
       actions: <Widget>[
         IconButton(
@@ -236,13 +104,14 @@ Widget build(BuildContext context) {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     languageButton('Kiswahili'),
                     languageButton('Dholuo'),
                     languageButton('English'),
                   ],
                 ),
+                _buildTitleBox(),
                 SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
@@ -309,7 +178,8 @@ Widget build(BuildContext context) {
                                 }
 
                                 if (methodDetailsData.containsKey(methodKey)) {
-                                    Navigator.push(
+
+Navigator.push(
   context,
   MaterialPageRoute(
     builder: (context) => MethodDetailsScreen(
@@ -318,10 +188,7 @@ Widget build(BuildContext context) {
       currentLanguage: _currentLanguage,
       translations: widget.translations,
       onChangeLanguage: (newLang) {
-        setState(() {
-          _currentLanguage = newLang;
-        });
-        // Optionally, handle other actions needed on language change
+        _changeLanguage(newLang); // Call _changeLanguage from RecommendationScreen
       },
     ),
   ),
@@ -398,6 +265,43 @@ Widget languageButton(String language) {
   );
 }
 
+Widget _buildTitleBox() {
+  return Container(
+    padding: EdgeInsets.all(10.0),
+    margin: EdgeInsets.only(top: 20.0),
+    decoration: BoxDecoration(
+      color: Colors.grey.shade200,
+      borderRadius: BorderRadius.circular(8.0),
+    ),
+    child: Text(
+      'Here are some recommendations of methods that might be right for you',
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    ),
+  );
+ }
+
+
+
+
+
+// Widget _buildTitleBox() {
+//   return Container(
+//     padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+//     margin: EdgeInsets.only(top: 20.0),
+//     width: double.infinity,
+//     decoration: BoxDecoration(
+//       color: Colors.grey.shade200,
+//       borderRadius: BorderRadius.circular(8.0),
+//     ),
+//     child: Text(
+//       _t('recommendationTitle'), // Fetch the translated text
+//       textAlign: TextAlign.center,
+//       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+//     ),
+//   );
+// }
+
 
 
 void navigateToLikedMethodsScreen() {
@@ -406,7 +310,7 @@ void navigateToLikedMethodsScreen() {
     MaterialPageRoute(
       builder: (context) => LikedMethodsScreen(
         likedMethods: likedMethods,
-        initialLanguage: _currentLanguage, // Use initialLanguage instead of currentLanguage
+        initialLanguage: _currentLanguage, 
         translations: widget.translations,
         onMethodsChanged: (updatedMethods) {
           setState(() {
