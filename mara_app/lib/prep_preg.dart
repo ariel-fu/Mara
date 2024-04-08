@@ -24,6 +24,11 @@ class _PrepPageState extends State<PrepPage> {
       'Dholuo': 'Kujiandaa kwa Ujauzito Wenye Afya Luo',
       'English': 'Preparing for a Healthy Pregnancy',
     },
+    'Are you ready? Tap each check mark to learn about ways to promote a healthy pregnancy.': {
+      'Kiswahili': 'Uko tayari? Gusa kila alama ya hundi ili kujifunza kuhusu njia za kukuza mimba yenye afya.', 
+      'Dholuo': 'Iyikori? Mul check mark mondo ipuonjri ewi yore manyalo kelo ich man gi ngima.', 
+      'English': 'Are you ready? Tap each check mark to learn about ways to promote a healthy pregnancy.'
+    }, 
     'content1': {
       'Kiswahili': 'Ikiwa unajaribu kuwa mjamzito au unajamiiana bila kinga, kuchukua multivitamini kunaweza kusaidia kuzuia shida za ujauzito. Unaweza kuuliza mfamasia au mtoa huduma kuhusu chaguo bora zaidi.',
       'Dholuo': 'Ka itemo mako ich kata ibedo e achiel maonge rabo yunga, muonyo multivitamin nyalo konyi geng\'o chandruok mag ich. inyalo penjo katij od yath kata jachiw thieth ewi yo maber.',
@@ -99,7 +104,7 @@ class _PrepPageState extends State<PrepPage> {
                       ),
                       SizedBox(height: 8.0),
                       Text(
-                        'Are you ready? Tap each check mark to learn about ways to promote a healthy pregnancy.',
+                        _t('Are you ready? Tap each check mark to learn about ways to promote a healthy pregnancy.'),
                         style: TextStyle(fontSize: 16.0),
                       ),
                     ],
