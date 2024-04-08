@@ -9,6 +9,7 @@ import 'pattern_page.dart';
 import 'time_page.dart';
 import 'private_page.dart';
 import 'ready_to_have_baby.dart';
+import 'learn_more.dart';
 
 void main() {
   runApp(MaraApp());
