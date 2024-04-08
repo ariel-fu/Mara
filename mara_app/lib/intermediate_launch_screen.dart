@@ -14,7 +14,7 @@ class imLaunchScreen extends StatelessWidget {
               //do something
             },
             child: Text(
-              'English',
+              'Kiswahili',
             ),
           ),
           const SizedBox(width: 20),
@@ -23,7 +23,7 @@ class imLaunchScreen extends StatelessWidget {
               //do something else
             },
             child: Text(
-              'Swahili',
+              'Dholuo',
             ),
           ),
           const SizedBox(width: 20),
@@ -32,13 +32,19 @@ class imLaunchScreen extends StatelessWidget {
               //different still
             },      
             child: Text(
-              'Guo',
+              'English',
             ),
           ),
           Spacer(),
         ],
       ),
-      body: SingleChildScrollView(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/imlaunchscreenimg.png"),
+            fit: BoxFit.fitHeight,
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -46,16 +52,16 @@ class imLaunchScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                "If this isn't the right time for you to get pregnant, you have lots of options!",
+                "If this isn't the right time for you to get pregnant, you have lots of options!", textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 40.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 "Figuring out which options are right for you can feel overwhelming, especially with all the things you might hear out there - from people in your life and other sources.",
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0), textAlign: TextAlign.center
               ),
             ),
             SizedBox(height: 20.0),
@@ -63,7 +69,7 @@ class imLaunchScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 "This app is designed especially for young women to help you get the information you need to make an empowered decision when you need it.",
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0), textAlign: TextAlign.center
               ),
             ),
             SizedBox(height: 20.0),
@@ -71,16 +77,16 @@ class imLaunchScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 "Whether you know what method you want, have never used a method, or are already using a method, you can go through each section of this guide to get informed!",
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0), textAlign: TextAlign.center
               ),
             ),
             SizedBox(height: 20.0),
-            Center(
+            /*Center(
               child: Image.asset(
                 'assets/imlaunchscreenimg.png',
                 width: MediaQuery.of(context).size.width * 0.8,
               ),
-            ),
+            ),*/
             SizedBox(height: 20.0),
             Center (
               child:
