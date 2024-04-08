@@ -16,7 +16,7 @@ class LaunchScreen extends StatelessWidget {
               //do something
             },
             child: Text(
-              'English',
+              'Kiswahili',
             ),
           ),
           const SizedBox(width: 20),
@@ -25,7 +25,7 @@ class LaunchScreen extends StatelessWidget {
               //do something else
             },
             child: Text(
-              'Swahili',
+              'Dholuo',
             ),
           ),
           const SizedBox(width: 20),
@@ -34,13 +34,14 @@ class LaunchScreen extends StatelessWidget {
               //different still
             },      
             child: Text(
-              'Guo',
+              'English',
             ),
           ),
           Spacer(),
         ],
       ),
       body: Center(
+        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,11 +49,12 @@ class LaunchScreen extends StatelessWidget {
             Center(
               child: Image.asset(
                 'assets/maralogo.png',
-                width: MediaQuery.of(context).size.width * 0.8,
+                width: MediaQuery.of(context).size.width * 0.5,
               ),
             ),
-            const Text("The best family planning choice is the option that you feel is right for you."),
-            const SizedBox(height: 20),
+            const Text("The best family planning choice is the option that you feel is right for you.", textAlign: TextAlign.center,),
+            const SizedBox(height: 50),
+            //Divider(),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
