@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/icons/mara_icons_icons.dart' show MaraIcons;
 
 class RecommendationModel {
   static List<String> getRecommendationsBasedOnPregnancyTiming(String timing) {
@@ -232,18 +233,19 @@ class RecommendationModel {
     }
   }
 
-   static String getImageForRecommendation(String recommendation) {
-    Map<String, String> recommendationImages = {
-      'Implant': './assets/implant.png',
-      'Pills': './assets/pills.png',
-      'Condoms': './assets/condom.png',
-      'IUD': './assets/IUD.png',
-      'Emergency Pill': './assets/emergency.png',
-      'Depo': './assets/depo.png',
-      'IUCD': './assets/IUD.png',
+   static IconData getImageForRecommendation(String recommendation) {
+    // Map<String, String> recommendationImages = {
+      Map<String, IconData> recommendationImages = {
+      'Implant': MaraIcons.contraceptive_implant,
+      'Pills': MaraIcons.birth_control_pills,
+      'Condoms': MaraIcons.condom,
+      'IUD': MaraIcons.iud,
+      'Emergency Pill': MaraIcons.double_pills,
+      'Depo': MaraIcons.syringe,
+      'IUCD': MaraIcons.iud,
     };
 
-    return recommendationImages[recommendation] ?? './assets/method_6.png'; // default image if no match found
+    return recommendationImages[recommendation] ?? MaraIcons.syringe; // change so no default
   }
 }
 
