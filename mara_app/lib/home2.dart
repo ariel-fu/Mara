@@ -21,33 +21,37 @@ class _HomePage2State extends State<HomePage2> {
   final List<bool> _selections = List.generate(6, (_) => false);
   bool get _allSelected => _selections.every((bool selected) => selected);
   void _handleTap(int index) {
-  setState(() { _selections[index] = true; });
-  if (index == 0) {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => OptionsPage()),
-  );
-  } else if (index == 1) {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => PatternPage()),
-  );
-  } else if (index == 2) {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => TimePage()),
-  );
-  } else if (index == 4) {
-    Navigator.push(
+    setState(() { _selections[index] = true; });
+    if (index == 0) {
+      Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => PrivatePage()),
+      MaterialPageRoute(builder: (context) => OptionsPage()),
     );
-  } else if (index == 3) {
-    //Navigator.push(
-    //context,
-    //MaterialPageRoute(builder: (context) => MainScreen()), //need a better name for that screen
-    //).then((_) { setState(() { _selections[index] = true; }); });
-  }
+    } else if (index == 1) {
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PatternPage()),
+    );
+    } else if (index == 2) {
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TimePage()),
+    );
+    } else if (index == 3) {
+      // Navigator.push(
+      // context,
+      // MaterialPageRoute(builder: (context) => MainScreen()),
+      // ).then((_) { setState(() { _selections[index] = true; }); });
+    } else if (index == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PrivatePage()),
+      );
+    } else if (index == 5) {
+      Navigator.pushNamed(context, '/ready_baby');
+    } else if (index == 6) {
+      Navigator.pushNamed(context, '/quiz');
+    }
   }
 
   @override
@@ -136,10 +140,10 @@ class _HomePage2State extends State<HomePage2> {
               title: Text('Take the Quiz'),
               tileColor: _allSelected ? Colors.green : Colors.grey,
               onTap: () {
-                //Navigator.push(
-                //  context,
-                //  MaterialPageRoute(builder: (context) => QuizScreen()),
-                //);
+                Navigator.push(
+                 context,
+                 MaterialPageRoute(builder: (context) => QuizScreen()),
+                );
               },
             ),
           ],
