@@ -54,6 +54,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
         ],
       ),
       body: Center(
+        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
