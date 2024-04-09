@@ -1,12 +1,3 @@
-import 'package:flutter/material.dart';
-import 'recommendation_model.dart';
-import 'recommendation_screen.dart';
-
-class QuizScreen extends StatefulWidget {
-  @override
-  _QuizScreenState createState() => _QuizScreenState();
-}
-
 class _QuizScreenState extends State<QuizScreen> {
   Map<String, String> _selectedOptions = {};
   String _currentLanguage = 'English';
@@ -50,21 +41,21 @@ final Map<String, Map<String, String>> _translations = {
     'title1': 'Recommendations', 
     'q1': 'How do you feel about changes to your periods?', 
     'q2': 'If you had to guess, when do you think you might want a pregnancy?', 
-    'q3': 'How long do you want your method to last?', 
+    'q3': 'How long do you want your method to work?', 
     'q4': 'How important is it to you to keep your method private from your parents or partner?', 
     'q5': 'Which of the below factors is most important to you when choosing a method?', 
     'subq1': 'Light, irregular periods',
     'subq2': 'Periods might get heavier', 
     'subq3': 'Periods might stop', 
     'q3sub1': 'Use method every time you have sex', 
-    'q3sub2': '3 months or less', 
-    'q3sub3': 'Lasts more than a year', 
+    'q3sub2': 'Lasts 3 months or less', 
+    'q3sub3': 'Works for more than 1 year', 
     'option1': 'Could be OK',
     'option2': 'Not OK', 
-    'option3': 'Not sure', 
-    'op1': 'More than 1 year', 
+    'option3': 'I\'m Not sure', 
+    'op1': 'In More than 1 year', 
     'op2': 'In 6-12 months', 
-    'op3': 'Not sure', 
+    'op3': 'I\'m not sure', 
     // ... other English translations
     'o1': 'Extremely important', 
     'o2': 'Somewhat important', 
@@ -91,13 +82,30 @@ final Map<String, Map<String, String>> _translations = {
   },
   'Kiswahili': {
     'title': 'Jaribio',
-    'q1': 'Unajisikiaje kuhusu mabadiliko ya vipindi vyako?',
+    'q1': 'Je, unajisikiaje kuhusu mabadiliko katika hedhi yako?',
     'q2': 'Ikiwa ulipaswa kukisia, unafikiri ni wakati gani unaweza kutaka mimba?',
-    'q3': 'Je! ungependa mbinu yako idumu kwa muda gani?', 
-    'subq1': 'Vipindi vyepesi, visivyo vya kawaida',
+    'q3': 'Je! ungependa mbinu yako ifanye kazi kwa muda gani?',
+    'q4': 'Je, kuna umuhimu gani kwako kuweka njia yako ya faragha (kutoka kwa washirika, wazazi)?',  
+    'q5': 'Je, ni kipi kati ya vipengele vilivyo hapa chini ambacho ni muhimu ZAIDI kwako wakati wa kuchagua njia?', 
+    'subq1': 'Hedhi nyapesi, yasiyo kawaida',
+    'subq2': 'Hedhi yanaweza kuwa nzito', 
+    'subq3': 'Hedhi yanaweza kukoma', 
+    'q3sub1': 'Tumia kila wakati unapofanya ngono', 
+    'q3sub2': 'Hudumu miezi 3 au chini',
+    'q3sub3': 'Inafanya kazi kwa zaidi ya mwaka 1',  
     'option1': 'Inaweza kuwa sawa',
     'option2': 'Si sawa',
     'option3': 'Sina uhakika', 
+    'op1': 'Katika zaidi ya mwaka 1', 
+    'op2': 'Katika miezi 6-12', 
+    'op3': 'Sina uhakika', 
+    'o1': 'Muhimu sana', 
+    'o2': 'Muhimu kwa kiasi fulani', 
+    'o3': 'Sio Muhimu', 
+    'o51': 'Uwezekano mdogo wa kupata mimba', 
+    'o52': 'Kuepuka mabadiliko ya hedhi yangu', 
+    'o53': 'Kuweka njia yangu kwa usiri', 
+    'o54': 'Kuwa na uwezo wa kupata mimba katika siku zijazo', 
     // ... other Kiswahili translations
     'title1': 'Mapendekezo', 
     'Implant': 'pandikiza', 
@@ -113,6 +121,30 @@ final Map<String, Map<String, String>> _translations = {
     // 'learnMore': 'Jifunze Zaidi',
   },
   'Dholuo': {
+    'q1': 'Iwinjo nade ewi lokruok e chwer mar rembi mar dwe?', 
+    'q2': 'Ka nyaka iduoki, en karang\'o ma iparo ni inyalo dwaro make ich?', 
+    'q3': 'Idwaro ni yori mar geng\'o ich oti kuom kinde marom nade?', 
+    'q4': 'Omokoni marom nade tiyo gi yor geng\'o ich e yo mopondo [kuom johera, jonyuol]?', 
+    'q5': 'En ang\'o kuom gigo ma oler piny kae  ma omokoni AHINYA  ekinde ma iyiero yor geng\'o ich?', 
+    'option1': 'Nyalo bedo maber', 
+    'option2': 'Ok ber',
+    'option3': 'Ok an gi adiera',  
+    'subq1': 'Chwer matin, remb dwe mabiro kinde ma ok ochan.', 
+    'subq2': 'Remb dwe nyalo chwer mang\'eny', 
+    'subq3': 'Remb dwe ok bi', 
+    'q3sub1': 'Tigo ekinde duto ma abedo e achiel', 
+    'q3sub2': 'Obudh kuom dweche 3 kata matin ne', 
+    'q3sub3': 'Oti kuom kinde mohingo higa 1', 
+    'op1': 'Mokalo higa 1', 
+    'op2': 'Ekind dweche 6-12', 
+    'op3': 'Ok an gi adiera', 
+    'o1': 'Omokona ahinya', 
+    'o2': 'Omokona marach rach',
+    'o3': 'Ok omokona', 
+    'o51': 'Bedo gi nyalo matin mar mako ich.', 
+    'o52': 'Bedo ni onge lokruok e chwer mar remba mar dwe.', 
+    'o53': 'Tiyo gi yor geng\'o ich eyo mopondo', 
+    'o54': 'Bedo ni anyalo mako ich e ndalo mabiro', 
     'title1': 'Ng\'eyo', 
     'recommendationTitle': 'Erigo gikmoko mawaneno ni nyalo bedo maber kodi!', 
      'outroText1': 'Rabo yunga e yo maber mar geng\'o kute mag ayaki kod tuoche mamoko, to ok nyalo bedo yo maber mar geng\'o ich kuom kinde malach.', 
@@ -536,7 +568,7 @@ bool _areAllQuestionsAnswered() {
       body: Column(
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               languageButton('Kiswahili'),
               languageButton('Dholuo'),
