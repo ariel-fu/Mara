@@ -87,6 +87,9 @@ flutter:
     - assets/depo.png
     - assets/implant.png
     - assets/woman.png
+    - assets/options-icons/
+    - assets/preg_woman.png
+    - assets/methods.json
     - assets/maralogo.png
     - assets/imlaunchscreenimg.png
 

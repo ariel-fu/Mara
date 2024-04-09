@@ -45,7 +45,43 @@ class _TemplatePageState extends State<TemplatePage> {
   };
 
   String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 0; // similar indexing for language
+  final languages = ["Kiswahili", "Dholuo", "English"];
+  bool overrideIndex = false;
+  final Map<String, List<String>> contentDescriptionMap = {
+    "Kiswahili": [
+      "method 1 in Kiswahili",
+      "method 2 in Kiswahili",
+      "method 3 in Kiswahili",
+      "method 4 in Kiswahili",
+      "method 5 in Kiswahili",
+      "method 6 in Kiswahili",
+      "method 7 in Kiswahili"
+    ],
+    "Dholuo": [
+      "method 1 in Dholuo",
+      "method 2 in Dholuo",
+      "method 3 in Dholuo",
+      "method 4 in Dholuo",
+      "method 5 in Dholuo",
+      "method 6 in Dholuo",
+      "method 7 in Dholuo"
+    ],
+    "English": [
+      "method 1 in English",
+      "method 2 in English",
+      "method 3 in English",
+      "method 4 in English",
+      "method 5 in English",
+      "method 6 in English",
+      "method 7 in English"
+    ],
+  };
+
+  String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
+  String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
   String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
   String videoTitle2 = 'Video 2 Language Not Selected';
 
@@ -260,6 +296,11 @@ class _TemplatePageState extends State<TemplatePage> {
           fontSize: 20.0,
           color: Colors.white,
         )
+        contentDescriptionMap[languages[languageIndex]]![methodIndex],
+        style: TextStyle(
+          fontSize: 20.0,
+          color: Colors.white,
+        )
     );
   }
 
@@ -268,6 +309,7 @@ class _TemplatePageState extends State<TemplatePage> {
   }
 
   String _getTitle(String videoKey, String language) {
+    return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
     return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   }
     

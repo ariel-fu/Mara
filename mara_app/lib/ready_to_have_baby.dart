@@ -4,12 +4,12 @@ import 'prep_preg.dart';
 import 'video.dart';
 import 'audio.dart';
 
-class MainScreen extends StatefulWidget {
+class ReadyPage extends StatefulWidget {
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _ReadyPageState createState() => _ReadyPageState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _ReadyPageState extends State<ReadyPage> {
   String _currentLanguage = 'English';
   // String asset = 'videoAudio/videos/chimes.mp4';
   // String videoTitle = 'Choose a Language';

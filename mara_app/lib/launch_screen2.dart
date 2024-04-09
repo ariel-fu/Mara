@@ -54,12 +54,14 @@ class _LaunchScreenState extends State<LaunchScreen> {
         ],
       ),
       body: Center(
+        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Center(
               child: Image.asset(
                 'assets/maralogo.png',
+                width: MediaQuery.of(context).size.width * 0.5,
                 width: MediaQuery.of(context).size.width * 0.5,
               ),
             ),
