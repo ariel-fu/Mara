@@ -41,7 +41,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       "Ndalo machuok bang golo IUCD, dendi biro dok kaka ne entie e thuolo mar mako ich. Ma en adier kata bed ni ne pok imako ich kata nyuol. Koro ka iseyikori mar mako ich, inyalo mana dhi mondo ogolni Implant.",
       "Inyalo mako ich mapiyo bang ka igolo IUCD [koil]! Koro en gima ni kare tiyo gi IUCD nyaka kinde ma idwaro make ich. IUCD onge gi homons kuome, koro bang ka isegole, to in mana kare dhi nyime!",
       "E-pill en yath matiyo e kinde matin. Kata ka imuonyo mang'eny, ok obi miyo ibed ni ok inyal mako ich e ndalo mabiro. E-pill ok keth dendi e yo moro amora, to bende ok oti maber e gengo ich ka itiyo kode anuoya.",
-      // other methods in Dholuo
+
     ],
     "English": [
       "Condoms have no effect on your body other than to block your partner's sperm from going inside your body. If you use condoms and are ready to have a baby, you can just stop using them. Keep in mind, though, that if you stop using condoms you won't be protected from HIV or other STIs. ",
@@ -51,12 +51,13 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       "A few days after having the implant removed, your body will return to your normal level of fertility. This it true whether or not you have ever had a pregnancy or a birth. So, when you are ready for a pregnancy, you can just have the implant removed! ",
       "You can get pregnant right away after having an IUCD (coil) removed! So it's OK to use the IUCD until you want to have a pregnancy. The IUCD has no hormones in it, so once it is removed, you are good to go!",
       "The E-pill is very short-acting. Even if you take it a lot, it won't make you less able to get pregnant in the future. The E-pill doesn't damage your body in any way, but also does not work well to prevent pregnancy with regular use. ",
-      // other methods in English
+     
     ],
   };
 
   @override
   Widget build(BuildContext context) {
+    
     final int? routeArgumentIndex =
         ModalRoute.of(context)?.settings.arguments as int?;
 
@@ -104,7 +105,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
           SizedBox(height: 20.0),
           buildMethodSelectionRow(boxWidth),
           SizedBox(height: 20.0),
-          buildContentArea(boxHeight, boxWidth),
+          buildContentArea(boxWidth),
         ],
       ),
     );
@@ -127,28 +128,29 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
     );
   }
 
+
   Widget buildMethodSelectionRow(double boxWidth) {
-    return Container(
-      alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * 0.1,
-      width: boxWidth,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            buildIconButton(MaraIcons.condom, 0),
-            buildIconButton(MaraIcons.female_condom, 1),
-            buildIconButton(MaraIcons.birth_control_pills, 2),
-            buildIconButton(MaraIcons.syringe, 3),
-            buildIconButton(MaraIcons.contraceptive_implant, 4),
-            buildIconButton(MaraIcons.iud, 5),
-            buildIconButton(MaraIcons.double_pills, 6),
-          ],
-        ),
+  return Container(
+    alignment: Alignment.center,
+    height: MediaQuery.of(context).size.height * 0.1,
+    width: boxWidth,
+    child: SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildIconButton(MaraIcons.condom, 0),
+          buildIconButton(MaraIcons.female_condom, 1),
+          buildIconButton(MaraIcons.birth_control_pills, 2),
+          buildIconButton(MaraIcons.syringe, 3),
+          buildIconButton(MaraIcons.contraceptive_implant, 4),
+          buildIconButton(MaraIcons.iud, 5),
+          buildIconButton(MaraIcons.double_pills, 6),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 
 
 
@@ -156,23 +158,10 @@ Widget subtitleSection() {
   return Container(
     alignment: Alignment.center,
     padding: EdgeInsets.symmetric(vertical: 10.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(left: 20.0), 
-          child: Icon(Icons.search, size: 20.0),
-        ),
-        SizedBox(width: 8.0),
-        Expanded(
-          child: Text(
-            subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            softWrap: true,
-            overflow: TextOverflow.visible,
-          ),
-        ),
-      ],
+    child: Text(
+      subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
+      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+      textAlign: TextAlign.center,
     ),
   );
 }
@@ -205,32 +194,35 @@ Widget subtitleSection() {
 
   
 
-  Widget buildContentArea(double boxHeight, double boxWidth) {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-            SizedBox(width: 10.0),
-            Expanded(
-              child: Text(
-                contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ),
-          ],
-        ),
+Widget buildContentArea(double boxWidth) {
+  return Padding(
+    padding: EdgeInsets.all(10.0),
+    child: Container(
+      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey),
       ),
-    );
-  }
+      child: Row( // Change to Row for horizontal layout
+        mainAxisSize: MainAxisSize.min, // To dynamically adjust the size
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+          SizedBox(width: 10.0),
+          Expanded(
+            child: Text(
+              contentDescriptionMap[languages[languageIndex]]![methodIndex],
+              style: TextStyle(fontSize: 16.0),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+
 
   
 
