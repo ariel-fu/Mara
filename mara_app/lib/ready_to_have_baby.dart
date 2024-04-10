@@ -24,7 +24,12 @@ class _ReadyPageState extends State<ReadyPage> {
       'Dholuo': 'Ango nyithindo mabeyo manyalo wuonwa?',
       'English': 'What if I\'m ready to have a baby?',
     },
-    // Add other translations as needed
+    'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!': {
+      'Kiswahili': 'Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!', 
+      'Dholuo': 'HEY! MA EN GIMA BER NG\'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng\'o kute mag ayaki kod nyae mamoko!', 
+      'English': 'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'
+    }
+
   };
 
   final Map<String, Map<String, String>> _videos = {
@@ -91,7 +96,14 @@ class _ReadyPageState extends State<ReadyPage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.warning_amber_rounded, color: Colors.amber), // Attention icon
+                  //   Image.asset(
+                  //   // 'assets/exclamation.png', // Path to your custom icon
+                  //   Icon(Icons.warning_amber_rounded, color: Colors.amber),
+                  //   width: 24, // Adjust size as needed
+                  //   height: 24, // Adjust size as needed
+                  //    // You can adjust the color if needed
+                  // ),
+                  Icon(Icons.warning_amber_rounded, color: Colors.amber),
                     SizedBox(width: 8.0),
                     Expanded(
                       child: Text(
@@ -157,9 +169,9 @@ Widget build(BuildContext context) {
                 .toList(),
           ),
           customListTile(
-            imagePath: 'assets/preg_woman.png',
+            imagePath: 'assets/preg_woman_new.png',
             header: _t('What if I\'m ready to have a baby?'),
-            title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
+            title: _t('HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'),
           ),
 
           SizedBox(width:boxWidth, height:boxHeight * 0.5 * 0.6, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
