@@ -125,58 +125,19 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
               ],
             ),
           ),
-          buildContentCard(Icons.medical_information, 'how_it_works_title', 'how_it_works'),
-        buildContentCard(Icons.water_drop, 'what_period', 'side_effects'),
-        buildContentCard(Icons.calendar_month, 'how_long', 'lasts'),
-        buildContentCard(Icons.check_circle_outline, 'how_effective', 'effectiveness'),
-        buildContentCard(Icons.remove_red_eye, 'can_private', 'privacy'),
-        buildContentCard(Icons.pregnant_woman, 'ready_to_have_baby', 'fertility'),
+          buildContentCard('assets/birth_control_new.png', 'how_it_works_title', 'how_it_works'),
+        buildContentCard('assets/period_new.png', 'what_period', 'side_effects'),
+        buildContentCard('assets/calendar_new.png', 'how_long', 'lasts'),
+        buildContentCard('assets/chance_new.png', 'how_effective', 'effectiveness'),
+        buildContentCard('assets/privacy_new.png', 'can_private', 'privacy'),
+        buildContentCard('assets/preg_woman_new.png', 'ready_to_have_baby', 'fertility'),
         ],
       ),
     );
   }
 
   
-
-//   Widget buildContentCard(IconData icon, String titleKey, String contentKey) {
-//   // Fetch the translated title and content based on the current language
-//   String translatedTitle = _t(titleKey);
-//   String content = widget.methodDetails?[contentKey]?[_currentLanguage] ?? 'No information available';
-
-//   return Container(
-//     margin: EdgeInsets.only(bottom: 10),
-//     padding: EdgeInsets.all(10),
-//     decoration: BoxDecoration(
-//       color: Colors.grey.shade200,
-//       borderRadius: BorderRadius.circular(10),
-//     ),
-//     child: Row(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Icon(icon, size: 44, color: Theme.of(context).primaryColor),
-//         SizedBox(width: 10),
-//         Expanded(
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Text(
-//                 translatedTitle, // Using the translated title
-//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//               ),
-//               SizedBox(height: 8),
-//               Text(
-//                 content, // Displaying content in the current language
-//                 style: TextStyle(fontSize: 16),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ],
-//     ),
-//   );
-// }
-
-Widget buildContentCard(IconData icon, String titleKey, String contentKey) {
+Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
   // Fetch the translated title and content based on the current language
   String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? 'No title available';
   String content = widget.methodDetails?[contentKey]?[_currentLanguage] ?? 'No information available';
@@ -191,7 +152,8 @@ Widget buildContentCard(IconData icon, String titleKey, String contentKey) {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 44, color: Theme.of(context).primaryColor),
+        // Icon(icon, size: 44, color: Theme.of(context).primaryColor),
+        Image.asset(iconPath, width: 44, height: 44),
         SizedBox(width: 10),
         Expanded(
           child: Column(
