@@ -1,3 +1,12 @@
+import 'package:flutter/material.dart';
+import 'recommendation_screen.dart';
+import 'recommendation_model.dart';
+
+class QuizScreen extends StatefulWidget {
+  @override
+  _QuizScreenState createState() => _QuizScreenState();
+}
+
 class _QuizScreenState extends State<QuizScreen> {
   Map<String, String> _selectedOptions = {};
   String _currentLanguage = 'English';
@@ -76,7 +85,18 @@ final Map<String, Map<String, String>> _translations = {
     'outroText2': 'The following method may also be a good option, but there may be a delay of 3-6 months in fertility after stopping: Depo', 
     'outroText3': 'We also recommend you start a prenatal vitamin for good pregnancy health.', 
     'outroText4': 'The following methods may be less private, but you might also want to consider them: Condoms, Pills. Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.', 
-
+    'outroText5': 'Condoms are the best way to prevent HIV and other infections, but rely on your partner to use and must be used every time you have sex to prevent pregnancy.', 
+    'outroText6': 'The following methods may cause changes to your bleeding but these changes are not harmful and will not lead to fertility problems: Depo, Implant, IUCD', 
+    'outroText7': 'Good news! NONE OF THE METHODS WILL CHANGE YOUR ABILITY TO GET PREGNANT IN THE FUTURE!!! If you want to get pregnant in the next 6 months, we recommend avoiding Depo.', 
+    'outroText8': 'Your periods might be light and irregular or stop when using Depo or the implant, but this is not bad and does not lead to fertility problems.You might also consider the following methods, which do not lead to periods stopping:Pills, Condoms, IUCD', 
+    'outroText9': 'Your periods might be heavier using the following method(s):', 
+    'outroText10': 'You might also consider the following methods, which do not lead to periods stopping: Pills, Condoms, IUCD', 
+    'outroText11': 'The following method may also be a good option, but there may be a delay of 3-6 months in fertility after stopping:Depo', 
+    'outroText12': 'The Emergency Pill can help prevent pregnancy after sex but is not as effective.', 
+    'outroText13': 'The following methods last 3 months or less but you might also want to use them: Condoms, Pills, Depo', 
+    'outroText14': 'The following methods last longer than 3 months but you might also want to use them: Implant, IUCD', 
+    'outroText15': 'The following methods last 1 or more years but you might also want to use them: Implant, IUCD', 
+    'outroText16': 'The following methods last less than a year but you might also want to use them: Condoms, Pills, Depo', 
     'recommendationTitle': 'Here are some recommendations that might be right for you!', 
     // 'learnMore': 'Learn More',
   },
@@ -118,7 +138,19 @@ final Map<String, Map<String, String>> _translations = {
     'outroText1': 'Kondomu ni njia bora ya kuzuia Virusi Vya Ukimwi na maambukizo mengine, lakini inaweza isiwe njia bora ya kuzuia mimba kwa muda mrefu.',  
     'outroText2': 'Njia ifuatayo inaweza pia kuwa chaguo nzuri, lakini kunaweza kuwa na kuchelewa kwa miezi 3-6 katika uzazi baada ya kuacha:', 
     'outroText3': 'Tunapendekeza pia uanzishe vitamini katika ujauzito kwa afya bora ya ujauzito.', 
-    // 'learnMore': 'Jifunze Zaidi',
+    'outroText4': 'Njia zifuatazo zinaweza kuwa za faragha kidogo, lakini pia unaweza kutaka kuzizingatia: Condoms, Pills. Kondomu ni njia bora ya kuzuia VVU na maambukizo mengine, lakini tegemea mwenzako atumie.', 
+    'outroText5': 'Kondomu ni njia bora ya kuzuia VVU na maambukizo mengine, lakini tegemea mpenzi wako kutumia na lazima zitumike kila wakati unapojamiiana ili kuzuia mimba.', 
+    'outroText6': 'Mbinu zifuatazo zinaweza kusababisha mabadiliko katika kutokwa na damu kwako lakini mabadiliko haya hayana madhara na hayatasababisha matatizo ya uzazi: Depo, Implant, IUCD', 
+    'outroText7': 'Habari njema! HAKUNA NJIA HIZO ITAKAYOBADILI UWEZO WAKO WA KUPATA MIMBA BAADAYE!!! Ikiwa unataka kupata mimba katika miezi 6 ijayo, tunapendekeza uepuke Depo.', 
+    'outroText8': 'Hedhi yako inaweza kuwa nyepesi na isiyo ya kawaida au kukoma unapotumia Depo au Implant, lakini hii si mbaya na haileti matatizo ya uzazi.', 
+    'outroText9': 'Hedhi yako unaweza kuwa mzito zaidi kwa kutumia mbinu zifuatazo:', 
+    'outroText10': 'Unaweza pia kuzingatia njia zifuatazo, ambazo hazisababishi kusimamishwa kwa hedhi:', 
+    'outroText11': 'Njia ifuatayo inaweza pia kuwa chaguo nzuri, lakini kunaweza kuwa na kuchelewa kwa miezi 3-6 katika uzazi baada ya kuacha: Depo', 
+    'outroText12': 'Kidonge cha Dharura kinaweza kusaidia kuzuia mimba baada ya kujamiiana lakini hakifai.', 
+    'outroText13': 'Njia zifuatazo hudumu kwa miezi 3 au chini ya hapo lakini pia unaweza kutaka kuzitumia: Condoms, Pills, Depo', 
+    'outroText14': 'Njia zifuatazo hudumu zaidi ya miezi 3 lakini pia unaweza kutaka kuzitumia: Implant, IUCD',
+    'outroText15': 'Njia zifuatazo hudumu mwaka 1 au zaidi lakini unaweza kutaka kuzitumia: Implant, IUCD', 
+    'outroText16': 'Njia zifuatazo hudumu chini ya mwaka mmoja lakini pia unaweza kutaka kuzitumia: Condoms, Pills, Depo', 
   },
   'Dholuo': {
     'q1': 'Iwinjo nade ewi lokruok e chwer mar rembi mar dwe?', 
@@ -150,6 +182,19 @@ final Map<String, Map<String, String>> _translations = {
      'outroText1': 'Rabo yunga e yo maber mar geng\'o kute mag ayaki kod tuoche mamoko, to ok nyalo bedo yo maber mar geng\'o ich kuom kinde malach.', 
       'outroText2': 'Yore moluwogi bende nyalo bedo yiero maber, to deko nyalo bete mar dweche 3-6 e nyaloni mar mako ich bang weyo:', 
       'outroText3': 'Wa ng\'ado ni rieko bende ni mondo ichak muonyo antenatal vitamins mondo iting ich man gi ngima maber', 
+      'outroText4': 'Yore moluwogi nyalo bedo ma ok opondo matin, to inyalo bende dwaro neno gi: Condoms, Pills. Rabo yunga e yo maber mogik e geng\'o kute mag ayaki kod tuoche mamoko, to nyaka jaherani ema tikode.', 
+      'outroText5': 'Rabo yunga e yo mabe e geng\'o kute mag ayaki kod tuoche mamoko, to nyaka jaherani ema ti kode kendo nyaka ti kode kinde duto ma ibedo e achiel mondo ogeng ich.', 
+      'outroText6': 'Yore moluwogi nyalo kelo lokruok e chwer mar rembi mar dwe to lokruok gi ok kel hinyruok kendo ok nyalo kelo chandruok e nyaloni mar mako ich: Depo, Implant, IUCD',
+      'outroText7': 'Wach maber! ONGE YOR KOMO NYUOL MANYALO LOKO NYALONI MAR MAKO ICH E NDALO MABIRO !!! Ka idwaro mako ich e dweche 6 mabiro, wang\'ado ni rieko ni iwe tiyo gi Depo.', 
+      'outroText8': 'Rembi mar dwe nyalo biro matin kendo biro ekinde ma ok ochan kata weyo chwer ka itiyo gi Depo kata implant, to ma ok rach kendo ok kel chandruok e nyaloni mar mako ich.', 
+      'outroText9': 'Rembi mar dwe nyalo chwer mang\'eny ka itiyo gi yore moluwogi:',
+      'outroText10': 'Inyalo  bende ng\'iyo yore ma oluwogi, ma ok mi chwer mar dwe chungi:', 
+      'outroText11': 'Yore moluwogi bende nyalo bedo yiero maber, to deko nyalo bete mar dweche 3-6 e nyaloni mar mako ich bang weyo: Depo', 
+      'outroText12': 'E-pill nyalo konyo geng\'o ich bang bedo e achiel to ok en yo matiyo maber ahinya.', 
+      'outroText13':'Yore moluwogi kau dweche 3 kata matin to inyalo bende dwaro tiyo kodgi: Condoms, Pills, Depo', 
+      'outroText14': 'Yore moluwogi kau dweche 3 kata matin to inyalo bende dwaro tiyo kodgi: Implant, IUCD', 
+      'outroText15': 'Yore moluwogi kau higa 1 kata mang\'eny to inyalo bende dwao tiyo kodgi: Implant, IUCD', 
+      'outroText16': 'Yore moluwogi kau kinde matin ne higa to inyalo bende dwaro tiyo kodgi: Condoms, Pills, Depo'
   }
 };
 
