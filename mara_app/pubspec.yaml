@@ -94,6 +94,12 @@ flutter:
     - assets/maralogo.png
     - assets/imlaunchscreenimg.png
     - assets/iud_picture_of_woman.png
+    - assets/birth_control_new.png
+    - assets/calendar_new.png
+    - assets/chance_new.png
+    - assets/period_new.png
+    - assets/privacy_new.png
+    - assets/preg_woman_new.png
 
   #   - images/a_dot_ham.jpeg
 

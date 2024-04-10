@@ -286,7 +286,7 @@ Widget _buildTitleBox() {
       borderRadius: BorderRadius.circular(8.0),
     ),
     child: Text(
-      'Here are some recommendations of methods that might be right for you',
+      _t('recommendationTitle'),
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     ),

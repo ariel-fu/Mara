@@ -60,49 +60,24 @@ class RecommendationModel {
     }
   }
 
-  static Q5Recommendation getRecommendationsForQ5(String option) {
-    switch (option) {
-      case 'The lowest chance of getting pregnant':
-        return Q5Recommendation(
-          recommendations: ['Depo, Implant, IUD'],
-          outroText: 'The lowest chance of getting pregnant with these methods: Depo, Implant, IUCD. Condoms are the best way to prevent HIV and other infections, but rely on your partner to use and must be used every time you have sex to prevent pregnancy.'
-        );
-      case 'Avoiding changes to my periods':
-        return Q5Recommendation(
-          recommendations: ['Condoms, Pills'],
-          outroText: 'Based on how important it is to you to avoid changes to your periods, the following methods might be a good choice for you: Condoms, Pills. The following methods may cause changes to your bleeding but these changes are not harmful and will not lead to fertility problems: Depo, Implant, IUCD.'
-        );
-      case 'Keeping my method private':
-        return Q5Recommendation(
-          recommendations: ['Depo, Implant, IUD'],
-          outroText: 'Keeping your method private: Depo, Implant, IUD. The following methods may be less private, but you might also want to consider them: Condoms, Pills.'
-        );
-      case 'Being able to get pregnant in the future':
-        return Q5Recommendation(
-          recommendations: ['Condoms, Pills, Depo, Implant, IUD, Emergency Pill'],
-          outroText: 'Good news! NONE OF THE METHODS WILL CHANGE YOUR ABILITY TO GET PREGNANT IN THE FUTURE!!! If you want to get pregnant in the next 6 months, we recommend avoiding Depo.'
-        );
-      default:
-        return Q5Recommendation(
-          recommendations: [],
-          outroText: 'Please select an option to get a recommendation.'
-        );
-    }
-  }
+
 
   static List<String> getOutroTextsBasedOnPregnancyTiming(String timing) { // Q2
     switch (timing) {
       case 'More than 1 year':
-        return [
-          'Condoms are the best way to prevent HIV and other infections, but may not be the best method for preventing pregnancy for a long period of time.'
-        ];
-      // Add more cases as needed
+        // return [
+        //   'Condoms are the best way to prevent HIV and other infections, but may not be the best method for preventing pregnancy for a long period of time.'
+        // ];
+        return ['outroText1'];
       case 'In 6-12 months':
-        return ['The following method may also be a good option, but there may be a delay of 3-6 months in fertility after stopping: Depo'];
+        // return ['The following method may also be a good option, but there may be a delay of 3-6 months in fertility after stopping: Depo'];
+        return ['outroText2'];
       case 'Now or very soon':
-        return ['We also recommend you start a prenatal vitamin for good pregnancy health.'];
+        // return ['We also recommend you start a prenatal vitamin for good pregnancy health.'];
+        return ['outroText3'];
       case 'Not sure':
-        return ['Condoms are the best way to prevent HIV and other infections, but may not be the best method for preventing pregnancy for a long period of time.'];
+        // return ['Condoms are the best way to prevent HIV and other infections, but may not be the best method for preventing pregnancy for a long period of time.'];
+        return ['outroText1'];
       default:
         return [''];
     }
@@ -111,11 +86,14 @@ class RecommendationModel {
   static List<String> getOutroTextsBasedOnPartner(String privacy){ // Q4
     switch(privacy) {
       case 'Extremely important':
-        return ['The following methods may be less private, but you might also want to consider them: Condoms, Pills. Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.'];
+        // return ['The following methods may be less private, but you might also want to consider them: Condoms, Pills. Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.'];
+        return ['outroText17'];
       case 'Somewhat important':
-        return ['The following methods may be less private, but you might also want to consider them: Condoms, Pills. Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.'];
+        // return ['The following methods may be less private, but you might also want to consider them: Condoms, Pills. Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.'];
+        return ['outroText17'];
       case 'Not important':
-        return ['Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.'];
+        // return ['Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.'];
+        return ['outroText5'];
       default:
         return [''];
     }
@@ -124,11 +102,14 @@ class RecommendationModel {
   static List<String> getOutroTextsBasedOnLightIrregular(String oktype){
     switch(oktype){
       case 'Could be OK':
-        return ['Your periods might be light and irregular or stop when using Depo or the implant, but this is not bad and does not lead to fertility problems.You might also consider the following methods, which do not lead to periods stopping:Pills, Condoms, IUCD'];
+        // return ['Your periods might be light and irregular or stop when using Depo or the implant, but this is not bad and does not lead to fertility problems.You might also consider the following methods, which do not lead to periods stopping:Pills, Condoms, IUCD'];
+        return ['outroText8'];
       case 'Not OK':
-        return ['Your periods might be light and irregular or stop when using the following methods, but this is not bad and does not lead to fertility problems: Depo, Implant'];
+        // return ['Your periods might be light and irregular or stop when using the following methods, but this is not bad and does not lead to fertility problems: Depo, Implant'];
+        return ['outroText18'];
       case 'Not sure':
-        return ['Your periods might be light and irregular or stop when using Depo or the implant, but this is not bad and does not lead to fertility problems.You might also consider the following methods, which do not lead to periods stopping:Pills, Condoms, IUCD'];
+        // return ['Your periods might be light and irregular or stop when using Depo or the implant, but this is not bad and does not lead to fertility problems.You might also consider the following methods, which do not lead to periods stopping:Pills, Condoms, IUCD'];
+        return ['outroText8'];
       default:
         return [''];
     }
@@ -137,11 +118,14 @@ class RecommendationModel {
   static List<String> getOutroTextsBasedOnPeriodsStop(String oktype){
     switch(oktype){
       case 'Could be OK':
-        return ['Your periods might be light and irregular or stop when using Depo or the implant, but this is not bad and does not lead to fertility problems.You might also consider the following methods, which do not lead to periods stopping:Pills, Condoms, IUCD'];
+        // return ['Your periods might be light and irregular or stop when using Depo or the implant, but this is not bad and does not lead to fertility problems.You might also consider the following methods, which do not lead to periods stopping:Pills, Condoms, IUCD'];
+        return ['outroText10'];
       case 'Not OK':
-        return ['Your periods might be light and irregular or stop when using the following methods, but this is not bad and does not lead to fertility problems: Depo, Implant'];
+        // return ['Your periods might be light and irregular or stop when using the following methods, but this is not bad and does not lead to fertility problems: Depo, Implant'];
+        return ['outroText8'];
       case 'Not sure':
-        return ['Your periods might be light and irregular or stop when using Depo or the implant, but this is not bad and does not lead to fertility problems.You might also consider the following methods, which do not lead to periods stopping:Pills, Condoms, IUCD'];
+        // return ['Your periods might be light and irregular or stop when using Depo or the implant, but this is not bad and does not lead to fertility problems.You might also consider the following methods, which do not lead to periods stopping:Pills, Condoms, IUCD'];
+        return ['outroText10'];
       default:
         return [''];
     }
@@ -150,11 +134,14 @@ class RecommendationModel {
   static List<String> getOutroTextsBasedOnPeriodsHeavier(String oktype){
     switch(oktype){
       case 'Could be OK':
-        return ['Your periods might be heavier using the following method:IUCD'];
+        // return ['Your periods might be heavier using the following method:IUCD'];
+        return ['outroText9'];
       case 'Not OK':
-        return ['Your periods might be heavier using the following method:IUCD'];
+        // return ['Your periods might be heavier using the following method:IUCD'];
+        return ['outroText9'];
       case 'Not sure':
-        return ['Your periods might be heavier using the following method:IUCD'];
+        // return ['Your periods might be heavier using the following method:IUCD'];
+        return ['outroText9'];
       default:
         return [''];
     }
@@ -176,11 +163,14 @@ class RecommendationModel {
   static List<String> getOutroTextsBasedOnLastEverytimeSex(String oktype){
     switch(oktype){
       case 'Could be OK':
-        return ['Condoms are the best way to prevent HIV and other infections, but must be used every time you have sex to prevent pregnancy. The Emergency Pill can help prevent pregnancy after sex but is not as effective.'];
+        // return ['Condoms are the best way to prevent HIV and other infections, but must be used every time you have sex to prevent pregnancy. The Emergency Pill can help prevent pregnancy after sex but is not as effective.'];
+        return ['outroText19'];
       case 'Not OK':
-        return ['Condoms are the best way to prevent HIV and other infections, but must be used every time you have sex to prevent pregnancy. The Emergency Pill can help prevent pregnancy after sex but is not as effective.'];
+        // return ['Condoms are the best way to prevent HIV and other infections, but must be used every time you have sex to prevent pregnancy. The Emergency Pill can help prevent pregnancy after sex but is not as effective.'];
+        return ['outroText19'];
       case 'Not sure':
-        return ['Condoms are the best way to prevent HIV and other infections, but must be used every time you have sex to prevent pregnancy. The Emergency Pill can help prevent pregnancy after sex but is not as effective.'];
+        // return ['Condoms are the best way to prevent HIV and other infections, but must be used every time you have sex to prevent pregnancy. The Emergency Pill can help prevent pregnancy after sex but is not as effective.'];
+        return ['outroText19'];
       default:
         return [''];
     }
@@ -189,11 +179,14 @@ class RecommendationModel {
   static List<String> getOutroTextsBasedOnLast3Months(String oktype){
     switch(oktype){
       case 'Could be OK':
-        return ['The following methods last longer than 3 months but you might also want to use them:Implant, IUCD'];
+        // return ['The following methods last longer than 3 months but you might also want to use them:Implant, IUCD'];
+        return ['outroText14'];
       case 'Not OK':
-        return ['The following methods last 3 months or less but you might also want to use them: Condoms, Pills, Depo'];
+        // return ['The following methods last 3 months or less but you might also want to use them: Condoms, Pills, Depo'];
+        return ['outroText13'];
       case 'Not sure':
-        return ['The following methods last 3 months or less but you might also want to use them: Condoms, Pills, Depo'];
+        // return ['The following methods last 3 months or less but you might also want to use them: Condoms, Pills, Depo'];
+        return ['outroText13'];
       default:
         return [''];
     }
@@ -202,11 +195,14 @@ class RecommendationModel {
   static List<String> getOutroTextsBasedOnMoreThan1Yr(String oktype){
     switch(oktype){
       case 'Could be OK':
-        return ['The following methods last less than a year but you might also want to use them: Condoms, PIlls, Depo'];
+        // return ['The following methods last less than a year but you might also want to use them: Condoms, PIlls, Depo'];
+        return ['outroText16'];
       case 'Not OK':
-        return ['The following methods last 3 or more years but you might also want to use them:Implant, IUCD'];
+        // return ['The following methods last 1 or more years but you might also want to use them:Implant, IUCD'];
+        return ['outroText15'];
       case 'Not sure':
-        return ['The following methods last less than a year but you might also want to use them: Condoms, PIlls, Depo'];
+        // return ['The following methods last less than a year but you might also want to use them: Condoms, PIlls, Depo'];
+        return ['outroText16'];
       default:
         return [''];
     }
@@ -220,13 +216,17 @@ class RecommendationModel {
   static List<String> getOutroTextsBasedOnFactorsImp(String factor){ // Q5
     switch(factor) {
       case 'The lowest chance of getting pregnant':
-        return ['Condoms are the best way to prevent HIV and other infections, but rely on your partner to use and must be used every time you have sex to prevent pregnancy.'];
+        // return ['Condoms are the best way to prevent HIV and other infections, but rely on your partner to use and must be used every time you have sex to prevent pregnancy.'];
+        return ['outroText5'];
       case 'Avoiding changes to my periods':
-        return ['The following methods may cause changes to your bleeding but these changes are not harmful and will not lead to fertility problems:Depo, Implant, IUCD'];
+        // return ['The following methods may cause changes to your bleeding but these changes are not harmful and will not lead to fertility problems:Depo, Implant, IUCD'];
+        return ['outroText6'];
       case 'Keeping my method private':
-        return ['The following methods may be less private, but you might also want to consider them: Condoms, Pills. Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.'];
+        // return ['The following methods may be less private, but you might also want to consider them: Condoms, Pills. Condoms are the best way to prevent HIV and other infections, but rely on your partner to use.'];
+        return ['outroText4'];
       case 'Being able to get pregnant in the future':
-        return ['Good news! NONE OF THE METHODS WILL CHANGE YOUR ABILITY TO GET PREGNANT IN THE FUTURE!!! If you want to get pregnant in the next 6 months, we recommend avoiding Depo'];
+        // return ['Good news! NONE OF THE METHODS WILL CHANGE YOUR ABILITY TO GET PREGNANT IN THE FUTURE!!! If you want to get pregnant in the next 6 months, we recommend avoiding Depo'];
+        return ['outroText7'];
       default:
         return [''];
     }
