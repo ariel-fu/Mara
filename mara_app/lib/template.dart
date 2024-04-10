@@ -10,11 +10,40 @@ class TemplatePage extends StatefulWidget {
 }
 
 class _TemplatePageState extends State<TemplatePage> {
-  // Widget methodContent = ;
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   bool overrideIndex = false;
   int languageIndex = 2; // similar indexing for language, English as the default
   final languages = ["Kiswahili", "Dholuo", "English"];
+
+  final Map<String, List<String>> iconLabelMap = {
+    "Kiswahili": [
+      'Condom in Kiswahili',
+      "Female Condom in Kiswahili",
+      "Birth Control Pills in Kiswahili",
+      "Syringe in Kiswahili",
+      "Contraceptive Implant in Kiswahili",
+      "IUD in Kiswahili",
+      "Emergency Contraceptive in Kiswahili"
+    ],
+    "Dholuo": [
+      "Condom in Dholuo",
+      "Female Condom in Dholuo",
+      "Birth Control Pills in Dholuo",
+      "Syringe in Dholuo",
+      "Contraceptive Implant in Dholuo",
+      "IUD in Dholuo",
+      "Emergency Contraceptive in Dholuo"
+    ],
+    "English": [
+      "Condom",
+      "Female Condom",
+      "Birth Control Pills",
+      "Syringe",
+      "Contraceptive Implant",
+      "IUD",
+      "Emergency Contraceptive"
+    ],
+  };
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -110,7 +139,7 @@ class _TemplatePageState extends State<TemplatePage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('INSERT TITLE HERE'),
+        title: Center(child: Text('INSERT TITLE HERE')),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
@@ -219,11 +248,17 @@ class _TemplatePageState extends State<TemplatePage> {
                       color: Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    child: Row(
+                    child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Icon(Icons.lightbulb_outline, color: Colors.amber),
-                          updateMethodContent()
+                          Center(
+                              child: Container(
+                                  child: Center(
+                                    child: updateMethodContent(),
+                                  )
+                              )
+                          )
                         ]
                     )
                   // child: Center(
@@ -303,7 +338,7 @@ class _TemplatePageState extends State<TemplatePage> {
         contentDescriptionMap[languages[languageIndex]]![methodIndex],
         style: TextStyle(
           fontSize: 20.0,
-          color: Colors.white,
+          color: Colors.black,
         )
     );
   }
