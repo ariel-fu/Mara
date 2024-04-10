@@ -16,36 +16,6 @@ class _TemplatePageState extends State<TemplatePage> {
   int languageIndex = 2; // similar indexing for language, English as the default
   final languages = ["Kiswahili", "Dholuo", "English"];
 
-  final Map<String, List<String>> iconLabelMap = {
-    "Kiswahili": [
-      'Condom in Kiswahili',
-      "Female Condom in Kiswahili",
-      "Birth Control Pills in Kiswahili",
-      "Syringe in Kiswahili",
-      "Contraceptive Implant in Kiswahili",
-      "IUD in Kiswahili",
-      "Emergency Contraceptive in Kiswahili"
-    ],
-    "Dholuo": [
-      "Condom in Dholuo",
-      "Female Condom in Dholuo",
-      "Birth Control Pills in Dholuo",
-      "Syringe in Dholuo",
-      "Contraceptive Implant in Dholuo",
-      "IUD in Dholuo",
-      "Emergency Contraceptive in Dholuo"
-    ],
-    "English": [
-      "Condom",
-      "Female Condom",
-      "Birth Control Pills",
-      "Syringe",
-      "Contraceptive Implant",
-      "IUD",
-      "Emergency Contraceptive"
-    ],
-  };
-
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
       "method 1 in Kiswahili",
