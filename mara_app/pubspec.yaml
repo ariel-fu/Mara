@@ -34,6 +34,7 @@ dependencies:
   excel: ^4.0.2
   csv: ^5.1.1
   path_provider: ^2.1.2
+  flutter_svg: ^2.0.10
 
   flutter:
     sdk: flutter
@@ -72,6 +73,33 @@ flutter:
     - videoAudio/audio/purr.mp3
     - videoAudio/audio/crickets.mp3
     - videoAudio/videos/chimes.mp4
+
+    - videoAudio/videos/peer/peer1KS.mp4
+    - videoAudio/videos/peer/peer1DL.mp4
+    - videoAudio/videos/peer/peer1E.mp4
+    - videoAudio/videos/peer/peer2KS.mp4
+    - videoAudio/videos/peer/peer2DL.mp4
+    - videoAudio/videos/peer/peer2E.mp4
+    - videoAudio/videos/peer/peer3KS.mp4
+    - videoAudio/videos/peer/peer3DL.mp4
+    - videoAudio/videos/peer/peer3E.mp4
+
+    - videoAudio/videos/provider/provider1KS.mp4
+    - videoAudio/videos/provider/provider1DL.mp4
+    - videoAudio/videos/provider/provider1E.mp4
+
+    - videoAudio/videos/provider/provider3KS.mp4
+    - videoAudio/videos/provider/provider3DL.mp4
+    - videoAudio/videos/provider/provider3E.mp4
+
+    - videoAudio/videos/provider/provider4KS.mp4
+    - videoAudio/videos/provider/provider4DL.mp4
+    - videoAudio/videos/provider/provider4E.mp4
+
+
+
+
+
     - assets/string-resources/method_1.png
     - assets/string-resources/method_2.png
     - assets/string-resources/method_3.png
@@ -85,9 +113,13 @@ flutter:
     - assets/IUD.png
     - assets/depo.png
     - assets/implant.png
+    - assets/iucd.png
     - assets/woman.png
+    - assets/options-icons/
     - assets/preg_woman.png
   #   - images/a_dot_ham.jpeg
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
