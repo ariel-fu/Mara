@@ -82,61 +82,69 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     );
   }
 
+
   @override
-  Widget build(BuildContext context) {
-    if (widget.methodDetails == null) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Error'),
-        ),
-        body: Center(child: Text('No data available for ${widget.methodName}')),
-      );
-    }
-
-    String methodName = widget.methodDetails?['name']?[_currentLanguage] ?? widget.methodName;
-    String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
-
+Widget build(BuildContext context) {
+  if (widget.methodDetails == null) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back), 
-          onPressed: () => Navigator.of(context).pop(), 
-        ),
-        title: Text('Summary of $methodName'),
+        title: Text('Error'),
       ),
-      body: ListView(
-        padding: EdgeInsets.all(8.0),
-        children: [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: ['Kiswahili', 'Dholuo', 'English'].map(_languageButton).toList(),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(iconPath, width: 50, height: 50),
-                SizedBox(width: 10),
-                Text(methodName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ),
-          buildContentCard('assets/birth_control_new.png', 'how_it_works_title', 'how_it_works'),
-        buildContentCard('assets/period_new.png', 'what_period', 'side_effects'),
-        buildContentCard('assets/calendar_new.png', 'how_long', 'lasts'),
-        buildContentCard('assets/chance_new.png', 'how_effective', 'effectiveness'),
-        buildContentCard('assets/privacy_new.png', 'can_private', 'privacy'),
-        buildContentCard('assets/preg_woman_new.png', 'ready_to_have_baby', 'fertility'),
-        ],
-      ),
+      body: Center(child: Text('No data available for ${widget.methodName}')),
     );
   }
 
-  
+  String methodName = widget.methodDetails?['name']?[_currentLanguage] ?? widget.methodName;
+  String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
+
+  return Scaffold(
+    appBar: AppBar(
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back), 
+        onPressed: () => Navigator.of(context).pop(), 
+      ),
+      title: Text('Summary of $methodName'),
+    ),
+    body: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: ['Kiswahili', 'Dholuo', 'English'].map(_languageButton).toList(),
+          ),
+        ),
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.all(8.0),
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(iconPath, width: 50, height: 50),
+                    SizedBox(width: 10),
+                    Text(methodName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+              buildContentCard('assets/birth_control_new.png', 'how_it_works_title', 'how_it_works'),
+              buildContentCard('assets/period_new.png', 'what_period', 'side_effects'),
+              buildContentCard('assets/calendar_new.png', 'how_long', 'lasts'),
+              buildContentCard('assets/chance_new.png', 'how_effective', 'effectiveness'),
+              buildContentCard('assets/privacy_new.png', 'can_private', 'privacy'),
+              buildContentCard('assets/preg_woman_new.png', 'ready_to_have_baby', 'fertility'),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+
 Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
   // Fetch the translated title and content based on the current language
   String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? 'No title available';
