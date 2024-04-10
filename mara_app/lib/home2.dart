@@ -127,18 +127,18 @@ class _HomePage2State extends State<HomePage2> {
               onTap: () => _handleTap(5),
             ),
             Divider(),  
-            
-            if (_allSelected)
-              ListTile(
-                leading: Icon(Icons.question_answer),
-                title: Text('Take the Quiz'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => QuizScreen()),
-                  );
-                },
-              ),
+            ListTile(
+              leading: Icon(Icons.question_answer),
+              title: Text('Take the Quiz'),
+              tileColor: _allSelected ? Colors.green : Colors.grey,
+              onTap: () {
+                _allSelected ? 
+                Navigator.push(
+                 context,
+                 MaterialPageRoute(builder: (context) => QuizScreen()),
+                ) : null;
+              },
+            ),
           ],
         ),
       ),
