@@ -13,7 +13,7 @@ class PillInfo extends StatelessWidget {
           onPressed: () {
             /* TODO - add navigation directly to options_page
              and hide the dialogue */
-            Navigator.of(context).popUntil(ModalRoute.withName('/options'));
+            Navigator.of(context).pop();
           },
         ),
         title: Text('Pills Page')

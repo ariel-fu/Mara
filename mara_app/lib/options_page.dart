@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'option_pages/pills.dart';
 import 'options_image.dart';
+import 'model/method_repository.dart';
 
 class OptionsPage extends StatefulWidget {
   const OptionsPage({Key? key}) : super(key: key);
@@ -13,16 +14,9 @@ class _OptionsPageState extends State<OptionsPage> {
   // String? _selectedMethod;
   int? methodIndex;
   bool overrideIndex = false;
-  int _languageIndex = 0; // Default value
+  int _languageIndex = 2; // Default value
   final languages = ["Kiswahili", "Dholuo", "English"];
-  final content = [
-    'IUD',
-    'Pills',
-    'Condom',
-    'Implant',
-    'Depo Injection',
-    'Female Condom',
-    '2-Pill',];
+  final methods = MethodRepository.loadMethods();
 
   // List<List<String>> languages = List.generate(3, (_) => <String>[]);
   // Change value to set aspect ratio
@@ -55,57 +49,74 @@ class _OptionsPageState extends State<OptionsPage> {
         leading: IconButton(
           icon: const Icon(Icons.home),
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/home', arguments: _languageIndex);
+            Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: const Text('Options'),
-        actions: [
-          // Buttons with translations on the top right
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                overrideIndex = true;
-                _languageIndex = 0;
-              });
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: _languageIndex == 0 ? Colors.grey : null,
-            ),
-            child: Text(
-              languages.isNotEmpty && languages[0].isNotEmpty ? languages[0] : '',
-            ),
-          ),
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                overrideIndex = true;
-                _languageIndex = 1;
-              });
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: _languageIndex == 1 ? Colors.grey : null,
-            ),
-            child: Text(
-              languages.isNotEmpty && languages[1].isNotEmpty ? languages[1] : '',
-            ),
-          ),
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                overrideIndex = true;
-                _languageIndex = 2;
-              });
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: _languageIndex == 2 ? Colors.grey : null,
-            ),
-            child: Text(
-              languages.isNotEmpty && languages[2].isNotEmpty ? languages[2] : '',
-            ),
-          ),
-        ],
+        title: Center(child: Text('What are my options?')),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(containerHeight * 0.05),
+          child: Container(
+            // height: availableHeight * 0.1,
+              child: Container(
+                // padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _languageIndex = 0;
+                            overrideIndex = true;
+                            // updateMethodContent();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _languageIndex == 0 ? Colors.grey : null,
+                          foregroundColor: _languageIndex == 0 ? Colors.white : null,
+                        ),
+                        child: Text('Kiswahili'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _languageIndex = 1;
+                            overrideIndex = true;
+                            // updateMethodContent();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _languageIndex == 1 ? Colors.grey : null,
+                          foregroundColor: _languageIndex == 1 ? Colors.white : null,
+                        ),
+                        child: Text('Dholuo'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _languageIndex = 2;
+                            overrideIndex = true;
+                            // updateMethodContent();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _languageIndex == 2 ? Colors.grey : null,
+                          foregroundColor: _languageIndex == 2 ? Colors.white : null,
+                        ),
+                        child: Text('English'),
+                      ),
+                    ),
+                  ],
+                ),
+              )),
+        ),
       ),
       // body
       body: OptionsImage(containerWidth, containerHeight, methodIndex, updateIndex),
@@ -118,13 +129,16 @@ class _OptionsPageState extends State<OptionsPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                IconButton(icon: Icon(Icons.volume_up), onPressed: null),
-                methodIndex == null ? Text("Please select a method to learn more") : Text(content[methodIndex!],
+                // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
+                methodIndex == null ? Text("Please select a method to learn more") : Text(methods[methodIndex]!.name,
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
               ]
             ),
-            methodIndex == null ? SizedBox(height: 20.0) : Text("description"),
-            SizedBox(height: 70.0),
+            methodIndex == null ? SizedBox(height: 20.0) : Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(methods[methodIndex]!.description),
+            ),
+            // SizedBox(height: 70.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -147,7 +161,7 @@ class _OptionsPageState extends State<OptionsPage> {
                     )
                   },
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.black,
+                    foregroundColor: Colors.white,
                     backgroundColor: Colors.green,
                   ),
                   child: Text('Learn more'),
@@ -168,8 +182,5 @@ class _OptionsPageState extends State<OptionsPage> {
     });
   }
 
-  // void _updateMethodContent() {
-  //   //
-  // }
 }
 
