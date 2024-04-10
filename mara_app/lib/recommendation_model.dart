@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 class RecommendationModel {
+  
+
   static List<String> getRecommendationsBasedOnPregnancyTiming(String timing) {
     //print(timing);
     switch (timing) {
@@ -237,10 +237,10 @@ class RecommendationModel {
       'Implant': './assets/implant.png',
       'Pills': './assets/pills.png',
       'Condoms': './assets/condom.png',
-      'IUD': './assets/IUD.png',
+      'IUD': './assets/iucd.png',
       'Emergency Pill': './assets/emergency.png',
       'Depo': './assets/depo.png',
-      'IUCD': './assets/IUD.png',
+      'IUCD': './assets/iucd.png',
     };
 
     return recommendationImages[recommendation] ?? './assets/method_6.png'; // default image if no match found
