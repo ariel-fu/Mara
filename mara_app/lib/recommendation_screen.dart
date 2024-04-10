@@ -50,9 +50,9 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   // }
 
   String _t(String key) {
-  String translation = widget.translations[_currentLanguage]?[key] ?? key;
-  print('Key: $key, Language: $_currentLanguage, Translation: $translation');
-  return translation;
+    String translation = widget.translations[_currentLanguage]?[key] ?? key;
+    print('Key: $key, Language: $_currentLanguage, Translation: $translation');
+    return translation;
 }
 
   Future<Map<String, dynamic>> loadMethodDetails() async {
