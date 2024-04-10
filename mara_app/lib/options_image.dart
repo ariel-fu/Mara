@@ -15,6 +15,11 @@ class OptionsImage extends StatelessWidget {
     final methods = MethodRepository.loadMethods();
     List<Widget> result = [];
     result.add(
+      methodIndex == 0 ? Positioned(
+        top: 0.05 * containerHeight,
+        left: 0.3 * containerWidth,
+        child: Image.asset('assets/iud_picture_of_woman.png', height: 0.7 * containerHeight)
+      ) :
       Positioned(
         top: 0.1 * containerHeight,
         left: -0.1 * containerWidth,
