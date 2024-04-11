@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'recommendation_screen.dart';
 import 'recommendation_model.dart';
+
+
 class QuizScreen extends StatefulWidget {
   @override
   _QuizScreenState createState() => _QuizScreenState();
@@ -101,10 +103,14 @@ final Map<String, Map<String, String>> _translations = {
     'introText8': 'Based on how important it is to you to avoid changes to your periods, the following methods might be a good choice for you:', 
     'introText9': 'Based on how important it is to you to be able to get pregnant in the future, the following methods might be a good choice for you:', 
     'recommendationTitle': 'Here are some recommendations that might be right for you!', 
+    'likedTitle': 'Your favorites', 
+    'incomplete': 'Incomplete quiz', 
+    'incompleteMessage': 'Please answer all questions before submitting the quiz', 
+    'submit': 'Submit quiz', 
     // 'learnMore': 'Learn More',
   },
   'Kiswahili': {
-    'title': 'Jaribio',
+    'title': 'Chemsha bongo',
     'q1': 'Je, unajisikiaje kuhusu mabadiliko katika hedhi yako?',
     'q2': 'Ikiwa ulipaswa kukisia, unafikiri ni wakati gani unaweza kutaka mimba?',
     'q3': 'Je! ungependa mbinu yako ifanye kazi kwa muda gani?',
@@ -159,7 +165,11 @@ final Map<String, Map<String, String>> _translations = {
     'introText6': 'Kulingana na jinsi ilivyo muhimu kwako kuweka njia yako ya faragha, mbinu zifuatazo zinaweza kuwa chaguo nzuri kwako:', 
     'introText7': 'Kulingana na jinsi ni muhimu kwako kuzuia ujauzito, njia zifuatazo zinaweza kuwa chaguo nzuri kwako:', 
     'introText8': 'Kulingana na jinsi ilivyo muhimu kwako kuzuia mabadiliko katika kipindi chako, njia zifuatazo zinaweza kuwa chaguo nzuri kwako:', 
-    'introText9': 'Kulingana na jinsi ilivyo muhimu kwako kupata mimba katika siku zijazo, njia zifuatazo zinaweza kuwa chaguo nzuri kwako:'
+    'introText9': 'Kulingana na jinsi ilivyo muhimu kwako kupata mimba katika siku zijazo, njia zifuatazo zinaweza kuwa chaguo nzuri kwako:', 
+    'likedTitle': 'Vipendwa vyako', 
+    'incomplete': 'Maswali ambayo hayajakamilika', 
+    'incompleteMessage': 'Tafadhali jibu maswali yote kabla ya kuwasilisha chemsha bongo',
+    'submit': 'Wasilisha chemsha bongo',  
   },
   'Dholuo': {
     'q1': 'Iwinjo nade ewi lokruok e chwer mar rembi mar dwe?', 
@@ -187,6 +197,7 @@ final Map<String, Map<String, String>> _translations = {
     'o53': 'Tiyo gi yor geng\'o ich eyo mopondo', 
     'o54': 'Bedo ni anyalo mako ich e ndalo mabiro', 
     'title1': 'Ng\'eyo', 
+    'title': 'Muro obuongo ', 
     'recommendationTitle': 'Erigo gikmoko mawaneno ni nyalo bedo maber kodi!', 
      'outroText1': 'Rabo yunga e yo maber mar geng\'o kute mag ayaki kod tuoche mamoko, to ok nyalo bedo yo maber mar geng\'o ich kuom kinde malach.', 
       'outroText2': 'Yore moluwogi bende nyalo bedo yiero maber, to deko nyalo bete mar dweche 3-6 e nyaloni mar mako ich bang weyo:', 
@@ -215,7 +226,11 @@ final Map<String, Map<String, String>> _translations = {
       'introText6': 'Kaluwore gi kaka omokoni mondo ikan tiyo gi yor komo nyuol mopondo, yore moluwogi nyalo bedo yiero maber ne in:', 
       'introText7': 'Kaluwore gi kaka omokoni mondo igeng\' ich, yore moluwogi nyalo bedo yiero maber ne in:', 
       'introText8': 'Kaluwore gi kaka omokoni mondo igeng\' lokruok e rembi mar dwe, yore moluwogi nyalo bedo yiero maber ne in:', 
-      'introText9': 'Kaluwore gi kaka omokoni mondo ibed ni inyalo mako ich e ndalo mabiro, yore moluwogi nyalo bedo yiero maber ne in:'
+      'introText9': 'Kaluwore gi kaka omokoni mondo ibed ni inyalo mako ich e ndalo mabiro, yore moluwogi nyalo bedo yiero maber ne in:', 
+      'likedTitle': 'Ma ihero', 
+      'incomplete': 'Penjo mapok otiek duoko ', 
+      'incompleteMessage': 'Kiyie to duok penjo te kapok ioro duoko mag penjo ma muro obuongo', 
+      'submit': 'Oor duoko mag muro obuongo', 
   }
 };
 
@@ -302,8 +317,8 @@ void _submitQuiz() {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Incomplete Quiz"),
-          content: Text("Please answer all questions before submitting the quiz."),
+          title: Text(_t('incomplete')),
+          content: Text(_t('incompleteMessage')),
           actions: <Widget>[
             TextButton(
               child: Text("OK"),
@@ -688,7 +703,7 @@ bool _areAllQuestionsAnswered() {
                   child: Center(
                     child: ElevatedButton(
                       onPressed: _submitQuiz,
-                      child: Text('Submit Quiz'),
+                      child: Text(_t('submit')),
                     ),
                   ),
                 ),
