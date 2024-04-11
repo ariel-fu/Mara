@@ -84,7 +84,7 @@ Widget build(BuildContext context) {
 actions: <Widget>[
   ElevatedButton.icon(
     icon: Icon(Icons.thumb_up, color: Colors.black),
-    label: Text('Liked Methods', style: TextStyle(color: Colors.black)),
+    label: Text('Your Favorites', style: TextStyle(color: Colors.black)),
     onPressed: navigateToLikedMethodsScreen,
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.deepPurple[100],
