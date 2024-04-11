@@ -154,10 +154,12 @@ actions: <Widget>[
                                       Stack(
                                         alignment: Alignment.center,
                                         children: [
-                                          Image.asset(
-                                            RecommendationModel.getImageForRecommendation(trimmedRec), 
-                                            width: 100, 
-                                            height: 100
+                                          Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Icon(
+                                              RecommendationModel.getImageForRecommendation(trimmedRec), 
+                                              size: 80,
+                                            ),
                                           ),
                                           Positioned(
                                             top: -9,
