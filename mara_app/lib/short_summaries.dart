@@ -30,7 +30,8 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     'lasts': 'How long does the method work?', 
     'effectiveness': 'How effective is it?',
     'privacy': 'Can I keep it private?', 
-    'fertility': 'What if I\'m ready to have a baby?'
+    'fertility': 'What if I\'m ready to have a baby?',
+    'page_title': 'Summary Page', 
   },
   'Kiswahili': {
     'how_it_works': 'Jinsi Inavyofanya Kazi',
@@ -38,7 +39,8 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     'lasts': 'Mbinu hiyo inafanya kazi kwa muda gani?', 
     'effectiveness': 'How effective is it?',
     'privacy': 'Je, ninaweza kuiweka kwa usiri?', 
-    'fertility': 'Je, itakuaje ikiwa niko tayari kupata mtoto?'
+    'fertility': 'Je, itakuaje ikiwa niko tayari kupata mtoto?', 
+    'page_title': 'Ukurasa wa muhtasari', 
   },
   'Dholuo': {
     'how_it_works': 'Jinsi Inavyofanya Kazi',
@@ -46,7 +48,8 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     'lasts': 'Yor ni tiyo kuom kinde marom nade?', 
     'effectiveness': 'How effective is it?',
     'privacy': 'Bende anyalo kete mopondo?', 
-    'fertility': 'To ka ayikora mar mako ich to?'
+    'fertility': 'To ka ayikora mar mako ich to?', 
+    'page_title': 'Oboke ma lero weche e yo machuok', 
   }
 };
 
@@ -57,6 +60,10 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
   }
 
   String _t(String key) {
+    String translation = widget.translations[_currentLanguage]?[key] ?? key;
+    debugPrint('Current Language: $_currentLanguage');
+  debugPrint('Key: $key');
+  debugPrint('Translation: $translation');
     return widget.translations[_currentLanguage]?[key] ?? key;
 }
 
@@ -82,8 +89,7 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     );
   }
 
-
-  @override
+@override
 Widget build(BuildContext context) {
   if (widget.methodDetails == null) {
     return Scaffold(
@@ -96,6 +102,7 @@ Widget build(BuildContext context) {
 
   String methodName = widget.methodDetails?['name']?[_currentLanguage] ?? widget.methodName;
   String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
+  String subtitle = widget.methodDetails?['subtitles']?[_currentLanguage] ?? '';
 
   return Scaffold(
     appBar: AppBar(
@@ -103,10 +110,10 @@ Widget build(BuildContext context) {
         icon: Icon(Icons.arrow_back), 
         onPressed: () => Navigator.of(context).pop(), 
       ),
-      title: Text('Summary of $methodName'),
+      title: Text('Summary Page'),
     ),
-    body: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    body: ListView(
+      padding: EdgeInsets.all(8.0),
       children: [
         Padding(
           padding: EdgeInsets.all(8.0),
@@ -115,34 +122,42 @@ Widget build(BuildContext context) {
             children: ['Kiswahili', 'Dholuo', 'English'].map(_languageButton).toList(),
           ),
         ),
-        Expanded(
-          child: ListView(
-            padding: EdgeInsets.all(8.0),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(iconPath, width: 50, height: 50),
-                    SizedBox(width: 10),
-                    Text(methodName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  ],
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(iconPath, width: 50, height: 50),
+                  SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(methodName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                      Text(subtitle, style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic)), // Subtitle displayed here
+                    ],
+                  ),
+                ],
               ),
-              buildContentCard('assets/birth_control_new.png', 'how_it_works_title', 'how_it_works'),
-              buildContentCard('assets/period_new.png', 'what_period', 'side_effects'),
-              buildContentCard('assets/calendar_new.png', 'how_long', 'lasts'),
-              buildContentCard('assets/chance_new.png', 'how_effective', 'effectiveness'),
-              buildContentCard('assets/privacy_new.png', 'can_private', 'privacy'),
-              buildContentCard('assets/preg_woman_new.png', 'ready_to_have_baby', 'fertility'),
             ],
           ),
         ),
+        buildContentCard('assets/birth_control_new.png', 'how_it_works_title', 'how_it_works'),
+        buildContentCard('assets/period_new.png', 'what_period', 'side_effects'),
+        buildContentCard('assets/calendar_new.png', 'how_long', 'lasts'),
+        buildContentCard('assets/chance_new.png', 'how_effective', 'effectiveness'),
+        buildContentCard('assets/privacy_new.png', 'can_private', 'privacy'),
+        buildContentCard('assets/preg_woman_new.png', 'ready_to_have_baby', 'fertility'),
       ],
     ),
   );
 }
+
+
+
 
 
 Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
@@ -183,6 +198,7 @@ Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
     ),
   );
 }
+
 
 
 }
