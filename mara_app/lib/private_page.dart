@@ -253,8 +253,7 @@ class _PrivatePageState extends State<PrivatePage> {
                   width: boxWidth,
                   height: boxHeight*0.2,
                   decoration: BoxDecoration(
-                    // color: Colors.grey.shade200,
-                    color: Colors.blue,
+                    color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Column(
