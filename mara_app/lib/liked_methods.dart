@@ -59,7 +59,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
           icon: Icon(Icons.arrow_back), 
           onPressed: () => Navigator.of(context).pop(), 
         ),
-        title: Text(_t("Liked Methods")), // or use _t('liked_methods') for translations
+        title: Text(_t('likedTitle')), // or use _t('liked_methods') for translations
       ),
       body: Column(
         children: [
@@ -134,7 +134,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
 
               : Center(
                   child: Text(
-                    'No liked methods', // or use _t('no_liked_methods') for translations
+                    _t('none'), // or use _t('no_liked_methods') for translations
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
