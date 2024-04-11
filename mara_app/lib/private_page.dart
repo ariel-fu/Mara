@@ -18,6 +18,7 @@ class _PrivatePageState extends State<PrivatePage> {
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
+      "videoAudio/videos/funnyCat.mp4",
       "videoAudio/videos/peer/peer3KS.mp4", // method 1 - condom
       "videoAudio/videos/peer/peer3KS.mp4",
       "videoAudio/videos/peer/peer3KS.mp4",
@@ -252,7 +253,7 @@ class _PrivatePageState extends State<PrivatePage> {
                 children: [
                   Container(
                       width: boxWidth,
-                      height: boxHeight*0.5*0.6,
+                      height: boxHeight*0.5*0.5,
                       decoration: BoxDecoration(
                         color: Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(8.0),
@@ -264,7 +265,7 @@ class _PrivatePageState extends State<PrivatePage> {
                             Center(
                                 child: Container(
                                   width: boxWidth * 0.9,
-                                    // height: availableHeight * 0.6 * 0.5,
+                                    height: availableHeight * 0.5*0.3,
                                     child: Center(
                                       child: updateMethodContent(),
                                     )
@@ -276,8 +277,9 @@ class _PrivatePageState extends State<PrivatePage> {
                     //   child: updateMethodContent(),
                     // ),
                   ),
+                  SizedBox(height: 20.0),
                   SizedBox(
-                    width: boxWidth,
+                    width: boxWidth*0.8,
                     height: availableHeight * 0.6 * 0.5,
                     child: Center(
                       child: getVideoContent(),
