@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'recommendation_screen.dart';
 import 'recommendation_model.dart';
-
 class QuizScreen extends StatefulWidget {
   @override
   _QuizScreenState createState() => _QuizScreenState();
@@ -72,15 +71,7 @@ final Map<String, Map<String, String>> _translations = {
     'o51': 'The lowest chance of getting pregnant', 
     'o52': 'Avoiding changes to my periods', 
     'o53': 'Keeping my method private', 
-    'o54': 'Being able to get pregnant in the future', 
-    'condoms': 'Condoms',
-    'Condoms': 'Condoms', 
-    'iucd': 'IUCD',
-    'depo': 'Depo',
-    'Implant': 'Implant', 
-    'implant': 'implant', 
-    'pills': 'pills', 
-    'Pills': 'Pills', 
+    'o54': 'Being able to get pregnant in the future',  
     'outroText1': 'Condoms are the best way to prevent HIV and other infections, but may not be the best method for preventing pregnancy for a long period of time.',
     'outroText2': 'The following method may also be a good option, but there may be a delay of 3-6 months in fertility after stopping: Depo', 
     'outroText3': 'We also recommend you start a prenatal vitamin for good pregnancy health.', 
@@ -140,12 +131,6 @@ final Map<String, Map<String, String>> _translations = {
     'o54': 'Kuwa na uwezo wa kupata mimba katika siku zijazo', 
     // ... other Kiswahili translations
     'title1': 'Mapendekezo', 
-    'Implant': 'pandikiza', 
-    'implant': 'pandikiza', 
-    'condoms': 'kondomu', 
-    'Condoms': 'kondomu', 
-    'pills': 'dawa', 
-    'Pills': 'dawa', 
     'recommendationTitle': 'Haya hapa ni baadhi ya mapendekezo ambayo yanaweza kuwa sawa kwako!', 
     'outroText1': 'Kondomu ni njia bora ya kuzuia Virusi Vya Ukimwi na maambukizo mengine, lakini inaweza isiwe njia bora ya kuzuia mimba kwa muda mrefu.',  
     'outroText2': 'Njia ifuatayo inaweza pia kuwa chaguo nzuri, lakini kunaweza kuwa na kuchelewa kwa miezi 3-6 katika uzazi baada ya kuacha:', 

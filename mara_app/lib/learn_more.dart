@@ -21,6 +21,11 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
   "Kiswahili": "Gusa kila njia ili ujifunze zaidi kuhusu mchango wake kwenye uzazi.",
   "Dholuo": "Tuo wuodi matin to ok nang'o chuny gi tim ber."
 };
+final Map<String, String> titleTranslations = {
+  "English": "What if I'm ready to have a baby?", 
+  "Kiswahili": "Je, itakuaje ikiwa niko tayari kupata mtoto?", 
+  "Dholuo": "To ka ayikora mar mako ich to?"
+};
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -41,6 +46,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       "Ndalo machuok bang golo IUCD, dendi biro dok kaka ne entie e thuolo mar mako ich. Ma en adier kata bed ni ne pok imako ich kata nyuol. Koro ka iseyikori mar mako ich, inyalo mana dhi mondo ogolni Implant.",
       "Inyalo mako ich mapiyo bang ka igolo IUCD [koil]! Koro en gima ni kare tiyo gi IUCD nyaka kinde ma idwaro make ich. IUCD onge gi homons kuome, koro bang ka isegole, to in mana kare dhi nyime!",
       "E-pill en yath matiyo e kinde matin. Kata ka imuonyo mang'eny, ok obi miyo ibed ni ok inyal mako ich e ndalo mabiro. E-pill ok keth dendi e yo moro amora, to bende ok oti maber e gengo ich ka itiyo kode anuoya.",
+      
 
     ],
     "English": [
@@ -51,7 +57,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       "A few days after having the implant removed, your body will return to your normal level of fertility. This it true whether or not you have ever had a pregnancy or a birth. So, when you are ready for a pregnancy, you can just have the implant removed! ",
       "You can get pregnant right away after having an IUCD (coil) removed! So it's OK to use the IUCD until you want to have a pregnancy. The IUCD has no hormones in it, so once it is removed, you are good to go!",
       "The E-pill is very short-acting. Even if you take it a lot, it won't make you less able to get pregnant in the future. The E-pill doesn't damage your body in any way, but also does not work well to prevent pregnancy with regular use. ",
-     
+      
     ],
   };
 
@@ -72,7 +78,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
           icon: Icon(Icons.arrow_back), 
           onPressed: () => Navigator.of(context).pop(), 
         ),
-        title: Text('What if I\'m ready to have a baby?'),
+        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
       ),
       body: SingleChildScrollView(
         child: Column(
