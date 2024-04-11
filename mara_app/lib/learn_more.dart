@@ -55,26 +55,16 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
     ],
   };
 
-  @override
-  Widget build(BuildContext context) {
-    
-    final int? routeArgumentIndex =
-        ModalRoute.of(context)?.settings.arguments as int?;
 
-    // Update languageIndex if a valid value is provided from the route
+@override
+  Widget build(BuildContext context) {
+    final int? routeArgumentIndex = ModalRoute.of(context)?.settings.arguments as int?;
     if (routeArgumentIndex != null &&
         routeArgumentIndex >= 0 &&
         routeArgumentIndex < languages.length &&
         !overrideIndex) {
       languageIndex = routeArgumentIndex;
     }
-
-    double screenWidth = MediaQuery.of(context).size.width;
-    double boxWidth = screenWidth * 0.85;
-
-    double screenHeight = MediaQuery.of(context).size.height;
-    double availableHeight = screenHeight;
-    double boxHeight = availableHeight * 0.25;
 
     return Scaffold(
       appBar: AppBar(
@@ -84,39 +74,34 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
         ),
         title: Text('What if I\'m ready to have a baby?'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: availableHeight * 0.1,
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  languageButton('Kiswahili', 0),
-                  languageButton('Dholuo', 1),
-                  languageButton('English', 2),
-                ],
+                children: languages.map((language) => languageButton(language)).toList(),
               ),
             ),
-          ),
-          subtitleSection(),
-          SizedBox(height: 20.0),
-          buildMethodSelectionRow(boxWidth),
-          SizedBox(height: 20.0),
-          buildContentArea(boxWidth),
-        ],
+            subtitleSection(),
+            SizedBox(height: 20.0),
+            methodSelectionRow(),
+            SizedBox(height: 20.0),
+            contentArea(),
+          ],
+        ),
       ),
     );
   }
 
-  Widget languageButton(String language, int index) {
-    bool isSelected = languageIndex == index;
+  Widget languageButton(String language) {
+    bool isSelected = languages[languageIndex] == language;
     return ElevatedButton(
       onPressed: () {
         setState(() {
-          languageIndex = index;
+          languageIndex = languages.indexOf(language);
           overrideIndex = true;
           updateMethodContent();
         });
@@ -128,112 +113,107 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
     );
   }
 
+  Widget subtitleSection() {
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(vertical: 10.0),
+      child: Text(
+        subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
+        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
 
-  Widget buildMethodSelectionRow(double boxWidth) {
-  return Container(
-    alignment: Alignment.center,
-    height: MediaQuery.of(context).size.height * 0.1,
-    width: boxWidth,
-    child: SingleChildScrollView(
+  Widget methodSelectionRow() {
+    return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          buildIconButton(MaraIcons.condom, 0),
-          buildIconButton(MaraIcons.female_condom, 1),
-          buildIconButton(MaraIcons.birth_control_pills, 2),
-          buildIconButton(MaraIcons.syringe, 3),
-          buildIconButton(MaraIcons.contraceptive_implant, 4),
-          buildIconButton(MaraIcons.iud, 5),
-          buildIconButton(MaraIcons.double_pills, 6),
+          buildIconButton(MaraIcons.condom, "Condom", 0),
+          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
         ],
       ),
-    ),
-  );
-}
-
-
-
-Widget subtitleSection() {
-  return Container(
-    alignment: Alignment.center,
-    padding: EdgeInsets.symmetric(vertical: 10.0),
-    child: Text(
-      subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-      textAlign: TextAlign.center,
-    ),
-  );
-}
-
-
-
-
-  Widget buildIconButton(IconData iconData, int index) {
-    bool isSelected = index == methodIndex;
-    return IconButton(
-      icon: Icon(
-        iconData,
-        size: isSelected ? 60 : 60,
-        color: isSelected ? Colors.black : Colors.grey,
-      ),
-      onPressed: () {
-        setState(() {
-          methodIndex = index;
-          updateMethodContent();
-        });
-      },
-      color: isSelected ? Colors.black : Colors.transparent,
-      iconSize: isSelected ? 60 : 60,
-      padding: EdgeInsets.all(10),
-      splashRadius: 40,
-      splashColor: Colors.grey.withOpacity(0.5),
-      highlightColor: Colors.transparent,
     );
   }
 
-  
-
-Widget buildContentArea(double boxWidth) {
-  return Padding(
-    padding: EdgeInsets.all(10.0),
-    child: Container(
-      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey),
-      ),
-      child: Row( // Change to Row for horizontal layout
-        mainAxisSize: MainAxisSize.min, // To dynamically adjust the size
-        crossAxisAlignment: CrossAxisAlignment.start,
+  Widget buildIconButton(IconData iconData, String caption, int index) {
+    bool isSelected = index == methodIndex;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-          SizedBox(width: 10.0),
-          Expanded(
+          IconButton(
+            icon: Icon(
+              iconData,
+              size: isSelected ? 60 : 60,
+              color: isSelected ? Colors.black : Colors.grey,
+            ),
+            onPressed: () {
+              setState(() {
+                methodIndex = index;
+                updateMethodContent();
+              });
+            },
+            splashRadius: 40,
+            splashColor: Colors.grey.withOpacity(0.5),
+            highlightColor: Colors.transparent,
+          ),
+          SizedBox(height: 5),
+          Container(
+            width: 100,
             child: Text(
-              contentDescriptionMap[languages[languageIndex]]![methodIndex],
-              style: TextStyle(fontSize: 16.0),
+              caption,
+              softWrap: true,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
             ),
           ),
         ],
       ),
-    ),
-  );
-}
+    );
+  }
 
-
-
-  
-
+  Widget contentArea() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            SizedBox(width: 10.0),
+            Flexible(
+              child: Text(
+                contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   void updateMethodContent() {
-    setState(() {
-      methodContent = Text(
-        contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(fontSize: 20.0, color: Colors.white),
-      );
-    });
+    methodContent = Text(
+      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+      style: TextStyle(fontSize: 20.0, color: Colors.white),
+    );
   }
 }
-
