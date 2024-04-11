@@ -107,7 +107,7 @@ class _ReadyPageState extends State<ReadyPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                  Icon(Icons.warning_amber_rounded, color: Colors.amber),
+                  Icon(Icons.warning_amber_rounded, color: Colors.black),
                     SizedBox(width: 8.0),
                     Expanded(
                       child: Text(
