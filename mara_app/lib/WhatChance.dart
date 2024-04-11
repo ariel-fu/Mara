@@ -187,7 +187,7 @@ class _WhatChanceState extends State<WhatChance> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black,
-                      fontSize: 18.0
+                      fontSize: 24.0
                     ),
                   )
               )
@@ -223,14 +223,14 @@ class _WhatChanceState extends State<WhatChance> {
 
           //SizedBox(height: 15.0),
           SizedBox(
-            height: availableHeight * 0.50, // Adjust as needed
+            height: availableHeight * 0.42, // Adjust as needed
                 child: Flex(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 direction: Axis.vertical,
                 children: [
                   Container(
                       width: boxWidth,
-                      height: boxHeight*0.4*0.5,
+                      height: boxHeight*0.4*0.4,
                       decoration: BoxDecoration(
                         color: Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(1.0),
@@ -242,7 +242,7 @@ class _WhatChanceState extends State<WhatChance> {
                             Center(
                                 child: Container(
                                   width: boxWidth * 0.9,
-                                  height: availableHeight * 0.5*0.3,
+                                  height: availableHeight * 0.09,
                                     child: Center(
                                       child: updateText(),
                                   )                                  
@@ -253,7 +253,7 @@ class _WhatChanceState extends State<WhatChance> {
                   ),
                   Container(
                     width: boxWidth,
-                    height: availableHeight * 0.3,
+                    height: availableHeight * 0.26,
                     decoration: BoxDecoration(
                         color: Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(1.0),
@@ -387,7 +387,7 @@ class _WhatChanceState extends State<WhatChance> {
       return Text(
       maleCondom[languages[languageIndex]]!,
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 17.0,
         color: Colors.black,
       )
     );
@@ -395,7 +395,7 @@ class _WhatChanceState extends State<WhatChance> {
       return Text(
       femaleCondom[languages[languageIndex]]!,
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 17.0,
         color: Colors.black,
       )
     );
@@ -403,7 +403,7 @@ class _WhatChanceState extends State<WhatChance> {
       return Text(
       dailyPills[languages[languageIndex]]!,
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 17.0,
         color: Colors.black,
       )
     );
@@ -411,7 +411,7 @@ class _WhatChanceState extends State<WhatChance> {
       return Text(
       injection[languages[languageIndex]]!,
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 17.0,
         color: Colors.black,
       )
     );
@@ -419,7 +419,7 @@ class _WhatChanceState extends State<WhatChance> {
       return Text(
        implant[languages[languageIndex]]!,
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 17.0,
         color: Colors.black,
       )
     );
@@ -427,7 +427,7 @@ class _WhatChanceState extends State<WhatChance> {
       return Text(
       IUCD[languages[languageIndex]]!,
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 17.0,
         color: Colors.black,
       )
     );
@@ -435,7 +435,7 @@ class _WhatChanceState extends State<WhatChance> {
       return Text(
       "no text for E-pill",
       style: TextStyle(
-        fontSize: 20.0,
+        fontSize: 17.0,
         color: Colors.black,
       )
     );
