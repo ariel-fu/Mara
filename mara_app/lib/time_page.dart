@@ -81,12 +81,6 @@ class _TimePageState extends State<TimePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
         title: Center(child: Text('How long does the method work?')),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
