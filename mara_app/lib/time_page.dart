@@ -14,7 +14,39 @@ class _TimePageState extends State<TimePage> {
   Widget methodContent = Text('DUMMY');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 0; // similar indexing for language
+  Widget methodContent = Text('DUMMY');
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+
+  final Map<String, List<String>> contentDescriptionMap = {
+    "Kiswahili": [
+      "method 1 in Kiswahili",
+      "method 2 in Kiswahili",
+      "method 3 in Kiswahili",
+      "method 4 in Kiswahili",
+      "method 5 in Kiswahili",
+      "method 6 in Kiswahili",
+      "method 7 in Kiswahili"
+    ],
+    "Dholuo": [
+      "method 1 in Dholuo",
+      "method 2 in Dholuo",
+      "method 3 in Dholuo",
+      "method 4 in Dholuo",
+      "method 5 in Dholuo",
+      "method 6 in Dholuo",
+      "method 7 in Dholuo"
+    ],
+    "English": [
+      "method 1 in English",
+      "method 2 in English",
+      "method 3 in English",
+      "method 4 in English",
+      "method 5 in English",
+      "method 6 in English",
+      "method 7 in English"
+    ],
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -169,6 +201,36 @@ class _TimePageState extends State<TimePage> {
                   
                 ],
               ),
+            alignment: Alignment.center,
+            height: availableHeight * 0.1,
+            width: boxWidth,
+            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
+            width: boxWidth,
+            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buildIconButton(MaraIcons.condom, 0),
+                  buildIconButton(MaraIcons.female_condom, 1),
+                  buildIconButton(MaraIcons.birth_control_pills, 2),
+                  buildIconButton(MaraIcons.syringe, 3),
+                  buildIconButton(MaraIcons.contraceptive_implant, 4),
+                  buildIconButton(MaraIcons.iud, 5),
+                  buildIconButton(MaraIcons.double_pills, 6),
+                  
+                  buildIconButton(MaraIcons.condom, 0),
+                  buildIconButton(MaraIcons.female_condom, 1),
+                  buildIconButton(MaraIcons.birth_control_pills, 2),
+                  buildIconButton(MaraIcons.syringe, 3),
+                  buildIconButton(MaraIcons.contraceptive_implant, 4),
+                  buildIconButton(MaraIcons.iud, 5),
+                  buildIconButton(MaraIcons.double_pills, 6),
+                  
+                ],
+              ),
             ),
           ),
           SizedBox(height: 20.0),
@@ -196,12 +258,24 @@ class _TimePageState extends State<TimePage> {
                     child: buildSecondaryContext(),
                   ),
                 ),
+                  width: boxWidth * 0.75,
+                  height: availableHeight * 0.25 - 10,
+                  color: Colors.green,
+                  child: Center(
+                    child: buildSecondaryContext(),
+                  ),
+                ),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Widget buildSecondaryContext() {
+    return Text("ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " + 
+      contentDescriptionMap[languages[languageIndex]]![methodIndex]);
   }
 
   Widget buildSecondaryContext() {
