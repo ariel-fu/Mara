@@ -114,12 +114,6 @@ class _BleedingPageState extends State<BleedingPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
         title: Center(child: Text('Bleeding Changes EXPLAINED')),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),

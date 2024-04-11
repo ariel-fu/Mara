@@ -55,12 +55,6 @@ class _TimePageState extends State<TimePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
         title: Text('How Long Will It Last?'),
       ),
       body: Column(

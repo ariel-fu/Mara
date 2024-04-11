@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/home2.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
-import 'package:mara_app/time_page.dart';
 
 class WhatChance extends StatefulWidget {
   const WhatChance({Key? key}) : super(key: key);
@@ -100,12 +99,6 @@ class _WhatChanceState extends State<WhatChance> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
         title: Center(child: Text(title[languages[languageIndex]]!)),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),

@@ -123,12 +123,6 @@ class _PrivatePageState extends State<PrivatePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
         title: Center(child: Text('Can I keep it private?')),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
