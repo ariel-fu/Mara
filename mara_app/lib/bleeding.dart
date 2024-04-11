@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
-import 'video.dart';
+import 'package:mara_app/video.dart';
+import 'pattern_page.dart';
 
 class BleedingPage extends StatefulWidget {
   const BleedingPage({Key? key}) : super(key: key);
@@ -12,10 +13,13 @@ class BleedingPage extends StatefulWidget {
 class _BleedingPageState extends State<BleedingPage> {
   Widget methodContent = Text('DUMMY');
   Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
-  int methodIndex = 0; // Index of the selected icon button, 0 for default
-  int languageIndex = 0; // similar indexing for language
-  final languages = ["Kiswahili", "Dholuo", "English"];
+
   bool overrideIndex = false;
+  // Widget methodContent = updateMethodContent();
+  int methodIndex = 2; // Index of the selected icon button, 0 for default
+  int languageIndex = 2; // similar indexing for language
+  final languages = ["Kiswahili", "Dholuo", "English"];
+
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
       "method 1 in Kiswahili",
@@ -81,26 +85,32 @@ class _BleedingPageState extends State<BleedingPage> {
     },
   },
 };
+  final double _aspectRatio = 16 / 10;
 
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
-  ModalRoute.of(context)?.settings.arguments as int?;
+    ModalRoute.of(context)?.settings.arguments as int?;
 
-  // Update languageIndex if a valid value is provided from the route
-  if (routeArgumentIndex != null &&
-      routeArgumentIndex >= 0 &&
-      routeArgumentIndex < languages.length &&
-      !overrideIndex) {
-    languageIndex = routeArgumentIndex;
-  }
+    // Update languageIndex if a valid value is provided from the route
+    // if (routeArgumentIndex != null &&
+    //     routeArgumentIndex >= 0 &&
+    //     routeArgumentIndex < languages.length &&
+    //     !overrideIndex) {
+    //   languageIndex = routeArgumentIndex;
+    // }
 
-    double screenWidth = MediaQuery.of(context).size.width;
-    double boxWidth = screenWidth * 0.85;
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
 
-    double screenHeight = MediaQuery.of(context).size.height;
-    double availableHeight = screenHeight;
-    double boxHeight = availableHeight * 0.25;
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
 
     return Scaffold(
       appBar: AppBar(
@@ -110,164 +120,210 @@ class _BleedingPageState extends State<BleedingPage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('Bleeding Changes EXPLAINED'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-              height: availableHeight * 0.1,
+        title: Center(child: Text('Bleeding Changes EXPLAINED')),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            // height: availableHeight * 0.1,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
+                // padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 0;
-                          overrideIndex = true;
-                          updateMethodContent();
-                          video1 = updateVideoContent1();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                        languageIndex == 0 ? Colors.grey : null,
+                    Padding(
+                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            languageIndex = 0;
+                            overrideIndex = true;
+                            updateMethodContent();
+                             video1 = getVideoContent1();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: languageIndex == 0 ? Colors.grey : null,
+                        ),
+                        child: Text('Kiswahili'),
                       ),
-                      child: Text('Kiswahili'),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 1;
-                          overrideIndex = true;
-                          updateMethodContent();
-                          video1 = updateVideoContent1();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                        languageIndex == 1 ? Colors.grey : null,
+                    Padding(
+                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            languageIndex = 1;
+                            overrideIndex = true;
+                            updateMethodContent();
+                            video1 = getVideoContent1();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: languageIndex == 1 ? Colors.grey : null,
+                        ),
+                        child: Text('Dholuo'),
                       ),
-                      child: Text('Dholuo'),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 2;
-                          overrideIndex = true;
-                          updateMethodContent();
-                          video1 = updateVideoContent1();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                        languageIndex == 2 ? Colors.grey : null,
+                    Padding(
+                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            languageIndex = 2;
+                            overrideIndex = true;
+                            updateMethodContent();
+                            video1 = getVideoContent1();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: languageIndex == 2 ? Colors.grey : null,
+                        ),
+                        child: Text('English'),
                       ),
-                      child: Text('English'),
                     ),
                   ],
                 ),
               )),
-          SizedBox(height: 20.0),
+          // preferredSize: Size.fromHeight(75),
+        ),
+        // actions: <Widget>[
+        //
+        // ]
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // SizedBox(height: availableHeight*0.01),
+          // Container (
+          //     width: boxWidth*0.8,
+          //     child: Padding (
+          //         padding: const EdgeInsets.only(top: 5.0, bottom: 20.0), // Adjust the padding as needed,
+          //         child: Text(
+          //           titleContentMap[languages[languageIndex]]!,
+          //           softWrap: true, // Wrap text to the next line if needed
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(
+          //               color: Colors.black,
+          //             fontSize: 18.0
+          //           ),
+          //         )
+          //     )
+
+          // ),
           Container(
             alignment: Alignment.center,
-            height: availableHeight * 0.1,
-            width: boxWidth,
+            // height: availableHeight * 0.15,
+            // width: boxWidth,
             // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildIconButton(MaraIcons.syringe, 3),
-                  buildIconButton(MaraIcons.contraceptive_implant, 4),
-                  buildIconButton(MaraIcons.iud, 5),
-                  buildIconButton(MaraIcons.double_pills, 6),
-                  buildIconButton(MaraIcons.birth_control_pills, 2),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+                  buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
                 ],
               ),
             ),
           ),
+
           SizedBox(height: 20.0),
-          Container (
-            height: availableHeight * 0.6, // Adjust as needed
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
+          SizedBox(
+            height: availableHeight * 0.60, // Adjust as needed
+                child: Flex(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                direction: Axis.vertical,
+                children: [
+                  Container(
                       width: boxWidth,
-                      height: boxHeight / 0.25 - 500,
-                      color: Colors.green,
-                      child: Expanded(child:Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment:CrossAxisAlignment.end,
-                        
-                        children: [
-                          Expanded(// Adjust the aspect ratio as needed
-                              child:video1,
-                          ),
-                        ],
-                      ),),                      
-                ),
-                Container(
-                  width: boxWidth,
-                  height: boxHeight,
-                  color: Colors.blue,
-                  child: Center(
-                    child: methodContent,
+                      height: boxHeight*0.5*0.6,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(Icons.lightbulb_outline, color: Colors.amber),
+                            Center(
+                                child: Container(
+                                  width: boxWidth * 0.9,
+                                    // height: availableHeight * 0.6 * 0.5,
+                                    child: Center(
+                                      child: updateMethodContent(),
+                                    )
+                                )
+                            )
+                          ]
+                      )
+                    // child: Center(
+                    //   child: updateMethodContent(),
+                    // ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: boxWidth,
+                    height: availableHeight * 0.5 * 0.6,
+                    child: Center(
+                      child: video1,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
   }
-
-  Widget buildSecondaryContext() {
-    return Text("some text here " +
-        contentDescriptionMap[languages[languageIndex]]![methodIndex]);
-  }
-
-  Widget buildIconButton(IconData iconData, int index) {
+  Widget buildIconButton(IconData iconData, String caption, int index) {
     bool isSelected = index == methodIndex;
 
     return Stack(
       alignment: Alignment.center,
       children: [
-        IconButton(
-          icon: Icon(
-            iconData,
-            size: isSelected ? 60 : 60,
-            color: isSelected ? Colors.black : Colors.grey,
-          ),
-          onPressed: () {
-            setState(() {
-              methodIndex = index;
-              updateMethodContent();
-            });
-          },
-          color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 60 : 60,
-          padding: EdgeInsets.all(10),
-          splashRadius: 40,
-          splashColor: Colors.grey.withOpacity(0.5),
-          highlightColor: Colors.transparent,
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: Icon(
+                iconData,
+                size: isSelected ? 60 : 60,
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  methodIndex = index;
+                  updateMethodContent();
+                });
+              },
+              color: isSelected ? Colors.black : Colors.transparent,
+              iconSize: isSelected ? 60 : 60,
+              padding: EdgeInsets.all(10),
+              splashRadius: 40,
+              splashColor: Colors.grey.withOpacity(0.5),
+              highlightColor: Colors.transparent,
+            ),
+            SizedBox(height: 5),
+            Container (
+                width: 100,
+                child: Text(
+                  caption,
+                  softWrap: true, // Wrap text to the next line if needed
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: isSelected ? Colors.black : Colors.grey,
+                  ),
+                )
+            )
+          ],
         ),
       ],
-    );
-  }
-
-  void updateMethodContent() {
-    methodContent = Text(
-        contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.white,
-        )
     );
   }
 
@@ -279,7 +335,7 @@ class _BleedingPageState extends State<BleedingPage> {
     return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   }
     
-  Widget updateVideoContent1() {
+  Widget getVideoContent1() {
       if (languageIndex == 0) {
         videoAsset1 = _getAsset('video1', '0');
         videoTitle1 = _getTitle('video1', '0');
@@ -291,5 +347,15 @@ class _BleedingPageState extends State<BleedingPage> {
           videoTitle1 = _getTitle('video1', '2');
       }
       return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+  }
+
+  Widget updateMethodContent() {
+    return Text(
+      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+      style: TextStyle(
+        fontSize: 20.0,
+        color: Colors.black,
+      )
+    );
   }
 }

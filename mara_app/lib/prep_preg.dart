@@ -85,7 +85,7 @@ class _PrepPageState extends State<PrepPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  'assets/preg_woman.png',
+                  'assets/preg_woman_new.png',
                   width: 150,
                   height: 150,
                   fit: BoxFit.contain,

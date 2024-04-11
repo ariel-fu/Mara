@@ -50,9 +50,9 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   // }
 
   String _t(String key) {
-  String translation = widget.translations[_currentLanguage]?[key] ?? key;
-  print('Key: $key, Language: $_currentLanguage, Translation: $translation');
-  return translation;
+    String translation = widget.translations[_currentLanguage]?[key] ?? key;
+    print('Key: $key, Language: $_currentLanguage, Translation: $translation');
+    return translation;
 }
 
   Future<Map<String, dynamic>> loadMethodDetails() async {
@@ -80,12 +80,24 @@ Widget build(BuildContext context) {
           onPressed: () => Navigator.of(context).pop(), 
         ),
       title: Text(_t('title1')), // Use _t method for translation
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.favorite),
-          onPressed: navigateToLikedMethodsScreen,
-        ),
-      ],
+
+actions: <Widget>[
+  ElevatedButton.icon(
+    icon: Icon(Icons.thumb_up, color: Colors.black),
+    label: Text(_t('likedTitle'), style: TextStyle(color: Colors.black)),
+    onPressed: navigateToLikedMethodsScreen,
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.deepPurple[100],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18.0),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), 
+    ),
+  ),
+],
+
+
+
     ),
     body: FutureBuilder<Map<String, dynamic>>(
       future: _methodDetailsDataFuture,
@@ -155,7 +167,7 @@ Widget build(BuildContext context) {
                                             child: IconButton(
                                               icon: Icon(
                                                 likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
-                                                color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.brown[400],
+                                                color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
                                               ),
                                               onPressed: () => toggleLikeMethod(trimmedRec),
                                             ),
@@ -276,33 +288,13 @@ Widget _buildTitleBox() {
       borderRadius: BorderRadius.circular(8.0),
     ),
     child: Text(
-      'Here are some recommendations of methods that might be right for you',
+      _t('recommendationTitle'),
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     ),
   );
  }
 
-
-
-
-
-// Widget _buildTitleBox() {
-//   return Container(
-//     padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-//     margin: EdgeInsets.only(top: 20.0),
-//     width: double.infinity,
-//     decoration: BoxDecoration(
-//       color: Colors.grey.shade200,
-//       borderRadius: BorderRadius.circular(8.0),
-//     ),
-//     child: Text(
-//       _t('recommendationTitle'), // Fetch the translated text
-//       textAlign: TextAlign.center,
-//       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-//     ),
-//   );
-// }
 
 
 

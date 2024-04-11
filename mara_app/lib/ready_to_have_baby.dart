@@ -29,16 +29,18 @@ class _ReadyPageState extends State<ReadyPage> {
 
   final Map<String, Map<String, String>> _videos = {
     'assets': {
-      'Kiswahili': 'videoAudio/videos/funnyCat.mp4',
-      'Dholuo': 'videoAudio/videos/funnyCat2.mp4',
-      'English': 'videoAudio/videos/chimes.mp4',
+      'Kiswahili': 'videoAudio/videos/provider/provider4KS.mp4',
+      'Dholuo': 'videoAudio/videos/provider/provider4DL.mp4',
+      'English': 'videoAudio/videos/provider/provider4E.mp4',
     },
     'titles': {
-      'Kiswahili': 'Video: A Doctor Explains [KISWAHILI]',
-      'Dholuo': 'Video: A Doctor Explains [DHOLUO]',
-      'English': 'Video: A Doctor Explains [ENGLISH]',
+      'Kiswahili': 'Video - Daktari Aeleza',
+      'Dholuo': 'Vidio - Laktar Wuoyo',
+      'English': 'Video: A Doctor Explains',
     }
   };
+
+  final double _aspectRatio = 16 / 10;
 
   String _t(String key) {
     return _translations[key]?[_currentLanguage] ?? key;
@@ -122,10 +124,22 @@ class _ReadyPageState extends State<ReadyPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
+Widget build(BuildContext context) {
+
+  double containerWidth = MediaQuery.of(context).size.width;
+  double containerHeight = MediaQuery.of(context).size.height;
+  if (containerHeight / containerWidth > _aspectRatio) {
+    containerHeight = containerWidth * _aspectRatio;
+  } else {
+    containerWidth = containerHeight / _aspectRatio;
+  }
+
+  double boxWidth = containerWidth;
+  double boxHeight = containerHeight;
+
+  return Scaffold(
+    appBar: AppBar(
+      leading: IconButton(
           icon: const Icon(Icons.home),
           onPressed: () {
             Navigator.of(context).pushNamed('/home');
@@ -147,11 +161,8 @@ class _ReadyPageState extends State<ReadyPage> {
             header: _t('What if I\'m ready to have a baby?'),
             title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
           ),
-          SizedBox(
-            width: 50,
-            height: 120,
-            child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
-          ),
+
+          SizedBox(width:boxWidth, height:boxHeight * 0.5 * 0.6, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
 
           ListTile(
             leading: Icon(Icons.search),
