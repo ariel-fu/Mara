@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+// getting errors, please revert back when fixed
+
+/*import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 
 class TemplatePage extends StatefulWidget {
@@ -340,4 +342,4 @@ class _TemplatePageState extends State<TemplatePage> {
       }
       return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
   }
-}
+}*/

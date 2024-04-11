@@ -62,7 +62,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
               child: Image.asset(
                 'assets/maralogo.png',
                 width: MediaQuery.of(context).size.width * 0.5,
-                width: MediaQuery.of(context).size.width * 0.5,
               ),
             ),
             Text(translations[currentLanguage]!, textAlign: TextAlign.center,),

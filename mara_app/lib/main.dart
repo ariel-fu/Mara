@@ -32,7 +32,7 @@ class _MaraAppState extends State<MaraApp> {
         '/home': (BuildContext context) => home2(), // home2 is the latest version
         '/options': (BuildContext context) => const OptionsPage(),
         '/bleeding_pattern': (BuildContext context) => const PatternPage(),
-        '/time': (BuildContext context) => const TimePage(),
+        //'/time': (BuildContext context) => const TimePage(), getting errors, please revert back when fixed
         '/private': (BuildContext context) => const PrivatePage(),
         '/ready_baby': (BuildContext context) => ReadyPage(),
       },

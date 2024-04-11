@@ -5,11 +5,10 @@ import 'package:mara_app/quiz_screen.dart';
 import 'package:mara_app/ready_to_have_baby.dart';
 import 'package:mara_app/time_page.dart';
 
-void main() => runApp(home2());
-
-
-
 class home2 extends StatefulWidget {
+
+  const home2({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -17,29 +16,30 @@ class home2 extends StatefulWidget {
 class _MainScreenState extends State<home2> {
   List<bool> _selections = List.generate(6, (_) => false);
   bool get _allSelected => _selections.every((bool selected) => selected);
-  void _handleTap(int index) {
+  void _handleTap(int index) async {
   setState(() { _selections[index] = true; });
   if (index == 0) {
-    Navigator.push(
+    await Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => OptionsPage()),
   );
   } else if (index == 1) {
-    Navigator.push(
+    await Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => PatternPage()),
   );
   } else if (index == 2) {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => TimePage()),
-  );
+    //await Navigator.push(
+    //context,
+    //MaterialPageRoute(builder: (context) => TimePage()),
+  //);
   } else if (index == 3) {
     //Navigator.push(
     //context,
     //MaterialPageRoute(builder: (context) => MainScreen()), //need a better name for that screen
     //).then((_) { setState(() { _selections[index] = true; }); });
   }
+  setState(() {});
   }
 
   @override
