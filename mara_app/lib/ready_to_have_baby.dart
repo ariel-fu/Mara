@@ -28,6 +28,16 @@ class _ReadyPageState extends State<ReadyPage> {
       'Kiswahili': 'Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!', 
       'Dholuo': 'HEY! MA EN GIMA BER NG\'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng\'o kute mag ayaki kod nyae mamoko!', 
       'English': 'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'
+    }, 
+    'LEARN MORE about the fertility considerations of each method': {
+      'Kiswahili': 'JIFUNZE ZAIDI kuhusu masuala ya uzazi ya kila mbinu', 
+      'Dholuo': 'PUONJRI MATUT ewi nyaloni mar mako ich gi yor komo nyuol ka yor komo nyuol.', 
+      'English': 'LEARN MORE about the fertility considerations of each method', 
+    }, 
+    'Preparing for a health pregnancy': {
+      'Kiswahili': 'Kujiandaa kwa ujauzito wenye afya', 
+      'Dholuo': 'Yikruok ne ich man gi ngima', 
+      'English': 'Preparing for a healthy pregnancy'
     }
 
   };
@@ -96,7 +106,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                 
+
                   Icon(Icons.warning_amber_rounded, color: Colors.amber),
                     SizedBox(width: 8.0),
                     Expanded(
@@ -160,7 +170,7 @@ Widget build(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: languages.map((language) => languageButton(language)).toList(),
         ),
-        
+        // Make the rest of the page scrollable
         Flexible(
           child: ListView(
             children: [
@@ -195,7 +205,7 @@ Widget build(BuildContext context) {
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: ElevatedButton.icon(
             icon: Icon(Icons.check_circle), // The icon
-            label: Text(_t('LEARN MORE about the fertility considerations of each method')), 
+            label: Text(_t('Preparing for a health pregnancy')), 
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurple[100], // Button background color
               foregroundColor: Colors.black, 
