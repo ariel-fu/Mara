@@ -24,22 +24,7 @@ class _ReadyPageState extends State<ReadyPage> {
       'Dholuo': 'Ango nyithindo mabeyo manyalo wuonwa?',
       'English': 'What if I\'m ready to have a baby?',
     },
-    'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!': {
-      'Kiswahili': 'Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!', 
-      'Dholuo': 'HEY! MA EN GIMA BER NG\'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng\'o kute mag ayaki kod nyae mamoko!', 
-      'English': 'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'
-    }, 
-    'LEARN MORE about the fertility considerations of each method': {
-      'Kiswahili': 'JIFUNZE ZAIDI kuhusu masuala ya uzazi ya kila mbinu', 
-      'Dholuo': 'PUONJRI MATUT ewi nyaloni mar mako ich gi yor komo nyuol ka yor komo nyuol.', 
-      'English': 'LEARN MORE about the fertility considerations of each method', 
-    }, 
-    'Preparing for a health pregnancy': {
-      'Kiswahili': 'Kujiandaa kwa ujauzito wenye afya', 
-      'Dholuo': 'Yikruok ne ich man gi ngima', 
-      'English': 'Preparing for a healthy pregnancy'
-    }
-
+    // Add other translations as needed
   };
 
   final Map<String, Map<String, String>> _videos = {
@@ -106,8 +91,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-                  Icon(Icons.warning_amber_rounded, color: Colors.black),
+                    Icon(Icons.warning_amber_rounded, color: Colors.amber), // Attention icon
                     SizedBox(width: 8.0),
                     Expanded(
                       child: Text(
@@ -163,35 +147,27 @@ Widget build(BuildContext context) {
         ),
         title: Text(_t('Family Planning Guide')),
       ),
-      body: Column(
-      children: [
-        // Language selection buttons
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: languages.map((language) => languageButton(language)).toList(),
-        ),
-        // Make the rest of the page scrollable
-        Flexible(
-          child: ListView(
-            children: [
-              customListTile(
-                imagePath: 'assets/preg_woman_new.png',
-                header: _t('What if I\'m ready to have a baby?'),
-                title: _t('HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'),
-              ),
-              
+      body: ListView(
+        children: [
+          // Language selection buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: ['Kiswahili', 'Dholuo', 'English']
+                .map((language) => languageButton(language))
+                .toList(),
+          ),
+          customListTile(
+            imagePath: 'assets/preg_woman.png',
+            header: _t('What if I\'m ready to have a baby?'),
+            title: _t('ATTENTION ALL YOUNG WOMEN: Using family planning methods will NOT change your ability to get pregnant in the future!'),
+          ),
+
           SizedBox(width:boxWidth, height:boxHeight * 0.5 * 0.6, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
-          
-         Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: ElevatedButton.icon(
-            icon: Icon(Icons.search), // The icon
-            label: Text(_t('LEARN MORE about the fertility considerations of each method')), // The label (text)
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple[100], // Button background color
-              foregroundColor: Colors.black 
-            ),
-            onPressed: () {
+
+          ListTile(
+            leading: Icon(Icons.search),
+            title: Text(_t('LEARN MORE about the fertility considerations of each method')),
+            onTap: () {
               int languageIndex = languages.indexOf(_currentLanguage);
               Navigator.pushNamed(
                 context,
@@ -200,34 +176,22 @@ Widget build(BuildContext context) {
               );
             },
           ),
-        ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: ElevatedButton.icon(
-            icon: Icon(Icons.check_circle), // The icon
-            label: Text(_t('Preparing for a health pregnancy')), 
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple[100], // Button background color
-              foregroundColor: Colors.black, 
-            ),
-    
-            onPressed: () {
+
+          ListTile(
+            leading: Icon(Icons.check_circle),
+            title: Text(_t('Preparing for a healthy pregnancy')),
+            onTap: () {
               Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PrepPage(initialLanguage: _currentLanguage),
-              ),
-            );
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PrepPage(initialLanguage: _currentLanguage),
+                ),
+              );
             },
-    
           ),
-        ),
-          
-      ]),
-        ), 
-      ]),
-  );
-    
+        ],
+      ),
+    );
   }
 }
 
