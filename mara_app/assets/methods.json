@@ -65,13 +65,18 @@
       "English": "What is my chance of getting pregnant?", 
       "Kiswahili": "Je, nafasi yangu ya kupata mimba ni ipi?", 
       "Dholuo": "Nyalona mar mako ich en ang'o?"
+    }, 
+    "subtitles": {
+      "English": "Nexplanon, Jadelle", 
+      "Kiswahili": "Nexplanon, Jadelle", 
+      "Dholuo": "Nexplanon, Jadelle"
     }
   },
   "depo": {
     "name": {
-      "English": "Depo",
-      "Kiswahili": "Depo",
-      "Dholuo": "Depo"
+      "English": "Injection",
+      "Kiswahili": "Injection",
+      "Dholuo": "Injection"
     },
     "icon": "assets/depo.png",
     "how_it_works": {
@@ -133,6 +138,11 @@
       "English": "What is my chance of getting pregnant?", 
       "Kiswahili": "Je, nafasi yangu ya kupata mimba ni ipi?", 
       "Dholuo": "Nyalona mar mako ich en ang'o?"
+    }, 
+    "subtitles": {
+      "English": "depo", 
+      "Kiswahili": "depo", 
+      "Dholuo": "depo"
     }
   },
   "iucd": {
@@ -201,6 +211,11 @@
       "English": "What is my chance of getting pregnant?", 
       "Kiswahili": "Je, nafasi yangu ya kupata mimba ni ipi?", 
       "Dholuo": "Nyalona mar mako ich en ang'o?"
+    }, 
+    "subtitles": {
+      "English": "coil", 
+      "Kiswahili": "coil", 
+      "Dholuo": "coil"
     }
   },
   "pills": {
@@ -269,6 +284,11 @@
       "English": "What is my chance of getting pregnant?", 
       "Kiswahili": "Je, nafasi yangu ya kupata mimba ni ipi?", 
       "Dholuo": "Nyalona mar mako ich en ang'o?"
+    }, 
+    "subtitles": {
+      "English": "Daily pills", 
+      "Kiswahili": "Daily pills", 
+      "Dholuo": "Daily pills"
     }
   },
   "emergency": {
@@ -337,6 +357,11 @@
       "English": "What is my chance of getting pregnant?", 
       "Kiswahili": "Je, nafasi yangu ya kupata mimba ni ipi?", 
       "Dholuo": "Nyalona mar mako ich en ang'o?"
+    }, 
+    "subtitles": {
+      "English": "E-Pill, P2", 
+      "Kiswahili": "E-Pill, P2", 
+      "Dholuo": "E-Pill, P2"
     }
   },
   "condoms": {
@@ -405,6 +430,11 @@
       "English": "What is my chance of getting pregnant?", 
       "Kiswahili": "Je, nafasi yangu ya kupata mimba ni ipi?", 
       "Dholuo": "Nyalona mar mako ich en ang'o?"
+    }, 
+    "subtitles": {
+      "English": "Trust", 
+      "Kiswahili": "Trust", 
+      "Dholuo": "Trust"
     }
   },
   "female_condom": {
@@ -473,6 +503,11 @@
       "English": "What is my chance of getting pregnant?", 
       "Kiswahili": "Je, nafasi yangu ya kupata mimba ni ipi?", 
       "Dholuo": "Nyalona mar mako ich en ang'o?"
+    }, 
+    "subtitles": {
+      "English": "(female) Condoms", 
+      "Kiswahili": "(female) Condoms", 
+      "Dholuo": "(female) Condoms"
     }
   }
 }
