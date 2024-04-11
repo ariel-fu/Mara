@@ -6,6 +6,7 @@ import 'package:mara_app/quiz_screen.dart';
 import 'package:mara_app/ready_to_have_baby.dart';
 import 'package:mara_app/time_page.dart';
 import 'package:mara_app/private_page.dart';
+import 'package:mara_app/WhatChance.dart';
 
 void main() => runApp(HomePage2());
 
@@ -47,7 +48,10 @@ class _HomePage2State extends State<HomePage2> {
         MaterialPageRoute(builder: (context) => PrivatePage()),
       );
     } else if (index == 5) {
-      MaterialPageRoute(builder: (context) => ReadyPage());
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ReadyPage()
+      );
     }
   }
 

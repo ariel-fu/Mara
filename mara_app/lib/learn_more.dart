@@ -21,6 +21,11 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
   "Kiswahili": "Gusa kila njia ili ujifunze zaidi kuhusu mchango wake kwenye uzazi.",
   "Dholuo": "Tuo wuodi matin to ok nang'o chuny gi tim ber."
 };
+final Map<String, String> titleTranslations = {
+  "English": "What if I'm ready to have a baby?", 
+  "Kiswahili": "Je, itakuaje ikiwa niko tayari kupata mtoto?", 
+  "Dholuo": "To ka ayikora mar mako ich to?"
+};
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -41,7 +46,8 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       "Ndalo machuok bang golo IUCD, dendi biro dok kaka ne entie e thuolo mar mako ich. Ma en adier kata bed ni ne pok imako ich kata nyuol. Koro ka iseyikori mar mako ich, inyalo mana dhi mondo ogolni Implant.",
       "Inyalo mako ich mapiyo bang ka igolo IUCD [koil]! Koro en gima ni kare tiyo gi IUCD nyaka kinde ma idwaro make ich. IUCD onge gi homons kuome, koro bang ka isegole, to in mana kare dhi nyime!",
       "E-pill en yath matiyo e kinde matin. Kata ka imuonyo mang'eny, ok obi miyo ibed ni ok inyal mako ich e ndalo mabiro. E-pill ok keth dendi e yo moro amora, to bende ok oti maber e gengo ich ka itiyo kode anuoya.",
-      // other methods in Dholuo
+      
+
     ],
     "English": [
       "Condoms have no effect on your body other than to block your partner's sperm from going inside your body. If you use condoms and are ready to have a baby, you can just stop using them. Keep in mind, though, that if you stop using condoms you won't be protected from HIV or other STIs. ",
@@ -51,16 +57,14 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       "A few days after having the implant removed, your body will return to your normal level of fertility. This it true whether or not you have ever had a pregnancy or a birth. So, when you are ready for a pregnancy, you can just have the implant removed! ",
       "You can get pregnant right away after having an IUCD (coil) removed! So it's OK to use the IUCD until you want to have a pregnancy. The IUCD has no hormones in it, so once it is removed, you are good to go!",
       "The E-pill is very short-acting. Even if you take it a lot, it won't make you less able to get pregnant in the future. The E-pill doesn't damage your body in any way, but also does not work well to prevent pregnancy with regular use. ",
-      // other methods in English
+      
     ],
   };
 
-  @override
-  Widget build(BuildContext context) {
-    final int? routeArgumentIndex =
-        ModalRoute.of(context)?.settings.arguments as int?;
 
-    // Update languageIndex if a valid value is provided from the route
+@override
+  Widget build(BuildContext context) {
+    final int? routeArgumentIndex = ModalRoute.of(context)?.settings.arguments as int?;
     if (routeArgumentIndex != null &&
         routeArgumentIndex >= 0 &&
         routeArgumentIndex < languages.length &&
@@ -68,54 +72,42 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       languageIndex = routeArgumentIndex;
     }
 
-    double screenWidth = MediaQuery.of(context).size.width;
-    double boxWidth = screenWidth * 0.85;
-
-    double screenHeight = MediaQuery.of(context).size.height;
-    double availableHeight = screenHeight;
-    double boxHeight = availableHeight * 0.25;
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back), 
           onPressed: () => Navigator.of(context).pop(), 
         ),
-        title: Text('What if I\'m ready to have a baby?'),
+        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: availableHeight * 0.1,
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  languageButton('Kiswahili', 0),
-                  languageButton('Dholuo', 1),
-                  languageButton('English', 2),
-                ],
+                children: languages.map((language) => languageButton(language)).toList(),
               ),
             ),
-          ),
-          subtitleSection(),
-          SizedBox(height: 20.0),
-          buildMethodSelectionRow(boxWidth),
-          SizedBox(height: 20.0),
-          buildContentArea(boxHeight, boxWidth),
-        ],
+            subtitleSection(),
+            SizedBox(height: 20.0),
+            methodSelectionRow(),
+            SizedBox(height: 20.0),
+            contentArea(),
+          ],
+        ),
       ),
     );
   }
 
-  Widget languageButton(String language, int index) {
-    bool isSelected = languageIndex == index;
+  Widget languageButton(String language) {
+    bool isSelected = languages[languageIndex] == language;
     return ElevatedButton(
       onPressed: () {
         setState(() {
-          languageIndex = index;
+          languageIndex = languages.indexOf(language);
           overrideIndex = true;
           updateMethodContent();
         });
@@ -127,85 +119,77 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
     );
   }
 
-  Widget buildMethodSelectionRow(double boxWidth) {
+  Widget subtitleSection() {
     return Container(
       alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * 0.1,
-      width: boxWidth,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            buildIconButton(MaraIcons.condom, 0),
-            buildIconButton(MaraIcons.female_condom, 1),
-            buildIconButton(MaraIcons.birth_control_pills, 2),
-            buildIconButton(MaraIcons.syringe, 3),
-            buildIconButton(MaraIcons.contraceptive_implant, 4),
-            buildIconButton(MaraIcons.iud, 5),
-            buildIconButton(MaraIcons.double_pills, 6),
-          ],
-        ),
+      padding: EdgeInsets.symmetric(vertical: 10.0),
+      child: Text(
+        subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
+        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
       ),
     );
   }
 
+  Widget methodSelectionRow() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildIconButton(MaraIcons.condom, "Condom", 0),
+          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+        ],
+      ),
+    );
+  }
 
-
-Widget subtitleSection() {
-  return Container(
-    alignment: Alignment.center,
-    padding: EdgeInsets.symmetric(vertical: 10.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(left: 20.0), 
-          child: Icon(Icons.search, size: 20.0),
-        ),
-        SizedBox(width: 8.0),
-        Expanded(
-          child: Text(
-            subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            softWrap: true,
-            overflow: TextOverflow.visible,
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-
-
-
-  Widget buildIconButton(IconData iconData, int index) {
+  Widget buildIconButton(IconData iconData, String caption, int index) {
     bool isSelected = index == methodIndex;
-    return IconButton(
-      icon: Icon(
-        iconData,
-        size: isSelected ? 60 : 60,
-        color: isSelected ? Colors.black : Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: Icon(
+              iconData,
+              size: isSelected ? 60 : 60,
+              color: isSelected ? Colors.black : Colors.grey,
+            ),
+            onPressed: () {
+              setState(() {
+                methodIndex = index;
+                updateMethodContent();
+              });
+            },
+            splashRadius: 40,
+            splashColor: Colors.grey.withOpacity(0.5),
+            highlightColor: Colors.transparent,
+          ),
+          SizedBox(height: 5),
+          Container(
+            width: 100,
+            child: Text(
+              caption,
+              softWrap: true,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
+            ),
+          ),
+        ],
       ),
-      onPressed: () {
-        setState(() {
-          methodIndex = index;
-          updateMethodContent();
-        });
-      },
-      color: isSelected ? Colors.black : Colors.transparent,
-      iconSize: isSelected ? 60 : 60,
-      padding: EdgeInsets.all(10),
-      splashRadius: 40,
-      splashColor: Colors.grey.withOpacity(0.5),
-      highlightColor: Colors.transparent,
     );
   }
 
-  
-
-  Widget buildContentArea(double boxHeight, double boxWidth) {
+  Widget contentArea() {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Container(
@@ -220,7 +204,7 @@ Widget subtitleSection() {
           children: [
             Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
             SizedBox(width: 10.0),
-            Expanded(
+            Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
                 style: TextStyle(fontSize: 16.0),
@@ -232,16 +216,10 @@ Widget subtitleSection() {
     );
   }
 
-  
-
-
   void updateMethodContent() {
-    setState(() {
-      methodContent = Text(
-        contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(fontSize: 20.0, color: Colors.white),
-      );
-    });
+    methodContent = Text(
+      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+      style: TextStyle(fontSize: 20.0, color: Colors.white),
+    );
   }
 }
-

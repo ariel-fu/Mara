@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 class LikedMethodsScreen extends StatefulWidget {
   final Set<String> likedMethods;
-  final String initialLanguage; 
+  final String initialLanguage; // renamed from currentLanguage for clarity
   final Map<String, Map<String, String>> translations;
   final Function(Set<String>) onMethodsChanged;
 
@@ -55,7 +55,11 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_t("Liked Methods")), // or use _t('liked_methods') for translations
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), 
+          onPressed: () => Navigator.of(context).pop(), 
+        ),
+        title: Text(_t('likedTitle')), // or use _t('liked_methods') for translations
       ),
       body: Column(
         children: [
@@ -108,14 +112,14 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                                 setState(() {
                                                     currentLanguage = newLang;
                                                 });
-                                                
+                                                // Optionally, handle other actions needed on language change
                                             },
                                         ),
                                     ),
                                 );
                             }
                         },
-                        child: Text('Learn More'),
+                        child: Text(_t('learnMore')),
                     ),
                     IconButton(
                         icon: Icon(Icons.delete, color: Colors.red),
@@ -129,7 +133,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
 
               : Center(
                   child: Text(
-                    'No liked methods', // or use _t('no_liked_methods') for translations
+                    _t('none'), // or use _t('no_liked_methods') for translations
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
