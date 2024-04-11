@@ -120,7 +120,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                 );
                             }
                         },
-                        child: Text('Learn More'),
+                        child: Text(_t('learnMore')),
                     ),
                     IconButton(
                         icon: Icon(Icons.delete, color: Colors.red),
