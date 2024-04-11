@@ -89,9 +89,10 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
         }
 
         return ListTile(
-            leading: Icon(
+            leading: Image.asset(
                 RecommendationModel.getImageForRecommendation(method),
-                size: 50,
+                width: 50,
+                height: 50,
             ),
             title: Text(_t(method)),
             trailing: Wrap(
