@@ -18,7 +18,6 @@ class _PrivatePageState extends State<PrivatePage> {
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
-      "videoAudio/videos/funnyCat.mp4",
       "videoAudio/videos/peer/peer3KS.mp4", // method 1 - condom
       "videoAudio/videos/peer/peer3KS.mp4",
       "videoAudio/videos/peer/peer3KS.mp4",
