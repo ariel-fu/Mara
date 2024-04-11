@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
-import 'video.dart';
+import 'package:mara_app/video.dart';
 import 'bleeding.dart';
 
 class PatternPage extends StatefulWidget {
@@ -11,6 +11,7 @@ class PatternPage extends StatefulWidget {
 }
 
 class _PatternPageState extends State<PatternPage> {
+
   Widget methodContent = Text('method content');
   String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
@@ -19,11 +20,14 @@ class _PatternPageState extends State<PatternPage> {
 
   Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider1E.mp4', title:'Video - A Doctor Explains');
   Widget video2 = VideoWidget(videoAsset: 'videoAudio/videos/peer/peer1E.mp4', title:'Video - A Peer Perspective');
-  
-  int methodIndex = -1; // Index of the selected icon button, -1 for none
-  int languageIndex = -1; // similar indexing for language
-  final double _aspectRatio = 16/10;
+  bool overrideIndex = false;
+  // Widget methodContent = updateMethodContent();
+  int methodIndex = 2; // Index of the selected icon button, 0 for default
+  int languageIndex = 2; // similar indexing for language  
+
+  final double _aspectRatio = 16 / 10;
   final languages = ["Kiswahili", "Dholuo", "English"];
+
   final content = [
     "method 1",
     "method 2",
@@ -97,12 +101,16 @@ class _PatternPageState extends State<PatternPage> {
 
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double boxWidth = screenWidth * 0.85;
+    final int? routeArgumentIndex =
+    ModalRoute.of(context)?.settings.arguments as int?;
 
-    // double screenHeight = MediaQuery.of(context).size.height;
-    // double availableHeight = screenHeight;
-    // double boxHeight = availableHeight * 0.25;
+    // Update languageIndex if a valid value is provided from the route
+    // if (routeArgumentIndex != null &&
+    //     routeArgumentIndex >= 0 &&
+    //     routeArgumentIndex < languages.length &&
+    //     !overrideIndex) {
+    //   languageIndex = routeArgumentIndex;
+    // }
 
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
@@ -111,8 +119,10 @@ class _PatternPageState extends State<PatternPage> {
     } else {
       containerWidth = containerHeight / _aspectRatio;
     }
+
     double boxWidth = containerWidth;
     double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
 
     return Scaffold(
       appBar: AppBar(
@@ -122,113 +132,158 @@ class _PatternPageState extends State<PatternPage> {
             Navigator.of(context).pushNamed('/home');
           },
         ),
-        title: Text('What Will Happen To My Period?'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-              height: containerHeight * 0.1,
+        title: Center(child: Text('What will happen to my period?')),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            // height: availableHeight * 0.1,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
+                // padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 0;
-                          updateMethodContent();
-                          video1 = updateVideoContent1();
-                          video2 = updateVideoContent2();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 0 ? Colors.grey : null,
+                    Padding(
+                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            languageIndex = 0;
+                            overrideIndex = true;
+                            updateMethodContent();
+                            video1 = updateVideoContent1();
+                            video2 = updateVideoContent2();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: languageIndex == 0 ? Colors.grey : null,
+                        ),
+                        child: Text('Kiswahili'),
                       ),
-                      child: Text('Kiswahili'),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 1;
-                          updateMethodContent();
-                          video1 = updateVideoContent1();
-                          video2 = updateVideoContent2();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 1 ? Colors.grey : null,
+                    Padding(
+                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            languageIndex = 1;
+                            overrideIndex = true;
+                            updateMethodContent();
+                            video1 = updateVideoContent1();
+                            video2 = updateVideoContent2();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: languageIndex == 1 ? Colors.grey : null,
+                        ),
+                        child: Text('Dholuo'),
                       ),
-                      child: Text('Dholuo'),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 2;
-                          updateMethodContent();
-                          video1 = updateVideoContent1();
-                          video2 = updateVideoContent2();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 2 ? Colors.grey : null,
+                    Padding(
+                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            languageIndex = 2;
+                            overrideIndex = true;
+                            updateMethodContent();
+                            video1 = updateVideoContent1();
+                            video2 = updateVideoContent2();
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: languageIndex == 2 ? Colors.grey : null,
+                        ),
+                        child: Text('English'),
                       ),
-                      child: Text('English'),
                     ),
                   ],
                 ),
               )),
-          SizedBox(height: 20.0),
+          // preferredSize: Size.fromHeight(75),
+        ),
+        // actions: <Widget>[
+        //
+        // ]
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // SizedBox(height: availableHeight*0.01),
           Container(
-            height: containerHeight * 0.1,
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            alignment: Alignment.center,
+            // height: availableHeight * 0.15,
+            // width: boxWidth,
+            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildIconButton(MaraIcons.iud, 0),
-                  buildIconButton(MaraIcons.birth_control_pills, 1),
-                  buildIconButton(MaraIcons.condom, 2),
-                  buildIconButton(MaraIcons.contraceptive_implant, 3),
-                  buildIconButton(MaraIcons.syringe, 4),
-                  buildIconButton(MaraIcons.female_condom, 5),
+                  buildIconButton(MaraIcons.condom, "Condom", 0),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+                  // SizedBox(width: 5),
+                  buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 20.0),
-          Container (
-            height: containerHeight * 0.6, // Adjust as needed
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment:CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: boxWidth,
-                  height: boxHeight * 0.6 * 0.5,
-                  color: Colors.blue,
-                  child: Column(
-                    children: [
-                      methodContent,
-                        IconButton(
-                              icon: const Icon(Icons.search),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => BleedingPage()),
-                                );
-                              },
+
+          SizedBox(height: 15.0),
+          SizedBox(
+            height: availableHeight * 0.70, // Adjust as needed
+                child: Flex(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                direction: Axis.vertical,
+                children: [
+                  Container(
+                      width: boxWidth,
+                      height: boxHeight*0.5*0.6,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                    ]
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(Icons.lightbulb_outline, color: Colors.amber),
+                            Center(
+                                child: Container(
+                                  width: boxWidth * 0.9,
+                                    // height: availableHeight * 0.6 * 0.5,
+                                    child: Center(
+                                      child: Column(children:[
+                                        updateMethodContent(),
+                                        IconButton(
+                                        icon: const ImageIcon(AssetImage('assets/noun_project/question.png')),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => BleedingPage()),
+                                          );
+                                        },
+                                      ),
+                                      ], 
+                                    )
+                                )
+                            )
+                            )
+                          ]
+                          
+                      )
+                    // child: Center(
+                    //   child: updateMethodContent(),
+                    // ),
                   ),
-                ),
-                
-                Row(children: [
+                  Row(children: [
                   SizedBox(width:15.0),
                   SizedBox(
                     width:boxWidth / 2,
@@ -242,49 +297,66 @@ class _PatternPageState extends State<PatternPage> {
                     child: Center(child: video2),
                   ),
                 ],),
-              ],
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
   }
 
-  Widget buildIconButton(IconData iconData, int index) {
+  Widget buildIconButton(IconData iconData, String caption, int index) {
     bool isSelected = index == methodIndex;
 
     return Stack(
       alignment: Alignment.center,
       children: [
-        IconButton(
-          icon: Icon(
-            iconData,
-            size: isSelected ? 100 : 60,
-            color: isSelected ? Colors.black : Colors.grey,
-          ),
-          onPressed: () {
-            setState(() {
-              methodIndex = index;
-              updateMethodContent();
-            });
-          },
-          color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 100 : 60,
-          padding: EdgeInsets.all(10),
-          splashRadius: 40,
-          splashColor: Colors.grey.withOpacity(0.5),
-          highlightColor: Colors.transparent,
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: Icon(
+                iconData,
+                size: isSelected ? 60 : 60,
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  methodIndex = index;
+                  updateMethodContent();
+                });
+              },
+              color: isSelected ? Colors.black : Colors.transparent,
+              iconSize: isSelected ? 60 : 60,
+              padding: EdgeInsets.all(10),
+              splashRadius: 40,
+              splashColor: Colors.grey.withOpacity(0.5),
+              highlightColor: Colors.transparent,
+            ),
+            SizedBox(height: 5),
+            Container (
+                width: 100,
+                child: Text(
+                  caption,
+                  softWrap: true, // Wrap text to the next line if needed
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: isSelected ? Colors.black : Colors.grey,
+                  ),
+                )
+            )
+          ],
         ),
       ],
     );
   }
 
-  void updateMethodContent() {
-    methodContent = Text(
+  Widget updateMethodContent() {
+    return Text(
       contentDescriptionMap[languages[languageIndex]]![methodIndex],
       style: TextStyle(
         fontSize: 20.0,
-        color: Colors.white,
+        color: Colors.black,
       )
     );
   }
