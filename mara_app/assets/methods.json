@@ -2,7 +2,7 @@
   "implant": {
     "name": {
       "English": "Implant",
-      "Kiswahili": "Kipandikizi",
+      "Kiswahili": "Implant",
       "Dholuo": "Implant"
     },
     "icon": "assets/implant.png",
@@ -221,7 +221,7 @@
   "pills": {
     "name": {
       "English": "Pills",
-      "Kiswahili": "Vya",
+      "Kiswahili": "Pills",
       "Dholuo": "Pills"
     },
     "icon": "assets/pills.png",
@@ -366,9 +366,9 @@
   },
   "condoms": {
     "name": {
-      "English": "Condoms",
-      "Kiswahili": "Kondomu",
-      "Dholuo": "Rabo"
+      "English": "(male) Condom",
+      "Kiswahili": "(male) Condom",
+      "Dholuo": "(male) Condom"
     },
     "icon": "assets/condom.png",
     "how_it_works": {
@@ -439,9 +439,9 @@
   },
   "female_condom": {
     "name": {
-      "English": "Female condom",
-      "Kiswahili": "Kiswahili translation of female condom",
-      "Dholuo": "[Dholuo Translation for female condom]"
+      "English": "Condom",
+      "Kiswahili": "Condom",
+      "Dholuo": "Condom"
     },
     "icon": "assets/female_condom.png",
     "how_it_works": {
