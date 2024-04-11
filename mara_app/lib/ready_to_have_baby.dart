@@ -96,13 +96,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  //   Image.asset(
-                  //   // 'assets/exclamation.png', // Path to your custom icon
-                  //   Icon(Icons.warning_amber_rounded, color: Colors.amber),
-                  //   width: 24, // Adjust size as needed
-                  //   height: 24, // Adjust size as needed
-                  //    // You can adjust the color if needed
-                  // ),
+                 
                   Icon(Icons.warning_amber_rounded, color: Colors.amber),
                     SizedBox(width: 8.0),
                     Expanded(
@@ -159,27 +153,35 @@ Widget build(BuildContext context) {
         ),
         title: Text(_t('Family Planning Guide')),
       ),
-      body: ListView(
-        children: [
-          // Language selection buttons
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: ['Kiswahili', 'Dholuo', 'English']
-                .map((language) => languageButton(language))
-                .toList(),
-          ),
-          customListTile(
-            imagePath: 'assets/preg_woman_new.png',
-            header: _t('What if I\'m ready to have a baby?'),
-            title: _t('HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'),
-          ),
-
+      body: Column(
+      children: [
+        // Language selection buttons
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: languages.map((language) => languageButton(language)).toList(),
+        ),
+        
+        Flexible(
+          child: ListView(
+            children: [
+              customListTile(
+                imagePath: 'assets/preg_woman_new.png',
+                header: _t('What if I\'m ready to have a baby?'),
+                title: _t('HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'),
+              ),
+              
           SizedBox(width:boxWidth, height:boxHeight * 0.5 * 0.6, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
-
-          ListTile(
-            leading: Icon(Icons.search),
-            title: Text(_t('LEARN MORE about the fertility considerations of each method')),
-            onTap: () {
+          
+         Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: ElevatedButton.icon(
+            icon: Icon(Icons.search), // The icon
+            label: Text(_t('LEARN MORE about the fertility considerations of each method')), // The label (text)
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100], // Button background color
+              foregroundColor: Colors.black 
+            ),
+            onPressed: () {
               int languageIndex = languages.indexOf(_currentLanguage);
               Navigator.pushNamed(
                 context,
@@ -188,22 +190,34 @@ Widget build(BuildContext context) {
               );
             },
           ),
-
-          ListTile(
-            leading: Icon(Icons.check_circle),
-            title: Text(_t('Preparing for a healthy pregnancy')),
-            onTap: () {
+        ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: ElevatedButton.icon(
+            icon: Icon(Icons.check_circle), // The icon
+            label: Text(_t('LEARN MORE about the fertility considerations of each method')), 
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100], // Button background color
+              foregroundColor: Colors.black, 
+            ),
+    
+            onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PrepPage(initialLanguage: _currentLanguage),
-                ),
-              );
+              context,
+              MaterialPageRoute(
+                builder: (context) => PrepPage(initialLanguage: _currentLanguage),
+              ),
+            );
             },
+    
           ),
-        ],
-      ),
-    );
+        ),
+          
+      ]),
+        ), 
+      ]),
+  );
+    
   }
 }
 
