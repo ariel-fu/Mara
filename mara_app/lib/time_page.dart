@@ -24,31 +24,31 @@ class _TimePageState extends State<TimePage> {
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
-      "method 1 in Kiswahili",
-      "method 2 in Kiswahili",
-      "method 3 in Kiswahili",
-      "method 4 in Kiswahili",
-      "method 5 in Kiswahili",
-      "method 6 in Kiswahili",
-      "method 7 in Kiswahili"
+      "Ili kuzuia mimba, unahitaji kutumia kondomu kila mara unapofanya ngono. Inaweza kuwa changamoto sana kutabiri siku zako salama, kwa hivyo kondomu zinahitajika kutumika kila wakati unapojamiiana ili kufanya kazi vizuri.",
+      "Ili kuzuia mimba, unahitaji kutumia kondomu kila mara unapofanya ngono. Inaweza kuwa changamoto sana kutabiri siku zako salama, kwa hivyo kondomu zinahitajika kutumika kila wakati unapojamiiana ili kufanya kazi vizuri.",
+      "Vidonge vya kila siku vinahitaji kuchukuliwa kila siku ili kuzuia mimba. Ukikosa vidonge, mwili wako unaweza kutoa yai, na unaweza kupata mimba. Inaweza kusaidia kumeza kidonge chako cha kila siku kama sehemu ya utaratibu, kama vile kabla ya kulala, au kabla ya kuanza siku yako asubuhi.",
+      "Sindano (depo) hudumu kwa miezi 3. Ikiwa umechelewa kwa zaidi ya wiki 2 kwa picha yako inayofuata, unaweza kupata mimba, kwa hivyo ni vizuri kukaa kwenye ratiba ikiwa unataka kuzuia mimba!",
+      "Implant hudumu kwa miaka 3 (Nexplanon) au miaka 5 (Jadelle), kulingana na aina gani unayopata. Ikiwa hupendi au unataka kupata mimba, unaweza kuiondoa wakati wowote unapotaka - huna kusubiri miaka 3-5! Kipandikizi kinaweza kuwa njia nzuri hata kwa mwaka mmoja au miwili tu.",
+      "IUCD (coil) inafanya kazi hadi miaka 12! Watu wengi hawaihifadhi kwa muda mrefu hivyo, na wanaweza kuitumia kwa mwaka mmoja au miwili. Unaweza kuondoa IUCD wakati wowote unapotaka, ikiwa hupendi au unataka kupata mimba.",
+      "E-pill (P2) haifanyi kazi kwa muda fulani, lakini inakusudiwa kupunguza uwezekano wa kupata mimba baada ya kufanya ngono. Usifikiri kwamba bado itafanya kazi ikiwa utafanya ngono tena siku moja au mbili baada ya kumeza E-pill...ni bora kutumia njia tofauti kama njia yako ya kawaida!"
     ],
     "Dholuo": [
-      "method 1 in Dholuo",
-      "method 2 in Dholuo",
-      "method 3 in Dholuo",
-      "method 4 in Dholuo",
-      "method 5 in Dholuo",
-      "method 6 in Dholuo",
-      "method 7 in Dholuo"
+      "Mondo igeng ich, dwarore ni mondo iti gi rabo yunga kinde duto ma ibedo e achiel. Onyalo bedo gima pek ng'eyo kinde ma ionge thuolo mar mako ich, koro rabo yunga onego tigodo kinde duto ma ibedo e achiel mondo oti maber.",
+      "Mondo igeng ich, dwarore ni mondo iti gi rabo yunga kinde duto ma ibedo e achiel. Onyalo bedo gima pek ng'eyo kinde ma ionge thuolo mar mako ich, koro rabo yunga onego tigodo kinde duto ma ibedo e achiel mondo oti maber.",
+      "Pills ma pile ka pile onego muony pile ka pile mondo ogeng ich. Ka ok imuonyo pills, dendi nyalo golo tong, kendo inyalo mako ich. Nyalo bedo gima konyo ka imuonyo pills pile ka pile kaka gino ma iketo e chenro, kaka kapok idhi e kitanda, kata kapok ichako odiechiengi gokinyi.",
+      "Sindan [Depo] bet e del kuom dweche 3. Ka ileo gi jumbe 2 yudo sindan machielo, inyalo mako ich, koro ber mondo irit tarik mochiki e dok e sindan ka idwaro geng'o ich!",
+      "Implant budho kuom higni 3 [Nexplanon] kata higni 5 [Jadelle], kaluwore e kido ma oketni. ka ok ihere kata idwaro mako ich, inyalo dhi mondo ogolni godo saa asaya ma idwaro - ok ochuno ni nyaka irit higni 3-5! Implant nyalo bedo yo maber ahinya kata mana e higa kata higni ariyo.",
+      "IUCD [koil] tiyo nyaka higni 12! Ng'eny ji ok weye kanyo mang'eny kamano, kendo nyalo mana tiyo kode kuom higa kata higni ariyo. Inyalo golo IUCD saa asaya ma idwaro, ka ok idware kata idwaro mako ich.",
+      "E-pill [P2] ok ti kuom kinde moko, to en mar duoko chien nyaloni mar mako ich bang bedo e achiel. Kik ipar ni podi odhi tiyo ka ibedo e achiel kendo odiechieng achiel kata ariyo bang muonyo E-pill... Ber mondo iti gi yo machielo kaka yori mapile mar geng'o ich!"
     ],
     "English": [
-      "method 1 in English",
-      "method 2 in English",
-      "method 3 in English",
-      "method 4 in English",
-      "method 5 in English",
-      "method 6 in English",
-      "method 7 in English"
+      "To prevent pregnancy, you need to use a condom every time you have sex. It can be very challenging to predict your safe days, so condoms need to be used every time you have sex in order to work well.",
+      "To prevent pregnancy, you need to use a condom every time you have sex. It can be very challenging to predict your safe days, so condoms need to be used every time you have sex in order to work well.",
+      "Daily pills need to be taken every day to prevent pregnancy. If you miss pills, your body might release an egg, and you could get pregnant. It can be helpful to take your daily pill as part of a routine, like right before you go to bed, or before you start your day in the morning.",
+      "The injection (depo) lasts for 3 months. If you are more than 2 weeks late for your next shot, you can get pregnant, so it is good to stay on schedule if you want to prevent pregnancy!",
+      "The implant lasts for 3 years (Nexplanon) or 5 years (Jadelle), depending on which type you get. If you don't like it or you want to get pregnant, you can have it removed whenever you want - you don't have to wait 3-5 years! The implant can be a great method even just for a year or two.",
+      "The IUCD (coil) works for up to 12 years! Many people don't keep it in that long, and might just use it for a year or two. You can have the IUCD removed whenever you want, if you don't like it or want to get pregnant.",
+      "The E-pill (P2) does not work for a particular length of time, but is meant to reduce the chance of pregnancy after having sex. Don't assume it is still going to work if you have sex again a day or two after taking the E-pill...it is better to use a different method as your regular method!"
     ],
   };
 
