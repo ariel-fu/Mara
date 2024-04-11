@@ -41,16 +41,13 @@ class _HomePage2State extends State<HomePage2> {
       // Navigator.push(
       // context,
       // MaterialPageRoute(builder: (context) => MainScreen()),
-      // ).then((_) { setState(() { _selections[index] = true; }); });
     } else if (index == 4) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => PrivatePage()),
       );
     } else if (index == 5) {
-      Navigator.pushNamed(context, '/ready_baby');
-    } else if (index == 6) {
-      Navigator.pushNamed(context, '/quiz');
+      MaterialPageRoute(builder: (context) => ReadyPage());
     }
   }
 
@@ -140,10 +137,10 @@ class _HomePage2State extends State<HomePage2> {
               title: Text('Take the Quiz'),
               tileColor: _allSelected ? Colors.green : Colors.grey,
               onTap: () {
-                Navigator.push(
-                 context,
-                 MaterialPageRoute(builder: (context) => QuizScreen()),
-                );
+                _allSelected ? Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuizScreen()),
+                ) : null;
               },
             ),
           ],
