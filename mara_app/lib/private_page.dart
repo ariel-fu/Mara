@@ -18,6 +18,7 @@ class _PrivatePageState extends State<PrivatePage> {
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
+      "videoAudio/videos/funnyCat.mp4",
       "videoAudio/videos/peer/peer3KS.mp4", // method 1 - condom
       "videoAudio/videos/peer/peer3KS.mp4",
       "videoAudio/videos/peer/peer3KS.mp4",
@@ -244,48 +245,51 @@ class _PrivatePageState extends State<PrivatePage> {
           ),
 
           SizedBox(height: 15.0),
-          SizedBox(
-            height: availableHeight * 0.70, // Adjust as needed
-                child: Flex(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                direction: Axis.vertical,
-                children: [
-                  Container(
-                      width: boxWidth,
-                      height: boxHeight*0.5*0.6,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(Icons.lightbulb_outline, color: Colors.amber),
-                            Center(
-                                child: Container(
-                                  width: boxWidth * 0.9,
-                                    // height: availableHeight * 0.6 * 0.5,
-                                    child: Center(
-                                      child: updateMethodContent(),
-                                    )
+          Flex(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            direction: Axis.vertical,
+            children: [
+              Container(
+                  width: boxWidth,
+                  height: boxHeight*0.2,
+                  decoration: BoxDecoration(
+                    // color: Colors.grey.shade200,
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(Icons.lightbulb_outline, color: Colors.amber),
+                        Center(
+                            child: SizedBox(
+                                width: boxWidth * 0.9,
+                                height: availableHeight * 0.5*0.3,
+                                child: Center(
+                                  child: updateMethodContent(),
                                 )
                             )
-                          ]
-                      )
-                    // child: Center(
-                    //   child: updateMethodContent(),
-                    // ),
-                  ),
-                  SizedBox(
-                    width: boxWidth,
-                    height: availableHeight * 0.6 * 0.5,
-                    child: Center(
-                      child: getVideoContent(),
-                    ),
-                  ),
-                ],
+                        )
+                      ]
+                  )
+                // child: Center(
+                //   child: updateMethodContent(),
+                // ),
               ),
-            ),
+              SizedBox(height: 15.0),
+              SizedBox(
+                width: boxWidth*0.8,
+                height: availableHeight * 0.6 * 0.5,
+                child: Center(
+                  child: getVideoContent(),
+                ),
+              ),
+            ],
+          ),
+          // SizedBox(
+          //   height: availableHeight * 0.70, // Adjust as needed
+          //       child:
+          //   ),
         ],
       ),
     );
