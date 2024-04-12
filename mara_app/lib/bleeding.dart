@@ -20,6 +20,12 @@ class _BleedingPageState extends State<BleedingPage> {
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
+  final Map<String, String> titleTranslations = {
+    "English": "Period changes EXPLAINED", 
+    "Kiswahili": "Mabadiliko ya hedhi IMEELEZWA", 
+    "Dholuo": "Lokruok e chwer mar remb dwe OLER"
+  };
+
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
       "Mabadiliko ya hedhi yako ni ya kawaida unapotumia implant, depo, tembe za kila siku, IUCD, au E-pills. Njia hizi zote isipokuwa IUCD zina homoni ndani yake, ambazo zina athari kwenye siku zako za hedhi wakati unatumia mbinu hizo. Mabadiliko haya yatakoma ukiacha kutumia mbinu. IUCD haina homoni, lakini iko ndani ya tumbo la uzazi au uterasi ambayo inaweza kusababisha hedhi nzito au ya uchungu. Mabadiliko haya ya kutokwa na damu hayana uhusiano wowote na uwezo wako wa kupata ujauzito katika siku zijazo.",
@@ -115,12 +121,10 @@ class _BleedingPageState extends State<BleedingPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Center(child: Text('Bleeding Changes EXPLAINED')),
+        title: Center(child: Text(titleTranslations[languages[languageIndex]] ?? "Title not found")),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
