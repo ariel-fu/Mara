@@ -90,7 +90,7 @@ class MethodRepository {
         ref: 'double_pills',
         jsonRef: 'emergency',
         icon: MaraIcons.double_pills,
-        name: 'Emergency pill (E-pill, P2)',
+        name: 'Emergency pill\n(E-pill, P2)',
         description: "Emergency pills are used to prevent pregnancy AFTER having sex. They only work if your body hasn't already released an egg, so they are good in an emergency, but not as the method you use all the time. Typically, they come as 2 pills you swallow at the same time.",
         brands: 'P2, E-pill',
         top: 0.28,
