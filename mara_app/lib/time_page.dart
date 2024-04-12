@@ -58,6 +58,18 @@ class _TimePageState extends State<TimePage> {
     ],
   };
 
+  final Map<String, String> importantMessageTranslations = {
+  "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+  "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+  "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!"
+};
+
+final Map<String, String> learnMoreTranslations = {
+  "English": "Learn more",
+  "Kiswahili": "Jifunze zaidi",
+  "Dholuo": "Puonjri matut"
+};
+
   
 
 Widget subtitleSection() {
@@ -125,41 +137,45 @@ Widget languageButton(String language) {
   }
 
 
-
 Widget additionalTextSection() {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
-              SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
-                  style: TextStyle(fontSize: 16.0),
-                  textAlign: TextAlign.justify,
-                ),
+  return Padding(
+    padding: EdgeInsets.all(10.0),
+    child: Column(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
+                style: TextStyle(fontSize: 16.0),
+                textAlign: TextAlign.justify,
               ),
-            ],
+            ),
+          ],
+        ),
+        SizedBox(height: 20),  // Space between the text and the button
+        TextButton.icon(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HIVPage()),
+            );
+          },
+          icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+          label: Text(
+            learnMoreTranslations[languages[languageIndex]] ?? "Translation Not Found",
+            style: TextStyle(color: Colors.black)
           ),
-          SizedBox(height: 20),  // Space between the text and the button
-          TextButton.icon(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const HIVPage()),
-              );
-            },
-            icon: Icon(Icons.search, color: Colors.black),
-            label: Text("Learn more", style: TextStyle(color: Colors.black)),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
+
+
 
 
 
