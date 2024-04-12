@@ -278,9 +278,15 @@ class _WhatChanceState extends State<WhatChance> {
             Divider(),
             TextButton(onPressed: () { 
               if (methodIndex == 6) {
-                EmergencyPage();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EmergencyPage()),
+                  );
               } else {
-                WhySomeMethodsBetter();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => WhySomeMethodsBetter()),
+                  );
               }
              }, 
             child:
@@ -319,7 +325,10 @@ class _WhatChanceState extends State<WhatChance> {
             //Divider(),
             if (methodIndex == 0 || methodIndex == 1) 
             TextButton(onPressed: () { 
-                HIVPage();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HIVPage()),
+                  );
               }, 
             child:
             Row(
