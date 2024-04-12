@@ -52,6 +52,18 @@ class _TimePageState extends State<TimePage> {
     ],
   };
 
+  final Map<String, String> learnMore = {
+    "Kiswahili": "JIFUNZE ZAIDI",
+    "Dholuo": "PUONJRI MATUT",
+    "English": "LEARN MORE"
+  };
+
+  final Map<String, String> heyThis = {
+    "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
+    "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!"
+  };
+
   final double _aspectRatio = 16 / 10;
 
   @override
@@ -232,38 +244,99 @@ class _TimePageState extends State<TimePage> {
   ],
 ),
 SizedBox(height: 15.0),
-Container(
-  width: boxWidth,
-  height: boxHeight * 0.5 * 0.6 - 50,
-  decoration: BoxDecoration(
-    color: Colors.grey.shade200,
-    borderRadius: BorderRadius.circular(8.0),
-  ),
-  child: Column(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      ImageIcon(AssetImage('assets/misc-icons/important.png')),
-      Text(
-        "ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " +
-            contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      ),
-      Text('CLICK BELOW TO LEARN MORE'),
-      IconButton(
-        icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HIVPage()),
-          );
-        },
-      ),
-    ],
-  ),
-),
-
+// Container(
+//   width: boxWidth,
+//   height: boxHeight * 0.5 * 0.6 - 50,
+//   decoration: BoxDecoration(
+//     color: Colors.grey.shade200,
+//     borderRadius: BorderRadius.circular(8.0),
+//   ),
+//   child: Column(
+//     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//     children: [
+//       ImageIcon(AssetImage('assets/misc-icons/important.png')),
+//       Text(
+//         "ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " +
+//             contentDescriptionMap[languages[languageIndex]]![methodIndex],
+//       ),
+//       Text(_t('LEARN MORE')),
+//       IconButton(
+//         icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
+//         onPressed: () {
+//           Navigator.push(
+//             context,
+//             MaterialPageRoute(builder: (context) => HIVPage()),
+//           );
+//         },
+//       ),
+//     ],
+//   ),
+// ),
+          Divider(),
+          if (methodIndex == 0 || methodIndex == 1) 
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(width: 10.0),
+              Image.asset(
+                'assets/misc-icons/important.png',
+                width: 40,
+                height: 40,
+              ),
+              SizedBox(width: 8),
+              Text(
+                heyThis[languages[languageIndex]]!,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12.0,
+                ),
+              ),
+            ],
+          ),
+          if (methodIndex == 0 || methodIndex == 1)
+          TextButton(
+            onPressed: () { 
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HIVPage())
+              );
+            }, 
+          child:
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                'assets/misc-icons/question.png',
+                width: 40,
+                height: 40,
+              ),
+              SizedBox(width: 8),
+              Text(
+                learnMore[languages[languageIndex]]!,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12.0,
+                ),
+              ),
+            ],
+          ),
+          ),
+          //if (methodIndex == 0 || methodIndex == 1) 
+          Divider()
         ],
       ),  
     );
+
+    void HIVSTDPage () {
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HIVPage()),
+    );
+    }
 
     Widget buildSecondaryContext() {
     return Text("ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " + 
