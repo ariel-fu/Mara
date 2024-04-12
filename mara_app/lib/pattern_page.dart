@@ -126,6 +126,12 @@ class _PatternPageState extends State<PatternPage> {
 
     return Scaffold(
       appBar: AppBar(
+        // leading: IconButton(
+        //   icon: const Icon(Icons.home),
+        //   onPressed: () {
+        //     Navigator.of(context).pushNamed('/home');
+        //   },
+        // ),
         title: Center(child: Text('What will happen to my period?')),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
