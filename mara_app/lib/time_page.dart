@@ -81,12 +81,12 @@ class _TimePageState extends State<TimePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.home),
+        //   onPressed: () {
+        //     Navigator.of(context).pushNamed('/home');
+        //   },
+        // ),
         title: Center(child: Text('How long does the method work?')),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
@@ -242,14 +242,14 @@ Container(
   child: Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      ImageIcon(AssetImage('assets/noun_project/important.png')),
+      ImageIcon(AssetImage('assets/misc-icons/important.png')),
       Text(
         "ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " +
             contentDescriptionMap[languages[languageIndex]]![methodIndex],
       ),
       Text('CLICK BELOW TO LEARN MORE'),
       IconButton(
-        icon: const ImageIcon(AssetImage('assets/noun_project/question.png')),
+        icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
         onPressed: () {
           Navigator.push(
             context,
