@@ -16,17 +16,17 @@ class _TimePageState extends State<TimePage> {
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
-  final Map<String, String> subtitleTranslations = {
-    "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
-    "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
-    "English": "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy."
-  };
+  // final Map<String, String> subtitleTranslations = {
+  //   "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
+  //   "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
+  //   "English": "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy."
+  // };
 
   final Map<String, String> titleTranslations = {
   "English": "How long does the method work?", 
   "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
   "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
-};
+  };
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -62,26 +62,13 @@ class _TimePageState extends State<TimePage> {
   "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
   "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
   "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!"
-};
+  };
 
 final Map<String, String> learnMoreTranslations = {
   "English": "Learn more",
   "Kiswahili": "Jifunze zaidi",
   "Dholuo": "Puonjri matut"
-};
-
-  
-
-Widget subtitleSection() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      child: Text(
-        subtitleTranslations[languages[languageIndex]] ?? "Subtitle not found",
-        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
+  };
 
 
 
@@ -106,8 +93,6 @@ Widget subtitleSection() {
                 children: languages.map((language) => languageButton(language)).toList(),
               ),
             ),
-            subtitleSection(),  
-            SizedBox(height: 20.0),
             methodSelectionRow(),
             SizedBox(height: 20.0),
             contentArea(),
@@ -142,6 +127,7 @@ Widget additionalTextSection() {
     padding: EdgeInsets.all(10.0),
     child: Column(
       children: [
+        if (methodIndex == 0 || methodIndex == 1)
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -157,6 +143,7 @@ Widget additionalTextSection() {
           ],
         ),
         SizedBox(height: 20),  // Space between the text and the button
+        if (methodIndex == 0 || methodIndex == 1)
         TextButton.icon(
           onPressed: () {
             Navigator.push(
