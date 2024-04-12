@@ -328,7 +328,7 @@ class _WhatChanceState extends State<WhatChance> {
               } else {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => WhySomeMethodsBetter()),
+                    MaterialPageRoute(builder: (context) => WhySomeMethodsBetter(initialLanguage: _currentLanguage)),
                   );
               }
              }, 
@@ -432,7 +432,7 @@ class _WhatChanceState extends State<WhatChance> {
   void WhyDoPage () {
     Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => WhySomeMethodsBetter()),
+    MaterialPageRoute(builder: (context) => WhySomeMethodsBetter(initialLanguage: _currentLanguage)),
   );
   }
   Widget getPic() {
