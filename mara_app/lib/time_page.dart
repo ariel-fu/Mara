@@ -16,11 +16,17 @@ class _TimePageState extends State<TimePage> {
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
-  final Map<String, String> titleContentMap = {
+  final Map<String, String> subtitleTranslations = {
     "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
     "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
     "English": "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy."
   };
+
+  final Map<String, String> titleTranslations = {
+  "English": "How long does the method work?", 
+  "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
+  "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+};
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -52,296 +58,128 @@ class _TimePageState extends State<TimePage> {
     ],
   };
 
-  final Map<String, String> learnMore = {
-    "Kiswahili": "JIFUNZE ZAIDI",
-    "Dholuo": "PUONJRI MATUT",
-    "English": "LEARN MORE"
-  };
+  
 
-  final Map<String, String> heyThis = {
-    "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
-    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
-    "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!"
-  };
+Widget subtitleSection() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: Text(
+        subtitleTranslations[languages[languageIndex]] ?? "Subtitle not found",
+        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
 
-  final double _aspectRatio = 16 / 10;
 
-  @override
+
+@override
   Widget build(BuildContext context) {
-    final int? routeArgumentIndex =
-    ModalRoute.of(context)?.settings.arguments as int?;
-
-    // Update languageIndex if a valid value is provided from the route
-    // if (routeArgumentIndex != null &&
-    //     routeArgumentIndex >= 0 &&
-    //     routeArgumentIndex < languages.length &&
-    //     !overrideIndex) {
-    //   languageIndex = routeArgumentIndex;
-    // }
-
-    double containerWidth = MediaQuery.of(context).size.width;
-    double containerHeight = MediaQuery.of(context).size.height;
-    if (containerHeight / containerWidth > _aspectRatio) {
-      containerHeight = containerWidth * _aspectRatio;
-    } else {
-      containerWidth = containerHeight / _aspectRatio;
-    }
-
-    double boxWidth = containerWidth;
-    double boxHeight = containerHeight;
-    double availableHeight = boxHeight;
-
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: const Icon(Icons.home),
-        //   onPressed: () {
-        //     Navigator.of(context).pushNamed('/home');
-        //   },
-        // ),
-        title: Center(child: Text('How long does the method work?')),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(availableHeight * 0.05),
-          child: Container(
-            // height: availableHeight * 0.1,
-              child: Container(
-                // padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 0;
-                            overrideIndex = true;
-                            updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 0 ? Colors.grey : null,
-                        ),
-                        child: Text('Kiswahili'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 1;
-                            overrideIndex = true;
-                            updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 1 ? Colors.grey : null,
-                        ),
-                        child: Text('Dholuo'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 2;
-                            overrideIndex = true;
-                            updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 2 ? Colors.grey : null,
-                        ),
-                        child: Text('English'),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-          // preferredSize: Size.fromHeight(75),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        // actions: <Widget>[
-        //
-        // ]
+        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // SizedBox(height: availableHeight*0.01),
-          Container (
-              width: boxWidth*0.8,
-              child: Padding (
-                  padding: const EdgeInsets.only(top: 5.0, bottom: 20.0), // Adjust the padding as needed,
-                  child: Text(
-                    titleContentMap[languages[languageIndex]]!,
-                    softWrap: true, // Wrap text to the next line if needed
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.black,
-                      fontSize: 18.0
-                    ),
-                  )
-              )
-
-          ),
-          Container(
-            alignment: Alignment.center,
-            // height: availableHeight * 0.15,
-            // width: boxWidth,
-            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  buildIconButton(MaraIcons.condom, "Condom", 0),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
-                ],
+                children: languages.map((language) => languageButton(language)).toList(),
               ),
             ),
-          ),
-      
-          SizedBox(height: 15.0),
-          Flex(
-  direction: Axis.vertical,
-  children: [
-    Container(
-      width: boxWidth * 0.9,
-      height: boxHeight * 0.2,
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(8.0),
+            subtitleSection(),  
+            SizedBox(height: 20.0),
+            methodSelectionRow(),
+            SizedBox(height: 20.0),
+            contentArea(),
+            SizedBox(height: 20.0),
+            additionalTextSection(),
+          ],
+        ),
       ),
+    );
+  }
+
+Widget languageButton(String language) {
+    bool isSelected = languages[languageIndex] == language;
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          languageIndex = languages.indexOf(language);
+          overrideIndex = true;
+          updateMethodContent();
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
+
+
+
+Widget additionalTextSection() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Icon(Icons.lightbulb_outline, color: Colors.amber),
-          Center(
-            child: SizedBox(
-              width: boxWidth * 0.75,
-              height: boxHeight * 0.5 * 0.3,
-              child: Center(
-                child: updateMethodContent(),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  ],
-),
-SizedBox(height: 15.0),
-// Container(
-//   width: boxWidth,
-//   height: boxHeight * 0.5 * 0.6 - 50,
-//   decoration: BoxDecoration(
-//     color: Colors.grey.shade200,
-//     borderRadius: BorderRadius.circular(8.0),
-//   ),
-//   child: Column(
-//     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//     children: [
-//       ImageIcon(AssetImage('assets/misc-icons/important.png')),
-//       Text(
-//         "ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " +
-//             contentDescriptionMap[languages[languageIndex]]![methodIndex],
-//       ),
-//       Text(_t('LEARN MORE')),
-//       IconButton(
-//         icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
-//         onPressed: () {
-//           Navigator.push(
-//             context,
-//             MaterialPageRoute(builder: (context) => HIVPage()),
-//           );
-//         },
-//       ),
-//     ],
-//   ),
-// ),
-          Divider(),
-          if (methodIndex == 0 || methodIndex == 1) 
+        children: [
           Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(width: 10.0),
-              Image.asset(
-                'assets/misc-icons/important.png',
-                width: 40,
-                height: 40,
-              ),
-              SizedBox(width: 8),
-              Text(
-                heyThis[languages[languageIndex]]!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12.0,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+              SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+                  style: TextStyle(fontSize: 16.0),
+                  textAlign: TextAlign.justify,
                 ),
               ),
             ],
           ),
-          if (methodIndex == 0 || methodIndex == 1)
-          TextButton(
-            onPressed: () { 
+          SizedBox(height: 20),  // Space between the text and the button
+          TextButton.icon(
+            onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HIVPage())
+                MaterialPageRoute(builder: (context) => const HIVPage()),
               );
-            }, 
-          child:
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                'assets/misc-icons/question.png',
-                width: 40,
-                height: 40,
-              ),
-              SizedBox(width: 8),
-              Text(
-                learnMore[languages[languageIndex]]!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12.0,
-                ),
-              ),
-            ],
+            },
+            icon: Icon(Icons.search, color: Colors.black),
+            label: Text("Learn more", style: TextStyle(color: Colors.black)),
           ),
-          ),
-          //if (methodIndex == 0 || methodIndex == 1) 
-          Divider()
         ],
-      ),  
+      ),
     );
+  }
 
-    void HIVSTDPage () {
-      Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HIVPage()),
+
+
+Widget methodSelectionRow() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildIconButton(MaraIcons.condom, "Condom", 0),
+          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+        ],
+      ),
     );
-    }
-
-    Widget buildSecondaryContext() {
-    return Text("ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " + 
-      contentDescriptionMap[languages[languageIndex]]![methodIndex]);
-  }}
+  }
 
   Widget buildIconButton(IconData iconData, String caption, int index) {
     bool isSelected = index == methodIndex;
@@ -376,7 +214,7 @@ SizedBox(height: 15.0),
                 width: 100,
                 child: Text(
                   caption,
-                  softWrap: true, // Wrap text to the next line if needed
+                  softWrap: true, 
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: isSelected ? Colors.black : Colors.grey,
@@ -386,6 +224,33 @@ SizedBox(height: 15.0),
           ],
         ),
       ],
+    );
+  }
+
+  Widget contentArea() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            SizedBox(width: 10.0),
+            Flexible(
+              child: Text(
+                contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
