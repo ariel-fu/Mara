@@ -8,7 +8,7 @@ class imLaunchScreen extends StatefulWidget {
   State<imLaunchScreen> createState() => _imLaunchState();
 }
 class _imLaunchState extends State<imLaunchScreen> {
-  String currentLanguage = 'English';
+  String _currentLanguage = 'English';
 
   Map<String, String> translations = {
     'English': "Let's get started!",
@@ -28,9 +28,9 @@ class _imLaunchState extends State<imLaunchScreen> {
     'Dholuo': "Wachaki!",
   };
 
- void switchLanguage(String language) {
+ void _switchLanguage(String language) {
     setState(() {
-      currentLanguage = language;
+      _currentLanguage = language;
     });
   }
   
@@ -38,35 +38,26 @@ class _imLaunchState extends State<imLaunchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         leading: Container(),
-         actions: [
-          Spacer(),
-          ElevatedButton(
-            onPressed: () => switchLanguage('Kiswahili'),
-            child: Text(
-              'Kiswahili',
-            ),
+         bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              languageButton('Kiswahili'),
+              languageButton('Dholuo'),
+              languageButton('English'),
+              ],
           ),
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed: () => switchLanguage('Dholuo'),
-            child: Text(
-              'Dholuo',
-            ),
-          ),
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed: () => switchLanguage('English'),     
-            child: Text(
-              'English',
-            ),
-          ),
-          Spacer(),
-        ],
+        ),
       ),
+      extendBodyBehindAppBar: true,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
+            alignment: Alignment.center,  // change, to reposition image
             image: AssetImage("assets/imlaunchscreenimg.png"),
             fit: BoxFit.fitHeight,
           ),
@@ -74,11 +65,11 @@ class _imLaunchState extends State<imLaunchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 20.0),
+            SizedBox(height: 80.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                translations[currentLanguage]!, textAlign: TextAlign.right,
+                translations[_currentLanguage]!, textAlign: TextAlign.right,
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
             ),
@@ -86,7 +77,7 @@ class _imLaunchState extends State<imLaunchScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                translations2[currentLanguage]!,
+                translations2[_currentLanguage]!,
                 style: TextStyle(fontSize: 16.0), textAlign: TextAlign.center
               ),
             ),
@@ -96,17 +87,31 @@ class _imLaunchState extends State<imLaunchScreen> {
               child:
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacementNamed(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage2()),
+                    '/home',
                   );
                 },
-                child: Text(translations3[currentLanguage]!,),
+                child: Text(translations3[_currentLanguage]!,),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+
+  // originally from quiz screen; factor out
+  Widget languageButton(String language) {
+    bool isSelected = _currentLanguage == language;
+    return ElevatedButton(
+      onPressed: () => _switchLanguage(language),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+        foregroundColor: isSelected ? Colors.white : null, // Optional: change text color based on selection
+      ),
+      child: Text(language),
     );
   }
 }

@@ -8,8 +8,6 @@ import 'package:mara_app/time_page.dart';
 import 'package:mara_app/private_page.dart';
 import 'package:mara_app/WhatChance.dart';
 
-void main() => runApp(HomePage2());
-
 
 class HomePage2 extends StatefulWidget {
   const HomePage2({Key? key}) : super(key: key);
@@ -50,7 +48,7 @@ class _HomePage2State extends State<HomePage2> {
     ],
   };
   
-  String currentLanguage = 'English';
+  String _currentLanguage = 'English';
 
   final List<bool> _selections = List.generate(6, (_) => false);
   bool get _allSelected => _selections.every((bool selected) => selected);
@@ -89,9 +87,9 @@ class _HomePage2State extends State<HomePage2> {
     }
   }
 
-  void switchLanguage(String language) {
+  void _switchLanguage(String language) {
     setState(() {
-      currentLanguage = language;
+      _currentLanguage = language;
     });
   }
 
@@ -99,80 +97,67 @@ class _HomePage2State extends State<HomePage2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Container(),
-         actions: [
-          Spacer(),
-          ElevatedButton(
-            onPressed:  () => switchLanguage('Kiswahili'),
-            child: Text(
-              'Kiswahili',
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0.0),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                languageButton('Kiswahili'),
+                languageButton('Dholuo'),
+                languageButton('English'),
+              ],
             ),
-          ),
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed:  () => switchLanguage('Dholuo'),
-            child: Text(
-              'Dholuo',
-            ),
-          ),
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed:  () => switchLanguage('English'),   
-            child: Text(
-              'English',
-            ),
-          ),
-          Spacer(),
-        ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            SizedBox(height: 20.0),
             ListTile(
               leading: Icon(Icons.info_outline),
-              title: Text(menuOptions[currentLanguage]![0]),
+              title: Text(menuOptions[_currentLanguage]![0]),
               onTap: () => _handleTap(0), 
               tileColor: _selections[0] ? Colors.green : null, 
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.calendar_today),
-              title: Text(menuOptions[currentLanguage]![1]),
+              title: Text(menuOptions[_currentLanguage]![1]),
               onTap: () => _handleTap(1),
               tileColor: _selections[1] ? Colors.green : null, 
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.hourglass_empty),
-              title: Text(menuOptions[currentLanguage]![2]),
+              title: Text(menuOptions[_currentLanguage]![2]),
               onTap: () => _handleTap(2),
               tileColor: _selections[2] ? Colors.green : null, 
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.pregnant_woman),
-              title: Text(menuOptions[currentLanguage]![3]),
+              title: Text(menuOptions[_currentLanguage]![3]),
               onTap: () => _handleTap(3),
               tileColor: _selections[3] ? Colors.green : null, 
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.lock_outline), 
-              title: Text(menuOptions[currentLanguage]![4]),
+              title: Text(menuOptions[_currentLanguage]![4]),
               onTap: () => _handleTap(4),
               tileColor: _selections[4] ? Colors.green : null, 
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.baby_changing_station),
-              title: Text(menuOptions[currentLanguage]![5]),
+              title: Text(menuOptions[_currentLanguage]![5]),
               onTap: () => _handleTap(5),
               tileColor: _selections[5] ? Colors.green : null, 
             ),
             Divider(),  
             ListTile(
               leading: Icon(Icons.question_answer),
-              title: Text(menuOptions[currentLanguage]![6]),
+              title: Text(menuOptions[_currentLanguage]![6]),
               tileColor: _allSelected ? Colors.green : Colors.grey,
               onTap: () {
                 _allSelected ? Navigator.push(
@@ -184,6 +169,19 @@ class _HomePage2State extends State<HomePage2> {
           ],
         ),
       ),
+    );
+  }
+
+  // originally from quiz screen; factor out
+  Widget languageButton(String language) {
+    bool isSelected = _currentLanguage == language;
+    return ElevatedButton(
+      onPressed: () => _switchLanguage(language),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+        foregroundColor: isSelected ? Colors.white : null, // Optional: change text color based on selection
+      ),
+      child: Text(language),
     );
   }
 }

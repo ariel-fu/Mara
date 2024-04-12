@@ -41,6 +41,7 @@ class _MaraAppState extends State<MaraApp> {
         '/quiz': (BuildContext context) => QuizScreen(),
         '/learnmore': (BuildContext context) => const LearnMoreFertility(),
       },
+      debugShowCheckedModeBanner: false,  // remove if install works
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
     );
   }

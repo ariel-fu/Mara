@@ -112,7 +112,7 @@ class OptionsImage extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 // color: Colors.black,
-                color: isSelected ? Colors.black : Colors.grey,
+                color: (isSelected || methodIndex == null) ? Colors.black : Colors.grey,
               ),
             ),
           ],

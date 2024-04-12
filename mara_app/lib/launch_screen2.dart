@@ -9,7 +9,7 @@ class LaunchScreen extends StatefulWidget {
 }
 
 class _LaunchScreenState extends State<LaunchScreen> {
-  String currentLanguage = 'English';
+  String _currentLanguage = 'English';
 
   Map<String, String> translations = {
     'English': "The best family planning choice is the option that you feel is right for you.",
@@ -23,9 +23,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
     'Dholuo': "Puonjri matut ewi yiero ma in godo",
   };
 
- void switchLanguage(String language) {
+ void _switchLanguage(String language) {
     setState(() {
-      currentLanguage = language;
+      _currentLanguage = language;
     });
   }
 
@@ -34,24 +34,18 @@ class _LaunchScreenState extends State<LaunchScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Container(),
-        actions: [
-          Spacer(),
-          ElevatedButton(
-            onPressed: () => switchLanguage('Kiswahili'),
-            child: Text('Kiswahili'),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              languageButton('Kiswahili'),
+              languageButton('Dholuo'),
+              languageButton('English'),
+              ],
           ),
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed: () => switchLanguage('Dholuo'),
-            child: Text('Dholuo'),
-          ),
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed: () => switchLanguage('English'),
-            child: Text('English'),
-          ),
-          Spacer(),
-        ],
+        ),
+
       ),
       body: Center(
         child: Column(
@@ -63,20 +57,34 @@ class _LaunchScreenState extends State<LaunchScreen> {
                 width: MediaQuery.of(context).size.width * 0.5,
               ),
             ),
-            Text(translations[currentLanguage]!, textAlign: TextAlign.center,),
+            Text(translations[_currentLanguage]!, textAlign: TextAlign.center,),
             const SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => imLaunchScreen()),
                 );
               },
-              child: Text(translations2[currentLanguage]!),
+              child: Text(translations2[_currentLanguage]!),
             ),
           ],
         ),
       ),
+    );
+  }
+
+
+  // originally from quiz screen; factor out
+  Widget languageButton(String language) {
+    bool isSelected = _currentLanguage == language;
+    return ElevatedButton(
+      onPressed: () => _switchLanguage(language),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+        foregroundColor: isSelected ? Colors.white : null, // Optional: change text color based on selection
+      ),
+      child: Text(language),
     );
   }
 }
