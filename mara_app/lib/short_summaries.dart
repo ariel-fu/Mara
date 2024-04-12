@@ -23,35 +23,6 @@ class MethodDetailsScreen extends StatefulWidget {
 class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
   late String _currentLanguage;
 
-  final Map<String, Map<String, String>> translations = {
-  'English': {
-    'how_it_works': 'How It Works',
-    'side_effects': 'What will happen to my period?',
-    'lasts': 'How long does the method work?', 
-    'effectiveness': 'How effective is it?',
-    'privacy': 'Can I keep it private?', 
-    'fertility': 'What if I\'m ready to have a baby?',
-    'page_title': 'Summary Page', 
-  },
-  'Kiswahili': {
-    'how_it_works': 'Jinsi Inavyofanya Kazi',
-    'side_effects': 'Nini kitafanyikia hedhi zangu?',
-    'lasts': 'Mbinu hiyo inafanya kazi kwa muda gani?', 
-    'effectiveness': 'How effective is it?',
-    'privacy': 'Je, ninaweza kuiweka kwa usiri?', 
-    'fertility': 'Je, itakuaje ikiwa niko tayari kupata mtoto?', 
-    'page_title': 'Ukurasa wa muhtasari', 
-  },
-  'Dholuo': {
-    'how_it_works': 'Jinsi Inavyofanya Kazi',
-    'side_effects': 'En ang\'o mabiro timore ne remba mar dwe?',
-    'lasts': 'Yor ni tiyo kuom kinde marom nade?', 
-    'effectiveness': 'How effective is it?',
-    'privacy': 'Bende anyalo kete mopondo?', 
-    'fertility': 'To ka ayikora mar mako ich to?', 
-    'page_title': 'Oboke ma lero weche e yo machuok', 
-  }
-};
 
   @override
   void initState() {
@@ -89,6 +60,8 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     );
   }
 
+
+
 @override
 Widget build(BuildContext context) {
   if (widget.methodDetails == null) {
@@ -110,7 +83,7 @@ Widget build(BuildContext context) {
         icon: Icon(Icons.arrow_back), 
         onPressed: () => Navigator.of(context).pop(), 
       ),
-      title: Text('Summary Page'),
+      title: Text(_t('summaryPage')),
     ),
     body: ListView(
       padding: EdgeInsets.all(8.0),

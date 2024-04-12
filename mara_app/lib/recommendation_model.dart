@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:mara_app/icons/mara_icons_icons.dart' show MaraIcons;
+
 class RecommendationModel {
   
 
@@ -6,7 +9,7 @@ class RecommendationModel {
     switch (timing) {
       case 'Now or very soon':
         return [
-          'No method, Pills, Condoms',
+          'Pills, Condoms',
           // 'Start a prenatal vitamin for good pregnancy health.'
         ];
       case 'In 6-12 months':
@@ -244,6 +247,34 @@ class RecommendationModel {
     };
 
     return recommendationImages[recommendation] ?? './assets/method_6.png'; // default image if no match found
+  }
+
+  static String getTitleFromJsonRef(String jsonRef) {
+    Map<String, String> recommendationTitles = {
+      'implant': 'Implant',
+      'pills': 'Pills (daily pills)',
+      'condoms': 'Condoms',
+      'iud': 'IUCD (coil)',
+      'emergency': 'Emergency pill (E-pill, P2)',
+      'depo': 'Injection (depo)',
+      'female_condom': 'Female condoms',
+    };
+
+    return recommendationTitles[jsonRef] ?? 'No title found';
+  }
+
+  static IconData getIconForRecommendation(String recommendation) {
+    Map<String, IconData> recommendationImages = {
+      'implant': MaraIcons.contraceptive_implant,
+      'pills': MaraIcons.birth_control_pills,
+      'condoms': MaraIcons.condom,
+      'iud': MaraIcons.iud,
+      'emergency': MaraIcons.double_pills,
+      'depo': MaraIcons.syringe,
+      'female_condom': MaraIcons.female_condom,
+    };
+
+    return recommendationImages[recommendation] ?? MaraIcons.iud; // default image if no match found
   }
 }
 

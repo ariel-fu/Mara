@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import 'model/method_repository.dart';
+import 'providers/provider_liked_methods.dart';
 
 class OptionsImage extends StatelessWidget {
   // works with an aspect ratio of 16/10
@@ -9,10 +11,12 @@ class OptionsImage extends StatelessWidget {
   final int? methodIndex;
   final Function updateIndex;
   OptionsImage(this.containerWidth, this.containerHeight, this.methodIndex, this.updateIndex, {super.key});
+  final methods = MethodRepository.loadMethods();
 
   @override
   Widget build(BuildContext context) {
-    final methods = MethodRepository.loadMethods();
+    var likes = context.watch<Likes>();
+    Set<String> likedMethods = likes.likedMethods;
     List<Widget> result = [];
     result.add(
       methodIndex == 0 ? Positioned(
@@ -46,9 +50,16 @@ class OptionsImage extends StatelessWidget {
         Positioned(
           top: containerHeight * curMethod!.top,
           left: containerWidth * curMethod.left,
-          child: _buildIconButton(curMethod.icon, methodId, containerWidth * curMethod.size),
+          child: _buildIconButton(context, likedMethods, curMethod.icon, methodId, containerWidth * curMethod.size),
         ),
       );
+      // result.add(
+      //   Positioned(
+      //     top: containerHeight * curMethod!.top + containerWidth * curMethod.size * 1.1,
+      //     left: containerWidth * curMethod.left + containerWidth * 0.1,
+      //     child: Text('text'),
+      //   ),
+      // );
     }
 
     return Align(
@@ -63,25 +74,50 @@ class OptionsImage extends StatelessWidget {
     );
   }
 
-  Widget _buildIconButton(IconData iconData, int index, double size) {
+  Widget _buildIconButton(BuildContext context, Set<String> likedMethods, IconData iconData, int index, double size) {
+    var likes = context.read<Likes>();
     bool isSelected = index == methodIndex;
 
     return Center(
-      child: IconButton(
-        icon: Icon(
-          iconData,
-          color: (isSelected || methodIndex == null) ? Colors.black : Colors.grey,
+      child: Column(
+        children: <Widget>[
+              IconButton(
+                icon: Icon(
+                  iconData,
+                  color: (isSelected || methodIndex == null) ? Colors.black : Colors.grey,
+                ),
+                // TODO - update so that state is managed from options_page instead
+                onPressed: () {
+                  updateIndex(index);
+                },
+                color: isSelected ? Colors.black : Colors.transparent,
+                iconSize: size,
+                padding: EdgeInsets.all(10),
+                splashRadius: 40,
+                splashColor: Colors.grey.withOpacity(0.5),
+                highlightColor: Colors.transparent,
+              ),
+          Row(
+            children: <Widget>[
+            IconButton(
+                  icon: likes.likedMethods.contains(methods[index]!.jsonRef) ?
+                    Icon(Icons.thumb_up) : Icon(Icons.thumb_up_off_alt),
+                    onPressed: () {
+                      likes.toggleLikedMethod(methods[index]!.jsonRef);
+                    }
+            ),
+            Text(
+              methods[index]!.name,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                // color: Colors.black,
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
+            ),
+          ],
         ),
-        // TODO - update so that state is managed from options_page instead
-        onPressed: () {
-          updateIndex(index);
-        },
-        color: isSelected ? Colors.black : Colors.transparent,
-        iconSize: size,
-        padding: EdgeInsets.all(10),
-        splashRadius: 40,
-        splashColor: Colors.grey.withOpacity(0.5),
-        highlightColor: Colors.transparent,
+        ],
       ),
     );
   }
