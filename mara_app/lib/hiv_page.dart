@@ -130,8 +130,11 @@ class _HIVPageState extends State<HIVPage> {
           //   Navigator.of(context).pushNamed('/time');
           // },
         ),
-        title: Text(
-          titleContentMap[languages[languageIndex]]!,
+        title: Center(
+          child:
+            Text(
+            titleContentMap[languages[languageIndex]]!,
+          )
         ),
       ),
       body: Column(
