@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
 import 'bleeding.dart';
@@ -97,6 +98,18 @@ class _PatternPageState extends State<PatternPage> {
       'text': 'Video - A Peer Perspective',
     },
   },
+};
+
+final Map<String, String> whyButton = {
+    "Kiswahili": "KWA NINI?",
+    "Dholuo": "NANG'O?",
+    "English": "WHY?"
+};
+
+final Map<String, String> heyThis = {
+    "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
+    "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!"
 };
 
   @override
@@ -262,15 +275,75 @@ class _PatternPageState extends State<PatternPage> {
                                     child: Center(
                                       child: Column(children:[
                                         updateMethodContent(),
-                                        IconButton(
-                                        icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => BleedingPage()),
-                                          );
-                                        },
-                                      ),
+                                        if (methodIndex == 0 || methodIndex == 1)
+                                        TextButton(
+                                          onPressed: () { 
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => HIVPage())
+                                            );
+                                          }, 
+                                          child:
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                Image.asset(
+                                                  'assets/misc-icons/important.png',
+                                                  width: 40,
+                                                  height: 40,
+                                                ),
+                                                SizedBox(width: 8),
+                                                Text(
+                                                  heyThis[languages[languageIndex]]!,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                        ),
+                                        if (methodIndex == 2 || methodIndex == 3 || methodIndex == 4 || methodIndex == 5 || methodIndex == 6 || methodIndex == 7)
+                                        TextButton(
+                                          onPressed: () { 
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => BleedingPage())
+                                            );
+                                          }, 
+                                          child:
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                Image.asset(
+                                                  'assets/misc-icons/question.png',
+                                                  width: 40,
+                                                  height: 40,
+                                                ),
+                                                SizedBox(width: 8),
+                                                Text(
+                                                  whyButton[languages[languageIndex]]!,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                        )
+                                      //   IconButton(
+                                      //   icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
+                                      //   onPressed: () {
+                                      //     Navigator.push(
+                                      //       context,
+                                      //       MaterialPageRoute(builder: (context) => BleedingPage()),
+                                      //     );
+                                      //   },
+                                      // ),
                                       ], 
                                     )
                                 )
