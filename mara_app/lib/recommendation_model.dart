@@ -6,7 +6,7 @@ class RecommendationModel {
     switch (timing) {
       case 'Now or very soon':
         return [
-          'No method, Pills, Condoms',
+          'Pills, Condoms',
           // 'Start a prenatal vitamin for good pregnancy health.'
         ];
       case 'In 6-12 months':
