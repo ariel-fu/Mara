@@ -14,6 +14,7 @@ class WhatChance extends StatefulWidget {
 }
 
 class _WhatChanceState extends State<WhatChance> {
+  String _currentLanguage = 'English';
   bool overrideIndex = false;
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
@@ -225,15 +226,16 @@ class _WhatChanceState extends State<WhatChance> {
               width: boxWidth*0.8,
               child: Padding (
                   padding: const EdgeInsets.only(top: 15.0, bottom: 0.0), // Adjust the padding as needed,
-                  child: Text(
-                    title[languages[languageIndex]]!,
-                    softWrap: true, // Wrap text to the next line if needed
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.black,
-                      fontSize: 24.0
-                    ),
-                  )
+                  // child: Text(
+                  //   title[languages[languageIndex]]!,
+                  //   caption,
+                  //   softWrap: true, // Wrap text to the next line if needed
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(
+                  //       color: Colors.black,
+                  //     fontSize: 24.0
+                  //   ),
+                  // )
               )
 
           ),
@@ -321,7 +323,7 @@ class _WhatChanceState extends State<WhatChance> {
               if (methodIndex == 6) {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EmergencyPage()),
+                    MaterialPageRoute(builder: (context) => EmergencyPage(initialLanguage: _currentLanguage)),
                   );
               } else {
                 Navigator.push(
