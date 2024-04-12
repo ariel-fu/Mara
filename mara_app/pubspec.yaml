@@ -99,29 +99,29 @@ flutter:
     - assets/preg_woman_new.png
     - assets/misc-icons/
 
-    #- videoAudio/videos/peer/peer1KS.mp4
-    #- videoAudio/videos/peer/peer1DL.mp4
-    #- videoAudio/videos/peer/peer1E.mp4
+    - videoAudio/videos/peer/peer1KS.mp4
+    - videoAudio/videos/peer/peer1DL.mp4
+    - videoAudio/videos/peer/peer1E.mp4
 
-    #- videoAudio/videos/peer/peer2KS.mp4
-    #- videoAudio/videos/peer/peer2DL.mp4
-    #- videoAudio/videos/peer/peer2E.mp4
+    - videoAudio/videos/peer/peer2KS.mp4
+    - videoAudio/videos/peer/peer2DL.mp4
+    - videoAudio/videos/peer/peer2E.mp4
       
-    #- videoAudio/videos/peer/peer3KS.mp4
-    #- videoAudio/videos/peer/peer3DL.mp4
-    #- videoAudio/videos/peer/peer3E.mp4
+    - videoAudio/videos/peer/peer3KS.mp4
+    - videoAudio/videos/peer/peer3DL.mp4
+    - videoAudio/videos/peer/peer3E.mp4
 
-    #- videoAudio/videos/provider/provider1KS.mp4
-    #- videoAudio/videos/provider/provider1DL.mp4
-    #- videoAudio/videos/provider/provider1E.mp4
+    - videoAudio/videos/provider/provider1KS.mp4
+    - videoAudio/videos/provider/provider1DL.mp4
+    - videoAudio/videos/provider/provider1E.mp4
 
-    #- videoAudio/videos/provider/provider3KS.mp4
-    #- videoAudio/videos/provider/provider3DL.mp4
-    #- videoAudio/videos/provider/provider3E.mp4
+    - videoAudio/videos/provider/provider3KS.mp4
+    - videoAudio/videos/provider/provider3DL.mp4
+    - videoAudio/videos/provider/provider3E.mp4
 
-    #- videoAudio/videos/provider/provider4KS.mp4
-    #- videoAudio/videos/provider/provider4DL.mp4
-    #- videoAudio/videos/provider/provider4E.mp4
+    - videoAudio/videos/provider/provider4KS.mp4
+    - videoAudio/videos/provider/provider4DL.mp4
+    - videoAudio/videos/provider/provider4E.mp4
 
   #   - images/a_dot_ham.jpeg
 
