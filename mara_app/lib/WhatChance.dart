@@ -197,9 +197,9 @@ class _WhatChanceState extends State<WhatChance> {
           ),
           Container(
             alignment: Alignment.center,
-             height: availableHeight * 0.199,
-             width: boxWidth,
-             padding: EdgeInsets.symmetric(horizontal: 0.08*boxWidth),
+            //  height: availableHeight * 0.199,
+            //  width: boxWidth,
+            //  padding: EdgeInsets.symmetric(horizontal: 0.08*boxWidth),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
