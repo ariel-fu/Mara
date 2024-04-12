@@ -46,12 +46,6 @@ class _OptionsPageState extends State<OptionsPage> {
     // var selectedButtonIndex = input == null ? input : 0;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
         title: Center(child: Text('What are my options?')),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(containerHeight * 0.05),

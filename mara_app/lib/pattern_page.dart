@@ -39,31 +39,31 @@ class _PatternPageState extends State<PatternPage> {
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
-      "method 1 - condom in Kiswahili",
-      "method 2 - female condom in Kiswahili",
-      "method 3 - birth control pills in Kiswahili",
-      "method 4 - syringe in Kiswahili",
-      "method 5 - contraceptive implant in Kiswahili",
-      "method 6 - iud in Kiswahili",
-      "method 7 - double pills in Kiswahili"
+      "Kutumia kondomu hakutaathiri hedhi yako hata kidogo!",
+      "Kutumia kondomu hakutaathiri hedhi yako hata kidogo!",
+      "Unapotumia vidonge vya kila siku, hedhi yako itakuja kila mwezi wakati wa wiki ya mwisho ya vidonge. Unaweza kuanza tembe wakati wowote katika mzunguko wako wa kila mwezi. Vidonge vya kila siku vinaweza kusaidia kupunguza hedhi nzito au yenye uchungu, na sio kawaida kusababisha kutokwa na damu nyingi isiyo ya kawaida.",
+      "Kuna uwezekano mkubwa kwamba damu yako ya hedhi kitapungua, na huenda kisije kwa ratiba ya kawaida. Unaweza kuacha kupata hedhi wakati unatumia implant. Hii ni ya kawaida na yenye afya wakati wa kutumia implant, kwa sababu ya jinsi njia hiyo inavyofanya kazi na mwili wako. Ikiwa hedhi yako ni nzito, hii inaweza kuwa jambo zuri.",
+      "Kuna uwezekano mkubwa kwamba damu yako ya hedhi kitapungua, na huenda kisije kwa ratiba ya kawaida. Unaweza kuacha kupata hedhi wakati unatumia implant. Hii ni ya kawaida na yenye afya wakati wa kutumia implant, kwa sababu ya jinsi njia hiyo inavyofanya kazi na mwili wako. Ikiwa hedhi yako ni nzito, hii inaweza kuwa jambo zuri.",
+      "IUCD, au coil, haitabadilisha muda wa siku zako za hedhi. Inaweza kufanya mtiririko wako wa hedhi kuwa mzito zaidi, na kusababisha mkazo zaidi wakati wa kipindi chako. Hii sio mbaya kwa mwili wako, lakini ikiwa tayari una hedhi nzito au yenye uchungu, inaweza kuwa sio njia bora kwako.",
+      "Vidonge vya E-pill vinaweza kuathiri hedhi yako kwa njia tofauti, kulingana na wakati unavinywa katika mzunguko wako wa kila mwezi. Hedhi yako inaweza kuja baadaye kidogo au mapema kuliko kawaida baada ya kumeza E-pills. Ni kawaida kutokwa na damu kidogo au matone ya damu kwenye chupi yako baada ya kumeza vidonge vya E-pill. Hii sio hatari, na itaenda yenyewe! Pima ujauzito ikiwa haupati hedhi yako."
     ],
     "Dholuo": [
-      "method 1 - condom in Dholuo",
-      "method 2 - female condom in Dholuo",
-      "method 3 - birth control pills in Dholuo",
-      "method 4 - syringe in Dholuo",
-      "method 5 - contraceptive implant in Dholuo",
-      "method 6 - iud in Dholuo",
-      "method 7 - double pills in Dholuo"
+      "Tiyo gi rabo yunga ok bi chacho rembi mar dwe kata matin",
+      "Tiyo gi rabo yunga ok bi chacho rembi mar dwe kata matin",
+      "Ekinde ma itiyo gi pills ma pile ka pile, rembi mar dwe biroga biro dwe ka dwe e wik mogik mar muonyo pills. Inyalo chako muonyo pills e saa asaya e sako ni mar dwe. Pills ma imuonyo pile ka pile nyalo konyo reso remo mar dwe mabiro mang'eny kata remb dwe mabiro gi rem, kendo ok kel ga remb dwe mabiro ekinde ma ok achan.",
+      "Rembi mar dwe biro bedo matin, kendo samoro ok bi biro kaka ochan. Inyalo weyo bedo gi remb dwe chutho ekinde ma itiyo gi implant. Ma en gima timore kendo gima ber ekinde ma itiyo gi implant, nikech kaka yor komo nyuol tiyo e dendi. Ka rembi mar dwe biro ga mang'eny, ma nyalo bedo gima ber.",
+      "Rembi mar dwe biro bedo matin, kendo samoro ok bi biro kaka ochan. Inyalo weyo bedo gi remb dwe chutho ekinde ma itiyo gi implant. Ma en gima timore kendo gima ber ekinde ma itiyo gi implant, nikech kaka yor komo nyuol tiyo e dendi. Ka rembi mar dwe biro ga mang'eny, ma nyalo bedo gima ber.",
+      "IUCD kata koil, ok bi loko kinde ma rembi mar dwe bire. onyalo miyo remb dwe ochwer mang'eny, kendo miyo piny iyi orami ahinya ekinde ma in e dwe. ma ok en gima rach ne dendi, to ka ne in ga gi remb dwe machwer mang'eny kata rem mang'eny ekinde ma in e dwe, ok onyal bedo yo maber mogik ne in.",
+      "E-pill nyalo chacho rembi mar dwe mopogore, kaluwore gi kinde ma imuonye e sako ni mar dwe. Rembi mar dwe nyalo biro bang'e matin kata chon matin moloyo kaka obiroga bang muonyo E-pill. en gima kare mondo ibed gi chwer matin kata ton matin mar remo e suruachi bang muonyo E-pills. Ma ok en gima nyalo hinyi, kendo biro rumo kende! Tim pim mar ich ka ok iyudo rembi mar dwe"
     ],
     "English": [
-       "method 1 - condom in English",
-      "method 2 - female condom in English",
-      "method 3 - birth control pills in English",
-      "method 4 - syringe in English",
-      "method 5 - contraceptive implant in English",
-      "method 6 - iud in English",
-      "method 7 - double pills in English"
+      "Using condoms will not affect your period at all!",
+      "Using condoms will not affect your period at all!",
+      "When using daily pills, your period will usually come every month during the last week of the pills. You can start the pills at any time in your monthly cycle. Daily pills can help relieve heavy or painful periods, and do not usually cause much irregular bleeding.",
+      "Your period will most likely become lighter, and might not come on a usual schedule. You might stop having periods at all while you are using the implant. This is normal and healthy while using the implant, because of the way the method works with your body. If your periods are usually heavy, this might be a good thing.",
+      "Your period will most likely become lighter, and might not come on a usual schedule. You might stop having periods at all while you are using the implant. This is normal and healthy while using the implant, because of the way the method works with your body. If your periods are usually heavy, this might be a good thing.",
+      "The IUCD, or coil, will not change the timing of when your periods come. It might make your period flow heavier, and cause more cramping during your period. This is not bad for your body, but if you already have very heavy or painful periods, it may not be the best method for you.  ",
+      "E-pills might affect your period differently, depending on when you take them in your monthly cycle. Your period might come a bit later or a bit earlier than usual after taking E-pills. It is normal to have some light bleeding or drops of blood in your panties after taking E-pills. This is not dangerous, and will go away on its own! Take a pregnancy test if you do not get your period."
     ],
   };
 
@@ -126,12 +126,6 @@ class _PatternPageState extends State<PatternPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
         title: Center(child: Text('What will happen to my period?')),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
@@ -263,7 +257,7 @@ class _PatternPageState extends State<PatternPage> {
                                       child: Column(children:[
                                         updateMethodContent(),
                                         IconButton(
-                                        icon: const ImageIcon(AssetImage('assets/noun_project/question.png')),
+                                        icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
                                         onPressed: () {
                                           Navigator.push(
                                             context,

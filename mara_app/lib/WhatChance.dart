@@ -107,12 +107,6 @@ class _WhatChanceState extends State<WhatChance> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
         title: Center(child: Text(title[languages[languageIndex]]!)),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
