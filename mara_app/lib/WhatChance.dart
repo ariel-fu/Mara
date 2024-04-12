@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/emergency.dart';
+import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/home2.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/time_page.dart';
@@ -32,9 +33,9 @@ class _WhatChanceState extends State<WhatChance> {
   };
 
   final Map<String, String> heyThis = {
-    "Kiswahili": "HEY! HII NI MUHIMU! Kutumia njia za upangaji uzazi HAKUTAbadilisha uwezo wako wa kupata mimba katika siku zijazo!",
-    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Tiyo gi yore mag komo nyuol OK bi loko nyaloni mar mako ich e ndalo mabiro!",
-    "English": "HEY! THIS IS IMPORTANT! Using family planning methods will NOT change your ability to get pregnant in the future!",
+    "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
+    "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
   };
 
   final Map<String, String> Epill = {
@@ -77,6 +78,12 @@ class _WhatChanceState extends State<WhatChance> {
     "Kiswahili": "Chini ya mwanamke 1 kati ya 100 wanaotumia IUCD (coil) kwa mwaka mmoja watapata mimba.",
     "Dholuo": "Matin ne miyo 1 kuom 100 matiyo gi IUCD [koil] e higa biro mako ich.",
     "English": "Fewer than 1 in 100 women using the IUCD (coil) for a year will become pregnant.",
+  };
+
+  final Map<String, String> EpillText = {
+    "Kiswahili": "Pata maelezo zaidi kuhusu jinsi ya kumeza kidonge cha E kwa usalama",
+    "Dholuo": "Ponjri matut ewi kaka inyalo muonyo E-pill eyo makare",
+    "English": "Learn more about how to take the E-pill safely",
   };
 
   final double _aspectRatio = 16 / 10;
@@ -281,8 +288,18 @@ class _WhatChanceState extends State<WhatChance> {
                   height: 40,
                 ),
                 SizedBox(width: 8),
+                if (methodIndex != 6)
                 Text(
                   whyDo[languages[languageIndex]]!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12.0,
+                  ),
+                ),
+                if (methodIndex == 6)
+                Text(
+                  EpillText[languages[languageIndex]]!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,
@@ -295,7 +312,13 @@ class _WhatChanceState extends State<WhatChance> {
 
             //Divider(),
             if (methodIndex == 0 || methodIndex == 1) 
-            TextButton(onPressed: () { EmergencyPage(); }, 
+            TextButton(onPressed: () { 
+                if (methodIndex == 6) {
+                  HIVPage();
+                } else {
+                  EmergencyPage();
+                }
+              }, 
             child:
             Row(
               mainAxisSize: MainAxisSize.min,
