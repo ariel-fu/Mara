@@ -18,6 +18,19 @@ class _HIVPageState extends State<HIVPage> {
 
   final double _aspectRatio = 16 / 10;
 
+  final Map<String, String> titleContentMap = {
+    "English": "Preventing HIV and STIs...", 
+    "Kiswahili": "Kuzuia Virusi Vya Ukimwi na magonjwa ya zinaa...", 
+    "Dholuo": "Geng'o kute mag ayaki kod Nyae..."
+  };
+
+    final Map<String, String> subtitleContentMap = {
+    "English": "You have the power to protect yourself!", 
+    "Kiswahili": "Una uwezo wa kujikinga!", 
+    "Dholuo": "In gi teko mar geng'ri iwuon!"
+  };
+
+
   final Map<String, List<String>> contentDescriptionMap1 = {
     "Kiswahili": [
       "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
@@ -117,12 +130,16 @@ class _HIVPageState extends State<HIVPage> {
           //   Navigator.of(context).pushNamed('/time');
           // },
         ),
-        title: Text('Preventing HIV and STDs...and pregnancy'),
+        title: Text(
+          titleContentMap[languages[languageIndex]]!,
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("You have the power to protect yourself!"),
+          Text(
+            subtitleContentMap[languages[languageIndex]]!
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[
