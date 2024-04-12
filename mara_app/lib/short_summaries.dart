@@ -83,7 +83,7 @@ Widget build(BuildContext context) {
         icon: Icon(Icons.arrow_back), 
         onPressed: () => Navigator.of(context).pop(), 
       ),
-      title: Center(child: Text(_t('summaryPage'))),
+      title: Text(_t('summaryPage')),
     ),
     body: ListView(
       padding: EdgeInsets.all(8.0),
@@ -118,7 +118,7 @@ Widget build(BuildContext context) {
             ],
           ),
         ),
-        buildContentCard('assets/birth_control_new.png', 'how_it_works_title', 'how_it_works'),
+        buildContentCard('assets/birth_control_new.png', '', 'how_it_works'),
         buildContentCard('assets/period_new.png', 'what_period', 'side_effects'),
         buildContentCard('assets/calendar_new.png', 'how_long', 'lasts'),
         buildContentCard('assets/chance_new.png', 'how_effective', 'effectiveness'),
@@ -133,10 +133,51 @@ Widget build(BuildContext context) {
 
 
 
+// Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
+//   // Fetch the translated title and content based on the current language
+//   String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? '';
+//   String content = widget.methodDetails?[contentKey]?[_currentLanguage] ?? 'No information available';
+
+//   return Container(
+//     margin: EdgeInsets.only(bottom: 10),
+//     padding: EdgeInsets.all(10),
+//     decoration: BoxDecoration(
+//       color: Colors.grey.shade200,
+//       borderRadius: BorderRadius.circular(10),
+//     ),
+//     child: Row(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         // Icon(icon, size: 44, color: Theme.of(context).primaryColor),
+//         Image.asset(iconPath, width: 44, height: 44),
+//         SizedBox(width: 10),
+//         Expanded(
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Text(
+//                 translatedTitle, // Using the translated title from the JSON
+//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//               ),
+//               SizedBox(height: 8),
+//               Text(
+//                 content, // Displaying content in the current language from the JSON
+//                 style: TextStyle(fontSize: 16),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ],
+//     ),
+//   );
+// }
+
 Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
-  // Fetch the translated title and content based on the current language
-  String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? 'No title available';
+  String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? '';
   String content = widget.methodDetails?[contentKey]?[_currentLanguage] ?? 'No information available';
+
+  // Check if a title is provided, if not, adjust layout accordingly.
+  bool hasTitle = translatedTitle.isNotEmpty;
 
   return Container(
     margin: EdgeInsets.only(bottom: 10),
@@ -148,29 +189,34 @@ Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Icon(icon, size: 44, color: Theme.of(context).primaryColor),
         Image.asset(iconPath, width: 44, height: 44),
         SizedBox(width: 10),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                translatedTitle, // Using the translated title from the JSON
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text(
-                content, // Displaying content in the current language from the JSON
+          child: hasTitle
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    translatedTitle,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    content,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              )
+            : Text(
+                content,
                 style: TextStyle(fontSize: 16),
               ),
-            ],
-          ),
         ),
       ],
     ),
   );
 }
+
 
 
 
