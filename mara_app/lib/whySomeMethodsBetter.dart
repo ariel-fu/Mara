@@ -47,10 +47,8 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title: Center(child: Text(whyDo[languages[languageIndex]]!)),
         bottom: PreferredSize(
