@@ -81,8 +81,6 @@ class OptionsImage extends StatelessWidget {
     return Center(
       child: Column(
         children: <Widget>[
-          Stack(
-            children : <Widget>[
               IconButton(
                 icon: Icon(
                   iconData,
@@ -99,26 +97,26 @@ class OptionsImage extends StatelessWidget {
                 splashColor: Colors.grey.withOpacity(0.5),
                 highlightColor: Colors.transparent,
               ),
-              Positioned(
-                child: IconButton(
+          Row(
+            children: <Widget>[
+            IconButton(
                   icon: likes.likedMethods.contains(methods[index]!.jsonRef) ?
-                      Icon(Icons.thumb_up) : Icon(Icons.thumb_up_off_alt),
-                  onPressed: () {
-                    likes.toggleLikedMethod(methods[index]!.jsonRef);
-                  }
-                ),
-              ),
-            ]
-          ),
-          Text(
-            methods[index]!.name,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              // color: Colors.black,
-              color: isSelected ? Colors.black : Colors.grey,
+                    Icon(Icons.thumb_up) : Icon(Icons.thumb_up_off_alt),
+                    onPressed: () {
+                      likes.toggleLikedMethod(methods[index]!.jsonRef);
+                    }
             ),
-          ),
+            Text(
+              methods[index]!.name,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                // color: Colors.black,
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
+            ),
+          ],
+        ),
         ],
       ),
     );
