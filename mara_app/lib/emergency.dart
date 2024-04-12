@@ -172,6 +172,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                       onPressed: () {
                         setState(() {
                           languageIndex = 0;
+                          _currentLanguage = 'Kiswahili';
                           overrideIndex = true;
                           //updateMethodContent('content1');
                           video1 = updateVideoContent1();
@@ -187,6 +188,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                       onPressed: () {
                         setState(() {
                           languageIndex = 1;
+                          _currentLanguage = 'Dholuo';
                           overrideIndex = true;
                           //updateMethodContent('content2');
                           video1 = updateVideoContent1();
@@ -202,6 +204,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                       onPressed: () {
                         setState(() {
                           languageIndex = 2;
+                          _currentLanguage = 'English';
                           overrideIndex = true;
                           //updateMethodContent('content3');
                           video1 = updateVideoContent1();
