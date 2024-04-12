@@ -1,4 +1,4 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'video.dart';
 
@@ -11,7 +11,6 @@ class HIVPage extends StatefulWidget {
 
 class _HIVPageState extends State<HIVPage> {
   Widget methodContent = Text('DUMMY');
-  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
@@ -19,71 +18,65 @@ class _HIVPageState extends State<HIVPage> {
 
   final double _aspectRatio = 16 / 10;
 
-  final Map<String, List<String>> contentDescriptionMap = {
+  final Map<String, List<String>> contentDescriptionMap1 = {
     "Kiswahili": [
-      "method 1 in Kiswahili",
-      "method 2 in Kiswahili",
-      "method 3 in Kiswahili",
-      "method 4 in Kiswahili",
-      "method 5 in Kiswahili",
-      "method 6 in Kiswahili",
-      "method 7 in Kiswahili"
+      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
     ],
     "Dholuo": [
-      "method 1 in Dholuo",
-      "method 2 in Dholuo",
-      "method 3 in Dholuo",
-      "method 4 in Dholuo",
-      "method 5 in Dholuo",
-      "method 6 in Dholuo",
-      "method 7 in Dholuo"
+      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
     ],
     "English": [
-      "method 1 in English",
-      "method 2 in English",
-      "method 3 in English",
-      "method 4 in English",
-      "method 5 in English",
-      "method 6 in English",
-      "method 7 in English"
+      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
     ],
   };
 
-  String videoAsset1 = 'videoAudio/videos/peer/peer3E.mp4';
-  String videoTitle1 = 'A Peer Perspective Language Not Selected';
-  // String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
-  // String videoTitle2 = 'Video 2 Language Not Selected';
-
-  final Map<String, Map<String, Map<String, String>>> languageToVideo = {
-  'video1': {
-    '0': { // Language code 0
-      'video': 'videoAudio/videos/peer/peer3KS.mp4',
-      'text': 'Video - Mtazamo wa Rika',
-    },
-    '1': { // Language code 1
-      'video': 'videoAudio/videos/peer/peer3DL.mp4',
-      'text': 'Vidio - Kaka Jowetegi Neno Gik Moko',
-    },
-    '2': { // Language code 2
-      'video': 'videoAudio/videos/peer/peer3E.mp4',
-      'text': 'Video - A Peer Perspective',
-    },
-  },
-  'video2': {
-    '0': {
-      'video': 'videoAudio/videos/chimes.mp4',
-      'text': 'Kiswahili Video #2',
-    },
-    '1': {
-      'video': 'videoAudio/videos/funnyCat.mp4',
-      'text': 'Dholuo Video #2',
-    },
-    '2': {
-      'video': 'videoAudio/videos/funnyCat2.mp4',
-      'text': 'English Video #2',
-    },
-  },
-};
+  final Map<String, List<String>> contentDescriptionMap2 = {
+    "Kiswahili": [
+      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+    ],
+    "Dholuo": [
+      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+    ],
+    "English": [
+      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+    ],
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -119,9 +112,10 @@ class _HIVPageState extends State<HIVPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/time');
-          },
+          onPressed: () => Navigator.of(context).pop(),
+          // onPressed: () {
+          //   Navigator.of(context).pushNamed('/time');
+          // },
         ),
         title: Text('Preventing HIV and STDs...and pregnancy'),
       ),
@@ -132,8 +126,8 @@ class _HIVPageState extends State<HIVPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[
-            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/noun_project/disease.png'))),
-            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/noun_project/sperm.png'))),
+            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/disease.png'))),
+            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/spermcontraception.png'))),
           ]),
           Container(
               height: containerHeight * 0.1,
@@ -147,8 +141,8 @@ class _HIVPageState extends State<HIVPage> {
                         setState(() {
                           languageIndex = 0;
                           overrideIndex = true;
-                          updateMethodContent();
-                          video1 = updateVideoContent1();
+                          updateMethodContent1();
+                          updateMethodContent2();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -162,8 +156,8 @@ class _HIVPageState extends State<HIVPage> {
                         setState(() {
                           languageIndex = 1;
                           overrideIndex = true;
-                          updateMethodContent();
-                          video1 = updateVideoContent1();
+                          updateMethodContent1();
+                          updateMethodContent2();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -177,8 +171,8 @@ class _HIVPageState extends State<HIVPage> {
                         setState(() {
                           languageIndex = 2;
                           overrideIndex = true;
-                          updateMethodContent();
-                          video1 = updateVideoContent1();
+                          updateMethodContent1();
+                          updateMethodContent2();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -199,22 +193,30 @@ class _HIVPageState extends State<HIVPage> {
                 Container(
                   width: boxWidth,
                   height: boxHeight * 0.25,
-                  color: Colors.blue,
+                  decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                   child: Column(
                     children:[
                       Text('Male and Female Condoms'),
-                      Expanded(child:Image.asset('assets/noun_project/condom.png')),
+                      updateMethodContent1(),
+                      SizedBox(width:15, height:15, child:Image.asset('assets/twopeople.png')),
                     ],
                   ),
                 ),
                 Container(
                   width: boxWidth,
                   height: boxHeight * 0.25,
-                  color: Colors.blue,
+                  decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                   child: Column(
                     children: [
                       Text('PrEP'),
-                      Expanded(child:Image.asset('assets/noun_project/prep.png')),
+                      updateMethodContent2(),
+                      SizedBox(width:15, height:15, child:Image.asset('assets/preppills.png')),
                     ],
                   ),
                 ),                 
@@ -226,10 +228,10 @@ class _HIVPageState extends State<HIVPage> {
     );
   }
 
-  Widget buildSecondaryContext() {
-    return Text("some text here " +
-        contentDescriptionMap[languages[languageIndex]]![methodIndex]);
-  }
+  // Widget buildSecondaryContext() {
+  //   return Text("some text here " +
+  //       contentDescriptionMap[languages[languageIndex]]![methodIndex]);
+  // }
 
   Widget buildIconButton(IconData iconData, int index) {
     bool isSelected = index == methodIndex;
@@ -246,7 +248,8 @@ class _HIVPageState extends State<HIVPage> {
           onPressed: () {
             setState(() {
               methodIndex = index;
-              updateMethodContent();
+              updateMethodContent1();
+              updateMethodContent2();
             });
           },
           color: isSelected ? Colors.black : Colors.transparent,
@@ -260,35 +263,23 @@ class _HIVPageState extends State<HIVPage> {
     );
   }
 
-  void updateMethodContent() {
-    methodContent = Text(
-        contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.white,
-        )
+  Widget updateMethodContent1() {
+    return Text(
+      contentDescriptionMap1[languages[languageIndex]]![methodIndex],
+      style: TextStyle(
+        fontSize: 20.0,
+        color: Colors.black,
+      )
     );
   }
 
-  String _getAsset(String videoKey, String language) {
-      return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+  Widget updateMethodContent2() {
+    return Text(
+      contentDescriptionMap2[languages[languageIndex]]![methodIndex],
+      style: TextStyle(
+        fontSize: 20.0,
+        color: Colors.black,
+      )
+    );
   }
-
-  String _getTitle(String videoKey, String language) {
-    return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
-  }
-    
-  Widget updateVideoContent1() {
-      if (languageIndex == 0) {
-        videoAsset1 = _getAsset('video1', '0');
-        videoTitle1 = _getTitle('video1', '0');
-      } else if (languageIndex == 1) {
-          videoAsset1 = _getAsset('video1', '1');
-          videoTitle1 = _getTitle('video1', '1');
-      } else if (languageIndex == 2) {
-          videoAsset1 = _getAsset('video1', '2');
-          videoTitle1 = _getTitle('video1', '2');
-      }
-      return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
-  }
-}*/
+}
