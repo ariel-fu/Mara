@@ -78,6 +78,18 @@ class _HIVPageState extends State<HIVPage> {
     ],
   };
 
+  final Map<String, String> titleTranslations = {
+    "English": "Preventing HIV and STIs...", 
+    "Kiswahili": "Kuzuia Virusi Vya Ukimwi na magonjwa ya zinaa...", 
+    "Dholuo": "Geng'o kute mag ayaki kod Nyae..."
+  };
+
+  final Map<String, String> protect = {
+    "English": "You have the power to protect yourself!", 
+    "Kiswahili": "Una uwezo wa kujikinga!", 
+    "Dholuo": "In gi teko mar geng'ri iwuon!"
+  };
+
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
@@ -117,17 +129,17 @@ class _HIVPageState extends State<HIVPage> {
           //   Navigator.of(context).pushNamed('/time');
           // },
         ),
-        title: Text('Preventing HIV and STDs...and pregnancy'),
+        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found")
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("You have the power to protect yourself!"),
+          Text(protect[languages[languageIndex]] ?? "Title not found"),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[
-            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/disease.png'))),
-            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/spermcontraception.png'))),
+            SizedBox(width:80, height:80, child:ImageIcon(AssetImage('assets/misc-icons/disease.png'))),
+            SizedBox(width:80, height:80, child:ImageIcon(AssetImage('assets/misc-icons/spermcontraception.png'))),
           ]),
           Container(
               height: containerHeight * 0.1,
@@ -201,7 +213,7 @@ class _HIVPageState extends State<HIVPage> {
                     children:[
                       Text('Male and Female Condoms'),
                       updateMethodContent1(),
-                      SizedBox(width:15, height:15, child:Image.asset('assets/twopeople.png')),
+                      SizedBox(width:100, height:100, child:Image.asset('assets/misc-icons/twopeople.png')),
                     ],
                   ),
                 ),
@@ -216,7 +228,7 @@ class _HIVPageState extends State<HIVPage> {
                     children: [
                       Text('PrEP'),
                       updateMethodContent2(),
-                      SizedBox(width:15, height:15, child:Image.asset('assets/preppills.png')),
+                      SizedBox(width:100, height:100, child:Image.asset('assets/misc-icons/preppills.png')),
                     ],
                   ),
                 ),                 
