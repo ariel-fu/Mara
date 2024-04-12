@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:mara_app/options_page.dart';
 import 'package:mara_app/pattern_page.dart';
@@ -7,6 +8,9 @@ import 'package:mara_app/ready_to_have_baby.dart';
 import 'package:mara_app/time_page.dart';
 import 'package:mara_app/private_page.dart';
 import 'package:mara_app/WhatChance.dart';
+
+import 'package:mara_app/providers/provider_liked_methods.dart';
+import 'package:mara_app/new_liked_methods.dart';
 
 
 class HomePage2 extends StatefulWidget {
@@ -47,8 +51,30 @@ class _HomePage2State extends State<HomePage2> {
       "Take the quiz"
     ],
   };
-  
+
   String _currentLanguage = 'English';
+
+  // copied from options_page
+  final Map<String, Map<String, String>> _translations = {
+    'English': {
+      'likedTitle': 'Your Favorites',
+      'learnMore': 'Learn More',
+    },
+    'Dholuo': {
+      'likedTitle': 'Ma ihero',
+      'learnMore': 'Puonjri matut',
+    },
+    'Kiswahili' : {
+      'likedTitle': 'Vipendwa vyako',
+      'learnMore': 'Jifunze zaidi',
+    },
+  };
+
+  String _t(String key) {
+    String translation = _translations[_currentLanguage]?[key] ?? key;
+    print('Key: $key, Language: $_currentLanguage, Translation: $translation');
+    return translation;
+  }
 
   final List<bool> _selections = List.generate(6, (_) => false);
   bool get _allSelected => _selections.every((bool selected) => selected);
@@ -97,8 +123,39 @@ class _HomePage2State extends State<HomePage2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          Consumer<Likes>(
+              builder: (context, likes, child) =>
+              ElevatedButton.icon(
+                icon: Icon(Icons.thumb_up, color: Colors.black),
+                label: Text(_t('likedTitle')),
+                // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
+                onPressed: () {
+                  var likes = context.read<Likes>();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LikedMethodsScreen(
+                        likedMethods: likes.likedMethods,
+                        initialLanguage: _currentLanguage, 
+                        translations: _translations,
+                        // onMethodsChanged: likes.removeMethod,
+                      ),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[100],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), 
+                ),
+              ),
+            ),
+        ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0.0),
+          preferredSize: Size.fromHeight(60),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[

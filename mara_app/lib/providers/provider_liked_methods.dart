@@ -22,4 +22,13 @@ class Likes extends ChangeNotifier {
     _likedMethods.addAll(newMethods);
     notifyListeners();
   }
+
+  bool removeMethod(String method) {
+    if (_likedMethods.contains(method)) {
+      _likedMethods.remove(method);
+      notifyListeners();
+      return true;
+    }
+    return false;
+  }
 }

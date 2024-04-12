@@ -27,6 +27,22 @@ class LikedMethodsScreen extends StatefulWidget {
 class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
   late String currentLanguage;
   late Future<Map<String, dynamic>> _methodDetailsFuture;
+
+  final Map<String, Map<String, String>> _likedTranslations = {
+    'English': {
+      'noneLiked': 'No liked methods yet! Visit "What are my options?" to start adding some.',
+      'summaryPage': 'Summary Page',
+    },
+    'Dholuo': {
+      'noneLiked': 'Hakuna',
+      'summaryPage': 'Oboke ma lero weche e yo machuok',
+    },
+    'Kiswahili': {
+      'noneLiked': 'Onge',
+      'summaryPage': 'Ukurasa wa muhtasari',
+    },
+  };
+
   @override
   void initState() {
     super.initState();
@@ -39,8 +55,12 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
     return json.decode(jsonString);
   }
 
-  String _t(String key) {
+  String _t2(String key) {
     return widget.translations[currentLanguage]?[key] ?? key;
+  }
+
+  String _t(String key) {
+    return _likedTranslations[currentLanguage]?[key] ?? key;
   }
 
   void _changeLanguage(String language) {
@@ -61,7 +81,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
           icon: Icon(Icons.arrow_back), 
           onPressed: () => Navigator.of(context).pop(), 
         ),
-        title: Text(_t('likedTitle')), // or use _t('liked_methods') for translations
+        title: Center(child: Text(_t2('likedTitle'))), // or use _t2('liked_methods') for translations
       ),
       body: Column(
         children: [
@@ -110,7 +130,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                             methodName: method,
                                             methodDetails: methodDetails[methodKey],
                                             currentLanguage: currentLanguage,
-                                            translations: widget.translations,
+                                            translations: _likedTranslations,
                                             onChangeLanguage: (newLang) {
                                                 setState(() {
                                                     currentLanguage = newLang;
@@ -122,7 +142,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                 );
                             }
                         },
-                        child: Text(_t('learnMore')),
+                        child: Text(_t2('learnMore')),
                     ),
                     // IconButton(
                     //     icon: Icon(Icons.delete, color: Colors.red),
@@ -140,7 +160,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
 
               : Center(
                   child: Text(
-                    _t('none'), // or use _t('no_liked_methods') for translations
+                    _t('noneLiked'), // or use _t2('no_liked_methods') for translations
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),

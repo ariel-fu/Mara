@@ -83,7 +83,7 @@ Widget build(BuildContext context) {
         icon: Icon(Icons.arrow_back), 
         onPressed: () => Navigator.of(context).pop(), 
       ),
-      title: Text(_t('summaryPage')),
+      title: Center(child: Text(_t('summaryPage'))),
     ),
     body: ListView(
       padding: EdgeInsets.all(8.0),

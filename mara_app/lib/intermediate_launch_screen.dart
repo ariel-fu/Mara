@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mara_app/home2.dart';
 
 class imLaunchScreen extends StatefulWidget {
   const imLaunchScreen({super.key});
@@ -65,7 +64,7 @@ class _imLaunchState extends State<imLaunchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 80.0),
+            SizedBox(height: 90.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
