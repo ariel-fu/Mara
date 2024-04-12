@@ -123,12 +123,12 @@ class _HIVPageState extends State<HIVPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text("You have the power to protect yourself!"),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children:[
-          //   SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/noun_project/disease.png'))),
-          //   SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/noun_project/sperm.png'))),
-          // ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children:[
+            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/misc-icons/disease.png'))),
+            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/misc-icons/spermcontraception.png'))),
+          ]),
           Container(
               height: containerHeight * 0.1,
               child: Container(
@@ -201,7 +201,7 @@ class _HIVPageState extends State<HIVPage> {
                     children:[
                       Text('Male and Female Condoms'),
                       updateMethodContent1(),
-                      // SizedBox(width:5, height:5, child:Image.asset('assets/noun_project/condom.png')),
+                      SizedBox(width:15, height:15, child:Image.asset('assets/misc-icons/twopeople.png')),
                     ],
                   ),
                 ),
@@ -216,7 +216,7 @@ class _HIVPageState extends State<HIVPage> {
                     children: [
                       Text('PrEP'),
                       updateMethodContent2(),
-                      // SizedBox(width;5, height:5, child:Image.asset('assets/noun_project/prep.png')),
+                      SizedBox(width:15, height:15, child:Image.asset('assets/misc-icons/preppills.png')),
                     ],
                   ),
                 ),                 
