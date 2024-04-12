@@ -112,9 +112,10 @@ class _HIVPageState extends State<HIVPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/time');
-          },
+          onPressed: () => Navigator.of(context).pop(),
+          // onPressed: () {
+          //   Navigator.of(context).pushNamed('/time');
+          // },
         ),
         title: Text('Preventing HIV and STDs...and pregnancy'),
       ),
