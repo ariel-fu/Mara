@@ -22,7 +22,7 @@ class _OptionsPageState extends State<OptionsPage> {
   final Map<String, Map<String, String>> _translations = {
     'English': {
       'title': 'What are my options?',
-      'likedTitle': 'Liked methods',
+      'likedTitle': 'Your Favorites',
       'learnMore': 'Learn More'
     },
     'Dholuo': {
