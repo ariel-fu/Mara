@@ -10,7 +10,7 @@ class EmergencyPage extends StatefulWidget {
 }
 
 class _EmergencyPageState extends State<EmergencyPage> {
-  Widget methodContent = Text('DUMMY');
+  //Widget methodContent = Text('DUMMY');
   Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 0; // similar indexing for language
@@ -19,33 +19,34 @@ class _EmergencyPageState extends State<EmergencyPage> {
 
   final double _aspectRatio = 16 / 10;
 
+  final Map<String, String> titleContentMap = {
+      "English": "It's an emergency!", 
+      "Kiswahili": "Ni ya dharura!", 
+      "Dholuo": "En gima imuonyo e resruok!"
+
+  };
+
+  final Map<String, String> subtitleContentMap = {
+      "English": "All you need to know about taking the E-pill (P2).", 
+      "Kiswahili": "Unachohitaji kujua kuhusu kumeza E-pill (P2).", 
+     "Dholuo": "Gik moko te ma onego ing'e ewi muonyo E-pill [P2]"
+  };
+
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
-      "method 1 in Kiswahili",
-      "method 2 in Kiswahili",
-      "method 3 in Kiswahili",
-      "method 4 in Kiswahili",
-      "method 5 in Kiswahili",
-      "method 6 in Kiswahili",
-      "method 7 in Kiswahili"
+      "E-pill ni chaguo zuri ikiwa unafanya ngono bila kondomu, lakini ni bora kufikiria kama chaguo mbadala, sio kama njia kuu unayotumia kuzuia ujauzito.",
+      "Muda ni muhimu kwa sababu muda gani unachukua baada ya kufanya ngono hufanya tofauti kubwa katika jinsi inavyofanya kazi vizuri kuzuia mimba. Chukua haraka iwezekanavyo, lakini ndani ya siku 5 za ngono. Watoa huduma wengine watakuambia siku 3. mapema ni bora!",
+      "Hakuna kikomo kwa mara ngapi unaweza kumeza kidonge cha E-pill kwa mwezi, lakini kunaweza kusababisha athari kama vile kwa tumbo na mabadiliko ya hedhi yako ambayo yanaweza kuudhi. Pia, ni bei ghali!"
     ],
     "Dholuo": [
-      "method 1 in Dholuo",
-      "method 2 in Dholuo",
-      "method 3 in Dholuo",
-      "method 4 in Dholuo",
-      "method 5 in Dholuo",
-      "method 6 in Dholuo",
-      "method 7 in Dholuo"
+      "E-pill en yo maber tiyo godo ka ibedo e achiel maonge rabo yunga, to ber mondo iti kode kaka yor resruok, ok kaka yori maduong ma itiyo godo e geng'o ich",
+      "Ng'iyo saa ma imuonye ber nikech mapiyo ma imuonye bang bedo e achiel biro kelo pogruok maduong e kaka otiyo maber e geng'o ich. Muonye mapiyo ahinya  kaka inyalo, to ekind ndalo 5 mar bedo e achiel. Jochiw thieth moko biro nyisi ndalo 3. Mapiyo mogik ber!",
+      "Onge giko ne ndalo ma inyalo muonye E-pill e dwe, to nitie nyalruok ni obiro keloni rach motudore gi yath kaka ich makuot kod lokruok e chwer mar rembi mar dwe manyalo wang'o ich. Bende, en gima beche tek!"
     ],
     "English": [
-      "method 1 in English",
-      "method 2 in English",
-      "method 3 in English",
-      "method 4 in English",
-      "method 5 in English",
-      "method 6 in English",
-      "method 7 in English"
+      "The E-pill is a good option if you have sex without a condom, but it's best to think of it as a backup option, not as the main method you are using to prevent pregnancy.",
+      "Timing is important because how soon you take it after sex makes a big difference in how well it works to prevent pregnancy. Take as soon as you can, but within 5 days of sex. Some providers will tell you 3 days. The sooner the better!",
+      "There is no limit to how many times you can take the E-pill in a month, but it will likely cause side effects like upset stomach and changes to your period that might be annoying. Also, it is expensive!"
     ],
   };
 
@@ -124,11 +125,18 @@ class _EmergencyPageState extends State<EmergencyPage> {
           // },
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('It is an emergency!'),
+        title: Center(
+          child:
+            Text(titleContentMap[languages[languageIndex]]!)
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Text(
+            subtitleContentMap[languages[languageIndex]]!
+          ),
+        //children: [
           Container(
               height: containerHeight * 0.1,
               child: Container(
@@ -185,37 +193,53 @@ class _EmergencyPageState extends State<EmergencyPage> {
                 ),
               )),
           SizedBox(height: 20.0),
-          Container(
-            alignment: Alignment.center,
-            height: containerHeight * 0.1,
-            width: boxWidth,
-            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  buildIconButton(MaraIcons.syringe, 3),
-                  buildIconButton(MaraIcons.contraceptive_implant, 4),
-                  buildIconButton(MaraIcons.iud, 5),
-                  buildIconButton(MaraIcons.double_pills, 6),
-                  buildIconButton(MaraIcons.birth_control_pills, 2),
-                ],
-              ),
-            ),
-          ),
+          // Container(
+          //   alignment: Alignment.center,
+          //   height: containerHeight * 0.1,
+          //   width: boxWidth,
+          //   // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
+          //   child: SingleChildScrollView(
+          //     scrollDirection: Axis.horizontal,
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //       children: [
+          //         buildIconButton(MaraIcons.syringe, 3),
+          //         buildIconButton(MaraIcons.contraceptive_implant, 4),
+          //         buildIconButton(MaraIcons.iud, 5),
+          //         buildIconButton(MaraIcons.double_pills, 6),
+          //         buildIconButton(MaraIcons.birth_control_pills, 2),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SizedBox(height: 20.0),
           Container (
             height: containerHeight * 0.6, // Adjust as needed
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Flex(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              direction: Axis.vertical,
               children: [
                 Container(
                   width: boxWidth,
-                  height: boxHeight * 0.25,
-                  color: Colors.blue,
-                  child: Center(
-                    child: methodContent,
+                  height: boxHeight*0.5*0.6,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Icon(Icons.lightbulb_outline, color: Colors.amber),
+                      Center(
+                          child: Container(
+                            width: boxWidth * 0.9,
+                              // height: availableHeight * 0.6 * 0.5,
+                              child: Center(
+                                child: updateMethodContent(),
+                              )
+                          )
+                      )
+                    ]
                   ),
                 ),
                 SizedBox(
@@ -231,10 +255,10 @@ class _EmergencyPageState extends State<EmergencyPage> {
     );
   }
 
-  Widget buildSecondaryContext() {
-    return Text("some text here " +
-        contentDescriptionMap[languages[languageIndex]]![methodIndex]);
-  }
+  // Widget buildSecondaryContext() {
+  //   return Text("some text here " +
+  //       contentDescriptionMap[languages[languageIndex]]![methodIndex]);
+  // }
 
   Widget buildIconButton(IconData iconData, int index) {
     bool isSelected = index == methodIndex;
@@ -265,13 +289,13 @@ class _EmergencyPageState extends State<EmergencyPage> {
     );
   }
 
-  void updateMethodContent() {
-    methodContent = Text(
-        contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.white,
-        )
+  Widget updateMethodContent() {
+    return Text(
+      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+      style: TextStyle(
+        fontSize: 20.0,
+        color: Colors.black,
+      )
     );
   }
 
