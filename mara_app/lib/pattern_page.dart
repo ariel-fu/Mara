@@ -199,7 +199,7 @@ class _PatternPageState extends State<PatternPage> {
         //     Navigator.of(context).pushNamed('/home');
         //   },
         // ),
-        title: Center(child: Text('What will happen to my period?')),
+        title: Center(child: Text(titleTranslations[languages[languageIndex]]!)),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
