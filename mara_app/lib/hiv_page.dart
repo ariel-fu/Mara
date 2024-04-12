@@ -126,8 +126,8 @@ class _HIVPageState extends State<HIVPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[
-            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/misc-icons/disease.png'))),
-            SizedBox(width:60, height:60, child:ImageIcon(AssetImage('assets/misc-icons/spermcontraception.png'))),
+            SizedBox(width:100, height:100, child:ImageIcon(AssetImage('assets/misc-icons/disease.png'))),
+            SizedBox(width:100, height:100, child:ImageIcon(AssetImage('assets/misc-icons/spermcontraception.png'))),
           ]),
           Container(
               height: containerHeight * 0.1,
@@ -201,7 +201,7 @@ class _HIVPageState extends State<HIVPage> {
                     children:[
                       Text('Male and Female Condoms'),
                       updateMethodContent1(),
-                      SizedBox(width:15, height:15, child:Image.asset('assets/misc-icons/twopeople.png')),
+                      SizedBox(width:80, height:80, child:Image.asset('assets/misc-icons/twopeople.png')),
                     ],
                   ),
                 ),
@@ -216,7 +216,7 @@ class _HIVPageState extends State<HIVPage> {
                     children: [
                       Text('PrEP'),
                       updateMethodContent2(),
-                      SizedBox(width:15, height:15, child:Image.asset('assets/misc-icons/preppills.png')),
+                      SizedBox(width:80, height:80, child:Image.asset('assets/misc-icons/preppills.png')),
                     ],
                   ),
                 ),                 

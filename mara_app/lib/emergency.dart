@@ -119,9 +119,10 @@ class _EmergencyPageState extends State<EmergencyPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/pregnant');
-          },
+          // onPressed: () {
+          //   Navigator.of(context).pushNamed('/pregnant');
+          // },
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text('It is an emergency!'),
       ),
