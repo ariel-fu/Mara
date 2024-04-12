@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class WhySomeMethodsBetter extends StatefulWidget {
-  const WhySomeMethodsBetter({Key? key}) : super(key: key);
+  //const WhySomeMethodsBetter({Key? key}) : super(key: key);
+  final String initialLanguage;
+  WhySomeMethodsBetter({Key? key, required this.initialLanguage}) : super(key: key);
 
   @override
-  State<WhySomeMethodsBetter> createState() => _WhySomeMethodsBetterState();
+  //State<WhySomeMethodsBetter> createState() => _WhySomeMethodsBetterState();
+  _WhySomeMethodsBetterState createState() => _WhySomeMethodsBetterState();
 }
 class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   bool overrideIndex = false;
@@ -12,25 +15,52 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
-  final Map<String, String> whyDo = {
+  final Map<String, String> titleMap = {
     "Kiswahili": "KWA NINI baadhi ya mbinu za kupanga uzazi hufanya kazi vizuri zaidi kuliko zingine ili kuzuia mimba?",
     "Dholuo": "EN ANG'O MA OMIYO yore moko mag komo nyuol tiyoga maber mohingo moko e geng'o ich?",
     "English": "WHY do some methods work better than others to prevent pregnancy?",
   };
 
+  
+  final Map<String, Map<String, String>> _translations = {
+    "content1": {
+      "Kiswahili": "Kadiri unavyopaswa kukumbuka kutumia au kupata njia, ndivyo nafasi zaidi ya makosa au matatizo inavyoongezeka. Hiyo ndiyo sababu kuu kwa nini baadhi ya mbinu kama vile vipandikizi na IUCD hufanya kazi vyema zaidi kuzuia mimba -- kwa sababu zinapokuwa kwenye mwili wako, si lazima ufanye kitu kingine chochote. Mbinu kama vile kondomu unazopaswa kutumia kila wakati unapofanya ngono (na unategemea mwenzi wako kuzitumia) hazifanyi kazi kwa muda ili kuzuia mimba, hasa kwa sababu watumiaji wanaweza kusahau kutumia kondomu au kutokuwa na wakati wanapohitaji. hiyo. Mbinu zote (zaidi ya E-pill) hufanya kazi vizuri sana kuzuia mimba zinapotumiwa kama ilivyoelekezwa.",
+      "Dholuo": "Kaka nyalo dwarore ni mondo ipar mar tiyo gi yor komo nyuol kata dhi ome, e kaka nyalo kelo thuolo mang'eny mar makosa kata chandruok. Ma ema omiyo yore moko mag komo nyuol kaka Implant kod IUCD tiyo maber e geng'o ich -- nikech ka oseruakgi e dendi, onge gima nyaka itim machielo. Yore kaka rabo yunga ma nyaka itigodo seche te ma ibedo e achiel [kendo dwarore ni jaherani ema ruake] ok ti ga maber kuom ndalo e geng'o ich, mana nikech jomatiyo kodgi wigi nyalo wil tiyo gi rabo yunga kata bedo maonge kode seche ma gidware. Yore gi te [koweyo E-pill] tiyo maber ahinya w geng'o ich ka oti kodgi kaka dwarore.",
+      "English": "The more you have to remember to use or get a method, the more room there is for mistakes or problems. That's the main reason why some methods like the implant and IUCD work better to prevent pregnancy -- because once they are in your body, you don't have to do anything else. Methods like condoms that you have to use every time you have sex (and depend on your partner to use them) do not work as well over time to prevent pregnancy, mainly because users might forget to use a condom or not have one when they need it. All of the methods (other than the E-pill) work very well to prevent pregnancy when used as directed."
+    }
+  };
+  final double _aspectRatio = 16 / 10;
+  late String _currentLanguage;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentLanguage = widget.initialLanguage;
+  }
+
+  String _t(String key) {
+    return _translations[key]?[_currentLanguage] ?? key;
+  }
+
+  void _changeLanguage(String language) {
+    setState(() {
+      _currentLanguage = language;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
-      final int? routeArgumentIndex =
+    final int? routeArgumentIndex =
     ModalRoute.of(context)?.settings.arguments as int?;
 
-    // Update languageIndex if a valid value is provided from the route
-    // if (routeArgumentIndex != null &&
-    //     routeArgumentIndex >= 0 &&
-    //     routeArgumentIndex < languages.length &&
-    //     !overrideIndex) {
-    //   languageIndex = routeArgumentIndex;
-    // }
-    final double _aspectRatio = 16 / 10;
+  // Update languageIndex if a valid value is provided from the route
+    if (routeArgumentIndex != null &&
+        routeArgumentIndex >= 0 &&
+        routeArgumentIndex < languages.length &&
+        !overrideIndex) {
+      languageIndex = routeArgumentIndex;
+    }
 
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
@@ -39,10 +69,8 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
     } else {
       containerWidth = containerHeight / _aspectRatio;
     }
-
     double boxWidth = containerWidth;
     double boxHeight = containerHeight;
-    double availableHeight = boxHeight;
 
     return Scaffold(
       appBar: AppBar(
@@ -50,119 +78,168 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Center(child: Text(whyDo[languages[languageIndex]]!)),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(availableHeight * 0.05),
-          child: Container(
-            // height: availableHeight * 0.1,
+        title: Center(
+          child:
+            Text(titleMap[languages[languageIndex]]!)
+        ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              height: containerHeight * 0.1,
               child: Container(
-                // padding: EdgeInsets.symmetric(vertical: 8.0),
+                padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: Row(
+                  // children: ['Kiswahili', 'Dholuo', 'English']
+                  //     .map((language) => languageButton(language))
+                  //     .toList(),
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 0;
-                            overrideIndex = true;
-                            //updateText();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 0 ? Colors.grey : null,
-                        ),
-                        child: Text('Kiswahili'),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          languageIndex = 0;
+                          _currentLanguage = 'Kiswahili';
+                          overrideIndex = true;
+                          //updateMethodContent('content1');
+                          //video1 = updateVideoContent1();
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                        languageIndex == 0 ? Colors.grey : null,
                       ),
+                      child: Text('Kiswahili'),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 1;
-                            overrideIndex = true;
-                            //updateText();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 1 ? Colors.grey : null,
-                        ),
-                        child: Text('Dholuo'),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          languageIndex = 1;
+                          _currentLanguage = 'Dholuo';
+                          overrideIndex = true;
+                          //updateMethodContent('content2');
+                          //video1 = updateVideoContent1();
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                        languageIndex == 1 ? Colors.grey : null,
                       ),
+                      child: Text('Dholuo'),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 2;
-                            overrideIndex = true;
-                            //updateText();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 2 ? Colors.grey : null,
-                        ),
-                        child: Text('English'),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          languageIndex = 2;
+                          _currentLanguage = 'English';
+                          overrideIndex = true;
+                          //updateMethodContent('content3');
+                          //video1 = updateVideoContent1();
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                        languageIndex == 2 ? Colors.grey : null,
                       ),
+                      child: Text('English'),
                     ),
                   ],
                 ),
               )),
-        ),
-      ),
-      body: 
-      Center(
-        child: Column (
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-              Image.asset(
-                  'assets/chance_of_preg/search.png',
-                  width: 40,
-                  height: 40,
+          SizedBox(height: 20.0),
+          Container (
+            //height: containerHeight * 0.6, // Adjust as needed
+            child: Flex(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              direction: Axis.vertical,
+              children: [
+                SizedBox(
+                  width: boxWidth,
+                  height: boxHeight * 0.5 * 0.6,
+                  //child: Center(child:video1),
+                  child: Text("VIDEO HERE")
                 ),
-                Text(
-                whyDo[languages[languageIndex]]!, 
-                textAlign: TextAlign.center,// Your text
-                style: TextStyle(
-                  fontSize: 16, // Adjust the font size as you need
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                   // Adjust the color as you need
-                ),
-              ),
-              SizedBox(height:50),
-              Divider(),
-              SizedBox(height:80),
-              Text(
-                "The Video will go here.", 
-                textAlign: TextAlign.center,// Your text
-                style: TextStyle(
-                  fontSize: 16, // Adjust the font size as you need
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                   // Adjust the color as you need
-                ),
-              ),
-              SizedBox(height:80),
-              Divider(),
-              SizedBox(height:60),
-               Text(
-                "Bottom content", 
-                textAlign: TextAlign.center,// Your text
-                style: TextStyle(
-                  fontSize: 16, // Adjust the font size as you need
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                   // Adjust the color as you need
-                ),
-              ),
-          ],
-        ),
+                contentBox('content1'),                  
+              ],
+            ),
+          ),
+        ],
       ),
     );
 
   }
+  Widget updateMethodContent(String contentKey) {
+    return Text(
+      _t(contentKey),
+      style: TextStyle(
+        fontSize: 20.0,
+        color: Colors.black,
+      )
+    );
+  }
+
+  // String _getAsset(String videoKey, String language) {
+  //     return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+  // }
+
+  // String _getTitle(String videoKey, String language) {
+  //   return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
+  // }
+    
+  // Widget updateVideoContent1() {
+  //     if (languageIndex == 0) {
+  //       videoAsset1 = _getAsset('video1', '0');
+  //       videoTitle1 = _getTitle('video1', '0');
+  //     } else if (languageIndex == 1) {
+  //         videoAsset1 = _getAsset('video1', '1');
+  //         videoTitle1 = _getTitle('video1', '1');
+  //     } else if (languageIndex == 2) {
+  //         videoAsset1 = _getAsset('video1', '2');
+  //         videoTitle1 = _getTitle('video1', '2');
+  //     }
+  //     return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+  // }
+
+  Widget languageButton(String language) {
+    bool isSelected = _currentLanguage == language;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: ElevatedButton(
+        onPressed: () => _changeLanguage(language),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: isSelected ? Colors.grey : null,
+        ),
+        child: Text(language),
+      ),
+    );
+  }
+
+  Widget contentBox(String contentKey) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            SizedBox(width: 10.0),
+            Expanded(
+              child: Text(
+                _t(contentKey),
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
+
