@@ -222,8 +222,8 @@ class _WhatChanceState extends State<WhatChance> {
               ),
             ),
           ),
-          Divider(),
-          //SizedBox(height: 15.0),
+          //Divider(),
+          SizedBox(height: 15.0),
           SizedBox(
             height: availableHeight * 0.45, // Adjust as needed
                 child: Flex(
@@ -234,8 +234,8 @@ class _WhatChanceState extends State<WhatChance> {
                       width: boxWidth,
                       height: boxHeight*0.15,
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(0, 255, 255, 255),
-                        borderRadius: BorderRadius.circular(1.0),
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -253,7 +253,7 @@ class _WhatChanceState extends State<WhatChance> {
                           ]
                       )
                   ),
-                  Divider(),
+                  //Divider(),
                   Container(
                     width: boxWidth,
                     height: availableHeight * 0.25,
