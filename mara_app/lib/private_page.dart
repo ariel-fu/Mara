@@ -47,6 +47,12 @@ class _PrivatePageState extends State<PrivatePage> {
     ],
   };
 
+  final Map<String, String> titleMap = {
+    "Kiswahili": "Je, ninaweza kuiweka kwa usiri?",
+    "Dholuo": "Bende anyalo kete mopondo?",
+    "English": "Can I keep it private?"
+  };
+
   final Map<String, String> titleContentMap = {
     "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
     "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
@@ -123,7 +129,7 @@ class _PrivatePageState extends State<PrivatePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Can I keep it private?')),
+        title: Center(child: Text(titleMap[languages[languageIndex]]!)),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
