@@ -113,32 +113,25 @@ class _EmergencyPageState extends State<EmergencyPage> {
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
-  ModalRoute.of(context)?.settings.arguments as int?;
+    ModalRoute.of(context)?.settings.arguments as int?;
 
   // Update languageIndex if a valid value is provided from the route
-  if (routeArgumentIndex != null &&
-      routeArgumentIndex >= 0 &&
-      routeArgumentIndex < languages.length &&
-      !overrideIndex) {
-    languageIndex = routeArgumentIndex;
-  }
+    if (routeArgumentIndex != null &&
+        routeArgumentIndex >= 0 &&
+        routeArgumentIndex < languages.length &&
+        !overrideIndex) {
+      languageIndex = routeArgumentIndex;
+    }
 
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double boxWidth = screenWidth * 0.85;
-
-    // double screenHeight = MediaQuery.of(context).size.height;
-    // double availableHeight = screenHeight;
-    // double boxHeight = availableHeight * 0.25;
-
-  double containerWidth = MediaQuery.of(context).size.width;
-  double containerHeight = MediaQuery.of(context).size.height;
-  if (containerHeight / containerWidth > _aspectRatio) {
-    containerHeight = containerWidth * _aspectRatio;
-  } else {
-    containerWidth = containerHeight / _aspectRatio;
-  }
-  double boxWidth = containerWidth;
-  double boxHeight = containerHeight;
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
 
     return Scaffold(
       appBar: AppBar(
