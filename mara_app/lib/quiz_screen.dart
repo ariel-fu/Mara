@@ -108,8 +108,8 @@ final Map<String, Map<String, String>> _translations = {
     'incompleteMessage': 'Please answer all questions before submitting the quiz', 
     'submit': 'Submit quiz', 
     'learnMore': 'Learn More',
-    'none': 'None',
-    'summaryPage': 'Summary Page',
+    'none': 'None', 
+    'summaryPage': 'Summary Page'
   },
   'Kiswahili': {
     'title': 'Chemsha bongo',
@@ -174,7 +174,7 @@ final Map<String, Map<String, String>> _translations = {
     'submit': 'Wasilisha chemsha bongo', 
     'learnMore': 'Jifunze zaidi ',  
     'none': 'Onge', 
-    'summaryPage': 'Oboke ma lero weche e yo machuok',
+    'summaryPage': 'Ukurasa wa muhtasari'
   },
   'Dholuo': {
     'q1': 'Iwinjo nade ewi lokruok e chwer mar rembi mar dwe?', 
@@ -237,8 +237,8 @@ final Map<String, Map<String, String>> _translations = {
       'incompleteMessage': 'Kiyie to duok penjo te kapok ioro duoko mag penjo ma muro obuongo', 
       'submit': 'Oor duoko mag muro obuongo', 
       'learnMore': 'Puonjri matut', 
-      'none': 'Hakuna',
-      'summaryPage': 'Ukurasa wa muhtasari',
+      'none': 'Hakuna', 
+      'summaryPage': 'Oboke ma lero weche e yo machuok'
   }
 };
 
