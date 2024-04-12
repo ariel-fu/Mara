@@ -8,6 +8,7 @@ class MethodRepository {
     const allMethods = <int, ContraceptiveMethod>{
       0: ContraceptiveMethod(
         ref: 'iud',
+        jsonRef: 'iucd',
         icon: MaraIcons.iud,
         name: 'IUCD (coil)',
         description: "The IUCD is small, T-shaped, and made out of plastic. It is placed into the womb (uterus) by a health provider to prevent pregnancy, and lasts up to 12 years. You can't feel it once it is in, and it does not have hormones. Side effects may include heavier and crampier periods.",
@@ -20,6 +21,7 @@ class MethodRepository {
       ),
       1: ContraceptiveMethod(
         ref: 'birth_control_pills',
+        jsonRef: 'pills',
         icon: MaraIcons.birth_control_pills,
         name: 'Pills (daily pills)',
         description: 'Daily pills contain hormones and need to be taken every day to prevent pregnancy. Side effects can include upset stomach and headache, but these usually go away after a couple months. Daily pills can improve pimples and help prevent some cancers.',
@@ -32,6 +34,7 @@ class MethodRepository {
       ),
       2: ContraceptiveMethod(
         ref: 'condom',
+        jsonRef: 'condoms',
         icon: MaraIcons.condom,
         name: 'Condom',
         description: "The male condom goes on over a man's penis before sex and keeps the sperm from going inside your body. This prevents pregnancy and also protects you from many STIs (infections you can get from sex, like HIV).",
@@ -44,6 +47,7 @@ class MethodRepository {
       ),
       3: ContraceptiveMethod(
         ref: 'contraceptive_implant',
+        jsonRef: 'implant',
         icon: MaraIcons.contraceptive_implant,
         name: 'Implant',
         description: 'The implant is a tiny plastic rod (or rods) about the size of a match that is placed under the skin of your upper arm by a health provider. The rods contain hormone medication. If you want to, you can feel the rod(s) under the skin. Nexplanon has 1 rod, and Jadelle has 2. Its side effects include changes to your periods. The implant does not cause weight gain or loss. ',
@@ -57,6 +61,7 @@ class MethodRepository {
       ),
       4: ContraceptiveMethod(
         ref: 'syringe',
+        jsonRef: 'depo',
         icon: MaraIcons.syringe,
         name: 'Injection (depo)',
         description: 'The injection, or depo, is an injection containing hormones given in your arm or buttock. Side effects include changes to your period, and some people experience weight gain or mood changes. ',
@@ -70,6 +75,7 @@ class MethodRepository {
       ),
       5: ContraceptiveMethod(
         ref: 'female_condom',
+        jsonRef: 'female_condom',
         icon: MaraIcons.female_condom,
         name: 'Female condom',
         description: "The female condom is placed into your vagina before sex to keep the man's sperm from going inside your body, which prevents pregnancy and STIs (infections you can get from sex, like HIV). The end with the flexible plastic ring goes into the vagina. It is woman-controlled!",
@@ -82,6 +88,7 @@ class MethodRepository {
       ),
       6: ContraceptiveMethod(
         ref: 'double_pills',
+        jsonRef: 'emergency',
         icon: MaraIcons.double_pills,
         name: 'Emergency pill (E-pill, P2)',
         description: "Emergency pills are used to prevent pregnancy AFTER having sex. They only work if your body hasn't already released an egg, so they are good in an emergency, but not as the method you use all the time. Typically, they come as 2 pills you swallow at the same time.",

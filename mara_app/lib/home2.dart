@@ -175,10 +175,10 @@ class _HomePage2State extends State<HomePage2> {
               title: Text(menuOptions[currentLanguage]![6]),
               tileColor: _allSelected ? Colors.green : Colors.grey,
               onTap: () {
-                //_allSelected ? Navigator.push(
-                //  context,
-                //  MaterialPageRoute(builder: (context) => QuizScreen()),
-                //) : null;
+                _allSelected ? Navigator.push(
+                 context,
+                 MaterialPageRoute(builder: (context) => QuizScreen()),
+                ) : null;
               },
             ),
           ],

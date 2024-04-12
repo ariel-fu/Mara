@@ -439,9 +439,9 @@
   },
   "female_condom": {
     "name": {
-      "English": "Condom",
-      "Kiswahili": "Condom",
-      "Dholuo": "Condom"
+      "English": "Female condom",
+      "Kiswahili": "Female condom",
+      "Dholuo": "Female condom"
     },
     "icon": "assets/female_condom.png",
     "how_it_works": {

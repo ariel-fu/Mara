@@ -5,6 +5,7 @@ enum Category {
 class ContraceptiveMethod {
   const ContraceptiveMethod({
     required this.ref,
+    required this.jsonRef,
     required this.icon,
     required this.name,
     required this.description,
@@ -19,6 +20,7 @@ class ContraceptiveMethod {
 
     // final bool isFavorited;
     final String ref;  // string reference for icons
+    final String jsonRef;
     final IconData icon;
     final String name;
     final String description;
