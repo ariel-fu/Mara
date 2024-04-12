@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/emergency.dart';
 import 'package:mara_app/home2.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/time_page.dart';
@@ -294,7 +295,7 @@ class _WhatChanceState extends State<WhatChance> {
 
             //Divider(),
             if (methodIndex == 0 || methodIndex == 1) 
-            TextButton(onPressed: () { WhyDoPage(); }, 
+            TextButton(onPressed: () { EmergencyPage(); }, 
             child:
             Row(
               mainAxisSize: MainAxisSize.min,

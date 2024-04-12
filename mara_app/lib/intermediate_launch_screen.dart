@@ -22,6 +22,12 @@ class _imLaunchState extends State<imLaunchScreen> {
     'Dholuo': "Ka ma ok en saa maber kodi mako ich, in gi yiero mang'eny! \n \n Temo yiero yo maber kodi nyalo bedo matek ahinya, nikech weche mangeny ma samoro ing'eyo kata isewinjo oko kucha koa kuom jogo mantie e ngimani kod kuonde mamoko. \n \n App ni olos ng'enyne ne mine matindo mondo okonyi yudo weche makare ma idwaro mondo itim yiero makare, ekinde ma idware. Kata ka ing'eyo yor komo nyuol ma idwaro, pok ne itiyo gi yor komo nyuol moro amora, kata itiyo gi yor komo nyuol sani, inyalo somo okang ka okang mar app ni mondo iyud puonjruok!",
   };
 
+  Map<String, String> translations3 = {
+    'English': "Let's get started!",
+    'Kiswahili': "Tuanze!",
+    'Dholuo': "Wachaki!",
+  };
+
  void switchLanguage(String language) {
     setState(() {
       currentLanguage = language;
@@ -95,7 +101,7 @@ class _imLaunchState extends State<imLaunchScreen> {
                     MaterialPageRoute(builder: (context) => HomePage2()),
                   );
                 },
-                child: const Text('continue'),
+                child: Text(translations3[currentLanguage]!,),
               ),
             ),
           ],
