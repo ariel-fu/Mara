@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:mara_app/icons/mara_icons_icons.dart';
+//import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'video.dart';
 
 class EmergencyPage extends StatefulWidget {
-  const EmergencyPage({Key? key}) : super(key: key);
+  // const EmergencyPage({Key? key}) : super(key: key);
+
+  // @override
+  // State<EmergencyPage> createState() => _EmergencyPageState();
+
+  final String initialLanguage;
+
+  EmergencyPage({Key? key, required this.initialLanguage}) : super(key: key);
 
   @override
-  State<EmergencyPage> createState() => _EmergencyPageState();
+  _EmergencyPageState createState() => _EmergencyPageState();
 }
 
 class _EmergencyPageState extends State<EmergencyPage> {
   //Widget methodContent = Text('DUMMY');
+  late String _currentLanguage;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentLanguage = widget.initialLanguage;
+  }
+
   Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 0; // similar indexing for language
@@ -18,6 +33,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
   bool overrideIndex = false;
 
   final double _aspectRatio = 16 / 10;
+
 
   final Map<String, String> titleContentMap = {
       "English": "It's an emergency!", 
@@ -32,23 +48,42 @@ class _EmergencyPageState extends State<EmergencyPage> {
      "Dholuo": "Gik moko te ma onego ing'e ewi muonyo E-pill [P2]"
   };
 
-  final Map<String, List<String>> contentDescriptionMap = {
-    "Kiswahili": [
-      "E-pill ni chaguo zuri ikiwa unafanya ngono bila kondomu, lakini ni bora kufikiria kama chaguo mbadala, sio kama njia kuu unayotumia kuzuia ujauzito.",
-      "Muda ni muhimu kwa sababu muda gani unachukua baada ya kufanya ngono hufanya tofauti kubwa katika jinsi inavyofanya kazi vizuri kuzuia mimba. Chukua haraka iwezekanavyo, lakini ndani ya siku 5 za ngono. Watoa huduma wengine watakuambia siku 3. mapema ni bora!",
-      "Hakuna kikomo kwa mara ngapi unaweza kumeza kidonge cha E-pill kwa mwezi, lakini kunaweza kusababisha athari kama vile kwa tumbo na mabadiliko ya hedhi yako ambayo yanaweza kuudhi. Pia, ni bei ghali!"
-    ],
-    "Dholuo": [
-      "E-pill en yo maber tiyo godo ka ibedo e achiel maonge rabo yunga, to ber mondo iti kode kaka yor resruok, ok kaka yori maduong ma itiyo godo e geng'o ich",
-      "Ng'iyo saa ma imuonye ber nikech mapiyo ma imuonye bang bedo e achiel biro kelo pogruok maduong e kaka otiyo maber e geng'o ich. Muonye mapiyo ahinya  kaka inyalo, to ekind ndalo 5 mar bedo e achiel. Jochiw thieth moko biro nyisi ndalo 3. Mapiyo mogik ber!",
-      "Onge giko ne ndalo ma inyalo muonye E-pill e dwe, to nitie nyalruok ni obiro keloni rach motudore gi yath kaka ich makuot kod lokruok e chwer mar rembi mar dwe manyalo wang'o ich. Bende, en gima beche tek!"
-    ],
-    "English": [
-      "The E-pill is a good option if you have sex without a condom, but it's best to think of it as a backup option, not as the main method you are using to prevent pregnancy.",
-      "Timing is important because how soon you take it after sex makes a big difference in how well it works to prevent pregnancy. Take as soon as you can, but within 5 days of sex. Some providers will tell you 3 days. The sooner the better!",
-      "There is no limit to how many times you can take the E-pill in a month, but it will likely cause side effects like upset stomach and changes to your period that might be annoying. Also, it is expensive!"
-    ],
+  final Map<String, Map<String, String>> _translations = {
+    "The E-pill is a good option": {
+      "Kiswahili": "E-pill ni chaguo zuri ikiwa unafanya ngono bila kondomu, lakini ni bora kufikiria kama chaguo mbadala, sio kama njia kuu unayotumia kuzuia ujauzito.",
+      "Dholuo": "E-pill en yo maber tiyo godo ka ibedo e achiel maonge rabo yunga, to ber mondo iti kode kaka yor resruok, ok kaka yori maduong ma itiyo godo e geng'o ich",
+      "English": "The E-pill is a good option if you have sex without a condom, but it's best to think of it as a backup option, not as the main method you are using to prevent pregnancy."
+    },
+    "Timing is important" :{
+      "Kiswahili": "Muda ni muhimu kwa sababu muda gani unachukua baada ya kufanya ngono hufanya tofauti kubwa katika jinsi inavyofanya kazi vizuri kuzuia mimba. Chukua haraka iwezekanavyo, lakini ndani ya siku 5 za ngono. Watoa huduma wengine watakuambia siku 3. mapema ni bora!",
+      "Dholuo": "Ng'iyo saa ma imuonye ber nikech mapiyo ma imuonye bang bedo e achiel biro kelo pogruok maduong e kaka otiyo maber e geng'o ich. Muonye mapiyo ahinya  kaka inyalo, to ekind ndalo 5 mar bedo e achiel. Jochiw thieth moko biro nyisi ndalo 3. Mapiyo mogik ber!",      
+      "English": "Timing is important because how soon you take it after sex makes a big difference in how well it works to prevent pregnancy. Take as soon as you can, but within 5 days of sex. Some providers will tell you 3 days. The sooner the better!"
+    },
+
+    "There is no limit" :{
+      "Kiswahili": "Hakuna kikomo kwa mara ngapi unaweza kumeza kidonge cha E-pill kwa mwezi, lakini kunaweza kusababisha athari kama vile kwa tumbo na mabadiliko ya hedhi yako ambayo yanaweza kuudhi. Pia, ni bei ghali!",
+      "Dholuo": "Onge giko ne ndalo ma inyalo muonye E-pill e dwe, to nitie nyalruok ni obiro keloni rach motudore gi yath kaka ich makuot kod lokruok e chwer mar rembi mar dwe manyalo wang'o ich. Bende, en gima beche tek!",
+      "English": "There is no limit to how many times you can take the E-pill in a month, but it will likely cause side effects like upset stomach and changes to your period that might be annoying. Also, it is expensive!"
+
+    }
+    // "Kiswahili": [
+    //   "E-pill ni chaguo zuri ikiwa unafanya ngono bila kondomu, lakini ni bora kufikiria kama chaguo mbadala, sio kama njia kuu unayotumia kuzuia ujauzito.",
+    //   "Muda ni muhimu kwa sababu muda gani unachukua baada ya kufanya ngono hufanya tofauti kubwa katika jinsi inavyofanya kazi vizuri kuzuia mimba. Chukua haraka iwezekanavyo, lakini ndani ya siku 5 za ngono. Watoa huduma wengine watakuambia siku 3. mapema ni bora!",
+    //   "Hakuna kikomo kwa mara ngapi unaweza kumeza kidonge cha E-pill kwa mwezi, lakini kunaweza kusababisha athari kama vile kwa tumbo na mabadiliko ya hedhi yako ambayo yanaweza kuudhi. Pia, ni bei ghali!"
+    // ],
+    // "Dholuo": [
+    //   "E-pill en yo maber tiyo godo ka ibedo e achiel maonge rabo yunga, to ber mondo iti kode kaka yor resruok, ok kaka yori maduong ma itiyo godo e geng'o ich",
+    //   "Ng'iyo saa ma imuonye ber nikech mapiyo ma imuonye bang bedo e achiel biro kelo pogruok maduong e kaka otiyo maber e geng'o ich. Muonye mapiyo ahinya  kaka inyalo, to ekind ndalo 5 mar bedo e achiel. Jochiw thieth moko biro nyisi ndalo 3. Mapiyo mogik ber!",
+    //   "Onge giko ne ndalo ma inyalo muonye E-pill e dwe, to nitie nyalruok ni obiro keloni rach motudore gi yath kaka ich makuot kod lokruok e chwer mar rembi mar dwe manyalo wang'o ich. Bende, en gima beche tek!"
+    // ],
+    // "English": [
+    //   "The E-pill is a good option if you have sex without a condom, but it's best to think of it as a backup option, not as the main method you are using to prevent pregnancy.",
+    //   "Timing is important because how soon you take it after sex makes a big difference in how well it works to prevent pregnancy. Take as soon as you can, but within 5 days of sex. Some providers will tell you 3 days. The sooner the better!",
+    //   "There is no limit to how many times you can take the E-pill in a month, but it will likely cause side effects like upset stomach and changes to your period that might be annoying. Also, it is expensive!"
+
+    // ],
   };
+
 
   String videoAsset1 = 'videoAudio/videos/peer/peer3E.mp4';
   String videoTitle1 = 'A Peer Perspective Language Not Selected';
@@ -86,35 +121,40 @@ class _EmergencyPageState extends State<EmergencyPage> {
   },
 };
 
+  String _t(String key) {
+    return _translations[key]?[_currentLanguage] ?? key;
+  }
+
+  void _changeLanguage(String language) {
+    setState(() {
+      _currentLanguage = language;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final int? routeArgumentIndex =
-  ModalRoute.of(context)?.settings.arguments as int?;
+    // final int? routeArgumentIndex =
+    // ModalRoute.of(context)?.settings.arguments as int?;
 
   // Update languageIndex if a valid value is provided from the route
-  if (routeArgumentIndex != null &&
-      routeArgumentIndex >= 0 &&
-      routeArgumentIndex < languages.length &&
-      !overrideIndex) {
-    languageIndex = routeArgumentIndex;
-  }
+    // if (routeArgumentIndex != null &&
+    //     routeArgumentIndex >= 0 &&
+    //     routeArgumentIndex < languages.length &&
+    //     !overrideIndex) {
+    //   languageIndex = routeArgumentIndex;
+    // }
 
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double boxWidth = screenWidth * 0.85;
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
 
-    // double screenHeight = MediaQuery.of(context).size.height;
-    // double availableHeight = screenHeight;
-    // double boxHeight = availableHeight * 0.25;
-
-  double containerWidth = MediaQuery.of(context).size.width;
-  double containerHeight = MediaQuery.of(context).size.height;
-  if (containerHeight / containerWidth > _aspectRatio) {
-    containerHeight = containerWidth * _aspectRatio;
-  } else {
-    containerWidth = containerHeight / _aspectRatio;
-  }
-  double boxWidth = containerWidth;
-  double boxHeight = containerHeight;
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
 
     return Scaffold(
       appBar: AppBar(
@@ -149,7 +189,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                         setState(() {
                           languageIndex = 0;
                           overrideIndex = true;
-                          updateMethodContent();
+                          //updateMethodContent();
                           video1 = updateVideoContent1();
                         });
                       },
@@ -164,7 +204,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                         setState(() {
                           languageIndex = 1;
                           overrideIndex = true;
-                          updateMethodContent();
+                          //updateMethodContent();
                           video1 = updateVideoContent1();
                         });
                       },
@@ -179,7 +219,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                         setState(() {
                           languageIndex = 2;
                           overrideIndex = true;
-                          updateMethodContent();
+                          //updateMethodContent();
                           video1 = updateVideoContent1();
                         });
                       },
@@ -212,40 +252,57 @@ class _EmergencyPageState extends State<EmergencyPage> {
           //     ),
           //   ),
           // ),
-          SizedBox(height: 20.0),
+          //SizedBox(height: 20.0),
+          // Container (
+          //   height: containerHeight * 0.6, // Adjust as needed
+          //   child: Flex(
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     direction: Axis.vertical,
+          //     children: [
+          //       Container(
+          //         width: boxWidth,
+          //         height: boxHeight*0.5*0.6,
+          //         decoration: BoxDecoration(
+          //           color: Colors.grey.shade200,
+          //           borderRadius: BorderRadius.circular(8.0),
+          //         ),
+          //         child: Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: <Widget>[
+          //             Icon(Icons.lightbulb_outline, color: Colors.amber),
+          //             Center(
+          //                 child: Container(
+          //                   width: boxWidth * 0.9,
+          //                     // height: availableHeight * 0.6 * 0.5,
+          //                     child: Center(
+          //                       child: updateMethodContent(),
+          //                     )
+          //                 )
+          //             )
+          //           ]
+          //         ),
+          //       ),
+          //       SizedBox(
+          //             width: boxWidth,
+          //             height: boxHeight * 0.5 * 0.6,
+          //             child: Center(child:video1),
+          //      ),                    
+          //     ],
+          //   ),
+          // ),
           Container (
-            height: containerHeight * 0.6, // Adjust as needed
+            //height: containerHeight * 0.6, // Adjust as needed
             child: Flex(
               crossAxisAlignment: CrossAxisAlignment.center,
               direction: Axis.vertical,
               children: [
-                Container(
-                  width: boxWidth,
-                  height: boxHeight*0.5*0.6,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Icon(Icons.lightbulb_outline, color: Colors.amber),
-                      Center(
-                          child: Container(
-                            width: boxWidth * 0.9,
-                              // height: availableHeight * 0.6 * 0.5,
-                              child: Center(
-                                child: updateMethodContent(),
-                              )
-                          )
-                      )
-                    ]
-                  ),
-                ),
+                contentBox('content1'),
+                contentBox('content2'),
+                contentBox('content3'),
                 SizedBox(
-                      width: boxWidth,
-                      height: boxHeight * 0.5 * 0.6,
-                      child: Center(child:video1),
+                  width: boxWidth,
+                  height: boxHeight * 0.5 * 0.6,
+                  child: Center(child:video1),
                ),                    
               ],
             ),
@@ -260,43 +317,43 @@ class _EmergencyPageState extends State<EmergencyPage> {
   //       contentDescriptionMap[languages[languageIndex]]![methodIndex]);
   // }
 
-  Widget buildIconButton(IconData iconData, int index) {
-    bool isSelected = index == methodIndex;
+  // Widget buildIconButton(IconData iconData, int index) {
+  //   bool isSelected = index == methodIndex;
 
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IconButton(
-          icon: Icon(
-            iconData,
-            size: isSelected ? 60 : 60,
-            color: isSelected ? Colors.black : Colors.grey,
-          ),
-          onPressed: () {
-            setState(() {
-              methodIndex = index;
-              updateMethodContent();
-            });
-          },
-          color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 60 : 60,
-          padding: EdgeInsets.all(10),
-          splashRadius: 40,
-          splashColor: Colors.grey.withOpacity(0.5),
-          highlightColor: Colors.transparent,
-        ),
-      ],
-    );
-  }
+  //   return Stack(
+  //     alignment: Alignment.center,
+  //     children: [
+  //       IconButton(
+  //         icon: Icon(
+  //           iconData,
+  //           size: isSelected ? 60 : 60,
+  //           color: isSelected ? Colors.black : Colors.grey,
+  //         ),
+  //         onPressed: () {
+  //           setState(() {
+  //             methodIndex = index;
+  //             updateMethodContent();
+  //           });
+  //         },
+  //         color: isSelected ? Colors.black : Colors.transparent,
+  //         iconSize: isSelected ? 60 : 60,
+  //         padding: EdgeInsets.all(10),
+  //         splashRadius: 40,
+  //         splashColor: Colors.grey.withOpacity(0.5),
+  //         highlightColor: Colors.transparent,
+  //       ),
+  //     ],
+  //   );
+  // }
 
-  Widget updateMethodContent() {
-    return Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.black,
-      )
-    );
+  // Widget updateMethodContent() {
+  //   return Text(
+  //     _translations[languages[languageIndex]]![methodIndex],
+  //     style: TextStyle(
+  //       fontSize: 20.0,
+  //       color: Colors.black,
+  //     )
+  //   );
   }
 
   String _getAsset(String videoKey, String language) {
@@ -319,5 +376,33 @@ class _EmergencyPageState extends State<EmergencyPage> {
           videoTitle1 = _getTitle('video1', '2');
       }
       return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+  }
+
+
+    Widget contentBox(String contentKey) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            SizedBox(width: 10.0),
+            Expanded(
+              child: Text(
+                _t(contentKey),
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
