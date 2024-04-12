@@ -276,7 +276,13 @@ class _WhatChanceState extends State<WhatChance> {
               ),
             ),
             Divider(),
-            TextButton(onPressed: () { WhyDoPage(); }, 
+            TextButton(onPressed: () { 
+              if (methodIndex == 6) {
+                EmergencyPage();
+              } else {
+                WhySomeMethodsBetter();
+              }
+             }, 
             child:
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -313,11 +319,7 @@ class _WhatChanceState extends State<WhatChance> {
             //Divider(),
             if (methodIndex == 0 || methodIndex == 1) 
             TextButton(onPressed: () { 
-                if (methodIndex == 6) {
-                  HIVPage();
-                } else {
-                  EmergencyPage();
-                }
+                HIVPage();
               }, 
             child:
             Row(
