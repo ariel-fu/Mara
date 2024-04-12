@@ -155,12 +155,12 @@ Widget build(BuildContext context) {
 
   return Scaffold(
     appBar: AppBar(
-      leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
+      // leading: IconButton(
+      //     icon: const Icon(Icons.home),
+      //     onPressed: () {
+      //       Navigator.of(context).pushNamed('/home');
+      //     },
+      //   ),
         title: Text(_t('Family Planning Guide')),
       ),
       body: Column(
