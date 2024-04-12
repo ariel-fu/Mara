@@ -39,9 +39,10 @@ class _HomePage2State extends State<HomePage2> {
       MaterialPageRoute(builder: (context) => TimePage()),
     );
     } else if (index == 3) {
-      // Navigator.push(
-      // context,
-      // MaterialPageRoute(builder: (context) => MainScreen()),
+       Navigator.push(
+       context,
+       MaterialPageRoute(builder: (context) => WhatChance()),
+       );
     } else if (index == 4) {
       Navigator.push(
         context,

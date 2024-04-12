@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/home2.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/time_page.dart';
+import 'package:mara_app/whySomeMethodsBetter.dart';
 
 class WhatChance extends StatefulWidget {
   const WhatChance({Key? key}) : super(key: key);
@@ -33,6 +34,12 @@ class _WhatChanceState extends State<WhatChance> {
     "Kiswahili": "HEY! HII NI MUHIMU! Kutumia njia za upangaji uzazi HAKUTAbadilisha uwezo wako wa kupata mimba katika siku zijazo!",
     "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Tiyo gi yore mag komo nyuol OK bi loko nyaloni mar mako ich e ndalo mabiro!",
     "English": "HEY! THIS IS IMPORTANT! Using family planning methods will NOT change your ability to get pregnant in the future!",
+  };
+
+  final Map<String, String> Epill = {
+    "Kiswahili": "Jinsi E-pill inavyofanya kazi vizuri ili kuzuia mimba inategemea mambo mengi - ni muda gani unachukua baada ya ngono, na muda wa mzunguko wako wa kila mwezi. E-pill haijaundwa kutumiwa kama njia yako ya kawaida ya kila siku, na haifanyi kazi vizuri ikiwa unafanya ngono mara kwa mara.",
+    "Dholuo": "Kaka E-pill tiyo maber e geng'o ich luwore gi gik mang'eny - kaka imuonye mapiyo marom nade bang bedo e achiel, kod kinde ma intie e sako ni mar dwe. E-pill ok olosi mondo oti godo kaka yori mapile mar geng'o ich kendo ok oti maber ka ibedo e achiel monuoyore ding'eny.",
+    "English": "How well the E-pill works to prevent pregnancy depends on a lot of things - how soon you take it after sex, and the timing in your monthly cycle. The E-pill is not designed to be used as your regular daily method, and it is does not work well if you are having sex frequently.",
   };
 
   final Map<String, String> femaleCondom = {
@@ -195,9 +202,9 @@ class _WhatChanceState extends State<WhatChance> {
           ),
           Container(
             alignment: Alignment.center,
-            // height: availableHeight * 0.15,
-            // width: boxWidth,
-            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
+             height: availableHeight * 0.199,
+             width: boxWidth,
+             padding: EdgeInsets.symmetric(horizontal: 0.08*boxWidth),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -220,29 +227,29 @@ class _WhatChanceState extends State<WhatChance> {
               ),
             ),
           ),
-
+          Divider(),
           //SizedBox(height: 15.0),
           SizedBox(
-            height: availableHeight * 0.42, // Adjust as needed
+            height: availableHeight * 0.45, // Adjust as needed
                 child: Flex(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 direction: Axis.vertical,
                 children: [
                   Container(
                       width: boxWidth,
-                      height: boxHeight*0.4*0.4,
+                      height: boxHeight*0.15,
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
+                        color: Color.fromARGB(0, 255, 255, 255),
                         borderRadius: BorderRadius.circular(1.0),
                       ),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Icon(Icons.lightbulb_outline, color: Colors.amber),
+                            Icon(Icons.lightbulb_outline, color: Colors.amber,),
                             Center(
                                 child: Container(
                                   width: boxWidth * 0.9,
-                                  height: availableHeight * 0.09,
+                                  height: availableHeight * 0.1,
                                     child: Center(
                                       child: updateText(),
                                   )                                  
@@ -251,11 +258,12 @@ class _WhatChanceState extends State<WhatChance> {
                           ]
                       )
                   ),
+                  Divider(),
                   Container(
                     width: boxWidth,
-                    height: availableHeight * 0.26,
+                    height: availableHeight * 0.25,
                     decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
+                        color: Color.fromARGB(0, 255, 255, 255),
                         borderRadius: BorderRadius.circular(1.0),
                       ),
                     child: Center(
@@ -324,12 +332,11 @@ class _WhatChanceState extends State<WhatChance> {
   void WhyDoPage () {
     Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => HomePage2()),
+    MaterialPageRoute(builder: (context) => WhySomeMethodsBetter()),
   );
   }
   Widget getPic() {
-    int methodIndex1 = methodIndex + 1;
-    String imageNum = "assets/method_efficiency_pics/efficacy images_Page_$methodIndex1.jpg";
+    String imageNum = "assets/method_efficiency_pics/efficacy images_Page_$methodIndex.jpg";
     return Image.asset(
                 imageNum,
                 width: MediaQuery.of(context).size.width * 0.8,
@@ -383,63 +390,36 @@ class _WhatChanceState extends State<WhatChance> {
   }
 
   Widget updateText() {
-    if (methodIndex == 0) {
-      return Text(
-      maleCondom[languages[languageIndex]]!,
-      style: TextStyle(
-        fontSize: 17.0,
-        color: Colors.black,
-      )
-    );
-    } else if (methodIndex == 1) {
-      return Text(
-      femaleCondom[languages[languageIndex]]!,
-      style: TextStyle(
-        fontSize: 17.0,
-        color: Colors.black,
-      )
-    );
-    } else if (methodIndex == 2) {
-      return Text(
-      dailyPills[languages[languageIndex]]!,
-      style: TextStyle(
-        fontSize: 17.0,
-        color: Colors.black,
-      )
-    );
-    } else if (methodIndex == 3) {
-      return Text(
-      injection[languages[languageIndex]]!,
-      style: TextStyle(
-        fontSize: 17.0,
-        color: Colors.black,
-      )
-    );
-    } else if (methodIndex == 4) {
-      return Text(
-       implant[languages[languageIndex]]!,
-      style: TextStyle(
-        fontSize: 17.0,
-        color: Colors.black,
-      )
-    );
-    } else if (methodIndex == 5) {
-      return Text(
-      IUCD[languages[languageIndex]]!,
-      style: TextStyle(
-        fontSize: 17.0,
-        color: Colors.black,
-      )
-    );
-    } else {
-      return Text(
-      "no text for E-pill",
-      style: TextStyle(
-        fontSize: 17.0,
-        color: Colors.black,
-      )
-    );
-    }
-    
+    String text;
+  if (methodIndex == 0) {
+    text = maleCondom[languages[languageIndex]]!;
+  } else if (methodIndex == 1) {
+    text = femaleCondom[languages[languageIndex]]!;
+  } else if (methodIndex == 2) {
+    text = dailyPills[languages[languageIndex]]!;
+  } else if (methodIndex == 3) {
+    text = injection[languages[languageIndex]]!;
+  } else if (methodIndex == 4) {
+    text = implant[languages[languageIndex]]!;
+  } else if (methodIndex == 5) {
+    text = IUCD[languages[languageIndex]]!;
+  } else if (methodIndex == 6) {
+    text = Epill[languages[languageIndex]]!;
+  } else {
+    text = "error";
+  }
+
+  return SingleChildScrollView(
+    scrollDirection: Axis.vertical,
+    child: Container(
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 17.0,
+          color: Colors.black,
+        ),
+      ),
+    ),
+  );
   }
 }
