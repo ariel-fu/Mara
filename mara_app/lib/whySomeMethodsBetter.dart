@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'video.dart';
 
 class WhySomeMethodsBetter extends StatefulWidget {
   //const WhySomeMethodsBetter({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider3E.mp4', title:'Video Language Not Selected');
 
   final Map<String, String> titleMap = {
     "Kiswahili": "KWA NINI baadhi ya mbinu za kupanga uzazi hufanya kazi vizuri zaidi kuliko zingine ili kuzuia mimba?",
@@ -28,6 +30,23 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
       "Dholuo": "Kaka nyalo dwarore ni mondo ipar mar tiyo gi yor komo nyuol kata dhi ome, e kaka nyalo kelo thuolo mang'eny mar makosa kata chandruok. Ma ema omiyo yore moko mag komo nyuol kaka Implant kod IUCD tiyo maber e geng'o ich -- nikech ka oseruakgi e dendi, onge gima nyaka itim machielo. Yore kaka rabo yunga ma nyaka itigodo seche te ma ibedo e achiel [kendo dwarore ni jaherani ema ruake] ok ti ga maber kuom ndalo e geng'o ich, mana nikech jomatiyo kodgi wigi nyalo wil tiyo gi rabo yunga kata bedo maonge kode seche ma gidware. Yore gi te [koweyo E-pill] tiyo maber ahinya w geng'o ich ka oti kodgi kaka dwarore.",
       "English": "The more you have to remember to use or get a method, the more room there is for mistakes or problems. That's the main reason why some methods like the implant and IUCD work better to prevent pregnancy -- because once they are in your body, you don't have to do anything else. Methods like condoms that you have to use every time you have sex (and depend on your partner to use them) do not work as well over time to prevent pregnancy, mainly because users might forget to use a condom or not have one when they need it. All of the methods (other than the E-pill) work very well to prevent pregnancy when used as directed."
     }
+  };
+
+  final Map<String, Map<String, Map<String, String>>> languageToVideo = {
+  'video1': {
+    '0': { // Language code 0
+      'video': 'videoAudio/videos/provider/provider3KS.mp4',
+      'text': 'Video - Daktari Aeleza',
+    },
+    '1': { // Language code 1
+      'video': 'videoAudio/videos/provider/provider3DL.mp4',
+      'text': 'Vidio - Laktar Wuoyo',
+    },
+    '2': { // Language code 2
+      'video': 'videoAudio/videos/provider/provider3E.mp4',
+      'text': 'Video - A Doctor Explains',
+    },
+   },
   };
   final double _aspectRatio = 16 / 10;
   late String _currentLanguage;
@@ -102,8 +121,8 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
                           languageIndex = 0;
                           _currentLanguage = 'Kiswahili';
                           overrideIndex = true;
-                          //updateMethodContent('content1');
-                          //video1 = updateVideoContent1();
+                          // updateMethodContent('content1');
+                          video1 = updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -118,8 +137,8 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
                           languageIndex = 1;
                           _currentLanguage = 'Dholuo';
                           overrideIndex = true;
-                          //updateMethodContent('content2');
-                          //video1 = updateVideoContent1();
+                          // updateMethodContent('content2');
+                          video1 = updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -134,8 +153,8 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
                           languageIndex = 2;
                           _currentLanguage = 'English';
                           overrideIndex = true;
-                          //updateMethodContent('content3');
-                          //video1 = updateVideoContent1();
+                          // updateMethodContent('content3');
+                          video1 = updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -154,13 +173,12 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
               crossAxisAlignment: CrossAxisAlignment.center,
               direction: Axis.vertical,
               children: [
+                contentBox('content1'),   
                 SizedBox(
                   width: boxWidth,
                   height: boxHeight * 0.5 * 0.6,
-                  //child: Center(child:video1),
-                  child: Text("VIDEO HERE")
+                  child: Center(child:video1),
                 ),
-                contentBox('content1'),                  
               ],
             ),
           ),
@@ -179,27 +197,29 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
     );
   }
 
-  // String _getAsset(String videoKey, String language) {
-  //     return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
-  // }
+  String _getAsset(String videoKey, String language) {
+      return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+  }
 
-  // String _getTitle(String videoKey, String language) {
-  //   return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
-  // }
+  String _getTitle(String videoKey, String language) {
+    return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
+  }
     
-  // Widget updateVideoContent1() {
-  //     if (languageIndex == 0) {
-  //       videoAsset1 = _getAsset('video1', '0');
-  //       videoTitle1 = _getTitle('video1', '0');
-  //     } else if (languageIndex == 1) {
-  //         videoAsset1 = _getAsset('video1', '1');
-  //         videoTitle1 = _getTitle('video1', '1');
-  //     } else if (languageIndex == 2) {
-  //         videoAsset1 = _getAsset('video1', '2');
-  //         videoTitle1 = _getTitle('video1', '2');
-  //     }
-  //     return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
-  // }
+  Widget updateVideoContent() {
+    String videoAsset1 = "";
+    String videoTitle1 = "";
+      if (languageIndex == 0) {
+        videoAsset1 = _getAsset('video1', '0');
+        videoTitle1 = _getTitle('video1', '0');
+      } else if (languageIndex == 1) {
+          videoAsset1 = _getAsset('video1', '1');
+          videoTitle1 = _getTitle('video1', '1');
+      } else if (languageIndex == 2) {
+          videoAsset1 = _getAsset('video1', '2');
+          videoTitle1 = _getTitle('video1', '2');
+      }
+      return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+  }
 
   Widget languageButton(String language) {
     bool isSelected = _currentLanguage == language;
