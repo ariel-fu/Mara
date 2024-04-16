@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
 import 'bleeding.dart';
@@ -38,12 +37,6 @@ class _PatternPageState extends State<PatternPage> {
     "method 6"
   ];
 
-  final Map<String, String> titleTranslations = {
-    "English": "What will happen to my period?", 
-    "Kiswahili": "Nini kitafanyikia hedhi zangu", 
-    "Dholuo": "En ang'o mabiro timore ne remba mar dwe?"
-  };
-
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
       "Kutumia kondomu hakutaathiri hedhi yako hata kidogo!",
@@ -72,18 +65,6 @@ class _PatternPageState extends State<PatternPage> {
       "The IUCD, or coil, will not change the timing of when your periods come. It might make your period flow heavier, and cause more cramping during your period. This is not bad for your body, but if you already have very heavy or painful periods, it may not be the best method for you.  ",
       "E-pills might affect your period differently, depending on when you take them in your monthly cycle. Your period might come a bit later or a bit earlier than usual after taking E-pills. It is normal to have some light bleeding or drops of blood in your panties after taking E-pills. This is not dangerous, and will go away on its own! Take a pregnancy test if you do not get your period."
     ],
-  };
-
-  final Map<String, String> importantMessageTranslations = {
-    "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
-    "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
-    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!"
-  };
-
-  final Map<String, String> why = {
-    "Kiswahili": "KWA NINI?",
-    "Dholuo": "NANG'O?",
-    "English": "WHY?"
   };
 
   //Video HashMap: specifies video asset and text/title based on language and video
@@ -116,55 +97,7 @@ class _PatternPageState extends State<PatternPage> {
       'text': 'Video - A Peer Perspective',
     },
   },
-  };
-// @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       leading: IconButton(
-  //         icon: Icon(Icons.arrow_back),
-  //         onPressed: () => Navigator.of(context).pop(),
-  //       ),
-  //       title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
-  //     ),
-  //     body: SingleChildScrollView(
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.center,
-  //         children: [
-  //           Padding(
-  //             padding: const EdgeInsets.symmetric(vertical: 8.0),
-  //             child: Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //               children: languages.map((language) => languageButton(language)).toList(),
-  //             ),
-  //           ),
-  //           methodSelectionRow(),
-  //           SizedBox(height: 20.0),
-  //           contentArea(),
-  //           SizedBox(height: 20.0),
-  //           additionalTextSection(),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
-// Widget languageButton(String language) {
-//     bool isSelected = languages[languageIndex] == language;
-//     return ElevatedButton(
-//       onPressed: () {
-//         setState(() {
-//           languageIndex = languages.indexOf(language);
-//           overrideIndex = true;
-//           updateMethodContent();
-//         });
-//       },
-//       style: ElevatedButton.styleFrom(
-//         backgroundColor: isSelected ? Colors.grey : null,
-//       ),
-//       child: Text(language),
-//     );
-//   }
+};
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +132,7 @@ class _PatternPageState extends State<PatternPage> {
         //     Navigator.of(context).pushNamed('/home');
         //   },
         // ),
-        title: Center(child: Text(titleTranslations[languages[languageIndex]]!)),
+        title: Center(child: Text('What will happen to my period?')),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
@@ -281,8 +214,7 @@ class _PatternPageState extends State<PatternPage> {
             // height: availableHeight * 0.15,
             // width: boxWidth,
             // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
-            child: SingleChildScrollView
-            (
+            child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -330,17 +262,15 @@ class _PatternPageState extends State<PatternPage> {
                                     child: Center(
                                       child: Column(children:[
                                         updateMethodContent(),
-                                        SizedBox(height: 20.0),
-                                        additionalTextSection(),
-                                      //   IconButton(
-                                      //   icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
-                                      //   onPressed: () {
-                                      //     Navigator.push(
-                                      //       context,
-                                      //       MaterialPageRoute(builder: (context) => BleedingPage()),
-                                      //     );
-                                      //   },
-                                      // ),
+                                        IconButton(
+                                        icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => BleedingPage()),
+                                          );
+                                        },
+                                      ),
                                       ], 
                                     )
                                 )
@@ -356,13 +286,13 @@ class _PatternPageState extends State<PatternPage> {
                   Row(children: [
                   SizedBox(width:15.0),
                   SizedBox(
-                    width:boxWidth / 2,
+                    width:boxWidth / 2 - 25,
                     height: boxHeight * 0.5 * 0.6,
                     child: Center(child: video1),
                   ),
                   SizedBox(width:10.0),
                   SizedBox(
-                    width:boxWidth / 2 - 8,
+                    width:boxWidth / 2 - 25,
                     height: boxHeight * 0.5 * 0.6,
                     child: Center(child: video2),
                   ),
@@ -370,64 +300,6 @@ class _PatternPageState extends State<PatternPage> {
                 ],
               ),
             ),
-        ],
-      ),
-    );
-  }
-
-  Widget additionalTextSection() {
-  return Padding(
-    padding: EdgeInsets.all(10.0),
-    child: Column(
-      children: [
-        if (methodIndex == 0 || methodIndex == 1)
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
-            SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
-                style: TextStyle(fontSize: 16.0),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 20),  // Space between the text and the button
-        if (methodIndex == 2 || methodIndex == 3 || methodIndex == 4 || methodIndex == 5 || methodIndex == 6 || methodIndex == 7)
-        TextButton.icon(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const BleedingPage()),
-            );
-          },
-          icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
-          label: Text(
-            why[languages[languageIndex]] ?? "Translation Not Found",
-            style: TextStyle(color: Colors.black)
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-  Widget methodSelectionRow() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          buildIconButton(MaraIcons.condom, "Condom", 0),
-          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
-          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
-          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
-          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
         ],
       ),
     );
@@ -523,32 +395,5 @@ class _PatternPageState extends State<PatternPage> {
           videoTitle2 = _getTitle('video2', '2');
       }
       return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
-  }
-
-  Widget contentArea() {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-            SizedBox(width: 10.0),
-            Flexible(
-              child: Text(
-                contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
