@@ -681,6 +681,7 @@ bool _areAllQuestionsAnswered() {
     return Scaffold(
       appBar: AppBar(
         title: Text(_t('title')),
+        centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
