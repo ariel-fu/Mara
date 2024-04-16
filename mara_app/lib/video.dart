@@ -59,7 +59,7 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    dispose();
+    // dispose();
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
