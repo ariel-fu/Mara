@@ -51,10 +51,16 @@ class _PatternPageState extends State<PatternPage> {
     "English": "WHY?",
   };
 
-  final Map<String, String> heyThis = {
+  final Map<String, String> importantMessageTranslations = {
     "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
     "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
     "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+  };
+
+  final Map<String, String> learnMoreTranslations = {
+    "English": "Learn more",
+    "Kiswahili": "Jifunze zaidi",
+    "Dholuo": "Puonjri matut"
   };
 
 
@@ -148,12 +154,6 @@ class _PatternPageState extends State<PatternPage> {
 
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: const Icon(Icons.home),
-        //   onPressed: () {
-        //     Navigator.of(context).pushNamed('/home');
-        //   },
-        // ),
         title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
@@ -286,7 +286,7 @@ class _PatternPageState extends State<PatternPage> {
                                     child: Center(
                                       child: Column(children:[
                                         updateMethodContent(),
-                                        additionalTextSection_why(),
+                                        additionalTextSection(),
                                         //additionalTextSection_heythis(),
 
                                       ], 
@@ -431,32 +431,7 @@ class _PatternPageState extends State<PatternPage> {
     );
   }
 
-   Widget additionalTextSection_heythis() {
-      return Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            if (methodIndex == 0 || methodIndex == 1) 
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    heyThis[languages[languageIndex]] ?? "Important Message Not Found",
-                    style: TextStyle(fontSize: 16.0),
-                    textAlign: TextAlign.justify,
-                  ),
-                ),
-                ],
-              ),
-          ]
-        )
-      );
-  }
-
-  Widget additionalTextSection_why() {
+  Widget additionalTextSection() {
   return Padding(
     padding: EdgeInsets.all(10.0),
     child: Column(
@@ -481,25 +456,41 @@ class _PatternPageState extends State<PatternPage> {
         ), 
         SizedBox(height: 20),  // Space between the text and the button
         if (methodIndex == 0 || methodIndex == 1)
-        TextButton.icon(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple[100], // Button background color
-              foregroundColor: Colors.black 
-            ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HIVPage()),
-            );
-          },
-          icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
-          label: Text(
-            heyThis[languages[languageIndex]] ?? "Translation Not Found",
-            style: TextStyle(color: Colors.black)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+              SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
+                  style: TextStyle(fontSize: 16.0),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
-    ),
+          //SizedBox(height: 20),  // Space between the text and the button
+          if (methodIndex == 0 || methodIndex == 1)
+          TextButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple[100], // Button background color
+                foregroundColor: Colors.black 
+              ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HIVPage()),
+              );
+            },
+            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+            label: Text(
+              learnMoreTranslations[languages[languageIndex]] ?? "Translation Not Found",
+              style: TextStyle(color: Colors.black)
+            ),
+          ),
+        ],
+      ),
   );
 }
 
