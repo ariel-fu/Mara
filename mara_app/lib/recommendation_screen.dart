@@ -27,7 +27,7 @@ class RecommendationScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _RecommendationScreenState createState() => _RecommendationScreenState();
+  State<RecommendationScreen> createState() => _RecommendationScreenState();
 }
 
 class _RecommendationScreenState extends State<RecommendationScreen> {
@@ -72,7 +72,6 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
 
 @override
 Widget build(BuildContext context) {
-  final likes = Provider.of<Likes>(context, listen: false);
   return Scaffold(
     appBar: AppBar(
       leading: IconButton(
@@ -305,13 +304,11 @@ Widget _buildTitleBox() {
 
 void navigateToLikedMethodsScreen() {
   // Access the liked methods from the provider
-  final likes = Provider.of<Likes>(context, listen: false);
-
+  
   Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) => LikedMethodsScreen(
-        likedMethods: likes.likedMethods, // Pass the liked methods to the new screen
         initialLanguage: _currentLanguage,
         translations: widget.translations,
       ),

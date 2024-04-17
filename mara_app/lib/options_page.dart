@@ -98,8 +98,6 @@ class _OptionsPageState extends State<OptionsPage> {
     }
   }
 
-  Set<String> _likedMethods = {};
-
   // from recommendation_screen.dart; factor out into app state
   late Future<Map<String, dynamic>> _methodDetailsDataFuture;
 
@@ -109,19 +107,9 @@ class _OptionsPageState extends State<OptionsPage> {
     return json.decode(jsonString);
   }
 
-  void toggleLikeMethod(String method) {
-    setState(() {
-      if (_likedMethods.contains(method)) {
-        _likedMethods.remove(method);
-      } else {
-        _likedMethods.add(method);
-      }
-    });
-  }
-
   String _t(String key) {
     String translation = _translations[languages[_languageIndex]]?[key] ?? key;
-    print('Key: $key, Language: $languages, Translation: $translation');
+    // print('Key: $key, Language: $languages, Translation: $translation');
     return translation;
   }
 
@@ -162,128 +150,124 @@ class _OptionsPageState extends State<OptionsPage> {
           preferredSize: Size.fromHeight(containerHeight * 0.05),
           child: Container(
               // height: availableHeight * 0.1,
-              child: Container(
-            // padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  // Adjust the padding as needed
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _languageIndex = 0;
-                        _switchLanguage(0);
-                        overrideIndex = true;
-                        // updateMethodContent();
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _languageIndex == 0 ? Colors.grey : null,
-                      foregroundColor:
-                          _languageIndex == 0 ? Colors.white : null,
-                    ),
-                    child: Text('Kiswahili'),
+                child: Container(
+                  // padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _languageIndex = 0;
+                              _switchLanguage(0);
+                              overrideIndex = true;
+                              // updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _languageIndex == 0 ? Colors.grey : null,
+                            foregroundColor:
+                                _languageIndex == 0 ? Colors.white : null,
+                          ),
+                          child: Text('Kiswahili'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _languageIndex = 1;
+                              _switchLanguage(1);
+                              overrideIndex = true;
+                              // updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _languageIndex == 1 ? Colors.grey : null,
+                            foregroundColor:
+                                _languageIndex == 1 ? Colors.white : null,
+                          ),
+                          child: Text('Dholuo'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _languageIndex = 2;
+                              _switchLanguage(2);
+                              overrideIndex = true;
+                              // updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _languageIndex == 2 ? Colors.grey : null,
+                            foregroundColor:
+                                _languageIndex == 2 ? Colors.white : null,
+                          ),
+                          child: Text('English'),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  // Adjust the padding as needed
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _languageIndex = 1;
-                        _switchLanguage(1);
-                        overrideIndex = true;
-                        // updateMethodContent();
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _languageIndex == 1 ? Colors.grey : null,
-                      foregroundColor:
-                          _languageIndex == 1 ? Colors.white : null,
+                )),
+          ),
+          actions: <Widget>[
+            Consumer<Likes>(
+              builder: (context, likes, child) => ElevatedButton.icon(
+                icon: Icon(Icons.thumb_up, color: Colors.black),
+                label: Text(_t('likedTitle')),
+                // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LikedMethodsScreen(
+                        initialLanguage: languages[_languageIndex], 
+                        translations: _translations,
+                      ),
                     ),
-                    child: Text('Dholuo'),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[100],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
                   ),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), 
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  // Adjust the padding as needed
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _languageIndex = 2;
-                        _switchLanguage(2);
-                        overrideIndex = true;
-                        // updateMethodContent();
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _languageIndex == 2 ? Colors.grey : null,
-                      foregroundColor:
-                          _languageIndex == 2 ? Colors.white : null,
-                    ),
-                    child: Text('English'),
-                  ),
-                ),
-              ],
-            ),
-          )),
-        ),
-        actions: <Widget>[
-          Consumer<Likes>(
-            builder: (context, likes, child) => ElevatedButton.icon(
-              icon: Icon(Icons.thumb_up, color: Colors.black),
-              label: Text(_t('likedTitle')),
-              // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
-              onPressed: () {
-                var likes = context.read<Likes>();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LikedMethodsScreen(
-                      likedMethods: likes.likedMethods,
-                      initialLanguage: languages[_languageIndex],
-                      translations: _translations,
-                      // onMethodsChanged: likes.toggleLikedMethod,
-                    ),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple[100],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               ),
             ),
-          ),
-        ],
-      ),
-      // body
-      body: OptionsImage(
-          containerWidth, containerHeight, methodIndex, updateIndex),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(12.0),
-        // duplicated from recommendation_screen.dart
-        child: FutureBuilder<Map<String, dynamic>>(
-          future: _methodDetailsDataFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              // Data is still loading, show a loading indicator
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              // If we run into an error, display it to the user
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (snapshot.hasData) {
-              final Map<String, dynamic> methodDetailsData = snapshot.data!;
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Row(
+          ],
+        ),
+        // body
+        body: OptionsImage(containerWidth, containerHeight, methodIndex, updateIndex),
+        bottomSheet: Padding(
+          padding: const EdgeInsets.all(12.0),
+          // duplicated from recommendation_screen.dart
+          child: FutureBuilder<Map<String, dynamic>>(
+            future: _methodDetailsDataFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // Data is still loading, show a loading indicator
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                // If we run into an error, display it to the user
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (snapshot.hasData) {
+                final Map<String, dynamic> methodDetailsData = snapshot.data!;
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
