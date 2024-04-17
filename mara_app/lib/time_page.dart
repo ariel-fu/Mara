@@ -64,7 +64,7 @@ class _TimePageState extends State<TimePage> {
   "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!"
   };
 
-final Map<String, String> learnMoreTranslations = {
+  final Map<String, String> learnMoreTranslations = {
   "English": "Learn more",
   "Kiswahili": "Jifunze zaidi",
   "Dholuo": "Puonjri matut"
@@ -76,10 +76,10 @@ final Map<String, String> learnMoreTranslations = {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () => Navigator.of(context).pop(),
+        // ),
         title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
       ),
       body: SingleChildScrollView(
@@ -165,10 +165,6 @@ Widget additionalTextSection() {
     ),
   );
 }
-
-
-
-
 
 Widget methodSelectionRow() {
     return SingleChildScrollView(
