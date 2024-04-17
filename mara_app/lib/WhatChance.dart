@@ -28,16 +28,22 @@ class _WhatChanceState extends State<WhatChance> {
   };
 
   
-  final Map<String, String> whyDo = {
+  final Map<String, String> whyTranslations = {
     "Kiswahili": "KWA NINI baadhi ya mbinu za kupanga uzazi hufanya kazi vizuri zaidi kuliko zingine ili kuzuia mimba?",
     "Dholuo": "EN ANG'O MA OMIYO yore moko mag komo nyuol tiyoga maber mohingo moko e geng'o ich?",
     "English": "WHY do some methods work better than others to prevent pregnancy?",
   };
 
-  final Map<String, String> heyThis = {
-    "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
-    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
+  final Map<String, String> importantMessageTranslations = {
     "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+    "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!"
+  };
+
+  final Map<String, String> learnMoreTranslations = {
+    "English": "Learn more",
+    "Kiswahili": "Jifunze zaidi",
+    "Dholuo": "Puonjri matut"
   };
 
 
@@ -71,7 +77,6 @@ class _WhatChanceState extends State<WhatChance> {
     ],
   };
 
-
   final Map<String, String> EpillText = {
     "Kiswahili": "Pata maelezo zaidi kuhusu jinsi ya kumeza kidonge cha E kwa usalama",
     "Dholuo": "Ponjri matut ewi kaka inyalo muonyo E-pill eyo makare",
@@ -97,10 +102,10 @@ class _WhatChanceState extends State<WhatChance> {
     double availableHeight = boxHeight;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () => Navigator.of(context).pop(),
+        // ),
         title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
       ),
       body: SingleChildScrollView(
@@ -129,8 +134,7 @@ class _WhatChanceState extends State<WhatChance> {
                 child: getPic(),
               ),
             ),
-            additionalTextSection_heythis(),
-            additionalTextSection_learnmore(),
+            additionalTextSection(),
           ],
         ),
       ),
@@ -180,36 +184,46 @@ class _WhatChanceState extends State<WhatChance> {
     );
   }
 
-  Widget additionalTextSection_heythis() {
+    Widget additionalTextSection() {
       return Padding(
         padding: EdgeInsets.all(10.0),
         child: Column(
           children: [
-            if (methodIndex == 0 || methodIndex == 1) 
+            if (methodIndex == 0 || methodIndex == 1)
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    heyThis[languages[languageIndex]] ?? "Important Message Not Found",
-                    style: TextStyle(fontSize: 16.0),
-                    textAlign: TextAlign.justify,
+                  ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
+                      style: TextStyle(fontSize: 16.0),
+                      textAlign: TextAlign.justify,
+                    ),
                   ),
-                ),
                 ],
               ),
-          ]
-        )
-      );
-  }
-
-    Widget additionalTextSection_learnmore() {
-      return Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Column(
-          children: [
+            //SizedBox(height: 20), 
+            if (methodIndex == 0 || methodIndex == 1)
+              TextButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple[100], // Button background color
+                    foregroundColor: Colors.black 
+                  ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HIVPage()),
+                  );
+                },
+                icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+                label: Text(
+                  learnMoreTranslations[languages[languageIndex]] ?? "Translation Not Found",
+                  style: TextStyle(color: Colors.black)
+                ),
+              ),
+              SizedBox(height: 50),
               if (methodIndex !=6)
                 TextButton.icon(
                   style: ElevatedButton.styleFrom(
@@ -224,7 +238,7 @@ class _WhatChanceState extends State<WhatChance> {
                 },
                 icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
                 label: Text(
-                  whyDo[languages[languageIndex]] ?? "Translation Not Found",
+                  whyTranslations[languages[languageIndex]] ?? "Translation Not Found",
                   style: TextStyle(color: Colors.black)
                 ),
                 ), 
