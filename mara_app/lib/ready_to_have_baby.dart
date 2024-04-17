@@ -106,8 +106,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-                  Icon(Icons.warning_amber_rounded, color: Colors.black),
+                    ImageIcon(AssetImage('assets/misc-icons/important.png'), color: Colors.black),
                     SizedBox(width: 8.0),
                     Expanded(
                       child: Text(
@@ -185,7 +184,7 @@ Widget build(BuildContext context) {
          Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: ElevatedButton.icon(
-            icon: Icon(Icons.search), // The icon
+            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
             label: Text(_t('LEARN MORE about the fertility considerations of each method')), // The label (text)
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurple[100], // Button background color
@@ -204,7 +203,7 @@ Widget build(BuildContext context) {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: ElevatedButton.icon(
-            icon: Icon(Icons.check_circle), // The icon
+            icon: ImageIcon(AssetImage('assets/misc-icons/check_mark.png'), color: Colors.black),
             label: Text(_t('Preparing for a health pregnancy')), 
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurple[100], // Button background color
