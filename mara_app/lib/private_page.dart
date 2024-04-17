@@ -53,7 +53,7 @@ class _PrivatePageState extends State<PrivatePage> {
     "English": "Can I keep it private?"
   };
 
-  final Map<String, String> titleContentMap = {
+  final Map<String, String> subtitleTranslations = {
     "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
     "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
     "English": "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy."
@@ -205,16 +205,17 @@ class _PrivatePageState extends State<PrivatePage> {
               child: Padding (
                   padding: const EdgeInsets.only(top: 5.0, bottom: 20.0), // Adjust the padding as needed,
                   child: Text(
-                    titleContentMap[languages[languageIndex]]!,
+                    subtitleTranslations[languages[languageIndex]]!,
                     softWrap: true, // Wrap text to the next line if needed
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black,
-                      fontSize: 18.0
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0
                     ),
                   )
               )
-
+              
           ),
           Container(
             alignment: Alignment.center,
