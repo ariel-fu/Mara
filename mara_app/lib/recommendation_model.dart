@@ -235,7 +235,7 @@ class RecommendationModel {
     }
   }
 
-   static String getImageForRecommendation(String recommendation) {
+  static String getImageForRecommendation(String recommendation) {
     Map<String, String> recommendationImages = {
       'Implant': './assets/implant.png',
       'Pills': './assets/pills.png',
@@ -254,7 +254,7 @@ class RecommendationModel {
       'implant': 'Implant',
       'pills': 'Pills (daily pills)',
       'condoms': 'Condoms',
-      'iud': 'IUCD (coil)',
+      'iucd': 'IUCD (coil)',
       'emergency': 'Emergency pill (E-pill, P2)',
       'depo': 'Injection (depo)',
       'female_condom': 'Female condoms',

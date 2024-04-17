@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:provider/provider.dart';
-import 'short_summaries.dart';
+import 'new_short_summaries.dart';
 import 'recommendation_model.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
