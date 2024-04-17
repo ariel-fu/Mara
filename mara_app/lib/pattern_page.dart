@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
 import 'bleeding.dart';
+import 'package:mara_app/hiv_page.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class PatternPage extends StatefulWidget {
 }
 
 class _PatternPageState extends State<PatternPage> {
+  //String _currentLanguage = 'English';
 
   Widget methodContent = Text('method content');
   String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
@@ -36,6 +38,25 @@ class _PatternPageState extends State<PatternPage> {
     "method 5",
     "method 6"
   ];
+
+  final Map<String, String> titleTranslations = {
+    "Kiswahili": "Nini kitafanyikia hedhi zangu",
+    "Dholuo": "En ang'o mabiro timore ne remba mar dwe?",
+    "English": "What will happen to my period?",
+  };
+
+  final Map<String, String>  whyTranslations = {
+    "Kiswahili": "KWA NINI?",
+    "Dholuo": "NANG'O?",
+    "English": "WHY?",
+  };
+
+  final Map<String, String> heyThis = {
+    "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
+    "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+  };
+
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -99,6 +120,7 @@ class _PatternPageState extends State<PatternPage> {
   },
 };
 
+
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
@@ -132,7 +154,7 @@ class _PatternPageState extends State<PatternPage> {
         //     Navigator.of(context).pushNamed('/home');
         //   },
         // ),
-        title: Center(child: Text('What will happen to my period?')),
+        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
@@ -255,26 +277,22 @@ class _PatternPageState extends State<PatternPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Icon(Icons.lightbulb_outline, color: Colors.amber),
+                            
                             Center(
+                              
                                 child: Container(
                                   width: boxWidth * 0.9,
                                     // height: availableHeight * 0.6 * 0.5,
                                     child: Center(
                                       child: Column(children:[
                                         updateMethodContent(),
-                                        IconButton(
-                                        icon: const ImageIcon(AssetImage('assets/misc-icons/question.png')),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => BleedingPage()),
-                                          );
-                                        },
-                                      ),
+                                        additionalTextSection_why(),
+                                        //additionalTextSection_heythis(),
+
                                       ], 
                                     )
+                                  )
                                 )
-                            )
                             )
                           ]
                           
@@ -350,6 +368,140 @@ class _PatternPageState extends State<PatternPage> {
       ],
     );
   }
+
+    Widget languageButton(String language) {
+    bool isSelected = languages[languageIndex] == language;
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          languageIndex = languages.indexOf(language);
+          overrideIndex = true;
+          updateMethodContent();
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
+
+  Widget methodSelectionRow() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildIconButton(MaraIcons.condom, "Condom", 0),
+          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+        ],
+      ),
+    );
+  }
+
+  Widget contentArea() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            SizedBox(width: 10.0),
+            Flexible(
+              child: Text(
+                contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+   Widget additionalTextSection_heythis() {
+      return Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            if (methodIndex == 0 || methodIndex == 1) 
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    heyThis[languages[languageIndex]] ?? "Important Message Not Found",
+                    style: TextStyle(fontSize: 16.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+                ],
+              ),
+          ]
+        )
+      );
+  }
+
+  Widget additionalTextSection_why() {
+  return Padding(
+    padding: EdgeInsets.all(10.0),
+    child: Column(
+      children: [
+        if (methodIndex == 2  || methodIndex == 3 || methodIndex == 4 || methodIndex == 5 || methodIndex == 6 || methodIndex == 7)
+        TextButton.icon(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepPurple[100], // Button background color
+            foregroundColor: Colors.black 
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const BleedingPage()),
+          );
+        },
+        icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+        label: Text(
+          whyTranslations[languages[languageIndex]] ?? "Translation Not Found",
+          style: TextStyle(color: Colors.black)
+        ),
+        ), 
+        SizedBox(height: 20),  // Space between the text and the button
+        if (methodIndex == 0 || methodIndex == 1)
+        TextButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100], // Button background color
+              foregroundColor: Colors.black 
+            ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HIVPage()),
+            );
+          },
+          icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+          label: Text(
+            heyThis[languages[languageIndex]] ?? "Translation Not Found",
+            style: TextStyle(color: Colors.black)
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
   Widget updateMethodContent() {
     return Text(
