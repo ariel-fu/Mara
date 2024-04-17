@@ -44,7 +44,7 @@ class _OptionsPageState extends State<OptionsPage> {
   final languages = ["Kiswahili", "Dholuo", "English"];
   final methods = MethodRepository.loadMethods();
   
-  Set<String> _likedMethods = {};
+  // Set<String> _likedMethods = {};
   // from recommendation_screen.dart; factor out into app state
   late Future<Map<String, dynamic>> _methodDetailsDataFuture;
   
@@ -57,16 +57,6 @@ class _OptionsPageState extends State<OptionsPage> {
   Future<Map<String, dynamic>> loadMethodDetails() async {
     final String jsonString = await rootBundle.loadString('assets/methods.json');
     return json.decode(jsonString);
-  }
-
-  void toggleLikeMethod(String method) {
-    setState(() {
-      if (_likedMethods.contains(method)) {
-        _likedMethods.remove(method);
-      } else {
-        _likedMethods.add(method);
-      }
-    });
   }
 
   String _t(String key) {
@@ -178,15 +168,12 @@ class _OptionsPageState extends State<OptionsPage> {
                 label: Text(_t('likedTitle')),
                 // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
                 onPressed: () {
-                  var likes = context.read<Likes>();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => LikedMethodsScreen(
-                        likedMethods: likes.likedMethods,
                         initialLanguage: languages[_languageIndex], 
                         translations: _translations,
-                        // onMethodsChanged: likes.toggleLikedMethod,
                       ),
                     ),
                   );

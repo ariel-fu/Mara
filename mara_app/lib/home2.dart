@@ -131,15 +131,12 @@ class _HomePage2State extends State<HomePage2> {
                 label: Text(_t('likedTitle')),
                 // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
                 onPressed: () {
-                  var likes = context.read<Likes>();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => LikedMethodsScreen(
-                        likedMethods: likes.likedMethods,
                         initialLanguage: _currentLanguage, 
                         translations: _translations,
-                        // onMethodsChanged: likes.removeMethod,
                       ),
                     ),
                   );
