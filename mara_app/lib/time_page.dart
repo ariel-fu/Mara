@@ -145,6 +145,10 @@ Widget additionalTextSection() {
         SizedBox(height: 20),  // Space between the text and the button
         if (methodIndex == 0 || methodIndex == 1)
         TextButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100], // Button background color
+              foregroundColor: Colors.black 
+            ),
           onPressed: () {
             Navigator.push(
               context,
