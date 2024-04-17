@@ -785,6 +785,8 @@ Widget subQuestionSection(BuildContext context, String questionKey, List<String>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ImageIcon(AssetImage('assets/misc-icons/question_circle.png'), color: Colors.black),
+            // if we can make the icon NEXT TO the question text, that would be nice. For now, this is OK.
             Text(
               _t(questionKey),
               style: TextStyle(
