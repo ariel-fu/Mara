@@ -38,6 +38,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   void didUpdateWidget(covariant VideoWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoAsset != widget.videoAsset) {
+      ourVideo.dispose();
       ourVideo = VideoPlayerController.asset(widget.videoAsset);
       _initializeVideoPlayerFuture =
           ourVideo.initialize().catchError((error) {
@@ -59,7 +60,6 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // dispose();
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
