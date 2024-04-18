@@ -12,7 +12,7 @@ class TimePage extends StatefulWidget {
 class _TimePageState extends State<TimePage> {
   bool overrideIndex = false;
   // Widget methodContent = updateMethodContent();
-  int methodIndex = 2; // Index of the selected icon button, 0 for default
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
