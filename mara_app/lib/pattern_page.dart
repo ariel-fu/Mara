@@ -24,7 +24,7 @@ class _PatternPageState extends State<PatternPage> {
   Widget video2 = VideoWidget(videoAsset: 'videoAudio/videos/peer/peer1E.mp4', title:'Video - A Peer Perspective');
   bool overrideIndex = false;
   // Widget methodContent = updateMethodContent();
-  int methodIndex = 2; // Index of the selected icon button, 0 for default
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language  
 
   final double _aspectRatio = 16 / 10;
