@@ -80,7 +80,6 @@ Widget build(BuildContext context) {
           onPressed: () => Navigator.of(context).pop(), 
         ),
       title: Text(_t('title1')), // Use _t method for translation
-      centerTitle: true,
 
 actions: <Widget>[
   ElevatedButton.icon(
