@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/audio.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'video.dart';
 
@@ -15,6 +16,11 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
   int languageIndex = 0; // Index for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   bool overrideIndex = false; // Used to override language selection from route
+  final Map<String, String> audioContentMap = {
+    "English": 'videoAudio/audio/crickets.mp3',
+    "Kiswahili": 'videoAudio/audio/meow.mp3',
+    "Dholuo": 'videoAudio/audio/meow.mp3'
+  };
 
   final Map<String, String> subtitleTranslations = {
   "English": "Tap each method to learn more about its fertility consideration.",
@@ -111,6 +117,11 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
     );
   }
 
+  Widget getAudio() {
+    print("language = " + audioContentMap[languages[languageIndex]]!);
+    return AudioWidget(audioAsset: audioContentMap[languages[languageIndex]]!);
+  }
+
   Widget languageButton(String language, int index) {
     bool isSelected = languageIndex == index;
     return ElevatedButton(
@@ -192,39 +203,51 @@ Widget subtitleSection() {
     );
   }
 
-  
 
-Widget buildContentArea(double boxWidth) {
-  return Padding(
-    padding: EdgeInsets.all(10.0),
-    child: Container(
-      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey),
-      ),
-      child: Row( // Change to Row for horizontal layout
-        mainAxisSize: MainAxisSize.min, // To dynamically adjust the size
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-          SizedBox(width: 10.0),
-          Expanded(
-            child: Text(
-              contentDescriptionMap[languages[languageIndex]]![methodIndex],
-              style: TextStyle(fontSize: 16.0),
+
+  Widget buildContentArea(double boxWidth) {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            SizedBox(width: 10.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                  SizedBox(height: 20.0),
+                  SizedBox(
+                    height: 50.0,
+                    child: getAudio()
+                  )
+
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     // Play audio here
+                  //   },
+                  //   child: Icon(Icons.volume_up, color: Colors.blue, size: 24.0),
+                  // ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
-
-
-
-  
+    );
+  }
 
 
   void updateMethodContent() {
