@@ -246,7 +246,7 @@ class RecommendationModel {
       'IUCD': './assets/iucd.png',
     };
 
-    return recommendationImages[recommendation] ?? './assets/method_6.png'; // default image if no match found
+    return recommendationImages[recommendation] ?? './assets/implant.png'; // default image if no match found
   }
 
   static String getTitleFromJsonRef(String jsonRef) {
