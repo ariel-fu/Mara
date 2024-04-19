@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'recommendation_screen.dart';
 import 'recommendation_model.dart';
+
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -62,10 +64,9 @@ final Map<String, Map<String, String>> _translations = {
     'option1': 'Could be OK',
     'option2': 'Not OK', 
     'option3': 'I\'m Not sure', 
-    'op1': 'More than 1 year', 
+    'op1': 'In More than 1 year', 
     'op2': 'In 6-12 months', 
     'op3': 'I\'m not sure', 
-    'op4': 'Now or very soon', 
     // ... other English translations
     'o1': 'Extremely important', 
     'o2': 'Somewhat important', 
@@ -130,7 +131,6 @@ final Map<String, Map<String, String>> _translations = {
     'op1': 'Katika zaidi ya mwaka 1', 
     'op2': 'Katika miezi 6-12', 
     'op3': 'Sina uhakika', 
-    'op4': 'Sasa au hivi karibuni', 
     'o1': 'Muhimu sana', 
     'o2': 'Muhimu kwa kiasi fulani', 
     'o3': 'Sio Muhimu', 
@@ -195,7 +195,6 @@ final Map<String, Map<String, String>> _translations = {
     'op1': 'Mokalo higa 1', 
     'op2': 'Ekind dweche 6-12', 
     'op3': 'Ok an gi adiera', 
-    'op4': 'Sani kata machiegni', 
     'o1': 'Omokona ahinya', 
     'o2': 'Omokona marach rach',
     'o3': 'Ok omokona', 
@@ -450,27 +449,20 @@ void _submitQuiz() {
     case 'op2': // In 6-12 months
       recommendations.addAll([
           'Pills, Condoms, Implant, IUCD',
-
+          // 'Start a prenatal vitamin for good pregnancy health.'
         ]);
       //recommendations.addAll(RecommendationModel.getRecommendationsBasedOnPregnancyTiming('In 6-12 months'));
       // introTexts.add('Based on when you think you want a pregnancy, the following methods may be a good choice for you:');
       introTexts.add('introText4');
        outroTexts.addAll(RecommendationModel.getOutroTextsBasedOnPregnancyTiming('In 6-12 months'));
       break;
-    case 'op3': //'I\'m Not sure'
+    case 'op3': // Now or very soon
       recommendations.addAll([
-          'Condoms, Emergency', 
-
+          'No method, Pills, Condoms',
+          // 'Start a prenatal vitamin for good pregnancy health.'
         ]);
-      
-      introTexts.add('introText4');
-      outroTexts.addAll(RecommendationModel.getOutroTextsBasedOnPregnancyTiming('I\'m not sure'));
-    case 'op4': //'Now or very soon'
-      recommendations.addAll([
-          'Pills, Condoms', 
-
-        ]);
-      
+      //recommendations.addAll(RecommendationModel.getRecommendationsBasedOnPregnancyTiming('Not sure'));
+      // introTexts.add('Based on when you think you want a pregnancy, the following methods may be a good choice for you:');
       introTexts.add('introText4');
       outroTexts.addAll(RecommendationModel.getOutroTextsBasedOnPregnancyTiming('Now or very soon'));
       break;
@@ -690,6 +682,7 @@ bool _areAllQuestionsAnswered() {
     return Scaffold(
       appBar: AppBar(
         title: Text(_t('title')),
+        centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
@@ -708,7 +701,7 @@ bool _areAllQuestionsAnswered() {
                 subQuestionSection(context, 'subq1', ['option1', 'option2', 'option3']),
                 subQuestionSection(context, 'subq2', ['option1', 'option2', 'option3']),
                 subQuestionSection(context, 'subq3', ['option1', 'option2', 'option3']),
-                quizSection(context, 'q2', ['op1', 'op2', 'op3', 'op4']),
+                quizSection(context, 'q2', ['op1', 'op2', 'op3']),
                 quizSection(context, 'q3', []),
                 subQuestionSection(context, 'q3sub1', ['option1', 'option2', 'option3']),
                 subQuestionSection(context, 'q3sub2', ['option1', 'option2', 'option3']),
@@ -793,6 +786,8 @@ Widget subQuestionSection(BuildContext context, String questionKey, List<String>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ImageIcon(AssetImage('assets/misc-icons/question_circle.png'), color: Colors.black),
+            // if we can make the icon NEXT TO the question text, that would be nice. For now, this is OK.
             Text(
               _t(questionKey),
               style: TextStyle(
