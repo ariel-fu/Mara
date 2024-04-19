@@ -100,6 +100,16 @@ class _PrivatePageState extends State<PrivatePage> {
      "Video: a peer explains"
     ],
   };
+
+  List<Map<String, dynamic>> iconButtons = [
+  {'icon': MaraIcons.condom, 'label': "Condom", 'index': 0},
+  {'icon': MaraIcons.female_condom, 'label': "Female Condom", 'index': 1},
+  {'icon': MaraIcons.birth_control_pills, 'label': "Pills (daily pills)", 'index': 2},
+  {'icon': MaraIcons.syringe, 'label': "Injection (depo)", 'index': 3},
+  {'icon': MaraIcons.contraceptive_implant, 'label': "Implant", 'index': 4},
+  {'icon': MaraIcons.iud, 'label': "IUCD (coil)", 'index': 5},
+  {'icon': MaraIcons.double_pills, 'label': "Emergency pill (E-pill, P2)", 'index': 6}
+];
   final double _aspectRatio = 16 / 10;
 
   @override
@@ -246,33 +256,39 @@ class _PrivatePageState extends State<PrivatePage> {
           ),
           SizedBox(height: 15.0),
           Flex(
-            direction: Axis.vertical,
-            children: [
-              Container(
-                  width: boxWidth * 0.9,
-                  height: boxHeight*0.2,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(8.0),
+  direction: Axis.vertical,
+  children: [
+    
+    Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.grey),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                SizedBox(width: 10.0),
+                Expanded( // Changed from Flexible to Expanded for better text handling
+                  child: Text(
+                    contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                    style: TextStyle(
+                      fontSize: 16.0, // Updated font size for consistency
+                      color: Colors.black,
+                    ),
                   ),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(Icons.lightbulb_outline, color: Colors.amber),
-                        Center(
-                            child: SizedBox(
-                                width: boxWidth * 0.75,
-                                height: availableHeight * 0.5 * 0.3,
-                                child: Center(
-                                  child: updateMethodContent(),
-                                )
-                            )
-                        )
-                      ]
-                  )
-              ),
-            ]
+                ),
+              ],
+            ),
           ),
+        ),
+  ],
+),
+
           SizedBox(height: 15.0),
           SizedBox(
             width: boxWidth*0.8,
@@ -286,15 +302,68 @@ class _PrivatePageState extends State<PrivatePage> {
     );
   }
 
-  Widget getVideoContent() {
+
+Widget methodSelectionRow() {
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: buildIconButtons(),
+    ),
+  );
+}
+
+Widget buildIconButton(IconData iconData, String caption, int index) {
+  bool isSelected = index == methodIndex;
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          icon: Icon(
+            iconData,
+            size: isSelected ? 60 : 40, // Adjusted size here
+            color: isSelected ? Colors.black : Colors.grey,
+          ),
+          onPressed: () {
+            setState(() {
+              methodIndex = index;
+              updateMethodContent();
+            });
+          },
+          splashRadius: isSelected ? 40 : 20,
+          splashColor: Colors.grey.withOpacity(0.5),
+          highlightColor: Colors.transparent,
+        ),
+        SizedBox(height: 5),
+        Container(
+          width: 100,
+          child: Text(
+            caption,
+            softWrap: true,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: isSelected ? Colors.black : Colors.grey,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+
+
+Widget getVideoContent() {
     String asset = videoContentMap[languages[languageIndex]]![methodIndex];
     String title = videoTitleMap[languages[languageIndex]]![0];
     return VideoWidget(videoAsset: asset, title: title);
   }
 
-  Widget buildIconButton(IconData iconData, String caption, int index) {
-    bool isSelected = index == methodIndex;
-
+  List<Widget> buildIconButtons() {
+  return iconButtons.map((button) {
+    bool isSelected = button['index'] == methodIndex;
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -303,40 +372,141 @@ class _PrivatePageState extends State<PrivatePage> {
           children: [
             IconButton(
               icon: Icon(
-                iconData,
-                size: isSelected ? 60 : 60,
+                button['icon'],
+                size: isSelected ? 60 : 50,
                 color: isSelected ? Colors.black : Colors.grey,
               ),
               onPressed: () {
                 setState(() {
-                  methodIndex = index;
-                  updateMethodContent();
+                  methodIndex = button['index'];
+                  // Update other stateful data here if necessary
                 });
               },
-              color: isSelected ? Colors.black : Colors.transparent,
-              iconSize: isSelected ? 60 : 60,
-              padding: EdgeInsets.all(10),
               splashRadius: 40,
               splashColor: Colors.grey.withOpacity(0.5),
               highlightColor: Colors.transparent,
             ),
             SizedBox(height: 5),
-            Container (
-                width: 100,
-                child: Text(
-                  caption,
-                  softWrap: true, // Wrap text to the next line if needed
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.grey,
-                  ),
-                )
+            Text(
+              button['label'],
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
             )
           ],
         ),
       ],
     );
+  }).toList();
+  
+}
+
+  
+
+  Widget languageButton(String language) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          languageIndex = languages.indexOf(language);
+          overrideIndex = true;
+          updateMethodContent();
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: languages[languageIndex] == language ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
   }
+
+  // Widget subtitleSection() {
+  //   return Container(
+  //     alignment: Alignment.center,
+  //     padding: EdgeInsets.symmetric(vertical: 10.0),
+  //     child: Text(
+  //       subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
+  //       style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+  //       textAlign: TextAlign.center,
+  //     ),
+  //   );
+  // }
+
+  Widget subtitleSection() {
+  return Container(
+    alignment: Alignment.center,
+    padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0), // Adjust padding as needed
+    decoration: BoxDecoration(
+      color: Colors.grey.shade200, // Use the desired background color
+      borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+    ),
+    child: Text(
+      subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
+      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+      textAlign: TextAlign.center,
+    ),
+  );
+}
+
+  // Widget contentArea() {
+  //   return Padding(
+  //     padding: EdgeInsets.all(10.0),
+  //     child: Container(
+  //       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+  //       decoration: BoxDecoration(
+  //         color: Colors.grey.shade200,
+  //         borderRadius: BorderRadius.circular(10),
+  //         border: Border.all(color: Colors.grey),
+  //       ),
+  //       child: Row(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+  //           SizedBox(width: 10.0),
+  //           Flexible(
+  //             child: Text(
+  //               contentDescriptionMap[languages[languageIndex]]![methodIndex],
+  //               style: TextStyle(fontSize: 16.0),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  Widget contentArea() {
+  return Padding(
+    padding: EdgeInsets.all(10.0),
+    child: SingleChildScrollView( // Add SingleChildScrollView here
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            SizedBox(width: 10.0),
+            Flexible(
+              child: Text(
+                contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+
+  
+
 
   Widget updateMethodContent() {
     return Text(
@@ -348,3 +518,4 @@ class _PrivatePageState extends State<PrivatePage> {
     );
   }
 }
+  
