@@ -1,3 +1,7 @@
+
+import 'package:flutter/material.dart';
+import 'package:mara_app/icons/mara_icons_icons.dart' show MaraIcons;
+
 class RecommendationModel {
   
 
@@ -19,9 +23,9 @@ class RecommendationModel {
           'Implant, IUD, Depo, Pills',
           // 'Note: Condoms are the best way to prevent HIV and other infections.'
         ];
-      case 'I\'m Not sure':
+      case 'Not sure':
         return [
-          'Condoms, Emergency Pill'
+          'Condoms, Emergency Pill as needed'
         ];
       default:
         return ['Please select when you think you might want a pregnancy to get a recommendation.'];
@@ -75,7 +79,7 @@ class RecommendationModel {
       case 'Now or very soon':
         // return ['We also recommend you start a prenatal vitamin for good pregnancy health.'];
         return ['outroText3'];
-      case 'I\'m not sure':
+      case 'Not sure':
         // return ['Condoms are the best way to prevent HIV and other infections, but may not be the best method for preventing pregnancy for a long period of time.'];
         return ['outroText1'];
       default:
@@ -216,7 +220,7 @@ class RecommendationModel {
   static List<String> getOutroTextsBasedOnFactorsImp(String factor){ // Q5
     switch(factor) {
       case 'The lowest chance of getting pregnant':
-        // return ['Condoms are the best way to prevent HIV and other infections, but rely on your partner to use and must be used every time you have sex to prevent pregnancy.'];
+        // return ['Condoms are the best way to prevent HIV and other infections, but rely on your partner to use and must be used every time you have sex to prevent pregnancy.'];
         return ['outroText5'];
       case 'Avoiding changes to my periods':
         // return ['The following methods may cause changes to your bleeding but these changes are not harmful and will not lead to fertility problems:Depo, Implant, IUCD'];
@@ -243,7 +247,35 @@ class RecommendationModel {
       'IUCD': './assets/iucd.png',
     };
 
-    return recommendationImages[recommendation] ?? './assets/implant.png'; // default image if no match found
+    return recommendationImages[recommendation] ?? './assets/method_6.png'; // default image if no match found
+  }
+
+  static String getTitleFromJsonRef(String jsonRef) {
+    Map<String, String> recommendationTitles = {
+      'implant': 'Implant',
+      'pills': 'Pills (daily pills)',
+      'condoms': 'Condoms',
+      'iud': 'IUCD (coil)',
+      'emergency': 'Emergency pill (E-pill, P2)',
+      'depo': 'Injection (depo)',
+      'female_condom': 'Female condoms',
+    };
+
+    return recommendationTitles[jsonRef] ?? 'No title found';
+  }
+
+  static IconData getIconForRecommendation(String recommendation) {
+    Map<String, IconData> recommendationImages = {
+      'implant': MaraIcons.contraceptive_implant,
+      'pills': MaraIcons.birth_control_pills,
+      'condoms': MaraIcons.condom,
+      'iud': MaraIcons.iud,
+      'emergency': MaraIcons.double_pills,
+      'depo': MaraIcons.syringe,
+      'female_condom': MaraIcons.female_condom,
+    };
+
+    return recommendationImages[recommendation] ?? MaraIcons.iud; // default image if no match found
   }
 }
 
@@ -253,5 +285,3 @@ class Q5Recommendation {
 
   Q5Recommendation({required this.recommendations, required this.outroText});
 }
-
-
