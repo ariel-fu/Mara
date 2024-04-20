@@ -187,6 +187,9 @@ actions: <Widget>[
                                     // case 'condoms':
                                     //   methodKey = 'male_condom'; // or 'female_condom' based on context
                                     //   break;
+                                    case 'emergency pill':
+                                      methodKey = 'emergency'; // This should match the exact key in your JSON data
+                                      break;
                                     default:
                                       methodKey = trimmedRec.toLowerCase();
                                 }
