@@ -640,7 +640,7 @@ void _submitQuiz() {
         // 'Depo', 
         // 'Implant', 
         // 'Emergency Pill'
-        'Condoms, Pills, IUCD, Depo, Implant, Emergency'
+        'Condoms, Pills, IUCD, Depo, Implant, Emergency Pill'
       ]);
       // introTexts.add('Based on how important it is to you to be able to get pregnant in the future, the following methods might be a good choice for you: ');
       introTexts.add('introText9');
