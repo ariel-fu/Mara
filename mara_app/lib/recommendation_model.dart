@@ -23,9 +23,9 @@ class RecommendationModel {
           'Implant, IUD, Depo, Pills',
           // 'Note: Condoms are the best way to prevent HIV and other infections.'
         ];
-      case 'Not sure':
+      case 'I\'m not sure':
         return [
-          'Condoms, Emergency Pill as needed'
+          'Condoms, Emergency Pill'
         ];
       default:
         return ['Please select when you think you might want a pregnancy to get a recommendation.'];
@@ -79,7 +79,7 @@ class RecommendationModel {
       case 'Now or very soon':
         // return ['We also recommend you start a prenatal vitamin for good pregnancy health.'];
         return ['outroText3'];
-      case 'Not sure':
+      case 'I\'m not sure':
         // return ['Condoms are the best way to prevent HIV and other infections, but may not be the best method for preventing pregnancy for a long period of time.'];
         return ['outroText1'];
       default:
