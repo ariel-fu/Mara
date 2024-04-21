@@ -216,12 +216,13 @@ class _HomePage2State extends State<HomePage2> {
               leading: Icon(Icons.question_answer),
               title: Text(menuOptions[_currentLanguage]![6]),
               tileColor: _allSelected ? Colors.green : Colors.grey,
-              onTap: () {
-                _allSelected ? Navigator.push(
-                 context,
-                 MaterialPageRoute(builder: (context) => QuizScreen()),
-                ) : null;
-              },
+              onTap:_takeQuiz,
+              // onTap: () {
+              //   _allSelected ? Navigator.push(
+              //    context,
+              //    MaterialPageRoute(builder: (context) => QuizScreen()),
+              //   ) : null;
+              // },
             ),
           ],
         ),
@@ -240,5 +241,37 @@ class _HomePage2State extends State<HomePage2> {
       ),
       child: Text(language),
     );
+  }
+
+  void _takeQuiz() {
+  //print('Attempting to submit. Selected options: $_selectedOptions'); 
+    if (_allSelected == false) {
+      print('incomplete'); 
+      // Show an alert dialog or a message to complete the quiz
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Please visit all sections before taking the quiz"),
+            //content: Text(_t('incompleteMessage')),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return; // Exit the function without navigating if not all questions are answered
+    }
+    else {
+      _allSelected ? Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => QuizScreen()),
+      ) : null;
+    }
   }
 }
