@@ -99,13 +99,13 @@ class OptionsImage extends StatelessWidget {
               ),
           Row(
             children: <Widget>[
-            IconButton(
-                  icon: likes.likedMethods.contains(methods[index]!.jsonRef) ?
-                    Icon(Icons.thumb_up) : Icon(Icons.thumb_up_off_alt),
-                    onPressed: () {
-                      likes.toggleLikedMethod(methods[index]!.jsonRef);
-                    }
-            ),
+            // IconButton(
+            //       icon: likes.likedMethods.contains(methods[index]!.jsonRef) ?
+            //         Icon(Icons.thumb_up) : Icon(Icons.thumb_up_off_alt),
+            //         onPressed: () {
+            //           likes.toggleLikedMethod(methods[index]!.jsonRef);
+            //         }
+            // ),
             Text(
               methods[index]!.name,
               style: TextStyle(
@@ -117,8 +117,39 @@ class OptionsImage extends StatelessWidget {
             ),
           ],
         ),
+        Row( //Thumbs up button below the method name
+          children: <Widget>[
+            ElevatedButton.icon(
+                  // icon: likes.likedMethods.contains(methods[index]!.jsonRef) ? Icon(Icons.thumb_up) : Icon(Icons.thumb_up_off_alt),               
+                  icon: Icon(
+                    likedMethods.contains(methods[index]!.jsonRef) ? Icons.thumb_up : Icons.thumb_up_off_alt,
+                    color: likedMethods.contains(methods[index]!.jsonRef) ? Colors.brown[900] : Colors.black,
+                  ),
+                  label: Text("I like this!"), // The label (text)
+                  style: ElevatedButton.styleFrom(
+                     backgroundColor: Colors.deepPurple[100], // Button background color
+                     foregroundColor: Colors.black 
+                  ),
+                  // style: ButtonStyle(
+                  //   backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  //     (Set<MaterialState> states) {
+                  //       if (states.contains(MaterialState.pressed))
+                  //         return Color.fromARGB(255, 36, 128, 248);
+                  //       return Color.fromRGBO(209, 196, 233, 1);
+                  //     },
+                  //   ),
+                  //   foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                  // ),
+                  onPressed: () {
+                      likes.toggleLikedMethod(methods[index]!.jsonRef);
+
+                  }
+            ),
+          ],
+        ),
         ],
       ),
     );
   }
+
 }
