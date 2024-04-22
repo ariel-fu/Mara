@@ -14,11 +14,11 @@ class _ReadyPageState extends State<ReadyPage> {
   String _currentLanguage = 'English';
   final List<String> languages = ["Kiswahili", "Dholuo", "English"];
   final Map<String, Map<String, String>> _translations = {
-    'Family Planning Guide': {
-      'Kiswahili': 'Mwongozo wa Mipango ya Familia',
-      'Dholuo': 'Tim Mabeyo Mar Dhano Nyithindo',
-      'English': 'Family Planning Guide',
-    },
+    // 'Family Planning Guide': {
+    //   'Kiswahili': 'Mwongozo wa Mipango ya Familia',
+    //   'Dholuo': 'Tim Mabeyo Mar Dhano Nyithindo',
+    //   'English': 'Family Planning Guide',
+    // },
     'What if I\'m ready to have a baby?': {
       'Kiswahili': 'Kama niko tayari kupata mtoto?',
       'Dholuo': 'Ango nyithindo mabeyo manyalo wuonwa?',
@@ -160,7 +160,7 @@ Widget build(BuildContext context) {
       //       Navigator.of(context).pushNamed('/home');
       //     },
       //   ),
-        title: Text(_t('Family Planning Guide')),
+        //title: Text(_t('Family Planning Guide')),
       ),
       body: Column(
       children: [
