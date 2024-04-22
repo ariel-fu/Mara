@@ -127,287 +127,202 @@ class _PatternPageState extends State<PatternPage> {
 };
 
 
-  @override
-  Widget build(BuildContext context) {
-    final int? routeArgumentIndex =
-    ModalRoute.of(context)?.settings.arguments as int?;
 
-    // Update languageIndex if a valid value is provided from the route
-    // if (routeArgumentIndex != null &&
-    //     routeArgumentIndex >= 0 &&
-    //     routeArgumentIndex < languages.length &&
-    //     !overrideIndex) {
-    //   languageIndex = routeArgumentIndex;
-    // }
+@override
+Widget build(BuildContext context) {
+  final double containerWidth = MediaQuery.of(context).size.width;
+  final double containerHeight = MediaQuery.of(context).size.height;
+  double boxWidth = containerWidth;
+  double boxHeight = containerHeight;
+  double availableHeight = boxHeight;
 
-    double containerWidth = MediaQuery.of(context).size.width;
-    double containerHeight = MediaQuery.of(context).size.height;
-    if (containerHeight / containerWidth > _aspectRatio) {
-      containerHeight = containerWidth * _aspectRatio;
-    } else {
-      containerWidth = containerHeight / _aspectRatio;
-    }
-
-    double boxWidth = containerWidth;
-    double boxHeight = containerHeight;
-    double availableHeight = boxHeight;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(availableHeight * 0.05),
-          child: Container(
-            // height: availableHeight * 0.1,
-              child: Container(
-                // padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 0;
-                            overrideIndex = true;
-                            updateMethodContent();
-                            video1 = updateVideoContent1();
-                            video2 = updateVideoContent2();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 0 ? Colors.grey : null,
-                        ),
-                        child: Text('Kiswahili'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 1;
-                            overrideIndex = true;
-                            updateMethodContent();
-                            video1 = updateVideoContent1();
-                            video2 = updateVideoContent2();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 1 ? Colors.grey : null,
-                        ),
-                        child: Text('Dholuo'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 2;
-                            overrideIndex = true;
-                            updateMethodContent();
-                            video1 = updateVideoContent1();
-                            video2 = updateVideoContent2();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 2 ? Colors.grey : null,
-                        ),
-                        child: Text('English'),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-          // preferredSize: Size.fromHeight(75),
+  return Scaffold(
+    appBar: AppBar(
+      title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(availableHeight * 0.05),
+        child: Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              languageButton('Kiswahili', 0),
+              languageButton('Dholuo', 1),
+              languageButton('English', 2),
+            ],
+          ),
         ),
-        // actions: <Widget>[
-        //
-        // ]
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // SizedBox(height: availableHeight*0.01),
-          Container(
-            alignment: Alignment.center,
-            // height: availableHeight * 0.15,
-            // width: boxWidth,
-            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  buildIconButton(MaraIcons.condom, "Condom", 0),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
-                ],
-              ),
+    ),
+    body: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(height: availableHeight * 0.01),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              buildIconButton(MaraIcons.condom, "Condom", 0),
+              buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+              buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+              buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+              buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+              buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+              buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+            ],
+          ),
+        ),
+        SizedBox(height: 15.0),
+        Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.grey),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                SizedBox(width: 10.0),
+                Expanded(
+                  child: Text(
+                    contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  ),
+                ),
+                
+              ],
             ),
           ),
-
-          SizedBox(height: 15.0),
+          
+        ),
+        additionalTextSection(),
+        Row(children: [
+          SizedBox(width: 15.0),
           SizedBox(
-            height: availableHeight * 0.70, // Adjust as needed
-                child: Flex(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                direction: Axis.vertical,
-                children: [
-                  Container(
-                      width: boxWidth,
-                      height: boxHeight*0.5*0.6,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(Icons.lightbulb_outline, color: Colors.amber),
-                            
-                            Center(
-                              
-                                child: Container(
-                                  width: boxWidth * 0.9,
-                                    // height: availableHeight * 0.6 * 0.5,
-                                    child: Center(
-                                      child: Column(children:[
-                                        updateMethodContent(),
-                                        additionalTextSection(),
-                                        //additionalTextSection_heythis(),
+            width: boxWidth / 2 - 25,
+            height: boxHeight * 0.5 * 0.6,
+            child: Center(child: video1),
+          ),
+          SizedBox(width: 10.0),
+          SizedBox(
+            width: boxWidth / 2 - 25,
+            height: boxHeight * 0.5 * 0.6,
+            child: Center(child: video2),
+          ),
+        ]),
+      ],
+    ),
+  );
+}
 
-                                      ], 
-                                    )
-                                  )
-                                )
-                            )
-                          ]
-                          
-                      )
-                    // child: Center(
-                    //   child: updateMethodContent(),
-                    // ),
-                  ),
-                  Row(children: [
-                  SizedBox(width:15.0),
-                  SizedBox(
-                    width:boxWidth / 2 - 25,
-                    height: boxHeight * 0.5 * 0.6,
-                    child: Center(child: video1),
-                  ),
-                  SizedBox(width:10.0),
-                  SizedBox(
-                    width:boxWidth / 2 - 25,
-                    height: boxHeight * 0.5 * 0.6,
-                    child: Center(child: video2),
-                  ),
-                ],),
-                ],
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildIconButton(IconData iconData, String caption, int index) {
-    bool isSelected = index == methodIndex;
-
-    return Stack(
-      alignment: Alignment.center,
+Widget buildIconButton(IconData iconData, String caption, int index) {
+  bool isSelected = index == methodIndex;
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: Icon(
-                iconData,
-                size: isSelected ? 60 : 60,
-                color: isSelected ? Colors.black : Colors.grey,
-              ),
-              onPressed: () {
-                setState(() {
-                  methodIndex = index;
-                  updateMethodContent();
-                });
-              },
-              color: isSelected ? Colors.black : Colors.transparent,
-              iconSize: isSelected ? 60 : 60,
-              padding: EdgeInsets.all(10),
-              splashRadius: 40,
-              splashColor: Colors.grey.withOpacity(0.5),
-              highlightColor: Colors.transparent,
+        IconButton(
+          icon: Icon(
+            iconData,
+            size: 60, 
+            color: isSelected ? Colors.black : Colors.grey,
+          ),
+          onPressed: () {
+            setState(() {
+              methodIndex = index;
+              updateMethodContent();
+            });
+          },
+          splashRadius: 40,
+          splashColor: Colors.grey.withOpacity(0.5),
+          highlightColor: Colors.transparent,
+        ),
+        SizedBox(height: 5),
+        Container(
+          width: 100,
+          child: Text(
+            caption,
+            softWrap: true,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: isSelected ? Colors.black : Colors.grey,
             ),
-            SizedBox(height: 5),
-            Container (
-                width: 100,
-                child: Text(
-                  caption,
-                  softWrap: true, // Wrap text to the next line if needed
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.grey,
-                  ),
-                )
-            )
-          ],
+          ),
         ),
       ],
-    );
-  }
+    ),
+  );
+}
 
-    Widget languageButton(String language) {
-    bool isSelected = languages[languageIndex] == language;
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          languageIndex = languages.indexOf(language);
-          overrideIndex = true;
-          updateMethodContent();
-        });
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected ? Colors.grey : null,
+
+Widget languageButton(String language, int index) {
+  bool isSelected = languages[languageIndex] == language;
+
+  return ElevatedButton(
+    onPressed: () {
+      setState(() {
+        languageIndex = index;
+        overrideIndex = true;
+        updateMethodContent();
+      });
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: isSelected ? Colors.grey : null,
+    ),
+    child: Text(language),
+  );
+}
+
+Widget methodSelectionRow() {
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        buildIconButton(MaraIcons.condom, "Condom", 0),
+        buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+        buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+        buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+        buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+        buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+        buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+      ],
+    ),
+  );
+}
+
+
+
+Widget videoSection(double width, double height) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Container(
+        width: width * 0.45, // Half the container width minus some margin
+        height: height,
+        child: video1,
       ),
-      child: Text(language),
-    );
-  }
-
-  Widget methodSelectionRow() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          buildIconButton(MaraIcons.condom, "Condom", 0),
-          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
-          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
-          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
-          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
-        ],
+      Container(
+        width: width * 0.45, // Half the container width minus some margin
+        height: height,
+        child: video2,
       ),
-    );
-  }
+    ],
+  );
+}
 
-  Widget contentArea() {
+
+
+  Widget detailedContentSection(double width) {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Container(
+        width: width * 0.9,
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
@@ -419,10 +334,10 @@ class _PatternPageState extends State<PatternPage> {
           children: [
             Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
             SizedBox(width: 10.0),
-            Flexible(
+            Expanded(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0, color: Colors.black),
               ),
             ),
           ],
@@ -431,68 +346,73 @@ class _PatternPageState extends State<PatternPage> {
     );
   }
 
-  Widget additionalTextSection() {
+
+
+Widget additionalTextSection() {
   return Padding(
     padding: EdgeInsets.all(10.0),
     child: Column(
       children: [
-        if (methodIndex == 2  || methodIndex == 3 || methodIndex == 4 || methodIndex == 5 || methodIndex == 6 || methodIndex == 7)
-        TextButton.icon(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepPurple[100], // Button background color
-            foregroundColor: Colors.black 
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const BleedingPage()),
-          );
-        },
-        icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
-        label: Text(
-          whyTranslations[languages[languageIndex]] ?? "Translation Not Found",
-          style: TextStyle(color: Colors.black)
-        ),
-        ), 
-        SizedBox(height: 20),  // Space between the text and the button
+        // Only display this section for certain method indices
         if (methodIndex == 0 || methodIndex == 1)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
-              SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
-                  style: TextStyle(fontSize: 16.0),
-                  textAlign: TextAlign.justify,
+          Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    importantMessageTranslations[languages[languageIndex]] ?? "Important message not found",
+                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          //SizedBox(height: 20),  // Space between the text and the button
-          if (methodIndex == 0 || methodIndex == 1)
+        // Button for learning more, only shown for condoms
+        if (methodIndex == 0 || methodIndex == 1)
           TextButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple[100], // Button background color
-                foregroundColor: Colors.black 
-              ),
+            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+            label: Text(
+              learnMoreTranslations[languages[languageIndex]] ?? "Learn more",
+              style: TextStyle(color: Colors.black)
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100], // Button background color
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            ),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HIVPage()),
+                MaterialPageRoute(builder: (context) => HIVPage()),
               );
             },
+          ),
+        // Additional button section for other methods
+        if (methodIndex != 0 && methodIndex != 1)
+          TextButton.icon(
             icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
             label: Text(
-              learnMoreTranslations[languages[languageIndex]] ?? "Translation Not Found",
-              style: TextStyle(color: Colors.black)
+              whyTranslations[languages[languageIndex]] ?? "WHY?",
+              style: TextStyle(color: Colors.black),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BleedingPage()),
+              );
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100],
             ),
           ),
-        ],
-      ),
+      ],
+    ),
   );
 }
+
 
   Widget updateMethodContent() {
     return Text(
