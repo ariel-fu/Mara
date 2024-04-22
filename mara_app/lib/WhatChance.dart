@@ -198,7 +198,7 @@ class _WhatChanceState extends State<WhatChance> {
                   Expanded(
                     child: Text(
                       importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
-                      style: TextStyle(fontSize: 16.0),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.justify,
                     ),
                   ),
