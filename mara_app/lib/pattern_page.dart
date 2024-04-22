@@ -14,6 +14,8 @@ class PatternPage extends StatefulWidget {
 class _PatternPageState extends State<PatternPage> {
   //String _currentLanguage = 'English';
 
+  
+
   Widget methodContent = Text('method content');
   String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
@@ -23,6 +25,7 @@ class _PatternPageState extends State<PatternPage> {
   Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider1E.mp4', title:'Video - A Doctor Explains');
   Widget video2 = VideoWidget(videoAsset: 'videoAudio/videos/peer/peer1E.mp4', title:'Video - A Peer Perspective');
   bool overrideIndex = false;
+  
   // Widget methodContent = updateMethodContent();
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language  
@@ -125,6 +128,8 @@ class _PatternPageState extends State<PatternPage> {
     },
   },
 };
+
+
 
 
 
@@ -236,6 +241,8 @@ Widget buildIconButton(IconData iconData, String caption, int index) {
             setState(() {
               methodIndex = index;
               updateMethodContent();
+               video1 = updateVideoContent1();
+              video2 = updateVideoContent2();
             });
           },
           splashRadius: 40,
@@ -269,6 +276,8 @@ Widget languageButton(String language, int index) {
         languageIndex = index;
         overrideIndex = true;
         updateMethodContent();
+        video1 = updateVideoContent1();
+        video2 = updateVideoContent2();
       });
     },
     style: ElevatedButton.styleFrom(
@@ -424,13 +433,17 @@ Widget additionalTextSection() {
     );
   }
 
-  String _getAsset(String videoKey, String language) {
-      return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
-  }
+ String _getAsset(String videoKey, String language) {
+  String asset = languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+  print('Asset for $videoKey in $language: $asset');
+  return asset;
+}
 
-  String _getTitle(String videoKey, String language) {
-    return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
-  }
+String _getTitle(String videoKey, String language) {
+  String title = languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
+  print('Title for $videoKey in $language: $title');
+  return title;
+}
 
   Widget updateVideoContent1() {
       if (languageIndex == 0) {
