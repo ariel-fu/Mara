@@ -99,6 +99,7 @@ flutter:
     - assets/preg_woman_new.png
     - assets/take_quiz.png
     - assets/misc-icons/
+    - assets/audio.png
 
     - videoAudio/videos/peer/peer1KS.mp4
     - videoAudio/videos/peer/peer1DL.mp4
