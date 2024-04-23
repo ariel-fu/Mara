@@ -219,7 +219,7 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),  
             ListTile(
-              leading: Image.asset('assets/take_quiz.png', width: 60, height: 60),
+              leading: Image.asset('assets/take_quiz_white.png', width: 60, height: 60),
               title: Text(menuOptions[_currentLanguage]![6]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
               tileColor: _allSelected ? Colors.green : Colors.grey,
