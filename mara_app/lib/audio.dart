@@ -41,7 +41,7 @@ class _AudioWidgetState extends State<AudioWidget> {
   Widget build(BuildContext context) {
     return  IconButton(
       icon: Image.asset(
-        "assets/audio_icon.png",
+        "assets/audio.png",
         width: 30,
         height: 30,
       ),
