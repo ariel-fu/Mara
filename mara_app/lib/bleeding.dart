@@ -56,41 +56,6 @@ class _BleedingPageState extends State<BleedingPage> {
     ],
   };
 
-//   String videoAsset1 = 'videoAudio/videos/funnyCat.mp4';
-//   String videoTitle1 = 'Video 1 Language Not Selected';
-//   String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
-//   String videoTitle2 = 'Video 2 Language Not Selected';
-
-//   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
-//   'video1': {
-//     '0': { // Language code 0
-//       'video': 'videoAudio/videos/chimes.mp4',
-//       'text': 'Kiswahili Video #1',
-//     },
-//     '1': { // Language code 1
-//       'video': 'videoAudio/videos/funnyCat.mp4',
-//       'text': 'Dholuo Video #1',
-//     },
-//     '2': { // Language code 2
-//       'video': 'videoAudio/videos/funnyCat2.mp4',
-//       'text': 'English Video #1',
-//     },
-//   },
-//   'video2': {
-//     '0': {
-//       'video': 'videoAudio/videos/chimes.mp4',
-//       'text': 'Kiswahili Video #2',
-//     },
-//     '1': {
-//       'video': 'videoAudio/videos/funnyCat.mp4',
-//       'text': 'Dholuo Video #2',
-//     },
-//     '2': {
-//       'video': 'videoAudio/videos/funnyCat2.mp4',
-//       'text': 'English Video #2',
-//     },
-//   },
-// };
   final double _aspectRatio = 16 / 10;
 
   @override
@@ -98,13 +63,7 @@ class _BleedingPageState extends State<BleedingPage> {
     final int? routeArgumentIndex =
     ModalRoute.of(context)?.settings.arguments as int?;
 
-    // Update languageIndex if a valid value is provided from the route
-    // if (routeArgumentIndex != null &&
-    //     routeArgumentIndex >= 0 &&
-    //     routeArgumentIndex < languages.length &&
-    //     !overrideIndex) {
-    //   languageIndex = routeArgumentIndex;
-    // }
+  
 
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
@@ -197,23 +156,7 @@ class _BleedingPageState extends State<BleedingPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // SizedBox(height: availableHeight*0.01),
-          // Container (
-          //     width: boxWidth*0.8,
-          //     child: Padding (
-          //         padding: const EdgeInsets.only(top: 5.0, bottom: 20.0), // Adjust the padding as needed,
-          //         child: Text(
-          //           titleContentMap[languages[languageIndex]]!,
-          //           softWrap: true, // Wrap text to the next line if needed
-          //           textAlign: TextAlign.center,
-          //           style: TextStyle(
-          //               color: Colors.black,
-          //             fontSize: 18.0
-          //           ),
-          //         )
-          //     )
-
-          // ),
+          
           Container(
             alignment: Alignment.center,
             // height: availableHeight * 0.15,
@@ -238,49 +181,33 @@ class _BleedingPageState extends State<BleedingPage> {
             ),
           ),
 
-          SizedBox(height: 20.0),
-          SizedBox(
-            height: availableHeight * 0.60, // Adjust as needed
-                child: Flex(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                direction: Axis.vertical,
-                children: [
-                  Container(
-                      width: boxWidth,
-                      height: boxHeight*0.5*0.6,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(Icons.lightbulb_outline, color: Colors.amber),
-                            Center(
-                                child: Container(
-                                  width: boxWidth * 0.9,
-                                    // height: availableHeight * 0.6 * 0.5,
-                                    child: Center(
-                                      child: updateMethodContent(),
-                                    )
-                                )
-                            )
-                          ]
-                      )
-                    // child: Center(
-                    //   child: updateMethodContent(),
-                    // ),
-                  ),
-                  // SizedBox(
-                  //   width: boxWidth,
-                  //   height: availableHeight * 0.5 * 0.6,
-                  //   child: Center(
-                  //     child: video1,
-                  //   ),
-                  // ),
-                ],
-              ),
+          SizedBox(height: 15.0),
+        Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.grey),
             ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                SizedBox(width: 10.0),
+                Expanded(
+                  child: Text(
+                    contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  ),
+                ),
+                
+              ],
+            ),
+          ),
+          
+        ),
         ],
       ),
     );
@@ -331,27 +258,7 @@ class _BleedingPageState extends State<BleedingPage> {
     );
   }
 
-  // String _getAsset(String videoKey, String language) {
-  //     return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
-  // }
 
-  // String _getTitle(String videoKey, String language) {
-  //   return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
-  // }
-    
-  // Widget getVideoContent1() {
-  //     if (languageIndex == 0) {
-  //       videoAsset1 = _getAsset('video1', '0');
-  //       videoTitle1 = _getTitle('video1', '0');
-  //     } else if (languageIndex == 1) {
-  //         videoAsset1 = _getAsset('video1', '1');
-  //         videoTitle1 = _getTitle('video1', '1');
-  //     } else if (languageIndex == 2) {
-  //         videoAsset1 = _getAsset('video1', '2');
-  //         videoTitle1 = _getTitle('video1', '2');
-  //     }
-  //     return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
-  // }
 
   Widget updateMethodContent() {
     return Text(
