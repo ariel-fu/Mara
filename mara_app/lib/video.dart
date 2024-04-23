@@ -38,6 +38,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   void didUpdateWidget(covariant VideoWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoAsset != widget.videoAsset) {
+      ourVideo.dispose();
       ourVideo = VideoPlayerController.asset(widget.videoAsset);
       _initializeVideoPlayerFuture =
           ourVideo.initialize().catchError((error) {

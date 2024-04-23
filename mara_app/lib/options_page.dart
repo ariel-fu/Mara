@@ -1,7 +1,15 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'option_pages/pills.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
+import 'package:provider/provider.dart';
+
 import 'options_image.dart';
+import 'short_summaries.dart';
+import 'new_liked_methods.dart';
 import 'model/method_repository.dart';
+import 'providers/provider_liked_methods.dart';
+import 'package:mara_app/audio.dart';
 
 class OptionsPage extends StatefulWidget {
   const OptionsPage({Key? key}) : super(key: key);
@@ -11,12 +19,92 @@ class OptionsPage extends StatefulWidget {
 }
 
 class _OptionsPageState extends State<OptionsPage> {
+
+  final Map<String, Map<String, String>> _translations = {
+    'English': {
+      'title': 'What are my options?',
+      'likedTitle': 'Your Favorites',
+      'learnMore': 'Learn More'
+    },
+    'Dholuo': {
+      'title': 'Yierona gin mage?',
+      'likedTitle': 'Ma ihero',
+      'learnMore': 'Puonjri matut',
+    },
+    'Kiswahili' : {
+      'title': 'Chaguzi zangu ni zipi?',
+      'likedTitle': 'Vipendwa vyako',
+      'learnMore': 'Jifunze zaidi'
+    },
+  };
+
+  final Map<String, List<String>> audioContentMap = {
+    "English": [
+      'videoAudio/audio/what_if_condom_E.mp3',
+      'videoAudio/audio/what_if_condom_E.mp3',
+      'videoAudio/audio/what_if_pills_E.mp3',
+      'videoAudio/audio/what_if_depo_E.mp3',
+      'videoAudio/audio/what_if_implant_E.mp3',
+      'videoAudio/audio/what_if_iucd_E.mp3',
+      'videoAudio/audio/what_if_epill_E.mp3',
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/what_if_condom_K.mp3',
+      'videoAudio/audio/what_if_condom_K.mp3',
+      'videoAudio/audio/what_if_pills_K.mp3',
+      'videoAudio/audio/what_if_depo_K.mp3',
+      'videoAudio/audio/what_if_implant_K.mp3',
+      'videoAudio/audio/what_if_iucd_K.mp3',
+      'videoAudio/audio/what_if_epill_K.mp3',
+    ],
+    "Dholuo": [
+      'videoAudio/audio/what_if_condom_L.mp3',
+      'videoAudio/audio/what_if_condom_L.mp3',
+      'videoAudio/audio/what_if_pills_L.mp3',
+      'videoAudio/audio/what_if_depo_L.mp3',
+      'videoAudio/audio/what_if_implant_L.mp3',
+      'videoAudio/audio/what_if_iucd_L.mp3',
+      'videoAudio/audio/what_if_epill_L.mp3',
+    ],
+  };
+
   // String? _selectedMethod;
   int? methodIndex;
   bool overrideIndex = false;
   int _languageIndex = 2; // Default value
   final languages = ["Kiswahili", "Dholuo", "English"];
   final methods = MethodRepository.loadMethods();
+  
+  Set<String> _likedMethods = {};
+  // from recommendation_screen.dart; factor out into app state
+  late Future<Map<String, dynamic>> _methodDetailsDataFuture;
+  
+  @override
+  void initState() {
+    super.initState();
+    _methodDetailsDataFuture = loadMethodDetails();
+  }
+
+  Future<Map<String, dynamic>> loadMethodDetails() async {
+    final String jsonString = await rootBundle.loadString('assets/methods.json');
+    return json.decode(jsonString);
+  }
+
+  void toggleLikeMethod(String method) {
+    setState(() {
+      if (_likedMethods.contains(method)) {
+        _likedMethods.remove(method);
+      } else {
+        _likedMethods.add(method);
+      }
+    });
+  }
+
+  String _t(String key) {
+    String translation = _translations[languages[_languageIndex]]?[key] ?? key;
+    print('Key: $key, Language: $languages, Translation: $translation');
+    return translation;
+  }
 
   // List<List<String>> languages = List.generate(3, (_) => <String>[]);
   // Change value to set aspect ratio
@@ -27,6 +115,8 @@ class _OptionsPageState extends State<OptionsPage> {
     // Receive selectedButtonIndex as a route argument if available
     final int? routeArgumentIndex =
         ModalRoute.of(context)?.settings.arguments as int?;
+
+    String? methodRef = (methodIndex == null) ? null : methods[methodIndex]!.jsonRef;
 
     // Update selectedButtonIndex if a valid value is provided from the route
     if (routeArgumentIndex != null &&
@@ -45,142 +135,241 @@ class _OptionsPageState extends State<OptionsPage> {
     }
     // var selectedButtonIndex = input == null ? input : 0;
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
-        title: Center(child: Text('What are my options?')),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(containerHeight * 0.05),
-          child: Container(
-            // height: availableHeight * 0.1,
-              child: Container(
-                // padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            _languageIndex = 0;
-                            overrideIndex = true;
-                            // updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: _languageIndex == 0 ? Colors.grey : null,
-                          foregroundColor: _languageIndex == 0 ? Colors.white : null,
+        appBar: AppBar(
+          title: Center(child: Text(_t('title'))),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(containerHeight * 0.05),
+            child: Container(
+              // height: availableHeight * 0.1,
+                child: Container(
+                  // padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _languageIndex = 0;
+                              overrideIndex = true;
+                              // updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _languageIndex == 0 ? Colors.grey : null,
+                            foregroundColor: _languageIndex == 0 ? Colors.white : null,
+                          ),
+                          child: Text('Kiswahili'),
                         ),
-                        child: Text('Kiswahili'),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            _languageIndex = 1;
-                            overrideIndex = true;
-                            // updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: _languageIndex == 1 ? Colors.grey : null,
-                          foregroundColor: _languageIndex == 1 ? Colors.white : null,
+                      Padding(
+                        padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _languageIndex = 1;
+                              overrideIndex = true;
+                              // updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _languageIndex == 1 ? Colors.grey : null,
+                            foregroundColor: _languageIndex == 1 ? Colors.white : null,
+                          ),
+                          child: Text('Dholuo'),
                         ),
-                        child: Text('Dholuo'),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            _languageIndex = 2;
-                            overrideIndex = true;
-                            // updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: _languageIndex == 2 ? Colors.grey : null,
-                          foregroundColor: _languageIndex == 2 ? Colors.white : null,
+                      Padding(
+                        padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _languageIndex = 2;
+                              overrideIndex = true;
+                              // updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _languageIndex == 2 ? Colors.grey : null,
+                            foregroundColor: _languageIndex == 2 ? Colors.white : null,
+                          ),
+                          child: Text('English'),
                         ),
-                        child: Text('English'),
                       ),
-                    ),
-                  ],
-                ),
-              )),
-        ),
-      ),
-      // body
-      body: OptionsImage(containerWidth, containerHeight, methodIndex, updateIndex),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
-                methodIndex == null ? Text("Please select a method to learn more") : Text(methods[methodIndex]!.name,
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-              ]
-            ),
-            methodIndex == null ? SizedBox(height: 20.0) : Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(methods[methodIndex]!.description),
-            ),
-            // SizedBox(height: 70.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: () => {
-                    setState(() {
-                      methodIndex = null;
-                    })
-                  },
-                  child: Text('Clear'),
-                ),
-                SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: methodIndex == null ? null : () => {
-                    methodIndex = null,
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => PillInfo()),
-                    )
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.green,
+                    ],
                   ),
-                  child: Text('Learn more'),
+                )),
+          ),
+          actions: <Widget>[
+            Consumer<Likes>(
+              builder: (context, likes, child) =>
+              ElevatedButton.icon(
+                icon: Icon(Icons.thumb_up, color: Colors.black),
+                label: Text(_t('likedTitle')),
+                // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
+                onPressed: () {
+                  var likes = context.read<Likes>();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LikedMethodsScreen(
+                        likedMethods: likes.likedMethods,
+                        initialLanguage: languages[_languageIndex], 
+                        translations: _translations,
+                        // onMethodsChanged: likes.toggleLikedMethod,
+                      ),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[100],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), 
                 ),
-              ],
+              ),
             ),
-            SizedBox(height: 20.0),
           ],
         ),
-      ),
-    );
+        // body
+        body: OptionsImage(containerWidth, containerHeight, methodIndex, updateIndex),
+        bottomSheet: Padding(
+          padding: const EdgeInsets.all(12.0),
+          // duplicated from recommendation_screen.dart
+          child: FutureBuilder<Map<String, dynamic>>(
+            future: _methodDetailsDataFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // Data is still loading, show a loading indicator
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                // If we run into an error, display it to the user
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (snapshot.hasData) {
+                final Map<String, dynamic> methodDetailsData = snapshot.data!;
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
+                        methodIndex == null ? Text("Please select a method to learn more") : Text(
+                          methods[methodIndex]!.name,
+                        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+                      ]
+                    ),
+                    Row (
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column (
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            getAudio(),
+                          ]
+                        ),
+                        Flexible (
+                          child: methodRef == null ? SizedBox(height: 20.0) : Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(methodDetailsData[methodRef]!['how_it_works'][languages[_languageIndex]]),
+                          ),
+                        )
+                      ]
+                    ),
+                    // SizedBox(height: 70.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(width: 20),
+                        ElevatedButton(
+                          onPressed: () => {
+                            setState(() {
+                              methodIndex = null;
+                            })
+                          },
+                          child: Text('Clear'),
+                        ),
+                        SizedBox(width: 20),
+                        ElevatedButton(
+                          onPressed: methodIndex == null ? null : () => {
+                            if (methodDetailsData.containsKey(methodRef)) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MethodDetailsScreen(
+                                    methodName: methods[methodIndex]!.name,
+                                    methodDetails: methodDetailsData[methodRef],
+                                    currentLanguage: languages[_languageIndex],
+                                    translations: _translations,  // TODO: delete unused parameters
+                                    onChangeLanguage: (newLang) {
+                                      _changeLanguage(newLang); // Call _changeLanguage from RecommendationScreen
+                                    },
+                                  ),
+                                ),
+                              ),
+                              // methodIndex = null,
+                            } else {
+                              // Handle the case where method details are not found
+                              print('No details found for $methodRef'),
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.green,
+                          ),
+                          child: Text('Learn more'),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20.0),
+                  ],
+                );
+              } else {
+                // Otherwise, if no data is present, display a placeholder
+                return Center(child: Text('No data available'));
+              }
+            },
+          ),
+        ),
+      );
   }
 
   void updateIndex(int index) {
     setState(() {
       methodIndex = index;
-      // _updateMethodContent();
     });
   }
+
+  void _changeLanguage(String language) {
+    setState(() {
+      _languageIndex = languages.indexOf(language);
+    });
+  }
+
+  Widget getAudio() {
+    int index = 0;
+    if(methodIndex != null) {
+      index = methodIndex!;
+    }
+    return AudioWidget(audioAsset: audioContentMap[languages[_languageIndex]]![index]);
+  }
+
+  // void navigateToLikedMethodsScreen() {
+  //   // var likes = context.read<Likes>();
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => NewLikedMethodsScreen(
+  //         // likedMethods: likes.likedMethods,
+  //         initialLanguage: languages[_languageIndex], 
+  //         translations: _translations,
+  //       ),
+  //     ),
+  //   );
+  // }
 
 }
 

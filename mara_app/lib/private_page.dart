@@ -12,42 +12,47 @@ class PrivatePage extends StatefulWidget {
 class _PrivatePageState extends State<PrivatePage> {
   bool overrideIndex = false;
   // Widget methodContent = updateMethodContent();
-  int methodIndex = 2; // Index of the selected icon button, 0 for default
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
-      "videoAudio/videos/funnyCat.mp4",
-      "videoAudio/videos/peer/peer3KS.mp4", // method 1 - condom
-      "videoAudio/videos/peer/peer3KS.mp4",
-      "videoAudio/videos/peer/peer3KS.mp4",
-      "videoAudio/videos/peer/peer3KS.mp4",
-      "videoAudio/videos/peer/peer3KS.mp4",
-      "videoAudio/videos/peer/peer3KS.mp4",
-      "videoAudio/videos/peer/peer3KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4", // method 1 - condom
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
     ],
     "Dholuo": [
-      "videoAudio/videos/peer/peer3DL.mp4",
-      "videoAudio/videos/peer/peer3DL.mp4",
-      "videoAudio/videos/peer/peer3DL.mp4",
-      "videoAudio/videos/peer/peer3DL.mp4",
-      "videoAudio/videos/peer/peer3DL.mp4",
-      "videoAudio/videos/peer/peer3DL.mp4",
-      "videoAudio/videos/peer/peer3DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
     ],
     "English": [
-      "videoAudio/videos/peer/peer3E.mp4",
-      "videoAudio/videos/peer/peer3E.mp4",
-      "videoAudio/videos/peer/peer3E.mp4",
-      "videoAudio/videos/peer/peer3E.mp4",
-      "videoAudio/videos/peer/peer3E.mp4",
-      "videoAudio/videos/peer/peer3E.mp4",
-      "videoAudio/videos/peer/peer3E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
     ],
   };
 
-  final Map<String, String> titleContentMap = {
+  final Map<String, String> titleMap = {
+    "Kiswahili": "Je, ninaweza kuiweka kwa usiri?",
+    "Dholuo": "Bende anyalo kete mopondo?",
+    "English": "Can I keep it private?"
+  };
+
+  final Map<String, String> subtitleTranslations = {
     "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
     "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
     "English": "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy."
@@ -91,23 +96,25 @@ class _PrivatePageState extends State<PrivatePage> {
       "Video: Mbasni lero "
     ],
     "English": [
-     "Video: a peer explains"
+      "Video: a peer explains"
     ],
   };
+
+  List<Map<String, dynamic>> iconButtons = [
+    {'icon': MaraIcons.condom, 'label': "Condom", 'index': 0},
+    {'icon': MaraIcons.female_condom, 'label': "Female Condom", 'index': 1},
+    {'icon': MaraIcons.birth_control_pills, 'label': "Pills (daily pills)", 'index': 2},
+    {'icon': MaraIcons.syringe, 'label': "Injection (depo)", 'index': 3},
+    {'icon': MaraIcons.contraceptive_implant, 'label': "Implant", 'index': 4},
+    {'icon': MaraIcons.iud, 'label': "IUCD (coil)", 'index': 5},
+    {'icon': MaraIcons.double_pills, 'label': "Emergency pill (E-pill, P2)", 'index': 6}
+  ];
   final double _aspectRatio = 16 / 10;
 
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
     ModalRoute.of(context)?.settings.arguments as int?;
-
-    // Update languageIndex if a valid value is provided from the route
-    // if (routeArgumentIndex != null &&
-    //     routeArgumentIndex >= 0 &&
-    //     routeArgumentIndex < languages.length &&
-    //     !overrideIndex) {
-    //   languageIndex = routeArgumentIndex;
-    // }
 
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
@@ -123,13 +130,7 @@ class _PrivatePageState extends State<PrivatePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
-        title: Center(child: Text('Can I keep it private?')),
+        title: Center(child: Text(titleMap[languages[languageIndex]]!)),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
@@ -205,12 +206,13 @@ class _PrivatePageState extends State<PrivatePage> {
               child: Padding (
                   padding: const EdgeInsets.only(top: 5.0, bottom: 20.0), // Adjust the padding as needed,
                   child: Text(
-                    titleContentMap[languages[languageIndex]]!,
+                    subtitleTranslations[languages[languageIndex]]!,
                     softWrap: true, // Wrap text to the next line if needed
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black,
-                      fontSize: 18.0
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0
                     ),
                   )
               )
@@ -243,53 +245,100 @@ class _PrivatePageState extends State<PrivatePage> {
               ),
             ),
           ),
-
           SizedBox(height: 15.0),
           Flex(
-            crossAxisAlignment: CrossAxisAlignment.center,
             direction: Axis.vertical,
             children: [
-              Container(
-                  width: boxWidth,
-                  height: boxHeight*0.2,
+
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                   decoration: BoxDecoration(
-                    // color: Colors.grey.shade200,
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(8.0),
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey),
                   ),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(Icons.lightbulb_outline, color: Colors.amber),
-                        Center(
-                            child: SizedBox(
-                                width: boxWidth * 0.9,
-                                height: availableHeight * 0.5*0.3,
-                                child: Center(
-                                  child: updateMethodContent(),
-                                )
-                            )
-                        )
-                      ]
-                  )
-                // child: Center(
-                //   child: updateMethodContent(),
-                // ),
-              ),
-              SizedBox(height: 15.0),
-              SizedBox(
-                width: boxWidth*0.8,
-                height: availableHeight * 0.6 * 0.5,
-                child: Center(
-                  child: getVideoContent(),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                      SizedBox(width: 10.0),
+                      Expanded( // Changed from Flexible to Expanded for better text handling
+                        child: Text(
+                          contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                          style: TextStyle(
+                            fontSize: 16.0, // Updated font size for consistency
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
-          // SizedBox(
-          //   height: availableHeight * 0.70, // Adjust as needed
-          //       child:
-          //   ),
+
+          SizedBox(height: 15.0),
+          SizedBox(
+            width: boxWidth*0.8,
+            height: availableHeight * 0.6 * 0.5,
+            child: Center(
+              child: getVideoContent(),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+
+  Widget methodSelectionRow() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: buildIconButtons(),
+      ),
+    );
+  }
+
+  Widget buildIconButton(IconData iconData, String caption, int index) {
+    bool isSelected = index == methodIndex;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: Icon(
+              iconData,
+              size: 60,
+              color: isSelected ? Colors.black : Colors.grey,
+            ),
+            onPressed: () {
+              setState(() {
+                methodIndex = index;
+                updateMethodContent();
+              });
+            },
+            splashRadius: 40,
+            splashColor: Colors.grey.withOpacity(0.5),
+            highlightColor: Colors.transparent,
+          ),
+          SizedBox(height: 5),
+          Container(
+            width: 100,
+            child: Text(
+              caption,
+              softWrap: true,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -301,59 +350,115 @@ class _PrivatePageState extends State<PrivatePage> {
     return VideoWidget(videoAsset: asset, title: title);
   }
 
-  Widget buildIconButton(IconData iconData, String caption, int index) {
-    bool isSelected = index == methodIndex;
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: Icon(
-                iconData,
-                size: isSelected ? 60 : 60,
-                color: isSelected ? Colors.black : Colors.grey,
+  List<Widget> buildIconButtons() {
+    return iconButtons.map((button) {
+      bool isSelected = button['index'] == methodIndex;
+      return Stack(
+        alignment: Alignment.center,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: Icon(
+                  button['icon'],
+                  size: isSelected ? 60 : 50,
+                  color: isSelected ? Colors.black : Colors.grey,
+                ),
+                onPressed: () {
+                  setState(() {
+                    methodIndex = button['index'];
+                    // Update other stateful data here if necessary
+                  });
+                },
+                splashRadius: 40,
+                splashColor: Colors.grey.withOpacity(0.5),
+                highlightColor: Colors.transparent,
               ),
-              onPressed: () {
-                setState(() {
-                  methodIndex = index;
-                  updateMethodContent();
-                });
-              },
-              color: isSelected ? Colors.black : Colors.transparent,
-              iconSize: isSelected ? 60 : 60,
-              padding: EdgeInsets.all(10),
-              splashRadius: 40,
-              splashColor: Colors.grey.withOpacity(0.5),
-              highlightColor: Colors.transparent,
-            ),
-            SizedBox(height: 5),
-            Container (
-                width: 100,
+              SizedBox(height: 5),
+              Text(
+                button['label'],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: isSelected ? Colors.black : Colors.grey,
+                ),
+              )
+            ],
+          ),
+        ],
+      );
+    }).toList();
+
+  }
+
+  Widget languageButton(String language) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          languageIndex = languages.indexOf(language);
+          overrideIndex = true;
+          updateMethodContent();
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: languages[languageIndex] == language ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
+
+  Widget subtitleSection() {
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0), // Adjust padding as needed
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200, // Use the desired background color
+        borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+      ),
+      child: Text(
+        subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
+        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+  Widget contentArea() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: SingleChildScrollView( // Add SingleChildScrollView here
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.grey),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+              SizedBox(width: 10.0),
+              Flexible(
                 child: Text(
-                  caption,
-                  softWrap: true, // Wrap text to the next line if needed
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.grey,
-                  ),
-                )
-            )
-          ],
+                  contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ),
+            ],
+          ),
         ),
-      ],
+      ),
     );
   }
 
   Widget updateMethodContent() {
     return Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.black,
-      )
+        contentDescriptionMap[languages[languageIndex]]![methodIndex],
+        style: TextStyle(
+          fontSize: 20.0,
+          color: Colors.black,
+        )
     );
   }
 }

@@ -1,26 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'video.dart';
 
-class EmergencyPage extends StatefulWidget {
+class WhySomeMethodsBetter extends StatefulWidget {
+  //const WhySomeMethodsBetter({Key? key}) : super(key: key);
   final String initialLanguage;
-  EmergencyPage({Key? key, required this.initialLanguage}) : super(key: key);
-  //const EmergencyPage({Key? key}) : super(key: key);
-  
+  WhySomeMethodsBetter({Key? key, required this.initialLanguage}) : super(key: key);
 
   @override
-  // State<EmergencyPage> createState() => _EmergencyPageState();
-  _EmergencyPageState createState() => _EmergencyPageState();
+  //State<WhySomeMethodsBetter> createState() => _WhySomeMethodsBetterState();
+  _WhySomeMethodsBetterState createState() => _WhySomeMethodsBetterState();
 }
-
-class _EmergencyPageState extends State<EmergencyPage> {
-  //Widget methodContent = Text('DUMMY');
-  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
+class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
+  bool overrideIndex = false;
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-  bool overrideIndex = false;
+  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider3E.mp4', title:'Video Language Not Selected');
+
+  final Map<String, String> titleMap = {
+    "Kiswahili": "KWA NINI baadhi ya mbinu za kupanga uzazi hufanya kazi vizuri zaidi kuliko zingine ili kuzuia mimba?",
+    "Dholuo": "EN ANG'O MA OMIYO yore moko mag komo nyuol tiyoga maber mohingo moko e geng'o ich?",
+    "English": "WHY do some methods work better than others to prevent pregnancy?",
+  };
+
+  
+  final Map<String, Map<String, String>> _translations = {
+    "content1": {
+      "Kiswahili": "Kadiri unavyopaswa kukumbuka kutumia au kupata njia, ndivyo nafasi zaidi ya makosa au matatizo inavyoongezeka. Hiyo ndiyo sababu kuu kwa nini baadhi ya mbinu kama vile vipandikizi na IUCD hufanya kazi vyema zaidi kuzuia mimba -- kwa sababu zinapokuwa kwenye mwili wako, si lazima ufanye kitu kingine chochote. Mbinu kama vile kondomu unazopaswa kutumia kila wakati unapofanya ngono (na unategemea mwenzi wako kuzitumia) hazifanyi kazi kwa muda ili kuzuia mimba, hasa kwa sababu watumiaji wanaweza kusahau kutumia kondomu au kutokuwa na wakati wanapohitaji. hiyo. Mbinu zote (zaidi ya E-pill) hufanya kazi vizuri sana kuzuia mimba zinapotumiwa kama ilivyoelekezwa.",
+      "Dholuo": "Kaka nyalo dwarore ni mondo ipar mar tiyo gi yor komo nyuol kata dhi ome, e kaka nyalo kelo thuolo mang'eny mar makosa kata chandruok. Ma ema omiyo yore moko mag komo nyuol kaka Implant kod IUCD tiyo maber e geng'o ich -- nikech ka oseruakgi e dendi, onge gima nyaka itim machielo. Yore kaka rabo yunga ma nyaka itigodo seche te ma ibedo e achiel [kendo dwarore ni jaherani ema ruake] ok ti ga maber kuom ndalo e geng'o ich, mana nikech jomatiyo kodgi wigi nyalo wil tiyo gi rabo yunga kata bedo maonge kode seche ma gidware. Yore gi te [koweyo E-pill] tiyo maber ahinya w geng'o ich ka oti kodgi kaka dwarore.",
+      "English": "The more you have to remember to use or get a method, the more room there is for mistakes or problems. That's the main reason why some methods like the implant and IUCD work better to prevent pregnancy -- because once they are in your body, you don't have to do anything else. Methods like condoms that you have to use every time you have sex (and depend on your partner to use them) do not work as well over time to prevent pregnancy, mainly because users might forget to use a condom or not have one when they need it. All of the methods (other than the E-pill) work very well to prevent pregnancy when used as directed."
+    }
+  };
+
+  final Map<String, Map<String, Map<String, String>>> languageToVideo = {
+  'video1': {
+    '0': { // Language code 0
+      'video': 'videoAudio/videos/provider/provider3KS.mp4',
+      'text': 'Video - Daktari Aeleza',
+    },
+    '1': { // Language code 1
+      'video': 'videoAudio/videos/provider/provider3DL.mp4',
+      'text': 'Vidio - Laktar Wuoyo',
+    },
+    '2': { // Language code 2
+      'video': 'videoAudio/videos/provider/provider3E.mp4',
+      'text': 'Video - A Doctor Explains',
+    },
+   },
+  };
+  final double _aspectRatio = 16 / 10;
   late String _currentLanguage;
 
   @override
@@ -28,77 +56,6 @@ class _EmergencyPageState extends State<EmergencyPage> {
     super.initState();
     _currentLanguage = widget.initialLanguage;
   }
-
-  final double _aspectRatio = 16 / 10;
-
-  final Map<String, String> titleContentMap = {
-      "English": "It's an emergency!", 
-      "Kiswahili": "Ni ya dharura!", 
-      "Dholuo": "En gima imuonyo e resruok!"
-
-  };
-
-  final Map<String, String> subtitleContentMap = {
-      "English": "All you need to know about taking the E-pill (P2).", 
-      "Kiswahili": "Unachohitaji kujua kuhusu kumeza E-pill (P2).", 
-     "Dholuo": "Gik moko te ma onego ing'e ewi muonyo E-pill [P2]"
-  };
-
-  final Map<String, Map<String, String>> _translations = {
-    "content1": {
-      "Kiswahili": "E-pill ni chaguo zuri ikiwa unafanya ngono bila kondomu, lakini ni bora kufikiria kama chaguo mbadala, sio kama njia kuu unayotumia kuzuia ujauzito.",
-      "Dholuo": "E-pill en yo maber tiyo godo ka ibedo e achiel maonge rabo yunga, to ber mondo iti kode kaka yor resruok, ok kaka yori maduong ma itiyo godo e geng'o ich",
-      "English": "The E-pill is a good option if you have sex without a condom, but it's best to think of it as a backup option, not as the main method you are using to prevent pregnancy."
-    },
-    "content2" :{
-      "Kiswahili": "Muda ni muhimu kwa sababu muda gani unachukua baada ya kufanya ngono hufanya tofauti kubwa katika jinsi inavyofanya kazi vizuri kuzuia mimba. Chukua haraka iwezekanavyo, lakini ndani ya siku 5 za ngono. Watoa huduma wengine watakuambia siku 3. mapema ni bora!",
-      "Dholuo": "Ng'iyo saa ma imuonye ber nikech mapiyo ma imuonye bang bedo e achiel biro kelo pogruok maduong e kaka otiyo maber e geng'o ich. Muonye mapiyo ahinya  kaka inyalo, to ekind ndalo 5 mar bedo e achiel. Jochiw thieth moko biro nyisi ndalo 3. Mapiyo mogik ber!",      
-      "English": "Timing is important because how soon you take it after sex makes a big difference in how well it works to prevent pregnancy. Take as soon as you can, but within 5 days of sex. Some providers will tell you 3 days. The sooner the better!"
-    },
-
-    "content3" :{
-      "Kiswahili": "Hakuna kikomo kwa mara ngapi unaweza kumeza kidonge cha E-pill kwa mwezi, lakini kunaweza kusababisha athari kama vile kwa tumbo na mabadiliko ya hedhi yako ambayo yanaweza kuudhi. Pia, ni bei ghali!",
-      "Dholuo": "Onge giko ne ndalo ma inyalo muonye E-pill e dwe, to nitie nyalruok ni obiro keloni rach motudore gi yath kaka ich makuot kod lokruok e chwer mar rembi mar dwe manyalo wang'o ich. Bende, en gima beche tek!",
-      "English": "There is no limit to how many times you can take the E-pill in a month, but it will likely cause side effects like upset stomach and changes to your period that might be annoying. Also, it is expensive!"
-
-    }
-  };
-
-  String videoAsset1 = 'videoAudio/videos/peer/peer3E.mp4';
-  String videoTitle1 = 'A Peer Perspective Language Not Selected';
-  // String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
-  // String videoTitle2 = 'Video 2 Language Not Selected';
-
-  final Map<String, Map<String, Map<String, String>>> languageToVideo = {
-  'video1': {
-    '0': { // Language code 0
-      'video': 'videoAudio/videos/peer/peer3KS.mp4',
-      'text': 'Video - Mtazamo wa Rika',
-    },
-    '1': { // Language code 1
-      'video': 'videoAudio/videos/peer/peer3DL.mp4',
-      'text': 'Vidio - Kaka Jowetegi Neno Gik Moko',
-    },
-    '2': { // Language code 2
-      'video': 'videoAudio/videos/peer/peer3E.mp4',
-      'text': 'Video - A Peer Perspective',
-    },
-  },
-  'video2': {
-    '0': {
-      'video': 'videoAudio/videos/chimes.mp4',
-      'text': 'Kiswahili Video #2',
-    },
-    '1': {
-      'video': 'videoAudio/videos/funnyCat.mp4',
-      'text': 'Dholuo Video #2',
-    },
-    '2': {
-      'video': 'videoAudio/videos/funnyCat2.mp4',
-      'text': 'English Video #2',
-    },
-  },
-  };
 
   String _t(String key) {
     return _translations[key]?[_currentLanguage] ?? key;
@@ -109,6 +66,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
       _currentLanguage = language;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -141,16 +99,12 @@ class _EmergencyPageState extends State<EmergencyPage> {
         ),
         title: Center(
           child:
-            Text(titleContentMap[languages[languageIndex]]!)
+            Text(titleMap[languages[languageIndex]]!)
         ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            subtitleContentMap[languages[languageIndex]]!
-          ),
-        //children: [
           Container(
               height: containerHeight * 0.1,
               child: Container(
@@ -167,8 +121,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
                           languageIndex = 0;
                           _currentLanguage = 'Kiswahili';
                           overrideIndex = true;
-                          //updateMethodContent('content1');
-                          video1 = updateVideoContent1();
+                          // updateMethodContent('content1');
+                          video1 = updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -183,8 +137,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
                           languageIndex = 1;
                           _currentLanguage = 'Dholuo';
                           overrideIndex = true;
-                          //updateMethodContent('content2');
-                          video1 = updateVideoContent1();
+                          // updateMethodContent('content2');
+                          video1 = updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -199,8 +153,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
                           languageIndex = 2;
                           _currentLanguage = 'English';
                           overrideIndex = true;
-                          //updateMethodContent('content3');
-                          video1 = updateVideoContent1();
+                          // updateMethodContent('content3');
+                          video1 = updateVideoContent();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -219,22 +173,20 @@ class _EmergencyPageState extends State<EmergencyPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               direction: Axis.vertical,
               children: [
-                contentBox('content1'),
-                contentBox('content2'),
-                contentBox('content3'),
+                contentBox('content1'),   
                 SizedBox(
                   width: boxWidth,
                   height: boxHeight * 0.5 * 0.6,
                   child: Center(child:video1),
-               ),                    
+                ),
               ],
             ),
           ),
         ],
       ),
     );
-  }
 
+  }
   Widget updateMethodContent(String contentKey) {
     return Text(
       _t(contentKey),
@@ -253,7 +205,9 @@ class _EmergencyPageState extends State<EmergencyPage> {
     return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   }
     
-  Widget updateVideoContent1() {
+  Widget updateVideoContent() {
+    String videoAsset1 = "";
+    String videoTitle1 = "";
       if (languageIndex == 0) {
         videoAsset1 = _getAsset('video1', '0');
         videoTitle1 = _getTitle('video1', '0');
@@ -273,13 +227,6 @@ class _EmergencyPageState extends State<EmergencyPage> {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ElevatedButton(
         onPressed: () => _changeLanguage(language),
-        // onPressed: () {
-        //   setState(() {
-        //     languageIndex = languageIndex;
-        //     overrideIndex = true;
-        //     video1 = updateVideoContent1();
-        //   });
-        // },
         style: ElevatedButton.styleFrom(
           backgroundColor: isSelected ? Colors.grey : null,
         ),
@@ -315,3 +262,4 @@ class _EmergencyPageState extends State<EmergencyPage> {
     );
   }
 }
+

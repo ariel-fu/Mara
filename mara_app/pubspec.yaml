@@ -68,11 +68,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - videoAudio/videos/funnyCat.mp4
-    - videoAudio/videos/funnyCat2.mp4
-    - videoAudio/audio/purr.mp3
-    - videoAudio/audio/crickets.mp3
-    - videoAudio/videos/chimes.mp4
+    - assets/method_efficiency_pics/ 
+    - assets/chance_of_preg/
     - assets/string-resources/method_1.png
     - assets/string-resources/method_2.png
     - assets/string-resources/method_3.png
@@ -100,6 +97,57 @@ flutter:
     - assets/period_new.png
     - assets/privacy_new.png
     - assets/preg_woman_new.png
+    - assets/take_quiz.png
+    - assets/misc-icons/
+
+    - videoAudio/videos/peer/peer1KS.mp4
+    - videoAudio/videos/peer/peer1DL.mp4
+    - videoAudio/videos/peer/peer1E.mp4
+
+    - videoAudio/videos/peer/peer2KS.mp4
+    - videoAudio/videos/peer/peer2DL.mp4
+    - videoAudio/videos/peer/peer2E.mp4
+      
+    - videoAudio/videos/peer/peer3KS.mp4
+    - videoAudio/videos/peer/peer3DL.mp4
+    - videoAudio/videos/peer/peer3E.mp4
+
+    - videoAudio/videos/provider/provider1KS.mp4
+    - videoAudio/videos/provider/provider1DL.mp4
+    - videoAudio/videos/provider/provider1E.mp4
+
+    - videoAudio/videos/provider/provider3KS.mp4
+    - videoAudio/videos/provider/provider3DL.mp4
+    - videoAudio/videos/provider/provider3E.mp4
+
+    - videoAudio/videos/provider/provider4KS.mp4
+    - videoAudio/videos/provider/provider4DL.mp4
+    - videoAudio/videos/provider/provider4E.mp4
+
+    - videoAudio/audio/what_if_condom_E.mp3
+    - videoAudio/audio/what_if_condom_K.mp3
+    - videoAudio/audio/what_if_condom_L.mp3
+
+    - videoAudio/audio/what_if_pills_E.mp3
+    - videoAudio/audio/what_if_pills_K.mp3
+    - videoAudio/audio/what_if_pills_L.mp3
+
+    - videoAudio/audio/what_if_depo_E.mp3
+    - videoAudio/audio/what_if_depo_K.mp3
+    - videoAudio/audio/what_if_depo_L.mp3
+
+    - videoAudio/audio/what_if_implant_E.mp3
+    - videoAudio/audio/what_if_implant_K.mp3
+    - videoAudio/audio/what_if_implant_L.mp3
+
+    - videoAudio/audio/what_if_iucd_E.mp3
+    - videoAudio/audio/what_if_iucd_K.mp3
+    - videoAudio/audio/what_if_iucd_L.mp3
+
+    - videoAudio/audio/what_if_epill_E.mp3
+    - videoAudio/audio/what_if_epill_K.mp3
+    - videoAudio/audio/what_if_epill_L.mp3
+
 
   #   - images/a_dot_ham.jpeg
 

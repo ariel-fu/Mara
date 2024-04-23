@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'recommendation_model.dart';
 import 'liked_methods.dart';
@@ -80,11 +81,12 @@ Widget build(BuildContext context) {
           onPressed: () => Navigator.of(context).pop(), 
         ),
       title: Text(_t('title1')), // Use _t method for translation
+      centerTitle: true,
 
 actions: <Widget>[
   ElevatedButton.icon(
     icon: Icon(Icons.thumb_up, color: Colors.black),
-    label: Text('Liked Methods', style: TextStyle(color: Colors.black)),
+    label: Text(_t('likedTitle'), style: TextStyle(color: Colors.black)),
     onPressed: navigateToLikedMethodsScreen,
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.deepPurple[100],
@@ -159,17 +161,17 @@ actions: <Widget>[
                                             width: 100, 
                                             height: 100
                                           ),
-                                          Positioned(
-                                            top: -9,
-                                            right: -9,
-                                            child: IconButton(
-                                              icon: Icon(
-                                                likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
-                                                color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
-                                              ),
-                                              onPressed: () => toggleLikeMethod(trimmedRec),
-                                            ),
-                                          ),
+                                          // Positioned(
+                                          //   top: -9,
+                                          //   right: -9,
+                                          //   child: IconButton(
+                                          //     icon: Icon(
+                                          //       likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
+                                          //       color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
+                                          //     ),
+                                          //     onPressed: () => toggleLikeMethod(trimmedRec),
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                       Text(
@@ -179,41 +181,59 @@ actions: <Widget>[
                                       ),
                               ElevatedButton(
                                 onPressed: () {
-                                String methodKey;
-                                // Convert the recommendation name to the corresponding JSON key
-                                switch (trimmedRec.toLowerCase()) {
-                                    // case 'condoms':
-                                    //   methodKey = 'male_condom'; // or 'female_condom' based on context
-                                    //   break;
-                                    default:
-                                      methodKey = trimmedRec.toLowerCase();
-                                }
+                                  String methodKey;
+                                  // Convert the recommendation name to the corresponding JSON key
+                                  switch (trimmedRec.toLowerCase()) {
+                                      // case 'condoms':
+                                      //   methodKey = 'male_condom'; // or 'female_condom' based on context
+                                      //   break;
+                                      case 'emergency pill':
+                                        methodKey = 'emergency'; // This should match the exact key in your JSON data
+                                        break;
+                                      default:
+                                        methodKey = trimmedRec.toLowerCase();
+                                  }
 
-                                if (methodDetailsData.containsKey(methodKey)) {
+                                  if (methodDetailsData.containsKey(methodKey)) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MethodDetailsScreen(
+                                          methodName: trimmedRec,
+                                          methodDetails: methodDetailsData[methodKey],
+                                          currentLanguage: _currentLanguage,
+                                          translations: widget.translations,
+                                          onChangeLanguage: (newLang) {
+                                            _changeLanguage(newLang); // Call _changeLanguage from RecommendationScreen
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  } 
+                                  else {
+                                    // Handle the case where method details are not found
+                                    print('No details found for $trimmedRec');
+                                  }
+                                },
+                                child: Text('Learn More'),
+                              ),
 
-Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => MethodDetailsScreen(
-      methodName: trimmedRec,
-      methodDetails: methodDetailsData[methodKey],
-      currentLanguage: _currentLanguage,
-      translations: widget.translations,
-      onChangeLanguage: (newLang) {
-        _changeLanguage(newLang); // Call _changeLanguage from RecommendationScreen
-      },
-    ),
-  ),
-);
-                                } else {
-                                  // Handle the case where method details are not found
-                                  print('No details found for $trimmedRec');
-                                }
-                        },
-                              child: Text('Learn More'),
-                            ),
-
-
+        Row( //Thumbs up button below the method name
+          children: <Widget>[
+            ElevatedButton.icon(
+                  icon: Icon(
+                    likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
+                    color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
+                  ),
+                  label: Text("I like this!"), // The label (text)
+                  style: ElevatedButton.styleFrom(
+                     backgroundColor: Colors.deepPurple[100], // Button background color
+                     foregroundColor: Colors.black 
+                  ),
+                  onPressed: () => toggleLikeMethod(trimmedRec),
+            ),
+          ],
+        ),
                                     ],
                                   ),
                                 );

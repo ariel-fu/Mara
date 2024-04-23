@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'recommendation_screen.dart';
 import 'recommendation_model.dart';
+
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -65,6 +67,7 @@ final Map<String, Map<String, String>> _translations = {
     'op1': 'In More than 1 year', 
     'op2': 'In 6-12 months', 
     'op3': 'I\'m not sure', 
+    'op4': 'Now or very soon', 
     // ... other English translations
     'o1': 'Extremely important', 
     'o2': 'Somewhat important', 
@@ -72,15 +75,7 @@ final Map<String, Map<String, String>> _translations = {
     'o51': 'The lowest chance of getting pregnant', 
     'o52': 'Avoiding changes to my periods', 
     'o53': 'Keeping my method private', 
-    'o54': 'Being able to get pregnant in the future', 
-    'condoms': 'Condoms',
-    'Condoms': 'Condoms', 
-    'iucd': 'IUCD',
-    'depo': 'Depo',
-    'Implant': 'Implant', 
-    'implant': 'implant', 
-    'pills': 'pills', 
-    'Pills': 'Pills', 
+    'o54': 'Being able to get pregnant in the future',  
     'outroText1': 'Condoms are the best way to prevent HIV and other infections, but may not be the best method for preventing pregnancy for a long period of time.',
     'outroText2': 'The following method may also be a good option, but there may be a delay of 3-6 months in fertility after stopping: Depo', 
     'outroText3': 'We also recommend you start a prenatal vitamin for good pregnancy health.', 
@@ -110,10 +105,16 @@ final Map<String, Map<String, String>> _translations = {
     'introText8': 'Based on how important it is to you to avoid changes to your periods, the following methods might be a good choice for you:', 
     'introText9': 'Based on how important it is to you to be able to get pregnant in the future, the following methods might be a good choice for you:', 
     'recommendationTitle': 'Here are some recommendations that might be right for you!', 
-    // 'learnMore': 'Learn More',
+    'likedTitle': 'Your favorites', 
+    'incomplete': 'Incomplete quiz', 
+    'incompleteMessage': 'Please answer all questions before submitting the quiz', 
+    'submit': 'Submit quiz', 
+    'learnMore': 'Learn More',
+    'none': 'None', 
+    'summaryPage': 'Summary Page'
   },
   'Kiswahili': {
-    'title': 'Jaribio',
+    'title': 'Chemsha bongo',
     'q1': 'Je, unajisikiaje kuhusu mabadiliko katika hedhi yako?',
     'q2': 'Ikiwa ulipaswa kukisia, unafikiri ni wakati gani unaweza kutaka mimba?',
     'q3': 'Je! ungependa mbinu yako ifanye kazi kwa muda gani?',
@@ -130,7 +131,8 @@ final Map<String, Map<String, String>> _translations = {
     'option3': 'Sina uhakika', 
     'op1': 'Katika zaidi ya mwaka 1', 
     'op2': 'Katika miezi 6-12', 
-    'op3': 'Sina uhakika', 
+    'op3': 'Sina uhakika',
+    'op4': 'Sasa au hivi karibuni', 
     'o1': 'Muhimu sana', 
     'o2': 'Muhimu kwa kiasi fulani', 
     'o3': 'Sio Muhimu', 
@@ -140,12 +142,6 @@ final Map<String, Map<String, String>> _translations = {
     'o54': 'Kuwa na uwezo wa kupata mimba katika siku zijazo', 
     // ... other Kiswahili translations
     'title1': 'Mapendekezo', 
-    'Implant': 'pandikiza', 
-    'implant': 'pandikiza', 
-    'condoms': 'kondomu', 
-    'Condoms': 'kondomu', 
-    'pills': 'dawa', 
-    'Pills': 'dawa', 
     'recommendationTitle': 'Haya hapa ni baadhi ya mapendekezo ambayo yanaweza kuwa sawa kwako!', 
     'outroText1': 'Kondomu ni njia bora ya kuzuia Virusi Vya Ukimwi na maambukizo mengine, lakini inaweza isiwe njia bora ya kuzuia mimba kwa muda mrefu.',  
     'outroText2': 'Njia ifuatayo inaweza pia kuwa chaguo nzuri, lakini kunaweza kuwa na kuchelewa kwa miezi 3-6 katika uzazi baada ya kuacha:', 
@@ -174,7 +170,14 @@ final Map<String, Map<String, String>> _translations = {
     'introText6': 'Kulingana na jinsi ilivyo muhimu kwako kuweka njia yako ya faragha, mbinu zifuatazo zinaweza kuwa chaguo nzuri kwako:', 
     'introText7': 'Kulingana na jinsi ni muhimu kwako kuzuia ujauzito, njia zifuatazo zinaweza kuwa chaguo nzuri kwako:', 
     'introText8': 'Kulingana na jinsi ilivyo muhimu kwako kuzuia mabadiliko katika kipindi chako, njia zifuatazo zinaweza kuwa chaguo nzuri kwako:', 
-    'introText9': 'Kulingana na jinsi ilivyo muhimu kwako kupata mimba katika siku zijazo, njia zifuatazo zinaweza kuwa chaguo nzuri kwako:'
+    'introText9': 'Kulingana na jinsi ilivyo muhimu kwako kupata mimba katika siku zijazo, njia zifuatazo zinaweza kuwa chaguo nzuri kwako:', 
+    'likedTitle': 'Vipendwa vyako', 
+    'incomplete': 'Maswali ambayo hayajakamilika', 
+    'incompleteMessage': 'Tafadhali jibu maswali yote kabla ya kuwasilisha chemsha bongo',
+    'submit': 'Wasilisha chemsha bongo', 
+    'learnMore': 'Jifunze zaidi ',  
+    'none': 'Onge', 
+    'summaryPage': 'Ukurasa wa muhtasari'
   },
   'Dholuo': {
     'q1': 'Iwinjo nade ewi lokruok e chwer mar rembi mar dwe?', 
@@ -194,6 +197,7 @@ final Map<String, Map<String, String>> _translations = {
     'op1': 'Mokalo higa 1', 
     'op2': 'Ekind dweche 6-12', 
     'op3': 'Ok an gi adiera', 
+    'op4': 'Sani kata machiegni', 
     'o1': 'Omokona ahinya', 
     'o2': 'Omokona marach rach',
     'o3': 'Ok omokona', 
@@ -202,6 +206,7 @@ final Map<String, Map<String, String>> _translations = {
     'o53': 'Tiyo gi yor geng\'o ich eyo mopondo', 
     'o54': 'Bedo ni anyalo mako ich e ndalo mabiro', 
     'title1': 'Ng\'eyo', 
+    'title': 'Muro obuongo ', 
     'recommendationTitle': 'Erigo gikmoko mawaneno ni nyalo bedo maber kodi!', 
      'outroText1': 'Rabo yunga e yo maber mar geng\'o kute mag ayaki kod tuoche mamoko, to ok nyalo bedo yo maber mar geng\'o ich kuom kinde malach.', 
       'outroText2': 'Yore moluwogi bende nyalo bedo yiero maber, to deko nyalo bete mar dweche 3-6 e nyaloni mar mako ich bang weyo:', 
@@ -230,7 +235,14 @@ final Map<String, Map<String, String>> _translations = {
       'introText6': 'Kaluwore gi kaka omokoni mondo ikan tiyo gi yor komo nyuol mopondo, yore moluwogi nyalo bedo yiero maber ne in:', 
       'introText7': 'Kaluwore gi kaka omokoni mondo igeng\' ich, yore moluwogi nyalo bedo yiero maber ne in:', 
       'introText8': 'Kaluwore gi kaka omokoni mondo igeng\' lokruok e rembi mar dwe, yore moluwogi nyalo bedo yiero maber ne in:', 
-      'introText9': 'Kaluwore gi kaka omokoni mondo ibed ni inyalo mako ich e ndalo mabiro, yore moluwogi nyalo bedo yiero maber ne in:'
+      'introText9': 'Kaluwore gi kaka omokoni mondo ibed ni inyalo mako ich e ndalo mabiro, yore moluwogi nyalo bedo yiero maber ne in:', 
+      'likedTitle': 'Ma ihero', 
+      'incomplete': 'Penjo mapok otiek duoko ', 
+      'incompleteMessage': 'Kiyie to duok penjo te kapok ioro duoko mag penjo ma muro obuongo', 
+      'submit': 'Oor duoko mag muro obuongo', 
+      'learnMore': 'Puonjri matut', 
+      'none': 'Hakuna', 
+      'summaryPage': 'Oboke ma lero weche e yo machuok'
   }
 };
 
@@ -317,8 +329,8 @@ void _submitQuiz() {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Incomplete Quiz"),
-          content: Text("Please answer all questions before submitting the quiz."),
+          title: Text(_t('incomplete')),
+          content: Text(_t('incompleteMessage')),
           actions: <Widget>[
             TextButton(
               child: Text("OK"),
@@ -447,13 +459,18 @@ void _submitQuiz() {
       introTexts.add('introText4');
        outroTexts.addAll(RecommendationModel.getOutroTextsBasedOnPregnancyTiming('In 6-12 months'));
       break;
-    case 'op3': // Now or very soon
+    case 'op3': // I'm not sure
       recommendations.addAll([
-          'No method, Pills, Condoms',
-          // 'Start a prenatal vitamin for good pregnancy health.'
+          'Condoms, Emergency Pill', 
         ]);
       //recommendations.addAll(RecommendationModel.getRecommendationsBasedOnPregnancyTiming('Not sure'));
       // introTexts.add('Based on when you think you want a pregnancy, the following methods may be a good choice for you:');
+      introTexts.add('introText4');
+      outroTexts.addAll(RecommendationModel.getOutroTextsBasedOnPregnancyTiming('I\'m not sure'));
+    case 'op4': 
+      recommendations.addAll([
+          'Pills, Condoms', 
+        ]);
       introTexts.add('introText4');
       outroTexts.addAll(RecommendationModel.getOutroTextsBasedOnPregnancyTiming('Now or very soon'));
       break;
@@ -623,7 +640,7 @@ void _submitQuiz() {
         // 'Depo', 
         // 'Implant', 
         // 'Emergency Pill'
-        'Condoms, Pills, IUCD, Depo, Implant, Emergency'
+        'Condoms, Pills, IUCD, Depo, Implant, Emergency Pill'
       ]);
       // introTexts.add('Based on how important it is to you to be able to get pregnant in the future, the following methods might be a good choice for you: ');
       introTexts.add('introText9');
@@ -673,6 +690,7 @@ bool _areAllQuestionsAnswered() {
     return Scaffold(
       appBar: AppBar(
         title: Text(_t('title')),
+        centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
@@ -691,7 +709,7 @@ bool _areAllQuestionsAnswered() {
                 subQuestionSection(context, 'subq1', ['option1', 'option2', 'option3']),
                 subQuestionSection(context, 'subq2', ['option1', 'option2', 'option3']),
                 subQuestionSection(context, 'subq3', ['option1', 'option2', 'option3']),
-                quizSection(context, 'q2', ['op1', 'op2', 'op3']),
+                quizSection(context, 'q2', ['op1', 'op2', 'op3', 'op4']),
                 quizSection(context, 'q3', []),
                 subQuestionSection(context, 'q3sub1', ['option1', 'option2', 'option3']),
                 subQuestionSection(context, 'q3sub2', ['option1', 'option2', 'option3']),
@@ -703,7 +721,7 @@ bool _areAllQuestionsAnswered() {
                   child: Center(
                     child: ElevatedButton(
                       onPressed: _submitQuiz,
-                      child: Text('Submit Quiz'),
+                      child: Text(_t('submit')),
                     ),
                   ),
                 ),
@@ -776,6 +794,8 @@ Widget subQuestionSection(BuildContext context, String questionKey, List<String>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ImageIcon(AssetImage('assets/misc-icons/question_circle.png'), color: Colors.black),
+            // if we can make the icon NEXT TO the question text, that would be nice. For now, this is OK.
             Text(
               _t(questionKey),
               style: TextStyle(

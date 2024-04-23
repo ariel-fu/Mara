@@ -14,11 +14,11 @@ class _ReadyPageState extends State<ReadyPage> {
   String _currentLanguage = 'English';
   final List<String> languages = ["Kiswahili", "Dholuo", "English"];
   final Map<String, Map<String, String>> _translations = {
-    'Family Planning Guide': {
-      'Kiswahili': 'Mwongozo wa Mipango ya Familia',
-      'Dholuo': 'Tim Mabeyo Mar Dhano Nyithindo',
-      'English': 'Family Planning Guide',
-    },
+    // 'Family Planning Guide': {
+    //   'Kiswahili': 'Mwongozo wa Mipango ya Familia',
+    //   'Dholuo': 'Tim Mabeyo Mar Dhano Nyithindo',
+    //   'English': 'Family Planning Guide',
+    // },
     'What if I\'m ready to have a baby?': {
       'Kiswahili': 'Kama niko tayari kupata mtoto?',
       'Dholuo': 'Ango nyithindo mabeyo manyalo wuonwa?',
@@ -28,6 +28,16 @@ class _ReadyPageState extends State<ReadyPage> {
       'Kiswahili': 'Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!', 
       'Dholuo': 'HEY! MA EN GIMA BER NG\'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng\'o kute mag ayaki kod nyae mamoko!', 
       'English': 'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'
+    }, 
+    'LEARN MORE about the fertility considerations of each method': {
+      'Kiswahili': 'JIFUNZE ZAIDI kuhusu masuala ya uzazi ya kila mbinu', 
+      'Dholuo': 'PUONJRI MATUT ewi nyaloni mar mako ich gi yor komo nyuol ka yor komo nyuol.', 
+      'English': 'LEARN MORE about the fertility considerations of each method', 
+    }, 
+    'Preparing for a health pregnancy': {
+      'Kiswahili': 'Kujiandaa kwa ujauzito wenye afya', 
+      'Dholuo': 'Yikruok ne ich man gi ngima', 
+      'English': 'Preparing for a healthy pregnancy'
     }
 
   };
@@ -96,14 +106,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  //   Image.asset(
-                  //   // 'assets/exclamation.png', // Path to your custom icon
-                  //   Icon(Icons.warning_amber_rounded, color: Colors.amber),
-                  //   width: 24, // Adjust size as needed
-                  //   height: 24, // Adjust size as needed
-                  //    // You can adjust the color if needed
-                  // ),
-                  Icon(Icons.warning_amber_rounded, color: Colors.amber),
+                    ImageIcon(AssetImage('assets/misc-icons/important.png'), color: Colors.black),
                     SizedBox(width: 8.0),
                     Expanded(
                       child: Text(
@@ -151,35 +154,43 @@ Widget build(BuildContext context) {
 
   return Scaffold(
     appBar: AppBar(
-      leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
-        title: Text(_t('Family Planning Guide')),
+      // leading: IconButton(
+      //     icon: const Icon(Icons.home),
+      //     onPressed: () {
+      //       Navigator.of(context).pushNamed('/home');
+      //     },
+      //   ),
+        //title: Text(_t('Family Planning Guide')),
       ),
-      body: ListView(
-        children: [
-          // Language selection buttons
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: ['Kiswahili', 'Dholuo', 'English']
-                .map((language) => languageButton(language))
-                .toList(),
-          ),
-          customListTile(
-            imagePath: 'assets/preg_woman_new.png',
-            header: _t('What if I\'m ready to have a baby?'),
-            title: _t('HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'),
-          ),
-
+      body: Column(
+      children: [
+        // Language selection buttons
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: languages.map((language) => languageButton(language)).toList(),
+        ),
+        // Make the rest of the page scrollable
+        Flexible(
+          child: ListView(
+            children: [
+              customListTile(
+                imagePath: 'assets/preg_woman_new.png',
+                header: _t('What if I\'m ready to have a baby?'),
+                title: _t('HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'),
+              ),
+              
           SizedBox(width:boxWidth, height:boxHeight * 0.5 * 0.6, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
-
-          ListTile(
-            leading: Icon(Icons.search),
-            title: Text(_t('LEARN MORE about the fertility considerations of each method')),
-            onTap: () {
+          
+         Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: ElevatedButton.icon(
+            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+            label: Text(_t('LEARN MORE about the fertility considerations of each method')), // The label (text)
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100], // Button background color
+              foregroundColor: Colors.black 
+            ),
+            onPressed: () {
               int languageIndex = languages.indexOf(_currentLanguage);
               Navigator.pushNamed(
                 context,
@@ -188,22 +199,34 @@ Widget build(BuildContext context) {
               );
             },
           ),
-
-          ListTile(
-            leading: Icon(Icons.check_circle),
-            title: Text(_t('Preparing for a healthy pregnancy')),
-            onTap: () {
+        ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: ElevatedButton.icon(
+            icon: ImageIcon(AssetImage('assets/misc-icons/check_mark.png'), color: Colors.black),
+            label: Text(_t('Preparing for a health pregnancy')), 
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100], // Button background color
+              foregroundColor: Colors.black, 
+            ),
+    
+            onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PrepPage(initialLanguage: _currentLanguage),
-                ),
-              );
+              context,
+              MaterialPageRoute(
+                builder: (context) => PrepPage(initialLanguage: _currentLanguage),
+              ),
+            );
             },
+    
           ),
-        ],
-      ),
-    );
+        ),
+          
+      ]),
+        ), 
+      ]),
+  );
+    
   }
 }
 

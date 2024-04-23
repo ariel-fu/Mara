@@ -39,23 +39,13 @@ class _AudioWidgetState extends State<AudioWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
-      body: Expanded(
-        child: Row(
-            children: [
-              Text(' Listen Here: ', style: TextStyle(
-                fontSize: 12.0)),
-              IconButton(
-                icon: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow),
-                onPressed: () => _toggleAudio1(),
-                style: IconButton.styleFrom(
-                  foregroundColor: Colors.lightBlue,
-                  backgroundColor: Colors.grey[300],
-                ),
-              ),
-          ]
-        )
-      )
-    ); 
+    return  IconButton(
+      icon: Image.asset(
+        "assets/audio_icon.png",
+        width: 30,
+        height: 30,
+      ),
+      onPressed: () => _toggleAudio1(),
+    );
   }
 }

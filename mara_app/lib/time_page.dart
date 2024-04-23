@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'package:mara_app/hiv_page.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({Key? key}) : super(key: key);
@@ -9,206 +10,259 @@ class TimePage extends StatefulWidget {
 }
 
 class _TimePageState extends State<TimePage> {
-  Widget methodContent = Text('DUMMY');
+  bool overrideIndex = false;
+  // Widget methodContent = updateMethodContent();
   int methodIndex = 0; // Index of the selected icon button, 0 for default
-  int languageIndex = 0; // similar indexing for language
+  int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+
+  // final Map<String, String> subtitleTranslations = {
+  //   "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
+  //   "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
+  //   "English": "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy."
+  // };
+
+  final Map<String, String> titleTranslations = {
+  "English": "How long does the method work?", 
+  "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
+  "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+  };
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
-      "method 1 in Kiswahili",
-      "method 2 in Kiswahili",
-      "method 3 in Kiswahili",
-      "method 4 in Kiswahili",
-      "method 5 in Kiswahili",
-      "method 6 in Kiswahili",
-      "method 7 in Kiswahili"
+      "Ili kuzuia mimba, unahitaji kutumia kondomu kila mara unapofanya ngono. Inaweza kuwa changamoto sana kutabiri siku zako salama, kwa hivyo kondomu zinahitajika kutumika kila wakati unapojamiiana ili kufanya kazi vizuri.",
+      "Ili kuzuia mimba, unahitaji kutumia kondomu kila mara unapofanya ngono. Inaweza kuwa changamoto sana kutabiri siku zako salama, kwa hivyo kondomu zinahitajika kutumika kila wakati unapojamiiana ili kufanya kazi vizuri.",
+      "Vidonge vya kila siku vinahitaji kuchukuliwa kila siku ili kuzuia mimba. Ukikosa vidonge, mwili wako unaweza kutoa yai, na unaweza kupata mimba. Inaweza kusaidia kumeza kidonge chako cha kila siku kama sehemu ya utaratibu, kama vile kabla ya kulala, au kabla ya kuanza siku yako asubuhi.",
+      "Sindano (depo) hudumu kwa miezi 3. Ikiwa umechelewa kwa zaidi ya wiki 2 kwa picha yako inayofuata, unaweza kupata mimba, kwa hivyo ni vizuri kukaa kwenye ratiba ikiwa unataka kuzuia mimba!",
+      "Implant hudumu kwa miaka 3 (Nexplanon) au miaka 5 (Jadelle), kulingana na aina gani unayopata. Ikiwa hupendi au unataka kupata mimba, unaweza kuiondoa wakati wowote unapotaka - huna kusubiri miaka 3-5! Kipandikizi kinaweza kuwa njia nzuri hata kwa mwaka mmoja au miwili tu.",
+      "IUCD (coil) inafanya kazi hadi miaka 12! Watu wengi hawaihifadhi kwa muda mrefu hivyo, na wanaweza kuitumia kwa mwaka mmoja au miwili. Unaweza kuondoa IUCD wakati wowote unapotaka, ikiwa hupendi au unataka kupata mimba.",
+      "E-pill (P2) haifanyi kazi kwa muda fulani, lakini inakusudiwa kupunguza uwezekano wa kupata mimba baada ya kufanya ngono. Usifikiri kwamba bado itafanya kazi ikiwa utafanya ngono tena siku moja au mbili baada ya kumeza E-pill...ni bora kutumia njia tofauti kama njia yako ya kawaida!"
     ],
     "Dholuo": [
-      "method 1 in Dholuo",
-      "method 2 in Dholuo",
-      "method 3 in Dholuo",
-      "method 4 in Dholuo",
-      "method 5 in Dholuo",
-      "method 6 in Dholuo",
-      "method 7 in Dholuo"
+      "Mondo igeng ich, dwarore ni mondo iti gi rabo yunga kinde duto ma ibedo e achiel. Onyalo bedo gima pek ng'eyo kinde ma ionge thuolo mar mako ich, koro rabo yunga onego tigodo kinde duto ma ibedo e achiel mondo oti maber.",
+      "Mondo igeng ich, dwarore ni mondo iti gi rabo yunga kinde duto ma ibedo e achiel. Onyalo bedo gima pek ng'eyo kinde ma ionge thuolo mar mako ich, koro rabo yunga onego tigodo kinde duto ma ibedo e achiel mondo oti maber.",
+      "Pills ma pile ka pile onego muony pile ka pile mondo ogeng ich. Ka ok imuonyo pills, dendi nyalo golo tong, kendo inyalo mako ich. Nyalo bedo gima konyo ka imuonyo pills pile ka pile kaka gino ma iketo e chenro, kaka kapok idhi e kitanda, kata kapok ichako odiechiengi gokinyi.",
+      "Sindan [Depo] bet e del kuom dweche 3. Ka ileo gi jumbe 2 yudo sindan machielo, inyalo mako ich, koro ber mondo irit tarik mochiki e dok e sindan ka idwaro geng'o ich!",
+      "Implant budho kuom higni 3 [Nexplanon] kata higni 5 [Jadelle], kaluwore e kido ma oketni. ka ok ihere kata idwaro mako ich, inyalo dhi mondo ogolni godo saa asaya ma idwaro - ok ochuno ni nyaka irit higni 3-5! Implant nyalo bedo yo maber ahinya kata mana e higa kata higni ariyo.",
+      "IUCD [koil] tiyo nyaka higni 12! Ng'eny ji ok weye kanyo mang'eny kamano, kendo nyalo mana tiyo kode kuom higa kata higni ariyo. Inyalo golo IUCD saa asaya ma idwaro, ka ok idware kata idwaro mako ich.",
+      "E-pill [P2] ok ti kuom kinde moko, to en mar duoko chien nyaloni mar mako ich bang bedo e achiel. Kik ipar ni podi odhi tiyo ka ibedo e achiel kendo odiechieng achiel kata ariyo bang muonyo E-pill... Ber mondo iti gi yo machielo kaka yori mapile mar geng'o ich!"
     ],
     "English": [
-      "method 1 in English",
-      "method 2 in English",
-      "method 3 in English",
-      "method 4 in English",
-      "method 5 in English",
-      "method 6 in English",
-      "method 7 in English"
+      "To prevent pregnancy, you need to use a condom every time you have sex. It can be very challenging to predict your safe days, so condoms need to be used every time you have sex in order to work well.",
+      "To prevent pregnancy, you need to use a condom every time you have sex. It can be very challenging to predict your safe days, so condoms need to be used every time you have sex in order to work well.",
+      "Daily pills need to be taken every day to prevent pregnancy. If you miss pills, your body might release an egg, and you could get pregnant. It can be helpful to take your daily pill as part of a routine, like right before you go to bed, or before you start your day in the morning.",
+      "The injection (depo) lasts for 3 months. If you are more than 2 weeks late for your next shot, you can get pregnant, so it is good to stay on schedule if you want to prevent pregnancy!",
+      "The implant lasts for 3 years (Nexplanon) or 5 years (Jadelle), depending on which type you get. If you don't like it or you want to get pregnant, you can have it removed whenever you want - you don't have to wait 3-5 years! The implant can be a great method even just for a year or two.",
+      "The IUCD (coil) works for up to 12 years! Many people don't keep it in that long, and might just use it for a year or two. You can have the IUCD removed whenever you want, if you don't like it or want to get pregnant.",
+      "The E-pill (P2) does not work for a particular length of time, but is meant to reduce the chance of pregnancy after having sex. Don't assume it is still going to work if you have sex again a day or two after taking the E-pill...it is better to use a different method as your regular method!"
     ],
   };
 
-  @override
+  final Map<String, String> importantMessageTranslations = {
+  "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+  "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+  "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!"
+  };
+
+  final Map<String, String> learnMoreTranslations = {
+  "English": "Learn more",
+  "Kiswahili": "Jifunze zaidi",
+  "Dholuo": "Puonjri matut"
+  };
+
+
+
+@override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double boxWidth = screenWidth * 0.85;
-
-    double screenHeight = MediaQuery.of(context).size.height;
-    double availableHeight = screenHeight;
-    double boxHeight = availableHeight * 0.25;
-
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
-        title: Text('How Long Will It Last?'),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () => Navigator.of(context).pop(),
+        // ),
+        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-              height: availableHeight * 0.1,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 0;
-                          updateMethodContent();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 0 ? Colors.grey : null,
-                      ),
-                      child: Text('Kiswahili'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 1;
-                          updateMethodContent();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 1 ? Colors.grey : null,
-                      ),
-                      child: Text('Dholuo'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 2;
-                          updateMethodContent();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 2 ? Colors.grey : null,
-                      ),
-                      child: Text('English'),
-                    ),
-                  ],
-                ),
-              )),
-          SizedBox(height: 20.0),
-          Container(
-            alignment: Alignment.center,
-            height: availableHeight * 0.1,
-            width: boxWidth,
-            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  buildIconButton(MaraIcons.condom, 0),
-                  buildIconButton(MaraIcons.female_condom, 1),
-                  buildIconButton(MaraIcons.birth_control_pills, 2),
-                  buildIconButton(MaraIcons.syringe, 3),
-                  buildIconButton(MaraIcons.contraceptive_implant, 4),
-                  buildIconButton(MaraIcons.iud, 5),
-                  buildIconButton(MaraIcons.double_pills, 6),
-                  
-                ],
+                children: languages.map((language) => languageButton(language)).toList(),
               ),
             ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            height: availableHeight * 0.6, // Adjust as needed
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: boxWidth,
-                  height: boxHeight,
-                  color: Colors.blue,
-                  child: Center(
-                    child: methodContent,
-                  ),
-                ),
-                // SizedBox(height: 10.0),
-                Container(
-                  width: boxWidth * 0.75,
-                  height: availableHeight * 0.25 - 10,
-                  color: Colors.green,
-                  child: Center(
-                    child: buildSecondaryContext(),
-                  ),
-                ),
-              ],
+            methodSelectionRow(),
+            SizedBox(height: 20.0),
+            contentArea(),
+            SizedBox(height: 20.0),
+            additionalTextSection(),
+          ],
+        ),
+      ),
+    );
+  }
+
+Widget languageButton(String language) {
+    bool isSelected = languages[languageIndex] == language;
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          languageIndex = languages.indexOf(language);
+          overrideIndex = true;
+          updateMethodContent();
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
+
+
+Widget additionalTextSection() {
+  return Padding(
+    padding: EdgeInsets.all(10.0),
+    child: Column(
+      children: [
+        if (methodIndex == 0 || methodIndex == 1)
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.justify,
+              ),
             ),
+          ],
+        ),
+        SizedBox(height: 20),  // Space between the text and the button
+        if (methodIndex == 0 || methodIndex == 1)
+        TextButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100], // Button background color
+              foregroundColor: Colors.black 
+            ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HIVPage()),
+            );
+          },
+          icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+          label: Text(
+            learnMoreTranslations[languages[languageIndex]] ?? "Translation Not Found",
+            style: TextStyle(color: Colors.black)
           ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget methodSelectionRow() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildIconButton(MaraIcons.condom, "Condom", 0),
+          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
         ],
       ),
     );
   }
 
-  Widget buildSecondaryContext() {
-    return Text("ATTENTION ALL YOUNG WOMEN:  Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs! | " + 
-      contentDescriptionMap[languages[languageIndex]]![methodIndex]);
-  }
-
-  Widget buildIconButton(IconData iconData, int index) {
+  Widget buildIconButton(IconData iconData, String caption, int index) {
     bool isSelected = index == methodIndex;
 
     return Stack(
       alignment: Alignment.center,
       children: [
-        IconButton(
-          icon: Icon(
-            iconData,
-            size: isSelected ? 60 : 60,
-            color: isSelected ? Colors.black : Colors.grey,
-          ),
-          onPressed: () {
-            setState(() {
-              methodIndex = index;
-              updateMethodContent();
-            });
-          },
-          color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 60 : 60,
-          padding: EdgeInsets.all(10),
-          splashRadius: 40,
-          splashColor: Colors.grey.withOpacity(0.5),
-          highlightColor: Colors.transparent,
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: Icon(
+                iconData,
+                size: isSelected ? 60 : 60,
+                color: isSelected ? Colors.black : Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  methodIndex = index;
+                  updateMethodContent();
+                });
+              },
+              color: isSelected ? Colors.black : Colors.transparent,
+              iconSize: isSelected ? 60 : 60,
+              padding: EdgeInsets.all(10),
+              splashRadius: 40,
+              splashColor: Colors.grey.withOpacity(0.5),
+              highlightColor: Colors.transparent,
+            ),
+            SizedBox(height: 5),
+            Container (
+                width: 100,
+                child: Text(
+                  caption,
+                  softWrap: true, 
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: isSelected ? Colors.black : Colors.grey,
+                  ),
+                )
+            )
+          ],
         ),
       ],
     );
   }
 
-  void updateMethodContent() {
-    methodContent = Text(
+  Widget contentArea() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            SizedBox(width: 10.0),
+            Flexible(
+              child: Text(
+                contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget updateMethodContent() {
+    return Text(
       contentDescriptionMap[languages[languageIndex]]![methodIndex],
       style: TextStyle(
         fontSize: 20.0,
-        color: Colors.white,
+        color: Colors.black,
       )
     );
   }
