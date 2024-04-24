@@ -6,6 +6,11 @@
       "Dholuo": "Implant"
     },
     "icon": "assets/implant.png",
+    "options_page" : {
+      "English": "The implant is a tiny plastic rod (or rods) about the size of a match that is placed under the skin of your upper arm by a health provider. If you want to, you can feel the rod(s) under the skin. It has hormones in it that prevent pregnancy by telling your body not to release an egg every month while the implant is in. It needs to be removed by a provider. This method is popular among people who want a method they can forget about and lasts up to 3-5 years depending on the type.",
+      "Kiswahili": "Implant ni kijiti ndogo ya plastiki (au vijiti) yenye ukubwa wa fimbo ya kiberiti ambayo huwekwa chini ya ngozi ya mkono wako wa juu na mhudumu wa afya. Ikiwa unataka, unaweza kuhisi fimbo chini ya ngozi. Ina homoni zinazozuia mimba kwa kuuambia mwili wako usitoe yai kila mwezi wakati implant iko ndani. Inahitaji kuondolewa na mtoa huduma. Njia hii ni maarufu kati ya watu ambao wanataka njia ambayo wanaweza kusahau na hudumu hadi miaka 3-5 kulingana na aina.",
+      "Dholuo": "Implant en plastik matin machiegni rom gi yadh kibrit ma isoyo e bwo pien e bat gi jachiw thieth. Ka idwaro, inyalo mule e bwo pien. En gi homons mageng'o ich ka nyiso dendi mondo kik gol tong dwe ka dwe ekinde ma implant ni eiye. Dwarore ni ogole gi jachiw thieth. Joma ohero yorni ahinya gin jogo madwaro yor komo nyuol ma wigi nyalo wil godo kendoo kao madirom higni 3-5 kaluwore gi kit miketo."
+    },
     "how_it_works": {
       "English": "The implant is a tiny plastic rod (or rods) about the size of a match that is placed under the skin of your upper arm by a health provider. The rods contain hormone medication. If you want to, you can feel the rod(s) under the skin. Nexplanon has 1 rod, and Jadelle has 2. Its side effects include changes to your periods. The implant does not cause weight gain or loss. ",
       "Kiswahili": "Implant ni fimbo ndogo ya plastiki (au vijiti) yenye ukubwa wa kiberiti ambayo huwekwa chini ya ngozi ya mkono wako wa juu na mhudumu wa afya. Vijiti vina dawa za homoni. Ikiwa unataka, unaweza kuhisi fimbo chini ya ngozi. Nexplanon ina fimbo 1, na Jadelle ina 2. Madhara yake ni pamoja na mabadiliko ya vipindi vyako. Implant hakisababishi kupata au kupunguza uzito.",
@@ -79,6 +84,11 @@
       "Dholuo": "Injection"
     },
     "icon": "assets/depo.png",
+    "options_page" : {
+      "English": "The injection, or depo, is an injection given in your arm or buttock. It has hormones in it that prevent pregnancy by telling your body not to release eggs for 3 months. It's very easy to keep private because once it's in your body, no one can see or feel it.",
+      "Kiswahili": "Sindano, au depo, ni sindano inayotolewa kwenye mkono au kitako chako. Ina homoni zinazozuia mimba kwa kuuambia mwili wako usitoe mayai kwa muda wa miezi 3. Ni rahisi sana kuiweka faragha kwa sababu ikishaingia mwilini mwako, hakuna anayeweza kuiona au kuihisi.",
+      "Dholuo": "Sindan, kata Depo, en sindan ma ichuoyo e bat kata e sianda. En gi homons mageng'o ich ka onyiso del mondo kik gol tong kuom dweche 3. Oyot kano mopondo nikech ka osechuoye e dendi onge ng'ama nyalo nene kata mule."
+    },
     "how_it_works": {
       "English": "The injection, or depo, is an injection containing hormones given in your arm or buttock. Side effects include changes to your period, and some people experience weight gain or mood changes. ",
       "Kiswahili": "Sindano, au depo, ni sindano iliyo na homoni inayotolewa kwenye mkono au kitako chako. Madhara ni pamoja na mabadiliko katika kipindi chako, na watu wengine hupata uzito au mabadiliko ya hisia.",
@@ -152,6 +162,11 @@
       "Dholuo": "IUCD"
     },
     "icon": "assets/iucd.png",
+    "options_page" : {
+      "English": "The IUCD is small, T-shaped, and made out of plastic. It is placed into the womb (uterus) by a health provider to prevent pregnancy, and is the longest lasting method at up to 12 years. You can't feel it once it is in, and it needs to be removed by a provider. This method does not have hormones, and is popular among people who don't want to have to remember to do anything to prevent pregnancy.",
+      "Kiswahili": "IUCD ni ndogo, yenye umbo la T, na imetengenezwa kwa plastiki. Huwekwa kwenye tumbo la uzazi (uterasi) na mhudumu wa afya ili kuzuia mimba, na ndiyo njia inayodumu kwa muda mrefu zaidi ya hadi miaka 12. Huwezi kuhisi ikiwa imeingia, na inahitaji kuondolewa na mtoa huduma. Njia hii haina homoni, na ni maarufu miongoni mwa watu ambao hawataki kukumbuka kufanya chochote ili kuzuia mimba.",
+      "Dholuo": "Koil [IUCD] en gima tin, olose ekido machalo T, kendo olose gi plastik. Ikete e ofuko nyuol gi jachiw thieth mondo ogeng ich, kendo en e yor komo nyuol mabudho ahinya, otieko higni madirom 12. ok inyal mule ka en e iye, kendo dwarore ni ogole gi jachiw thieth. Yor ni onge homons, kendo ohere ahinya gi jogo ma ok dwar paro timo gimoro amora mondo ogeng' ich"
+    },
     "how_it_works": {
       "English": "The IUCD is small, T-shaped, and made out of plastic. It is placed into the womb (uterus) by a health provider to prevent pregnancy, and lasts up to 12 years. You can't feel it once it is in, and it does not have hormones. Side effects may include heavier and crampier periods.", 
       "Kiswahili": "IUCD ni ndogo, yenye umbo la T, na imetengenezwa kwa plastiki. Huwekwa kwenye tumbo la uzazi (uterasi) na mhudumu wa afya ili kuzuia mimba, na hudumu hadi miaka 12. Huwezi kuhisi ikiwa imeingia, na haina homoni. Madhara yanaweza kujumuisha vipindi vizito na vya kuuma.", 
@@ -225,6 +240,11 @@
       "Dholuo": "Pills"
     },
     "icon": "assets/pills.png",
+    "options_page" : {
+      "English": "Daily pills need to be taken every day to prevent pregnancy. The pills contain hormones that tell your body not to release an egg that month. You can stop them on their own, and they can also help to reduce pimples and prevent cancer.",
+      "Kiswahili": "Vidonge vya kila siku vinahitaji kuchukuliwa kila siku ili kuzuia mimba. Vidonge hivyo vina homoni zinazouambia mwili wako usitoe yai mwezi huo. Unaweza kuwazuia wao wenyewe, na wanaweza pia kusaidia kupunguza chunusi na kuzuia saratani.",
+      "Dholuo": "Pills dwarore ni omuonyo pile ka pile mondo ogeng ich. Yedhegi nigi homons manyiso dendi mondo kik gol tong e dwe no. inyalo weyo tiyo kodgi kendi, kendo ginyalo bende konyo duoko kabirwa chien kendo geng'o kansa."
+    },
     "how_it_works": {
       "English": "Daily pills contain hormones and need to be taken every day to prevent pregnancy. Side effects can include upset stomach and headache, but these usually go away after a couple months. Daily pills can improve pimples and help prevent some cancers.",
       "Kiswahili": "Vidonge vya kila siku vina homoni na vinahitaji kuchukuliwa kila siku ili kuzuia mimba. Madhara yanaweza kujumuisha mshtuko wa tumbo na maumivu ya kichwa, lakini kawaida hupotea baada ya miezi michache. Vidonge vya kila siku vinaweza kuboresha chunusi na kusaidia kuzuia baadhi ya saratani.",
@@ -298,6 +318,11 @@
       "Dholuo": "E-Pills"
     },
     "icon": "assets/emergency.png", 
+    "options_page" : {
+      "English": "Emergency pills are used to prevent pregnancy AFTER having sex. They only work if your body hasn't already released an egg, so they are good in an emergency, but not as the method you use all the time. Typically, they come as 2 pills you swallow at the same time. ",
+      "Kiswahili": "Vidonge vya dharura hutumika kuzuia mimba BAADA ya kujamiiana. Zinafanya kazi tu ikiwa mwili wako bado haujatoa yai, kwa hivyo ni nzuri katika dharura, lakini sio kama njia unayotumia kila wakati. Kwa kawaida, huja kama dawa 2 unazomeza kwa wakati mmoja.",
+      "Dholuo": "Emergency pills itiyo godo e geng'o ich BANG' terruok. Gitiyo mana ka dendi pok ne ogolo tong, koro gibeyo tiyo godo e emergency, to ok kaka yor komo nyuol mitiyo godo seche tee. Ojabiro kaka yedhe 2 ma imuonyo kanyakla."
+    },
     "how_it_works": {
       "English": "Emergency pills are used to prevent pregnancy AFTER having sex. They only work if your body hasn't already released an egg, so they are good in an emergency, but not as the method you use all the time. Typically, they come as 2 pills you swallow at the same time.",
       "Kiswahili": "Vidonge vya dharura hutumika kuzuia mimba BAADA ya kujamiiana. Zinafanya kazi tu ikiwa mwili wako bado haujatoa yai, kwa hivyo ni nzuri katika dharura, lakini sio kama njia unayotumia kila wakati. Kwa kawaida, huja kama dawa 2 unazomeza kwa wakati mmoja.",
@@ -371,6 +396,11 @@
       "Dholuo": "(male) Condom"
     },
     "icon": "assets/condom.png",
+    "options_page" : {
+      "English": "The male condom goes on over a man's penis before sex and keeps the sperm from going inside your body. This prevents pregnancy and also protects you from many STIs (infections you can get from sex, like HIV).",
+      "Kiswahili": "Kondomu ya kiume huenda juu ya uume wa mwanamume kabla ya kujamiiana na kuzuia mbegu za kiume zisiingie ndani ya mwili wako. Hii inazuia mimba na pia hukukinga dhidi ya magonjwa mengi ya zinaa (maambukizi unayoweza kupata kutokana na kufanya ngono, kama vile virusi vya ukimwi).",
+      "Dholuo": "Rabo yunga iruako e duong dichuo kapok uteroru kendo ogeng'o mondo pi nyodo kik donj e dendi. Ma geng'o ich kendo geng'i kuom tuoche mang'eny mag nyae [tuoche ma inyalo yudo e yor terruok, kaka kute mag ayaki."
+    },
     "how_it_works": {
       "English": "The male condom goes on over a man's penis before sex and keeps the sperm from going inside your body. This prevents pregnancy and also protects you from many STIs (infections you can get from sex, like HIV).",
       "Kiswahili": "Kondomu ya kiume huenda juu ya uume wa mwanamume kabla ya kujamiiana na kuzuia mbegu za kiume zisiingie ndani ya mwili wako. Hii inazuia mimba na pia hukukinga dhidi ya magonjwa mengi ya zinaa (maambukizi unayoweza kupata kutokana na kufanya ngono, kama vile virusi vya ukimwi).",
@@ -444,6 +474,11 @@
       "Dholuo": "Female condom"
     },
     "icon": "assets/female_condom.png",
+    "options_page" : {
+      "English": "The female condom is placed into your vagina before sex to keep the man's sperm from going inside your body, which prevents pregnancy and STIs (infections you can get from sex, like HIV). The end with the flexible plastic ring goes into the vagina. It is woman-controlled!",
+      "Kiswahili": "Kondomu ya kike huwekwa kwenye uke wako kabla ya kujamiiana ili kuzuia mbegu za kiume zisiingie ndani ya mwili wako, jambo ambalo huzuia mimba na magonjwa ya zinaa (maambukizi unayoweza kupata kutokana na kujamiiana, kama vile VVU). Mwisho na pete ya plastiki inayoweza kubadilika huenda kwenye uke. Inadhibitiwa na mwanamke!",
+      "Dholuo": "Rabo duong mine isoyo e duongni kapok iterori mondo kik pi nyodo mar dichuo odonj e dendi, ma geng'o ich kod nyae [tuoche ma inyalo yudo e yor terruok, kaka kute mag ayaki]. Dhoge man gi plastik ma dudore machalo pete donjo e duong. En gima miyo ema ruako."
+    },
     "how_it_works": {
       "English": "The female condom is placed into your vagina before sex to keep the man's sperm from going inside your body, which prevents pregnancy and STIs (infections you can get from sex, like HIV). The end with the flexible plastic ring goes into the vagina. It is woman-controlled!",
       "Kiswahili": "Kondomu ya kike huwekwa kwenye uke wako kabla ya kujamiiana ili kuzuia mbegu za kiume zisiingie ndani ya mwili wako, jambo ambalo huzuia mimba na magonjwa ya zinaa (maambukizi unayoweza kupata kutokana na kujamiiana, kama vile VVU). Mwisho na pete ya plastiki inayoweza kubadilika huenda kwenye uke. Inadhibitiwa na mwanamke!.",
