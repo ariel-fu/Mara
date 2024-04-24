@@ -105,7 +105,7 @@ class _OptionsPageState extends State<OptionsPage> {
     // var selectedButtonIndex = input == null ? input : 0;
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text(_t('title'))),
+          title: Text(_t('title')),
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(containerHeight * 0.05),
             child: Container(
@@ -233,7 +233,7 @@ class _OptionsPageState extends State<OptionsPage> {
                     ),
                     methodRef == null ? SizedBox(height: 20.0) : Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text(methodDetailsData[methodRef]!['how_it_works'][languages[_languageIndex]]),
+                      child: Text(methodDetailsData[methodRef]!['explanation'][languages[_languageIndex]]),
                     ),
                     // SizedBox(height: 70.0),
                     Row(
