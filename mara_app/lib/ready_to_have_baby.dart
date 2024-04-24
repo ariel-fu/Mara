@@ -24,10 +24,10 @@ class _ReadyPageState extends State<ReadyPage> {
       'Dholuo': 'Ango nyithindo mabeyo manyalo wuonwa?',
       'English': 'What if I\'m ready to have a baby?',
     },
-    'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!': {
-      'Kiswahili': 'Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!', 
-      'Dholuo': 'HEY! MA EN GIMA BER NG\'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng\'o kute mag ayaki kod nyae mamoko!', 
-      'English': 'HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'
+    'HEY! THIS IS IMPORTANT!': {
+      'Kiswahili': 'HEY! HII NI MUHIMU! Kutumia njia za upangaji uzazi HAKUTAbadilisha uwezo wako wa kupata mimba katika siku zijazo!', 
+      'Dholuo': 'HEY! MA EN GIMA BER NG\'EYO! Tiyo gi yore mag komo nyuol OK bi loko nyaloni mar mako ich e ndalo mabiro!', 
+      'English': 'HEY! THIS IS IMPORTANT! Using family planning methods will NOT change your ability to get pregnant in the future!',
     }, 
     'LEARN MORE about the fertility considerations of each method': {
       'Kiswahili': 'JIFUNZE ZAIDI kuhusu masuala ya uzazi ya kila mbinu', 
@@ -37,7 +37,7 @@ class _ReadyPageState extends State<ReadyPage> {
     'Preparing for a health pregnancy': {
       'Kiswahili': 'Kujiandaa kwa ujauzito wenye afya', 
       'Dholuo': 'Yikruok ne ich man gi ngima', 
-      'English': 'Preparing for a healthy pregnancy'
+      'English': 'Preparing for a healthy pregnancy',
     }
 
   };
@@ -176,7 +176,7 @@ Widget build(BuildContext context) {
               customListTile(
                 imagePath: 'assets/preg_woman_new.png',
                 header: _t('What if I\'m ready to have a baby?'),
-                title: _t('HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!'),
+                title: _t('HEY! THIS IS IMPORTANT!'),
               ),
               
           SizedBox(width:boxWidth, height:boxHeight * 0.5 * 0.6, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
