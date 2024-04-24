@@ -43,31 +43,43 @@ class _PatternPageState extends State<PatternPage> {
   // TODO: replace iwth the right names
   final Map<String, List<String>> audioContentMap = {
     "English": [
-      'videoAudio/audio/what_if_condom_E.mp3',
-      'videoAudio/audio/what_if_condom_E.mp3',
-      'videoAudio/audio/what_if_pills_E.mp3',
-      'videoAudio/audio/what_if_depo_E.mp3',
-      'videoAudio/audio/what_if_implant_E.mp3',
-      'videoAudio/audio/what_if_iucd_E.mp3',
-      'videoAudio/audio/what_if_epill_E.mp3',
+      'videoAudio/audio/period_audio/period_condom_E.mp3',
+      'videoAudio/audio/period_audio/period_condom_E.mp3',
+      'videoAudio/audio/period_audio/period_pills_E.mp3',
+      'videoAudio/audio/period_audio/period_depo_E.mp3',
+      'videoAudio/audio/period_audio/period_implant_E.mp3',
+      'videoAudio/audio/period_audio/period_iucd_E.mp3',
+      'videoAudio/audio/period_audio/period_epill_E.mp3',
     ],
     "Kiswahili": [
-      'videoAudio/audio/what_if_condom_K.mp3',
-      'videoAudio/audio/what_if_condom_K.mp3',
-      'videoAudio/audio/what_if_pills_K.mp3',
-      'videoAudio/audio/what_if_depo_K.mp3',
-      'videoAudio/audio/what_if_implant_K.mp3',
-      'videoAudio/audio/what_if_iucd_K.mp3',
-      'videoAudio/audio/what_if_epill_K.mp3',
+      'videoAudio/audio/period_audio/period_condom_K.mp3',
+      'videoAudio/audio/period_audio/period_condom_K.mp3',
+      'videoAudio/audio/period_audio/period_pills_K.mp3',
+      'videoAudio/audio/period_audio/period_depo_K.mp3',
+      'videoAudio/audio/period_audio/period_implant_K.mp3',
+      'videoAudio/audio/period_audio/period_iucd_K.mp3',
+      'videoAudio/audio/period_audio/period_epill_K.mp3',
     ],
     "Dholuo": [
-      'videoAudio/audio/what_if_condom_L.mp3',
-      'videoAudio/audio/what_if_condom_L.mp3',
-      'videoAudio/audio/what_if_pills_L.mp3',
-      'videoAudio/audio/what_if_depo_L.mp3',
-      'videoAudio/audio/what_if_implant_L.mp3',
-      'videoAudio/audio/what_if_iucd_L.mp3',
-      'videoAudio/audio/what_if_epill_L.mp3',
+      'videoAudio/audio/period_audio/period_condom_L.mp3',
+      'videoAudio/audio/period_audio/period_condom_L.mp3',
+      'videoAudio/audio/period_audio/period_pills_L.mp3',
+      'videoAudio/audio/period_audio/period_depo_L.mp3',
+      'videoAudio/audio/period_audio/period_implant_L.mp3',
+      'videoAudio/audio/period_audio/period_iucd_L.mp3',
+      'videoAudio/audio/period_audio/period_epill_L.mp3',
+    ],
+  };
+
+  final Map<String, List<String>> heyThisAudioMap = {
+    "English": [
+      'videoAudio/audio/period_audio/heyThis_message_E.mp3'
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/period_audio/heyThis_message_K.mp3'
+    ],
+    "Dholuo": [
+      'videoAudio/audio/period_audio/heyThis_message_L.mp3'
     ],
   };
 
@@ -222,7 +234,7 @@ Widget build(BuildContext context) {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                    getAudio(),
+                    getAudio(audioContentMap, methodIndex),
                   ],
                 ),
                 SizedBox(width: 10.0),
@@ -376,7 +388,7 @@ Widget videoSection(double width, double height) {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                getAudio(),
+                getAudio(audioContentMap, methodIndex),
               ],
             ),
             SizedBox(width: 10.0),
@@ -406,8 +418,14 @@ Widget additionalTextSection() {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
                 SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                    getAudio(heyThisAudioMap, 0),
+                  ],
+                ),
                 Expanded(
                   child: Text(
                     importantMessageTranslations[languages[languageIndex]] ?? "Important message not found",
@@ -510,7 +528,7 @@ String _getTitle(String videoKey, String language) {
       return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
   }
 
-  Widget getAudio() {
-    return AudioWidget(audioAsset: audioContentMap[languages[languageIndex]]![methodIndex]);
+  Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
+    return AudioWidget(audioAsset: audioMap[languages[languageIndex]]![audioIndex]);
   }
 }
