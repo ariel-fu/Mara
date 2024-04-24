@@ -30,7 +30,7 @@ class _HomePage2State extends State<HomePage2> {
       "Je, nafasi yangu ya kupata mimba ni ipi?",
       "Je, ninaweza kuiweka kwa usiri?",
       "Je, itakuaje ikiwa niko tayari kupata mtoto?",
-      "Take the quiz"
+      "Chukua jaribio letu na utafute mbinu yako!"
     ],
     "Dholuo": [
       "Yierona gin mage?",
@@ -39,7 +39,7 @@ class _HomePage2State extends State<HomePage2> {
       "Nyalona mar mako ich en ang'o?",
       "Bende anyalo kete mopondo?",
       "To ka ayikora mar mako ich to?",
-      "Take the quiz"
+      "Tim penj wa mondo iyud yori mar geng'o ich!"
     ],
     "English": [
       "What are my options?",
@@ -48,7 +48,7 @@ class _HomePage2State extends State<HomePage2> {
       "What is my chance of getting pregnant? ",
       "Can I keep it private?",
       "What if I'm ready to have a baby?",
-      "Take the quiz"
+      "Take our quiz and find your method!"
     ],
   };
 
