@@ -233,7 +233,7 @@ class _OptionsPageState extends State<OptionsPage> {
                     ),
                     methodRef == null ? SizedBox(height: 20.0) : Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text(methodDetailsData[methodRef]!['explanation'][languages[_languageIndex]]),
+                      child: Text(methodDetailsData[methodRef]!['options_page'][languages[_languageIndex]]),
                     ),
                     // SizedBox(height: 70.0),
                     Row(
