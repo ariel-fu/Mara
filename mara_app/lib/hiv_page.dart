@@ -488,7 +488,9 @@ Widget build(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               contentBox('Male and Female Condoms', updateMethodContent1()),
+              SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/twopeople.png')),
               contentBox('PrEP', updateMethodContent2()),
+              SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/preppills.png')),
             ],
           ),
         ),
