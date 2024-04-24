@@ -20,8 +20,8 @@ class _PrepPageState extends State<PrepPage> {
 
   final Map<String, Map<String, String>> _translations = {
     'Preparing for a Healthy Pregnancy': {
-      'Kiswahili': 'Kujiandaa kwa Ujauzito Wenye Afya',
-      'Dholuo': 'Kujiandaa kwa Ujauzito Wenye Afya Luo',
+      'Kiswahili': 'Kujiandaa kwa ujauzito wenye afya',
+      'Dholuo': 'Yikruok ne ich man gi ngima',
       'English': 'Preparing for a Healthy Pregnancy',
     },
     'Are you ready? Tap each check mark to learn about ways to promote a healthy pregnancy.': {

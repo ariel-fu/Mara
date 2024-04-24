@@ -73,15 +73,15 @@ class _EmergencyPageState extends State<EmergencyPage> {
   'video1': {
     '0': { // Language code 0
       'video': 'videoAudio/videos/peer/peer3KS.mp4',
-      'text': 'Video - Mtazamo wa Rika',
+      'text': 'Video: Mwenzio anaelezea',
     },
     '1': { // Language code 1
       'video': 'videoAudio/videos/peer/peer3DL.mp4',
-      'text': 'Vidio - Kaka Jowetegi Neno Gik Moko',
+      'text': 'Video: Mbasni lero',
     },
     '2': { // Language code 2
       'video': 'videoAudio/videos/peer/peer3E.mp4',
-      'text': 'Video - A Peer Perspective',
+      'text': 'Video: a peer explains',
     },
   },
   'video2': {

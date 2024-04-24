@@ -36,15 +36,15 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   'video1': {
     '0': { // Language code 0
       'video': 'videoAudio/videos/provider/provider3KS.mp4',
-      'text': 'Video - Daktari Aeleza',
+      'text': 'Video: Mtoa huduma wa afya anaelezea',
     },
     '1': { // Language code 1
       'video': 'videoAudio/videos/provider/provider3DL.mp4',
-      'text': 'Vidio - Laktar Wuoyo',
+      'text': 'Vidio: Jachiw thieth lero',
     },
     '2': { // Language code 2
       'video': 'videoAudio/videos/provider/provider3E.mp4',
-      'text': 'Video - A Doctor Explains',
+      'text': 'Video: a provider explains',
     },
    },
   };

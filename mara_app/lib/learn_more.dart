@@ -18,8 +18,8 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
 
   final Map<String, String> subtitleTranslations = {
   "English": "Tap each method to learn more about its fertility consideration.",
-  "Kiswahili": "Gusa kila njia ili ujifunze zaidi kuhusu mchango wake kwenye uzazi.",
-  "Dholuo": "Tuo wuodi matin to ok nang'o chuny gi tim ber."
+  "Kiswahili": "Gusa kila mbinu ili upate maelezo zaidi kuhusu masuala yake ya uzazi",
+  "Dholuo": "Mul e yor komo nyuol ka yor komo nyuol mondo ipuonjri mang'eny ewi gigo monego ing'e ewi nyaloni mar mako ich"
 };
 final Map<String, String> titleTranslations = {
   "English": "What if I'm ready to have a baby?", 

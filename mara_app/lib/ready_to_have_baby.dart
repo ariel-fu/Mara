@@ -20,8 +20,8 @@ class _ReadyPageState extends State<ReadyPage> {
     //   'English': 'Family Planning Guide',
     // },
     'What if I\'m ready to have a baby?': {
-      'Kiswahili': 'Kama niko tayari kupata mtoto?',
-      'Dholuo': 'Ango nyithindo mabeyo manyalo wuonwa?',
+      'Kiswahili': 'Je, itakuaje ikiwa niko tayari kupata mtoto?',
+      'Dholuo': 'To ka ayikora mar mako ich to?',
       'English': 'What if I\'m ready to have a baby?',
     },
     'HEY! THIS IS IMPORTANT!': {
@@ -49,9 +49,9 @@ class _ReadyPageState extends State<ReadyPage> {
       'English': 'videoAudio/videos/provider/provider4E.mp4',
     },
     'titles': {
-      'Kiswahili': 'Video - Daktari Aeleza',
-      'Dholuo': 'Vidio - Laktar Wuoyo',
-      'English': 'Video: A Doctor Explains',
+      'Kiswahili': 'Video: Mtoa huduma wa afya anaelezea',
+      'Dholuo': 'Video: Jachiw thieth lero',
+      'English': 'Video: a provider explains',
     }
   };
 

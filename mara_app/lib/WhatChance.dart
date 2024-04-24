@@ -49,8 +49,8 @@ class _WhatChanceState extends State<WhatChance> {
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
-      "Takriban wanawake 13 kati ya 100 wanaotumia kondomu za kiume kwa mwaka mmoja watapata mimba.",
       "Takriban wanawake 21 kati ya 100 wanaotumia kondomu za kike kwa mwaka mmoja watapata mimba.",
+      "Takriban wanawake 13 kati ya 100 wanaotumia kondomu za kiume kwa mwaka mmoja watapata mimba.",
       "Takriban wanawake 7 kati ya 100 wanaotumia vidonge vya kila siku kwa mwaka watakuwa wajawazito.",
       "Takriban wanawake 4 kati ya 100 wanaotumia sindano (depo) kwa mwaka watakuwa wajawazito.",
       "Chini ya mwanamke 1 kati ya 100 wanaotumia implant kwa mwaka mmoja watapata ujauzito.",
@@ -58,8 +58,8 @@ class _WhatChanceState extends State<WhatChance> {
       "Jinsi E-pill inavyofanya kazi vizuri ili kuzuia mimba inategemea mambo mengi - ni muda gani unachukua baada ya ngono, na muda wa mzunguko wako wa kila mwezi. E-pill haijaundwa kutumiwa kama njia yako ya kawaida ya kila siku, na haifanyi kazi vizuri ikiwa unafanya ngono mara kwa mara.",
     ],
     "Dholuo": [
-      "Madirom mine 13 kuom 100 matiyo gi kondoms mar chuo e higa biro mako ich.",
       "Madirom mine 21 kuom 100 matiyo gi kondoms mar mine e higa biro mako ich.",
+      "Madirom mine 13 kuom 100 matiyo gi kondoms mar chuo e higa biro mako ich.",
       "Madirom mine 7 kuom 100 matiyo gi pills mapile ka pile e higa biro mako ich",
       "madirom mine 4 kuom 100 matiyo gi sindan [Depo] e higa biro mako ich.",
       "Matin ne miyo 1 kuom 100 matiyo gi Implant e higa biro mako ich.",
@@ -67,8 +67,8 @@ class _WhatChanceState extends State<WhatChance> {
       "Kaka E-pill tiyo maber e geng'o ich luwore gi gik mang'eny - kaka imuonye mapiyo marom nade bang bedo e achiel, kod kinde ma intie e sako ni mar dwe. E-pill ok olosi mondo oti godo kaka yori mapile mar geng'o ich kendo ok oti maber ka ibedo e achiel monuoyore ding'eny.",
     ],
     "English": [
-      "About 13 out of 100 women using male condoms for a year will become pregnant.",
       "About 21 out of 100 women using female condoms for a year will become pregnant.",
+      "About 13 out of 100 women using male condoms for a year will become pregnant.",
       "About 7 out of 100 women using daily pills for a year will become pregnant.",
       "About 4 out of 100 women using the injection (depo) for a year will become pregnant.",
       "Fewer than 1 in 100 women using the implant for a year will become pregnant.",
