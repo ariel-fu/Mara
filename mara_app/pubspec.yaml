@@ -97,6 +97,13 @@ flutter:
     - assets/period_new.png
     - assets/privacy_new.png
     - assets/preg_woman_new.png
+    - assets/birth_control_white.png
+    - assets/calendar_white.png
+    - assets/chance_white.png
+    - assets/period_white.png
+    - assets/privacy_white.png
+    - assets/preg_woman_white.png
+    - assets/take_quiz_white.png
     - assets/take_quiz.png
     - assets/misc-icons/
     - assets/audio.png

@@ -130,29 +130,29 @@ class _PatternPageState extends State<PatternPage> {
   'video1': {
     '0': { // Language code 0
       'video': 'videoAudio/videos/provider/provider1KS.mp4',
-      'text': 'Video - Daktari Aeleza',
+      'text': 'Video: Mtoa huduma wa afya anaelezea',
     },
     '1': { // Language code 1
       'video': 'videoAudio/videos/provider/provider1DL.mp4',
-      'text': 'Vidio - Laktar Wuoyo',
+      'text': 'Video: Jachiw thieth lero',
     },
     '2': { // Language code 2
       'video': 'videoAudio/videos/provider/provider1E.mp4',
-      'text': 'Video - A Doctor Explains',
+      'text': 'Video: a provider explains',
     },
   },
   'video2': {
     '0': {
       'video': 'videoAudio/videos/peer/peer1KS.mp4',
-      'text': 'Video - Mtazamo wa Rika',
+      'text': 'Video: Mwenzio anaelezea',
     },
     '1': {
       'video': 'videoAudio/videos/peer/peer1DL.mp4',
-      'text': 'Vidio - Kaka Jowetegi Neno Gik Moko',
+      'text': 'Video: Mbasni lero',
     },
     '2': {
       'video': 'videoAudio/videos/peer/peer1E.mp4',
-      'text': 'Video - A Peer Perspective',
+      'text': 'Video: a peer explains',
     },
   },
 };
@@ -229,7 +229,7 @@ Widget build(BuildContext context) {
                 Flexible(
                   child: Text(
                     contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                    style: TextStyle(fontSize: 16.0),
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
                   ),
                 ),
               ],
@@ -383,7 +383,7 @@ Widget videoSection(double width, double height) {
             Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0, color: Colors.black),
               ),
             ),
           ],
