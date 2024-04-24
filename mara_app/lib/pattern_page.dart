@@ -3,6 +3,7 @@ import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
 import 'bleeding.dart';
 import 'package:mara_app/hiv_page.dart';
+import 'package:mara_app/audio.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -13,9 +14,6 @@ class PatternPage extends StatefulWidget {
 
 class _PatternPageState extends State<PatternPage> {
   //String _currentLanguage = 'English';
-
-  
-
   Widget methodContent = Text('method content');
   String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
@@ -42,6 +40,37 @@ class _PatternPageState extends State<PatternPage> {
     "method 6"
   ];
 
+  // TODO: replace iwth the right names
+  final Map<String, List<String>> audioContentMap = {
+    "English": [
+      'videoAudio/audio/period_condom_E.mp3',
+      'videoAudio/audio/period_condom_E.mp3',
+      'videoAudio/audio/period_pills_E.mp3',
+      'videoAudio/audio/period_depo_E.mp3',
+      'videoAudio/audio/period_implant_E.mp3',
+      'videoAudio/audio/period_iucd_E.mp3',
+      'videoAudio/audio/period_epill_E.mp3',
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/period_condom_K.mp3',
+      'videoAudio/audio/period_condom_K.mp3',
+      'videoAudio/audio/period_pills_K.mp3',
+      'videoAudio/audio/period_depo_K.mp3',
+      'videoAudio/audio/period_implant_K.mp3',
+      'videoAudio/audio/period_iucd_K.mp3',
+      'videoAudio/audio/period_epill_K.mp3',
+    ],
+    "Dholuo": [
+      'videoAudio/audio/period_condom_L.mp3',
+      'videoAudio/audio/period_condom_L.mp3',
+      'videoAudio/audio/period_pills_L.mp3',
+      'videoAudio/audio/period_depo_L.mp3',
+      'videoAudio/audio/period_implant_L.mp3',
+      'videoAudio/audio/period_iucd_L.mp3',
+      'videoAudio/audio/period_epill_L.mp3',
+    ],
+  };
+
   final Map<String, String> titleTranslations = {
     "Kiswahili": "Nini kitafanyikia hedhi zangu",
     "Dholuo": "En ang'o mabiro timore ne remba mar dwe?",
@@ -65,7 +94,6 @@ class _PatternPageState extends State<PatternPage> {
     "Kiswahili": "Jifunze zaidi",
     "Dholuo": "Puonjri matut"
   };
-
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -102,29 +130,29 @@ class _PatternPageState extends State<PatternPage> {
   'video1': {
     '0': { // Language code 0
       'video': 'videoAudio/videos/provider/provider1KS.mp4',
-      'text': 'Video: Mtoa huduma wa afya anaelezea',
+      'text': 'Video - Daktari Aeleza',
     },
     '1': { // Language code 1
       'video': 'videoAudio/videos/provider/provider1DL.mp4',
-      'text': 'Video: Jachiw thieth lero',
+      'text': 'Vidio - Laktar Wuoyo',
     },
     '2': { // Language code 2
       'video': 'videoAudio/videos/provider/provider1E.mp4',
-      'text': 'Video: a provider explains',
+      'text': 'Video - A Doctor Explains',
     },
   },
   'video2': {
     '0': {
       'video': 'videoAudio/videos/peer/peer1KS.mp4',
-      'text': 'Video: Mwenzio anaelezea',
+      'text': 'Video - Mtazamo wa Rika',
     },
     '1': {
       'video': 'videoAudio/videos/peer/peer1DL.mp4',
-      'text': 'Video: Mbasni lero',
+      'text': 'Vidio - Kaka Jowetegi Neno Gik Moko',
     },
     '2': {
       'video': 'videoAudio/videos/peer/peer1E.mp4',
-      'text': 'Video: a peer explains',
+      'text': 'Video - A Peer Perspective',
     },
   },
 };
@@ -190,19 +218,23 @@ Widget build(BuildContext context) {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                    getAudio(),
+                  ],
+                ),
                 SizedBox(width: 10.0),
-                Expanded(
+                Flexible(
                   child: Text(
                     contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                    style: TextStyle(fontSize: 16.0),
                   ),
                 ),
-                
               ],
             ),
           ),
-          
         ),
         additionalTextSection(),
         Row(children: [
@@ -331,7 +363,6 @@ Widget videoSection(double width, double height) {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Container(
-        width: width * 0.9,
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
@@ -341,12 +372,18 @@ Widget videoSection(double width, double height) {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                getAudio(),
+              ],
+            ),
             SizedBox(width: 10.0),
-            Expanded(
+            Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0, color: Colors.black),
+                style: TextStyle(fontSize: 16.0),
               ),
             ),
           ],
@@ -471,5 +508,9 @@ String _getTitle(String videoKey, String language) {
           videoTitle2 = _getTitle('video2', '2');
       }
       return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
+  }
+
+  Widget getAudio() {
+    return AudioWidget(audioAsset: audioContentMap[languages[languageIndex]]![methodIndex]);
   }
 }
