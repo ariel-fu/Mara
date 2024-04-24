@@ -350,11 +350,11 @@ class _OptionsPageState extends State<OptionsPage> {
   }
 
   Widget getAudio() {
-    int index = 0;
-    if(methodIndex != null) {
-      index = methodIndex!;
+    if(methodIndex == null) {
+      return SizedBox();
     }
-    return AudioWidget(audioAsset: audioContentMap[languages[_languageIndex]]![index]);
+        
+    return AudioWidget(audioAsset: audioContentMap[languages[_languageIndex]]![methodIndex!]);
   }
 
   // void navigateToLikedMethodsScreen() {
