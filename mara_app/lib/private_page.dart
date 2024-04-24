@@ -138,7 +138,7 @@ class _PrivatePageState extends State<PrivatePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text(titleMap[languages[languageIndex]]!)),
+        title: Text(titleMap[languages[languageIndex]] ?? "Title not found"),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
