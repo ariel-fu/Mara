@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class imLaunchScreen extends StatefulWidget {
   const imLaunchScreen({super.key});
@@ -7,7 +8,22 @@ class imLaunchScreen extends StatefulWidget {
   State<imLaunchScreen> createState() => _imLaunchState();
 }
 class _imLaunchState extends State<imLaunchScreen> {
+
   String _currentLanguage = 'English';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  // Load the current language from SharedPreferences
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+  }
 
   Map<String, String> translations = {
     'English': "Let's get started!",
@@ -27,8 +43,10 @@ class _imLaunchState extends State<imLaunchScreen> {
     'Dholuo': "Wachaki!",
   };
 
- void _switchLanguage(String language) {
-    setState(() {
+ void _switchLanguage(String language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
+    setState(()  { 
       _currentLanguage = language;
     });
   }

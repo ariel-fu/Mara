@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'bleeding.dart';
 import 'package:mara_app/hiv_page.dart';
 
@@ -29,6 +30,27 @@ class _PatternPageState extends State<PatternPage> {
   // Widget methodContent = updateMethodContent();
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language  
+
+   @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  String _currentLanguage = 'English';
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      languageIndex= 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
+  }
 
   final double _aspectRatio = 16 / 10;
   final languages = ["Kiswahili", "Dholuo", "English"];
@@ -135,6 +157,7 @@ class _PatternPageState extends State<PatternPage> {
 
 @override
 Widget build(BuildContext context) {
+  _loadCurrentLanguage();
   final double containerWidth = MediaQuery.of(context).size.width;
   final double containerHeight = MediaQuery.of(context).size.height;
   double boxWidth = containerWidth;
@@ -272,6 +295,7 @@ Widget languageButton(String language, int index) {
 
   return ElevatedButton(
     onPressed: () {
+      _switchLanguage(index);
       setState(() {
         languageIndex = index;
         overrideIndex = true;
@@ -444,6 +468,22 @@ String _getTitle(String videoKey, String language) {
   print('Title for $videoKey in $language: $title');
   return title;
 }
+
+void _switchLanguage(int language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0 ) {
+      temp =  'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp =  'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(()  { 
+      languageIndex = language;
+    });
+  }
 
   Widget updateVideoContent1() {
       if (languageIndex == 0) {

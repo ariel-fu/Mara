@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'options_image.dart';
 import 'short_summaries.dart';
@@ -43,16 +44,33 @@ class _OptionsPageState extends State<OptionsPage> {
   int _languageIndex = 2; // Default value
   final languages = ["Kiswahili", "Dholuo", "English"];
   final methods = MethodRepository.loadMethods();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+    _methodDetailsDataFuture = loadMethodDetails();
+  }
+
+  String _currentLanguage = 'English';
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      _languageIndex= 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      _languageIndex = 1;
+    } else {
+      _languageIndex = 0;
+    }
+  }
   
   Set<String> _likedMethods = {};
   // from recommendation_screen.dart; factor out into app state
   late Future<Map<String, dynamic>> _methodDetailsDataFuture;
   
-  @override
-  void initState() {
-    super.initState();
-    _methodDetailsDataFuture = loadMethodDetails();
-  }
 
   Future<Map<String, dynamic>> loadMethodDetails() async {
     final String jsonString = await rootBundle.loadString('assets/methods.json');
@@ -81,6 +99,7 @@ class _OptionsPageState extends State<OptionsPage> {
 
   @override
   Widget build(BuildContext context) {
+    _loadCurrentLanguage();
     // Receive selectedButtonIndex as a route argument if available
     final int? routeArgumentIndex =
         ModalRoute.of(context)?.settings.arguments as int?;
@@ -121,6 +140,7 @@ class _OptionsPageState extends State<OptionsPage> {
                           onPressed: () {
                             setState(() {
                               _languageIndex = 0;
+                              _switchLanguage(0);
                               overrideIndex = true;
                               // updateMethodContent();
                             });
@@ -138,6 +158,7 @@ class _OptionsPageState extends State<OptionsPage> {
                           onPressed: () {
                             setState(() {
                               _languageIndex = 1;
+                              _switchLanguage(1);
                               overrideIndex = true;
                               // updateMethodContent();
                             });
@@ -155,6 +176,7 @@ class _OptionsPageState extends State<OptionsPage> {
                           onPressed: () {
                             setState(() {
                               _languageIndex = 2;
+                              _switchLanguage(2);
                               overrideIndex = true;
                               // updateMethodContent();
                             });
@@ -293,6 +315,22 @@ class _OptionsPageState extends State<OptionsPage> {
       );
   }
 
+  void _switchLanguage(int language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0 ) {
+      temp =  'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp =  'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(()  { 
+      _languageIndex = language;
+    });
+  }
+  
   void updateIndex(int index) {
     setState(() {
       methodIndex = index;

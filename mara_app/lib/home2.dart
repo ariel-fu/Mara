@@ -11,6 +11,7 @@ import 'package:mara_app/WhatChance.dart';
 
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:mara_app/new_liked_methods.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HomePage2 extends StatefulWidget {
@@ -53,6 +54,19 @@ class _HomePage2State extends State<HomePage2> {
   };
 
   String _currentLanguage = 'English';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+  }
 
   // copied from options_page
   final Map<String, Map<String, String>> _translations = {
@@ -113,14 +127,17 @@ class _HomePage2State extends State<HomePage2> {
     }
   }
 
-  void _switchLanguage(String language) {
-    setState(() {
+  void _switchLanguage(String language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
+    setState(()  { 
       _currentLanguage = language;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    _loadCurrentLanguage();
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
