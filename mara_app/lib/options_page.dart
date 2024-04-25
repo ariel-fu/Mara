@@ -40,30 +40,30 @@ class _OptionsPageState extends State<OptionsPage> {
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
-      'videoAudio/audio/options_audio/options_male_condom_E.mp3',
-      'videoAudio/audio/options_audio/options_female_condom_E.mp3',
-      'videoAudio/audio/options_audio/options_pills_E.mp3',
-      'videoAudio/audio/options_audio/options_depo_E.mp3',
-      'videoAudio/audio/options_audio/options_implant_E.mp3',
       'videoAudio/audio/options_audio/options_iucd_E.mp3',
+      'videoAudio/audio/options_audio/options_pills_E.mp3',
+      'videoAudio/audio/options_audio/options_male_condom_E.mp3',
+      'videoAudio/audio/options_audio/options_implant_E.mp3',
+      'videoAudio/audio/options_audio/options_depo_E.mp3',
+      'videoAudio/audio/options_audio/options_female_condom_E.mp3',
       'videoAudio/audio/options_audio/options_epill_E.mp3',
     ],
     "Kiswahili": [
-      'videoAudio/audio/options_audio/options_male_condom_K.mp3',
-      'videoAudio/audio/options_audio/options_female_condom_K.mp3',
-      'videoAudio/audio/options_audio/options_pills_K.mp3',
-      'videoAudio/audio/options_audio/options_depo_K.mp3',
-      'videoAudio/audio/options_audio/options_implant_K.mp3',
       'videoAudio/audio/options_audio/options_iucd_K.mp3',
+      'videoAudio/audio/options_audio/options_pills_K.mp3',
+      'videoAudio/audio/options_audio/options_male_condom_K.mp3',
+      'videoAudio/audio/options_audio/options_implant_K.mp3',
+      'videoAudio/audio/options_audio/options_depo_K.mp3',
+      'videoAudio/audio/options_audio/options_female_condom_K.mp3',
       'videoAudio/audio/options_audio/options_epill_K.mp3',
     ],
     "Dholuo": [
-      'videoAudio/audio/options_audio/options_male_condom_L.mp3',
-      'videoAudio/audio/options_audio/options_female_condom_L.mp3',
-      'videoAudio/audio/options_audio/options_pills_L.mp3',
-      'videoAudio/audio/options_audio/options_depo_L.mp3',
-      'videoAudio/audio/options_audio/options_implant_L.mp3',
       'videoAudio/audio/options_audio/options_iucd_L.mp3',
+      'videoAudio/audio/options_audio/options_pills_L.mp3',
+      'videoAudio/audio/options_audio/options_male_condom_L.mp3',
+      'videoAudio/audio/options_audio/options_implant_L.mp3',
+      'videoAudio/audio/options_audio/options_depo_L.mp3',
+      'videoAudio/audio/options_audio/options_female_condom_L.mp3',
       'videoAudio/audio/options_audio/options_epill_L.mp3',
     ],
   };
@@ -274,7 +274,7 @@ class _OptionsPageState extends State<OptionsPage> {
                         Flexible (
                           child: methodRef == null ? SizedBox(height: 20.0) : Padding(
                             padding: const EdgeInsets.all(15.0),
-                            child: Text(methodDetailsData[methodRef]!['how_it_works'][languages[_languageIndex]]),
+                            child: Text(methodDetailsData[methodRef]!['options_page'][languages[_languageIndex]]),
                           ),
                         )
                       ]
@@ -353,7 +353,7 @@ class _OptionsPageState extends State<OptionsPage> {
     if(methodIndex == null) {
       return SizedBox();
     }
-
+    print(audioContentMap[languages[_languageIndex]]![methodIndex!]);
     return AudioWidget(audioAsset: audioContentMap[languages[_languageIndex]]![methodIndex!]);
   }
 
