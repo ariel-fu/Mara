@@ -23,6 +23,12 @@ class MethodDetailsScreen extends StatefulWidget {
 class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
   late String _currentLanguage;
 
+  final Map<String, String>  titleTranslations = {
+    'Kiswahili': 'Ukurasa wa muhtasari',
+    'Dholuo': 'Oboke ma lero weche e yo machuok',
+    'English': 'Summary page',
+  };
+
 
   @override
   void initState() {
@@ -83,7 +89,7 @@ Widget build(BuildContext context) {
         icon: Icon(Icons.arrow_back), 
         onPressed: () => Navigator.of(context).pop(), 
       ),
-      title: Text(_t('summaryPage')),
+      title: Text(titleTranslations[_currentLanguage] ?? "Title not found"),
     ),
     body: ListView(
       padding: EdgeInsets.all(8.0),

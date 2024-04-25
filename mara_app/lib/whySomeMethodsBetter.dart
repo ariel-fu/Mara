@@ -15,7 +15,7 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider3E.mp4', title:'Video Language Not Selected');
+  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider3E.mp4', title:'Video: a provider explains');
 
   final Map<String, String> titleMap = {
     "Kiswahili": "KWA NINI baadhi ya mbinu za kupanga uzazi hufanya kazi vizuri zaidi kuliko zingine ili kuzuia mimba?",

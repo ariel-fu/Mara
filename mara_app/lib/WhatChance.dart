@@ -273,7 +273,7 @@ class _WhatChanceState extends State<WhatChance> {
   );
   }
   Widget getPic() {
-    String imageNum = "assets/method_efficiency_pics/efficacy images_Page_$methodIndex.jpg";
+    String imageNum = "assets/method_efficiency_pics/efficacy_Page_$methodIndex.jpg";
     return Image.asset(
                 imageNum,
                 width: MediaQuery.of(context).size.width * 0.8,

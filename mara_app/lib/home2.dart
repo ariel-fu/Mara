@@ -31,7 +31,7 @@ class _HomePage2State extends State<HomePage2> {
       "Je, nafasi yangu ya kupata mimba ni ipi?",
       "Je, ninaweza kuiweka kwa usiri?",
       "Je, itakuaje ikiwa niko tayari kupata mtoto?",
-      "Take the quiz"
+      "Chukua jaribio letu na utafute mbinu yako!"
     ],
     "Dholuo": [
       "Yierona gin mage?",
@@ -40,7 +40,7 @@ class _HomePage2State extends State<HomePage2> {
       "Nyalona mar mako ich en ang'o?",
       "Bende anyalo kete mopondo?",
       "To ka ayikora mar mako ich to?",
-      "Take the quiz"
+      "Tim penj wa mondo iyud yori mar geng'o ich!"
     ],
     "English": [
       "What are my options?",
@@ -49,7 +49,7 @@ class _HomePage2State extends State<HomePage2> {
       "What is my chance of getting pregnant? ",
       "Can I keep it private?",
       "What if I'm ready to have a baby?",
-      "Take the quiz"
+      "Take our quiz and find your method!"
     ],
   };
 
@@ -183,62 +183,82 @@ class _HomePage2State extends State<HomePage2> {
             ),
         ),
       ),
+      // body: ListView.builder( // List view with builder to create dynamic list items
+      //   itemBuilder: (context, index) => 
+      //     CustomListTile( // Custom list tile widget with specific height
+      //       height: 150, // Set custom height for each list tile
+      //         leading: Image.asset('assets/birth_control_white.png', width: 60, height: 60),
+      //         title: Text(menuOptions[_currentLanguage]![0]),
+      //         titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
+      //         onTap: () => _handleTap(0), 
+      //         tileColor: _selections[0] ? Colors.green : Colors.black, 
+      //       // Remaining list tile properties...
+      //     ),
+      //   itemCount: 1, // Number of list items to build
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(height: 20.0),
             ListTile(
-              leading: Image.asset('assets/birth_control_white.png', width: 60, height: 60),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
+              leading: Image.asset('assets/birth_control_white.png', width: 90, height: 90),
               title: Text(menuOptions[_currentLanguage]![0]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(0), 
               tileColor: _selections[0] ? Colors.green : Colors.black, 
             ),
             Divider(),
             ListTile(
-              leading: Image.asset('assets/period_white.png', width: 60, height: 60),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
+              leading: Image.asset('assets/period_white.png', width: 90, height: 90),
               title: Text(menuOptions[_currentLanguage]![1]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(1),
               tileColor: _selections[1] ? Colors.green : Colors.black, 
             ),
             Divider(),
             ListTile(
-              leading: Image.asset('assets/calendar_white.png', width: 60, height: 60),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
+              leading: Image.asset('assets/calendar_white.png', width: 90, height: 90),
               title: Text(menuOptions[_currentLanguage]![2]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(2),
               tileColor: _selections[2] ? Colors.green : Colors.black, 
             ),
             Divider(),
             ListTile(
-              leading: Image.asset('assets/chance_white.png', width: 60, height: 60),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
+              leading: Image.asset('assets/chance_white.png', width: 90, height: 90),
               title: Text(menuOptions[_currentLanguage]![3]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(3),
               tileColor: _selections[3] ? Colors.green : Colors.black, 
             ),
             Divider(),
             ListTile(
-              leading: Image.asset('assets/privacy_white.png', width: 60, height: 60),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
+              leading: Image.asset('assets/privacy_white.png', width: 90, height: 90),
               title: Text(menuOptions[_currentLanguage]![4]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(4),
               tileColor: _selections[4] ? Colors.green : Colors.black, 
             ),
             Divider(),
             ListTile(
-              leading: Image.asset('assets/preg_woman_white.png', width: 60, height: 60),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
+              leading: Image.asset('assets/preg_woman_white.png', width: 90, height: 90),
               title: Text(menuOptions[_currentLanguage]![5]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(5),
               tileColor: _selections[5] ? Colors.green : Colors.black, 
             ),
             Divider(),  
             ListTile(
-              leading: Image.asset('assets/take_quiz_white.png', width: 60, height: 60),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
+              leading: Image.asset('assets/take_quiz_white.png', width: 90, height: 90),
               title: Text(menuOptions[_currentLanguage]![6]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               tileColor: _allSelected ? Colors.green : Colors.grey,
               onTap:_takeQuiz,
               // onTap: () {
@@ -297,5 +317,73 @@ class _HomePage2State extends State<HomePage2> {
         MaterialPageRoute(builder: (context) => QuizScreen()),
       ) : null;
     }
+  }
+}
+
+/////////////////////
+
+// Custom list tile definition
+class CustomListTile extends StatelessWidget {
+  final Widget? leading; // Optional leading widget
+  final Text? title; // Required title text
+  final Text? subTitle; // Optional subtitle text
+  final Function? onTap; // Optional tap event handler
+  final Function? onLongPress; // Optional long press event handler
+  final Function? onDoubleTap; // Optional double tap event handler
+  final Widget? trailing; // Optional trailing widget
+  final Color? tileColor; // Optional tile background color
+  final double? height; // Required height for the custom list tile
+  final TextStyle? titleTextStyle;
+
+  // Constructor for the custom list tile
+  const CustomListTile({
+    super.key,
+    this.leading,
+    this.title,
+    this.subTitle,
+    this.onTap,
+    this.onLongPress,
+    this.onDoubleTap,
+    this.trailing,
+    this.tileColor,
+    required this.height, // Make height required for clarity
+    this.titleTextStyle
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material( // Material design container for the list tile
+      color: tileColor, // Set background color if provided
+      child: InkWell( // Tappable area with event handlers
+        onTap: () => onTap, // Tap event handler
+        //onDoubleTap: () => onDoubleTap, // Double tap event handler
+        //onLongPress: () => onLongPress, // Long press event handler
+        child: SizedBox( // Constrain the size of the list tile
+          height: height, // Set custom height from constructor
+          child: Row( // Row layout for list item content
+            children: [
+              Padding( // Padding for the leading widget
+                padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                child: leading, // Display leading widget
+              ),
+              Expanded( // Expanded section for title and subtitle
+                child: Column( // Column layout for title and subtitle
+                  crossAxisAlignment: CrossAxisAlignment.start, // Align text left
+                  children: [
+                    title ?? const SizedBox(), // Display title or empty space
+                    const SizedBox(height: 10), // Spacing between title and subtitle
+                    subTitle ?? const SizedBox(), // Display subtitle or empty space
+                  ],
+                ),
+              ),
+              Padding( // Padding for the trailing widget
+                padding: const EdgeInsets.all(12.0),
+                child: trailing, // Display trailing widget
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

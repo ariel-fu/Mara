@@ -93,7 +93,7 @@ class OptionsImage extends StatelessWidget {
                 color: isSelected ? Colors.black : Colors.transparent,
                 iconSize: size,
                 padding: EdgeInsets.all(10),
-                splashRadius: 40,
+                splashRadius: 20,
                 splashColor: Colors.grey.withOpacity(0.5),
                 highlightColor: Colors.transparent,
               ),
