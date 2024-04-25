@@ -25,7 +25,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       'videoAudio/audio/ready_for_baby_audio/what_if_depo_E.mp3',
       'videoAudio/audio/ready_for_baby_audio/what_if_implant_E.mp3',
       'videoAudio/audio/ready_for_baby_audio/what_if_iucd_E.mp3',
-      'videoAudio/audio/ready_for_baby_audio/what_if_epills_E.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_epill_E.mp3',
     ],
     "Kiswahili": [
       'videoAudio/audio/ready_for_baby_audio/what_if_condom_K.mp3',
@@ -34,7 +34,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       'videoAudio/audio/ready_for_baby_audio/what_if_depo_K.mp3',
       'videoAudio/audio/ready_for_baby_audio/what_if_implant_K.mp3',
       'videoAudio/audio/ready_for_baby_audio/what_if_iucd_K.mp3',
-      'videoAudio/audio/ready_for_baby_audio/what_if_epills_K.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_epill_K.mp3',
     ],
     "Dholuo": [
       'videoAudio/audio/ready_for_baby_audio/what_if_condom_L.mp3',
@@ -43,7 +43,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       'videoAudio/audio/ready_for_baby_audio/what_if_depo_L.mp3',
       'videoAudio/audio/ready_for_baby_audio/what_if_implant_L.mp3',
       'videoAudio/audio/ready_for_baby_audio/what_if_iucd_L.mp3',
-      'videoAudio/audio/ready_for_baby_audio/what_if_epills_L.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_epill_L.mp3',
     ],
   };
 
