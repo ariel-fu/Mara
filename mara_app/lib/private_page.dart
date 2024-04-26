@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
+import 'package:mara_app/audio.dart';
 
 class PrivatePage extends StatefulWidget {
   const PrivatePage({Key? key}) : super(key: key);
@@ -43,6 +44,36 @@ class _PrivatePageState extends State<PrivatePage> {
       "videoAudio/videos/peer/peer2E.mp4",
       "videoAudio/videos/peer/peer2E.mp4",
       "videoAudio/videos/peer/peer2E.mp4",
+    ],
+  };
+
+  final Map<String, List<String>> audioContentMap = {
+    "English": [
+      'videoAudio/audio/private_audio/private_male_condom_E.mp3',
+      'videoAudio/audio/private_audio/private_female_condom_E.mp3',
+      'videoAudio/audio/private_audio/private_pills_E.mp3',
+      'videoAudio/audio/private_audio/private_depo_E.mp3',
+      'videoAudio/audio/private_audio/private_implant_E.mp3',
+      'videoAudio/audio/private_audio/private_iucd_E.mp3',
+      'videoAudio/audio/private_audio/private_epill_E.mp3',
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/private_audio/private_male_condom_K.mp3',
+      'videoAudio/audio/private_audio/private_female_condom_K.mp3',
+      'videoAudio/audio/private_audio/private_pills_K.mp3',
+      'videoAudio/audio/private_audio/private_depo_K.mp3',
+      'videoAudio/audio/private_audio/private_implant_K.mp3',
+      'videoAudio/audio/private_audio/private_iucd_K.mp3',
+      'videoAudio/audio/private_audio/private_epill_K.mp3',
+    ],
+    "Dholuo": [
+      'videoAudio/audio/private_audio/private_male_condom_L.mp3',
+      'videoAudio/audio/private_audio/private_female_condom_L.mp3',
+      'videoAudio/audio/private_audio/private_pills_L.mp3',
+      'videoAudio/audio/private_audio/private_depo_L.mp3',
+      'videoAudio/audio/private_audio/private_implant_L.mp3',
+      'videoAudio/audio/private_audio/private_iucd_L.mp3',
+      'videoAudio/audio/private_audio/private_epill_L.mp3',
     ],
   };
 
@@ -263,6 +294,7 @@ class _PrivatePageState extends State<PrivatePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                      getAudio(),
                       SizedBox(width: 10.0),
                       Expanded( // Changed from Flexible to Expanded for better text handling
                         child: Text(
@@ -460,5 +492,9 @@ class _PrivatePageState extends State<PrivatePage> {
           color: Colors.black,
         )
     );
+  }
+
+  Widget getAudio() {
+    return AudioWidget(audioAsset: audioContentMap[languages[languageIndex]]![methodIndex]);
   }
 }
