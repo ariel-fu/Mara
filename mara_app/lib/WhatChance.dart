@@ -5,6 +5,7 @@ import 'package:mara_app/home2.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/time_page.dart';
 import 'package:mara_app/whySomeMethodsBetter.dart';
+import 'audio.dart';
 
 class WhatChance extends StatefulWidget {
   const WhatChance({Key? key}) : super(key: key);
@@ -19,6 +20,18 @@ class _WhatChanceState extends State<WhatChance> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+
+  final Map<String, List<String>> heyThisAudioMap = {
+    "English": [
+      'videoAudio/audio/heyThis_HIV_STI_E.mp3'
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/heyThis_HIV_STI_K.mp3'
+    ],
+    "Dholuo": [
+      'videoAudio/audio/heyThis_HIV_STI_L.mp3'
+    ],
+  };
   
 
   final Map<String, String> titleTranslations = {
@@ -89,17 +102,6 @@ class _WhatChanceState extends State<WhatChance> {
   @override
   Widget build(BuildContext context) {
 
-    double containerWidth = MediaQuery.of(context).size.width;
-    double containerHeight = MediaQuery.of(context).size.height;
-    if (containerHeight / containerWidth > _aspectRatio) {
-      containerHeight = containerWidth * _aspectRatio;
-    } else {
-      containerWidth = containerHeight / _aspectRatio;
-    }
-
-    double boxWidth = containerWidth;
-    double boxHeight = containerHeight;
-    double availableHeight = boxHeight;
     return Scaffold(
       appBar: AppBar(
         // leading: IconButton(
@@ -122,20 +124,24 @@ class _WhatChanceState extends State<WhatChance> {
             methodSelectionRow(),
             SizedBox(height: 20.0),
             contentArea(),
-            SizedBox(height: 20.0),
-            Container(
-              width: boxWidth,
-              height: availableHeight * 0.25,
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(0, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(1.0),
-                ),
-              child: Center(
-                child: getPic(),
-              ),
+            Center(
+                 child: getPic(),
             ),
             additionalTextSection(),
+            // Container(
+            //   width: boxWidth,
+            //   height: availableHeight * 0.25,
+            //   decoration: BoxDecoration(
+            //       color: Color.fromARGB(0, 255, 255, 255),
+            //       borderRadius: BorderRadius.circular(1.0),
+            //     ),
+            //   child: Center(
+            //     child: getPic(),
+            //   ),
+            // ),
+            // additionalTextSection(),
           ],
+        //),
         ),
       ),
     );
@@ -190,20 +196,30 @@ class _WhatChanceState extends State<WhatChance> {
         child: Column(
           children: [
             if (methodIndex == 0 || methodIndex == 1)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
-                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.justify,
+              Padding(
+                padding: EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                    SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                        getAudio(heyThisAudioMap, 0),
+                      ],
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Text(
+                        importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
+                        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                        //textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ],
               ),
+            ),
             //SizedBox(height: 20), 
             if (methodIndex == 0 || methodIndex == 1)
               TextButton.icon(
@@ -353,5 +369,9 @@ class _WhatChanceState extends State<WhatChance> {
         ],
       ),
     );
+  }
+
+  Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
+    return AudioWidget(audioAsset: audioMap[languages[languageIndex]]![audioIndex]);
   }
 }
