@@ -237,6 +237,35 @@ flutter:
     - videoAudio/audio/how_long_audio/how_long_epill_K.mp3
     - videoAudio/audio/how_long_audio/how_long_epill_L.mp3
 
+    - videoAudio/audio/private_audio/private_male_condom_E.mp3
+    - videoAudio/audio/private_audio/private_male_condom_K.mp3
+    - videoAudio/audio/private_audio/private_male_condom_L.mp3
+
+    - videoAudio/audio/private_audio/private_female_condom_E.mp3
+    - videoAudio/audio/private_audio/private_female_condom_K.mp3
+    - videoAudio/audio/private_audio/private_female_condom_L.mp3
+
+    - videoAudio/audio/private_audio/private_pills_E.mp3
+    - videoAudio/audio/private_audio/private_pills_K.mp3
+    - videoAudio/audio/private_audio/private_pills_L.mp3
+
+    - videoAudio/audio/private_audio/private_depo_E.mp3
+    - videoAudio/audio/private_audio/private_depo_K.mp3
+    - videoAudio/audio/private_audio/private_depo_L.mp3
+
+    - videoAudio/audio/private_audio/private_implant_E.mp3
+    - videoAudio/audio/private_audio/private_implant_K.mp3
+    - videoAudio/audio/private_audio/private_implant_L.mp3
+
+    - videoAudio/audio/private_audio/private_iucd_E.mp3
+    - videoAudio/audio/private_audio/private_iucd_K.mp3
+    - videoAudio/audio/private_audio/private_iucd_L.mp3
+
+    - videoAudio/audio/private_audio/private_epill_E.mp3
+    - videoAudio/audio/private_audio/private_epill_K.mp3
+    - videoAudio/audio/private_audio/private_epill_L.mp3
+
+
 
   #   - images/a_dot_ham.jpeg
 
