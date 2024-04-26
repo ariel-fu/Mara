@@ -355,4 +355,3 @@ class _WhatChanceState extends State<WhatChance> {
     );
   }
 }
-
