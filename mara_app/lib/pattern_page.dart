@@ -412,9 +412,10 @@ Widget additionalTextSection() {
       children: [
         // Only display this section for certain method indices
         if (methodIndex == 0 || methodIndex == 1)
-          Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
-            child: Row(
+          //Padding(
+            //padding: EdgeInsets.only(bottom: 10.0),
+            //child: Row(
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(width: 10),
@@ -433,7 +434,7 @@ Widget additionalTextSection() {
                 ),
               ],
             ),
-          ),
+          //),
         // Button for learning more, only shown for condoms
         if (methodIndex == 0 || methodIndex == 1)
           TextButton.icon(
