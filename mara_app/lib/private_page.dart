@@ -77,6 +77,18 @@ class _PrivatePageState extends State<PrivatePage> {
     ],
   };
 
+  final Map<String, List<String>> subtitleAudioMap = {
+    "English": [
+      'videoAudio/audio/private_audio/private_subtitle_E.mp3'
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/private_audio/private_subtitle_K.mp3'
+    ],
+    "Dholuo": [
+      'videoAudio/audio/private_audio/private_subtitle_L.mp3'
+    ],
+  };
+
   final Map<String, String> titleMap = {
     "Kiswahili": "Je, ninaweza kuiweka kwa usiri?",
     "Dholuo": "Bende anyalo kete mopondo?",
@@ -232,23 +244,53 @@ class _PrivatePageState extends State<PrivatePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // SizedBox(height: availableHeight*0.01),
-          Container (
-              width: boxWidth*0.8,
-              child: Padding (
-                  padding: const EdgeInsets.only(top: 5.0, bottom: 20.0), // Adjust the padding as needed,
-                  child: Text(
-                    subtitleTranslations[languages[languageIndex]]!,
-                    softWrap: true, // Wrap text to the next line if needed
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0
-                    ),
-                  )
-              )
-
-          ),
+          subtitleSection(),
+          // Container (
+          //     width: boxWidth*0.8,
+          //     child: Padding (
+          //         padding: const EdgeInsets.only(top: 5.0, bottom: 20.0), // Adjust the padding as needed,
+          //         child: Text(
+          //           subtitleTranslations[languages[languageIndex]]!,
+          //           softWrap: true, // Wrap text to the next line if needed
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(
+          //               color: Colors.black,
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 16.0
+          //           ),
+          //         )
+          //     )
+              // child: Padding(
+              //   padding: const EdgeInsets.only(top: 5.0, bottom: 20.0),
+              //   child: Column(
+              //     children: [
+              //       Row(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           Column(
+              //             crossAxisAlignment: CrossAxisAlignment.center,
+              //             children: [
+              //               getAudio(subtitleAudioMap, 0),
+              //               Expanded( // Changed from Flexible to Expanded for better text handling
+              //                 child: Text(
+              //                   subtitleTranslations[languages[languageIndex]]![methodIndex],
+              //                   softWrap: true,
+              //                   textAlign: TextAlign.center,
+              //                   style: TextStyle(
+              //                     color: Colors.black,
+              //                     fontWeight: FontWeight.bold,
+              //                     fontSize: 16.0
+              //                   ),
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ],
+              //       ),
+              //     ]
+              //   ),
+              // ) ,
+          //),
           Container(
             alignment: Alignment.center,
             // height: availableHeight * 0.15,
@@ -294,7 +336,7 @@ class _PrivatePageState extends State<PrivatePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                      getAudio(),
+                      getAudio(audioContentMap, methodIndex),
                       SizedBox(width: 10.0),
                       Expanded( // Changed from Flexible to Expanded for better text handling
                         child: Text(
@@ -442,16 +484,33 @@ class _PrivatePageState extends State<PrivatePage> {
   Widget subtitleSection() {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0), // Adjust padding as needed
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200, // Use the desired background color
-        borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
-      ),
-      child: Text(
-        subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-        textAlign: TextAlign.center,
-      ),
+      //padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0), // Adjust padding as needed
+      //padding: const EdgeInsets.only(top: 5.0, bottom: 20.0)
+      // decoration: BoxDecoration(
+      //   color: Colors.grey.shade200, // Use the desired background color
+      //   borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+      // ),
+      child: Padding (
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+        child: Row(
+          children: [
+            getAudio(subtitleAudioMap, 0),
+            Expanded ( 
+              child:Text(
+                subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      )
+      // Text(
+      // //child: Text(
+      //   subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
+      //   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+      //   textAlign: TextAlign.center,
+      // ),
     );
   }
 
@@ -494,7 +553,7 @@ class _PrivatePageState extends State<PrivatePage> {
     );
   }
 
-  Widget getAudio() {
-    return AudioWidget(audioAsset: audioContentMap[languages[languageIndex]]![methodIndex]);
+  Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
+    return AudioWidget(audioAsset: audioMap[languages[languageIndex]]![audioIndex]);
   }
 }
