@@ -213,6 +213,30 @@ flutter:
     - videoAudio/audio/options_audio/options_epill_K.mp3
     - videoAudio/audio/options_audio/options_epill_L.mp3
 
+    - videoAudio/audio/how_long_audio/how_long_condom_E.mp3
+    - videoAudio/audio/how_long_audio/how_long_condom_K.mp3
+    - videoAudio/audio/how_long_audio/how_long_condom_L.mp3
+
+    - videoAudio/audio/how_long_audio/how_long_pills_E.mp3
+    - videoAudio/audio/how_long_audio/how_long_pills_K.mp3
+    - videoAudio/audio/how_long_audio/how_long_pills_L.mp3
+
+    - videoAudio/audio/how_long_audio/how_long_depo_E.mp3
+    - videoAudio/audio/how_long_audio/how_long_depo_K.mp3
+    - videoAudio/audio/how_long_audio/how_long_depo_L.mp3
+
+    - videoAudio/audio/how_long_audio/how_long_implant_E.mp3
+    - videoAudio/audio/how_long_audio/how_long_implant_K.mp3
+    - videoAudio/audio/how_long_audio/how_long_implant_L.mp3
+
+    - videoAudio/audio/how_long_audio/how_long_iucd_E.mp3
+    - videoAudio/audio/how_long_audio/how_long_iucd_K.mp3
+    - videoAudio/audio/how_long_audio/how_long_iucd_L.mp3
+
+    - videoAudio/audio/how_long_audio/how_long_epill_E.mp3
+    - videoAudio/audio/how_long_audio/how_long_epill_K.mp3
+    - videoAudio/audio/how_long_audio/how_long_epill_L.mp3
+
 
   #   - images/a_dot_ham.jpeg
 
