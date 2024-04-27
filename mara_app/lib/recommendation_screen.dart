@@ -225,7 +225,7 @@ actions: <Widget>[
                     likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
                     color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
                   ),
-                  label: Text("I like this!"), // The label (text)
+                  label: Text("Favorite it!"), // The label (text)
                   style: ElevatedButton.styleFrom(
                      backgroundColor: Colors.deepPurple[100], // Button background color
                      foregroundColor: Colors.black 

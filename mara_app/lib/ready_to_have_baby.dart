@@ -97,8 +97,8 @@ class _ReadyPageState extends State<ReadyPage> {
             children: [
               Image.asset(
                 imagePath,
-                width: 200, // Adjust width
-                height: 200, // Adjust height
+                width: 250, // Adjust width
+                height: 250, // Adjust height
                 fit: BoxFit.contain,
               ),
               SizedBox(width: 16.0),
@@ -174,7 +174,7 @@ Widget build(BuildContext context) {
           child: ListView(
             children: [
               customListTile(
-                imagePath: 'assets/preg_woman_new.png',
+                imagePath: 'assets/ready_to_have_baby_pregnant.png',
                 header: _t('What if I\'m ready to have a baby?'),
                 title: _t('HEY! THIS IS IMPORTANT!'),
               ),
