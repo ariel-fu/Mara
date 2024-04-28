@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'recommendation_model.dart';
-import 'liked_methods.dart';
 import 'short_summaries.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:mara_app/providers/provider_liked_methods.dart';
+import 'package:provider/provider.dart';
+import 'new_liked_methods.dart';
 class RecommendationScreen extends StatefulWidget {
   final List<String> recommendations;
   final List<String> introTexts;
@@ -45,9 +47,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     widget.onChangeLanguage(language);
   }
 
-  // String _t(String key) {
-  //   return widget.translations[_currentLanguage]?[key] ?? key;
-  // }
+ 
 
   String _t(String key) {
     String translation = widget.translations[_currentLanguage]?[key] ?? key;
@@ -60,15 +60,11 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     return json.decode(jsonString);
   }
 
-  void toggleLikeMethod(String method) {
-    setState(() {
-      if (likedMethods.contains(method)) {
-        likedMethods.remove(method);
-      } else {
-        likedMethods.add(method);
-      }
-    });
-  }
+ void toggleLikeMethod(String method) {
+  final likes = Provider.of<Likes>(context, listen: false); // Get the Likes instance
+  likes.toggleLikedMethod(method);  // Toggle the liked state
+}
+
 
 
 @override
@@ -295,25 +291,17 @@ Widget _buildTitleBox() {
  }
 
 
-
-
 void navigateToLikedMethodsScreen() {
   Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) => LikedMethodsScreen(
-        likedMethods: likedMethods,
-        initialLanguage: _currentLanguage, 
+        initialLanguage: _currentLanguage,
         translations: widget.translations,
-        onMethodsChanged: (updatedMethods) {
-          setState(() {
-            likedMethods = updatedMethods;
-          });
-        },
-
       ),
     ),
   );
 }
+
 
 }
