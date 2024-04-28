@@ -42,8 +42,8 @@ class _AudioWidgetState extends State<AudioWidget> {
     return  IconButton(
       icon: Image.asset(
         "assets/audio.png",
-        width: 40,
-        height: 40,
+        width: 60,
+        height: 60,
       ),
       onPressed: () => _toggleAudio1(),
     );
