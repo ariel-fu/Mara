@@ -258,7 +258,9 @@ class _OptionsPageState extends State<OptionsPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
-                        methodIndex == null ? Text("Please select a method to learn more") : Text(
+                        methodIndex == null ? Text("Tap on a method to learn more!",
+                          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ) : Text(
                             methods[methodIndex]!.name,
                             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
                       ]
