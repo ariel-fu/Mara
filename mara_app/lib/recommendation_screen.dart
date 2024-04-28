@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'recommendation_model.dart';
-import 'liked_methods.dart';
 import 'short_summaries.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:mara_app/providers/provider_liked_methods.dart';
+import 'package:provider/provider.dart';
+import 'new_liked_methods.dart';
 class RecommendationScreen extends StatefulWidget {
   final List<String> recommendations;
   final List<String> introTexts;
@@ -46,9 +48,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     widget.onChangeLanguage(language);
   }
 
-  // String _t(String key) {
-  //   return widget.translations[_currentLanguage]?[key] ?? key;
-  // }
+ 
 
   String _t(String key) {
     String translation = widget.translations[_currentLanguage]?[key] ?? key;
@@ -61,15 +61,11 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     return json.decode(jsonString);
   }
 
-  void toggleLikeMethod(String method) {
-    setState(() {
-      if (likedMethods.contains(method)) {
-        likedMethods.remove(method);
-      } else {
-        likedMethods.add(method);
-      }
-    });
-  }
+ void toggleLikeMethod(String method) {
+  final likes = Provider.of<Likes>(context, listen: false); // Get the Likes instance
+  likes.toggleLikedMethod(method);  // Toggle the liked state
+}
+
 
 
 @override
@@ -161,17 +157,17 @@ actions: <Widget>[
                                             width: 100, 
                                             height: 100
                                           ),
-                                          // Positioned(
-                                          //   top: -9,
-                                          //   right: -9,
-                                          //   child: IconButton(
-                                          //     icon: Icon(
-                                          //       likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
-                                          //       color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
-                                          //     ),
-                                          //     onPressed: () => toggleLikeMethod(trimmedRec),
-                                          //   ),
-                                          // ),
+                                          Positioned(
+                                            top: -9,
+                                            right: -9,
+                                            child: IconButton(
+                                              icon: Icon(
+                                                likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
+                                                color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
+                                              ),
+                                              onPressed: () => toggleLikeMethod(trimmedRec),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                       Text(
@@ -181,59 +177,41 @@ actions: <Widget>[
                                       ),
                               ElevatedButton(
                                 onPressed: () {
-                                  String methodKey;
-                                  // Convert the recommendation name to the corresponding JSON key
-                                  switch (trimmedRec.toLowerCase()) {
-                                      // case 'condoms':
-                                      //   methodKey = 'male_condom'; // or 'female_condom' based on context
-                                      //   break;
-                                      case 'emergency pill':
-                                        methodKey = 'emergency'; // This should match the exact key in your JSON data
-                                        break;
-                                      default:
-                                        methodKey = trimmedRec.toLowerCase();
-                                  }
+                                String methodKey;
+                                // Convert the recommendation name to the corresponding JSON key
+                                switch (trimmedRec.toLowerCase()) {
+                                    // case 'condoms':
+                                    //   methodKey = 'male_condom'; // or 'female_condom' based on context
+                                    //   break;
+                                    default:
+                                      methodKey = trimmedRec.toLowerCase();
+                                }
 
-                                  if (methodDetailsData.containsKey(methodKey)) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MethodDetailsScreen(
-                                          methodName: trimmedRec,
-                                          methodDetails: methodDetailsData[methodKey],
-                                          currentLanguage: _currentLanguage,
-                                          translations: widget.translations,
-                                          onChangeLanguage: (newLang) {
-                                            _changeLanguage(newLang); // Call _changeLanguage from RecommendationScreen
-                                          },
-                                        ),
-                                      ),
-                                    );
-                                  } 
-                                  else {
-                                    // Handle the case where method details are not found
-                                    print('No details found for $trimmedRec');
-                                  }
-                                },
-                                child: Text('Learn More'),
-                              ),
+                                if (methodDetailsData.containsKey(methodKey)) {
 
-        Row( //Thumbs up button below the method name
-          children: <Widget>[
-            ElevatedButton.icon(
-                  icon: Icon(
-                    likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
-                    color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
-                  ),
-                  label: Text("Favorite it!"), // The label (text)
-                  style: ElevatedButton.styleFrom(
-                     backgroundColor: Colors.deepPurple[100], // Button background color
-                     foregroundColor: Colors.black 
-                  ),
-                  onPressed: () => toggleLikeMethod(trimmedRec),
-            ),
-          ],
-        ),
+Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => MethodDetailsScreen(
+      methodName: trimmedRec,
+      methodDetails: methodDetailsData[methodKey],
+      currentLanguage: _currentLanguage,
+      translations: widget.translations,
+      onChangeLanguage: (newLang) {
+        _changeLanguage(newLang); // Call _changeLanguage from RecommendationScreen
+      },
+    ),
+  ),
+);
+                                } else {
+                                  // Handle the case where method details are not found
+                                  print('No details found for $trimmedRec');
+                                }
+                        },
+                              child: Text('Learn More'),
+                            ),
+
+
                                     ],
                                   ),
                                 );
@@ -314,25 +292,22 @@ Widget _buildTitleBox() {
  }
 
 
-
-
 void navigateToLikedMethodsScreen() {
+  // Access the liked methods from the provider
+  final likes = Provider.of<Likes>(context, listen: false);
+
   Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) => LikedMethodsScreen(
-        likedMethods: likedMethods,
-        initialLanguage: _currentLanguage, 
+        likedMethods: likes.likedMethods, // Pass the liked methods to the new screen
+        initialLanguage: _currentLanguage,
         translations: widget.translations,
-        onMethodsChanged: (updatedMethods) {
-          setState(() {
-            likedMethods = updatedMethods;
-          });
-        },
-
       ),
     ),
   );
 }
+
+
 
 }
