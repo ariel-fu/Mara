@@ -253,16 +253,36 @@ class RecommendationModel {
   static String getTitleFromJsonRef(String jsonRef) {
     Map<String, String> recommendationTitles = {
       'implant': 'Implant',
-      'pills': 'Pills (daily pills)',
+      'pills' : 'Pills (daily pills)', 
       'condoms': 'Condoms',
-      'iud': 'IUCD (coil)',
-      'emergency': 'Emergency pill (E-pill, P2)',
-      'depo': 'Injection (depo)',
-      'female_condom': 'Female condoms',
+      'iud': 'IUCD (coil)', 
+      'iucd': 'IUCD (coil)', 
+      'emergency': 'Emergency pill (E-pill, P2)', 
+      'depo': 'Injection (depo)', 
+      'female_condom': 'Female condoms'
     };
 
     return recommendationTitles[jsonRef] ?? 'No title found';
   }
+
+  static String getJsonRefFromName(String name) {
+  Map<String, String> recommendationTitles = {
+    'Implant': 'implant',
+    'Pills': 'pills',
+    'Condoms': 'condoms',
+    'IUCD': 'iucd',
+    'IUD': 'iucd',
+    'Emergency Pill': 'emergency',
+    'Depo': 'depo',
+    'Female condoms': 'female_condom',
+  };
+
+  String result = recommendationTitles[name] ?? 'No title found';
+  if (result == 'No title found') {
+    print("No title found for: $name");  // Debugging line to check input
+  }
+  return result;
+}
 
   static IconData getIconForRecommendation(String recommendation) {
     Map<String, IconData> recommendationImages = {
@@ -277,6 +297,7 @@ class RecommendationModel {
 
     return recommendationImages[recommendation] ?? MaraIcons.iud; // default image if no match found
   }
+
 }
 
 class Q5Recommendation {
