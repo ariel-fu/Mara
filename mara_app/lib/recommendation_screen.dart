@@ -67,7 +67,6 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   likes.toggleLikedMethod(jsonRef);  // Toggle the liked state
   print("Liked Methods after toggle: ${likes.likedMethods}");
   setState(() {});
-  
 }
 
 
@@ -128,156 +127,96 @@ actions: <Widget>[
                 _buildTitleBox(),
                 SizedBox(height: 20),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: widget.recommendations.length,
-                    itemBuilder: (context, index) {
-                      List<String> individualRecommendations = widget.recommendations[index].split(', ');
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+  child: ListView.builder(
+    itemCount: widget.recommendations.length,
+    itemBuilder: (context, index) {
+      List<String> individualRecommendations = widget.recommendations[index].split(', ');
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              widget.introTexts.length > index ? _t(widget.introTexts[index]) : '',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: individualRecommendations.map((rec) {
+                String trimmedRec = rec.trim();
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              widget.introTexts.length > index ? _t(widget.introTexts[index]) : '',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
+                          Icon(
+                            RecommendationModel.getIconForRecommendation(RecommendationModel.getJsonRefFromName(trimmedRec)),
+                            size: 80,
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: individualRecommendations.map((rec) {
-                                String trimmedRec = rec.trim();
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Stack(
-                                        alignment: Alignment.center,
-                                       
-                                        children: [
-                                          Icon(
-                                            RecommendationModel.getIconForRecommendation(
-                                            RecommendationModel.getJsonRefFromName(trimmedRec)
-                                           ),
-                                        size: 100, // Set size as required
-                                        ),
-                                        ],
-                                      ),
-                                      Text(
-                                        _t(trimmedRec),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  String methodKey;
-                                  // Convert the recommendation name to the corresponding JSON key
-                                  switch (trimmedRec.toLowerCase()) {
-                                      // case 'condoms':
-                                      //   methodKey = 'male_condom'; // or 'female_condom' based on context
-                                      //   break;
-                                      case 'emergency pill':
-                                        methodKey = 'emergency'; // This should match the exact key in your JSON data
-                                        break;
-                                      default:
-                                        methodKey = trimmedRec.toLowerCase();
-                                  }
-
-                                  if (methodDetailsData.containsKey(methodKey)) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MethodDetailsScreen(
-                                          methodName: trimmedRec,
-                                          methodDetails: methodDetailsData[methodKey],
-                                          currentLanguage: _currentLanguage,
-                                          translations: widget.translations,
-                                          onChangeLanguage: (newLang) {
-                                            _changeLanguage(newLang); // Call _changeLanguage from RecommendationScreen
-                                          },
-                                        ),
-                                      ),
-                                    );
-                                  } 
-                                  else {
-                                    // Handle the case where method details are not found
-                                    print('No details found for $trimmedRec');
-                                  }
-                                },
-                                child: Text('Learn More'),
-                              ),
-
-        Row( //Thumbs up button below the method name
-          children: <Widget>[
-            ElevatedButton.icon(
-    icon: Icon(
-        likes.likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
-        color: likes.likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
-    ),
-    label: Text("Favorite it!"),
-    style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.deepPurple[100], // Button background color
-        foregroundColor: Colors.black,
-    ),
-    onPressed: () => toggleLikeMethod(trimmedRec),
-)
-// ElevatedButton.icon(
-//   icon: Icon(
-//     likes.likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
-//     color: likes.likedMethods.contains(trimmedRec) ? Colors.black : Colors.grey, 
-//   ),
-//   label: Text("Favorite it!"),
-//   style: ElevatedButton.styleFrom(
-//     backgroundColor: likes.likedMethods.contains(trimmedRec) ? Colors.lightBlue[100] : Colors.deepPurple[100],  
-//     foregroundColor: Colors.black,  // Text and icon color when enabled
-//   ),
-//   onPressed: () {
-//     likes.toggleLikedMethod(trimmedRec);
-//     setState(() {});  
-//   },
-// )
-
-
-          ],
-        ),
-        
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              padding: const EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Icon(Icons.lightbulb_outline, color: Colors.amber),
-                                  SizedBox(width: 8),
-                                  Expanded(
-                                    child: Text(
-                                      widget.outroTexts.length > index ? _t(widget.outroTexts[index]) : '',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Divider(),
                         ],
-                      );
-                    },
+                      ),
+                      Text(
+                        _t(trimmedRec),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Consumer<Likes>(
+                        builder: (context, likes, child) {
+                          return ElevatedButton.icon(
+                            icon: Icon(
+                              likes.likedMethods.contains(RecommendationModel.getJsonRefFromName(trimmedRec)) ? Icons.thumb_up : Icons.thumb_up_off_alt,
+                              color: likes.likedMethods.contains(RecommendationModel.getJsonRefFromName(trimmedRec)) ? Colors.brown[900] : Colors.black,
+                            ),
+                            label: Text("Favorite it!"),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.deepPurple[100],
+                              foregroundColor: Colors.black,
+                            ),
+                            onPressed: () => toggleLikeMethod(trimmedRec),
+                          );
+                        }
+                      ),
+                    ],
                   ),
-                ),
+                );
+              }).toList(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Icon(Icons.lightbulb_outline, color: Colors.amber),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      widget.outroTexts.length > index ? _t(widget.outroTexts[index]) : '',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Divider(),
+        ],
+      );
+    },
+  ),
+)
+
               ],
             ),
           );
