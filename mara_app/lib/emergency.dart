@@ -16,7 +16,7 @@ class EmergencyPage extends StatefulWidget {
 
 class _EmergencyPageState extends State<EmergencyPage> {
   //Widget methodContent = Text('DUMMY');
-  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
+  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/peer/peer3E.mp4', title:'Video 1 Language Not Selected');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
