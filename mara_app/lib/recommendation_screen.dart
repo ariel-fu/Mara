@@ -165,6 +165,45 @@ actions: <Widget>[
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 16),
                       ),
+                      ElevatedButton(
+                                onPressed: () {
+                                  String methodKey;
+                                  // Convert the recommendation name to the corresponding JSON key
+                                  switch (trimmedRec.toLowerCase()) {
+                                      // case 'condoms':
+                                      //   methodKey = 'male_condom'; // or 'female_condom' based on context
+                                      //   break;
+                                      case 'emergency pill':
+                                        methodKey = 'emergency'; // This should match the exact key in your JSON data
+                                        break;
+                                      default:
+                                        methodKey = trimmedRec.toLowerCase();
+                                  }
+
+                                  if (methodDetailsData.containsKey(methodKey)) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MethodDetailsScreen(
+                                          methodName: trimmedRec,
+                                          methodDetails: methodDetailsData[methodKey],
+                                          currentLanguage: _currentLanguage,
+                                          translations: widget.translations,
+                                          onChangeLanguage: (newLang) {
+                                            _changeLanguage(newLang); // Call _changeLanguage from RecommendationScreen
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  } 
+                                  else {
+                                    // Handle the case where method details are not found
+                                    print('No details found for $trimmedRec');
+                                  }
+                                },
+                                child: Text('Learn More'),
+                              ),
+
                       Consumer<Likes>(
                         builder: (context, likes, child) {
                           return ElevatedButton.icon(
@@ -281,3 +320,5 @@ void navigateToLikedMethodsScreen() {
 }
 
 }
+
+
