@@ -1,10 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'recommendation_model.dart';
-import 'liked_methods.dart';
+import 'new_liked_methods.dart';
 import 'short_summaries.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:mara_app/providers/provider_liked_methods.dart';
+import 'package:provider/provider.dart';
+
 class RecommendationScreen extends StatefulWidget {
   final List<String> recommendations;
   final List<String> introTexts;
@@ -12,7 +15,6 @@ class RecommendationScreen extends StatefulWidget {
   final String currentLanguage;
   final Function(String) onChangeLanguage;
   final Map<String, Map<String, String>> translations;
-
 
   RecommendationScreen({
     Key? key,
@@ -30,7 +32,6 @@ class RecommendationScreen extends StatefulWidget {
 
 class _RecommendationScreenState extends State<RecommendationScreen> {
   late String _currentLanguage;
-  Set<String> likedMethods = Set<String>(); // Store liked methods
   late Future<Map<String, dynamic>> _methodDetailsDataFuture;
   @override
   void initState() {
@@ -46,9 +47,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     widget.onChangeLanguage(language);
   }
 
-  // String _t(String key) {
-  //   return widget.translations[_currentLanguage]?[key] ?? key;
-  // }
+  
 
   String _t(String key) {
     String translation = widget.translations[_currentLanguage]?[key] ?? key;
@@ -61,19 +60,19 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     return json.decode(jsonString);
   }
 
-  void toggleLikeMethod(String method) {
-    setState(() {
-      if (likedMethods.contains(method)) {
-        likedMethods.remove(method);
-      } else {
-        likedMethods.add(method);
-      }
-    });
-  }
+ void toggleLikeMethod(String method) {
+  final likes = Provider.of<Likes>(context, listen: false); // Get the Likes instance
+  String jsonRef = RecommendationModel.getJsonRefFromName(method);
+  print('Toggling like for method: $method with jsonRef: $jsonRef');
+  likes.toggleLikedMethod(jsonRef);  // Toggle the liked state
+  print("Liked Methods after toggle: ${likes.likedMethods}");
+  setState(() {});
+}
 
 
 @override
 Widget build(BuildContext context) {
+  final likes = Provider.of<Likes>(context, listen: false);
   return Scaffold(
     appBar: AppBar(
       leading: IconButton(
@@ -128,58 +127,45 @@ actions: <Widget>[
                 _buildTitleBox(),
                 SizedBox(height: 20),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: widget.recommendations.length,
-                    itemBuilder: (context, index) {
-                      List<String> individualRecommendations = widget.recommendations[index].split(', ');
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+  child: ListView.builder(
+    itemCount: widget.recommendations.length,
+    itemBuilder: (context, index) {
+      List<String> individualRecommendations = widget.recommendations[index].split(', ');
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              widget.introTexts.length > index ? _t(widget.introTexts[index]) : '',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: individualRecommendations.map((rec) {
+                String trimmedRec = rec.trim();
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              widget.introTexts.length > index ? _t(widget.introTexts[index]) : '',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
+                          Icon(
+                            RecommendationModel.getIconForRecommendation(RecommendationModel.getJsonRefFromName(trimmedRec)),
+                            size: 80,
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: individualRecommendations.map((rec) {
-                                String trimmedRec = rec.trim();
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          Image.asset(
-                                            RecommendationModel.getImageForRecommendation(trimmedRec), 
-                                            width: 100, 
-                                            height: 100
-                                          ),
-                                          // Positioned(
-                                          //   top: -9,
-                                          //   right: -9,
-                                          //   child: IconButton(
-                                          //     icon: Icon(
-                                          //       likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
-                                          //       color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
-                                          //     ),
-                                          //     onPressed: () => toggleLikeMethod(trimmedRec),
-                                          //   ),
-                                          // ),
-                                        ],
-                                      ),
-                                      Text(
-                                        _t(trimmedRec),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                              ElevatedButton(
+                        ],
+                      ),
+                      Text(
+                        _t(trimmedRec),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      ElevatedButton(
                                 onPressed: () {
                                   String methodKey;
                                   // Convert the recommendation name to the corresponding JSON key
@@ -218,57 +204,58 @@ actions: <Widget>[
                                 child: Text('Learn More'),
                               ),
 
-        Row( //Thumbs up button below the method name
-          children: <Widget>[
-            ElevatedButton.icon(
-                  icon: Icon(
-                    likedMethods.contains(trimmedRec) ? Icons.thumb_up : Icons.thumb_up_off_alt,
-                    color: likedMethods.contains(trimmedRec) ? Colors.brown[900] : Colors.black,
+                      Consumer<Likes>(
+                        builder: (context, likes, child) {
+                          return ElevatedButton.icon(
+                            icon: Icon(
+                              likes.likedMethods.contains(RecommendationModel.getJsonRefFromName(trimmedRec)) ? Icons.thumb_up : Icons.thumb_up_off_alt,
+                              color: likes.likedMethods.contains(RecommendationModel.getJsonRefFromName(trimmedRec)) ? Colors.brown[900] : Colors.black,
+                            ),
+                            label: Text("Favorite it!"),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.deepPurple[100],
+                              foregroundColor: Colors.black,
+                            ),
+                            onPressed: () => toggleLikeMethod(trimmedRec),
+                          );
+                        }
+                      ),
+                    ],
                   ),
-                  label: Text("Favorite it!"), // The label (text)
-                  style: ElevatedButton.styleFrom(
-                     backgroundColor: Colors.deepPurple[100], // Button background color
-                     foregroundColor: Colors.black 
-                  ),
-                  onPressed: () => toggleLikeMethod(trimmedRec),
+                );
+              }).toList(),
             ),
-          ],
-        ),
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              padding: const EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Icon(Icons.lightbulb_outline, color: Colors.amber),
-                                  SizedBox(width: 8),
-                                  Expanded(
-                                    child: Text(
-                                      widget.outroTexts.length > index ? _t(widget.outroTexts[index]) : '',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Divider(),
-                        ],
-                      );
-                    },
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Icon(Icons.lightbulb_outline, color: Colors.amber),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      widget.outroTexts.length > index ? _t(widget.outroTexts[index]) : '',
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
-                ),
+                ],
+              ),
+            ),
+          ),
+          Divider(),
+        ],
+      );
+    },
+  ),
+)
+
               ],
             ),
           );
@@ -317,22 +304,21 @@ Widget _buildTitleBox() {
 
 
 void navigateToLikedMethodsScreen() {
+  // Access the liked methods from the provider
+  final likes = Provider.of<Likes>(context, listen: false);
+
   Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) => LikedMethodsScreen(
-        likedMethods: likedMethods,
-        initialLanguage: _currentLanguage, 
+        likedMethods: likes.likedMethods, // Pass the liked methods to the new screen
+        initialLanguage: _currentLanguage,
         translations: widget.translations,
-        onMethodsChanged: (updatedMethods) {
-          setState(() {
-            likedMethods = updatedMethods;
-          });
-        },
-
       ),
     ),
   );
 }
 
 }
+
+
