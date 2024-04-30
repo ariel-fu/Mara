@@ -19,38 +19,34 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
-      'videoAudio/audio/what_if_condom_E.mp3',
-      'videoAudio/audio/what_if_condom_E.mp3',
-      'videoAudio/audio/what_if_pills_E.mp3',
-      'videoAudio/audio/what_if_depo_E.mp3',
-      'videoAudio/audio/what_if_implant_E.mp3',
-      'videoAudio/audio/what_if_iucd_E.mp3',
-      'videoAudio/audio/what_if_epill_E.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_condom_E.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_condom_E.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_pills_E.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_depo_E.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_implant_E.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_iucd_E.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_epill_E.mp3',
     ],
     "Kiswahili": [
-      'videoAudio/audio/what_if_condom_K.mp3',
-      'videoAudio/audio/what_if_condom_K.mp3',
-      'videoAudio/audio/what_if_pills_K.mp3',
-      'videoAudio/audio/what_if_depo_K.mp3',
-      'videoAudio/audio/what_if_implant_K.mp3',
-      'videoAudio/audio/what_if_iucd_K.mp3',
-      'videoAudio/audio/what_if_epill_K.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_condom_K.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_condom_K.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_pills_K.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_depo_K.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_implant_K.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_iucd_K.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_epill_K.mp3',
     ],
     "Dholuo": [
-      'videoAudio/audio/what_if_condom_L.mp3',
-      'videoAudio/audio/what_if_condom_L.mp3',
-      'videoAudio/audio/what_if_pills_L.mp3',
-      'videoAudio/audio/what_if_depo_L.mp3',
-      'videoAudio/audio/what_if_implant_L.mp3',
-      'videoAudio/audio/what_if_iucd_L.mp3',
-      'videoAudio/audio/what_if_epill_L.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_condom_L.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_condom_L.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_pills_L.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_depo_L.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_implant_L.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_iucd_L.mp3',
+      'videoAudio/audio/ready_for_baby_audio/what_if_epill_L.mp3',
     ],
   };
-  // final Map<String, String> audioContentMap = {
-  //   "English": 'videoAudio/audio/what_if_E.mp3',
-  //   "Kiswahili": 'videoAudio/audio/what_if_K.mp3',
-  //   "Dholuo": 'videoAudio/audio/what_if_L.mp3'
-  // };
+
   final Map<String, String> subtitleTranslations = {
     "English": "Tap each method to learn more about its fertility consideration.",
     "Kiswahili": "Gusa kila njia ili ujifunze zaidi kuhusu mchango wake kwenye uzazi.",

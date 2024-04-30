@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'prep_preg.dart';
 import 'video.dart';
@@ -25,21 +24,36 @@ class _ReadyPageState extends State<ReadyPage> {
       'English': 'What if I\'m ready to have a baby?',
     },
     'HEY! THIS IS IMPORTANT!': {
-      'Kiswahili': 'HEY! HII NI MUHIMU! Kutumia njia za upangaji uzazi HAKUTAbadilisha uwezo wako wa kupata mimba katika siku zijazo!', 
-      'Dholuo': 'HEY! MA EN GIMA BER NG\'EYO! Tiyo gi yore mag komo nyuol OK bi loko nyaloni mar mako ich e ndalo mabiro!', 
-      'English': 'HEY! THIS IS IMPORTANT! Using family planning methods will NOT change your ability to get pregnant in the future!',
-    }, 
+      'Kiswahili':
+          'HEY! HII NI MUHIMU! Kutumia njia za upangaji uzazi HAKUTAbadilisha uwezo wako wa kupata mimba katika siku zijazo!',
+      'Dholuo':
+          'HEY! MA EN GIMA BER NG\'EYO! Tiyo gi yore mag komo nyuol OK bi loko nyaloni mar mako ich e ndalo mabiro!',
+      'English':
+          'HEY! THIS IS IMPORTANT! Using family planning methods will NOT change your ability to get pregnant in the future!',
+    },
     'LEARN MORE about the fertility considerations of each method': {
-      'Kiswahili': 'JIFUNZE ZAIDI kuhusu masuala ya uzazi ya kila mbinu', 
-      'Dholuo': 'PUONJRI MATUT ewi nyaloni mar mako ich gi yor komo nyuol ka yor komo nyuol.', 
-      'English': 'LEARN MORE about the fertility considerations of each method', 
-    }, 
+      'Kiswahili': 'JIFUNZE ZAIDI kuhusu masuala ya uzazi ya kila mbinu',
+      'Dholuo':
+          'PUONJRI MATUT ewi nyaloni mar mako ich gi yor komo nyuol ka yor komo nyuol.',
+      'English': 'LEARN MORE about the fertility considerations of each method',
+    },
     'Preparing for a health pregnancy': {
-      'Kiswahili': 'Kujiandaa kwa ujauzito wenye afya', 
-      'Dholuo': 'Yikruok ne ich man gi ngima', 
+      'Kiswahili': 'Kujiandaa kwa ujauzito wenye afya',
+      'Dholuo': 'Yikruok ne ich man gi ngima',
       'English': 'Preparing for a healthy pregnancy',
     }
+  };
 
+  final Map<String, List<String>> audioContentMap = {
+    "English": [
+      'videoAudio/audio/ready_for_baby_audio/launch/heyThis_pregnant_E.mp3'
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/ready_for_baby_audio/launch/heyThis_pregnant_K.mp3'
+    ],
+    "Dholuo": [
+      'videoAudio/audio/ready_for_baby_audio/launch/heyThis_pregnant_L.mp3'
+    ],
   };
 
   final Map<String, Map<String, String>> _videos = {
@@ -75,7 +89,10 @@ class _ReadyPageState extends State<ReadyPage> {
     });
   }
 
-  Widget customListTile({required String imagePath, required String header, required String title}) {
+  Widget customListTile(
+      {required String imagePath,
+      required String header,
+      required String title}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Column(
@@ -106,7 +123,14 @@ class _ReadyPageState extends State<ReadyPage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ImageIcon(AssetImage('assets/misc-icons/important.png'), color: Colors.black),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                            color: Colors.black),
+                        getAudio(),
+                      ],
+                    ),
                     SizedBox(width: 8.0),
                     Expanded(
                       child: Text(
@@ -139,94 +163,96 @@ class _ReadyPageState extends State<ReadyPage> {
   }
 
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
 
-  double containerWidth = MediaQuery.of(context).size.width;
-  double containerHeight = MediaQuery.of(context).size.height;
-  if (containerHeight / containerWidth > _aspectRatio) {
-    containerHeight = containerWidth * _aspectRatio;
-  } else {
-    containerWidth = containerHeight / _aspectRatio;
-  }
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
 
-  double boxWidth = containerWidth;
-  double boxHeight = containerHeight;
-
-  return Scaffold(
-    appBar: AppBar(
-      // leading: IconButton(
-      //     icon: const Icon(Icons.home),
-      //     onPressed: () {
-      //       Navigator.of(context).pushNamed('/home');
-      //     },
-      //   ),
-        //title: Text(_t('Family Planning Guide')),
-      ),
-      body: Column(
-      children: [
+    return Scaffold(
+      appBar: AppBar(
+          // leading: IconButton(
+          //     icon: const Icon(Icons.home),
+          //     onPressed: () {
+          //       Navigator.of(context).pushNamed('/home');
+          //     },
+          //   ),
+          //title: Text(_t('Family Planning Guide')),
+          ),
+      body: Column(children: [
         // Language selection buttons
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: languages.map((language) => languageButton(language)).toList(),
+          children:
+              languages.map((language) => languageButton(language)).toList(),
         ),
         // Make the rest of the page scrollable
         Flexible(
-          child: ListView(
-            children: [
-              customListTile(
-                imagePath: 'assets/ready_to_have_baby_pregnant.png',
-                header: _t('What if I\'m ready to have a baby?'),
-                title: _t('HEY! THIS IS IMPORTANT!'),
-              ),
-              
-          SizedBox(width:boxWidth, height:boxHeight * 0.5 * 0.6, child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
-          
-         Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: ElevatedButton.icon(
-            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
-            label: Text(_t('LEARN MORE about the fertility considerations of each method')), // The label (text)
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple[100], // Button background color
-              foregroundColor: Colors.black 
+          child: ListView(children: [
+            customListTile(
+              imagePath: 'assets/ready_to_have_baby_pregnant.png',
+              header: _t('What if I\'m ready to have a baby?'),
+              title: _t('HEY! THIS IS IMPORTANT!'),
             ),
-            onPressed: () {
-              int languageIndex = languages.indexOf(_currentLanguage);
-              Navigator.pushNamed(
-                context,
-                '/learnmore',
-                arguments: languageIndex
-              );
-            },
-          ),
-        ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: ElevatedButton.icon(
-            icon: ImageIcon(AssetImage('assets/misc-icons/check_mark.png'), color: Colors.black),
-            label: Text(_t('Preparing for a health pregnancy')), 
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple[100], // Button background color
-              foregroundColor: Colors.black, 
-            ),
-    
-            onPressed: () {
-              Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PrepPage(initialLanguage: _currentLanguage),
+            SizedBox(
+                width: boxWidth,
+                height: boxHeight * 0.5 * 0.6,
+                child:
+                    VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              child: ElevatedButton.icon(
+                icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
+                    color: Colors.black),
+                label: Text(_t(
+                    'LEARN MORE about the fertility considerations of each method')),
+                // The label (text)
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple[100],
+                    // Button background color
+                    foregroundColor: Colors.black),
+                onPressed: () {
+                  int languageIndex = languages.indexOf(_currentLanguage);
+                  Navigator.pushNamed(context, '/learnmore',
+                      arguments: languageIndex);
+                },
               ),
-            );
-            },
-    
-          ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              child: ElevatedButton.icon(
+                icon: ImageIcon(AssetImage('assets/misc-icons/check_mark.png'),
+                    color: Colors.black),
+                label: Text(_t('Preparing for a health pregnancy')),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[100],
+                  // Button background color
+                  foregroundColor: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          PrepPage(initialLanguage: _currentLanguage),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ]),
         ),
-          
       ]),
-        ), 
-      ]),
-  );
-    
+    );
+  }
+
+  Widget getAudio() {
+    return AudioWidget(audioAsset: audioContentMap[_currentLanguage]![0]);
   }
 }
-

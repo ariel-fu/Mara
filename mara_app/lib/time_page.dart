@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/hiv_page.dart';
+import 'audio.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({Key? key}) : super(key: key);
@@ -16,6 +17,48 @@ class _TimePageState extends State<TimePage> {
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
+  final Map<String, List<String>> audioContentMap = {
+    "English": [
+      'videoAudio/audio/how_long_audio/how_long_condom_E.mp3',
+      'videoAudio/audio/how_long_audio/how_long_condom_E.mp3',
+      'videoAudio/audio/how_long_audio/how_long_pills_E.mp3',
+      'videoAudio/audio/how_long_audio/how_long_depo_E.mp3',
+      'videoAudio/audio/how_long_audio/how_long_implant_E.mp3',
+      'videoAudio/audio/how_long_audio/how_long_iucd_E.mp3',
+      'videoAudio/audio/how_long_audio/how_long_epill_E.mp3',
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/how_long_audio/how_long_condom_K.mp3',
+      'videoAudio/audio/how_long_audio/how_long_condom_K.mp3',
+      'videoAudio/audio/how_long_audio/how_long_pills_K.mp3',
+      'videoAudio/audio/how_long_audio/how_long_depo_K.mp3',
+      'videoAudio/audio/how_long_audio/how_long_implant_K.mp3',
+      'videoAudio/audio/how_long_audio/how_long_iucd_K.mp3',
+      'videoAudio/audio/how_long_audio/how_long_epill_K.mp3',
+    ],
+    "Dholuo": [
+      'videoAudio/audio/how_long_audio/how_long_condom_L.mp3',
+      'videoAudio/audio/how_long_audio/how_long_condom_L.mp3',
+      'videoAudio/audio/how_long_audio/how_long_pills_L.mp3',
+      'videoAudio/audio/how_long_audio/how_long_depo_L.mp3',
+      'videoAudio/audio/how_long_audio/how_long_implant_L.mp3',
+      'videoAudio/audio/how_long_audio/how_long_iucd_L.mp3',
+      'videoAudio/audio/how_long_audio/how_long_epill_L.mp3',
+    ],
+  };
+
+  final Map<String, List<String>> heyThisAudioMap = {
+    "English": [
+      'videoAudio/audio/heyThis_HIV_STI_E.mp3'
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/heyThis_HIV_STI_K.mp3'
+    ],
+    "Dholuo": [
+      'videoAudio/audio/heyThis_HIV_STI_L.mp3'
+    ],
+  };
+
   // final Map<String, String> subtitleTranslations = {
   //   "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
   //   "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
@@ -26,6 +69,12 @@ class _TimePageState extends State<TimePage> {
   "English": "How long does the method work?", 
   "Kiswahili": "Mbinu hiyo inafanya kazi kwa muda gani?", 
   "Dholuo": "Yor ni tiyo kuom kinde marom nade?"
+  };
+
+  final Map<String, String>  whyTranslations = {
+    "Kiswahili": "KWA NINI?",
+    "Dholuo": "NANG'O?",
+    "English": "WHY?",
   };
 
   final Map<String, List<String>> contentDescriptionMap = {
@@ -121,46 +170,72 @@ Widget languageButton(String language) {
     );
   }
 
-
-Widget additionalTextSection() {
+  Widget additionalTextSection() {
   return Padding(
     padding: EdgeInsets.all(10.0),
     child: Column(
       children: [
+        // Only display this section for certain method indices
         if (methodIndex == 0 || methodIndex == 1)
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
-            SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.justify,
-              ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                    getAudio(heyThisAudioMap, 0),
+                  ],
+                ),
+                Expanded(
+                  child: Text(
+                    importantMessageTranslations[languages[languageIndex]] ?? "Important message not found",
+                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-        SizedBox(height: 20),  // Space between the text and the button
-        if (methodIndex == 0 || methodIndex == 1)
-        TextButton.icon(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple[100], // Button background color
-              foregroundColor: Colors.black 
-            ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HIVPage()),
-            );
-          },
-          icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
-          label: Text(
-            learnMoreTranslations[languages[languageIndex]] ?? "Translation Not Found",
-            style: TextStyle(color: Colors.black)
           ),
-        ),
+        // Button for learning more, only shown for condoms
+        if (methodIndex == 0 || methodIndex == 1)
+          TextButton.icon(
+            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+            label: Text(
+              learnMoreTranslations[languages[languageIndex]] ?? "Learn more",
+              style: TextStyle(color: Colors.black)
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100], // Button background color
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HIVPage()),
+              );
+            },
+          ),
+        // Additional button section for other methods
+        if (methodIndex != 0 && methodIndex != 1)
+          TextButton.icon(
+            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+            label: Text(
+              whyTranslations[languages[languageIndex]] ?? "WHY?",
+              style: TextStyle(color: Colors.black),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HIVPage()),
+              );
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.deepPurple[100],
+            ),
+          ),
       ],
     ),
   );
@@ -243,7 +318,13 @@ Widget methodSelectionRow() {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                    getAudio(audioContentMap, methodIndex),
+                  ],
+                ),
             SizedBox(width: 10.0),
             Flexible(
               child: Text(
@@ -265,5 +346,9 @@ Widget methodSelectionRow() {
         color: Colors.black,
       )
     );
+  }
+
+  Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
+    return AudioWidget(audioAsset: audioMap[languages[languageIndex]]![audioIndex]);
   }
 }

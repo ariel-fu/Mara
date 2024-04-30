@@ -267,37 +267,37 @@ void navigateToRecommendationScreen(BuildContext context, String pregnancyTiming
       ),
     ),
   );
-}
+  }
 
 
-String getConsistentKeyForQuestion(String questionText) {
-  var invertedMap = <String, String>{};
-  
-  _translations.forEach((language, translations) {
-    translations.forEach((key, value) {
-      invertedMap[value] = key; // Invert the map to go from translation to key
+  String getConsistentKeyForQuestion(String questionText) {
+    var invertedMap = <String, String>{};
+    
+    _translations.forEach((language, translations) {
+      translations.forEach((key, value) {
+        invertedMap[value] = key; // Invert the map to go from translation to key
+      });
     });
-  });
 
-  return invertedMap[questionText] ?? questionText;
-}
-
+    return invertedMap[questionText] ?? questionText;
+  }
 
 
 
-void _changeLanguage(String language) {
-  setState(() {
-    _currentLanguage = language;
-  });
-}
 
-Map<String, String> getReverseLookupMap(String language) {
-  Map<String, String> reverseMap = {};
-  _translations[language]?.forEach((key, value) {
-    reverseMap[value] = key;
-  });
-  return reverseMap;
-}
+  void _changeLanguage(String language) {
+    setState(() {
+      _currentLanguage = language;
+    });
+  }
+
+  Map<String, String> getReverseLookupMap(String language) {
+    Map<String, String> reverseMap = {};
+    _translations[language]?.forEach((key, value) {
+      reverseMap[value] = key;
+    });
+    return reverseMap;
+  }
 
 
 // void _handleOptionSelection(String questionKey, String optionKey) {
@@ -308,7 +308,7 @@ Map<String, String> getReverseLookupMap(String language) {
 //   });
 // }
 
-void _handleOptionSelection(String questionKey, String optionKey) {
+  void _handleOptionSelection(String questionKey, String optionKey) {
     setState(() {
       _selectedOptions[questionKey] = optionKey;
     });
@@ -703,6 +703,12 @@ bool _areAllQuestionsAnswered() {
             ],
           ),
           Expanded(
+            child: RawScrollbar(
+              thumbColor: const Color.fromARGB(255, 232, 132, 165),
+              thumbVisibility: true,
+              trackVisibility: false,
+              thickness: 25.0,
+              radius: Radius.circular(20),
             child: ListView(
               children: <Widget>[
                 quizSection(context, 'q1', []),
@@ -726,6 +732,7 @@ bool _areAllQuestionsAnswered() {
                   ),
                 ),
               ],
+            ),
             ),
           ),
         ],

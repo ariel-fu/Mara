@@ -5,6 +5,7 @@ import 'package:mara_app/home2.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/time_page.dart';
 import 'package:mara_app/whySomeMethodsBetter.dart';
+import 'audio.dart';
 
 class WhatChance extends StatefulWidget {
   const WhatChance({Key? key}) : super(key: key);
@@ -19,7 +20,42 @@ class _WhatChanceState extends State<WhatChance> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-  
+
+  final Map<String, List<String>> importantAudioContentMap = {
+    "English": [
+      'videoAudio/audio/what_chance_audio/chance_male_condom_E.mp3',
+      'videoAudio/audio/what_chance_audio/chance_female_condom_E.mp3',
+      'videoAudio/audio/what_chance_audio/chance_pills_E.mp3',
+      'videoAudio/audio/what_chance_audio/chance_depo_E.mp3',
+      'videoAudio/audio/what_chance_audio/chance_implant_E.mp3',
+      'videoAudio/audio/what_chance_audio/chance_iucd_E.mp3',
+      'videoAudio/audio/what_chance_audio/chance_epill_E.mp3'
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/what_chance_audio/chance_male_condom_K.mp3',
+      'videoAudio/audio/what_chance_audio/chance_female_condom_K.mp3',
+      'videoAudio/audio/what_chance_audio/chance_pills_K.mp3',
+      'videoAudio/audio/what_chance_audio/chance_depo_K.mp3',
+      'videoAudio/audio/what_chance_audio/chance_implant_K.mp3',
+      'videoAudio/audio/what_chance_audio/chance_iucd_K.mp3',
+      'videoAudio/audio/what_chance_audio/chance_epill_K.mp3'
+    ],
+    "Dholuo": [
+      'videoAudio/audio/what_chance_audio/chance_male_condom_L.mp3',
+      'videoAudio/audio/what_chance_audio/chance_female_condom_L.mp3',
+      'videoAudio/audio/what_chance_audio/chance_pills_L.mp3',
+      'videoAudio/audio/what_chance_audio/chance_depo_L.mp3',
+      'videoAudio/audio/what_chance_audio/chance_implant_L.mp3',
+      'videoAudio/audio/what_chance_audio/chance_iucd_L.mp3',
+      'videoAudio/audio/what_chance_audio/chance_epill_L.mp3'
+    ],
+  };
+
+  final Map<String, List<String>> heyThisAudioMap = {
+    "English": ['videoAudio/audio/heyThis_HIV_STI_E.mp3'],
+    "Kiswahili": ['videoAudio/audio/heyThis_HIV_STI_K.mp3'],
+    "Dholuo": ['videoAudio/audio/heyThis_HIV_STI_L.mp3'],
+  };
 
   final Map<String, String> titleTranslations = {
     "Kiswahili": "Je, nafasi yangu ya kupata mimba ni ipi?",
@@ -27,17 +63,22 @@ class _WhatChanceState extends State<WhatChance> {
     "English": "What is my chance of getting pregnant?",
   };
 
-  
   final Map<String, String> whyTranslations = {
-    "Kiswahili": "KWA NINI baadhi ya mbinu za kupanga uzazi hufanya kazi vizuri zaidi kuliko zingine ili kuzuia mimba?",
-    "Dholuo": "EN ANG'O MA OMIYO yore moko mag komo nyuol tiyoga maber mohingo moko e geng'o ich?",
-    "English": "WHY do some methods work better than others to prevent pregnancy?",
+    "Kiswahili":
+        "KWA NINI baadhi ya mbinu za kupanga uzazi hufanya kazi vizuri zaidi kuliko zingine ili kuzuia mimba?",
+    "Dholuo":
+        "EN ANG'O MA OMIYO yore moko mag komo nyuol tiyoga maber mohingo moko e geng'o ich?",
+    "English":
+        "WHY do some methods work better than others to prevent pregnancy?",
   };
 
   final Map<String, String> importantMessageTranslations = {
-    "English": "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
-    "Kiswahili": "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
-    "Dholuo": "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!"
+    "English":
+        "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+    "Kiswahili":
+        "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+    "Dholuo":
+        "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!"
   };
 
   final Map<String, String> learnMoreTranslations = {
@@ -45,7 +86,6 @@ class _WhatChanceState extends State<WhatChance> {
     "Kiswahili": "Jifunze zaidi",
     "Dholuo": "Puonjri matut"
   };
-
 
   final Map<String, List<String>> contentDescriptionMap = {
     "Kiswahili": [
@@ -78,35 +118,24 @@ class _WhatChanceState extends State<WhatChance> {
   };
 
   final Map<String, String> EpillText = {
-    "Kiswahili": "Pata maelezo zaidi kuhusu jinsi ya kumeza kidonge cha E kwa usalama",
+    "Kiswahili":
+        "Pata maelezo zaidi kuhusu jinsi ya kumeza kidonge cha E kwa usalama",
     "Dholuo": "Ponjri matut ewi kaka inyalo muonyo E-pill eyo makare",
     "English": "Learn more about how to take the E-pill safely",
   };
 
   final double _aspectRatio = 16 / 10;
 
-
   @override
   Widget build(BuildContext context) {
-
-    double containerWidth = MediaQuery.of(context).size.width;
-    double containerHeight = MediaQuery.of(context).size.height;
-    if (containerHeight / containerWidth > _aspectRatio) {
-      containerHeight = containerWidth * _aspectRatio;
-    } else {
-      containerWidth = containerHeight / _aspectRatio;
-    }
-
-    double boxWidth = containerWidth;
-    double boxHeight = containerHeight;
-    double availableHeight = boxHeight;
     return Scaffold(
       appBar: AppBar(
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back),
         //   onPressed: () => Navigator.of(context).pop(),
         // ),
-        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
+        title: Text(
+            titleTranslations[languages[languageIndex]] ?? "Title not found"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -116,31 +145,37 @@ class _WhatChanceState extends State<WhatChance> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: languages.map((language) => languageButton(language)).toList(),
+                children: languages
+                    .map((language) => languageButton(language))
+                    .toList(),
               ),
             ),
             methodSelectionRow(),
             SizedBox(height: 20.0),
             contentArea(),
-            SizedBox(height: 20.0),
-            Container(
-              width: boxWidth,
-              height: availableHeight * 0.25,
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(0, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(1.0),
-                ),
-              child: Center(
-                child: getPic(),
-              ),
+            Center(
+              child: getPic(),
             ),
             additionalTextSection(),
+            // Container(
+            //   width: boxWidth,
+            //   height: availableHeight * 0.25,
+            //   decoration: BoxDecoration(
+            //       color: Color.fromARGB(0, 255, 255, 255),
+            //       borderRadius: BorderRadius.circular(1.0),
+            //     ),
+            //   child: Center(
+            //     child: getPic(),
+            //   ),
+            // ),
+            // additionalTextSection(),
           ],
+          //),
         ),
       ),
     );
   }
-  
+
   Widget contentArea() {
     return Padding(
       padding: EdgeInsets.all(10.0),
@@ -154,7 +189,13 @@ class _WhatChanceState extends State<WhatChance> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                getAudio(importantAudioContentMap, methodIndex),
+              ],
+            ),
             SizedBox(width: 10.0),
             Flexible(
               child: Text(
@@ -167,6 +208,7 @@ class _WhatChanceState extends State<WhatChance> {
       ),
     );
   }
+
   Widget languageButton(String language) {
     bool isSelected = languages[languageIndex] == language;
     return ElevatedButton(
@@ -184,100 +226,121 @@ class _WhatChanceState extends State<WhatChance> {
     );
   }
 
-    Widget additionalTextSection() {
-      return Padding(
+  Widget additionalTextSection() {
+    return Padding(
         padding: EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            if (methodIndex == 0 || methodIndex == 1)
-              Row(
+        child: Column(children: [
+          if (methodIndex == 0 || methodIndex == 1)
+            Padding(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                  //ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
                   SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                          size: 24.0, color: Colors.black),
+                      getAudio(heyThisAudioMap, 0),
+                    ],
+                  ),
                   Expanded(
                     child: Text(
-                      importantMessageTranslations[languages[languageIndex]] ?? "Important Message Not Found",
-                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.justify,
+                      importantMessageTranslations[languages[languageIndex]] ??
+                          "Important Message Not Found",
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                      //textAlign: TextAlign.justify,
                     ),
                   ),
                 ],
               ),
-            //SizedBox(height: 20), 
-            if (methodIndex == 0 || methodIndex == 1)
-              TextButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple[100], // Button background color
-                    foregroundColor: Colors.black 
-                  ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HIVPage()),
-                  );
-                },
-                icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
-                label: Text(
-                  learnMoreTranslations[languages[languageIndex]] ?? "Translation Not Found",
-                  style: TextStyle(color: Colors.black)
-                ),
-              ),
-              SizedBox(height: 50),
-              if (methodIndex !=6)
-                TextButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple[100], // Button background color
-                    foregroundColor: Colors.black 
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WhySomeMethodsBetter(initialLanguage: _currentLanguage)),
-                  );
-                },
-                icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
-                label: Text(
-                  whyTranslations[languages[languageIndex]] ?? "Translation Not Found",
-                  style: TextStyle(color: Colors.black)
-                ),
-                ), 
-                               
-                if (methodIndex == 6) 
-                TextButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple[100], // Button background color
-                    foregroundColor: Colors.black 
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EmergencyPage(initialLanguage: _currentLanguage)),
-                  );
-                },
-                icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
-                label: Text(
-                  EpillText[languages[languageIndex]] ?? "Translation Not Found",
-                  style: TextStyle(color: Colors.black)
-                ),
-              ),
-          ]
-        )
-      );
+            ),
+          //SizedBox(height: 20),
+          if (methodIndex == 0 || methodIndex == 1)
+            TextButton.icon(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[100],
+                  // Button background color
+                  foregroundColor: Colors.black),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HIVPage()),
+                );
+              },
+              icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
+                  color: Colors.black),
+              label: Text(
+                  learnMoreTranslations[languages[languageIndex]] ??
+                      "Translation Not Found",
+                  style: TextStyle(color: Colors.black)),
+            ),
+          SizedBox(height: 50),
+          if (methodIndex != 6)
+            TextButton.icon(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[100],
+                  // Button background color
+                  foregroundColor: Colors.black),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WhySomeMethodsBetter(
+                          initialLanguage: _currentLanguage)),
+                );
+              },
+              icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
+                  color: Colors.black),
+              label: Text(
+                  whyTranslations[languages[languageIndex]] ??
+                      "Translation Not Found",
+                  style: TextStyle(color: Colors.black)),
+            ),
+
+          if (methodIndex == 6)
+            TextButton.icon(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[100],
+                  // Button background color
+                  foregroundColor: Colors.black),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          EmergencyPage(initialLanguage: _currentLanguage)),
+                );
+              },
+              icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
+                  color: Colors.black),
+              label: Text(
+                  EpillText[languages[languageIndex]] ??
+                      "Translation Not Found",
+                  style: TextStyle(color: Colors.black)),
+            ),
+        ]));
   }
-  
-  void WhyDoPage () {
+
+  void WhyDoPage() {
     Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => WhySomeMethodsBetter(initialLanguage: _currentLanguage)),
-  );
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              WhySomeMethodsBetter(initialLanguage: _currentLanguage)),
+    );
   }
+
   Widget getPic() {
-    String imageNum = "assets/method_efficiency_pics/efficacy_Page_$methodIndex.jpg";
+    String imageNum =
+        "assets/method_efficiency_pics/efficacy_Page_$methodIndex.jpg";
     return Image.asset(
-                imageNum,
-                width: MediaQuery.of(context).size.width * 0.8,
-              );
+      imageNum,
+      width: MediaQuery.of(context).size.width * 0.8,
+    );
   }
 
   Widget buildIconButton(IconData iconData, String caption, int index) {
@@ -310,7 +373,7 @@ class _WhatChanceState extends State<WhatChance> {
               highlightColor: Colors.transparent,
             ),
             SizedBox(height: 5),
-            Container (
+            Container(
                 width: 100,
                 child: Text(
                   caption,
@@ -319,8 +382,7 @@ class _WhatChanceState extends State<WhatChance> {
                   style: TextStyle(
                     color: isSelected ? Colors.black : Colors.grey,
                   ),
-                )
-            )
+                ))
           ],
         ),
       ],
@@ -328,13 +390,11 @@ class _WhatChanceState extends State<WhatChance> {
   }
 
   Widget updateMethodContent() {
-    return Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      style: TextStyle(
-        fontSize: 18.0,
-        color: Colors.black,
-      )
-    );
+    return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
+        style: TextStyle(
+          fontSize: 18.0,
+          color: Colors.black,
+        ));
   }
 
   Widget methodSelectionRow() {
@@ -345,14 +405,19 @@ class _WhatChanceState extends State<WhatChance> {
         children: [
           buildIconButton(MaraIcons.condom, "Condom", 0),
           buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(
+              MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
           buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
           buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
           buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+          buildIconButton(
+              MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
         ],
       ),
     );
   }
-}
 
+  Widget getAudio(Map<String, List<String>> audioMap, int index) {
+    return AudioWidget(audioAsset: audioMap[languages[languageIndex]]![index]);
+  }
+}

@@ -8,6 +8,7 @@ import 'package:mara_app/ready_to_have_baby.dart';
 import 'package:mara_app/time_page.dart';
 import 'package:mara_app/private_page.dart';
 import 'package:mara_app/WhatChance.dart';
+import 'package:mara_app/hiv_page.dart';
 
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:mara_app/new_liked_methods.dart';
@@ -31,6 +32,7 @@ class _HomePage2State extends State<HomePage2> {
       "Je, nafasi yangu ya kupata mimba ni ipi?",
       "Je, ninaweza kuiweka kwa usiri?",
       "Je, itakuaje ikiwa niko tayari kupata mtoto?",
+      "Kuzuia Virusi Vya Ukimwi na magonjwa ya zinaa",
       "Chukua jaribio letu na utafute mbinu yako!"
     ],
     "Dholuo": [
@@ -40,6 +42,7 @@ class _HomePage2State extends State<HomePage2> {
       "Nyalona mar mako ich en ang'o?",
       "Bende anyalo kete mopondo?",
       "To ka ayikora mar mako ich to?",
+      "Geng'o kute mag ayaki kod Nyae",
       "Tim penj wa mondo iyud yori mar geng'o ich!"
     ],
     "English": [
@@ -49,9 +52,13 @@ class _HomePage2State extends State<HomePage2> {
       "What is my chance of getting pregnant? ",
       "Can I keep it private?",
       "What if I'm ready to have a baby?",
+      "Preventing HIV and STIs",
       "Take our quiz and find your method!"
     ],
   };
+
+
+
 
   String _currentLanguage = 'English';
 
@@ -90,7 +97,8 @@ class _HomePage2State extends State<HomePage2> {
     return translation;
   }
 
-  final List<bool> _selections = List.generate(6, (_) => false);
+  // final List<bool> _selections = List.generate(6, (_) => false);
+   final List<bool> _selections = List.generate(7, (_) => false); //include HIV/STI page
   bool get _allSelected => _selections.every((bool selected) => selected);
   void _handleTap(int index) {
     setState(() { _selections[index] = true; });
@@ -123,6 +131,11 @@ class _HomePage2State extends State<HomePage2> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ReadyPage()),
+      );
+    } else if (index == 6) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HIVPage()),
       );
     }
   }
@@ -253,11 +266,20 @@ class _HomePage2State extends State<HomePage2> {
               onTap: () => _handleTap(5),
               tileColor: _selections[5] ? Colors.green : Colors.black, 
             ),
+            Divider(),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
+              leading: Image.asset('assets/misc-icons/twopeople_white.png', width: 90, height: 90),
+              title: Text(menuOptions[_currentLanguage]![6]),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
+              onTap: () => _handleTap(6),
+              tileColor: _selections[6] ? Colors.green : Colors.black, 
+            ),           
             Divider(),  
             ListTile(
               contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
               leading: Image.asset('assets/take_quiz_white.png', width: 90, height: 90),
-              title: Text(menuOptions[_currentLanguage]![6]),
+              title: Text(menuOptions[_currentLanguage]![7]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               tileColor: _allSelected ? Colors.green : Colors.grey,
               onTap:_takeQuiz,
@@ -317,73 +339,5 @@ class _HomePage2State extends State<HomePage2> {
         MaterialPageRoute(builder: (context) => QuizScreen()),
       ) : null;
     }
-  }
-}
-
-/////////////////////
-
-// Custom list tile definition
-class CustomListTile extends StatelessWidget {
-  final Widget? leading; // Optional leading widget
-  final Text? title; // Required title text
-  final Text? subTitle; // Optional subtitle text
-  final Function? onTap; // Optional tap event handler
-  final Function? onLongPress; // Optional long press event handler
-  final Function? onDoubleTap; // Optional double tap event handler
-  final Widget? trailing; // Optional trailing widget
-  final Color? tileColor; // Optional tile background color
-  final double? height; // Required height for the custom list tile
-  final TextStyle? titleTextStyle;
-
-  // Constructor for the custom list tile
-  const CustomListTile({
-    super.key,
-    this.leading,
-    this.title,
-    this.subTitle,
-    this.onTap,
-    this.onLongPress,
-    this.onDoubleTap,
-    this.trailing,
-    this.tileColor,
-    required this.height, // Make height required for clarity
-    this.titleTextStyle
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material( // Material design container for the list tile
-      color: tileColor, // Set background color if provided
-      child: InkWell( // Tappable area with event handlers
-        onTap: () => onTap, // Tap event handler
-        //onDoubleTap: () => onDoubleTap, // Double tap event handler
-        //onLongPress: () => onLongPress, // Long press event handler
-        child: SizedBox( // Constrain the size of the list tile
-          height: height, // Set custom height from constructor
-          child: Row( // Row layout for list item content
-            children: [
-              Padding( // Padding for the leading widget
-                padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-                child: leading, // Display leading widget
-              ),
-              Expanded( // Expanded section for title and subtitle
-                child: Column( // Column layout for title and subtitle
-                  crossAxisAlignment: CrossAxisAlignment.start, // Align text left
-                  children: [
-                    title ?? const SizedBox(), // Display title or empty space
-                    const SizedBox(height: 10), // Spacing between title and subtitle
-                    subTitle ?? const SizedBox(), // Display subtitle or empty space
-                  ],
-                ),
-              ),
-              Padding( // Padding for the trailing widget
-                padding: const EdgeInsets.all(12.0),
-                child: trailing, // Display trailing widget
-              )
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

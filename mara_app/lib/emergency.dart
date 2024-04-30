@@ -7,7 +7,7 @@ class EmergencyPage extends StatefulWidget {
   final String initialLanguage;
   EmergencyPage({Key? key, required this.initialLanguage}) : super(key: key);
   //const EmergencyPage({Key? key}) : super(key: key);
-  
+
 
   @override
   // State<EmergencyPage> createState() => _EmergencyPageState();
@@ -32,16 +32,16 @@ class _EmergencyPageState extends State<EmergencyPage> {
   final double _aspectRatio = 16 / 10;
 
   final Map<String, String> titleContentMap = {
-      "English": "It's an emergency!", 
-      "Kiswahili": "Ni ya dharura!", 
-      "Dholuo": "En gima imuonyo e resruok!"
+    "English": "It's an emergency!",
+    "Kiswahili": "Ni ya dharura!",
+    "Dholuo": "En gima imuonyo e resruok!"
 
   };
 
   final Map<String, String> subtitleContentMap = {
-      "English": "All you need to know about taking the E-pill (P2).", 
-      "Kiswahili": "Unachohitaji kujua kuhusu kumeza E-pill (P2).", 
-     "Dholuo": "Gik moko te ma onego ing'e ewi muonyo E-pill [P2]"
+    "English": "All you need to know about taking the E-pill (P2).",
+    "Kiswahili": "Unachohitaji kujua kuhusu kumeza E-pill (P2).",
+    "Dholuo": "Gik moko te ma onego ing'e ewi muonyo E-pill [P2]"
   };
 
   final Map<String, Map<String, String>> _translations = {
@@ -52,7 +52,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
     },
     "content2" :{
       "Kiswahili": "Muda ni muhimu kwa sababu muda gani unachukua baada ya kufanya ngono hufanya tofauti kubwa katika jinsi inavyofanya kazi vizuri kuzuia mimba. Chukua haraka iwezekanavyo, lakini ndani ya siku 5 za ngono. Watoa huduma wengine watakuambia siku 3. mapema ni bora!",
-      "Dholuo": "Ng'iyo saa ma imuonye ber nikech mapiyo ma imuonye bang bedo e achiel biro kelo pogruok maduong e kaka otiyo maber e geng'o ich. Muonye mapiyo ahinya  kaka inyalo, to ekind ndalo 5 mar bedo e achiel. Jochiw thieth moko biro nyisi ndalo 3. Mapiyo mogik ber!",      
+      "Dholuo": "Ng'iyo saa ma imuonye ber nikech mapiyo ma imuonye bang bedo e achiel biro kelo pogruok maduong e kaka otiyo maber e geng'o ich. Muonye mapiyo ahinya  kaka inyalo, to ekind ndalo 5 mar bedo e achiel. Jochiw thieth moko biro nyisi ndalo 3. Mapiyo mogik ber!",
       "English": "Timing is important because how soon you take it after sex makes a big difference in how well it works to prevent pregnancy. Take as soon as you can, but within 5 days of sex. Some providers will tell you 3 days. The sooner the better!"
     },
 
@@ -70,34 +70,34 @@ class _EmergencyPageState extends State<EmergencyPage> {
   // String videoTitle2 = 'Video 2 Language Not Selected';
 
   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
-  'video1': {
-    '0': { // Language code 0
-      'video': 'videoAudio/videos/peer/peer3KS.mp4',
-      'text': 'Video: Mwenzio anaelezea',
+    'video1': {
+      '0': { // Language code 0
+        'video': 'videoAudio/videos/peer/peer3KS.mp4',
+        'text': 'Video: Mwenzio anaelezea',
+      },
+      '1': { // Language code 1
+        'video': 'videoAudio/videos/peer/peer3DL.mp4',
+        'text': 'Video: Mbasni lero',
+      },
+      '2': { // Language code 2
+        'video': 'videoAudio/videos/peer/peer3E.mp4',
+        'text': 'Video: a peer explains',
+      },
     },
-    '1': { // Language code 1
-      'video': 'videoAudio/videos/peer/peer3DL.mp4',
-      'text': 'Video: Mbasni lero',
+    'video2': {
+      '0': {
+        'video': 'videoAudio/videos/chimes.mp4',
+        'text': 'Kiswahili Video #2',
+      },
+      '1': {
+        'video': 'videoAudio/videos/funnyCat.mp4',
+        'text': 'Dholuo Video #2',
+      },
+      '2': {
+        'video': 'videoAudio/videos/funnyCat2.mp4',
+        'text': 'English Video #2',
+      },
     },
-    '2': { // Language code 2
-      'video': 'videoAudio/videos/peer/peer3E.mp4',
-      'text': 'Video: a peer explains',
-    },
-  },
-  'video2': {
-    '0': {
-      'video': 'videoAudio/videos/chimes.mp4',
-      'text': 'Kiswahili Video #2',
-    },
-    '1': {
-      'video': 'videoAudio/videos/funnyCat.mp4',
-      'text': 'Dholuo Video #2',
-    },
-    '2': {
-      'video': 'videoAudio/videos/funnyCat2.mp4',
-      'text': 'English Video #2',
-    },
-  },
   };
 
   String _t(String key) {
@@ -115,7 +115,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
     final int? routeArgumentIndex =
     ModalRoute.of(context)?.settings.arguments as int?;
 
-  // Update languageIndex if a valid value is provided from the route
+    // Update languageIndex if a valid value is provided from the route
     if (routeArgumentIndex != null &&
         routeArgumentIndex >= 0 &&
         routeArgumentIndex < languages.length &&
@@ -140,7 +140,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Center(
-          child:
+            child:
             Text(titleContentMap[languages[languageIndex]]!)
         ),
       ),
@@ -148,9 +148,9 @@ class _EmergencyPageState extends State<EmergencyPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            subtitleContentMap[languages[languageIndex]]!
+              subtitleContentMap[languages[languageIndex]]!
           ),
-        //children: [
+          //children: [
           Container(
               height: containerHeight * 0.1,
               child: Container(
@@ -226,7 +226,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                   width: boxWidth,
                   height: boxHeight * 0.5 * 0.6,
                   child: Center(child:video1),
-               ),                    
+                ),
               ],
             ),
           ),
@@ -237,34 +237,34 @@ class _EmergencyPageState extends State<EmergencyPage> {
 
   Widget updateMethodContent(String contentKey) {
     return Text(
-      _t(contentKey),
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.black,
-      )
+        _t(contentKey),
+        style: TextStyle(
+          fontSize: 20.0,
+          color: Colors.black,
+        )
     );
   }
 
   String _getAsset(String videoKey, String language) {
-      return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+    return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
   }
 
   String _getTitle(String videoKey, String language) {
     return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   }
-    
+
   Widget updateVideoContent1() {
-      if (languageIndex == 0) {
-        videoAsset1 = _getAsset('video1', '0');
-        videoTitle1 = _getTitle('video1', '0');
-      } else if (languageIndex == 1) {
-          videoAsset1 = _getAsset('video1', '1');
-          videoTitle1 = _getTitle('video1', '1');
-      } else if (languageIndex == 2) {
-          videoAsset1 = _getAsset('video1', '2');
-          videoTitle1 = _getTitle('video1', '2');
-      }
-      return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+    if (languageIndex == 0) {
+      videoAsset1 = _getAsset('video1', '0');
+      videoTitle1 = _getTitle('video1', '0');
+    } else if (languageIndex == 1) {
+      videoAsset1 = _getAsset('video1', '1');
+      videoTitle1 = _getTitle('video1', '1');
+    } else if (languageIndex == 2) {
+      videoAsset1 = _getAsset('video1', '2');
+      videoTitle1 = _getTitle('video1', '2');
+    }
+    return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
   }
 
   Widget languageButton(String language) {
