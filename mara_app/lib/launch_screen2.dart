@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/intermediate_launch_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({super.key});
@@ -10,6 +11,20 @@ class LaunchScreen extends StatefulWidget {
 
 class _LaunchScreenState extends State<LaunchScreen> {
   String _currentLanguage = 'English';
+  
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  // Load the current language from SharedPreferences
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+  }
 
   Map<String, String> translations = {
     'English': "The best family planning choice is the option that you feel is right for you.",
@@ -23,8 +38,10 @@ class _LaunchScreenState extends State<LaunchScreen> {
     'Dholuo': "Puonjri matut ewi yiero ma in godo",
   };
 
- void _switchLanguage(String language) {
-    setState(() {
+ void _switchLanguage(String language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
+    setState(()  { 
       _currentLanguage = language;
     });
   }

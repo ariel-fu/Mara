@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'pattern_page.dart';
 
 class BleedingPage extends StatefulWidget {
@@ -11,6 +12,7 @@ class BleedingPage extends StatefulWidget {
 }
 
 class _BleedingPageState extends State<BleedingPage> {
+  
   Widget methodContent = Text('DUMMY');
   Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
 
@@ -19,6 +21,27 @@ class _BleedingPageState extends State<BleedingPage> {
   int methodIndex = 2; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+
+  String _currentLanguage = 'English';
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      languageIndex= 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
+  }
 
   final Map<String, String> titleTranslations = {
     "English": "Period changes EXPLAINED", 
@@ -101,6 +124,7 @@ class _BleedingPageState extends State<BleedingPage> {
                             languageIndex = 0;
                             overrideIndex = true;
                             updateMethodContent();
+                            _switchLanguage(0);
                             //  video1 = getVideoContent1();
                           });
                         },
@@ -118,6 +142,7 @@ class _BleedingPageState extends State<BleedingPage> {
                             languageIndex = 1;
                             overrideIndex = true;
                             updateMethodContent();
+                            _switchLanguage(1);
                             // video1 = getVideoContent1();
                           });
                         },
@@ -135,6 +160,7 @@ class _BleedingPageState extends State<BleedingPage> {
                             languageIndex = 2;
                             overrideIndex = true;
                             updateMethodContent();
+                            _switchLanguage(2);
                             // video1 = getVideoContent1();
                           });
                         },
@@ -258,7 +284,21 @@ class _BleedingPageState extends State<BleedingPage> {
     );
   }
 
-
+  void _switchLanguage(int language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0 ) {
+      temp =  'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp =  'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(()  { 
+      _currentLanguage = temp;
+    });
+  }
 
   Widget updateMethodContent() {
     return Text(
