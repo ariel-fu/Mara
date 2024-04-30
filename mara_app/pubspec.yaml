@@ -62,13 +62,13 @@ flutter:
   uses-material-design: true
   
   fonts:
-    - family:  MaraIcons
+    - family: MaraIcons
       fonts:
-       - asset: fonts/MaraIcons.ttf
+        - asset: fonts/MaraIcons.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/method_efficiency_pics/ 
+    - assets/method_efficiency_pics/
     - assets/chance_of_preg/
     - assets/string-resources/method_1.png
     - assets/string-resources/method_2.png
@@ -116,7 +116,7 @@ flutter:
     - videoAudio/videos/peer/peer2KS.mp4
     - videoAudio/videos/peer/peer2DL.mp4
     - videoAudio/videos/peer/peer2E.mp4
-      
+
     - videoAudio/videos/peer/peer3KS.mp4
     - videoAudio/videos/peer/peer3DL.mp4
     - videoAudio/videos/peer/peer3E.mp4
@@ -133,97 +133,26 @@ flutter:
     - videoAudio/videos/provider/provider4DL.mp4
     - videoAudio/videos/provider/provider4E.mp4
 
-    - videoAudio/audio/heyThis_HIV_STI_E.mp3
-    - videoAudio/audio/heyThis_HIV_STI_K.mp3
-    - videoAudio/audio/heyThis_HIV_STI_L.mp3
+    #    AUDIO CONTENT
+    - videoAudio/audio/how_long_audio/hiv_sti_condom_E.mp3
+    - videoAudio/audio/how_long_audio/hiv_sti_condom_K.mp3
+    - videoAudio/audio/how_long_audio/hiv_sti_condom_L.mp3
 
-    - videoAudio/audio/ready_for_baby_audio/what_if_condom_E.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_condom_K.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_condom_L.mp3
-
-    - videoAudio/audio/ready_for_baby_audio/what_if_pills_E.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_pills_K.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_pills_L.mp3
-
-    - videoAudio/audio/ready_for_baby_audio/what_if_depo_E.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_depo_K.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_depo_L.mp3
-
-    - videoAudio/audio/ready_for_baby_audio/what_if_implant_E.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_implant_K.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_implant_L.mp3
-
-    - videoAudio/audio/ready_for_baby_audio/what_if_iucd_E.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_iucd_K.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_iucd_L.mp3
-
-    - videoAudio/audio/ready_for_baby_audio/what_if_epill_E.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_epill_K.mp3
-    - videoAudio/audio/ready_for_baby_audio/what_if_epill_L.mp3
-
-    - videoAudio/audio/period_audio/period_condom_E.mp3
-    - videoAudio/audio/period_audio/period_condom_K.mp3
-    - videoAudio/audio/period_audio/period_condom_L.mp3
-
-    - videoAudio/audio/period_audio/period_pills_E.mp3
-    - videoAudio/audio/period_audio/period_pills_K.mp3
-    - videoAudio/audio/period_audio/period_pills_L.mp3
-
-    - videoAudio/audio/period_audio/period_depo_E.mp3
-    - videoAudio/audio/period_audio/period_depo_K.mp3
-    - videoAudio/audio/period_audio/period_depo_L.mp3
-
-    - videoAudio/audio/period_audio/period_implant_E.mp3
-    - videoAudio/audio/period_audio/period_implant_K.mp3
-    - videoAudio/audio/period_audio/period_implant_L.mp3
-
-    - videoAudio/audio/period_audio/period_iucd_E.mp3
-    - videoAudio/audio/period_audio/period_iucd_K.mp3
-    - videoAudio/audio/period_audio/period_iucd_L.mp3
-
-    - videoAudio/audio/period_audio/period_epill_E.mp3
-    - videoAudio/audio/period_audio/period_epill_K.mp3
-    - videoAudio/audio/period_audio/period_epill_L.mp3
-
-    - videoAudio/audio/options_audio/options_male_condom_E.mp3
-    - videoAudio/audio/options_audio/options_male_condom_K.mp3
-    - videoAudio/audio/options_audio/options_male_condom_L.mp3
-
-    - videoAudio/audio/options_audio/options_female_condom_E.mp3
-    - videoAudio/audio/options_audio/options_female_condom_K.mp3
-    - videoAudio/audio/options_audio/options_female_condom_L.mp3
-
-    - videoAudio/audio/options_audio/options_pills_E.mp3
-    - videoAudio/audio/options_audio/options_pills_K.mp3
-    - videoAudio/audio/options_audio/options_pills_L.mp3
-
-    - videoAudio/audio/options_audio/options_depo_E.mp3
-    - videoAudio/audio/options_audio/options_depo_K.mp3
-    - videoAudio/audio/options_audio/options_depo_L.mp3
-
-    - videoAudio/audio/options_audio/options_implant_E.mp3
-    - videoAudio/audio/options_audio/options_implant_K.mp3
-    - videoAudio/audio/options_audio/options_implant_L.mp3
-
-    - videoAudio/audio/options_audio/options_iucd_E.mp3
-    - videoAudio/audio/options_audio/options_iucd_K.mp3
-    - videoAudio/audio/options_audio/options_iucd_L.mp3
-
-    - videoAudio/audio/options_audio/options_epill_E.mp3
-    - videoAudio/audio/options_audio/options_epill_K.mp3
-    - videoAudio/audio/options_audio/options_epill_L.mp3
+    - videoAudio/audio/how_long_audio/hiv_sti_prep_E.mp3
+    - videoAudio/audio/how_long_audio/hiv_sti_prep_K.mp3
+    - videoAudio/audio/how_long_audio/hiv_sti_prep_L.mp3
 
     - videoAudio/audio/how_long_audio/how_long_condom_E.mp3
     - videoAudio/audio/how_long_audio/how_long_condom_K.mp3
     - videoAudio/audio/how_long_audio/how_long_condom_L.mp3
 
-    - videoAudio/audio/how_long_audio/how_long_pills_E.mp3
-    - videoAudio/audio/how_long_audio/how_long_pills_K.mp3
-    - videoAudio/audio/how_long_audio/how_long_pills_L.mp3
-
     - videoAudio/audio/how_long_audio/how_long_depo_E.mp3
     - videoAudio/audio/how_long_audio/how_long_depo_K.mp3
     - videoAudio/audio/how_long_audio/how_long_depo_L.mp3
+
+    - videoAudio/audio/how_long_audio/how_long_epill_E.mp3
+    - videoAudio/audio/how_long_audio/how_long_epill_K.mp3
+    - videoAudio/audio/how_long_audio/how_long_epill_L.mp3
 
     - videoAudio/audio/how_long_audio/how_long_implant_E.mp3
     - videoAudio/audio/how_long_audio/how_long_implant_K.mp3
@@ -233,25 +162,93 @@ flutter:
     - videoAudio/audio/how_long_audio/how_long_iucd_K.mp3
     - videoAudio/audio/how_long_audio/how_long_iucd_L.mp3
 
-    - videoAudio/audio/how_long_audio/how_long_epill_E.mp3
-    - videoAudio/audio/how_long_audio/how_long_epill_K.mp3
-    - videoAudio/audio/how_long_audio/how_long_epill_L.mp3
+    - videoAudio/audio/how_long_audio/how_long_pills_E.mp3
+    - videoAudio/audio/how_long_audio/how_long_pills_K.mp3
+    - videoAudio/audio/how_long_audio/how_long_pills_L.mp3
 
-    - videoAudio/audio/private_audio/private_male_condom_E.mp3
-    - videoAudio/audio/private_audio/private_male_condom_K.mp3
-    - videoAudio/audio/private_audio/private_male_condom_L.mp3
+    - videoAudio/audio/launch_intermediate/intermediate_button_E.mp3
+    - videoAudio/audio/launch_intermediate/intermediate_button_K.mp3
+    - videoAudio/audio/launch_intermediate/intermediate_button_L.mp3
 
-    - videoAudio/audio/private_audio/private_female_condom_E.mp3
-    - videoAudio/audio/private_audio/private_female_condom_K.mp3
-    - videoAudio/audio/private_audio/private_female_condom_L.mp3
+    - videoAudio/audio/launch_intermediate/intermediate_text_E.mp3
+    - videoAudio/audio/launch_intermediate/intermediate_text_K.mp3
+    - videoAudio/audio/launch_intermediate/intermediate_text_L.mp3
 
-    - videoAudio/audio/private_audio/private_pills_E.mp3
-    - videoAudio/audio/private_audio/private_pills_K.mp3
-    - videoAudio/audio/private_audio/private_pills_L.mp3
+    - videoAudio/audio/launch_intermediate/launch_button_E.mp3
+    - videoAudio/audio/launch_intermediate/launch_button_K.mp3
+    - videoAudio/audio/launch_intermediate/launch_button_L.mp3
+
+    - videoAudio/audio/launch_intermediate/launch_text_E.mp3
+    - videoAudio/audio/launch_intermediate/launch_text_K.mp3
+    - videoAudio/audio/launch_intermediate/launch_text_L.mp3
+
+    - videoAudio/audio/options_audio/options_depo_E.mp3
+    - videoAudio/audio/options_audio/options_depo_K.mp3
+    - videoAudio/audio/options_audio/options_depo_L.mp3
+
+    - videoAudio/audio/options_audio/options_epill_E.mp3
+    - videoAudio/audio/options_audio/options_epill_K.mp3
+    - videoAudio/audio/options_audio/options_epill_L.mp3
+
+    - videoAudio/audio/options_audio/options_female_condom_E.mp3
+    - videoAudio/audio/options_audio/options_female_condom_K.mp3
+    - videoAudio/audio/options_audio/options_female_condom_L.mp3
+
+    - videoAudio/audio/options_audio/options_implant_E.mp3
+    - videoAudio/audio/options_audio/options_implant_K.mp3
+    - videoAudio/audio/options_audio/options_implant_L.mp3
+
+    - videoAudio/audio/options_audio/options_iucd_E.mp3
+    - videoAudio/audio/options_audio/options_iucd_K.mp3
+    - videoAudio/audio/options_audio/options_iucd_L.mp3
+
+    - videoAudio/audio/options_audio/options_male_condom_E.mp3
+    - videoAudio/audio/options_audio/options_male_condom_K.mp3
+    - videoAudio/audio/options_audio/options_male_condom_L.mp3
+
+    - videoAudio/audio/options_audio/options_pills_E.mp3
+    - videoAudio/audio/options_audio/options_pills_K.mp3
+    - videoAudio/audio/options_audio/options_pills_L.mp3
+
+    - videoAudio/audio/period_audio/period_changes_E.mp3
+    - videoAudio/audio/period_audio/period_changes_K.mp3
+    - videoAudio/audio/period_audio/period_changes_L.mp3
+
+    - videoAudio/audio/period_audio/period_condom_E.mp3
+    - videoAudio/audio/period_audio/period_condom_K.mp3
+    - videoAudio/audio/period_audio/period_condom_L.mp3
+
+    - videoAudio/audio/period_audio/period_depo_E.mp3
+    - videoAudio/audio/period_audio/period_depo_K.mp3
+    - videoAudio/audio/period_audio/period_depo_L.mp3
+
+    - videoAudio/audio/period_audio/period_epill_E.mp3
+    - videoAudio/audio/period_audio/period_epill_K.mp3
+    - videoAudio/audio/period_audio/period_epill_L.mp3
+
+    - videoAudio/audio/period_audio/period_implant_E.mp3
+    - videoAudio/audio/period_audio/period_implant_K.mp3
+    - videoAudio/audio/period_audio/period_implant_L.mp3
+
+    - videoAudio/audio/period_audio/period_iucd_E.mp3
+    - videoAudio/audio/period_audio/period_iucd_K.mp3
+    - videoAudio/audio/period_audio/period_iucd_L.mp3
+
+    - videoAudio/audio/period_audio/period_pills_E.mp3
+    - videoAudio/audio/period_audio/period_pills_K.mp3
+    - videoAudio/audio/period_audio/period_pills_L.mp3
 
     - videoAudio/audio/private_audio/private_depo_E.mp3
     - videoAudio/audio/private_audio/private_depo_K.mp3
     - videoAudio/audio/private_audio/private_depo_L.mp3
+
+    - videoAudio/audio/private_audio/private_epill_E.mp3
+    - videoAudio/audio/private_audio/private_epill_K.mp3
+    - videoAudio/audio/private_audio/private_epill_L.mp3
+
+    - videoAudio/audio/private_audio/private_female_condom_E.mp3
+    - videoAudio/audio/private_audio/private_female_condom_K.mp3
+    - videoAudio/audio/private_audio/private_female_condom_L.mp3
 
     - videoAudio/audio/private_audio/private_implant_E.mp3
     - videoAudio/audio/private_audio/private_implant_K.mp3
@@ -261,14 +258,139 @@ flutter:
     - videoAudio/audio/private_audio/private_iucd_K.mp3
     - videoAudio/audio/private_audio/private_iucd_L.mp3
 
-    - videoAudio/audio/private_audio/private_epill_E.mp3
-    - videoAudio/audio/private_audio/private_epill_K.mp3
-    - videoAudio/audio/private_audio/private_epill_L.mp3
+    - videoAudio/audio/private_audio/private_male_condom_E.mp3
+    - videoAudio/audio/private_audio/private_male_condom_K.mp3
+    - videoAudio/audio/private_audio/private_male_condom_L.mp3
+
+    - videoAudio/audio/private_audio/private_pills_E.mp3
+    - videoAudio/audio/private_audio/private_pills_K.mp3
+    - videoAudio/audio/private_audio/private_pills_L.mp3
 
     - videoAudio/audio/private_audio/private_subtitle_E.mp3
     - videoAudio/audio/private_audio/private_subtitle_K.mp3
     - videoAudio/audio/private_audio/private_subtitle_L.mp3
 
+    - videoAudio/audio/ready_for_baby_audio/launch/heyThis_pregnant_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/launch/heyThis_pregnant_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/launch/heyThis_pregnant_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_1_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_1_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_1_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_2_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_2_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_2_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_3_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_3_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_3_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_4_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_4_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_content_4_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_subtitle_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_subtitle_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/prep_preg/prep_preg_subtitle_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/what_if_condom_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_condom_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_condom_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/what_if_depo_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_depo_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_depo_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/what_if_epill_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_epill_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_epill_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/what_if_implant_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_implant_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_implant_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/what_if_iucd_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_iucd_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_iucd_L.mp3
+
+    - videoAudio/audio/ready_for_baby_audio/what_if_pills_E.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_pills_K.mp3
+    - videoAudio/audio/ready_for_baby_audio/what_if_pills_L.mp3
+
+    - videoAudio/audio/title_audio/title_how_long_E.mp3
+    - videoAudio/audio/title_audio/title_how_long_K.mp3
+    - videoAudio/audio/title_audio/title_how_long_L.mp3
+
+    - videoAudio/audio/title_audio/title_options_K.mp3
+
+    - videoAudio/audio/title_audio/title_period_E.mp3
+    - videoAudio/audio/title_audio/title_period_K.mp3
+    - videoAudio/audio/title_audio/title_period_L.mp3
+
+    - videoAudio/audio/title_audio/title_private_E.mp3
+    - videoAudio/audio/title_audio/title_private_K.mp3
+    - videoAudio/audio/title_audio/title_private_L.mp3
+
+    - videoAudio/audio/title_audio/title_ready_baby_E.mp3
+    - videoAudio/audio/title_audio/title_ready_baby_K.mp3
+    - videoAudio/audio/title_audio/title_ready_baby_L.mp3
+
+    - videoAudio/audio/title_audio/title_what_chance_E.mp3
+    - videoAudio/audio/title_audio/title_what_chance_K.mp3
+    - videoAudio/audio/title_audio/title_what_chance_L.mp3
+
+    - videoAudio/audio/what_chance_audio/emergency/emergency_content_1_E.mp3
+    - videoAudio/audio/what_chance_audio/emergency/emergency_content_1_K.mp3
+    - videoAudio/audio/what_chance_audio/emergency/emergency_content_1_L.mp3
+
+    - videoAudio/audio/what_chance_audio/emergency/emergency_content_2_E.mp3
+    - videoAudio/audio/what_chance_audio/emergency/emergency_content_2_K.mp3
+    - videoAudio/audio/what_chance_audio/emergency/emergency_content_2_L.mp3
+
+    - videoAudio/audio/what_chance_audio/emergency/emergency_content_3_E.mp3
+    - videoAudio/audio/what_chance_audio/emergency/emergency_content_3_K.mp3
+    - videoAudio/audio/what_chance_audio/emergency/emergency_content_3_L.mp3
+
+    - videoAudio/audio/what_chance_audio/whySomeMethods/whySomeMethods_content_E.mp3
+    - videoAudio/audio/what_chance_audio/whySomeMethods/whySomeMethods_content_K.mp3
+    - videoAudio/audio/what_chance_audio/whySomeMethods/whySomeMethods_content_L.mp3
+
+    - videoAudio/audio/what_chance_audio/whySomeMethods/whySomeMethods_title_E_1.mp3
+    - videoAudio/audio/what_chance_audio/whySomeMethods/whySomeMethods_title_K_1.mp3
+    - videoAudio/audio/what_chance_audio/whySomeMethods/whySomeMethods_title_L_1.mp3
+
+    - videoAudio/audio/what_chance_audio/chance_depo_E.mp3
+    - videoAudio/audio/what_chance_audio/chance_depo_K.mp3
+    - videoAudio/audio/what_chance_audio/chance_depo_L.mp3
+
+    - videoAudio/audio/what_chance_audio/chance_epill_E.mp3
+    - videoAudio/audio/what_chance_audio/chance_epill_K.mp3
+    - videoAudio/audio/what_chance_audio/chance_epill_L.mp3
+
+    - videoAudio/audio/what_chance_audio/chance_female_condom_E.mp3
+    - videoAudio/audio/what_chance_audio/chance_female_condom_K.mp3
+    - videoAudio/audio/what_chance_audio/chance_female_condom_L.mp3
+
+    - videoAudio/audio/what_chance_audio/chance_implant_E.mp3
+    - videoAudio/audio/what_chance_audio/chance_implant_K.mp3
+    - videoAudio/audio/what_chance_audio/chance_implant_L.mp3
+
+    - videoAudio/audio/what_chance_audio/chance_iucd_E.mp3
+    - videoAudio/audio/what_chance_audio/chance_iucd_K.mp3
+    - videoAudio/audio/what_chance_audio/chance_iucd_L.mp3
+
+    - videoAudio/audio/what_chance_audio/chance_male_condom_E.mp3
+    - videoAudio/audio/what_chance_audio/chance_male_condom_K.mp3
+    - videoAudio/audio/what_chance_audio/chance_male_condom_L.mp3
+
+    - videoAudio/audio/what_chance_audio/chance_pills_E.mp3
+    - videoAudio/audio/what_chance_audio/chance_pills_K.mp3
+    - videoAudio/audio/what_chance_audio/chance_pills_L.mp3
+
+    - videoAudio/audio/heyThis_HIV_STI_E.mp3
+    - videoAudio/audio/heyThis_HIV_STI_K.mp3
+    - videoAudio/audio/heyThis_HIV_STI_L.mp3
 
 
   #   - images/a_dot_ham.jpeg
