@@ -66,6 +66,9 @@ flutter:
     - family: MaraIcons
       fonts:
         - asset: fonts/MaraIcons.ttf
+    - family: MiscIcons
+      fonts:
+        - asset: fonts/MiscIcons.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:

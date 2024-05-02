@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:mara_app/icons/misc_icons.dart';
+
 class MethodDetailsScreen extends StatefulWidget {
   final String methodName;
   final Map<String, dynamic>? methodDetails;
@@ -124,12 +126,12 @@ Widget build(BuildContext context) {
             ],
           ),
         ),
-        buildContentCard('assets/birth_control_new.png', '', 'how_it_works'),
-        buildContentCard('assets/period_new.png', 'what_period', 'side_effects'),
-        buildContentCard('assets/calendar_new.png', 'how_long', 'lasts'),
-        buildContentCard('assets/chance_new.png', 'how_effective', 'effectiveness'),
-        buildContentCard('assets/privacy_new.png', 'can_private', 'privacy'),
-        buildContentCard('assets/preg_woman_new.png', 'ready_to_have_baby', 'fertility'),
+        buildContentCard(MiscIcons.birth_control, '', 'how_it_works'),
+        buildContentCard(MiscIcons.period, 'what_period', 'side_effects'),
+        buildContentCard(MiscIcons.calendar, 'how_long', 'lasts'),
+        buildContentCard(MiscIcons.chance, 'how_effective', 'effectiveness'),
+        buildContentCard(MiscIcons.private, 'can_private', 'privacy'),
+        buildContentCard(MiscIcons.pregnant_woman, 'ready_to_have_baby', 'fertility'),
       ],
     ),
   );
@@ -178,7 +180,7 @@ Widget build(BuildContext context) {
 //   );
 // }
 
-Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
+Widget buildContentCard(IconData summaryIcon, String titleKey, String contentKey) {
   String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? '';
   String content = widget.methodDetails?[contentKey]?[_currentLanguage] ?? 'No information available';
 
@@ -195,7 +197,7 @@ Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.asset(iconPath, width: 44, height: 44),
+        Icon(summaryIcon, size: 44),
         SizedBox(width: 10),
         Expanded(
           child: hasTitle

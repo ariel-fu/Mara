@@ -13,7 +13,7 @@ import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:mara_app/new_liked_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:mara_app/icons/misc_icons.dart';
 
 class HomePage2 extends StatefulWidget {
   const HomePage2({Key? key}) : super(key: key);
@@ -93,7 +93,7 @@ class _HomePage2State extends State<HomePage2> {
 
   String _t(String key) {
     String translation = _translations[_currentLanguage]?[key] ?? key;
-    print('Key: $key, Language: $_currentLanguage, Translation: $translation');
+    // print('Key: $key, Language: $_currentLanguage, Translation: $translation');
     return translation;
   }
 
@@ -214,8 +214,8 @@ class _HomePage2State extends State<HomePage2> {
           children: <Widget>[
             SizedBox(height: 20.0),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/birth_control_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+              leading: Icon(MiscIcons.birth_control, size: 60, color: Colors.white), 
               title: Text(menuOptions[_currentLanguage]![0]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(0), 
@@ -223,8 +223,9 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/period_white.png', width: 90, height: 90),
+              titleAlignment: ListTileTitleAlignment.bottom,
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              leading: Icon(MiscIcons.period, size: 80, color: Colors.white), 
               title: Text(menuOptions[_currentLanguage]![1]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(1),
@@ -232,8 +233,8 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/calendar_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0), 
+              leading: Icon(MiscIcons.calendar, size: 60, color: Colors.white),
               title: Text(menuOptions[_currentLanguage]![2]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(2),
@@ -241,8 +242,8 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/chance_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0), 
+              leading: Icon(MiscIcons.chance, size: 60, color: Colors.white),
               title: Text(menuOptions[_currentLanguage]![3]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(3),
@@ -250,8 +251,8 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/privacy_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0), 
+              leading: Icon(MiscIcons.private, size: 60, color: Colors.white),
               title: Text(menuOptions[_currentLanguage]![4]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(4),
@@ -259,8 +260,8 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/preg_woman_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0), 
+              leading: Icon(MiscIcons.pregnant_woman, size: 60, color: Colors.white),
               title: Text(menuOptions[_currentLanguage]![5]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(5),
@@ -268,8 +269,8 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/misc-icons/twopeople_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0), 
+              leading: Icon(MiscIcons.safe_sex,size: 60, color: Colors.white),
               title: Text(menuOptions[_currentLanguage]![6]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               onTap: () => _handleTap(6),
@@ -277,8 +278,8 @@ class _HomePage2State extends State<HomePage2> {
             ),           
             Divider(),  
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/take_quiz_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0), 
+              leading: Icon(MiscIcons.quiz, size: 60, color: Colors.white),
               title: Text(menuOptions[_currentLanguage]![7]),
               titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
               tileColor: _allSelected ? Colors.green : Colors.grey,
