@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mara_app/icons/misc_icons.dart';
+import 'package:mara_app/recommendation_model.dart';
 
 class MethodDetailsScreen extends StatefulWidget {
   final String methodName;
@@ -19,7 +20,7 @@ class MethodDetailsScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MethodDetailsScreenState createState() => _MethodDetailsScreenState();
+  State<MethodDetailsScreen> createState() => _MethodDetailsScreenState();
 }
 
 class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
@@ -82,7 +83,7 @@ Widget build(BuildContext context) {
   }
 
   String methodName = widget.methodDetails?['name']?[_currentLanguage] ?? widget.methodName;
-  String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
+  // String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
   String subtitle = widget.methodDetails?['subtitles']?[_currentLanguage] ?? '';
 
   return Scaffold(
@@ -112,7 +113,8 @@ Widget build(BuildContext context) {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(iconPath, width: 50, height: 50),
+                  Icon(RecommendationModel.getIconForRecommendation(widget.methodName), size: 50),
+                  // Image.asset(iconPath, width: 50, height: 50),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

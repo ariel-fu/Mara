@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'audio.dart';
 
+import 'package:mara_app/icons/misc_icons.dart';
+
 class PrepPage extends StatefulWidget {
   final String initialLanguage;
 
@@ -148,12 +150,7 @@ class _PrepPageState extends State<PrepPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  'assets/preg_woman_new.png',
-                  width: 150,
-                  height: 150,
-                  fit: BoxFit.contain,
-                ),
+                Icon(MiscIcons.pregnant_woman, size: 150),
                 SizedBox(width: 16.0),
                 Expanded(
                   child: Column(
