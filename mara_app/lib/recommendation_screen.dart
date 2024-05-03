@@ -184,7 +184,7 @@ actions: <Widget>[
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => MethodDetailsScreen(
-                                          methodName: trimmedRec,
+                                          methodName: RecommendationModel.getJsonRefFromName(trimmedRec),
                                           methodDetails: methodDetailsData[methodKey],
                                           currentLanguage: _currentLanguage,
                                           translations: widget.translations,
