@@ -5,6 +5,7 @@ import 'bleeding.dart';
 import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/audio.dart';
 import 'video.dart';
+import 'video2.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -21,8 +22,8 @@ class _PatternPageState extends State<PatternPage> {
   String videoAsset2 = 'videoAudio/videos/peer/peer1E.mp4';
   String videoTitle2 = 'Video 2 Language Not Selected';
 
-  VideoWidget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider1E.mp4', title:'Video: a provider explains');
-  VideoWidget video2 = VideoWidget(videoAsset: 'videoAudio/videos/peer/peer1E.mp4', title:'Video: a peer explains');
+  VideoWidget2 video1 = VideoWidget2(videoAsset: 'videoAudio/videos/provider/provider1E.mp4', title:'Video: a provider explains');
+  VideoWidget2 video2 = VideoWidget2(videoAsset: 'videoAudio/videos/peer/peer1E.mp4', title:'Video: a peer explains');
   bool overrideIndex = false;
   
   // Widget methodContent = updateMethodContent();
@@ -506,7 +507,7 @@ String _getTitle(String videoKey, String language) {
   return title;
 }
 
-  VideoWidget updateVideoContent1() {
+  VideoWidget2 updateVideoContent1() {
       if (languageIndex == 0) {
         videoAsset1 = _getAsset('video1', '0');
         videoTitle1 = _getTitle('video1', '0');
@@ -517,10 +518,10 @@ String _getTitle(String videoKey, String language) {
           videoAsset1 = _getAsset('video1', '2');
           videoTitle1 = _getTitle('video1', '2');
       }
-      return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+      return VideoWidget2(videoAsset: videoAsset1, title: videoTitle1);
   }
 
-  VideoWidget updateVideoContent2() {
+  VideoWidget2 updateVideoContent2() {
     if (languageIndex == 0) {
         videoAsset2 = _getAsset('video2', '0');
         videoTitle2 = _getTitle('video2', '0');
@@ -531,7 +532,7 @@ String _getTitle(String videoKey, String language) {
           videoAsset2 = _getAsset('video2', '2');
           videoTitle2 = _getTitle('video2', '2');
       }
-      return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
+      return VideoWidget2(videoAsset: videoAsset2, title: videoTitle2);
   }
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
