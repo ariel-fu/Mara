@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'recommendation_model.dart';
 import 'new_liked_methods.dart';
 import 'short_summaries.dart';
@@ -36,11 +37,19 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   @override
   void initState() {
     super.initState();
-    _currentLanguage = widget.currentLanguage;
+    _loadCurrentLanguage();
     _methodDetailsDataFuture = loadMethodDetails();
   }
 
-  void _changeLanguage(String language) {
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+  }
+  void _changeLanguage(String language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
     setState(() {
       _currentLanguage = language;
     });

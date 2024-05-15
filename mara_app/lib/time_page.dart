@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/hiv_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 
 class TimePage extends StatefulWidget {
@@ -16,6 +17,27 @@ class _TimePageState extends State<TimePage> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+
+  String _currentLanguage = 'English';
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      languageIndex= 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
+  }
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
@@ -154,6 +176,7 @@ class _TimePageState extends State<TimePage> {
   }
 
 Widget languageButton(String language) {
+    asyncmethod(language);
     bool isSelected = languages[languageIndex] == language;
     return ElevatedButton(
       onPressed: () {
@@ -168,6 +191,11 @@ Widget languageButton(String language) {
       ),
       child: Text(language),
     );
+  }
+
+  void asyncmethod(String language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
   }
 
   Widget additionalTextSection() {

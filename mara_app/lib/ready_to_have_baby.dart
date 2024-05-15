@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'prep_preg.dart';
 import 'video.dart';
 import 'audio.dart';
@@ -12,6 +13,19 @@ class ReadyPage extends StatefulWidget {
 class _ReadyPageState extends State<ReadyPage> {
   String _currentLanguage = 'English';
   final List<String> languages = ["Kiswahili", "Dholuo", "English"];
+
+  @override
+  void initState() {
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+  }
+
   final Map<String, Map<String, String>> _translations = {
     // 'Family Planning Guide': {
     //   'Kiswahili': 'Mwongozo wa Mipango ya Familia',
@@ -83,7 +97,9 @@ class _ReadyPageState extends State<ReadyPage> {
     return _videos['titles']?[_currentLanguage] ?? 'Title not found';
   }
 
-  void _changeLanguage(String language) {
+  void _changeLanguage(String language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
     setState(() {
       _currentLanguage = language;
     });

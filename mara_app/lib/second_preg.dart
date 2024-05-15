@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 
 class SecondPreg extends StatefulWidget {
@@ -16,6 +17,27 @@ class _SecondPregState extends State<SecondPreg> {
   int languageIndex = 0; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   bool overrideIndex = false;
+  String _currentLanguage = 'English';
+
+   @override
+  void initState() {
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      languageIndex= 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
+  }
+
 
   final double _aspectRatio = 16 / 10;
 
@@ -142,6 +164,7 @@ class _SecondPregState extends State<SecondPreg> {
                           overrideIndex = true;
                           updateMethodContent();
                           video1 = updateVideoContent1();
+                          _switchLanguage(0);
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -157,6 +180,7 @@ class _SecondPregState extends State<SecondPreg> {
                           overrideIndex = true;
                           updateMethodContent();
                           video1 = updateVideoContent1();
+                          _switchLanguage(1);
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -172,6 +196,7 @@ class _SecondPregState extends State<SecondPreg> {
                           overrideIndex = true;
                           updateMethodContent();
                           video1 = updateVideoContent1();
+                          _switchLanguage(2);
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -230,6 +255,22 @@ class _SecondPregState extends State<SecondPreg> {
     );
   }
 
+   void _switchLanguage(int language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0 ) {
+      temp =  'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp =  'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(()  { 
+      _currentLanguage = temp;
+    });
+  }
+  
   Widget buildSecondaryContext() {
     return Text("some text here " +
         contentDescriptionMap[languages[languageIndex]]![methodIndex]);

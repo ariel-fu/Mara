@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'short_summaries.dart';
 import 'recommendation_model.dart';
 import 'dart:convert';
@@ -22,7 +23,7 @@ class LikedMethodsScreen extends StatefulWidget {
 }
 
 class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
-  late String currentLanguage;
+  late String currentLanguage = "English";
   late Future<Map<String, dynamic>> _methodDetailsFuture;
 
   final Map<String, Map<String, String>> _likedTranslations = {
@@ -43,8 +44,15 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
   @override
   void initState() {
     super.initState();
-    currentLanguage = widget.initialLanguage;
+    _loadCurrentLanguage();
     _methodDetailsFuture = loadMethodDetails();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
   }
 
   Future<Map<String, dynamic>> loadMethodDetails() async {
@@ -60,7 +68,9 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
     return _likedTranslations[currentLanguage]?[key] ?? key;
   }
 
-  void _changeLanguage(String language) {
+  void _changeLanguage(String language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
     if (language != currentLanguage) {
       setState(() {
         currentLanguage = language;

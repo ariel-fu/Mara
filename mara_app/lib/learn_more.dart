@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 import 'package:mara_app/audio.dart';
 
@@ -92,6 +93,27 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
     ],
   };
 
+  String _currentLanguage = 'English';
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      languageIndex= 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -141,6 +163,7 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
           languageIndex = languages.indexOf(language);
           overrideIndex = true;
           updateMethodContent();
+          _switchLanguage(language);
         });
       },
       style: ElevatedButton.styleFrom(
@@ -148,6 +171,14 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
       ),
       child: Text(language),
     );
+  }
+
+   void _switchLanguage(String language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
+    setState(()  { 
+      _currentLanguage = language;
+    });
   }
 
   Widget subtitleSection() {

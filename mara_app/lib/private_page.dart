@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
 import 'package:mara_app/audio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PrivatePage extends StatefulWidget {
   const PrivatePage({Key? key}) : super(key: key);
@@ -154,6 +155,26 @@ class _PrivatePageState extends State<PrivatePage> {
   ];
   final double _aspectRatio = 16 / 10;
 
+  String _currentLanguage = 'English';
+  @override
+  void initState() {
+    _loadCurrentLanguage();
+  }
+
+   Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      languageIndex= 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
@@ -191,6 +212,7 @@ class _PrivatePageState extends State<PrivatePage> {
                             languageIndex = 0;
                             overrideIndex = true;
                             updateMethodContent();
+                            _switchLanguage(0);
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -207,6 +229,7 @@ class _PrivatePageState extends State<PrivatePage> {
                             languageIndex = 1;
                             overrideIndex = true;
                             updateMethodContent();
+                            _switchLanguage(1);
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -223,6 +246,7 @@ class _PrivatePageState extends State<PrivatePage> {
                             languageIndex = 2;
                             overrideIndex = true;
                             updateMethodContent();
+                            _switchLanguage(2);
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -367,6 +391,21 @@ class _PrivatePageState extends State<PrivatePage> {
     );
   }
 
+void _switchLanguage(int language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0 ) {
+      temp =  'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp =  'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(()  { 
+      _currentLanguage = temp;
+    });
+  }
 
   Widget methodSelectionRow() {
     return SingleChildScrollView(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 
 class EmergencyPage extends StatefulWidget {
@@ -27,6 +28,14 @@ class _EmergencyPageState extends State<EmergencyPage> {
   void initState() {
     super.initState();
     _currentLanguage = widget.initialLanguage;
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
   }
 
   final double _aspectRatio = 16 / 10;
@@ -104,7 +113,9 @@ class _EmergencyPageState extends State<EmergencyPage> {
     return _translations[key]?[_currentLanguage] ?? key;
   }
 
-  void _changeLanguage(String language) {
+  void _changeLanguage(String language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
     setState(() {
       _currentLanguage = language;
     });
