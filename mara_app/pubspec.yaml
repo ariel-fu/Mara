@@ -35,6 +35,7 @@ dependencies:
   csv: ^5.1.1
   path_provider: ^2.1.2
   flutter_svg: ^2.0.10
+  #  google_fonts: ^6.2.0
 
   flutter:
     sdk: flutter
@@ -90,6 +91,7 @@ flutter:
     - assets/preg_woman.png
     - assets/methods.json
     - assets/maralogo.png
+    - assets/mara_divas.png
     - assets/imlaunchscreenimg.png
     - assets/iud_picture_of_woman.png
     - assets/birth_control_new.png
@@ -109,6 +111,7 @@ flutter:
     - assets/take_quiz.png
     - assets/misc-icons/
     - assets/audio.png
+    - assets/new_audio.png
 
     - videoAudio/videos/peer/peer1KS.mp4
     - videoAudio/videos/peer/peer1DL.mp4

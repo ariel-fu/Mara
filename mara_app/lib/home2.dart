@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/emergency.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mara_app/options_page.dart';
@@ -14,16 +15,16 @@ import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:mara_app/new_liked_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'audio.dart';
 
 class HomePage2 extends StatefulWidget {
   const HomePage2({Key? key}) : super(key: key);
-  
+
   @override
   State<HomePage2> createState() => _HomePage2State();
 }
 
 class _HomePage2State extends State<HomePage2> {
-
   final Map<String, List<String>> menuOptions = {
     "Kiswahili": [
       "Chaguzi zangu ni zipi?",
@@ -33,7 +34,8 @@ class _HomePage2State extends State<HomePage2> {
       "Je, ninaweza kuiweka kwa usiri?",
       "Je, itakuaje ikiwa niko tayari kupata mtoto?",
       "Kuzuia Virusi Vya Ukimwi na magonjwa ya zinaa",
-      "Chukua jaribio letu na utafute mbinu yako!"
+      "Chukua jaribio letu na utafute mbinu yako!",
+      "3 things you need to know about the E-pill (P2) in Kishwahili"
     ],
     "Dholuo": [
       "Yierona gin mage?",
@@ -43,7 +45,8 @@ class _HomePage2State extends State<HomePage2> {
       "Bende anyalo kete mopondo?",
       "To ka ayikora mar mako ich to?",
       "Geng'o kute mag ayaki kod Nyae",
-      "Tim penj wa mondo iyud yori mar geng'o ich!"
+      "Tim penj wa mondo iyud yori mar geng'o ich!",
+      "3 things you need to know about the E-pill (P2) in Dholuo"
     ],
     "English": [
       "What are my options?",
@@ -53,12 +56,52 @@ class _HomePage2State extends State<HomePage2> {
       "Can I keep it private?",
       "What if I'm ready to have a baby?",
       "Preventing HIV and STIs",
-      "Take our quiz and find your method!"
+      "Take our quiz and find your method!",
+      "3 things you need to know about the E-pill (P2)"
     ],
   };
 
+  final Map<String, List<String>> audioContentMap = {
+    "English": [
+      'videoAudio/audio/title_audio/title_options_E.mp4',
+      'videoAudio/audio/title_audio/title_period_E.mp4',
+      'videoAudio/audio/title_audio/title_how_long_E.mp4',
+      'videoAudio/audio/title_audio/title_what_chance_E.mp4',
+      'videoAudio/audio/title_audio/title_private_E.mp4',
+      'videoAudio/audio/title_audio/title_ready_baby_E.mp4',
+      // these are fake
+      'videoAudio/audio/title_audio/hiv_sti_E.mp4',
+      'videoAudio/audio/title_audio/quiz_E.mp4',
+      'videoAudio/audio/title_audio/epill_E.mp4',
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/title_audio/title_options_K.mp4',
+      'videoAudio/audio/title_audio/title_period_K.mp4',
+      'videoAudio/audio/title_audio/title_how_long_K.mp4',
+      'videoAudio/audio/title_audio/title_what_chance_K.np4',
+      'videoAudio/audio/title_audio/title_private_K.mp4',
+      'videoAudio/audio/title_audio/title_ready_baby_K.mp4',
+      // these are fake
+      'videoAudio/audio/title_audio/hiv_sti_K.mp4',
+      'videoAudio/audio/title_audio/quiz_K.mp4',
+      'videoAudio/audio/title_audio/epill_K.mp4',
+    ],
+    "Dholuo": [
+      'videoAudio/audio/title_audio/title_options_L.mp4',
+      'videoAudio/audio/title_audio/title_period_L.mp4',
+      'videoAudio/audio/title_audio/title_how_long_L.mp4',
+      'videoAudio/audio/title_audio/title_what_chance_L.np4',
+      'videoAudio/audio/title_audio/title_private_L.mp4',
+      'videoAudio/audio/title_audio/title_ready_baby_L.mp4',
+      // these are fake
+      'videoAudio/audio/title_audio/hiv_sti_L.mp4',
+      'videoAudio/audio/title_audio/quiz_L.mp4',
+      'videoAudio/audio/title_audio/epill_L.mp4',
+    ],
+  };
 
-
+  final Color visistedColor = Color.fromRGBO(181, 8, 153, 1);
+  final Color notVisitedColor = Color.fromRGBO(103, 16, 157, 1);
 
   String _currentLanguage = 'English';
 
@@ -85,7 +128,7 @@ class _HomePage2State extends State<HomePage2> {
       'likedTitle': 'Ma ihero',
       'learnMore': 'Puonjri matut',
     },
-    'Kiswahili' : {
+    'Kiswahili': {
       'likedTitle': 'Vipendwa vyako',
       'learnMore': 'Jifunze zaidi',
     },
@@ -93,35 +136,39 @@ class _HomePage2State extends State<HomePage2> {
 
   String _t(String key) {
     String translation = _translations[_currentLanguage]?[key] ?? key;
-    print('Key: $key, Language: $_currentLanguage, Translation: $translation');
+    // print('Key: $key, Language: $_currentLanguage, Translation: $translation');
     return translation;
   }
 
   // final List<bool> _selections = List.generate(6, (_) => false);
-   final List<bool> _selections = List.generate(7, (_) => false); //include HIV/STI page
+  final List<bool> _selections =
+      List.generate(7, (_) => false); //include HIV/STI page
   bool get _allSelected => _selections.every((bool selected) => selected);
+
   void _handleTap(int index) {
-    setState(() { _selections[index] = true; });
+    setState(() {
+      _selections[index] = true;
+    });
     if (index == 0) {
       Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => OptionsPage()),
-    );
+        context,
+        MaterialPageRoute(builder: (context) => OptionsPage()),
+      );
     } else if (index == 1) {
       Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => PatternPage()),
-    );
+        context,
+        MaterialPageRoute(builder: (context) => PatternPage()),
+      );
     } else if (index == 2) {
       Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TimePage()),
-    );
+        context,
+        MaterialPageRoute(builder: (context) => TimePage()),
+      );
     } else if (index == 3) {
-       Navigator.push(
-       context,
-       MaterialPageRoute(builder: (context) => WhatChance()),
-       );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => WhatChance()),
+      );
     } else if (index == 4) {
       Navigator.push(
         context,
@@ -140,10 +187,10 @@ class _HomePage2State extends State<HomePage2> {
     }
   }
 
-  void _switchLanguage(String language) async{
+  void _switchLanguage(String language) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('selectedLanguage', language);
-    setState(()  { 
+    setState(() {
       _currentLanguage = language;
     });
   }
@@ -155,56 +202,55 @@ class _HomePage2State extends State<HomePage2> {
       appBar: AppBar(
         actions: <Widget>[
           Consumer<Likes>(
-              builder: (context, likes, child) =>
-              ElevatedButton.icon(
-                icon: Icon(Icons.thumb_up, color: Colors.black),
-                label: Text(_t('likedTitle')),
-                // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
-                onPressed: () {
-                  var likes = context.read<Likes>();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LikedMethodsScreen(
-                        likedMethods: likes.likedMethods,
-                        initialLanguage: _currentLanguage, 
-                        translations: _translations,
-                        // onMethodsChanged: likes.removeMethod,
-                      ),
+            builder: (context, likes, child) => ElevatedButton.icon(
+              icon: Icon(Icons.thumb_up, color: Colors.black),
+              label: Text(_t('likedTitle')),
+              // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
+              onPressed: () {
+                var likes = context.read<Likes>();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LikedMethodsScreen(
+                      likedMethods: likes.likedMethods,
+                      initialLanguage: _currentLanguage,
+                      translations: _translations,
+                      // onMethodsChanged: likes.removeMethod,
                     ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple[100],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), 
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple[100],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
                 ),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               ),
             ),
+          ),
         ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(60),
           child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                languageButton('Kiswahili'),
-                languageButton('Dholuo'),
-                languageButton('English'),
-              ],
-            ),
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              languageButton('Kiswahili'),
+              languageButton('Dholuo'),
+              languageButton('English'),
+            ],
+          ),
         ),
       ),
       // body: ListView.builder( // List view with builder to create dynamic list items
-      //   itemBuilder: (context, index) => 
+      //   itemBuilder: (context, index) =>
       //     CustomListTile( // Custom list tile widget with specific height
       //       height: 150, // Set custom height for each list tile
       //         leading: Image.asset('assets/birth_control_white.png', width: 60, height: 60),
       //         title: Text(menuOptions[_currentLanguage]![0]),
       //         titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
-      //         onTap: () => _handleTap(0), 
-      //         tileColor: _selections[0] ? Colors.green : Colors.black, 
+      //         onTap: () => _handleTap(0),
+      //         tileColor: _selections[0] ? Colors.green : Colors.black,
       //       // Remaining list tile properties...
       //     ),
       //   itemCount: 1, // Number of list items to build
@@ -214,81 +260,143 @@ class _HomePage2State extends State<HomePage2> {
           children: <Widget>[
             SizedBox(height: 20.0),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/birth_control_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              leading: IntrinsicWidth(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/birth_control_white.png',
+                      width: 90, height: 90),
+                  getAudio(audioContentMap, 0),
+                ],
+              )),
               title: Text(menuOptions[_currentLanguage]![0]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
-              onTap: () => _handleTap(0), 
-              tileColor: _selections[0] ? Colors.green : Colors.black, 
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold),
+              onTap: () => _handleTap(0),
+              tileColor: _selections[0] ? visistedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/period_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              leading: IntrinsicWidth(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/period_white.png', width: 90, height: 90),
+                  getAudio(audioContentMap, 1),
+                ],
+              )),
               title: Text(menuOptions[_currentLanguage]![1]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold),
               onTap: () => _handleTap(1),
-              tileColor: _selections[1] ? Colors.green : Colors.black, 
+              tileColor: _selections[1] ? visistedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/calendar_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              leading: IntrinsicWidth(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/calendar_white.png',
+                      width: 90, height: 90),
+                  getAudio(audioContentMap, 2),
+                ],
+              )),
               title: Text(menuOptions[_currentLanguage]![2]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold),
               onTap: () => _handleTap(2),
-              tileColor: _selections[2] ? Colors.green : Colors.black, 
+              tileColor: _selections[2] ? visistedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/chance_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              leading: IntrinsicWidth(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/chance_white.png', width: 90, height: 90),
+                  getAudio(audioContentMap, 3),
+                ],
+              )),
               title: Text(menuOptions[_currentLanguage]![3]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold),
               onTap: () => _handleTap(3),
-              tileColor: _selections[3] ? Colors.green : Colors.black, 
+              tileColor: _selections[3] ? visistedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/privacy_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              leading: IntrinsicWidth(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/privacy_white.png',
+                      width: 90, height: 90),
+                  getAudio(audioContentMap, 4),
+                ],
+              )),
               title: Text(menuOptions[_currentLanguage]![4]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold),
               onTap: () => _handleTap(4),
-              tileColor: _selections[4] ? Colors.green : Colors.black, 
+              tileColor: _selections[4] ? visistedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/preg_woman_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              leading: IntrinsicWidth(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/preg_woman_white.png',
+                      width: 90, height: 90),
+                  getAudio(audioContentMap, 5),
+                ],
+              )),
               title: Text(menuOptions[_currentLanguage]![5]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold),
               onTap: () => _handleTap(5),
-              tileColor: _selections[5] ? Colors.green : Colors.black, 
+              tileColor: _selections[5] ? visistedColor : notVisitedColor,
             ),
             Divider(),
+            getButtonRow(),
+            Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/misc-icons/twopeople_white.png', width: 90, height: 90),
-              title: Text(menuOptions[_currentLanguage]![6]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
-              onTap: () => _handleTap(6),
-              tileColor: _selections[6] ? Colors.green : Colors.black, 
-            ),           
-            Divider(),  
-            ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0), 
-              leading: Image.asset('assets/take_quiz_white.png', width: 90, height: 90),
+              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              leading: IntrinsicWidth(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset('assets/take_quiz_white.png',
+                      width: 90, height: 90),
+                  getAudio(audioContentMap, 7),
+                ],
+              )),
               title: Text(menuOptions[_currentLanguage]![7]),
-              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
-              tileColor: _allSelected ? Colors.green : Colors.grey,
-              onTap:_takeQuiz,
-              // onTap: () {
-              //   _allSelected ? Navigator.push(
-              //    context,
-              //    MaterialPageRoute(builder: (context) => QuizScreen()),
-              //   ) : null;
-              // },
+              titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold),
+              tileColor: _allSelected ? visistedColor : notVisitedColor,
+              onTap: _takeQuiz,
             ),
           ],
         ),
@@ -303,16 +411,18 @@ class _HomePage2State extends State<HomePage2> {
       onPressed: () => _switchLanguage(language),
       style: ElevatedButton.styleFrom(
         backgroundColor: isSelected ? Colors.grey : null,
-        foregroundColor: isSelected ? Colors.white : null, // Optional: change text color based on selection
+        foregroundColor: isSelected
+            ? Colors.white
+            : null, // Optional: change text color based on selection
       ),
       child: Text(language),
     );
   }
 
   void _takeQuiz() {
-  //print('Attempting to submit. Selected options: $_selectedOptions'); 
+    //print('Attempting to submit. Selected options: $_selectedOptions');
     if (_allSelected == false) {
-      print('incomplete'); 
+      print('incomplete');
       // Show an alert dialog or a message to complete the quiz
       showDialog(
         context: context,
@@ -332,12 +442,75 @@ class _HomePage2State extends State<HomePage2> {
         },
       );
       return; // Exit the function without navigating if not all questions are answered
+    } else {
+      _allSelected
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => QuizScreen()),
+            )
+          : null;
     }
-    else {
-      _allSelected ? Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => QuizScreen()),
-      ) : null;
-    }
+  }
+
+  Widget getAudio(Map<String, List<String>> audioContentMap, int index) {
+    return AudioWidget(audioAsset: audioContentMap[_currentLanguage]![index]);
+  }
+
+  Widget getButtonRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        getAudio(audioContentMap, 8),
+        Expanded(
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(
+                  Color.fromRGBO(208, 165, 229, 1)),
+            ),
+            onPressed: () {
+              // Handle button press
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        EmergencyPage(initialLanguage: _currentLanguage)),
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.all(8.0), // Adjust the padding as needed
+              child: Text(
+                menuOptions[_currentLanguage]![8],
+                overflow: TextOverflow.visible,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ),
+        getAudio(audioContentMap, 6),
+        Expanded(
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(
+                  Color.fromRGBO(208, 165, 229, 1)),
+            ),
+            onPressed: () {
+              // Handle button press
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HIVPage()),
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.all(8.0), // Adjust the padding as needed
+              child: Text(
+                menuOptions[_currentLanguage]![6],
+                overflow: TextOverflow.visible,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

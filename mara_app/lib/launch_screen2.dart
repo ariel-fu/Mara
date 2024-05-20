@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/intermediate_launch_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'audio.dart';
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({super.key});
@@ -11,7 +12,7 @@ class LaunchScreen extends StatefulWidget {
 
 class _LaunchScreenState extends State<LaunchScreen> {
   String _currentLanguage = 'English';
-  
+
   @override
   void initState() {
     super.initState();
@@ -27,21 +28,48 @@ class _LaunchScreenState extends State<LaunchScreen> {
   }
 
   Map<String, String> translations = {
-    'English': "The best family planning choice is the option that you feel is right for you.",
-    'Kiswahili': "Chaguo bora zaidi la kupanga uzazi ni chaguo ambalo unahisi linakufaa.",
+    'English':
+        "Divas have choices! The best choice for pregnancy prevention is the option that you feel is right for you.",
+    'Kiswahili':
+        "Chaguo bora zaidi la kupanga uzazi ni chaguo ambalo unahisi linakufaa.",
     'Dholuo': "Yor komo nyuol maber mogik en ma ineno ka ber kodi.",
   };
 
   Map<String, String> translations2 = {
-    'English': "Learn more about your options",
-    'Kiswahili': "Pata maelezo zaidi kuhusu chaguo zako",
-    'Dholuo': "Puonjri matut ewi yiero ma in godo",
+    'English': "Learn more about your options!",
+    'Kiswahili': "Pata maelezo zaidi kuhusu chaguo zako!",
+    'Dholuo': "Puonjri matut ewi yiero ma in godo!",
   };
 
- void _switchLanguage(String language) async{
+  final Map<String, List<String>> textAudioContentMap = {
+    "English": [
+      'videoAudio/audio/launch_intermediate/launch_text_E.mp4',
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/launch_intermediate/launch_text_L.mp4',
+    ],
+    "Dholuo": [
+      'videoAudio/audio/launch_intermediate/launch_text_K.mp4',
+    ],
+  };
+
+  // TODO: figure out where the utton audio is supposed to gp
+  final Map<String, List<String>> buttonAudioContentMap = {
+    "English": [
+      'videoAudio/audio/launch_intermediate/launch_button_E.mp4',
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/launch_intermediate/launch_button_L.mp4',
+    ],
+    "Dholuo": [
+      'videoAudio/audio/launch_intermediate/launch_button_K.mp4',
+    ],
+  };
+
+  void _switchLanguage(String language) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('selectedLanguage', language);
-    setState(()  { 
+    setState(() {
       _currentLanguage = language;
     });
   }
@@ -59,10 +87,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
               languageButton('Kiswahili'),
               languageButton('Dholuo'),
               languageButton('English'),
-              ],
+            ],
           ),
         ),
-
       ),
       body: Center(
         child: Column(
@@ -70,27 +97,40 @@ class _LaunchScreenState extends State<LaunchScreen> {
           children: <Widget>[
             Center(
               child: Image.asset(
-                'assets/maralogo.png',
+                'assets/mara_divas.png',
                 width: MediaQuery.of(context).size.width * 0.5,
               ),
             ),
-            Text(translations[_currentLanguage]!, textAlign: TextAlign.center,),
+            Row(children: [
+              getAudio(buttonAudioContentMap),
+              Flexible(
+                  child: Text(
+                translations[_currentLanguage]!,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.visible,
+              ))
+            ]),
             const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => imLaunchScreen()),
-                );
-              },
-              child: Text(translations2[_currentLanguage]!),
-            ),
+            IntrinsicWidth(
+                child: Row(children: [
+              getAudio(buttonAudioContentMap),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => imLaunchScreen()),
+                  );
+                },
+                child: Text(
+                  translations2[_currentLanguage]!,
+                ),
+              )
+            ])),
           ],
         ),
       ),
     );
   }
-
 
   // originally from quiz screen; factor out
   Widget languageButton(String language) {
@@ -99,9 +139,15 @@ class _LaunchScreenState extends State<LaunchScreen> {
       onPressed: () => _switchLanguage(language),
       style: ElevatedButton.styleFrom(
         backgroundColor: isSelected ? Colors.grey : null,
-        foregroundColor: isSelected ? Colors.white : null, // Optional: change text color based on selection
+        foregroundColor: isSelected
+            ? Colors.white
+            : null, // Optional: change text color based on selection
       ),
       child: Text(language),
     );
+  }
+
+  Widget getAudio(Map<String, List<String>> audioContentMap) {
+    return AudioWidget(audioAsset: audioContentMap[_currentLanguage]![0]);
   }
 }
