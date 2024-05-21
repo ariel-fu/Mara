@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="45.771614mm"
-   height="51.737812mm"
-   viewBox="0 0 45.771614 51.737812"
+   width="77.761902mm"
+   height="36.500004mm"
+   viewBox="0 0 77.761902 36.500004"
    version="1.1"
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,20 +13,25 @@
      id="defs1" />
   <g
      id="layer1"
-     transform="translate(-99.218751,-77.258333)">
+     transform="translate(-78.05208,-71.172918)">
     <g
-       id="g2"
-       transform="translate(62.349896,63.447614)">
+       id="g4"
+       transform="translate(-40.011007,11.485973)">
+      <g
+         id="layer1-2-8"
+         transform="translate(55.608321,-7.5172188)"
+         style="stroke-width:0.999993">
+        <circle
+           style="fill:none;fill-opacity:1;stroke:#67109d;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+           id="path44-0-7-0-98-6"
+           cx="121.96667"
+           cy="85.454163"
+           r="18" />
+      </g>
       <path
-         style="fill:none;fill-opacity:1;stroke:#39d12b;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
-         d="M 68.635657,44.2229 C 82.725371,66.186885 82.389902,65.296455 82.389902,65.296455"
-         id="path36" />
-      <circle
-         style="fill:none;fill-opacity:1;stroke:#39d12b;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
-         id="path44"
-         cx="55.118855"
-         cy="32.060719"
-         r="18" />
+         style="fill:#ff0000;stroke:#67109d;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+         d="m 159.42988,80.031955 -41.34286,3.975277"
+         id="path4" />
     </g>
   </g>
 </svg>

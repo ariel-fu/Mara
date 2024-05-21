@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="50.981281mm"
-   height="40.412418mm"
-   viewBox="0 0 50.981281 40.412418"
+   width="54.915558mm"
+   height="63.871449mm"
+   viewBox="0 0 54.915558 63.871449"
    version="1.1"
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,20 +13,25 @@
      id="defs1" />
   <g
      id="layer1"
-     transform="translate(-105.42193,-106.89848)">
+     transform="translate(-75.670832,-63.764582)">
     <g
-       id="g2"
-       transform="translate(77.385068,33.362954)">
-      <circle
-         style="fill:none;fill-opacity:1;stroke:#39d12b;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
-         id="path44-0"
-         cx="46.286858"
-         cy="95.697945"
-         r="18" />
+       id="g3"
+       transform="translate(-40.604267,50.63642)">
+      <g
+         id="layer1-2-8-9"
+         transform="translate(30.973995,-54.076)"
+         style="stroke-width:0.999993">
+        <circle
+           style="fill:none;fill-opacity:1;stroke:#67109d;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+           id="path44-0-7-0-98-6-1"
+           cx="121.96667"
+           cy="85.454163"
+           r="18" />
+      </g>
       <path
-         style="fill:#cccccc;stroke:#39d12b;stroke-width:0.5;stroke-dasharray:none"
-         d="M 61.94383,87.07111 78.863355,73.731849"
-         id="path1" />
+         style="fill:#ff0000;stroke:#67109d;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+         d="m 139.30191,43.325159 -22.82013,33.533804 v 0"
+         id="path3" />
     </g>
   </g>
 </svg>
