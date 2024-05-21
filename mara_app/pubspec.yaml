@@ -69,6 +69,9 @@ flutter:
     - family: MiscIcons
       fonts:
         - asset: fonts/MiscIcons.ttf
+    - family: PoetsenOne
+      fonts:
+        - asset: fonts/PoetsenOne-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
