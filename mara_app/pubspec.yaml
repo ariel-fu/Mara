@@ -75,6 +75,9 @@ flutter:
     - family: Roboto
       fonts:
         - asset: fonts/Roboto-Regular.ttf
+    - family: Monserrat
+      fonts:
+        - asset: fonts/Monserrat-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
