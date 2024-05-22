@@ -190,7 +190,7 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
               children: [
                 contentBox('content1'),   
                 SizedBox(
-                  width: boxWidth,
+                  width: boxWidth * 0.8,
                   height: boxHeight * 0.5 * 0.6,
                   child: Center(child:video1),
                 ),

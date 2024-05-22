@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 
 class EmergencyPage extends StatefulWidget {
@@ -27,6 +28,14 @@ class _EmergencyPageState extends State<EmergencyPage> {
   void initState() {
     super.initState();
     _currentLanguage = widget.initialLanguage;
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
   }
 
   final double _aspectRatio = 16 / 10;
@@ -60,18 +69,13 @@ class _EmergencyPageState extends State<EmergencyPage> {
       "Kiswahili": "Hakuna kikomo kwa mara ngapi unaweza kumeza kidonge cha E-pill kwa mwezi, lakini kunaweza kusababisha athari kama vile kwa tumbo na mabadiliko ya hedhi yako ambayo yanaweza kuudhi. Pia, ni bei ghali!",
       "Dholuo": "Onge giko ne ndalo ma inyalo muonye E-pill e dwe, to nitie nyalruok ni obiro keloni rach motudore gi yath kaka ich makuot kod lokruok e chwer mar rembi mar dwe manyalo wang'o ich. Bende, en gima beche tek!",
       "English": "There is no limit to how many times you can take the E-pill in a month, but it will likely cause side effects like upset stomach and changes to your period that might be annoying. Also, it is expensive!"
+
     },
 
-    "content4" :{
-       "Kiswahili": "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill?",
-       "Dholuo": "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill?",
-       "English": "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill?"
-    },
-
-    "content5" :{
-      "Kiswahili": "Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
-      "Dholuo": "Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde monego ichak tiyogo, tim nonro mar mako ich bang' jumbe 2 bang' tiyo gi E-pill, mana mondo ibed gadier.",
-      "English": "If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
+    "content4" : {
+      "Kiswahili": "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill? Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
+      "Dholuo": "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill? Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde ma ne idwaro, tem neno kabe in gi ich bang' jumbe 2 bang' ka isemiyi E-pill, mana mondo ibed gadier.",
+      "English": "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill? If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
     }
   };
 
@@ -115,7 +119,9 @@ class _EmergencyPageState extends State<EmergencyPage> {
     return _translations[key]?[_currentLanguage] ?? key;
   }
 
-  void _changeLanguage(String language) {
+  void _changeLanguage(String language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
     setState(() {
       _currentLanguage = language;
     });
@@ -161,7 +167,6 @@ class _EmergencyPageState extends State<EmergencyPage> {
           Text(
               subtitleContentMap[languages[languageIndex]]!
           ),
-          //children: [
           Container(
               height: containerHeight * 0.1,
               child: Container(
@@ -224,65 +229,39 @@ class _EmergencyPageState extends State<EmergencyPage> {
                 ),
               )),
           SizedBox(height: 20.0),
-
-          // Expanded(child: RawScrollbar(
-          //     thumbColor: const Color.fromARGB(255, 232, 132, 165),
-          //     thumbVisibility: true,
-          //     trackVisibility: false,
-          //     thickness: 25.0,
-          //     radius: Radius.circular(20),
-          //     child: Container (
-          //   //height: containerHeight * 0.6, // Adjust as needed
-          //   child: Flex(
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     direction: Axis.vertical,
-          //     children: [
-          //       contentBox('content1'),
-          //       contentBox('content2'),
-          //       contentBox('content3'),
-          //       SizedBox(
-          //         width: boxWidth * 0.5,
-          //         height: boxHeight * 0.5 * 0.4,
-          //         child: Center(child:video1),
-          //       ),
-          //       contentBox('content4'),
-          //       contentBox('content5'),
-          //       Image.asset(
-          //               'assets/new_icons/emergency_photos.png',
-          //               width: 100,
-          //               height: 100,
-          //               fit: BoxFit.cover,
-          //       ),
-          //     ]
-          //   ),
-          // ),
-          // ),
-          // ),
-
           Container (
             //height: containerHeight * 0.6, // Adjust as needed
-            child: Flex(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              direction: Axis.vertical,
-              children: [
-                contentBox('content1'),
-                contentBox('content2'),
-                contentBox('content3'),
-                SizedBox(
-                  width: boxWidth * 0.5,
-                  height: boxHeight * 0.5 * 0.4,
-                  child: Center(child:video1),
-                ),
-                contentBox('content4'),
-                contentBox('content5'),
-                Image.asset(
-                        'assets/new_icons/emergency_photos.png',
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                ),
-              ]
-            ),
+            child: RawScrollbar(
+              thumbColor: const Color.fromARGB(255, 232, 132, 165),
+              thumbVisibility: true,
+              trackVisibility: false,
+              thickness: 25.0,
+              radius: Radius.circular(20),
+              child: Flex(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                direction: Axis.vertical,
+                children: [
+                  contentBox('content1'),
+                  contentBox('content2'),
+                  contentBox('content3'),
+                  // SizedBox(
+                  //   width: boxWidth * 0.8,
+                  //   height: boxHeight * 0.6 * 0.5,
+                  //   child: Center(child:video1),
+                  // ),
+                  Row(
+                    children: [
+                      // contentBox('content4'), 
+                      // Image.asset(
+                      //   'assets/new_icons/emergency_photos.png',
+                      //   width: 100,
+                      //   height: 100,
+                      //   fit: BoxFit.cover,
+                      // ),
+                    ]
+                  ),
+                ],
+            ),),
           ),
         ],
       ),

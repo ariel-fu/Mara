@@ -217,8 +217,8 @@ class _ReadyPageState extends State<ReadyPage> {
               title: _t('HEY! THIS IS IMPORTANT!'),
             ),
             SizedBox(
-                width: boxWidth,
-                height: boxHeight * 0.5 * 0.6,
+                width: boxWidth * 0.8,
+                height: boxHeight * 0.5 * 0.8,
                 child:
                     VideoWidget(videoAsset: _getAsset(), title: _getTitle())),
             Padding(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'home.dart';
-
 import 'package:mara_app/quiz_screen.dart';
 import 'home2.dart';
 import 'launch_screen2.dart';
