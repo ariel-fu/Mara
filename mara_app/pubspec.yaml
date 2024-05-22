@@ -72,6 +72,9 @@ flutter:
     - family: PoetsenOne
       fonts:
         - asset: fonts/PoetsenOne-Regular.ttf
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
