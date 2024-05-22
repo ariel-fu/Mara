@@ -108,6 +108,7 @@ flutter:
     - assets/period_white.png
     - assets/misc-icons/
     - assets/audio.png
+    - assets/options_images/
 
     - videoAudio/videos/peer/peer1KS.mp4
     - videoAudio/videos/peer/peer1DL.mp4
