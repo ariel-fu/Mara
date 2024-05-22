@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
 import 'package:mara_app/audio.dart';
+import 'package:mara_app/design/colors.dart';
 
 class PrivatePage extends StatefulWidget {
   const PrivatePage({Key? key}) : super(key: key);
@@ -173,7 +174,12 @@ class _PrivatePageState extends State<PrivatePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(titleMap[languages[languageIndex]] ?? "Title not found"),
+        title: Center(
+          child: Text(
+            titleMap[languages[languageIndex]] ?? "Title not found",
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
