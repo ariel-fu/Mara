@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'bleeding.dart';
 import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/audio.dart';
+import 'package:mara_app/design/colors.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -54,6 +55,7 @@ class _PatternPageState extends State<PatternPage> {
       languageIndex = 0;
     }
   }
+
 
   final double _aspectRatio = 16 / 10;
   final languages = ["Kiswahili", "Dholuo", "English"];
@@ -206,8 +208,14 @@ class _PatternPageState extends State<PatternPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            titleTranslations[languages[languageIndex]] ?? "Title not found"),
+        // title: Text(
+        //     titleTranslations[languages[languageIndex]] ?? "Title not found"),
+      title: Center(
+          child: Text(
+            titleTranslations[languages[languageIndex]] ?? "Title not found",
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
@@ -249,9 +257,11 @@ class _PatternPageState extends State<PatternPage> {
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                //color: Colors.grey.shade200,
+                color: MaraColors.purple,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.grey),
+                //border: Border.all(color: Colors.grey),
+                border:Border.all(color: Color.fromARGB(1, 103, 16, 157))
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,7 +279,7 @@ class _PatternPageState extends State<PatternPage> {
                     child: Text(
                       contentDescriptionMap[languages[languageIndex]]![
                           methodIndex],
-                      style: TextStyle(fontSize: 16.0),
+                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
                     ),
                   ),
                 ],
@@ -457,7 +467,7 @@ class _PatternPageState extends State<PatternPage> {
                       importantMessageTranslations[languages[languageIndex]] ??
                           "Important message not found",
                       style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                          fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
