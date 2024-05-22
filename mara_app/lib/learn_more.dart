@@ -3,6 +3,9 @@ import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'video.dart';
 import 'package:mara_app/audio.dart';
 
+import 'package:mara_app/design/colors.dart';
+
+
 class LearnMoreFertility extends StatefulWidget {
   const LearnMoreFertility({Key? key}) : super(key: key);
 
@@ -109,7 +112,12 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
+        title: Center(
+          child: Text(
+            titleTranslations[languages[languageIndex]] ?? "Title not found",
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
