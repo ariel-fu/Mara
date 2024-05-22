@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/hiv_page.dart';
 import 'audio.dart';
+import 'package:mara_app/design/colors.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({Key? key}) : super(key: key);
@@ -129,7 +130,12 @@ class _TimePageState extends State<TimePage> {
         //   icon: Icon(Icons.arrow_back),
         //   onPressed: () => Navigator.of(context).pop(),
         // ),
-        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
+        title: Center(
+          child: Text(
+            titleTranslations[languages[languageIndex]] ?? "Title not found",
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -311,7 +317,7 @@ Widget methodSelectionRow() {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: MaraColors.purple,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey),
         ),
@@ -321,7 +327,7 @@ Widget methodSelectionRow() {
             Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                    //Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
                     getAudio(audioContentMap, methodIndex),
                   ],
                 ),
@@ -329,7 +335,7 @@ Widget methodSelectionRow() {
             Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
               ),
             ),
           ],
