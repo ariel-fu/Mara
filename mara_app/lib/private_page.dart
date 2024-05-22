@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/video.dart';
 import 'package:mara_app/audio.dart';
 import 'package:mara_app/design/colors.dart';
@@ -90,6 +91,12 @@ class _PrivatePageState extends State<PrivatePage> {
     ],
   };
 
+  final Map<String, List<String>> heyThisAudioMap = {
+    "English": ['videoAudio/audio/heyThis_HIV_STI_E.mp3'],
+    "Kiswahili": ['videoAudio/audio/heyThis_HIV_STI_K.mp3'],
+    "Dholuo": ['videoAudio/audio/heyThis_HIV_STI_L.mp3'],
+  };
+
   final Map<String, String> titleMap = {
     "Kiswahili": "Je, ninaweza kuiweka kwa usiri?",
     "Dholuo": "Bende anyalo kete mopondo?",
@@ -100,6 +107,21 @@ class _PrivatePageState extends State<PrivatePage> {
     "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
     "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
     "English": "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy."
+  };
+
+  final Map<String, String> importantMessageTranslations = {
+    "Kiswahili":
+        "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+    "Dholuo":
+        "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
+    "English":
+        "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+  };
+
+  final Map<String, String> learnMoreTranslations = {
+    "English": "Learn more",
+    "Kiswahili": "Jifunze zaidi",
+    "Dholuo": "Puonjri matut"
   };
 
   final Map<String, List<String>> contentDescriptionMap = {
@@ -367,7 +389,8 @@ class _PrivatePageState extends State<PrivatePage> {
             child: Center(
               child: getVideoContent(),
             ),
-          )
+          ),
+          additionalTextSection(),
         ],
       ),
     );
@@ -561,5 +584,64 @@ class _PrivatePageState extends State<PrivatePage> {
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
     return AudioWidget(audioAsset: audioMap[languages[languageIndex]]![audioIndex]);
+  }
+
+  Widget additionalTextSection() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Column(
+        children: [
+          // Only display this section for certain method indices
+          if (methodIndex == 0 || methodIndex == 1)
+            Padding(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: Row(
+                //Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                          size: 24.0, color: Colors.black),
+                      getAudio(heyThisAudioMap, 0),
+                    ],
+                  ),
+                  Expanded(
+                    child: Text(
+                      importantMessageTranslations[languages[languageIndex]] ??
+                          "Important message not found",
+                      style: TextStyle(
+                          fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          // Button for learning more, only shown for condoms
+          if (methodIndex == 0 || methodIndex == 1)
+            TextButton.icon(
+              icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
+                  color: Colors.black),
+              label: Text(
+                  learnMoreTranslations[languages[languageIndex]] ??
+                      "Learn more",
+                  style: TextStyle(color: Colors.black)),
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.deepPurple[100],
+                // Button background color
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HIVPage()),
+                );
+              },
+            ),
+        ],
+      ),
+    );
   }
 }
