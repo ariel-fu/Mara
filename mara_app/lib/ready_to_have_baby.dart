@@ -3,6 +3,7 @@ import 'prep_preg.dart';
 import 'video.dart';
 import 'audio.dart';
 import 'learn_more.dart';
+import 'package:mara_app/design/colors.dart';
 
 class ReadyPage extends StatefulWidget {
   @override
@@ -101,10 +102,7 @@ class _ReadyPageState extends State<ReadyPage> {
           Center(
             child: Text(
               header,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24.0,
-              ),
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
               textAlign: TextAlign.center,
             ),
           ),
