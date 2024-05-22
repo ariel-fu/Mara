@@ -279,11 +279,14 @@ class _OptionsPageState extends State<OptionsPage> {
                         // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
                         methodIndex == null
                             ? Text("Please select a method to learn more")
-                            : Text(methods[methodIndex]!.name,
+                            :Text(methods[methodIndex]!.name,
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold)),
-                      ]),
+                        ]
+                    ),
+                    if (methodIndex != null)
+                      getPic(), //real image of method
                   Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -420,4 +423,12 @@ class _OptionsPageState extends State<OptionsPage> {
 //     ),
 //   );
 // }
+  Widget getPic() {
+    String imageNum =
+        "assets/options_images/$methodIndex.png";
+    return Image.asset(
+      imageNum,
+      width: MediaQuery.of(context).size.width * 0.2,
+    );
+  }
 }
