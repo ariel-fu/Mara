@@ -259,8 +259,8 @@ class _PatternPageState extends State<PatternPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(Icons.lightbulb_outline,
-                          color: Colors.amber, size: 24.0),
+                      // Icon(Icons.lightbulb_outline,
+                      //     color: Colors.amber, size: 24.0),
                       getAudio(audioContentMap, methodIndex),
                     ],
                   ),
@@ -413,7 +413,7 @@ class _PatternPageState extends State<PatternPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                //Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
                 getAudio(audioContentMap, methodIndex),
               ],
             ),
