@@ -261,7 +261,7 @@ class _PatternPageState extends State<PatternPage> {
                 color: MaraColors.purple,
                 borderRadius: BorderRadius.circular(10),
                 //border: Border.all(color: Colors.grey),
-                border:Border.all(color: Color.fromARGB(1, 103, 16, 157))
+                border:Border.all(color: Colors.grey)
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
