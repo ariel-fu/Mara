@@ -220,7 +220,7 @@ class _BleedingPageState extends State<BleedingPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                //Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
                 SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
