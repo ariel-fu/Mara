@@ -418,7 +418,7 @@ class _PrivatePageState extends State<PrivatePage> {
             icon: Icon(
               iconData,
               size: 60,
-              color: isSelected ? Colors.black : Colors.grey,
+              color: isSelected ? MaraColors.magentaPurple : Colors.grey,
             ),
             onPressed: () {
               setState(() {
