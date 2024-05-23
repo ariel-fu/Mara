@@ -290,14 +290,14 @@ class _ReadyPageState extends State<ReadyPage> {
             methodSelectionRow(),
             SizedBox(height: 20.0),
             contentArea(),
-            additionalTextSection(),
-            SizedBox(height: 15.0),
+            // SizedBox(height: 15.0),
             SizedBox(
                 width: boxWidth,
                 height: boxHeight * 0.5 * 0.6,
                 child:
                     VideoWidget(videoAsset: _getAsset(), title: _getTitle())
             ),
+            additionalTextSection(),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: ElevatedButton.icon(
@@ -413,7 +413,7 @@ class _ReadyPageState extends State<ReadyPage> {
             icon: Icon(
               iconData,
               size: isSelected ? 60 : 60,
-              color: isSelected ? Colors.black : Colors.grey,
+              color: isSelected ? MaraColors.magentaPurple : Colors.grey,
             ),
             onPressed: () {
               setState(() {
