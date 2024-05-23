@@ -284,26 +284,28 @@ class _OptionsPageState extends State<OptionsPage> {
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold)),
                         ]
-                    ),
-                    if (methodIndex != null)
-                      getPic(), //real image of method
-                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          getAudio(),
-                        ]),
-                    Flexible(
-                      child: methodRef == null
-                          ? SizedBox(height: 20.0)
-                          : Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Text(
-                                  methodDetailsData[methodRef]!['options_page']
-                                      [languages[_languageIndex]]),
-                            ),
-                    )
-                  ]),
+                    ), //real image of method
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, 
+                    children: [
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            getAudio(),
+                          ]),
+                      Flexible(
+                        child: methodRef == null
+                            ? SizedBox(height: 20.0)
+                            : Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Text(
+                                    methodDetailsData[methodRef]!['options_page']
+                                        [languages[_languageIndex]]),
+                              ),
+                      ),
+                      if (methodIndex != null)
+                        getPic(),
+                    ]
+                  ),
 
                   // SizedBox(height: 70.0),
                   Row(
