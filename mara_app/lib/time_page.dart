@@ -192,16 +192,28 @@ Widget languageButton(String language) {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                    //ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
                     getAudio(heyThisAudioMap, 0),
                   ],
                 ),
-                Expanded(
-                  child: Text(
-                    importantMessageTranslations[languages[languageIndex]] ?? "Important message not found",
-                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                            size: 50.0, color: Colors.black),
+                        Flexible(
+                          child: Text(
+                          importantMessageTranslations[languages[languageIndex]] ??
+                              "Important message not found",
+                          style: TextStyle(
+                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ]
+                    )
                   ),
-                ),
               ],
             ),
           ),
