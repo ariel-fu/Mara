@@ -241,13 +241,11 @@ class _PatternPageState extends State<PatternPage> {
               children: [
                 buildIconButton(MaraIcons.condom, "Condom", 0),
                 buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-                buildIconButton(
-                    MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+                buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
                 buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
                 buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
                 buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-                buildIconButton(
-                    MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+                buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
               ],
             ),
           ),
@@ -269,8 +267,6 @@ class _PatternPageState extends State<PatternPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // Icon(Icons.lightbulb_outline,
-                      //     color: Colors.amber, size: 24.0),
                       getAudio(audioContentMap, methodIndex),
                     ],
                   ),
@@ -286,21 +282,24 @@ class _PatternPageState extends State<PatternPage> {
               ),
             ),
           ),
+          
+          Row(
+            children: [
+              SizedBox(width: 15.0),
+              SizedBox(
+                width: boxWidth / 2 - 25,
+                height: boxHeight * 0.5 * 0.6,
+                child: Center(child: video1),
+              ),
+              SizedBox(width: 10.0),
+              SizedBox(
+                width: boxWidth / 2 - 25,
+                height: boxHeight * 0.5 * 0.6,
+                child: Center(child: video2),
+              ),
+            ]
+          ),
           additionalTextSection(),
-          Row(children: [
-            SizedBox(width: 15.0),
-            SizedBox(
-              width: boxWidth / 2 - 25,
-              height: boxHeight * 0.5 * 0.6,
-              child: Center(child: video1),
-            ),
-            SizedBox(width: 10.0),
-            SizedBox(
-              width: boxWidth / 2 - 25,
-              height: boxHeight * 0.5 * 0.6,
-              child: Center(child: video2),
-            ),
-          ]),
         ],
       ),
     );
@@ -317,7 +316,7 @@ class _PatternPageState extends State<PatternPage> {
             icon: Icon(
               iconData,
               size: 60,
-              color: isSelected ? Colors.black : Colors.grey,
+              color: isSelected ? MaraColors.magentaPurple : Colors.grey,
             ),
             onPressed: () {
               setState(() {
