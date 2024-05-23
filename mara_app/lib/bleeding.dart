@@ -258,7 +258,7 @@ class _BleedingPageState extends State<BleedingPage> {
               icon: Icon(
                 iconData,
                 size: 60, //all icons are black
-                color: Colors.black, //all icons are black
+                color: MaraColors.magentaPurple, //all icons are black
               ),
               onPressed: () {
                 setState(() {
