@@ -603,18 +603,28 @@ class _PrivatePageState extends State<PrivatePage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                          size: 24.0, color: Colors.black),
+                      // ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                      //     size: 24.0, color: Colors.black),
                       getAudio(heyThisAudioMap, 0),
                     ],
                   ),
+                  SizedBox(width: 10),
                   Expanded(
-                    child: Text(
-                      importantMessageTranslations[languages[languageIndex]] ??
-                          "Important message not found",
-                      style: TextStyle(
-                          fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
-                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                            size: 50.0, color: Colors.black),
+                        Flexible(
+                          child: Text(
+                          importantMessageTranslations[languages[languageIndex]] ??
+                              "Important message not found",
+                          style: TextStyle(
+                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ]
+                    )
                   ),
                 ],
               ),
