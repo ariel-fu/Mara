@@ -187,7 +187,7 @@ class _WhatChanceState extends State<WhatChance> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: MaraColors.purple,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey),
         ),
@@ -205,7 +205,7 @@ class _WhatChanceState extends State<WhatChance> {
             Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
+                 style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
               ),
             ),
           ],
