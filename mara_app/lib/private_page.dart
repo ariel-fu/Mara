@@ -356,23 +356,25 @@ class _PrivatePageState extends State<PrivatePage> {
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                    color: MaraColors.purple,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.grey),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                      getAudio(audioContentMap, methodIndex),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                          getAudio(audioContentMap, methodIndex),
+                        ],
+                      ),
                       SizedBox(width: 10.0),
-                      Expanded( // Changed from Flexible to Expanded for better text handling
+                      Flexible(
                         child: Text(
                           contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                          style: TextStyle(
-                            fontSize: 16.0, // Updated font size for consistency
-                            color: Colors.black,
-                          ),
+                          style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
                         ),
                       ),
                     ],
