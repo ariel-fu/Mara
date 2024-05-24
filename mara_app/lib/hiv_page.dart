@@ -155,13 +155,13 @@ Widget build(BuildContext context) {
         Text(
           subtitleContentMap[languages[languageIndex]]!,
           //style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.magentaPurple, fontSize: 30.0)
+          style: TextStyle(fontFamily: 'Monsterrat', color: MaraColors.magentaPurple, fontSize: 30.0, fontWeight: FontWeight.bold)
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(width:100, height:100, child:ImageIcon(AssetImage('assets/misc-icons/disease.png'))),
-            SizedBox(width:100, height:100, child:ImageIcon(AssetImage('assets/misc-icons/spermcontraception.png'))),
+            SizedBox(width:100, height:100, child:ImageIcon(AssetImage('assets/misc-icons/disease.png'), color: MaraColors.magentaPurple)),
+            SizedBox(width:100, height:100, child:ImageIcon(AssetImage('assets/misc-icons/spermcontraception.png'), color: MaraColors.magentaPurple)),
           ]
         ),
         Container(
@@ -184,10 +184,30 @@ Widget build(BuildContext context) {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              contentBox('Male and Female Condoms', updateMethodContent1()),
-              SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/twopeople.png')),
-              contentBox('PrEP', updateMethodContent2()),
-              SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/preppills.png')),
+              contentBox(
+                'Male and Female Condoms', 
+                updateMethodContent1()
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(width:150, height:150, child:Image.asset('assets/options_images/2.png')),
+                  SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/twopeople.png', color: MaraColors.magentaPurple)),
+                  SizedBox(width:150, height:150, child:Image.asset('assets/options_images/5.png')),
+                ],
+              ),
+              contentBox(
+                'PrEP', 
+                updateMethodContent2()
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(width:150, height:150, child:Image.asset('assets/misc-icons/prep_hands.png')),
+                  SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/preppills.png', color: MaraColors.magentaPurple)),
+                  SizedBox(width:150, height:150, child:Image.asset('assets/misc-icons/prep_text.png')),
+                ],
+              ),
             ],
           ),
         ),
