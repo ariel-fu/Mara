@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 import 'package:mara_app/design/colors.dart';
 
@@ -19,6 +20,27 @@ class _HIVPageState extends State<HIVPage> {
 
   final double _aspectRatio = 16 / 10;
 
+  String _currentLanguage = 'English';
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      languageIndex= 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
+  }
+  
   final Map<String, String> titleContentMap = {
     "English": "Preventing HIV and STIs", 
     "Kiswahili": "Kuzuia Virusi Vya Ukimwi na magonjwa ya zinaa", 
@@ -225,6 +247,13 @@ Widget languageButton(String language, int index) {
         overrideIndex = true;
         updateMethodContent1();
         updateMethodContent2();
+        if (index == 0) {
+        _switchLanguage('Kiswahili');
+        } else if (index == 1) {
+          _switchLanguage('Dholuo');
+        } else {
+          _switchLanguage('English');
+        }
       });
     },
     style: ElevatedButton.styleFrom(
@@ -233,6 +262,14 @@ Widget languageButton(String language, int index) {
     child: Text(language),
   );
 }
+
+ void _switchLanguage(String language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
+    setState(()  { 
+      _currentLanguage = language;
+    });
+  }
 
 Widget contentBox(String title, String content) {
   return Padding(

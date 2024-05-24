@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mara_app/icons/misc_icons.dart';
 import 'package:mara_app/recommendation_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MethodDetailsScreen extends StatefulWidget {
   final String methodName;
@@ -26,18 +27,23 @@ class MethodDetailsScreen extends StatefulWidget {
 class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
   late String _currentLanguage;
 
+  @override
+  void initState() {
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+  }
+
   final Map<String, String>  titleTranslations = {
     'Kiswahili': 'Ukurasa wa muhtasari',
     'Dholuo': 'Oboke ma lero weche e yo machuok',
     'English': 'Summary page',
   };
-
-
-  @override
-  void initState() {
-    super.initState();
-    _currentLanguage = widget.currentLanguage;
-  }
 
   String _t(String key) {
     String translation = widget.translations[_currentLanguage]?[key] ?? key;
@@ -49,6 +55,7 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
 
 
   Widget _languageButton(String language) {
+    asyncmethod(language);
     bool isSelected = _currentLanguage == language;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -69,6 +76,10 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     );
   }
 
+void asyncmethod(String language) async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('selectedLanguage', language);
+}
 
 
 @override

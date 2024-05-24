@@ -4,6 +4,7 @@ import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/video.dart';
 import 'package:mara_app/audio.dart';
 import 'package:mara_app/design/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PrivatePage extends StatefulWidget {
   const PrivatePage({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class PrivatePage extends StatefulWidget {
 
 class _PrivatePageState extends State<PrivatePage> {
   bool overrideIndex = false;
+
   // Widget methodContent = updateMethodContent();
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
@@ -80,15 +82,9 @@ class _PrivatePageState extends State<PrivatePage> {
   };
 
   final Map<String, List<String>> subtitleAudioMap = {
-    "English": [
-      'videoAudio/audio/private_audio/private_subtitle_E.mp3'
-    ],
-    "Kiswahili": [
-      'videoAudio/audio/private_audio/private_subtitle_K.mp3'
-    ],
-    "Dholuo": [
-      'videoAudio/audio/private_audio/private_subtitle_L.mp3'
-    ],
+    "English": ['videoAudio/audio/private_audio/private_subtitle_E.mp3'],
+    "Kiswahili": ['videoAudio/audio/private_audio/private_subtitle_K.mp3'],
+    "Dholuo": ['videoAudio/audio/private_audio/private_subtitle_L.mp3'],
   };
 
   final Map<String, List<String>> heyThisAudioMap = {
@@ -104,9 +100,12 @@ class _PrivatePageState extends State<PrivatePage> {
   };
 
   final Map<String, String> subtitleTranslations = {
-    "Kiswahili": "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
-    "Dholuo": "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
-    "English": "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy."
+    "Kiswahili":
+        "Baadhi ya watu wanataka kuweka njia yao ya matumizi ya faragha kutoka kwa washirika, wazazi na wengine. Gonga njia zilizo hapa chini ili kupata maelezo zaidi kuhusu faragha.",
+    "Dholuo":
+        "Jomoko dwaroga tiyo gi yore mag komo nyuol e yo mopondo ma joheragi, jonyuol kod jomamoko ok ong'eyo. Mul piny ebwo yore mag komo nyuol mondo ipuonjri matut ewi tiyo kodgi mopondo",
+    "English":
+        "Some people want to keep their method use private from partners, parents, and others. Tap on the below methods to learn more about privacy."
   };
 
   final Map<String, String> importantMessageTranslations = {
@@ -155,32 +154,55 @@ class _PrivatePageState extends State<PrivatePage> {
   };
 
   final Map<String, List<String>> videoTitleMap = {
-    "Kiswahili": [
-      "Video: Mwenzio anaelezea"
-    ],
-    "Dholuo": [
-      "Video: Mbasni lero "
-    ],
-    "English": [
-      "Video: a peer explains"
-    ],
+    "Kiswahili": ["Video: Mwenzio anaelezea"],
+    "Dholuo": ["Video: Mbasni lero "],
+    "English": ["Video: a peer explains"],
   };
 
   List<Map<String, dynamic>> iconButtons = [
     {'icon': MaraIcons.condom, 'label': "Condom", 'index': 0},
     {'icon': MaraIcons.female_condom, 'label': "Female Condom", 'index': 1},
-    {'icon': MaraIcons.birth_control_pills, 'label': "Pills (daily pills)", 'index': 2},
+    {
+      'icon': MaraIcons.birth_control_pills,
+      'label': "Pills (daily pills)",
+      'index': 2
+    },
     {'icon': MaraIcons.syringe, 'label': "Injection (depo)", 'index': 3},
     {'icon': MaraIcons.contraceptive_implant, 'label': "Implant", 'index': 4},
     {'icon': MaraIcons.iud, 'label': "IUCD (coil)", 'index': 5},
-    {'icon': MaraIcons.double_pills, 'label': "Emergency pill (E-pill, P2)", 'index': 6}
+    {
+      'icon': MaraIcons.double_pills,
+      'label': "Emergency pill (E-pill, P2)",
+      'index': 6
+    }
   ];
   final double _aspectRatio = 16 / 10;
+
+  String _currentLanguage = 'English';
+
+  @override
+  void initState() {
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      languageIndex = 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
-    ModalRoute.of(context)?.settings.arguments as int?;
+        ModalRoute.of(context)?.settings.arguments as int?;
 
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
@@ -197,71 +219,77 @@ class _PrivatePageState extends State<PrivatePage> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text(
-            titleMap[languages[languageIndex]] ?? "Title not found",
-            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-          )
-        ),
+            child: Text(titleMap[languages[languageIndex]] ?? "Title not found",
+                style: TextStyle(
+                    fontFamily: 'PoetsenOne',
+                    color: MaraColors.purple,
+                    fontSize: 36.0))),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
-            // height: availableHeight * 0.1,
+              // height: availableHeight * 0.1,
               child: Container(
-                // padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 0;
-                            overrideIndex = true;
-                            updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 0 ? Colors.grey : null,
-                        ),
-                        child: Text('Kiswahili'),
-                      ),
+            // padding: EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  // Adjust the padding as needed
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        languageIndex = 0;
+                        overrideIndex = true;
+                        updateMethodContent();
+                        _switchLanguage(0);
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: languageIndex == 0 ? Colors.grey : null,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 1;
-                            overrideIndex = true;
-                            updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 1 ? Colors.grey : null,
-                        ),
-                        child: Text('Dholuo'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 2;
-                            overrideIndex = true;
-                            updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 2 ? Colors.grey : null,
-                        ),
-                        child: Text('English'),
-                      ),
-                    ),
-                  ],
+                    child: Text('Kiswahili'),
+                  ),
                 ),
-              )),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  // Adjust the padding as needed
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        languageIndex = 1;
+                        overrideIndex = true;
+                        updateMethodContent();
+                        _switchLanguage(1);
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: languageIndex == 1 ? Colors.grey : null,
+                    ),
+                    child: Text('Dholuo'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  // Adjust the padding as needed
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        languageIndex = 2;
+                        overrideIndex = true;
+                        updateMethodContent();
+                        _switchLanguage(2);
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: languageIndex == 2 ? Colors.grey : null,
+                    ),
+                    child: Text('English'),
+                  ),
+                ),
+              ],
+            ),
+          )),
           // preferredSize: Size.fromHeight(75),
         ),
         // actions: <Widget>[
@@ -288,36 +316,36 @@ class _PrivatePageState extends State<PrivatePage> {
           //           ),
           //         )
           //     )
-              // child: Padding(
-              //   padding: const EdgeInsets.only(top: 5.0, bottom: 20.0),
-              //   child: Column(
-              //     children: [
-              //       Row(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           Column(
-              //             crossAxisAlignment: CrossAxisAlignment.center,
-              //             children: [
-              //               getAudio(subtitleAudioMap, 0),
-              //               Expanded( // Changed from Flexible to Expanded for better text handling
-              //                 child: Text(
-              //                   subtitleTranslations[languages[languageIndex]]![methodIndex],
-              //                   softWrap: true,
-              //                   textAlign: TextAlign.center,
-              //                   style: TextStyle(
-              //                     color: Colors.black,
-              //                     fontWeight: FontWeight.bold,
-              //                     fontSize: 16.0
-              //                   ),
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ],
-              //       ),
-              //     ]
-              //   ),
-              // ) ,
+          // child: Padding(
+          //   padding: const EdgeInsets.only(top: 5.0, bottom: 20.0),
+          //   child: Column(
+          //     children: [
+          //       Row(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Column(
+          //             crossAxisAlignment: CrossAxisAlignment.center,
+          //             children: [
+          //               getAudio(subtitleAudioMap, 0),
+          //               Expanded( // Changed from Flexible to Expanded for better text handling
+          //                 child: Text(
+          //                   subtitleTranslations[languages[languageIndex]]![methodIndex],
+          //                   softWrap: true,
+          //                   textAlign: TextAlign.center,
+          //                   style: TextStyle(
+          //                     color: Colors.black,
+          //                     fontWeight: FontWeight.bold,
+          //                     fontSize: 16.0
+          //                   ),
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ],
+          //       ),
+          //     ]
+          //   ),
+          // ) ,
           //),
           Container(
             alignment: Alignment.center,
@@ -333,15 +361,18 @@ class _PrivatePageState extends State<PrivatePage> {
                   // SizedBox(width: 5),
                   buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
                   // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+                  buildIconButton(
+                      MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
                   // SizedBox(width: 5),
                   buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
                   // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+                  buildIconButton(
+                      MaraIcons.contraceptive_implant, "Implant", 4),
                   // SizedBox(width: 5),
                   buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
                   // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+                  buildIconButton(
+                      MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
                 ],
               ),
             ),
@@ -350,11 +381,11 @@ class _PrivatePageState extends State<PrivatePage> {
           Flex(
             direction: Axis.vertical,
             children: [
-
               Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                   decoration: BoxDecoration(
                     color: MaraColors.purple,
                     borderRadius: BorderRadius.circular(10),
@@ -366,15 +397,20 @@ class _PrivatePageState extends State<PrivatePage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                          Icon(Icons.lightbulb_outline,
+                              color: Colors.amber, size: 24.0),
                           getAudio(audioContentMap, methodIndex),
                         ],
                       ),
                       SizedBox(width: 10.0),
                       Flexible(
                         child: Text(
-                          contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                          style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                          contentDescriptionMap[languages[languageIndex]]![
+                              methodIndex],
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              color: Colors.white,
+                              fontSize: 19.0),
                         ),
                       ),
                     ],
@@ -386,7 +422,7 @@ class _PrivatePageState extends State<PrivatePage> {
 
           SizedBox(height: 15.0),
           SizedBox(
-            width: boxWidth*0.8,
+            width: boxWidth * 0.8,
             height: availableHeight * 0.6 * 0.5,
             child: Center(
               child: getVideoContent(),
@@ -398,6 +434,21 @@ class _PrivatePageState extends State<PrivatePage> {
     );
   }
 
+  void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      _currentLanguage = temp;
+    });
+  }
 
   Widget methodSelectionRow() {
     return SingleChildScrollView(
@@ -493,7 +544,6 @@ class _PrivatePageState extends State<PrivatePage> {
         ],
       );
     }).toList();
-
   }
 
   Widget languageButton(String language) {
@@ -506,7 +556,8 @@ class _PrivatePageState extends State<PrivatePage> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: languages[languageIndex] == language ? Colors.grey : null,
+        backgroundColor:
+            languages[languageIndex] == language ? Colors.grey : null,
       ),
       child: Text(language),
     );
@@ -514,41 +565,43 @@ class _PrivatePageState extends State<PrivatePage> {
 
   Widget subtitleSection() {
     return Container(
-      alignment: Alignment.center,
-      //padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0), // Adjust padding as needed
-      //padding: const EdgeInsets.only(top: 5.0, bottom: 20.0)
-      // decoration: BoxDecoration(
-      //   color: Colors.grey.shade200, // Use the desired background color
-      //   borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
-      // ),
-      child: Padding (
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
-        child: Row(
-          children: [
-            getAudio(subtitleAudioMap, 0),
-            Expanded ( 
-              child:Text(
-                subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+        alignment: Alignment.center,
+        //padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0), // Adjust padding as needed
+        //padding: const EdgeInsets.only(top: 5.0, bottom: 20.0)
+        // decoration: BoxDecoration(
+        //   color: Colors.grey.shade200, // Use the desired background color
+        //   borderRadius: BorderRadius.circular(10.0), // Adjust border radius as needed
+        // ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+          child: Row(
+            children: [
+              getAudio(subtitleAudioMap, 0),
+              Expanded(
+                child: Text(
+                  subtitleTranslations[languages[languageIndex]] ??
+                      "Translation not found",
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
-          ],
-        ),
-      )
-      // Text(
-      // //child: Text(
-      //   subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-      //   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-      //   textAlign: TextAlign.center,
-      // ),
-    );
+            ],
+          ),
+        )
+        // Text(
+        // //child: Text(
+        //   subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
+        //   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        //   textAlign: TextAlign.center,
+        // ),
+        );
   }
 
   Widget contentArea() {
     return Padding(
       padding: EdgeInsets.all(10.0),
-      child: SingleChildScrollView( // Add SingleChildScrollView here
+      child: SingleChildScrollView(
+        // Add SingleChildScrollView here
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
           decoration: BoxDecoration(
@@ -575,17 +628,16 @@ class _PrivatePageState extends State<PrivatePage> {
   }
 
   Widget updateMethodContent() {
-    return Text(
-        contentDescriptionMap[languages[languageIndex]]![methodIndex],
+    return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
         style: TextStyle(
           fontSize: 20.0,
           color: Colors.black,
-        )
-    );
+        ));
   }
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
-    return AudioWidget(audioAsset: audioMap[languages[languageIndex]]![audioIndex]);
+    return AudioWidget(
+        audioAsset: audioMap[languages[languageIndex]]![audioIndex]);
   }
 
   Widget additionalTextSection() {
@@ -612,22 +664,23 @@ class _PrivatePageState extends State<PrivatePage> {
                   ),
                   SizedBox(width: 10),
                   Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
                         ImageIcon(AssetImage('assets/misc-icons/important.png'),
                             size: 50.0, color: Colors.black),
                         Flexible(
                           child: Text(
-                          importantMessageTranslations[languages[languageIndex]] ??
-                              "Important message not found",
-                          style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                            importantMessageTranslations[
+                                    languages[languageIndex]] ??
+                                "Important message not found",
+                            style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold),
                           ),
                         )
-                      ]
-                    )
-                  ),
+                      ])),
                 ],
               ),
             ),

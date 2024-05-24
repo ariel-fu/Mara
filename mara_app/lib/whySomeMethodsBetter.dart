@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 import 'package:mara_app/design/colors.dart';
 
@@ -17,6 +18,27 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/provider/provider3E.mp4', title:'Video: a provider explains');
+
+  String _currentLanguage = 'English';
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
+    if (_currentLanguage.contains('English')) {
+      languageIndex= 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
+  }
 
   final Map<String, String> titleMap = {
     "Kiswahili": "KWA NINI baadhi ya mbinu za kupanga uzazi hufanya kazi vizuri zaidi kuliko zingine ili kuzuia mimba?",
@@ -50,13 +72,6 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
    },
   };
   final double _aspectRatio = 16 / 10;
-  late String _currentLanguage;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentLanguage = widget.initialLanguage;
-  }
 
   String _t(String key) {
     return _translations[key]?[_currentLanguage] ?? key;
@@ -227,6 +242,7 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   }
 
   Widget languageButton(String language) {
+    asyncmethod(language);
     bool isSelected = _currentLanguage == language;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -238,6 +254,11 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
         child: Text(language),
       ),
     );
+  }
+
+  void asyncmethod(String language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
   }
 
   Widget contentBox(String contentKey) {

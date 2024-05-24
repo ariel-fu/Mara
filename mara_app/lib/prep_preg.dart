@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 
 import 'package:mara_app/icons/misc_icons.dart';
@@ -14,12 +15,19 @@ class PrepPage extends StatefulWidget {
 }
 
 class _PrepPageState extends State<PrepPage> {
-  late String _currentLanguage;
+  String _currentLanguage = "English";
 
   @override
   void initState() {
     super.initState();
-    _currentLanguage = widget.initialLanguage;
+    _loadCurrentLanguage();
+  }
+
+   Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+    });
   }
 
   final Map<String, Map<String, String>> importantAudioContentMap = {
@@ -122,7 +130,9 @@ class _PrepPageState extends State<PrepPage> {
     return _translations[key]?[_currentLanguage] ?? key;
   }
 
-  void _changeLanguage(String language) {
+  void _changeLanguage(String language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
     setState(() {
       _currentLanguage = language;
     });
