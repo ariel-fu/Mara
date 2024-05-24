@@ -5,7 +5,9 @@ import 'package:just_audio/just_audio.dart';
 class AudioWidget extends StatefulWidget {
   @override
   final String audioAsset;
-  AudioWidget({Key? key, required this.audioAsset}) : super(key:key);
+
+  AudioWidget({Key? key, required this.audioAsset}) : super(key: key);
+
   @override
   State<AudioWidget> createState() => _AudioWidgetState();
 }
@@ -39,9 +41,9 @@ class _AudioWidgetState extends State<AudioWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return  IconButton(
+    return IconButton(
       icon: Image.asset(
-        "assets/audio.png",
+        "assets/new_audio.png",
         width: 60,
         height: 60,
       ),

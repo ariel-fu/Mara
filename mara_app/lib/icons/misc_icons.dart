@@ -26,7 +26,7 @@ class MiscIcons {
   static const IconData calendar = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData chance = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData birth_control = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData pregnant_woman = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  // static const IconData simple_pregnant_woman = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData audio = IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData contraception = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData safe_sex = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -38,4 +38,5 @@ class MiscIcons {
   static const IconData why = IconData(0xe80e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData disease_prevention = IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData question_mark = IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData pregnant_woman = IconData(0xe816, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

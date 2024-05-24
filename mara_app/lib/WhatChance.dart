@@ -7,6 +7,7 @@ import 'package:mara_app/time_page.dart';
 import 'package:mara_app/whySomeMethodsBetter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
+import 'package:mara_app/design/colors.dart';
 
 class WhatChance extends StatefulWidget {
   const WhatChance({Key? key}) : super(key: key);
@@ -139,10 +140,9 @@ class _WhatChanceState extends State<WhatChance> {
   };
 
   final Map<String, String> EpillText = {
-    "Kiswahili":
-        "Pata maelezo zaidi kuhusu jinsi ya kumeza kidonge cha E kwa usalama",
-    "Dholuo": "Ponjri matut ewi kaka inyalo muonyo E-pill eyo makare",
-    "English": "Learn more about how to take the E-pill safely",
+    "Kiswahili": "Mambo 3 unayohitaji kujua kuhusu E-pill (P2)",
+    "Dholuo": "Gik moko 3 ma onego ing'e ewi E-pill (P2)",
+    "English": "3 things you need to know about the E-pill (P2)",
   };
 
   final double _aspectRatio = 16 / 10;
@@ -155,8 +155,12 @@ class _WhatChanceState extends State<WhatChance> {
         //   icon: Icon(Icons.arrow_back),
         //   onPressed: () => Navigator.of(context).pop(),
         // ),
-        title: Text(
-            titleTranslations[languages[languageIndex]] ?? "Title not found"),
+        title: Center(
+          child: Text(
+            titleTranslations[languages[languageIndex]] ?? "Title not found",
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -203,7 +207,7 @@ class _WhatChanceState extends State<WhatChance> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: MaraColors.purple,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey),
         ),
@@ -221,7 +225,7 @@ class _WhatChanceState extends State<WhatChance> {
             Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
+                 style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
               ),
             ),
           ],
@@ -268,19 +272,28 @@ class _WhatChanceState extends State<WhatChance> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                          size: 24.0, color: Colors.black),
+                      // ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                      //     size: 24.0, color: Colors.black),
                       getAudio(heyThisAudioMap, 0),
                     ],
                   ),
+                  SizedBox(width: 10),
                   Expanded(
-                    child: Text(
-                      importantMessageTranslations[languages[languageIndex]] ??
-                          "Important Message Not Found",
-                      style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
-                      //textAlign: TextAlign.justify,
-                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                            size: 50.0, color: Colors.black),
+                        Flexible(
+                          child: Text(
+                          importantMessageTranslations[languages[languageIndex]] ??
+                              "Important message not found",
+                          style: TextStyle(
+                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ]
+                    )
                   ),
                 ],
               ),
@@ -364,7 +377,7 @@ class _WhatChanceState extends State<WhatChance> {
   Widget getPic() {
     String imageNum =
         "assets/method_efficiency_pics/efficacy_Page_$methodIndex.jpg";
-    return Image.asset(
+    return Image.asset( 
       imageNum,
       width: MediaQuery.of(context).size.width * 0.8,
     );
@@ -383,7 +396,7 @@ class _WhatChanceState extends State<WhatChance> {
               icon: Icon(
                 iconData,
                 size: isSelected ? 60 : 60,
-                color: isSelected ? Colors.black : Colors.grey,
+                color: isSelected ? MaraColors.magentaPurple : Colors.grey,
               ),
               onPressed: () {
                 setState(() {

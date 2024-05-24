@@ -11,6 +11,7 @@ import 'short_summaries.dart';
 import 'new_liked_methods.dart';
 import 'model/method_repository.dart';
 import 'providers/provider_liked_methods.dart';
+import 'package:mara_app/design/colors.dart';
 
 class OptionsPage extends StatefulWidget {
   const OptionsPage({Key? key}) : super(key: key);
@@ -115,7 +116,7 @@ class _OptionsPageState extends State<OptionsPage> {
 
   // List<List<String>> languages = List.generate(3, (_) => <String>[]);
   // Change value to set aspect ratio
-  final double _aspectRatio = 16 / 10;
+  final double _aspectRatio = 1.08;
 
   @override
   Widget build(BuildContext context) {
@@ -135,8 +136,8 @@ class _OptionsPageState extends State<OptionsPage> {
       _languageIndex = routeArgumentIndex;
     }
 
-    double containerWidth = MediaQuery.of(context).size.width * 0.8;
-    double containerHeight = MediaQuery.of(context).size.height * 0.8;
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
     if (containerHeight / containerWidth > _aspectRatio) {
       containerHeight = containerWidth * _aspectRatio;
     } else {
@@ -145,7 +146,12 @@ class _OptionsPageState extends State<OptionsPage> {
     // var selectedButtonIndex = input == null ? input : 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text(_t('title')),
+        title: Center(
+          child: Text(
+            _t('title'),
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(containerHeight * 0.05),
           child: Container(
@@ -273,28 +279,33 @@ class _OptionsPageState extends State<OptionsPage> {
                         // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
                         methodIndex == null
                             ? Text("Please select a method to learn more")
-                            : Text(methods[methodIndex]!.name,
+                            :Text(methods[methodIndex]!.name,
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold)),
-                      ]),
-                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          getAudio(),
-                        ]),
-                    Flexible(
-                      child: methodRef == null
-                          ? SizedBox(height: 20.0)
-                          : Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Text(
-                                  methodDetailsData[methodRef]!['options_page']
-                                      [languages[_languageIndex]]),
-                            ),
-                    )
-                  ]),
+                        ]
+                    ), //real image of method
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, 
+                    children: [
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            getAudio(),
+                          ]),
+                      Flexible(
+                        child: methodRef == null
+                            ? SizedBox(height: 20.0)
+                            : Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Text(
+                                    methodDetailsData[methodRef]!['options_page']
+                                        [languages[_languageIndex]]),
+                              ),
+                      ),
+                      if (methodIndex != null)
+                        getPic(),
+                    ]
+                  ),
 
                   // SizedBox(height: 70.0),
                   Row(
@@ -346,7 +357,7 @@ class _OptionsPageState extends State<OptionsPage> {
                                 },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Colors.green,
+                          backgroundColor: MaraColors.purple,
                         ),
                         child: Text('Learn more'),
                       ),
@@ -397,7 +408,7 @@ class _OptionsPageState extends State<OptionsPage> {
     if (methodIndex == null) {
       return SizedBox();
     }
-    print(audioContentMap[languages[_languageIndex]]![methodIndex!]);
+    // print(audioContentMap[languages[_languageIndex]]![methodIndex!]);
     return AudioWidget(
         audioAsset: audioContentMap[languages[_languageIndex]]![methodIndex!]);
   }
@@ -414,4 +425,12 @@ class _OptionsPageState extends State<OptionsPage> {
 //     ),
 //   );
 // }
+  Widget getPic() {
+    String imageNum =
+        "assets/options_images/$methodIndex.png";
+    return Image.asset(
+      imageNum,
+      width: MediaQuery.of(context).size.width * 0.2,
+    );
+  }
 }

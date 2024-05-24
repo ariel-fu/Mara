@@ -35,6 +35,7 @@ dependencies:
   csv: ^5.1.1
   path_provider: ^2.1.2
   flutter_svg: ^2.0.10
+  #  google_fonts: ^6.2.0
 
   flutter:
     sdk: flutter
@@ -69,6 +70,15 @@ flutter:
     - family: MiscIcons
       fonts:
         - asset: fonts/MiscIcons.ttf
+    - family: PoetsenOne
+      fonts:
+        - asset: fonts/PoetsenOne-Regular.ttf
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -93,12 +103,16 @@ flutter:
     - assets/preg_woman.png
     - assets/methods.json
     - assets/maralogo.png
+    - assets/mara_divas.png
     - assets/imlaunchscreenimg.png
     - assets/iud_picture_of_woman.png
     - assets/ready_to_have_baby_pregnant.png
     - assets/period_white.png
     - assets/misc-icons/
     - assets/audio.png
+
+    - assets/new_audio.png
+    - assets/options_images/
 
     - videoAudio/videos/peer/peer1KS.mp4
     - videoAudio/videos/peer/peer1DL.mp4
@@ -383,7 +397,14 @@ flutter:
     - videoAudio/audio/heyThis_HIV_STI_K.mp3
     - videoAudio/audio/heyThis_HIV_STI_L.mp3
 
-
+    - assets/ready_to_have_baby_pregnant.png
+    - assets/ready_to_have_baby_pregnant_white.png
+    - assets/birth_control_white.png
+    - assets/calendar_white.png
+    - assets/chance_white.png
+    - assets/privacy_white.png
+    - assets/take_quiz_white.png
+    - assets/emergency_photos.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

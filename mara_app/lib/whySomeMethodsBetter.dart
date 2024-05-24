@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
+import 'package:mara_app/design/colors.dart';
 
 class WhySomeMethodsBetter extends StatefulWidget {
   //const WhySomeMethodsBetter({Key? key}) : super(key: key);
@@ -112,14 +113,18 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Center(
-          child:
-            Text(titleMap[languages[languageIndex]]!)
-        ),
+        // title: Center(
+        //   child:
+        //     Text(titleMap[languages[languageIndex]]!)
+        // ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Text(
+            titleMap[languages[languageIndex]]!,
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 30.0)
+          ),
           Container(
               height: containerHeight * 0.1,
               child: Container(

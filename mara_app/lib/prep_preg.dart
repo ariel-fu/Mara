@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 
 import 'package:mara_app/icons/misc_icons.dart';
+import 'package:mara_app/design/colors.dart';
 
 class PrepPage extends StatefulWidget {
   final String initialLanguage;
@@ -145,7 +146,13 @@ class _PrepPageState extends State<PrepPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(_t('Preparing for a Healthy Pregnancy')),
+        
+        title: Center(
+          child: Text(
+            _t('Preparing for a Healthy Pregnancy'),
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
       ),
       body: ListView(
         children: <Widget>[
