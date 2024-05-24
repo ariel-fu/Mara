@@ -267,15 +267,15 @@ class _PatternPageState extends State<PatternPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
                       getAudio(audioContentMap, methodIndex),
                     ],
                   ),
                   SizedBox(width: 10.0),
                   Flexible(
                     child: Text(
-                      contentDescriptionMap[languages[languageIndex]]![
-                          methodIndex],
-                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
+                      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
                     ),
                   ),
                 ],
