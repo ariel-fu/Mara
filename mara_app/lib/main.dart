@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 // import 'home.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 import 'package:mara_app/quiz_screen.dart';
 import 'home2.dart';
@@ -13,13 +15,9 @@ import 'ready_to_have_baby.dart';
 import 'learn_more.dart';
 import 'package:mara_app/providers/provider_liked_methods.dart';
 
-
 void main() {
   runApp(
-    ChangeNotifierProvider<Likes>(
-      create: (_) => Likes(),
-      child: MaraApp()
-    ),
+    ChangeNotifierProvider<Likes>(create: (_) => Likes(), child: MaraApp()),
   );
 }
 
@@ -32,7 +30,7 @@ class MaraApp extends StatefulWidget {
 
 class _MaraAppState extends State<MaraApp> {
   bool _isDarkMode = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,7 +38,8 @@ class _MaraAppState extends State<MaraApp> {
       initialRoute: '/launch',
       routes: {
         '/launch': (BuildContext context) => const LaunchScreen(),
-        '/home': (BuildContext context) => const HomePage2(), // home2 is the latest version
+        '/home': (BuildContext context) => const HomePage2(),
+        // home2 is the latest version
         '/options': (BuildContext context) => const OptionsPage(),
         '/bleeding_pattern': (BuildContext context) => const PatternPage(),
         '/time': (BuildContext context) => const TimePage(),
@@ -49,8 +48,13 @@ class _MaraAppState extends State<MaraApp> {
         '/quiz': (BuildContext context) => QuizScreen(),
         '/learnmore': (BuildContext context) => const LearnMoreFertility(),
       },
-      debugShowCheckedModeBanner: false,  // remove if install works
-      theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
+      debugShowCheckedModeBanner: false,
+      // remove if install works
+      // theme: ThemeData(
+      //   textTheme: GoogleFonts.getFont('PoetsenOne') != null
+      //       ? GoogleFonts.getFont('PoetsenOne')
+      //       : GoogleFonts.abel,
+      // ),
     );
   }
 }
