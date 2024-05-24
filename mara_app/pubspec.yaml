@@ -397,7 +397,14 @@ flutter:
     - videoAudio/audio/heyThis_HIV_STI_K.mp3
     - videoAudio/audio/heyThis_HIV_STI_L.mp3
 
-
+    - assets/ready_to_have_baby_pregnant.png
+    - assets/ready_to_have_baby_pregnant_white.png
+    - assets/birth_control_white.png
+    - assets/calendar_white.png
+    - assets/chance_white.png
+    - assets/privacy_white.png
+    - assets/take_quiz_white.png
+    - assets/emergency_photos.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -212,10 +212,8 @@ class _HomePage2State extends State<HomePage2> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => LikedMethodsScreen(
-                      likedMethods: likes.likedMethods,
                       initialLanguage: _currentLanguage,
                       translations: _translations,
-                      // onMethodsChanged: likes.removeMethod,
                     ),
                   ),
                 );
@@ -270,7 +268,11 @@ class _HomePage2State extends State<HomePage2> {
                   getAudio(audioContentMap, 0),
                 ],
               )),
-              title: Text(menuOptions[_currentLanguage]![0]),
+              title: Text(menuOptions[_currentLanguage]![0],
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: Colors.white,
+                      fontSize: 24.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -289,7 +291,11 @@ class _HomePage2State extends State<HomePage2> {
                   getAudio(audioContentMap, 1),
                 ],
               )),
-              title: Text(menuOptions[_currentLanguage]![1]),
+              title: Text(menuOptions[_currentLanguage]![1],
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: Colors.white,
+                      fontSize: 24.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -309,7 +315,11 @@ class _HomePage2State extends State<HomePage2> {
                   getAudio(audioContentMap, 2),
                 ],
               )),
-              title: Text(menuOptions[_currentLanguage]![2]),
+              title: Text(menuOptions[_currentLanguage]![2],
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: Colors.white,
+                      fontSize: 24.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -328,7 +338,11 @@ class _HomePage2State extends State<HomePage2> {
                   getAudio(audioContentMap, 3),
                 ],
               )),
-              title: Text(menuOptions[_currentLanguage]![3]),
+              title: Text(menuOptions[_currentLanguage]![3],
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: Colors.white,
+                      fontSize: 24.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -348,7 +362,11 @@ class _HomePage2State extends State<HomePage2> {
                   getAudio(audioContentMap, 4),
                 ],
               )),
-              title: Text(menuOptions[_currentLanguage]![4]),
+              title: Text(menuOptions[_currentLanguage]![4],
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: Colors.white,
+                      fontSize: 24.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -363,12 +381,16 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/preg_woman_white.png',
+                  Image.asset('assets/ready_to_have_baby_pregnant_white.png',
                       width: 90, height: 90),
                   getAudio(audioContentMap, 5),
                 ],
               )),
-              title: Text(menuOptions[_currentLanguage]![5]),
+              title: Text(menuOptions[_currentLanguage]![5],
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: Colors.white,
+                      fontSize: 24.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -390,7 +412,11 @@ class _HomePage2State extends State<HomePage2> {
                   getAudio(audioContentMap, 7),
                 ],
               )),
-              title: Text(menuOptions[_currentLanguage]![7]),
+              title: Text(menuOptions[_currentLanguage]![7],
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: Colors.white,
+                      fontSize: 24.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -421,35 +447,40 @@ class _HomePage2State extends State<HomePage2> {
 
   void _takeQuiz() {
     //print('Attempting to submit. Selected options: $_selectedOptions');
-    if (_allSelected == false) {
-      print('incomplete');
-      // Show an alert dialog or a message to complete the quiz
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Please visit all sections before taking the quiz"),
-            //content: Text(_t('incompleteMessage')),
-            actions: <Widget>[
-              TextButton(
-                child: Text("OK"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-      return; // Exit the function without navigating if not all questions are answered
-    } else {
-      _allSelected
-          ? Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => QuizScreen()),
-            )
-          : null;
-    }
+    // test
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => QuizScreen()),
+    );
+    // if (_allSelected == false) {
+    //   print('incomplete');
+    //   // Show an alert dialog or a message to complete the quiz
+    //   showDialog(
+    //     context: context,
+    //     builder: (BuildContext context) {
+    //       return AlertDialog(
+    //         title: Text("Please visit all sections before taking the quiz"),
+    //         //content: Text(_t('incompleteMessage')),
+    //         actions: <Widget>[
+    //           TextButton(
+    //             child: Text("OK"),
+    //             onPressed: () {
+    //               Navigator.of(context).pop();
+    //             },
+    //           ),
+    //         ],
+    //       );
+    //     },
+    //   );
+    //   return; // Exit the function without navigating if not all questions are answered
+    // } else {
+    //   _allSelected
+    //       ? Navigator.push(
+    //           context,
+    //           MaterialPageRoute(builder: (context) => QuizScreen()),
+    //         )
+    //       : null;
+    // }
   }
 
   Widget getAudio(Map<String, List<String>> audioContentMap, int index) {
@@ -478,11 +509,13 @@ class _HomePage2State extends State<HomePage2> {
             },
             child: Padding(
               padding: EdgeInsets.all(8.0), // Adjust the padding as needed
-              child: Text(
-                menuOptions[_currentLanguage]![8],
-                overflow: TextOverflow.visible,
-                textAlign: TextAlign.center,
-              ),
+              child: Text(menuOptions[_currentLanguage]![8],
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: Colors.black,
+                      fontSize: 24.0)),
             ),
           ),
         ),
@@ -502,11 +535,13 @@ class _HomePage2State extends State<HomePage2> {
             },
             child: Padding(
               padding: EdgeInsets.all(8.0), // Adjust the padding as needed
-              child: Text(
-                menuOptions[_currentLanguage]![6],
-                overflow: TextOverflow.visible,
-                textAlign: TextAlign.center,
-              ),
+              child: Text(menuOptions[_currentLanguage]![6],
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: Colors.black,
+                      fontSize: 24.0)),
             ),
           ),
         ),
