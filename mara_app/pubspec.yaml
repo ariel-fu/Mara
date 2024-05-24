@@ -67,6 +67,18 @@ flutter:
     - family: MaraIcons
       fonts:
         - asset: fonts/MaraIcons.ttf
+    - family: MiscIcons
+      fonts:
+        - asset: fonts/MiscIcons.ttf
+    - family: PoetsenOne
+      fonts:
+        - asset: fonts/PoetsenOne-Regular.ttf
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -94,24 +106,13 @@ flutter:
     - assets/mara_divas.png
     - assets/imlaunchscreenimg.png
     - assets/iud_picture_of_woman.png
-    - assets/birth_control_new.png
-    - assets/calendar_new.png
-    - assets/chance_new.png
-    - assets/period_new.png
-    - assets/privacy_new.png
-    - assets/preg_woman_new.png
     - assets/ready_to_have_baby_pregnant.png
-    - assets/birth_control_white.png
-    - assets/calendar_white.png
-    - assets/chance_white.png
     - assets/period_white.png
-    - assets/privacy_white.png
-    - assets/preg_woman_white.png
-    - assets/take_quiz_white.png
-    - assets/take_quiz.png
     - assets/misc-icons/
     - assets/audio.png
+
     - assets/new_audio.png
+    - assets/options_images/
 
     - videoAudio/videos/peer/peer1KS.mp4
     - videoAudio/videos/peer/peer1DL.mp4

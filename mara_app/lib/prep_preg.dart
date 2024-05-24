@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'audio.dart';
 
+import 'package:mara_app/icons/misc_icons.dart';
+import 'package:mara_app/design/colors.dart';
+
 class PrepPage extends StatefulWidget {
   final String initialLanguage;
 
@@ -133,7 +136,13 @@ class _PrepPageState extends State<PrepPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(_t('Preparing for a Healthy Pregnancy')),
+        
+        title: Center(
+          child: Text(
+            _t('Preparing for a Healthy Pregnancy'),
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
       ),
       body: ListView(
         children: <Widget>[
@@ -148,12 +157,7 @@ class _PrepPageState extends State<PrepPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  'assets/preg_woman_new.png',
-                  width: 150,
-                  height: 150,
-                  fit: BoxFit.contain,
-                ),
+                Icon(MiscIcons.pregnant_woman, size: 150),
                 SizedBox(width: 16.0),
                 Expanded(
                   child: Column(

@@ -3,6 +3,7 @@ import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'pattern_page.dart';
+import 'package:mara_app/design/colors.dart';
 
 class BleedingPage extends StatefulWidget {
   const BleedingPage({Key? key}) : super(key: key);
@@ -106,7 +107,13 @@ class _BleedingPageState extends State<BleedingPage> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Center(child: Text(titleTranslations[languages[languageIndex]] ?? "Title not found")),
+        
+        title: Center(
+          child: Text(
+            titleTranslations[languages[languageIndex]] ?? "Title not found",
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
@@ -213,19 +220,19 @@ class _BleedingPageState extends State<BleedingPage> {
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200,
+              color: MaraColors.purple,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: Colors.grey),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                //Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
                 SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
                     contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                    style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
                   ),
                 ),
                 
@@ -250,8 +257,8 @@ class _BleedingPageState extends State<BleedingPage> {
             IconButton(
               icon: Icon(
                 iconData,
-                size: isSelected ? 60 : 60,
-                color: isSelected ? Colors.black : Colors.grey,
+                size: 60, //all icons are black
+                color: MaraColors.magentaPurple, //all icons are black
               ),
               onPressed: () {
                 setState(() {
@@ -259,8 +266,8 @@ class _BleedingPageState extends State<BleedingPage> {
                   updateMethodContent();
                 });
               },
-              color: isSelected ? Colors.black : Colors.transparent,
-              iconSize: isSelected ? 60 : 60,
+              color: Colors.black, //all text is black
+              iconSize: 60, //all text is black
               padding: EdgeInsets.all(10),
               splashRadius: 40,
               splashColor: Colors.grey.withOpacity(0.5),

@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'bleeding.dart';
 import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/audio.dart';
+import 'package:mara_app/design/colors.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -54,6 +55,7 @@ class _PatternPageState extends State<PatternPage> {
       languageIndex = 0;
     }
   }
+
 
   final double _aspectRatio = 16 / 10;
   final languages = ["Kiswahili", "Dholuo", "English"];
@@ -206,8 +208,14 @@ class _PatternPageState extends State<PatternPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            titleTranslations[languages[languageIndex]] ?? "Title not found"),
+        // title: Text(
+        //     titleTranslations[languages[languageIndex]] ?? "Title not found"),
+      title: Center(
+          child: Text(
+            titleTranslations[languages[languageIndex]] ?? "Title not found",
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
@@ -233,13 +241,11 @@ class _PatternPageState extends State<PatternPage> {
               children: [
                 buildIconButton(MaraIcons.condom, "Condom", 0),
                 buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-                buildIconButton(
-                    MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+                buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
                 buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
                 buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
                 buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-                buildIconButton(
-                    MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+                buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
               ],
             ),
           ),
@@ -249,9 +255,11 @@ class _PatternPageState extends State<PatternPage> {
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                //color: Colors.grey.shade200,
+                color: MaraColors.purple,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.grey),
+                //border: Border.all(color: Colors.grey),
+                border:Border.all(color: Colors.grey)
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -259,38 +267,39 @@ class _PatternPageState extends State<PatternPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(Icons.lightbulb_outline,
-                          color: Colors.amber, size: 24.0),
+                      Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
                       getAudio(audioContentMap, methodIndex),
                     ],
                   ),
                   SizedBox(width: 10.0),
                   Flexible(
                     child: Text(
-                      contentDescriptionMap[languages[languageIndex]]![
-                          methodIndex],
-                      style: TextStyle(fontSize: 16.0),
+                      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
                     ),
                   ),
                 ],
               ),
             ),
           ),
+          
+          Row(
+            children: [
+              SizedBox(width: 15.0),
+              SizedBox(
+                width: boxWidth / 2 - 25,
+                height: boxHeight * 0.5 * 0.6,
+                child: Center(child: video1),
+              ),
+              SizedBox(width: 10.0),
+              SizedBox(
+                width: boxWidth / 2 - 25,
+                height: boxHeight * 0.5 * 0.6,
+                child: Center(child: video2),
+              ),
+            ]
+          ),
           additionalTextSection(),
-          Row(children: [
-            SizedBox(width: 15.0),
-            SizedBox(
-              width: boxWidth / 2 - 25,
-              height: boxHeight * 0.5 * 0.6,
-              child: Center(child: video1),
-            ),
-            SizedBox(width: 10.0),
-            SizedBox(
-              width: boxWidth / 2 - 25,
-              height: boxHeight * 0.5 * 0.6,
-              child: Center(child: video2),
-            ),
-          ]),
         ],
       ),
     );
@@ -307,7 +316,7 @@ class _PatternPageState extends State<PatternPage> {
             icon: Icon(
               iconData,
               size: 60,
-              color: isSelected ? Colors.black : Colors.grey,
+              color: isSelected ? MaraColors.magentaPurple : Colors.grey,
             ),
             onPressed: () {
               setState(() {
@@ -413,7 +422,6 @@ class _PatternPageState extends State<PatternPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
                 getAudio(audioContentMap, methodIndex),
               ],
             ),
@@ -440,25 +448,34 @@ class _PatternPageState extends State<PatternPage> {
             Padding(
               padding: EdgeInsets.only(bottom: 10.0),
               child: Row(
-                //Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                          size: 24.0, color: Colors.black),
+                      // ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                      //     size: 50.0, color: Colors.black),
                       getAudio(heyThisAudioMap, 0),
                     ],
                   ),
+                  SizedBox(width: 10),
                   Expanded(
-                    child: Text(
-                      importantMessageTranslations[languages[languageIndex]] ??
-                          "Important message not found",
-                      style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
-                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                            size: 50.0, color: Colors.black),
+                        Flexible(
+                          child: Text(
+                          importantMessageTranslations[languages[languageIndex]] ??
+                              "Important message not found",
+                          style: TextStyle(
+                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ]
+                    )
                   ),
                 ],
               ),

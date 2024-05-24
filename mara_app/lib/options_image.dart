@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import 'model/method_repository.dart';
 import 'providers/provider_liked_methods.dart';
+import 'package:mara_app/design/colors.dart';
+import 'package:mara_app/icons/image_asset_strings.dart';
 
 class OptionsImage extends StatelessWidget {
   // works with an aspect ratio of 16/10
@@ -20,14 +22,14 @@ class OptionsImage extends StatelessWidget {
     List<Widget> result = [];
     result.add(
       methodIndex == 0 ? Positioned(
-        top: 0.05 * containerHeight,
-        left: 0.3 * containerWidth,
-        child: Image.asset('assets/iud_picture_of_woman.png', height: 0.7 * containerHeight)
+        top: 0.1 * containerHeight,
+        left: 0.35 * containerWidth,
+        child: Image.asset(ImagePaths.iudWoman, height: 0.7 * containerHeight)
       ) :
       Positioned(
         top: 0.1 * containerHeight,
-        left: -0.1 * containerWidth,
-        child: Image.asset('assets/woman.png', height: 0.7 * containerHeight),
+        left: 0.35 * containerWidth,
+        child: Image.asset(ImagePaths.woman, height: 0.9 * containerHeight),
       ),
     );
     for (var methodId in methods.keys) {
@@ -65,6 +67,7 @@ class OptionsImage extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: Container(
+        // color: Colors.lightBlue[50],
         width: containerWidth,
         height: containerHeight,
         child: Stack(
@@ -84,7 +87,7 @@ class OptionsImage extends StatelessWidget {
               IconButton(
                 icon: Icon(
                   iconData,
-                  color: (isSelected || methodIndex == null) ? Colors.black : Colors.grey,
+                  color: (isSelected || methodIndex == null) ? MaraColors.magentaPurple : MaraColors.lightPurple,
                 ),
                 // TODO - update so that state is managed from options_page instead
                 onPressed: () {

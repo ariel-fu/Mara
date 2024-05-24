@@ -11,6 +11,7 @@ import 'short_summaries.dart';
 import 'new_liked_methods.dart';
 import 'model/method_repository.dart';
 import 'providers/provider_liked_methods.dart';
+import 'package:mara_app/design/colors.dart';
 
 class OptionsPage extends StatefulWidget {
   const OptionsPage({Key? key}) : super(key: key);
@@ -98,8 +99,6 @@ class _OptionsPageState extends State<OptionsPage> {
     }
   }
 
-  Set<String> _likedMethods = {};
-
   // from recommendation_screen.dart; factor out into app state
   late Future<Map<String, dynamic>> _methodDetailsDataFuture;
 
@@ -109,25 +108,15 @@ class _OptionsPageState extends State<OptionsPage> {
     return json.decode(jsonString);
   }
 
-  void toggleLikeMethod(String method) {
-    setState(() {
-      if (_likedMethods.contains(method)) {
-        _likedMethods.remove(method);
-      } else {
-        _likedMethods.add(method);
-      }
-    });
-  }
-
   String _t(String key) {
     String translation = _translations[languages[_languageIndex]]?[key] ?? key;
-    print('Key: $key, Language: $languages, Translation: $translation');
+    // print('Key: $key, Language: $languages, Translation: $translation');
     return translation;
   }
 
   // List<List<String>> languages = List.generate(3, (_) => <String>[]);
   // Change value to set aspect ratio
-  final double _aspectRatio = 16 / 10;
+  final double _aspectRatio = 1.08;
 
   @override
   Widget build(BuildContext context) {
@@ -147,8 +136,8 @@ class _OptionsPageState extends State<OptionsPage> {
       _languageIndex = routeArgumentIndex;
     }
 
-    double containerWidth = MediaQuery.of(context).size.width * 0.8;
-    double containerHeight = MediaQuery.of(context).size.height * 0.8;
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
     if (containerHeight / containerWidth > _aspectRatio) {
       containerHeight = containerWidth * _aspectRatio;
     } else {
@@ -157,160 +146,166 @@ class _OptionsPageState extends State<OptionsPage> {
     // var selectedButtonIndex = input == null ? input : 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text(_t('title')),
+        title: Center(
+          child: Text(
+            _t('title'),
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(containerHeight * 0.05),
           child: Container(
               // height: availableHeight * 0.1,
-              child: Container(
-            // padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  // Adjust the padding as needed
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _languageIndex = 0;
-                        _switchLanguage(0);
-                        overrideIndex = true;
-                        // updateMethodContent();
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _languageIndex == 0 ? Colors.grey : null,
-                      foregroundColor:
-                          _languageIndex == 0 ? Colors.white : null,
-                    ),
-                    child: Text('Kiswahili'),
+                child: Container(
+                  // padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _languageIndex = 0;
+                              _switchLanguage(0);
+                              overrideIndex = true;
+                              // updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _languageIndex == 0 ? Colors.grey : null,
+                            foregroundColor:
+                                _languageIndex == 0 ? Colors.white : null,
+                          ),
+                          child: Text('Kiswahili'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _languageIndex = 1;
+                              _switchLanguage(1);
+                              overrideIndex = true;
+                              // updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _languageIndex == 1 ? Colors.grey : null,
+                            foregroundColor:
+                                _languageIndex == 1 ? Colors.white : null,
+                          ),
+                          child: Text('Dholuo'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        // Adjust the padding as needed
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _languageIndex = 2;
+                              _switchLanguage(2);
+                              overrideIndex = true;
+                              // updateMethodContent();
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _languageIndex == 2 ? Colors.grey : null,
+                            foregroundColor:
+                                _languageIndex == 2 ? Colors.white : null,
+                          ),
+                          child: Text('English'),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  // Adjust the padding as needed
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _languageIndex = 1;
-                        _switchLanguage(1);
-                        overrideIndex = true;
-                        // updateMethodContent();
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _languageIndex == 1 ? Colors.grey : null,
-                      foregroundColor:
-                          _languageIndex == 1 ? Colors.white : null,
+                )),
+          ),
+          actions: <Widget>[
+            Consumer<Likes>(
+              builder: (context, likes, child) => ElevatedButton.icon(
+                icon: Icon(Icons.thumb_up, color: Colors.black),
+                label: Text(_t('likedTitle')),
+                // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LikedMethodsScreen(
+                        initialLanguage: languages[_languageIndex], 
+                        translations: _translations,
+                      ),
                     ),
-                    child: Text('Dholuo'),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[100],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
                   ),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), 
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  // Adjust the padding as needed
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _languageIndex = 2;
-                        _switchLanguage(2);
-                        overrideIndex = true;
-                        // updateMethodContent();
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _languageIndex == 2 ? Colors.grey : null,
-                      foregroundColor:
-                          _languageIndex == 2 ? Colors.white : null,
-                    ),
-                    child: Text('English'),
-                  ),
-                ),
-              ],
-            ),
-          )),
-        ),
-        actions: <Widget>[
-          Consumer<Likes>(
-            builder: (context, likes, child) => ElevatedButton.icon(
-              icon: Icon(Icons.thumb_up, color: Colors.black),
-              label: Text(_t('likedTitle')),
-              // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
-              onPressed: () {
-                var likes = context.read<Likes>();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LikedMethodsScreen(
-                      likedMethods: likes.likedMethods,
-                      initialLanguage: languages[_languageIndex],
-                      translations: _translations,
-                      // onMethodsChanged: likes.toggleLikedMethod,
-                    ),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple[100],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               ),
             ),
-          ),
-        ],
-      ),
-      // body
-      body: OptionsImage(
-          containerWidth, containerHeight, methodIndex, updateIndex),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.all(12.0),
-        // duplicated from recommendation_screen.dart
-        child: FutureBuilder<Map<String, dynamic>>(
-          future: _methodDetailsDataFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              // Data is still loading, show a loading indicator
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              // If we run into an error, display it to the user
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (snapshot.hasData) {
-              final Map<String, dynamic> methodDetailsData = snapshot.data!;
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Row(
+          ],
+        ),
+        // body
+        body: OptionsImage(containerWidth, containerHeight, methodIndex, updateIndex),
+        bottomSheet: Padding(
+          padding: const EdgeInsets.all(12.0),
+          // duplicated from recommendation_screen.dart
+          child: FutureBuilder<Map<String, dynamic>>(
+            future: _methodDetailsDataFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // Data is still loading, show a loading indicator
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                // If we run into an error, display it to the user
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (snapshot.hasData) {
+                final Map<String, dynamic> methodDetailsData = snapshot.data!;
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
                         methodIndex == null
                             ? Text("Please select a method to learn more")
-                            : Text(methods[methodIndex]!.name,
+                            :Text(methods[methodIndex]!.name,
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold)),
-                      ]),
-                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          getAudio(),
-                        ]),
-                    Flexible(
-                      child: methodRef == null
-                          ? SizedBox(height: 20.0)
-                          : Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Text(
-                                  methodDetailsData[methodRef]!['options_page']
-                                      [languages[_languageIndex]]),
-                            ),
-                    )
-                  ]),
+                        ]
+                    ), //real image of method
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, 
+                    children: [
+                      Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            getAudio(),
+                          ]),
+                      Flexible(
+                        child: methodRef == null
+                            ? SizedBox(height: 20.0)
+                            : Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Text(
+                                    methodDetailsData[methodRef]!['options_page']
+                                        [languages[_languageIndex]]),
+                              ),
+                      ),
+                      if (methodIndex != null)
+                        getPic(),
+                    ]
+                  ),
 
                   // SizedBox(height: 70.0),
                   Row(
@@ -362,7 +357,7 @@ class _OptionsPageState extends State<OptionsPage> {
                                 },
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Colors.green,
+                          backgroundColor: MaraColors.purple,
                         ),
                         child: Text('Learn more'),
                       ),
@@ -413,7 +408,7 @@ class _OptionsPageState extends State<OptionsPage> {
     if (methodIndex == null) {
       return SizedBox();
     }
-    print(audioContentMap[languages[_languageIndex]]![methodIndex!]);
+    // print(audioContentMap[languages[_languageIndex]]![methodIndex!]);
     return AudioWidget(
         audioAsset: audioContentMap[languages[_languageIndex]]![methodIndex!]);
   }
@@ -430,4 +425,12 @@ class _OptionsPageState extends State<OptionsPage> {
 //     ),
 //   );
 // }
+  Widget getPic() {
+    String imageNum =
+        "assets/options_images/$methodIndex.png";
+    return Image.asset(
+      imageNum,
+      width: MediaQuery.of(context).size.width * 0.2,
+    );
+  }
 }

@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/providers/provider_liked_methods.dart';
+import 'package:provider/provider.dart';
 import 'short_summaries.dart';
 import 'recommendation_model.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
-import 'model/method_repository.dart';
 class LikedMethodsScreen extends StatefulWidget {
-  final Set<String> likedMethods;
   final String initialLanguage; // renamed from currentLanguage for clarity
   final Map<String, Map<String, String>> translations;
-  // final Function(String) onMethodsChanged;
 
   LikedMethodsScreen({
     Key? key,
-    required this.likedMethods,
     required this.initialLanguage,
     required this.translations,
-    // required this.onMethodsChanged,
   }) : super(key: key);
 
 
   @override
-  _LikedMethodsScreenState createState() => _LikedMethodsScreenState();
+  State<LikedMethodsScreen> createState() => _LikedMethodsScreenState();
 }
 
 class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
@@ -30,7 +27,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
 
   final Map<String, Map<String, String>> _likedTranslations = {
     'English': {
-      'noneLiked': 'None.',
+      'noneLiked': 'No liked methods yet! Visit "What are my options?" to start adding some.',
       'summaryPage': 'Summary Page',
     },
     'Dholuo': {
@@ -96,74 +93,77 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
               ],
             ),
           ),
-          Expanded(
-            child: widget.likedMethods.isNotEmpty
-              ? ListView.builder(
-    itemCount: widget.likedMethods.length,
-    itemBuilder: (context, index) {
-        String method = widget.likedMethods.elementAt(index);
-        // Convert the method name to the corresponding JSON key
-        String methodKey;
-        switch (method.toLowerCase()) {
-            // Add any specific mappings here
-            default:
-                methodKey = method.toLowerCase();
-        }
-
-        return ListTile(
-          minVerticalPadding: 20,
-            leading: Icon(
-                RecommendationModel.getIconForRecommendation(method),
-                size: 50,
-            ),
-            title: Text(RecommendationModel.getTitleFromJsonRef(method)),
-            trailing: Wrap(
-                spacing: 8, // Space between two widgets
-                children: <Widget>[
-                    ElevatedButton(
-                        onPressed: () async {
-                            final methodDetails = await _methodDetailsFuture;
-                            if (methodDetails[methodKey] != null) {
-                                Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (context) => MethodDetailsScreen(
-                                            methodName: method,
-                                            methodDetails: methodDetails[methodKey],
-                                            currentLanguage: currentLanguage,
-                                            translations: _likedTranslations,
-                                            onChangeLanguage: (newLang) {
-                                                setState(() {
-                                                    currentLanguage = newLang;
-                                                });
-                                                // Optionally, handle other actions needed on language change
-                                            },
-                                        ),
-                                    ),
-                                );
-                            }
-                        },
-                        child: Text(_t2('learnMore')),
-                    ),
-                    // IconButton(
-                    //     icon: Icon(Icons.delete, color: Colors.red),
-                    //     onPressed: () {
-                    //       print(widget.likedMethods);
-                    //       widget.onMethodsChanged(method);
-                    //       print(widget.likedMethods);
-                    //     }
-                    // ),
-                ],
-            ),
-        );
-    },
-)
-
-              : Center(
-                  child: Text(
-                    _t('noneLiked'), // or use _t2('no_liked_methods') for translations
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+          Consumer<Likes>(
+            builder: (context, likes, child) {
+              return Expanded(
+                child: likes.likedMethods.isNotEmpty
+                  ? ListView.builder(
+                  itemCount: likes.likedMethods.length,
+                  itemBuilder: (context, index) {
+                      String method = likes.likedMethods.elementAt(index);
+                      // Convert the method name to the corresponding JSON key
+                      String methodKey;
+                      switch (method.toLowerCase()) {
+                // Add any specific mappings here
+                default:
+                    methodKey = method.toLowerCase();
+                      }
+              
+                      return ListTile(
+              minVerticalPadding: 20,
+                leading: Icon(
+                    RecommendationModel.getIconForRecommendation(method),
+                    size: 50,
                 ),
+                title: Text(RecommendationModel.getTitleFromJsonRef(method)),
+                trailing: Wrap(
+                    spacing: 8, // Space between two widgets
+                    children: <Widget>[
+                        ElevatedButton(
+                            onPressed: () async {
+                                final methodDetails = await _methodDetailsFuture;
+                                if (methodDetails[methodKey] != null) {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) => MethodDetailsScreen(
+                                                methodName: method,
+                                                methodDetails: methodDetails[methodKey],
+                                                currentLanguage: currentLanguage,
+                                                translations: _likedTranslations,
+                                                onChangeLanguage: (newLang) {
+                                                    setState(() {
+                                                        currentLanguage = newLang;
+                                                    });
+                                                    // Optionally, handle other actions needed on language change
+                                                },
+                                            ),
+                                        ),
+                                    );
+                                }
+                            },
+                            child: Text(_t2('learnMore')),
+                        ),
+                        IconButton(
+                            icon: Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              // add index out of bounds check
+                              likes.removeMethod(likes.likedMethods.elementAt(index));
+                            }
+                        ),
+                    ],
+                ),
+                      );
+                  },
+              )
+              
+                  : Center(
+                      child: Text(
+                        _t('noneLiked'), // or use _t2('no_liked_methods') for translations
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+              );
+            },
           ),
         ],
       ),
@@ -186,28 +186,4 @@ Widget _languageButton(String language) {
       child: Text(language),
     );
   }
-
-  // TODO - changed _handleMethodRemoval
-  
-  void _navigateToSummary(String method) async {
-  final methodDetails = await _methodDetailsFuture;
-  print("Method Details for $method: ${methodDetails[method]}");
-  if (methodDetails[method] != null) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => MethodDetailsScreen(
-          methodName: method,
-          methodDetails: methodDetails[method],
-          currentLanguage: currentLanguage,
-          translations: widget.translations,
-          onChangeLanguage: (newLang) {
-            setState(() {
-              currentLanguage = newLang;
-            });
-          },
-        ),
-      ),
-    );
-  }
-}
 }

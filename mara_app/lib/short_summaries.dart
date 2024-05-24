@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:mara_app/icons/misc_icons.dart';
+import 'package:mara_app/recommendation_model.dart';
+
 class MethodDetailsScreen extends StatefulWidget {
   final String methodName;
   final Map<String, dynamic>? methodDetails;
@@ -17,7 +20,7 @@ class MethodDetailsScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MethodDetailsScreenState createState() => _MethodDetailsScreenState();
+  State<MethodDetailsScreen> createState() => _MethodDetailsScreenState();
 }
 
 class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
@@ -80,7 +83,7 @@ Widget build(BuildContext context) {
   }
 
   String methodName = widget.methodDetails?['name']?[_currentLanguage] ?? widget.methodName;
-  String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
+  // String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
   String subtitle = widget.methodDetails?['subtitles']?[_currentLanguage] ?? '';
 
   return Scaffold(
@@ -110,7 +113,8 @@ Widget build(BuildContext context) {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(iconPath, width: 50, height: 50),
+                  Icon(RecommendationModel.getIconForRecommendation(widget.methodName), size: 50),
+                  // Image.asset(iconPath, width: 50, height: 50),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,12 +128,12 @@ Widget build(BuildContext context) {
             ],
           ),
         ),
-        buildContentCard('assets/birth_control_new.png', '', 'how_it_works'),
-        buildContentCard('assets/period_new.png', 'what_period', 'side_effects'),
-        buildContentCard('assets/calendar_new.png', 'how_long', 'lasts'),
-        buildContentCard('assets/chance_new.png', 'how_effective', 'effectiveness'),
-        buildContentCard('assets/privacy_new.png', 'can_private', 'privacy'),
-        buildContentCard('assets/preg_woman_new.png', 'ready_to_have_baby', 'fertility'),
+        buildContentCard(MiscIcons.birth_control, '', 'how_it_works'),
+        buildContentCard(MiscIcons.period, 'what_period', 'side_effects'),
+        buildContentCard(MiscIcons.calendar, 'how_long', 'lasts'),
+        buildContentCard(MiscIcons.chance, 'how_effective', 'effectiveness'),
+        buildContentCard(MiscIcons.private, 'can_private', 'privacy'),
+        buildContentCard(MiscIcons.pregnant_woman, 'ready_to_have_baby', 'fertility'),
       ],
     ),
   );
@@ -178,7 +182,7 @@ Widget build(BuildContext context) {
 //   );
 // }
 
-Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
+Widget buildContentCard(IconData summaryIcon, String titleKey, String contentKey) {
   String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? '';
   String content = widget.methodDetails?[contentKey]?[_currentLanguage] ?? 'No information available';
 
@@ -195,7 +199,7 @@ Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.asset(iconPath, width: 44, height: 44),
+        Icon(summaryIcon, size: 44),
         SizedBox(width: 10),
         Expanded(
           child: hasTitle

@@ -47,6 +47,7 @@ ios/
 macos/
 linux/
 windows/
+videoAudio/
 
 # linter rules
 # analysis_options.yaml

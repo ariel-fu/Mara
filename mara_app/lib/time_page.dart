@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/hiv_page.dart';
 import 'audio.dart';
+import 'package:mara_app/design/colors.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({Key? key}) : super(key: key);
@@ -129,7 +130,12 @@ class _TimePageState extends State<TimePage> {
         //   icon: Icon(Icons.arrow_back),
         //   onPressed: () => Navigator.of(context).pop(),
         // ),
-        title: Text(titleTranslations[languages[languageIndex]] ?? "Title not found"),
+        title: Center(
+          child: Text(
+            titleTranslations[languages[languageIndex]] ?? "Title not found",
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+          )
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -186,16 +192,28 @@ Widget languageButton(String language) {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
+                    //ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
                     getAudio(heyThisAudioMap, 0),
                   ],
                 ),
-                Expanded(
-                  child: Text(
-                    importantMessageTranslations[languages[languageIndex]] ?? "Important message not found",
-                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                            size: 50.0, color: Colors.black),
+                        Flexible(
+                          child: Text(
+                          importantMessageTranslations[languages[languageIndex]] ??
+                              "Important message not found",
+                          style: TextStyle(
+                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ]
+                    )
                   ),
-                ),
               ],
             ),
           ),
@@ -272,7 +290,7 @@ Widget methodSelectionRow() {
               icon: Icon(
                 iconData,
                 size: isSelected ? 60 : 60,
-                color: isSelected ? Colors.black : Colors.grey,
+                color: isSelected ? MaraColors.magentaPurple : Colors.grey,
               ),
               onPressed: () {
                 setState(() {
@@ -311,7 +329,7 @@ Widget methodSelectionRow() {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: MaraColors.purple,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey),
         ),
@@ -319,17 +337,17 @@ Widget methodSelectionRow() {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                    getAudio(audioContentMap, methodIndex),
-                  ],
-                ),
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                getAudio(audioContentMap, methodIndex),
+              ],
+            ),
             SizedBox(width: 10.0),
             Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
               ),
             ),
           ],
