@@ -119,10 +119,9 @@ class _WhatChanceState extends State<WhatChance> {
   };
 
   final Map<String, String> EpillText = {
-    "Kiswahili":
-        "Pata maelezo zaidi kuhusu jinsi ya kumeza kidonge cha E kwa usalama",
-    "Dholuo": "Ponjri matut ewi kaka inyalo muonyo E-pill eyo makare",
-    "English": "Learn more about how to take the E-pill safely",
+    "Kiswahili": "Mambo 3 unayohitaji kujua kuhusu E-pill (P2)",
+    "Dholuo": "Gik moko 3 ma onego ing'e ewi E-pill (P2)",
+    "English": "3 things you need to know about the E-pill (P2)",
   };
 
   final double _aspectRatio = 16 / 10;
@@ -351,7 +350,7 @@ class _WhatChanceState extends State<WhatChance> {
   Widget getPic() {
     String imageNum =
         "assets/method_efficiency_pics/efficacy_Page_$methodIndex.jpg";
-    return Image.asset(
+    return Image.asset( 
       imageNum,
       width: MediaQuery.of(context).size.width * 0.8,
     );
