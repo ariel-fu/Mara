@@ -261,28 +261,41 @@ class _EmergencyPageState extends State<EmergencyPage> {
 
           Container (
             //height: containerHeight * 0.6, // Adjust as needed
-            child: Flex(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              direction: Axis.vertical,
-              children: [
-                contentBox('content1'),
-                contentBox('content2'),
-                contentBox('content3'),
-                SizedBox(
-                  width: boxWidth * 0.5,
-                  height: boxHeight * 0.5 * 0.4,
-                  child: Center(child:video1),
-                ),
-                contentBox('content4'),
-                contentBox('content5'),
-                Image.asset(
-                        'assets/new_icons/emergency_photos.png',
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                ),
-              ]
-            ),
+      
+              child: Flex(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                direction: Axis.vertical,
+                children: [
+                  contentBox2('content1', '1'),
+                  contentBox2('content2', '2'),
+                  contentBox2('content3', '3'),
+                  SizedBox(
+                    width: boxWidth * 0.6,
+                    height: boxHeight * 0.5 * 0.6,
+                    child: Center(child:video1),
+                  ),
+                  contentBox('content4'),
+                  Expanded(
+                    child: Wrap(
+                      spacing: 8.0, // space between adjacent chips
+                      runSpacing: 4.0, // space between lines
+                      alignment: WrapAlignment.start, // aligns the chips starting from the left
+                      children: [
+                        contentBox('content5'),
+                        Container(
+                          width: 150,
+                          height: 150,
+                          child: Image.asset(
+                            'assets/new_icons/emergency_photos.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            
           ),
         ],
       ),
@@ -360,7 +373,35 @@ class _EmergencyPageState extends State<EmergencyPage> {
             Expanded(
               child: Text(
                 _t(contentKey),
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 20.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget contentBox2(String contentKey, String number) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            Text(number, style:TextStyle(fontWeight:FontWeight.bold)),
+            SizedBox(width: 10.0),
+            Expanded(
+              child: Text(
+                _t(contentKey),
+                style: TextStyle(fontSize: 20.0),
               ),
             ),
           ],
