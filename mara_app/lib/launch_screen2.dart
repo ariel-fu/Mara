@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/intermediate_launch_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
+import 'package:mara_app/design/colors.dart';
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({super.key});
@@ -30,6 +31,15 @@ class _LaunchScreenState extends State<LaunchScreen> {
   Map<String, String> translations = {
     'English':
         "Divas have choices! The best choice for pregnancy prevention is the option that you feel is right for you.",
+    'Kiswahili':
+        "Warembo wana chaguo!",
+    'Dholuo': "Nyibeyo nigi yiero!",
+  };
+
+
+  Map<String, String> subtitle_translations = {
+    'English':
+        "The best choice for pregnancy prevention is the option that you feel is right for you.",
     'Kiswahili':
         "Chaguo bora zaidi la kupanga uzazi ni chaguo ambalo unahisi linakufaa.",
     'Dholuo': "Yor komo nyuol maber mogik en ma ineno ka ber kodi.",
@@ -105,11 +115,33 @@ class _LaunchScreenState extends State<LaunchScreen> {
               getAudio(buttonAudioContentMap),
               Flexible(
                   child: Text(
-                translations[_currentLanguage]!,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.visible,
-              ))
+                    translations[_currentLanguage]!,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.visible,
+                    style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: MaraColors.purple,
+                      fontSize: 30.0
+                    ),
+                  )
+              )
             ]),
+            SizedBox(height:50),
+            Row(children: [
+              getAudio(buttonAudioContentMap),
+              Flexible(
+                  child: Text(
+                    subtitle_translations[_currentLanguage]!,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.visible,
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      color: Colors.black,
+                      fontSize: 20.0
+                    ),
+                  )
+              )
+            ]),            
             const SizedBox(height: 50),
             IntrinsicWidth(
                 child: Row(children: [
