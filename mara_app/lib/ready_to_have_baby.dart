@@ -413,7 +413,7 @@ class _ReadyPageState extends State<ReadyPage> {
             icon: Icon(
               iconData,
               size: isSelected ? 60 : 60,
-              color: isSelected ? Colors.black : Colors.grey,
+              color: isSelected ? MaraColors.magentaPurple : Colors.grey,
             ),
             onPressed: () {
               setState(() {
