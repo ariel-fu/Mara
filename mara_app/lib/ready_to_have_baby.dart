@@ -285,8 +285,7 @@ class _ReadyPageState extends State<ReadyPage> {
               imagePath: 'assets/ready_to_have_baby_pregnant.png',
               title: importantMessage_pregnant_Translations[languages[languageIndex]] ?? "Important message not found",
             ),
-            subtitleSection(),
-            SizedBox(height: 20.0),
+            //SizedBox(height: 20.0),
             methodSelectionRow(),
             SizedBox(height: 20.0),
             contentArea(),
@@ -351,35 +350,42 @@ class _ReadyPageState extends State<ReadyPage> {
                 height: 200, // Adjust height
                 fit: BoxFit.contain,
               ),
-              SizedBox(width: 5.0),
+              //SizedBox(width: 5.0),
               Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    subtitleSection(),
+                    SizedBox(height: 15.0),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        getAudio(heyThis_baby_AudioMap,0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            getAudio(heyThis_baby_AudioMap,0),
+                          ],
+                        ),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                                  size: 50.0, color: Colors.black),
+                              Flexible(
+                                child: Text(
+                                title,
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 19.0, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ]
+                          )
+                        ),
                       ],
-                    ),
-                    SizedBox(width: 8.0),
-                    Expanded(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                              size: 50.0, color: Colors.black),
-                          Flexible(
-                            child: Text(
-                            title,
-                            style: TextStyle(fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ]
-                      )
-                    ),
+                    ),             
                   ],
-                ),
+                )
               ),
             ],
           ),
@@ -466,7 +472,7 @@ class _ReadyPageState extends State<ReadyPage> {
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Text(
         subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
     );
@@ -478,7 +484,7 @@ class _ReadyPageState extends State<ReadyPage> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: MaraColors.purple,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey),
         ),
@@ -496,7 +502,10 @@ class _ReadyPageState extends State<ReadyPage> {
             Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(
+                    fontFamily: 'Roboto',
+                    color: Colors.white,
+                    fontSize: 19.0),
               ),
             ),
           ],
