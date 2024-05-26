@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/bleeding.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/hiv_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -263,24 +264,6 @@ Widget languageButton(String language) {
                 MaterialPageRoute(builder: (context) => HIVPage()),
               );
             },
-          ),
-        // Additional button section for other methods
-        if (methodIndex != 0 && methodIndex != 1)
-          TextButton.icon(
-            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
-            label: Text(
-              whyTranslations[languages[languageIndex]] ?? "WHY?",
-              style: TextStyle(color: Colors.black),
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HIVPage()),
-              );
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: MaraColors.lavendar,
-            ),
           ),
       ],
     ),
