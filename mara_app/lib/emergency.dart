@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'video.dart';
+import 'package:mara_app/design/colors.dart';
 
 class EmergencyPage extends StatefulWidget {
   final String initialLanguage;
@@ -26,6 +27,14 @@ class _EmergencyPageState extends State<EmergencyPage> {
   bool overrideIndex = false;
   late String _currentLanguage;
 
+  String _getAsset() {
+    return _videos['assets']?[_currentLanguage] ?? 'Asset not found';
+  }
+
+  String _getTitle() {
+    return _videos['titles']?[_currentLanguage] ?? 'Title not found';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -36,13 +45,13 @@ class _EmergencyPageState extends State<EmergencyPage> {
 
   final Map<String, String> titleContentMap = {
     "English": "It's an emergency!",
-    "Kiswahili": "Ni ya dharura!",
-    "Dholuo": "En gima imuonyo e resruok!"
+    "Dholuo": "Mambo 3 unayohitaji kujua kuhusu E-pill (P2)",
+    "Kiswahili": "Ni ya dharura!"
   };
 
   final Map<String, String> subtitleContentMap = {
-    "English": "All you need to know about taking the E-pill (P2).",
-    "Kiswahili": "Unachohitaji kujua kuhusu kumeza E-pill (P2).",
+    "English": "3 things you need to know about the E-pill (P2)",
+    "Kiswahili": "Gik moko 3 ma onego ing'e ewi E-pill (P2)",
     "Dholuo": "Gik moko te ma onego ing'e ewi muonyo E-pill [P2]"
   };
 
@@ -95,39 +104,52 @@ class _EmergencyPageState extends State<EmergencyPage> {
   // String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
   // String videoTitle2 = 'Video 2 Language Not Selected';
 
-  final Map<String, Map<String, Map<String, String>>> languageToVideo = {
-    'video1': {
-      '0': {
-        // Language code 0
-        'video': 'videoAudio/videos/peer/peer3KS.mp4',
-        'text': 'Video: Mwenzio anaelezea',
-      },
-      '1': {
-        // Language code 1
-        'video': 'videoAudio/videos/peer/peer3DL.mp4',
-        'text': 'Video: Mbasni lero',
-      },
-      '2': {
-        // Language code 2
-        'video': 'videoAudio/videos/peer/peer3E.mp4',
-        'text': 'Video: a peer explains',
-      },
+    final Map<String, Map<String, String>> _videos = {
+    'assets': {
+      'Kiswahili': 'videoAudio/videos/peer/peer3KS.mp4',
+      'Dholuo': 'videoAudio/videos/peer/peer3DL.mp4',
+      'English': 'videoAudio/videos/peer/peer3E.mp4',
     },
-    'video2': {
-      '0': {
-        'video': 'videoAudio/videos/chimes.mp4',
-        'text': 'Kiswahili Video #2',
-      },
-      '1': {
-        'video': 'videoAudio/videos/funnyCat.mp4',
-        'text': 'Dholuo Video #2',
-      },
-      '2': {
-        'video': 'videoAudio/videos/funnyCat2.mp4',
-        'text': 'English Video #2',
-      },
-    },
+    'titles': {
+      'Kiswahili': 'Video: Mwenzio anaelezea',
+      'Dholuo': 'Video: Mbasni lero',
+      'English': 'Video: a peer explains',
+    }
   };
+
+  // final Map<String, Map<String, Map<String, String>>> languageToVideo = {
+  //   'video1': {
+  //     '0': {
+  //       // Language code 0
+  //       'video': 'videoAudio/videos/peer/peer3KS.mp4',
+  //       'text': 'Video: Mwenzio anaelezea',
+  //     },
+  //     '1': {
+  //       // Language code 1
+  //       'video': 'videoAudio/videos/peer/peer3DL.mp4',
+  //       'text': 'Video: Mbasni lero',
+  //     },
+  //     '2': {
+  //       // Language code 2
+  //       'video': 'videoAudio/videos/peer/peer3E.mp4',
+  //       'text': 'Video: a peer explains',
+  //     },
+  //   },
+  //   'video2': {
+  //     '0': {
+  //       'video': 'videoAudio/videos/chimes.mp4',
+  //       'text': 'Kiswahili Video #2',
+  //     },
+  //     '1': {
+  //       'video': 'videoAudio/videos/funnyCat.mp4',
+  //       'text': 'Dholuo Video #2',
+  //     },
+  //     '2': {
+  //       'video': 'videoAudio/videos/funnyCat2.mp4',
+  //       'text': 'English Video #2',
+  //     },
+  //   },
+  // };
 
   String _t(String key) {
     return _translations[key]?[_currentLanguage] ?? key;
@@ -168,12 +190,26 @@ class _EmergencyPageState extends State<EmergencyPage> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Center(child: Text(titleContentMap[languages[languageIndex]]!)),
+        title: Center(
+          child: Text(titleContentMap[languages[languageIndex]]!,
+          style: TextStyle(
+                    fontFamily: 'PoetsenOne',
+                    color: MaraColors.purple,
+                    fontSize: 36.0)
+          )
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(subtitleContentMap[languages[languageIndex]]!),
+          Text(subtitleContentMap[languages[languageIndex]]!,
+            style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      color: MaraColors.magentaPurple,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold
+            )
+          ),
           //children: [
           Container(
               height: containerHeight * 0.1,
@@ -192,7 +228,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                           _currentLanguage = 'Kiswahili';
                           overrideIndex = true;
                           //updateMethodContent('content1');
-                          video1 = updateVideoContent1();
+                          //video1 = updateVideoContent1();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -208,7 +244,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                           _currentLanguage = 'Dholuo';
                           overrideIndex = true;
                           //updateMethodContent('content2');
-                          video1 = updateVideoContent1();
+                          //video1 = updateVideoContent1();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -224,7 +260,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                           _currentLanguage = 'English';
                           overrideIndex = true;
                           //updateMethodContent('content3');
-                          video1 = updateVideoContent1();
+                          //video1 = updateVideoContent1();
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -249,7 +285,6 @@ class _EmergencyPageState extends State<EmergencyPage> {
                 radius: Radius.circular(20),
               
                 child: LayoutBuilder(
-                  
                   builder: (context, constraint) {
                     return SingleChildScrollView(
                       child: ConstrainedBox(
@@ -267,7 +302,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
                               SizedBox(
                                 width: boxWidth * 0.5,
                                 height: boxHeight * 0.5 * 0.4,
-                                child: Center(child: video1),
+                                //child: Center(child: video1),
+                                child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
                               ),
                               contentBox('content4'),
                               contentBox('content5'),
@@ -302,27 +338,27 @@ class _EmergencyPageState extends State<EmergencyPage> {
         ));
   }
 
-  String _getAsset(String videoKey, String language) {
-    return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
-  }
+  // String _getAsset(String videoKey, String language) {
+  //   return languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+  // }
 
-  String _getTitle(String videoKey, String language) {
-    return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
-  }
+  // String _getTitle(String videoKey, String language) {
+  //   return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
+  // }
 
-  Widget updateVideoContent1() {
-    if (languageIndex == 0) {
-      videoAsset1 = _getAsset('video1', '0');
-      videoTitle1 = _getTitle('video1', '0');
-    } else if (languageIndex == 1) {
-      videoAsset1 = _getAsset('video1', '1');
-      videoTitle1 = _getTitle('video1', '1');
-    } else if (languageIndex == 2) {
-      videoAsset1 = _getAsset('video1', '2');
-      videoTitle1 = _getTitle('video1', '2');
-    }
-    return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
-  }
+  // Widget updateVideoContent1() {
+  //   if (languageIndex == 0) {
+  //     videoAsset1 = _getAsset('video1', '0');
+  //     videoTitle1 = _getTitle('video1', '0');
+  //   } else if (languageIndex == 1) {
+  //     videoAsset1 = _getAsset('video1', '1');
+  //     videoTitle1 = _getTitle('video1', '1');
+  //   } else if (languageIndex == 2) {
+  //     videoAsset1 = _getAsset('video1', '2');
+  //     videoTitle1 = _getTitle('video1', '2');
+  //   }
+  //   return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+  // }
 
   Widget languageButton(String language) {
     bool isSelected = _currentLanguage == language;
