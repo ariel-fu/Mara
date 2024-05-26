@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
 
+
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({super.key});
 
@@ -30,10 +31,11 @@ class _LaunchScreenState extends State<LaunchScreen> {
 
   Map<String, String> translations = {
     'English':
-        "Divas have choices! The best choice for pregnancy prevention is the option that you feel is right for you.",
+        "Divas have choices!",
     'Kiswahili':
         "Warembo wana chaguo!",
-    'Dholuo': "Nyibeyo nigi yiero!",
+    'Dholuo': 
+      "Nyibeyo nigi yiero!",
   };
 
 
@@ -53,26 +55,26 @@ class _LaunchScreenState extends State<LaunchScreen> {
 
   final Map<String, List<String>> textAudioContentMap = {
     "English": [
-      'videoAudio/audio/launch_intermediate/launch_text_E.mp4',
+      'videoAudio/audio/launch_intermediate/launch_text_E.mp3',
     ],
     "Kiswahili": [
-      'videoAudio/audio/launch_intermediate/launch_text_L.mp4',
+      'videoAudio/audio/launch_intermediate/launch_text_K.mp3',
     ],
     "Dholuo": [
-      'videoAudio/audio/launch_intermediate/launch_text_K.mp4',
+      'videoAudio/audio/launch_intermediate/launch_text_L.mp3',
     ],
   };
 
   // TODO: figure out where the utton audio is supposed to gp
   final Map<String, List<String>> buttonAudioContentMap = {
     "English": [
-      'videoAudio/audio/launch_intermediate/launch_button_E.mp4',
+      'videoAudio/audio/launch_intermediate/launch_button_E.mp3',
     ],
     "Kiswahili": [
-      'videoAudio/audio/launch_intermediate/launch_button_L.mp4',
+      'videoAudio/audio/launch_intermediate/launch_button_K.mp3',
     ],
     "Dholuo": [
-      'videoAudio/audio/launch_intermediate/launch_button_K.mp4',
+      'videoAudio/audio/launch_intermediate/launch_button_L.mp3',
     ],
   };
 
@@ -111,53 +113,73 @@ class _LaunchScreenState extends State<LaunchScreen> {
                 width: MediaQuery.of(context).size.width * 0.5,
               ),
             ),
-            Row(children: [
-              getAudio(buttonAudioContentMap),
-              Flexible(
-                  child: Text(
-                    translations[_currentLanguage]!,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.visible,
-                    style: TextStyle(
-                      fontFamily: 'PoetsenOne',
-                      color: MaraColors.purple,
-                      fontSize: 30.0
-                    ),
+            // Row(children: [            
+              IntrinsicWidth(
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    getAudio(textAudioContentMap),
+                    Flexible(
+                        child: Text(
+                          translations[_currentLanguage]!,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.visible,
+                          style: TextStyle(
+                            fontFamily: 'PoetsenOne',
+                            color: MaraColors.purple,
+                            fontSize: 30.0
+                          ),
+                        )
+                    ),  
+                  ]
+                ),
+              ),
+            // ]),
+            //SizedBox(height:50),
+            IntrinsicWidth(
+              child: Row(
+                children: [
+                //getAudio(buttonAudioContentMap),
+                  Flexible(
+                      child: Text(
+                        subtitle_translations[_currentLanguage]!,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.visible,
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          color: Colors.black,
+                          fontSize: 20.0
+                        ),
+                      )
                   )
-              )
-            ]),
-            SizedBox(height:50),
-            Row(children: [
-              getAudio(buttonAudioContentMap),
-              Flexible(
-                  child: Text(
-                    subtitle_translations[_currentLanguage]!,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.visible,
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Colors.black,
-                      fontSize: 20.0
-                    ),
-                  )
-              )
-            ]),            
+                ]
+              ),   
+            ),         
             const SizedBox(height: 50),
             IntrinsicWidth(
-                child: Row(children: [
-              getAudio(buttonAudioContentMap),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => imLaunchScreen()),
-                  );
-                },
-                child: Text(
-                  translations2[_currentLanguage]!,
-                ),
+              child: Row(
+                children: [
+                  getAudio(buttonAudioContentMap),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => imLaunchScreen()),
+                      );
+                    },
+                    child: Text(
+                      translations2[_currentLanguage]!,
+                      style: TextStyle(color: Colors.black)
+                    ),
+                    style: TextButton.styleFrom(
+                      backgroundColor: MaraColors.lavender,
+                      // Button background color
+                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    )
+                  )
+                ]
               )
-            ])),
+            ),
           ],
         ),
       ),
