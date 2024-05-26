@@ -694,7 +694,7 @@ class _PrivatePageState extends State<PrivatePage> {
                       "Learn more",
                   style: TextStyle(color: Colors.black)),
               style: TextButton.styleFrom(
-                backgroundColor: Colors.deepPurple[100],
+                backgroundColor: MaraColors.lavender,
                 // Button background color
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               ),
