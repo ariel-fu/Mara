@@ -302,7 +302,7 @@ class _WhatChanceState extends State<WhatChance> {
           if (methodIndex == 0 || methodIndex == 1)
             TextButton.icon(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple[100],
+                  backgroundColor: MaraColors.lavender,
                   // Button background color
                   foregroundColor: Colors.black),
               onPressed: () {
@@ -322,7 +322,7 @@ class _WhatChanceState extends State<WhatChance> {
           if (methodIndex != 6)
             TextButton.icon(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple[100],
+                  backgroundColor: MaraColors.lavender,
                   // Button background color
                   foregroundColor: Colors.black),
               onPressed: () {
@@ -344,7 +344,7 @@ class _WhatChanceState extends State<WhatChance> {
           if (methodIndex == 6)
             TextButton.icon(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple[100],
+                  backgroundColor: MaraColors.lavender,
                   // Button background color
                   foregroundColor: Colors.black),
               onPressed: () {
