@@ -490,7 +490,7 @@ class _PatternPageState extends State<PatternPage> {
                       "Learn more",
                   style: TextStyle(color: Colors.black)),
               style: TextButton.styleFrom(
-                backgroundColor: MaraColors.lavendar,
+                backgroundColor: MaraColors.lavender,
                 // Button background color
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               ),
