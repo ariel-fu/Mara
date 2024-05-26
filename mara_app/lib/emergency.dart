@@ -238,89 +238,55 @@ class _EmergencyPageState extends State<EmergencyPage> {
               )),
           SizedBox(height: 20.0),
 
-          // Expanded(child: RawScrollbar(
-          //     thumbColor: const Color.fromARGB(255, 232, 132, 165),
-          //     thumbVisibility: true,
-          //     trackVisibility: false,
-          //     thickness: 25.0,
-          //     radius: Radius.circular(20),
-          //     child: Container (
-          //   //height: containerHeight * 0.6, // Adjust as needed
-          //   child: Flex(
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     direction: Axis.vertical,
-          //     children: [
-          //       contentBox('content1'),
-          //       contentBox('content2'),
-          //       contentBox('content3'),
-          //       SizedBox(
-          //         width: boxWidth * 0.5,
-          //         height: boxHeight * 0.5 * 0.4,
-          //         child: Center(child:video1),
-          //       ),
-          //       contentBox('content4'),
-          //       contentBox('content5'),
-          //       Image.asset(
-          //               'assets/new_icons/emergency_photos.png',
-          //               width: 100,
-          //               height: 100,
-          //               fit: BoxFit.cover,
-          //       ),
-          //     ]
-          //   ),
-          // ),
-          // ),
-          // ),
           Expanded(
-            child: 
-          Container(
+            child: Container(
             //height: containerHeight * 0.6, // Adjust as needed
-            child: RawScrollbar(
-              thumbColor: const Color.fromARGB(255, 232, 132, 165),
-              thumbVisibility: true,
-              trackVisibility: false,
-              thickness: 25.0,
-              radius: Radius.circular(20),
-            
-            child: LayoutBuilder(
+              child: RawScrollbar(
+                thumbColor: const Color.fromARGB(255, 232, 132, 165),
+                thumbVisibility: true,
+                trackVisibility: false,
+                thickness: 25.0,
+                radius: Radius.circular(20),
               
-              builder: (context, constraint) {
-                return SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints:
-                        BoxConstraints(minHeight: constraint.maxHeight),
-                    child: IntrinsicHeight(
-                      child: Flex(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        direction: Axis.vertical,
-                        
-                        children: [
-                          contentBox('content1'),
-                          contentBox('content2'),
-                          contentBox('content3'),
-                          SizedBox(
-                            width: boxWidth * 0.5,
-                            height: boxHeight * 0.5 * 0.4,
-                            child: Center(child: video1),
+                child: LayoutBuilder(
+                  
+                  builder: (context, constraint) {
+                    return SingleChildScrollView(
+                      child: ConstrainedBox(
+                        constraints:
+                            BoxConstraints(minHeight: constraint.maxHeight),
+                        child: IntrinsicHeight(
+                          child: Flex(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            direction: Axis.vertical,
+                            
+                            children: [
+                              contentBox('content1'),
+                              contentBox('content2'),
+                              contentBox('content3'),
+                              SizedBox(
+                                width: boxWidth * 0.5,
+                                height: boxHeight * 0.5 * 0.4,
+                                child: Center(child: video1),
+                              ),
+                              contentBox('content4'),
+                              contentBox('content5'),
+                              Image.asset(
+                                'assets/emergency_photos.png',
+                                width: 300,
+                                height:300,
+                                fit: BoxFit.cover,
+                              ),
+                            ]
                           ),
-                          contentBox('content4'),
-                          contentBox('content5'),
-                          Image.asset(
-                            'assets/emergency_photos.png',
-                            width: 300,
-                            height:300,
-                            fit: BoxFit.cover,
-                          ),
-                        ]
-                      ),
-                    )
-                  )
-                );
-              }
-          ),
-            )
+                        )
+                      )
+                    );
+                  }
+                ),
+              )
           
-          )
+            )
           )
         ],
       ),
