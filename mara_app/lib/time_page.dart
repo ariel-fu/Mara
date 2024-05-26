@@ -279,7 +279,7 @@ Widget languageButton(String language) {
               );
             },
             style: TextButton.styleFrom(
-              backgroundColor: Colors.deepPurple[100],
+              backgroundColor: MaraColors.lavendar,
             ),
           ),
       ],
