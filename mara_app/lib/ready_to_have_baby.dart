@@ -49,13 +49,13 @@ class _ReadyPageState extends State<ReadyPage> {
 
   final Map<String, List<String>> heyThis_baby_AudioMap = {
     "English": [
-      'videoAudio/audio/ready_for_baby_audio/launch/heyThis_pregnant_E.mp3'
+      'videoAudio/audio/ready_for_baby_audio/heyThis_pregnant_E.mp3'
     ],
     "Kiswahili": [
-      'videoAudio/audio/ready_for_baby_audio/launch/heyThis_pregnant_K.mp3'
+      'videoAudio/audio/ready_for_baby_audio/heyThis_pregnant_K.mp3'
     ],
     "Dholuo": [
-      'videoAudio/audio/ready_for_baby_audio/launch/heyThis_pregnant_L.mp3'
+      'videoAudio/audio/ready_for_baby_audio/heyThis_pregnant_L.mp3'
     ],
   };
 
@@ -121,11 +121,11 @@ class _ReadyPageState extends State<ReadyPage> {
 
   final Map<String, String> importantMessage_hiv_sti_Translations = {
     "Kiswahili":
-        "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+        "HEY! HII NI MUHIMU! Kutumia njia za kukinga mimba HAKUTA badilisha uwezo wako wa kupata mimba katika siku zijazo!",
     "Dholuo":
-        "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
+        "HEY! MA EN GIMA BER NG'EYO! Tiyo gi yore mag geng'o ich OK bi loko nyaloni mar mako ich e ndalo mabiro!",
     "English":
-        "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+        "HEY! THIS IS IMPORTANT! Using pregnancy prevention methods will NOT change your ability to get pregnant in the future!",
   };
 
   final Map<String, String> learnMoreTranslations = {
