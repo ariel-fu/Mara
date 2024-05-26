@@ -306,7 +306,7 @@ class _ReadyPageState extends State<ReadyPage> {
                     style: TextStyle(fontSize: 24.0),
                   ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple[100],
+                  backgroundColor: MaraColors.lavender,
                   // Button background color
                   foregroundColor: Colors.black,
                 ),
@@ -574,7 +574,7 @@ class _ReadyPageState extends State<ReadyPage> {
                       "Learn more",
                   style: TextStyle(color: Colors.black)),
               style: TextButton.styleFrom(
-                backgroundColor: Colors.deepPurple[100],
+                backgroundColor: MaraColors.lavender,
                 // Button background color
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               ),
