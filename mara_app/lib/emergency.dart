@@ -1,11 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'video.dart';
+import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
 
 class EmergencyPage extends StatefulWidget {
   final String initialLanguage;
+  late int contentNum; //content box number
 
   EmergencyPage({Key? key, required this.initialLanguage}) : super(key: key);
 
@@ -56,7 +59,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
   };
 
   final Map<String, Map<String, String>> _translations = {
-    "content1": {
+    "1": {
       "Kiswahili":
           "E-pill ni chaguo zuri ikiwa unafanya ngono bila kondomu, lakini ni bora kufikiria kama chaguo mbadala, sio kama njia kuu unayotumia kuzuia ujauzito.",
       "Dholuo":
@@ -64,7 +67,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
       "English":
           "The E-pill is a good option if you have sex without a condom, but it's best to think of it as a backup option, not as the main method you are using to prevent pregnancy."
     },
-    "content2": {
+    "2": {
       "Kiswahili":
           "Muda ni muhimu kwa sababu muda gani unachukua baada ya kufanya ngono hufanya tofauti kubwa katika jinsi inavyofanya kazi vizuri kuzuia mimba. Chukua haraka iwezekanavyo, lakini ndani ya siku 5 za ngono. Watoa huduma wengine watakuambia siku 3. mapema ni bora!",
       "Dholuo":
@@ -72,7 +75,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
       "English":
           "Timing is important because how soon you take it after sex makes a big difference in how well it works to prevent pregnancy. Take as soon as you can, but within 5 days of sex. Some providers will tell you 3 days. The sooner the better!"
     },
-    "content3": {
+    "3": {
       "Kiswahili":
           "Hakuna kikomo kwa mara ngapi unaweza kumeza kidonge cha E-pill kwa mwezi, lakini kunaweza kusababisha athari kama vile kwa tumbo na mabadiliko ya hedhi yako ambayo yanaweza kuudhi. Pia, ni bei ghali!",
       "Dholuo":
@@ -80,22 +83,30 @@ class _EmergencyPageState extends State<EmergencyPage> {
       "English":
           "There is no limit to how many times you can take the E-pill in a month, but it will likely cause side effects like upset stomach and changes to your period that might be annoying. Also, it is expensive!"
     },
-    "content4": {
+    // "4": {
+    //   "Kiswahili":
+    //       "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill?",
+    //   "Dholuo":
+    //       "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill?",
+    //   "English":
+    //       "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill?"
+    // },
+    // "5": {
+    //   "Kiswahili":
+    //       "Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
+    //   "Dholuo":
+    //       "Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde monego ichak tiyogo, tim nonro mar mako ich bang' jumbe 2 bang' tiyo gi E-pill, mana mondo ibed gadier.",
+    //   "English":
+    //       "If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
+    // }
+    "4": {
       "Kiswahili":
-          "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill?",
+          "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill? Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
       "Dholuo":
-          "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill?",
+          "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill? Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde monego ichak tiyogo, tim nonro mar mako ich bang' jumbe 2 bang' tiyo gi E-pill, mana mondo ibed gadier",
       "English":
-          "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill?"
+          "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill? If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
     },
-    "content5": {
-      "Kiswahili":
-          "Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
-      "Dholuo":
-          "Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde monego ichak tiyogo, tim nonro mar mako ich bang' jumbe 2 bang' tiyo gi E-pill, mana mondo ibed gadier.",
-      "English":
-          "If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
-    }
   };
 
   String videoAsset1 = 'videoAudio/videos/peer/peer3E.mp4';
@@ -115,6 +126,27 @@ class _EmergencyPageState extends State<EmergencyPage> {
       'Dholuo': 'Video: Mbasni lero',
       'English': 'Video: a peer explains',
     }
+  };
+
+  final Map<String, List<String>> audioContentMap = {
+    "English": [
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_1_E.mp3',
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_2_E.mp3',
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_3_E.mp3',
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_4_E.mp3',
+    ],
+    "Kiswahili": [
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_1_K.mp3',
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_2_K.mp3',
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_3_K.mp3',
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_4_K.mp3',
+    ],
+    "Dholuo": [
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_1_L.mp3',
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_2_L.mp3',
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_3_L.mp3',
+      'videoAudio/audio/what_chance_audio/emergency/emergency_content_4_L.mp3',
+    ],
   };
 
   // final Map<String, Map<String, Map<String, String>>> languageToVideo = {
@@ -283,6 +315,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                 trackVisibility: false,
                 thickness: 25.0,
                 radius: Radius.circular(20),
+                
               
                 child: LayoutBuilder(
                   builder: (context, constraint) {
@@ -294,24 +327,36 @@ class _EmergencyPageState extends State<EmergencyPage> {
                           child: Flex(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             direction: Axis.vertical,
-                            
                             children: [
-                              contentBox('content1'),
-                              contentBox('content2'),
-                              contentBox('content3'),
+                              contentBox('1'),
+                              contentBox('2'),
+                              contentBox('3'),
                               SizedBox(
                                 width: boxWidth * 0.5,
                                 height: boxHeight * 0.5 * 0.4,
                                 //child: Center(child: video1),
                                 child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
                               ),
-                              contentBox('content4'),
-                              contentBox('content5'),
-                              Image.asset(
-                                'assets/emergency_photos.png',
-                                width: 300,
-                                height:300,
-                                fit: BoxFit.cover,
+                              //place new content next to e-pill image
+                              Container(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,                               children: [
+                                    getAudio(audioContentMap, 3),
+                                    SizedBox(width: 10.0),
+                                    Expanded(
+                                      child: Text(
+                                        _t('4'),
+                                        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Image.asset(
+                                      'assets/emergency_photos.png',
+                                      width: 500,
+                                      height:500,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ]
+                                )
                               ),
                             ]
                           ),
@@ -382,6 +427,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
   }
 
   Widget contentBox(String contentKey) {
+    var contentNum = int.parse(contentKey) - 1;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -394,7 +440,13 @@ class _EmergencyPageState extends State<EmergencyPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            //Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+            if (contentNum == 0 || contentNum == 1 || contentNum == 2) // just first 3 boxes
+              Text(
+                contentKey,
+                style: TextStyle(fontSize: 30.0),
+              ),
+            getAudio(audioContentMap, contentNum),
             SizedBox(width: 10.0),
             Expanded(
               child: Text(
@@ -406,5 +458,9 @@ class _EmergencyPageState extends State<EmergencyPage> {
         ),
       ),
     );
+  }
+
+  Widget getAudio(Map<String, List<String>> audioMap, int contentNum) {
+    return AudioWidget(audioAsset: audioMap[_currentLanguage]![contentNum]);
   }
 }
