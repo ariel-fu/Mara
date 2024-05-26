@@ -356,8 +356,8 @@ class _OptionsPageState extends State<OptionsPage> {
                                     }
                                 },
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: MaraColors.purple,
+                          foregroundColor: Colors.black,
+                          backgroundColor: MaraColors.lavender,
                         ),
                         child: Text('Learn more'),
                       ),
