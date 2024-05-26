@@ -254,7 +254,7 @@ Widget languageButton(String language) {
               style: TextStyle(color: Colors.black)
             ),
             style: TextButton.styleFrom(
-              backgroundColor: Colors.deepPurple[100], // Button background color
+              backgroundColor: MaraColors.lavendar, // Button background color
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             ),
             onPressed: () {
