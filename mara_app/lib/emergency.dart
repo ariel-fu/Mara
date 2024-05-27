@@ -83,30 +83,30 @@ class _EmergencyPageState extends State<EmergencyPage> {
       "English":
           "There is no limit to how many times you can take the E-pill in a month, but it will likely cause side effects like upset stomach and changes to your period that might be annoying. Also, it is expensive!"
     },
-    // "4": {
-    //   "Kiswahili":
-    //       "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill?",
-    //   "Dholuo":
-    //       "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill?",
-    //   "English":
-    //       "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill?"
-    // },
-    // "5": {
-    //   "Kiswahili":
-    //       "Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
-    //   "Dholuo":
-    //       "Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde monego ichak tiyogo, tim nonro mar mako ich bang' jumbe 2 bang' tiyo gi E-pill, mana mondo ibed gadier.",
-    //   "English":
-    //       "If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
-    // }
     "4": {
       "Kiswahili":
-          "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill? Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
+          "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill?",
       "Dholuo":
-          "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill? Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde monego ichak tiyogo, tim nonro mar mako ich bang' jumbe 2 bang' tiyo gi E-pill, mana mondo ibed gadier",
+          "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill?",
       "English":
-          "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill? If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
+          "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill?"
     },
+    "5": {
+      "Kiswahili":
+          "Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
+      "Dholuo":
+          "Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde monego ichak tiyogo, tim nonro mar mako ich bang' jumbe 2 bang' tiyo gi E-pill, mana mondo ibed gadier.",
+      "English":
+          "If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
+    }
+    // "4": {
+    //   "Kiswahili":
+    //       "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill? Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
+    //   "Dholuo":
+    //       "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill? Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde monego ichak tiyogo, tim nonro mar mako ich bang' jumbe 2 bang' tiyo gi E-pill, mana mondo ibed gadier",
+    //   "English":
+    //       "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill? If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
+    // },
   };
 
   String videoAsset1 = 'videoAudio/videos/peer/peer3E.mp4';
@@ -332,23 +332,34 @@ class _EmergencyPageState extends State<EmergencyPage> {
                               contentBox('2'),
                               contentBox('3'),
                               SizedBox(
-                                width: boxWidth * 0.5,
-                                height: boxHeight * 0.5 * 0.4,
+                                width: boxWidth * 0.8,
+                                height: boxHeight * 0.5 * 0.7,
                                 //child: Center(child: video1),
                                 child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
                               ),
                               //place new content next to e-pill image
                               Container(
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,                               children: [
+                                  crossAxisAlignment: CrossAxisAlignment.start,                               
+                                  children: [
                                     getAudio(audioContentMap, 3),
                                     SizedBox(width: 10.0),
+
                                     Expanded(
-                                      child: Text(
+                                      child: Column(children:[
+                                       Text(
                                         _t('4'),
                                         style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                                        ),
+                                      
+                                      Text(
+                                          _t('5'),
+                                          style: TextStyle(fontSize: 16.0),
                                       ),
+                                    ]),
                                     ),
+
+                                
                                     Image.asset(
                                       'assets/emergency_photos.png',
                                       width: 500,
