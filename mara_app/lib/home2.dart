@@ -35,7 +35,7 @@ class _HomePage2State extends State<HomePage2> {
       "Je, itakuaje ikiwa niko tayari kupata mtoto?",
       "Kuzuia Virusi Vya Ukimwi na magonjwa ya zinaa",
       "Chukua jaribio letu na utafute mbinu yako!",
-      "3 things you need to know about the E-pill (P2) in Kishwahili"
+      "Mambo 3 unayohitaji kujua kuhusu E-pill (P2)"
     ],
     "Dholuo": [
       "Yierona gin mage?",
@@ -46,7 +46,7 @@ class _HomePage2State extends State<HomePage2> {
       "To ka ayikora mar mako ich to?",
       "Geng'o kute mag ayaki kod Nyae",
       "Tim penj wa mondo iyud yori mar geng'o ich!",
-      "3 things you need to know about the E-pill (P2) in Dholuo"
+      "Gik moko 3 ma onego ing'e ewi E-pill (P2)"
     ],
     "English": [
       "What are my options?",
@@ -63,40 +63,37 @@ class _HomePage2State extends State<HomePage2> {
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
-      'videoAudio/audio/title_audio/title_options_E.mp4',
-      'videoAudio/audio/title_audio/title_period_E.mp4',
-      'videoAudio/audio/title_audio/title_how_long_E.mp4',
-      'videoAudio/audio/title_audio/title_what_chance_E.mp4',
-      'videoAudio/audio/title_audio/title_private_E.mp4',
-      'videoAudio/audio/title_audio/title_ready_baby_E.mp4',
-      // these are fake
-      'videoAudio/audio/title_audio/hiv_sti_E.mp4',
-      'videoAudio/audio/title_audio/quiz_E.mp4',
-      'videoAudio/audio/title_audio/epill_E.mp4',
+      'videoAudio/audio/title_audio/title_options_E.mp3', // todo - get tese
+      'videoAudio/audio/title_audio/title_period_E.mp3',
+      'videoAudio/audio/title_audio/title_how_long_E.mp3',
+      'videoAudio/audio/title_audio/title_what_chance_E.mp3',
+      'videoAudio/audio/title_audio/title_private_E.mp3',
+      'videoAudio/audio/title_audio/title_ready_baby_E.mp3',
+      'videoAudio/audio/heyThis_HIV_STI_E.mp3',
+      'videoAudio/audio/title_audio/quiz_E.mp3', // these are fake
+      'videoAudio/audio/3things_E.mp3',
     ],
     "Kiswahili": [
-      'videoAudio/audio/title_audio/title_options_K.mp4',
-      'videoAudio/audio/title_audio/title_period_K.mp4',
-      'videoAudio/audio/title_audio/title_how_long_K.mp4',
+      'videoAudio/audio/title_audio/title_options_K.mp3',
+      'videoAudio/audio/title_audio/title_period_K.mp3',
+      'videoAudio/audio/title_audio/title_how_long_K.mp3',
       'videoAudio/audio/title_audio/title_what_chance_K.np4',
-      'videoAudio/audio/title_audio/title_private_K.mp4',
-      'videoAudio/audio/title_audio/title_ready_baby_K.mp4',
-      // these are fake
-      'videoAudio/audio/title_audio/hiv_sti_K.mp4',
-      'videoAudio/audio/title_audio/quiz_K.mp4',
-      'videoAudio/audio/title_audio/epill_K.mp4',
+      'videoAudio/audio/title_audio/title_private_K.mp3',
+      'videoAudio/audio/title_audio/title_ready_baby_K.mp3',
+      'videoAudio/audio/heyThis_HIV_STI_K.mp3',
+      'videoAudio/audio/title_audio/quiz_K.mp3', // these are fake
+      'videoAudio/audio/3things_K.mp3',
     ],
     "Dholuo": [
-      'videoAudio/audio/title_audio/title_options_L.mp4',
-      'videoAudio/audio/title_audio/title_period_L.mp4',
-      'videoAudio/audio/title_audio/title_how_long_L.mp4',
+      'videoAudio/audio/title_audio/title_options_L.mp3',
+      'videoAudio/audio/title_audio/title_period_L.mp3',
+      'videoAudio/audio/title_audio/title_how_long_L.mp3',
       'videoAudio/audio/title_audio/title_what_chance_L.np4',
-      'videoAudio/audio/title_audio/title_private_L.mp4',
-      'videoAudio/audio/title_audio/title_ready_baby_L.mp4',
-      // these are fake
-      'videoAudio/audio/title_audio/hiv_sti_L.mp4',
-      'videoAudio/audio/title_audio/quiz_L.mp4',
-      'videoAudio/audio/title_audio/epill_L.mp4',
+      'videoAudio/audio/title_audio/title_private_L.mp3',
+      'videoAudio/audio/title_audio/title_ready_baby_L.mp3',
+      'videoAudio/audio/heyThis_HIV_STI_L.mp3',
+      'videoAudio/audio/title_audio/quiz_L.mp3', // these are fake
+      'videoAudio/audio/3things_L.mp3',
     ],
   };
 
