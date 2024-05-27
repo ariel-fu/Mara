@@ -176,8 +176,7 @@ Widget build(BuildContext context) {
       children: [
         Text(
           subtitleContentMap[languages[languageIndex]]!,
-          //style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          style: TextStyle(fontFamily: 'Monsterrat', color: MaraColors.magentaPurple, fontSize: 30.0, fontWeight: FontWeight.bold)
+          style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.magentaPurple, fontSize: 30.0)
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

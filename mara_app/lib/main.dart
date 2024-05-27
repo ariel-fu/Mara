@@ -12,7 +12,7 @@ import 'pattern_page.dart';
 import 'time_page.dart';
 import 'private_page.dart';
 import 'ready_to_have_baby.dart';
-import 'learn_more.dart';
+//import 'learn_more.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:mara_app/providers/provider_liked_methods.dart';
 
@@ -47,7 +47,7 @@ class _MaraAppState extends State<MaraApp> {
         '/private': (BuildContext context) => const PrivatePage(),
         '/ready_baby': (BuildContext context) => ReadyPage(),
         '/quiz': (BuildContext context) => QuizScreen(),
-        '/learnmore': (BuildContext context) => const LearnMoreFertility(),
+        //'/learnmore': (BuildContext context) => const LearnMoreFertility(),
       },
       debugShowCheckedModeBanner: false,
       // remove if install works

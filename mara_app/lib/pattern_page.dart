@@ -119,11 +119,11 @@ class _PatternPageState extends State<PatternPage> {
 
   final Map<String, String> importantMessageTranslations = {
     "Kiswahili":
-        "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kupanga uzazi ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
+        "Hey! HII NI MUHIMU! Kondomu za kiume na za kike ndizo njia PEKEE za kukinga mimba ambazo pia huzuia Virusi Vya Ukimwi na magonjwa mengine ya zinaa!",
     "Dholuo":
-        "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore komo nyuol KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
+        "HEY! MA EN GIMA BER NG'EYO! Rabo yunga mar chuo gi mine e yore geng'o ich KENDE ma bende geng'o kute mag ayaki kod nyae mamoko!",
     "English":
-        "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY family planning methods that also prevent HIV and other STIs!",
+        "HEY! THIS IS IMPORTANT! Male and female condoms are the ONLY pregnancy prevention methods that also prevent HIV and other STIs!",
   };
 
   final Map<String, String> learnMoreTranslations = {
@@ -490,7 +490,7 @@ class _PatternPageState extends State<PatternPage> {
                       "Learn more",
                   style: TextStyle(color: Colors.black)),
               style: TextButton.styleFrom(
-                backgroundColor: Colors.deepPurple[100],
+                backgroundColor: MaraColors.lavender,
                 // Button background color
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               ),

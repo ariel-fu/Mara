@@ -121,9 +121,12 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            titleMap[languages[languageIndex]]!,
-            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 30.0)
+          Center(
+            child: Text(
+              titleMap[languages[languageIndex]]!,
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 30.0),
+              textAlign: TextAlign.center,
+            ),
           ),
           Container(
               height: containerHeight * 0.1,
