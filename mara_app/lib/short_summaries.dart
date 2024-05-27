@@ -35,12 +35,35 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     _loadCurrentLanguage();
   }
 
+  // Future<void> _loadCurrentLanguage() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+  //   });
+  // }
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
+    if (_currentLanguage.contains('English')) {
+      languageIndex = 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
   }
+
+  void _changeLanguage(String language) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedLanguage', language);
+    setState(() {
+      _currentLanguage = language;
+    });
+    widget.onChangeLanguage(language);
+  }
+
 
   final Map<String, String>  titleTranslations = {
     'Kiswahili': 'Ukurasa wa muhtasari',
@@ -56,28 +79,40 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     return widget.translations[_currentLanguage]?[key] ?? key;
 }
 
-
-  Widget _languageButton(String language) {
-    asyncmethod(language);
+  Widget languageButton(String language) {
     bool isSelected = _currentLanguage == language;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ElevatedButton(
-        onPressed: () {
-          if (!isSelected) {
-            setState(() {
-              _currentLanguage = language;
-            });
-            widget.onChangeLanguage(language);
-          }
-        },
+        onPressed: () => _changeLanguage(language),
         style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : null,
+          backgroundColor: isSelected ? Colors.grey : null, // Grey if selected
         ),
         child: Text(language),
       ),
     );
   }
+  // Widget _languageButton(String language) {
+  //   asyncmethod(language);
+  //   bool isSelected = _currentLanguage == language;
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
+  //     child: ElevatedButton(
+  //       onPressed: () {
+  //         if (!isSelected) {
+  //           setState(() {
+  //             _currentLanguage = language;
+  //           });
+  //           widget.onChangeLanguage(language);
+  //         }
+  //       },
+  //       style: ElevatedButton.styleFrom(
+  //         backgroundColor: isSelected ? Colors.grey : null,
+  //       ),
+  //       child: Text(language),
+  //     ),
+  //   );
+  // }
 
 void asyncmethod(String language) async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -115,7 +150,11 @@ Widget build(BuildContext context) {
           padding: EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: ['Kiswahili', 'Dholuo', 'English'].map(_languageButton).toList(),
+            children: [
+              languageButton('Kiswahili'),
+              languageButton('Dholuo'),
+              languageButton('English'),
+            ]
           ),
         ),
         Padding(
