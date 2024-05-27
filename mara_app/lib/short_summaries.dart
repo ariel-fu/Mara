@@ -25,7 +25,10 @@ class MethodDetailsScreen extends StatefulWidget {
 }
 
 class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
-  late String _currentLanguage;
+  final languages = ["Kiswahili", "Dholuo", "English"];
+  bool overrideIndex = false;
+  int languageIndex = 2; // similar indexing for language
+  String _currentLanguage = 'English';
 
   @override
   void initState() {

@@ -150,48 +150,118 @@ class _TimePageState extends State<TimePage> {
 
 @override
   Widget build(BuildContext context) {
+    _loadCurrentLanguage();
+    final double containerWidth = MediaQuery.of(context).size.width;
+    final double containerHeight = MediaQuery.of(context).size.height;
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back),
-        //   onPressed: () => Navigator.of(context).pop(),
-        // ),
         title: Center(
           child: Text(
             titleTranslations[languages[languageIndex]] ?? "Title not found",
             style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
           )
         ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                languageButton('Kiswahili', 0),
+                languageButton('Dholuo', 1),
+                languageButton('English', 2),
+              ],
+            ),
+          ),
+        ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: languages.map((language) => languageButton(language)).toList(),
-              ),
-            ),
             methodSelectionRow(),
-            SizedBox(height: 20.0),
+            SizedBox(height: 15.0),
             contentArea(),
-            SizedBox(height: 20.0),
             additionalTextSection(),
           ],
-        ),
+        //),
       ),
     );
   }
 
-Widget languageButton(String language) {
-    asyncmethod(language);
+  void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      languageIndex = language;
+    });
+  }
+
+  Widget buildIconButton(IconData iconData, String caption, int index) {
+    bool isSelected = index == methodIndex;
+
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: Icon(
+                iconData,
+                size: isSelected ? 60 : 60,
+                color: isSelected ? MaraColors.magentaPurple : Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  methodIndex = index;
+                  updateMethodContent();
+                });
+              },
+              color: isSelected ? Colors.black : Colors.transparent,
+              iconSize: isSelected ? 60 : 60,
+              padding: EdgeInsets.all(10),
+              splashRadius: 40,
+              splashColor: Colors.grey.withOpacity(0.5),
+              highlightColor: Colors.transparent,
+            ),
+            SizedBox(height: 5),
+            Container (
+                width: 100,
+                child: Text(
+                  caption,
+                  softWrap: true, 
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: isSelected ? Colors.black : Colors.grey,
+                  ),
+                )
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget languageButton(String language, int index) {
     bool isSelected = languages[languageIndex] == language;
+
     return ElevatedButton(
       onPressed: () {
+        _switchLanguage(index);
         setState(() {
-          languageIndex = languages.indexOf(language);
+          languageIndex = index;
           overrideIndex = true;
           updateMethodContent();
         });
@@ -203,10 +273,28 @@ Widget languageButton(String language) {
     );
   }
 
-  void asyncmethod(String language) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedLanguage', language);
+  Widget methodSelectionRow() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildIconButton(MaraIcons.condom, "Condom", 0),
+          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+        ],
+      ),
+    );
   }
+
+  // void asyncmethod(String language) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString('selectedLanguage', language);
+  // }
 
   Widget additionalTextSection() {
   return Padding(
@@ -272,70 +360,6 @@ Widget languageButton(String language) {
     ),
   );
 }
-
-Widget methodSelectionRow() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          buildIconButton(MaraIcons.condom, "Condom", 0),
-          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
-          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
-          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
-          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
-        ],
-      ),
-    );
-  }
-
-  Widget buildIconButton(IconData iconData, String caption, int index) {
-    bool isSelected = index == methodIndex;
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: Icon(
-                iconData,
-                size: isSelected ? 60 : 60,
-                color: isSelected ? MaraColors.magentaPurple : Colors.grey,
-              ),
-              onPressed: () {
-                setState(() {
-                  methodIndex = index;
-                  updateMethodContent();
-                });
-              },
-              color: isSelected ? Colors.black : Colors.transparent,
-              iconSize: isSelected ? 60 : 60,
-              padding: EdgeInsets.all(10),
-              splashRadius: 40,
-              splashColor: Colors.grey.withOpacity(0.5),
-              highlightColor: Colors.transparent,
-            ),
-            SizedBox(height: 5),
-            Container (
-                width: 100,
-                child: Text(
-                  caption,
-                  softWrap: true, 
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.grey,
-                  ),
-                )
-            )
-          ],
-        ),
-      ],
-    );
-  }
 
   Widget contentArea() {
     return Padding(

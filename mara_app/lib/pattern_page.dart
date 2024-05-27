@@ -60,14 +60,14 @@ class _PatternPageState extends State<PatternPage> {
   final double _aspectRatio = 16 / 10;
   final languages = ["Kiswahili", "Dholuo", "English"];
 
-  final content = [
-    "method 1",
-    "method 2",
-    "method 3",
-    "method 4",
-    "method 5",
-    "method 6"
-  ];
+  // final content = [
+  //   "method 1",
+  //   "method 2",
+  //   "method 3",
+  //   "method 4",
+  //   "method 5",
+  //   "method 6"
+  // ];
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
@@ -162,37 +162,37 @@ class _PatternPageState extends State<PatternPage> {
     ],
   };
 
-  //Video HashMap: specifies video asset and text/title based on language and video
+  // //Video HashMap: specifies video asset and text/title based on language and video
   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
     'video1': {
       '0': {
         // Language code 0
         'video': 'videoAudio/videos/provider/provider1KS.mp4',
-        'text': 'Video - Daktari Aeleza',
+        'text': 'Video: Jachiw thieth lero',
       },
       '1': {
         // Language code 1
         'video': 'videoAudio/videos/provider/provider1DL.mp4',
-        'text': 'Vidio - Laktar Wuoyo',
+        'text': 'Video: Mtoa huduma wa afya anaelezea',
       },
       '2': {
         // Language code 2
         'video': 'videoAudio/videos/provider/provider1E.mp4',
-        'text': 'Video - A Doctor Explains',
+        'text': 'Video: a provider explains',
       },
     },
     'video2': {
       '0': {
         'video': 'videoAudio/videos/peer/peer1KS.mp4',
-        'text': 'Video - Mtazamo wa Rika',
+        'text': 'Video: Mwenzio anaelezeaa',
       },
       '1': {
         'video': 'videoAudio/videos/peer/peer1DL.mp4',
-        'text': 'Vidio - Kaka Jowetegi Neno Gik Moko',
+        'text': 'Video: Mbasni lero',
       },
       '2': {
         'video': 'videoAudio/videos/peer/peer1E.mp4',
-        'text': 'Video - A Peer Perspective',
+        'text': 'Video: a peer explains',
       },
     },
   };
@@ -208,13 +208,11 @@ class _PatternPageState extends State<PatternPage> {
 
     return Scaffold(
       appBar: AppBar(
-        // title: Text(
-        //     titleTranslations[languages[languageIndex]] ?? "Title not found"),
-      title: Center(
-          child: Text(
-            titleTranslations[languages[languageIndex]] ?? "Title not found",
-            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-          )
+        title: Center(
+            child: Text(
+              titleTranslations[languages[languageIndex]] ?? "Title not found",
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+            )
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
@@ -234,56 +232,10 @@ class _PatternPageState extends State<PatternPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: availableHeight * 0.01),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                buildIconButton(MaraIcons.condom, "Condom", 0),
-                buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-                buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
-                buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
-                buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
-                buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-                buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
-              ],
-            ),
-          ),
+          methodSelectionRow(),
           SizedBox(height: 15.0),
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-              decoration: BoxDecoration(
-                //color: Colors.grey.shade200,
-                color: MaraColors.purple,
-                borderRadius: BorderRadius.circular(10),
-                //border: Border.all(color: Colors.grey),
-                border:Border.all(color: Colors.grey)
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                      getAudio(audioContentMap, methodIndex),
-                    ],
-                  ),
-                  SizedBox(width: 10.0),
-                  Flexible(
-                    child: Text(
-                      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          
-          Row(
+          contentArea(),         
+          Row( //video
             children: [
               SizedBox(width: 15.0),
               SizedBox(
@@ -388,55 +340,23 @@ class _PatternPageState extends State<PatternPage> {
     );
   }
 
-  Widget videoSection(double width, double height) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          width: width * 0.45, // Half the container width minus some margin
-          height: height,
-          child: video1,
-        ),
-        Container(
-          width: width * 0.45, // Half the container width minus some margin
-          height: height,
-          child: video2,
-        ),
-      ],
-    );
-  }
-
-  Widget detailedContentSection(double width) {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                getAudio(audioContentMap, methodIndex),
-              ],
-            ),
-            SizedBox(width: 10.0),
-            Flexible(
-              child: Text(
-                contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget videoSection(double width, double height) {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     children: [
+  //       Container(
+  //         width: width * 0.45, // Half the container width minus some margin
+  //         height: height,
+  //         child: video1,
+  //       ),
+  //       Container(
+  //         width: width * 0.45, // Half the container width minus some margin
+  //         height: height,
+  //         child: video2,
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget additionalTextSection() {
     return Padding(
@@ -523,6 +443,41 @@ class _PatternPageState extends State<PatternPage> {
         ],
       ),
     );
+  }
+
+  Widget contentArea() {
+    return Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+              decoration: BoxDecoration(
+                //color: Colors.grey.shade200,
+                color: MaraColors.purple,
+                borderRadius: BorderRadius.circular(10),
+                //border: Border.all(color: Colors.grey),
+                border:Border.all(color: Colors.grey)
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                      getAudio(audioContentMap, methodIndex),
+                    ],
+                  ),
+                  SizedBox(width: 10.0),
+                  Flexible(
+                    child: Text(
+                      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
   }
 
   Widget updateMethodContent() {
