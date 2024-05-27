@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
+import 'package:mara_app/audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'pattern_page.dart';
+// import 'pattern_page.dart';
 import 'package:mara_app/design/colors.dart';
+
 
 class BleedingPage extends StatefulWidget {
   const BleedingPage({Key? key}) : super(key: key);
@@ -19,7 +21,7 @@ class _BleedingPageState extends State<BleedingPage> {
 
   bool overrideIndex = false;
   // Widget methodContent = updateMethodContent();
-  int methodIndex = 2; // Index of the selected icon button, 0 for default
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
@@ -80,6 +82,12 @@ class _BleedingPageState extends State<BleedingPage> {
     ],
   };
 
+  final Map<String, List<String>> audioContentMap = {
+    "English": ["videoAudio/audio/period_audio/period_changes_E.mp3"],
+    "Kiswahili": ["videoAudio/audio/period_audio/period_changes_K.mp3"],
+    "Dholuo": ["videoAudio/audio/period_audio/period_changes_L.mp3"]
+  };
+
   final double _aspectRatio = 16 / 10;
 
   @override
@@ -117,134 +125,29 @@ class _BleedingPageState extends State<BleedingPage> {
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
-            // height: availableHeight * 0.1,
-              child: Container(
-                // padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 0;
-                            overrideIndex = true;
-                            updateMethodContent();
-                            _switchLanguage(0);
-                            //  video1 = getVideoContent1();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 0 ? Colors.grey : null,
-                        ),
-                        child: Text('Kiswahili'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 1;
-                            overrideIndex = true;
-                            updateMethodContent();
-                            _switchLanguage(1);
-                            // video1 = getVideoContent1();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 1 ? Colors.grey : null,
-                        ),
-                        child: Text('Dholuo'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 2;
-                            overrideIndex = true;
-                            updateMethodContent();
-                            _switchLanguage(2);
-                            // video1 = getVideoContent1();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 2 ? Colors.grey : null,
-                        ),
-                        child: Text('English'),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-          // preferredSize: Size.fromHeight(75),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                languageButton('Kiswahili', 0),
+                languageButton('Dholuo', 1),
+                languageButton('English', 2),
+              ],
+            ),
+          ),
         ),
-        // actions: <Widget>[
-        //
-        // ]
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          
-          Container(
-            alignment: Alignment.center,
-            // height: availableHeight * 0.15,
-            // width: boxWidth,
-            // padding: EdgeInsets.symmetric(horizontal: 0.1*boxWidth),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-                  // SizedBox(width: 5),
-                  buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
-                  buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
-                ],
-              ),
-            ),
-          ),
-
+          SizedBox(height: availableHeight * 0.01),
+          methodSelectionRow(),
           SizedBox(height: 15.0),
-        Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-            decoration: BoxDecoration(
-              color: MaraColors.purple,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.grey),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                SizedBox(width: 10.0),
-                Expanded(
-                  child: Text(
-                    contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                    style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
-                  ),
-                ),
-                
-              ],
-            ),
-          ),
-          
-        ),
+          contentArea(),
         ],
       ),
     );
   }
+
   Widget buildIconButton(IconData iconData, String caption, int index) {
     bool isSelected = index == methodIndex;
 
@@ -291,6 +194,43 @@ class _BleedingPageState extends State<BleedingPage> {
     );
   }
 
+  Widget languageButton(String language, int index) {
+    bool isSelected = languages[languageIndex] == language;
+
+    return ElevatedButton(
+      onPressed: () {
+        _switchLanguage(index);
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
+
+  Widget methodSelectionRow() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildIconButton(
+              MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+          buildIconButton(
+              MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+        ],
+      ),
+    );
+  }
+
+
   void _switchLanguage(int language) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String temp;
@@ -307,6 +247,41 @@ class _BleedingPageState extends State<BleedingPage> {
     });
   }
 
+  Widget contentArea() {
+    return Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+              decoration: BoxDecoration(
+                //color: Colors.grey.shade200,
+                color: MaraColors.purple,
+                borderRadius: BorderRadius.circular(10),
+                //border: Border.all(color: Colors.grey),
+                border:Border.all(color: Colors.grey)
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                      getAudio(audioContentMap, 0),
+                    ],
+                  ),
+                  SizedBox(width: 10.0),
+                  Flexible(
+                    child: Text(
+                      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+  }
+
   Widget updateMethodContent() {
     return Text(
       contentDescriptionMap[languages[languageIndex]]![methodIndex],
@@ -315,5 +290,10 @@ class _BleedingPageState extends State<BleedingPage> {
         color: Colors.black,
       )
     );
+  }
+
+  Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
+    return AudioWidget(
+        audioAsset: audioMap[languages[languageIndex]]![audioIndex]);
   }
 }
