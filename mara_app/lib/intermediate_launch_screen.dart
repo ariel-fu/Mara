@@ -137,12 +137,13 @@ class _imLaunchState extends State<imLaunchScreen> {
                   Expanded(
                       child: Column(children: [
                     Text(translations[_currentLanguage]!,
-                        style: TextStyle(fontSize: 32.0),
+                        style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center),
                     SizedBox(height: 50.0),
                     Text(translations2[_currentLanguage]!,
                         style: TextStyle(fontSize: 24.0),
                         textAlign: TextAlign.center),
+                    //contentTextBold(),
                   ]))
                 ],
               ),
@@ -220,6 +221,41 @@ class _imLaunchState extends State<imLaunchScreen> {
       child: Text(language),
     );
   }
+
+  // Widget contentTextBold() {
+  //   var text = RichText(
+  //     text: TextSpan(
+  //       // Note: Styles for TextSpans must be explicitly defined.
+  //       // Child text spans will inherit styles from parent
+  //       style: const TextStyle(fontFamily: "Montserrat", fontSize: 24.0),
+  //       if (_currentLanguage.contains('English')) {
+  //         children: <TextSpan>[
+  //           TextSpan(text: 'MARA divas is designed especially for young women to help you '),
+  //           TextSpan(text: 'get the information you need ', style: const TextStyle(fontWeight: FontWeight.bold)),
+  //           TextSpan(text: 'to make an empowered decision, '),
+  //           TextSpan(text: 'when you need it.', style: const TextStyle(fontWeight: FontWeight.bold)),
+  //         ],
+  //       }
+  //       else if (_currentLanguage.contains('Dholuo')) {
+  //         children: <TextSpan>[
+  //           TextSpan(text: 'textDL '),
+  //           TextSpan(text: 'textDL ', style: const TextStyle(fontWeight: FontWeight.bold)),
+  //           TextSpan(text: 'textDL '),
+  //           TextSpan(text: 'textDL', style: const TextStyle(fontWeight: FontWeight.bold)),
+  //         ],
+  //       }
+  //       else {
+  //         children: <TextSpan>[
+  //           TextSpan(text: 'textKS '),
+  //           TextSpan(text: 'textKS ', style: const TextStyle(fontWeight: FontWeight.bold)),
+  //           TextSpan(text: 'textKS, '),
+  //           TextSpan(text: 'textKS', style: const TextStyle(fontWeight: FontWeight.bold)),
+  //         ],
+  //       },
+  //     ),
+  //   );
+  //   return text;
+  // }
 
   Widget getAudio(Map<String, List<String>> audioContentMap) {
     return AudioWidget(audioAsset: audioContentMap[_currentLanguage]![0]);
