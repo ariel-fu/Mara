@@ -4,7 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'video.dart';
 import 'audio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mara_app/design/colors.dart';
+
 
 class EmergencyPage extends StatefulWidget {
   final String initialLanguage;
@@ -21,28 +23,28 @@ class EmergencyPage extends StatefulWidget {
 
 class _EmergencyPageState extends State<EmergencyPage> {
   //Widget methodContent = Text('DUMMY');
-  Widget video1 = VideoWidget(
-      videoAsset: 'videoAudio/videos/peer/peer3E.mp4',
-      title: 'Video 1 Language Not Selected');
+  // Widget video1 = VideoWidget(
+  //     videoAsset: 'videoAudio/videos/peer/peer3E.mp4',
+  //     title: 'Video 1 Language Not Selected');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   bool overrideIndex = false;
-  late String _currentLanguage;
+  // late String _currentLanguage;
 
-  String _getAsset() {
-    return _videos['assets']?[_currentLanguage] ?? 'Asset not found';
-  }
+  // String _getAsset() {
+  //   return _videos['assets']?[_currentLanguage] ?? 'Asset not found';
+  // }
 
-  String _getTitle() {
-    return _videos['titles']?[_currentLanguage] ?? 'Title not found';
-  }
+  // String _getTitle() {
+  //   return _videos['titles']?[_currentLanguage] ?? 'Title not found';
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    _currentLanguage = widget.initialLanguage;
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _currentLanguage = widget.initialLanguage;
+  // }
 
   final double _aspectRatio = 16 / 10;
 
@@ -109,23 +111,34 @@ class _EmergencyPageState extends State<EmergencyPage> {
     // },
   };
 
-  String videoAsset1 = 'videoAudio/videos/peer/peer3E.mp4';
-  String videoTitle1 = 'A Peer Perspective Language Not Selected';
+  // String videoAsset1 = 'videoAudio/videos/peer/peer3E.mp4';
+  // String videoTitle1 = 'A Peer Perspective Language Not Selected';
 
   // String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
   // String videoTitle2 = 'Video 2 Language Not Selected';
 
-    final Map<String, Map<String, String>> _videos = {
-    'assets': {
-      'Kiswahili': 'videoAudio/videos/peer/peer3KS.mp4',
-      'Dholuo': 'videoAudio/videos/peer/peer3DL.mp4',
-      'English': 'videoAudio/videos/peer/peer3E.mp4',
-    },
-    'titles': {
-      'Kiswahili': 'Video: Mwenzio anaelezea',
-      'Dholuo': 'Video: Mbasni lero',
-      'English': 'Video: a peer explains',
-    }
+  //   final Map<String, Map<String, String>> _videos = {
+  //   'assets': {
+  //     'Kiswahili': 'videoAudio/videos/peer/peer3KS.mp4',
+  //     'Dholuo': 'videoAudio/videos/peer/peer3DL.mp4',
+  //     'English': 'videoAudio/videos/peer/peer3E.mp4',
+  //   },
+  //   'titles': {
+  //     'Kiswahili': 'Video: Mwenzio anaelezea',
+  //     'Dholuo': 'Video: Mbasni lero',
+  //     'English': 'Video: a peer explains',
+  //   }
+  // };
+  final Map<String, List<String>> videoContentMap = {
+    "Kiswahili": ["videoAudio/videos/peer/peer3KS.mp4"],
+    "Dholuo": ["videoAudio/videos/peer/peer3DL.mp4"],
+    "English": ["videoAudio/videos/peer/peer3E.mp4"],
+  };
+
+  final Map<String, List<String>> videoTitleMap = {
+    "Kiswahili": ["Video: Mwenzio anaelezea"],
+    "Dholuo": ["Video: Mbasni lero"],
+    "English": ["Video: a peer explains"],
   };
 
   final Map<String, List<String>> audioContentMap = {
@@ -187,10 +200,31 @@ class _EmergencyPageState extends State<EmergencyPage> {
     return _translations[key]?[_currentLanguage] ?? key;
   }
 
-  void _changeLanguage(String language) {
+  // void _changeLanguage(String language) {
+  //   setState(() {
+  //     _currentLanguage = language;
+  //   });
+  // }
+
+  String _currentLanguage = 'English';
+
+  @override
+  void initState() {
+    _loadCurrentLanguage();
+  }
+
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _currentLanguage = language;
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
+    if (_currentLanguage.contains('English')) {
+      languageIndex = 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
   }
 
   @override
@@ -242,68 +276,82 @@ class _EmergencyPageState extends State<EmergencyPage> {
                       fontWeight: FontWeight.bold
             )
           ),
-          //children: [
           Container(
-              height: containerHeight * 0.1,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  // children: ['Kiswahili', 'Dholuo', 'English']
-                  //     .map((language) => languageButton(language))
-                  //     .toList(),
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 0;
-                          _currentLanguage = 'Kiswahili';
-                          overrideIndex = true;
-                          //updateMethodContent('content1');
-                          //video1 = updateVideoContent1();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 0 ? Colors.grey : null,
-                      ),
-                      child: Text('Kiswahili'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 1;
-                          _currentLanguage = 'Dholuo';
-                          overrideIndex = true;
-                          //updateMethodContent('content2');
-                          //video1 = updateVideoContent1();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 1 ? Colors.grey : null,
-                      ),
-                      child: Text('Dholuo'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          languageIndex = 2;
-                          _currentLanguage = 'English';
-                          overrideIndex = true;
-                          //updateMethodContent('content3');
-                          //video1 = updateVideoContent1();
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            languageIndex == 2 ? Colors.grey : null,
-                      ),
-                      child: Text('English'),
-                    ),
-                  ],
-                ),
-              )),
+            height: containerHeight * 0.1,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  languageButton('Kiswahili', 0),
+                  languageButton('Dholuo', 1),
+                  languageButton('English', 2),
+                ],
+              ),
+            )
+          ),
+          //children: [
+          // Container(
+          //     height: containerHeight * 0.1,
+          //     child: Container(
+          //       padding: EdgeInsets.symmetric(vertical: 8.0),
+          //       child: Row(
+          //         // children: ['Kiswahili', 'Dholuo', 'English']
+          //         //     .map((language) => languageButton(language))
+          //         //     .toList(),
+          //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //         children: [
+          //           ElevatedButton(
+          //             onPressed: () {
+          //               setState(() {
+          //                 languageIndex = 0;
+          //                 _currentLanguage = 'Kiswahili';
+          //                 overrideIndex = true;
+          //                 //updateMethodContent('content1');
+          //                 //video1 = updateVideoContent1();
+          //               });
+          //             },
+          //             style: ElevatedButton.styleFrom(
+          //               backgroundColor:
+          //                   languageIndex == 0 ? Colors.grey : null,
+          //             ),
+          //             child: Text('Kiswahili'),
+          //           ),
+          //           ElevatedButton(
+          //             onPressed: () {
+          //               setState(() {
+          //                 languageIndex = 1;
+          //                 _currentLanguage = 'Dholuo';
+          //                 overrideIndex = true;
+          //                 //updateMethodContent('content2');
+          //                 //video1 = updateVideoContent1();
+          //               });
+          //             },
+          //             style: ElevatedButton.styleFrom(
+          //               backgroundColor:
+          //                   languageIndex == 1 ? Colors.grey : null,
+          //             ),
+          //             child: Text('Dholuo'),
+          //           ),
+          //           ElevatedButton(
+          //             onPressed: () {
+          //               setState(() {
+          //                 languageIndex = 2;
+          //                 _currentLanguage = 'English';
+          //                 overrideIndex = true;
+          //                 //updateMethodContent('content3');
+          //                 //video1 = updateVideoContent1();
+          //               });
+          //             },
+          //             style: ElevatedButton.styleFrom(
+          //               backgroundColor:
+          //                   languageIndex == 2 ? Colors.grey : null,
+          //             ),
+          //             child: Text('English'),
+          //           ),
+          //         ],
+          //       ),
+          //     )),
           SizedBox(height: 20.0),
 
           Expanded(
@@ -328,14 +376,17 @@ class _EmergencyPageState extends State<EmergencyPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             direction: Axis.vertical,
                             children: [
-                              contentBox('1'),
-                              contentBox('2'),
-                              contentBox('3'),
+                              contentArea('1'),
+                              contentArea('2'),
+                              contentArea('3'),
                               SizedBox(
                                 width: boxWidth * 0.8,
                                 height: boxHeight * 0.5 * 0.7,
                                 //child: Center(child: video1),
-                                child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
+                                //child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
+                                child: Center(
+                                  child: getVideoContent(),
+                                ),
                               ),
                               //place new content next to e-pill image
                               Container(
@@ -358,12 +409,11 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                       ),
                                     ]),
                                     ),
-
                                 
                                     Image.asset(
                                       'assets/emergency_photos.png',
-                                      width: 500,
-                                      height:500,
+                                      width: 400,
+                                      height: 400,
                                       fit: BoxFit.cover,
                                     ),
                                   ]
@@ -386,12 +436,20 @@ class _EmergencyPageState extends State<EmergencyPage> {
     );
   }
 
-  Widget updateMethodContent(String contentKey) {
-    return Text(_t(contentKey),
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.black,
-        ));
+  void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      _currentLanguage = temp;
+    });
   }
 
   // String _getAsset(String videoKey, String language) {
@@ -416,28 +474,45 @@ class _EmergencyPageState extends State<EmergencyPage> {
   //   return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
   // }
 
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ElevatedButton(
-        onPressed: () => _changeLanguage(language),
-        // onPressed: () {
-        //   setState(() {
-        //     languageIndex = languageIndex;
-        //     overrideIndex = true;
-        //     video1 = updateVideoContent1();
-        //   });
-        // },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : null,
-        ),
-        child: Text(language),
+  // Widget languageButton(String language) {
+  //   bool isSelected = _currentLanguage == language;
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
+  //     child: ElevatedButton(
+  //       onPressed: () => _changeLanguage(language),
+  //       // onPressed: () {
+  //       //   setState(() {
+  //       //     languageIndex = languageIndex;
+  //       //     overrideIndex = true;
+  //       //     video1 = updateVideoContent1();
+  //       //   });
+  //       // },
+  //       style: ElevatedButton.styleFrom(
+  //         backgroundColor: isSelected ? Colors.grey : null,
+  //       ),
+  //       child: Text(language),
+  //     ),
+  //   );
+  // }
+  Widget languageButton(String language, int index) {
+    bool isSelected = languages[languageIndex] == language;
+
+    return ElevatedButton(
+      onPressed: () {
+        _switchLanguage(index);
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
       ),
+      child: Text(language),
     );
   }
 
-  Widget contentBox(String contentKey) {
+  Widget contentArea(String contentKey) {
     var contentNum = int.parse(contentKey) - 1;
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -469,6 +544,21 @@ class _EmergencyPageState extends State<EmergencyPage> {
         ),
       ),
     );
+  }
+
+  Widget updateMethodContent(String contentKey) {
+    return Text(_t(contentKey),
+        style: TextStyle(
+          fontSize: 20.0,
+          color: Colors.black,
+        ));
+  }
+
+
+  Widget getVideoContent() {
+    String asset = videoContentMap[languages[languageIndex]]![methodIndex];
+    String title = videoTitleMap[languages[languageIndex]]![0];
+    return VideoWidget(videoAsset: asset, title: title);
   }
 
   Widget getAudio(Map<String, List<String>> audioMap, int contentNum) {
