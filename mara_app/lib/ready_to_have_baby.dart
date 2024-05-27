@@ -5,6 +5,7 @@ import 'audio.dart';
 import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/design/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ReadyPage extends StatefulWidget {
   @override
@@ -17,7 +18,6 @@ class _ReadyPageState extends State<ReadyPage> {
   int languageIndex = 2; // Index for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   bool overrideIndex = false; // Used to override language selection from route
-  String _currentLanguage = 'English';
   // final List<String> languages = ["Kiswahili", "Dholuo", "English"];
 
   final Map<String, String> titleMap = {
@@ -59,17 +59,53 @@ class _ReadyPageState extends State<ReadyPage> {
     ],
   };
 
-  final Map<String, Map<String, String>> _videos = {
-    'assets': {
-      'Kiswahili': 'videoAudio/videos/provider/provider4KS.mp4',
-      'Dholuo': 'videoAudio/videos/provider/provider4DL.mp4',
-      'English': 'videoAudio/videos/provider/provider4E.mp4',
-    },
-    'titles': {
-      'Kiswahili': 'Video: Mtoa huduma wa afya anaelezea',
-      'Dholuo': 'Video: Jachiw thieth lero',
-      'English': 'Video: a provider explains',
-    }
+  // final Map<String, Map<String, String>> _videos = {
+  //   'assets': {
+  //     'Kiswahili': 'videoAudio/videos/provider/provider4KS.mp4',
+  //     'Dholuo': 'videoAudio/videos/provider/provider4DL.mp4',
+  //     'English': 'videoAudio/videos/provider/provider4E.mp4',
+  //   },
+  //   'titles': {
+  //     'Kiswahili': 'Video: Mtoa huduma wa afya anaelezea',
+  //     'Dholuo': 'Video: Jachiw thieth lero',
+  //     'English': 'Video: a provider explains',
+  //   }
+  // };
+
+  final Map<String, List<String>> videoContentMap = {
+    "Kiswahili": [
+      "videoAudio/videos/provider/provider4KS.mp4", // method 1 - condom
+      "videoAudio/videos/provider/provider4KS.mp4"
+      "videoAudio/videos/provider/provider4KS.mp4"
+      "videoAudio/videos/provider/provider4KS.mp4"
+      "videoAudio/videos/provider/provider4KS.mp4"
+      "videoAudio/videos/provider/provider4KS.mp4"
+      "videoAudio/videos/provider/provider4KS.mp4"
+    ],
+    "Dholuo": [
+      "videoAudio/videos/provider/provider4DL.mp4",
+      "videoAudio/videos/provider/provider4DL.mp4",
+      "videoAudio/videos/provider/provider4DL.mp4",
+      "videoAudio/videos/provider/provider4DL.mp4",
+      "videoAudio/videos/provider/provider4DL.mp4",
+      "videoAudio/videos/provider/provider4DL.mp4",
+      "videoAudio/videos/provider/provider4DL.mp4",
+    ],
+    "English": [
+      "videoAudio/videos/provider/provider4E.mp4",
+      "videoAudio/videos/provider/provider4E.mp4",
+      "videoAudio/videos/provider/provider4E.mp4",
+      "videoAudio/videos/provider/provider4E.mp4",
+      "videoAudio/videos/provider/provider4E.mp4",
+      "videoAudio/videos/provider/provider4E.mp4",
+      "videoAudio/videos/provider/provider4E.mp4",
+    ],
+  };
+
+  final Map<String, List<String>> videoTitleMap = {
+    "Kiswahili": ["Video: Mtoa huduma wa afya anaelezea"],
+    "Dholuo": ["Video: Jachiw thieth lero"],
+    "English": ["Video: a provider explains"],
   };
 
     final Map<String, List<String>> audioContentMap = {
@@ -175,18 +211,38 @@ class _ReadyPageState extends State<ReadyPage> {
   //   return _translations[key]?[_currentLanguage] ?? key;
   // }
 
-  String _getAsset() {
-    return _videos['assets']?[_currentLanguage] ?? 'Asset not found';
+  // String _getAsset() {
+  //   return videoContentMap['assets']?[_currentLanguage] ?? 'Asset not found';
+  // }
+
+  // String _getTitle() {
+  //   return videoTitleMap['titles']?[_currentLanguage] ?? 'Title not found';
+  // }
+
+  // void _changeLanguage(String language) {
+  //   setState(() {
+  //     _currentLanguage = language;
+  //   });
+  // }
+  String _currentLanguage = 'English';
+
+  @override
+  void initState() {
+    _loadCurrentLanguage();
   }
 
-  String _getTitle() {
-    return _videos['titles']?[_currentLanguage] ?? 'Title not found';
-  }
-
-  void _changeLanguage(String language) {
+  Future<void> _loadCurrentLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _currentLanguage = language;
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
+    if (_currentLanguage.contains('English')) {
+      languageIndex = 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
   }
 
 
@@ -202,7 +258,7 @@ class _ReadyPageState extends State<ReadyPage> {
 
     double boxWidth = containerWidth;
     double boxHeight = containerHeight;
-       double availableHeight = boxHeight;
+    double availableHeight = boxHeight;
 
     return Scaffold(
       appBar: AppBar(
@@ -212,200 +268,58 @@ class _ReadyPageState extends State<ReadyPage> {
             style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
           )
         ),
-      bottom: PreferredSize(
+        bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
-            // height: availableHeight * 0.1,
-              child: Container(
-                // padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 0;
-                            overrideIndex = true;
-                            updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 0 ? Colors.grey : null,
-                        ),
-                        child: Text('Kiswahili'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 1;
-                            overrideIndex = true;
-                            updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 1 ? Colors.grey : null,
-                        ),
-                        child: Text('Dholuo'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0), // Adjust the padding as needed
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            languageIndex = 2;
-                            overrideIndex = true;
-                            updateMethodContent();
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: languageIndex == 2 ? Colors.grey : null,
-                        ),
-                        child: Text('English'),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-          // preferredSize: Size.fromHeight(75),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                languageButton('Kiswahili', 0),
+                languageButton('Dholuo', 1),
+                languageButton('English', 2),
+              ],
+            ),
+          ),
         ),
       ),
-      
-      body: SingleChildScrollView(   
-                 
-        child: Column(
+      body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [           
             customListTile(
               imagePath: 'assets/ready_to_have_baby_pregnant.png',
               title: importantMessage_pregnant_Translations[languages[languageIndex]] ?? "Important message not found",
             ),
-            //SizedBox(height: 20.0),
             methodSelectionRow(),
-            SizedBox(height: 20.0),
+            SizedBox(height: 15.0),
             contentArea(),
             additionalTextSection(),
-            SizedBox(height: 15.0),
             SizedBox(
                 width: boxWidth,
-                height: boxHeight * 0.5 * 0.6,
-                child:
-                    VideoWidget(videoAsset: _getAsset(), title: _getTitle())
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-              child: ElevatedButton.icon(
-                icon: ImageIcon(AssetImage('assets/misc-icons/check_mark.png'),
-                    color: Colors.black),
-                label: Text(prep_preg_Translations[languages[languageIndex]] ?? "Label not found", 
-                    style: TextStyle(fontSize: 24.0),
-                  ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: MaraColors.lavender,
-                  // Button background color
-                  foregroundColor: Colors.black,
+                height: availableHeight * 0.6 * 0.5,
+                child: Center(
+                  child: getVideoContent(),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          PrepPage(initialLanguage: _currentLanguage),
-                    ),
-                  );
-                },
-              ),
             ),
+            prep_preg_Button(),
           ]
-        )
       )
     );
   }
 
-  // Widget getAudio() {
-  //   return AudioWidget(audioAsset: audioContentMap[_currentLanguage]![0]);
-  // }
-
-  Widget customListTile(
-      {required String imagePath,
-      //required String header,
-      required String title}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 5.0), // Increased height for more spacing
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset(
-                imagePath,
-                width: 200, // Adjust width
-                height: 200, // Adjust height
-                fit: BoxFit.contain,
-              ),
-              //SizedBox(width: 5.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    subtitleSection(),
-                    SizedBox(height: 15.0),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            getAudio(heyThis_baby_AudioMap,0),
-                          ],
-                        ),
-                        SizedBox(width: 8.0),
-                        Expanded(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                                  size: 50.0, color: Colors.black),
-                              Flexible(
-                                child: Text(
-                                title,
-                                style: TextStyle(fontFamily: 'Roboto', fontSize: 19.0, fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ]
-                          )
-                        ),
-                      ],
-                    ),             
-                  ],
-                )
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ElevatedButton(
-        onPressed: () => _changeLanguage(language),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : null,
-        ),
-        child: Text(language),
-      ),
-    );
+  void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      _currentLanguage = temp;
+    });
   }
 
   Widget buildIconButton(IconData iconData, String caption, int index) {
@@ -448,6 +362,26 @@ class _ReadyPageState extends State<ReadyPage> {
     );
   }
 
+  Widget languageButton(String language, int index) {
+    bool isSelected = languages[languageIndex] == language;
+
+    return ElevatedButton(
+      onPressed: () {
+        _switchLanguage(index);
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+          updateMethodContent();
+          //video1 = updateVideoContent1();
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
+
   Widget methodSelectionRow() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -475,49 +409,6 @@ class _ReadyPageState extends State<ReadyPage> {
         style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
-    );
-  }
-
-  Widget contentArea() {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-        decoration: BoxDecoration(
-          color: MaraColors.purple,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                getAudio(audioContentMap, methodIndex),
-              ],
-            ),
-            SizedBox(width: 10.0),
-            Flexible(
-              child: Text(
-                contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 19.0),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void updateMethodContent() {
-    methodContent = Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      style: TextStyle(fontSize: 20.0, color: Colors.white),
     );
   }
 
@@ -588,6 +479,146 @@ class _ReadyPageState extends State<ReadyPage> {
         ],
       ),
     );
+  }
+
+  Widget contentArea() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: MaraColors.purple,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                getAudio(audioContentMap, methodIndex),
+              ],
+            ),
+            SizedBox(width: 10.0),
+            Flexible(
+              child: Text(
+                contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                style: TextStyle(
+                    fontFamily: 'Roboto',
+                    color: Colors.white,
+                    fontSize: 19.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void updateMethodContent() {
+    methodContent = Text(
+      contentDescriptionMap[languages[languageIndex]]![methodIndex],
+      style: TextStyle(fontSize: 20.0, color: Colors.white),
+    );
+  }
+
+  Widget customListTile(
+      {required String imagePath,
+      //required String header,
+      required String title}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 5.0), // Increased height for more spacing
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset(
+                imagePath,
+                width: 200, // Adjust width
+                height: 200, // Adjust height
+                fit: BoxFit.contain,
+              ),
+              //SizedBox(width: 5.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    subtitleSection(),
+                    SizedBox(height: 15.0),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            getAudio(heyThis_baby_AudioMap,0),
+                          ],
+                        ),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                                  size: 50.0, color: Colors.black),
+                              Flexible(
+                                child: Text(
+                                title,
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 19.0, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ]
+                          )
+                        ),
+                      ],
+                    ),             
+                  ],
+                )
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }  
+
+  Widget prep_preg_Button(){
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: ElevatedButton.icon(
+        icon: ImageIcon(AssetImage('assets/misc-icons/check_mark.png'),
+            color: Colors.black),
+        label: Text(prep_preg_Translations[languages[languageIndex]] ?? "Label not found", 
+            style: TextStyle(fontSize: 24.0),
+          ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: MaraColors.lavender,
+          // Button background color
+          foregroundColor: Colors.black,
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  PrepPage(initialLanguage: _currentLanguage),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+
+  Widget getVideoContent() {
+    String asset = videoContentMap[languages[languageIndex]]![methodIndex];
+    String title = videoTitleMap[languages[languageIndex]]![0];
+    return VideoWidget(videoAsset: asset, title: title);
   }
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {

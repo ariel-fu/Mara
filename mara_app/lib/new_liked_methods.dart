@@ -23,7 +23,10 @@ class LikedMethodsScreen extends StatefulWidget {
 }
 
 class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
-  late String currentLanguage = "English";
+  final languages = ["Kiswahili", "Dholuo", "English"];
+  bool overrideIndex = false;
+  int languageIndex = 2; // similar indexing for language
+  String _currentLanguage = 'English';
   late Future<Map<String, dynamic>> _methodDetailsFuture;
 
   final Map<String, Map<String, String>> _likedTranslations = {
@@ -48,11 +51,24 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
     _methodDetailsFuture = loadMethodDetails();
   }
 
+  // Future<void> _loadCurrentLanguage() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+  //   });
+  // }
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
+    if (_currentLanguage.contains('English')) {
+      languageIndex = 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
   }
 
   Future<Map<String, dynamic>> loadMethodDetails() async {
@@ -61,19 +77,19 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
   }
 
   String _t2(String key) {
-    return widget.translations[currentLanguage]?[key] ?? key;
+    return widget.translations[_currentLanguage]?[key] ?? key;
   }
 
   String _t(String key) {
-    return _likedTranslations[currentLanguage]?[key] ?? key;
+    return _likedTranslations[_currentLanguage]?[key] ?? key;
   }
 
   void _changeLanguage(String language) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('selectedLanguage', language);
-    if (language != currentLanguage) {
+    if (language != _currentLanguage) {
       setState(() {
-        currentLanguage = language;
+        _currentLanguage = language;
       });
     }
   }
@@ -138,11 +154,11 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                             builder: (context) => MethodDetailsScreen(
                                                 methodName: method,
                                                 methodDetails: methodDetails[methodKey],
-                                                currentLanguage: currentLanguage,
+                                                currentLanguage: _currentLanguage,
                                                 translations: _likedTranslations,
                                                 onChangeLanguage: (newLang) {
                                                     setState(() {
-                                                        currentLanguage = newLang;
+                                                        _currentLanguage = newLang;
                                                     });
                                                     // Optionally, handle other actions needed on language change
                                                 },
@@ -183,7 +199,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
 
 
 Widget _languageButton(String language) {
-    bool isSelected = currentLanguage == language; // Use the local currentLanguage
+    bool isSelected = _currentLanguage == language; // Use the local currentLanguage
     return ElevatedButton(
       onPressed: () {
         if (!isSelected) {

@@ -149,34 +149,52 @@ class _WhatChanceState extends State<WhatChance> {
 
   @override
   Widget build(BuildContext context) {
+     _loadCurrentLanguage();
+    final double containerWidth = MediaQuery.of(context).size.width;
+    final double containerHeight = MediaQuery.of(context).size.height;
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back),
-        //   onPressed: () => Navigator.of(context).pop(),
-        // ),
         title: Center(
           child: Text(
             titleTranslations[languages[languageIndex]] ?? "Title not found",
             style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
           )
         ),
+         bottom: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                languageButton('Kiswahili', 0),
+                languageButton('Dholuo', 1),
+                languageButton('English', 2),
+              ],
+            ),
+          ),
+        ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      //body: SingleChildScrollView(
+        body: Column(
+        //child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: languages
-                    .map((language) => languageButton(language))
-                    .toList(),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: languages
+            //         .map((language) => languageButton(language))
+            //         .toList(),
+            //   ),
+            // ),
+            SizedBox(height: availableHeight * 0.01),
             methodSelectionRow(),
-            SizedBox(height: 20.0),
+            SizedBox(height: 15.0),
             contentArea(),
             Center(
               child: getPic(),
@@ -196,51 +214,86 @@ class _WhatChanceState extends State<WhatChance> {
             // additionalTextSection(),
           ],
           //),
-        ),
+        //),
       ),
     );
   }
 
-  Widget contentArea() {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-        decoration: BoxDecoration(
-          color: MaraColors.purple,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+  void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      languageIndex = language;
+    });
+  }
+
+  // void asyncmethod(String language) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString('selectedLanguage', language);
+  // }
+
+  Widget buildIconButton(IconData iconData, String caption, int index) {
+    bool isSelected = index == methodIndex;
+
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                getAudio(importantAudioContentMap, methodIndex),
-              ],
-            ),
-            SizedBox(width: 10.0),
-            Flexible(
-              child: Text(
-                contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                 style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+            IconButton(
+              icon: Icon(
+                iconData,
+                size: isSelected ? 60 : 60,
+                color: isSelected ? MaraColors.magentaPurple : Colors.grey,
               ),
+              onPressed: () {
+                setState(() {
+                  methodIndex = index;
+                  //updateText();
+                  updateMethodContent();
+                });
+              },
+              color: isSelected ? Colors.black : Colors.transparent,
+              iconSize: isSelected ? 60 : 60,
+              padding: EdgeInsets.all(10),
+              splashRadius: 40,
+              splashColor: Colors.grey.withOpacity(0.5),
+              highlightColor: Colors.transparent,
             ),
+            SizedBox(height: 5),
+            Container(
+                width: 100,
+                child: Text(
+                  caption,
+                  softWrap: true, // Wrap text to the next line if needed
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: isSelected ? Colors.black : Colors.grey,
+                  ),
+                ))
           ],
         ),
-      ),
+      ],
     );
   }
 
-  Widget languageButton(String language) {
-    asyncmethod(language);
+  Widget languageButton(String language, int index) {
     bool isSelected = languages[languageIndex] == language;
+
     return ElevatedButton(
       onPressed: () {
+        _switchLanguage(index);
         setState(() {
-          languageIndex = languages.indexOf(language);
+          languageIndex = index;
           overrideIndex = true;
           updateMethodContent();
         });
@@ -252,9 +305,24 @@ class _WhatChanceState extends State<WhatChance> {
     );
   }
 
-  void asyncmethod(String language) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedLanguage', language);
+  Widget methodSelectionRow() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildIconButton(MaraIcons.condom, "Condom", 0),
+          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
+          buildIconButton(
+              MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
+          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
+          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
+          buildIconButton(
+              MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+        ],
+      ),
+    );
   }
 
   Widget additionalTextSection() {
@@ -365,6 +433,47 @@ class _WhatChanceState extends State<WhatChance> {
         ]));
   }
 
+  Widget contentArea() {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+          color: MaraColors.purple,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                getAudio(importantAudioContentMap, methodIndex),
+              ],
+            ),
+            SizedBox(width: 10.0),
+            Flexible(
+              child: Text(
+                contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                 style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget updateMethodContent() {
+    return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
+        style: TextStyle(
+          fontSize: 18.0,
+          color: Colors.black,
+        ));
+  }
+
   void WhyDoPage() {
     Navigator.push(
       context,
@@ -380,80 +489,6 @@ class _WhatChanceState extends State<WhatChance> {
     return Image.asset( 
       imageNum,
       width: MediaQuery.of(context).size.width * 0.8,
-    );
-  }
-
-  Widget buildIconButton(IconData iconData, String caption, int index) {
-    bool isSelected = index == methodIndex;
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: Icon(
-                iconData,
-                size: isSelected ? 60 : 60,
-                color: isSelected ? MaraColors.magentaPurple : Colors.grey,
-              ),
-              onPressed: () {
-                setState(() {
-                  methodIndex = index;
-                  //updateText();
-                  updateMethodContent();
-                });
-              },
-              color: isSelected ? Colors.black : Colors.transparent,
-              iconSize: isSelected ? 60 : 60,
-              padding: EdgeInsets.all(10),
-              splashRadius: 40,
-              splashColor: Colors.grey.withOpacity(0.5),
-              highlightColor: Colors.transparent,
-            ),
-            SizedBox(height: 5),
-            Container(
-                width: 100,
-                child: Text(
-                  caption,
-                  softWrap: true, // Wrap text to the next line if needed
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.grey,
-                  ),
-                ))
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget updateMethodContent() {
-    return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(
-          fontSize: 18.0,
-          color: Colors.black,
-        ));
-  }
-
-  Widget methodSelectionRow() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          buildIconButton(MaraIcons.condom, "Condom", 0),
-          buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-          buildIconButton(
-              MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
-          buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
-          buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
-          buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-          buildIconButton(
-              MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
-        ],
-      ),
     );
   }
 
