@@ -12,6 +12,9 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   Map<String, String> _selectedOptions = {};
+  final languages = ["Kiswahili", "Dholuo", "English"];
+  bool overrideIndex = false;
+  int languageIndex = 2; // similar indexing for language
   String _currentLanguage = 'English';
 
   @override
@@ -20,11 +23,24 @@ class _QuizScreenState extends State<QuizScreen> {
     _loadCurrentLanguage();
   }
 
+  // Future<void> _loadCurrentLanguage() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+  //   });
+  // }
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
+    if (_currentLanguage.contains('English')) {
+      languageIndex = 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
   }
 
   final List<String> subQuestionKeys = [

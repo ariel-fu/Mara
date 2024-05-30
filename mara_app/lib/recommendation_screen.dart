@@ -32,8 +32,13 @@ class RecommendationScreen extends StatefulWidget {
 }
 
 class _RecommendationScreenState extends State<RecommendationScreen> {
-  late String _currentLanguage;
+  // late String _currentLanguage;
   late Future<Map<String, dynamic>> _methodDetailsDataFuture;
+  final languages = ["Kiswahili", "Dholuo", "English"];
+  bool overrideIndex = false;
+  int languageIndex = 2; // similar indexing for language
+  String _currentLanguage = 'English';
+
   @override
   void initState() {
     super.initState();
@@ -41,12 +46,26 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     _methodDetailsDataFuture = loadMethodDetails();
   }
 
+  // Future<void> _loadCurrentLanguage() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+  //   });
+  // }
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
+    if (_currentLanguage.contains('English')) {
+      languageIndex = 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
   }
+
   void _changeLanguage(String language) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('selectedLanguage', language);
@@ -90,24 +109,22 @@ Widget build(BuildContext context) {
       title: Text(_t('title1')), // Use _t method for translation
       centerTitle: true,
 
-actions: <Widget>[
-  ElevatedButton.icon(
-    icon: Icon(Icons.thumb_up, color: Colors.black),
-    label: Text(_t('likedTitle'), style: TextStyle(color: Colors.black)),
-    onPressed: navigateToLikedMethodsScreen,
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.deepPurple[100],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18.0),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), 
+      actions: <Widget>[
+        ElevatedButton.icon(
+          icon: Icon(Icons.thumb_up, color: Colors.black),
+          label: Text(_t('likedTitle'), style: TextStyle(color: Colors.black)),
+          onPressed: navigateToLikedMethodsScreen,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepPurple[100],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), 
+          ),
+        ),
+      ],
     ),
-  ),
-],
-
-
-
-    ),
+    
     body: FutureBuilder<Map<String, dynamic>>(
       future: _methodDetailsDataFuture,
       builder: (context, snapshot) {

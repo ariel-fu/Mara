@@ -115,47 +115,44 @@ class _LaunchScreenState extends State<LaunchScreen> {
             ),
             // Row(children: [            
               IntrinsicWidth(
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    getAudio(textAudioContentMap),
-                    Flexible(
-                        child: Text(
-                          translations[_currentLanguage]!,
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.visible,
-                          style: TextStyle(
-                            fontFamily: 'PoetsenOne',
-                            color: MaraColors.purple,
-                            fontSize: 30.0
-                          ),
-                        )
-                    ),  
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          getAudio(textAudioContentMap),
+                          Expanded(
+                              child: Column(children: [
+                            Text(translations[_currentLanguage]!,
+                                style: TextStyle(
+                                  fontFamily: 'PoetsenOne',
+                                  color: MaraColors.purple,
+                                  fontSize: 30.0
+                                ),
+                                overflow: TextOverflow.visible,
+                                textAlign: TextAlign.center),
+                            SizedBox(height: 25.0),
+                            Text(subtitle_translations[_currentLanguage]!,
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black,
+                                  fontSize: 20.0
+                                ),
+                                overflow: TextOverflow.visible,
+                                textAlign: TextAlign.center),
+                          ]))
+                        ],
+                      ),
+                    ),
+
                   ]
                 ),
               ),
-            // ]),
-            //SizedBox(height:50),
-            IntrinsicWidth(
-              child: Row(
-                children: [
-                //getAudio(buttonAudioContentMap),
-                  Flexible(
-                      child: Text(
-                        subtitle_translations[_currentLanguage]!,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.visible,
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black,
-                          fontSize: 20.0
-                        ),
-                      )
-                  )
-                ]
-              ),   
-            ),         
-            const SizedBox(height: 50),
+                  
+            const SizedBox(height: 80),
             IntrinsicWidth(
               child: Row(
                 children: [

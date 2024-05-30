@@ -248,7 +248,6 @@ class _PrivatePageState extends State<PrivatePage> {
           methodSelectionRow(),
           SizedBox(height: 15.0),
           contentArea(),
-          SizedBox(height: 15.0),
           SizedBox(
             width: boxWidth * 0.8,
             height: availableHeight * 0.6 * 0.5,
