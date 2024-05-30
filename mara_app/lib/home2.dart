@@ -443,41 +443,35 @@ class _HomePage2State extends State<HomePage2> {
   }
 
   void _takeQuiz() {
-    //print('Attempting to submit. Selected options: $_selectedOptions');
-    // test
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => QuizScreen()),
-    );
-    // if (_allSelected == false) {
-    //   print('incomplete');
-    //   // Show an alert dialog or a message to complete the quiz
-    //   showDialog(
-    //     context: context,
-    //     builder: (BuildContext context) {
-    //       return AlertDialog(
-    //         title: Text("Please visit all sections before taking the quiz"),
-    //         //content: Text(_t('incompleteMessage')),
-    //         actions: <Widget>[
-    //           TextButton(
-    //             child: Text("OK"),
-    //             onPressed: () {
-    //               Navigator.of(context).pop();
-    //             },
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   );
-    //   return; // Exit the function without navigating if not all questions are answered
-    // } else {
-    //   _allSelected
-    //       ? Navigator.push(
-    //           context,
-    //           MaterialPageRoute(builder: (context) => QuizScreen()),
-    //         )
-    //       : null;
-    // }
+  //print('Attempting to submit. Selected options: $_selectedOptions'); 
+    if (_allSelected == false) {
+      print('incomplete'); 
+      // Show an alert dialog or a message to complete the quiz
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Please visit all sections before taking the quiz"),
+            //content: Text(_t('incompleteMessage')),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return; // Exit the function without navigating if not all questions are answered
+    }
+    else {
+      _allSelected ? Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => QuizScreen()),
+      ) : null;
+    }
   }
 
   Widget getAudio(Map<String, List<String>> audioContentMap, int index) {
