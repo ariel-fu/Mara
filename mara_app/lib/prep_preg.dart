@@ -173,14 +173,14 @@ class _PrepPageState extends State<PrepPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        _t('Preparing for a Healthy Pregnancy'),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                      SizedBox(height: 8.0),
+                      // Text(
+                      //   _t('Preparing for a Healthy Pregnancy'),
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //     fontSize: 18.0,
+                      //   ),
+                      // ),
+                      // SizedBox(height: 8.0),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -188,7 +188,7 @@ class _PrepPageState extends State<PrepPage> {
                           Flexible(
                             child: Text(
                               _t('Are you ready? Tap each check mark to learn about ways to promote a healthy pregnancy.'),
-                              style: TextStyle(fontSize: 16.0),
+                              style: TextStyle(fontSize: 25.0),
                             ),
                           )
                         ],
@@ -228,10 +228,10 @@ class _PrepPageState extends State<PrepPage> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey),
-        ),
+            color: MaraColors.purple,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.grey),
+          ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -246,7 +246,7 @@ class _PrepPageState extends State<PrepPage> {
             Expanded(
               child: Text(
                 _t(contentKey),
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
               ),
             ),
           ],

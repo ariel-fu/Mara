@@ -16,7 +16,22 @@ class PatternPage extends StatefulWidget {
 
 class _PatternPageState extends State<PatternPage> {
   //String _currentLanguage = 'English';
-  Widget methodContent = Text('method content');
+  //Widget methodContent = Text('method content');
+  // Widget methodContent = updateMethodContent();
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 2; // similar indexing for language
+  // String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
+  // String videoTitle1 = 'Video 1 Language Not Selected';
+  // String videoAsset2 = 'videoAudio/videos/peer/peer1E.mp4';
+  // String videoTitle2 = 'Video 2 Language Not Selected';
+
+  // Widget video1 = VideoWidget(
+  //     videoAsset: 'videoAudio/videos/provider/provider1E.mp4',
+  //     title: 'Video: a provider explains');
+  // Widget video2 = VideoWidget(
+  //     videoAsset: 'videoAudio/videos/peer/peer1E.mp4',
+  //     title: 'Video: a peer explains');
+
   String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
   String videoAsset2 = 'videoAudio/videos/peer/peer1E.mp4';
@@ -29,10 +44,6 @@ class _PatternPageState extends State<PatternPage> {
       videoAsset: 'videoAudio/videos/peer/peer1E.mp4',
       title: 'Video: a peer explains');
   bool overrideIndex = false;
-
-  // Widget methodContent = updateMethodContent();
-  int methodIndex = 0; // Index of the selected icon button, 0 for default
-  int languageIndex = 2; // similar indexing for language
 
   @override
   void initState() {
@@ -59,15 +70,6 @@ class _PatternPageState extends State<PatternPage> {
 
   final double _aspectRatio = 16 / 10;
   final languages = ["Kiswahili", "Dholuo", "English"];
-
-  // final content = [
-  //   "method 1",
-  //   "method 2",
-  //   "method 3",
-  //   "method 4",
-  //   "method 5",
-  //   "method 6"
-  // ];
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
@@ -163,6 +165,79 @@ class _PatternPageState extends State<PatternPage> {
   };
 
   // //Video HashMap: specifies video asset and text/title based on language and video
+  // final Map<String, List<String>> video_provider_ContentMap = {
+  //     "Kiswahili": [
+  //       'videoAudio/videos/provider/provider1KS.mp4',
+  //       'videoAudio/videos/provider/provider1KS.mp4',
+  //       'videoAudio/videos/provider/provider1KS.mp4',
+  //       'videoAudio/videos/provider/provider1KS.mp4',
+  //       'videoAudio/videos/provider/provider1KS.mp4',
+  //       'videoAudio/videos/provider/provider1KS.mp4',
+  //       'videoAudio/videos/provider/provider1KS.mp4',
+  //     ],
+  //     "Dholuo": [
+  //       'videoAudio/videos/provider/provider1DL.mp4',
+  //       'videoAudio/videos/provider/provider1DL.mp4',
+  //       'videoAudio/videos/provider/provider1DL.mp4',
+  //       'videoAudio/videos/provider/provider1DL.mp4',
+  //       'videoAudio/videos/provider/provider1DL.mp4',
+  //       'videoAudio/videos/provider/provider1DL.mp4',
+  //       'videoAudio/videos/provider/provider1DL.mp4',
+  //     ],
+  //     "English": [
+  //       'videoAudio/videos/provider/provider1E.mp4',
+  //       'videoAudio/videos/provider/provider1E.mp4',
+  //       'videoAudio/videos/provider/provider1E.mp4',
+  //       'videoAudio/videos/provider/provider1E.mp4',
+  //       'videoAudio/videos/provider/provider1E.mp4',
+  //       'videoAudio/videos/provider/provider1E.mp4',
+  //       'videoAudio/videos/provider/provider1E.mp4',
+  //     ],
+  // };
+
+  // final Map<String, List<String>> video_peer_ContentMap = {
+  //     "Kiswahili": [
+  //       'videoAudio/videos/provider/peer1KS.mp4',
+  //       'videoAudio/videos/provider/peer1KS.mp4',
+  //       'videoAudio/videos/provider/peer1KS.mp4',
+  //       'videoAudio/videos/provider/peer1KS.mp4',
+  //       'videoAudio/videos/provider/peer1KS.mp4',
+  //       'videoAudio/videos/provider/peer1KS.mp4',
+  //       'videoAudio/videos/provider/peer1KS.mp4',
+  //     ],
+  //     "Dholuo": [
+  //       'videoAudio/videos/provider/peer1DL.mp4',
+  //       'videoAudio/videos/provider/peer1DL.mp4',
+  //       'videoAudio/videos/provider/peer1DL.mp4',
+  //       'videoAudio/videos/provider/peer1DL.mp4',
+  //       'videoAudio/videos/provider/peer1DL.mp4',
+  //       'videoAudio/videos/provider/peer1DL.mp4',
+  //       'videoAudio/videos/provider/peer1DL.mp4',
+  //     ],
+  //     "English": [
+  //       'videoAudio/videos/provider/peer1E.mp4',
+  //       'videoAudio/videos/provider/peer1E.mp4',
+  //       'videoAudio/videos/provider/peer1E.mp4',
+  //       'videoAudio/videos/provider/peer1E.mp4',
+  //       'videoAudio/videos/provider/peer1E.mp4',
+  //       'videoAudio/videos/provider/peer1E.mp4',
+  //       'videoAudio/videos/provider/peer1E.mp4',
+  //     ],
+  // };
+
+  // final Map<String, List<String>> video_provider_TitleMap = {
+  //   "Kiswahili": ["Video: Jachiw thieth lero"],
+  //   "Dholuo": ["Video: Mtoa huduma wa afya anaelezea"],
+  //   "English": ["Video: a provider explains"],
+  // };
+
+  // final Map<String, List<String>> video_peer_TitleMap = {
+  //   "Kiswahili": ["Video: Mwenzio anaelezea"],
+  //   "Dholuo": ["Video: Mbasni lero"],
+  //   "English": ["Video: a peer explains"],
+  // };
+
+
   final Map<String, Map<String, Map<String, String>>> languageToVideo = {
     'video1': {
       '0': {
@@ -241,13 +316,24 @@ class _PatternPageState extends State<PatternPage> {
               SizedBox(
                 width: boxWidth / 2 - 25,
                 height: boxHeight * 0.5 * 0.6,
-                child: Center(child: video1),
+                child: Center(
+                  child: video1
+                )
+                // child: Center(
+                //   child: getVideoContent(video_provider_ContentMap, video_provider_TitleMap)
+                // )
               ),
               SizedBox(width: 10.0),
               SizedBox(
                 width: boxWidth / 2 - 25,
                 height: boxHeight * 0.5 * 0.6,
-                child: Center(child: video2),
+                child: Center(
+                  child: video2
+                )
+                // child: Center(
+                //   child: getVideoContent(video_peer_ContentMap, video_peer_TitleMap)
+                // )
+
               ),
             ]
           ),
@@ -273,9 +359,11 @@ class _PatternPageState extends State<PatternPage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                updateMethodContent();
-                video1 = updateVideoContent1();
-                video2 = updateVideoContent2();
+                //updateMethodContent();
+                // video1 = updateVideoContent1();
+                // video2 = updateVideoContent2();
+                // video1 = getVideoContent(video_provider_ContentMap, video_provider_TitleMap);
+                // video2 = getVideoContent(video_peer_ContentMap, video_peer_TitleMap);
               });
             },
             splashRadius: 40,
@@ -308,7 +396,7 @@ class _PatternPageState extends State<PatternPage> {
         setState(() {
           languageIndex = index;
           overrideIndex = true;
-          updateMethodContent();
+          //updateMethodContent();
           video1 = updateVideoContent1();
           video2 = updateVideoContent2();
         });
@@ -391,7 +479,7 @@ class _PatternPageState extends State<PatternPage> {
                           importantMessageTranslations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 22.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
@@ -428,7 +516,7 @@ class _PatternPageState extends State<PatternPage> {
                   color: Colors.black),
               label: Text(
                 whyTranslations[languages[languageIndex]] ?? "WHY?",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(fontSize: 20.0, color: Colors.black),
               ),
               onPressed: () {
                 Navigator.push(
@@ -471,7 +559,7 @@ class _PatternPageState extends State<PatternPage> {
                   Flexible(
                     child: Text(
                       contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
                     ),
                   ),
                 ],
@@ -480,13 +568,13 @@ class _PatternPageState extends State<PatternPage> {
           );
   }
 
-  Widget updateMethodContent() {
-    return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.black,
-        ));
-  }
+  // Widget updateMethodContent() {
+  //   return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
+  //       style: TextStyle(
+  //         fontSize: 22.0,
+  //         color: Colors.black,
+  //       ));
+  // }
 
   String _getAsset(String videoKey, String language) {
     String asset =
@@ -545,6 +633,12 @@ class _PatternPageState extends State<PatternPage> {
     }
     return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
   }
+
+  // Widget getVideoContent(Map<String, List<String>> videoContentMap, Map<String, List<String>> videoTitleMap) {
+  //   String asset = videoContentMap[languages[languageIndex]]![methodIndex];
+  //   String title = videoTitleMap[languages[languageIndex]]![0];
+  //   return VideoWidget(videoAsset: asset, title: title);
+  // }
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
     return AudioWidget(

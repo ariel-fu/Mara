@@ -141,7 +141,7 @@ class _imLaunchState extends State<imLaunchScreen> {
                         textAlign: TextAlign.center),
                     SizedBox(height: 50.0),
                     Text(translations2[_currentLanguage]!,
-                        style: TextStyle(fontSize: 24.0),
+                        style: TextStyle(fontFamily: "Montserrat", fontSize: 24.0),
                         textAlign: TextAlign.center),
                     //contentTextBold(),
                   ]))
@@ -167,6 +167,7 @@ class _imLaunchState extends State<imLaunchScreen> {
                       },
                       child: Text(
                         translations4[_currentLanguage]!,
+                        style: TextStyle(fontSize: 22, color: Colors.black)
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: MaraColors.lavender,
@@ -192,6 +193,7 @@ class _imLaunchState extends State<imLaunchScreen> {
                   },
                   child: Text(
                     translations3[_currentLanguage]!,
+                    style: TextStyle(fontSize: 22, color: Colors.black)
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MaraColors.lavender,

@@ -269,7 +269,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -292,7 +292,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -316,7 +316,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -339,7 +339,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -363,7 +363,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -387,7 +387,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -413,7 +413,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -506,7 +506,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.black,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
             ),
           ),
         ),
@@ -532,7 +532,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.black,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
             ),
           ),
         ),

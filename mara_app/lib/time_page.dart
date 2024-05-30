@@ -226,7 +226,7 @@ class _TimePageState extends State<TimePage> {
               onPressed: () {
                 setState(() {
                   methodIndex = index;
-                  updateMethodContent();
+                  //updateMethodContent();
                 });
               },
               color: isSelected ? Colors.black : Colors.transparent,
@@ -263,7 +263,7 @@ class _TimePageState extends State<TimePage> {
         setState(() {
           languageIndex = index;
           overrideIndex = true;
-          updateMethodContent();
+          //updateMethodContent();
         });
       },
       style: ElevatedButton.styleFrom(
@@ -328,7 +328,7 @@ class _TimePageState extends State<TimePage> {
                           importantMessageTranslations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 22.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
@@ -343,7 +343,7 @@ class _TimePageState extends State<TimePage> {
             icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
             label: Text(
               learnMoreTranslations[languages[languageIndex]] ?? "Learn more",
-              style: TextStyle(color: Colors.black)
+              style: TextStyle(fontSize: 22.0, color: Colors.black),
             ),
             style: TextButton.styleFrom(
               backgroundColor: MaraColors.lavender, // Button background color
@@ -385,7 +385,7 @@ class _TimePageState extends State<TimePage> {
             Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
               ),
             ),
           ],
@@ -394,15 +394,15 @@ class _TimePageState extends State<TimePage> {
     );
   }
 
-  Widget updateMethodContent() {
-    return Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.black,
-      )
-    );
-  }
+  // Widget updateMethodContent() {
+  //   return Text(
+  //     contentDescriptionMap[languages[languageIndex]]![methodIndex],
+  //     style: TextStyle(
+  //       fontSize: 22.0,
+  //       color: Colors.black,
+  //     )
+  //   );
+  // }
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
     return AudioWidget(audioAsset: audioMap[languages[languageIndex]]![audioIndex]);
