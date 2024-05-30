@@ -294,7 +294,7 @@ class _ReadyPageState extends State<ReadyPage> {
             contentArea(),
             additionalTextSection(),
             SizedBox(
-                width: boxWidth,
+                width: boxWidth * 0.8,
                 height: availableHeight * 0.6 * 0.5,
                 child: Center(
                   child: getVideoContent(),
