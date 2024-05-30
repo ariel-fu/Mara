@@ -115,7 +115,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
   // String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
   // String videoTitle2 = 'Video 2 Language Not Selected';
 
-    final Map<String, Map<String, String>> _videos = {
+  final Map<String, Map<String, String>> _videos = {
     'assets': {
       'Kiswahili': 'videoAudio/videos/peer/peer3KS.mp4',
       'Dholuo': 'videoAudio/videos/peer/peer3DL.mp4',
@@ -219,29 +219,36 @@ class _EmergencyPageState extends State<EmergencyPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, size: 48.0),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Center(
-          child: Text(titleContentMap[languages[languageIndex]]!,
-          style: TextStyle(
+            child: Text(titleContentMap[languages[languageIndex]]!,
+                style: TextStyle(
                     fontFamily: 'PoetsenOne',
                     color: MaraColors.purple,
-                    fontSize: 36.0)
-          )
-        ),
+                    fontSize: 36.0))),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home, size: 48.0),
+            onPressed: () {
+              Navigator.pushReplacementNamed(
+                context,
+                '/home',
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(subtitleContentMap[languages[languageIndex]]!,
-            style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: MaraColors.magentaPurple,
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.bold
-            )
-          ),
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  color: MaraColors.magentaPurple,
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold)),
           //children: [
           Container(
               height: containerHeight * 0.1,
@@ -307,24 +314,21 @@ class _EmergencyPageState extends State<EmergencyPage> {
           SizedBox(height: 20.0),
 
           Expanded(
-            child: Container(
-            //height: containerHeight * 0.6, // Adjust as needed
-              child: RawScrollbar(
-                thumbColor: const Color.fromARGB(255, 232, 132, 165),
-                thumbVisibility: true,
-                trackVisibility: false,
-                thickness: 25.0,
-                radius: Radius.circular(20),
-                
-              
-                child: LayoutBuilder(
-                  builder: (context, constraint) {
-                    return SingleChildScrollView(
-                      child: ConstrainedBox(
-                        constraints:
-                            BoxConstraints(minHeight: constraint.maxHeight),
-                        child: IntrinsicHeight(
-                          child: Flex(
+              child: Container(
+                  //height: containerHeight * 0.6, // Adjust as needed
+                  child: RawScrollbar(
+            thumbColor: const Color.fromARGB(255, 232, 132, 165),
+            thumbVisibility: true,
+            trackVisibility: false,
+            thickness: 25.0,
+            radius: Radius.circular(20),
+            child: LayoutBuilder(builder: (context, constraint) {
+              return SingleChildScrollView(
+                  child: ConstrainedBox(
+                      constraints:
+                          BoxConstraints(minHeight: constraint.maxHeight),
+                      child: IntrinsicHeight(
+                        child: Flex(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             direction: Axis.vertical,
                             children: [
@@ -332,57 +336,47 @@ class _EmergencyPageState extends State<EmergencyPage> {
                               contentBox('2'),
                               contentBox('3'),
                               SizedBox(
-                                width: boxWidth * 0.8,
-                                height: boxHeight * 0.5 * 0.7,
-                                //child: Center(child: video1),
-                                child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
-                              ),
+                                  width: boxWidth * 0.8,
+                                  height: boxHeight * 0.5 * 0.7,
+                                  //child: Center(child: video1),
+                                  child: VideoWidget(
+                                      videoAsset: _getAsset(),
+                                      title: _getTitle())),
                               //place new content next to e-pill image
                               Container(
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,                               
-                                  children: [
+                                  child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
                                     getAudio(audioContentMap, 3),
                                     SizedBox(width: 10.0),
-
                                     Expanded(
-                                      child: Column(children:[
-                                       Text(
-                                        _t('4'),
-                                        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                                      child: Column(children: [
+                                        Text(
+                                          _t('4'),
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                      
-                                      Text(
+                                        Text(
                                           _t('5'),
                                           style: TextStyle(fontSize: 16.0),
-                                      ),
-                                    ]),
+                                        ),
+                                      ]),
                                     ),
-
-                                
                                     Image.asset(
                                       'assets/emergency_photos.png',
                                       width: 500,
-                                      height:500,
+                                      height: 500,
                                       fit: BoxFit.cover,
                                     ),
-                                  ]
-                                )
-                              ),
-                            ]
-                          ),
-                        )
-                      )
-                    );
-                  }
-                ),
-              )
-          
-            )
-          )
+                                  ])),
+                            ]),
+                      )));
+            }),
+          )))
         ],
       ),
-    
     );
   }
 
@@ -452,7 +446,9 @@ class _EmergencyPageState extends State<EmergencyPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-            if (contentNum == 0 || contentNum == 1 || contentNum == 2) // just first 3 boxes
+            if (contentNum == 0 ||
+                contentNum == 1 ||
+                contentNum == 2) // just first 3 boxes
               Text(
                 contentKey,
                 style: TextStyle(fontSize: 30.0),
