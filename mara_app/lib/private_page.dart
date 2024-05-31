@@ -422,7 +422,7 @@ class _PrivatePageState extends State<PrivatePage> {
                                     languages[languageIndex]] ??
                                 "Important message not found",
                             style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 22.0, fontWeight: FontWeight.bold
+                              fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold
                             ),
                           ),
                         )
@@ -438,7 +438,7 @@ class _PrivatePageState extends State<PrivatePage> {
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Learn more",
-                  style: TextStyle(fontSize: 22.0, color: Colors.black)
+                  style: TextStyle(fontSize: 20.0, color: Colors.black)
                   ),
               style: TextButton.styleFrom(
                 backgroundColor: MaraColors.lavender,

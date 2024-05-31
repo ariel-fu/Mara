@@ -46,6 +46,42 @@ class _BleedingPageState extends State<BleedingPage> {
     }
   }
 
+  final Map<String, List<String>> videoContentMap = {
+    "Kiswahili": [
+      "videoAudio/videos/peer/peer2KS.mp4", // method 1 - condom
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/peer2KS.mp4",
+    ],
+    "Dholuo": [
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+      "videoAudio/videos/peer/peer2DL.mp4",
+    ],
+    "English": [
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/peer2E.mp4",
+    ],
+  };
+
+  final Map<String, List<String>> videoTitleMap = {
+    "Kiswahili": ["Video: Mtoa huduma wa afya anaelezea"],
+    "Dholuo": ["Video: Jachiw thieth lero"],
+    "English": ["Video: a provider explains"],
+  };
+
   final Map<String, String> titleTranslations = {
     "English": "Period changes EXPLAINED", 
     "Kiswahili": "Mabadiliko ya hedhi IMEELEZWA", 
@@ -141,6 +177,13 @@ class _BleedingPageState extends State<BleedingPage> {
         children: [
           SizedBox(height: availableHeight * 0.01),
           methodSelectionRow(),
+          SizedBox(
+            width: boxWidth * 0.8,
+            height: availableHeight * 0.6 * 0.5,
+            child: Center(
+              child: getVideoContent(),
+            ),
+          ),
           SizedBox(height: 15.0),
           contentArea(),
         ],
@@ -166,7 +209,7 @@ class _BleedingPageState extends State<BleedingPage> {
               onPressed: () {
                 setState(() {
                   methodIndex = index;
-                  updateMethodContent();
+                  //updateMethodContent();
                 });
               },
               color: Colors.black, //all text is black
@@ -273,7 +316,7 @@ class _BleedingPageState extends State<BleedingPage> {
                   Flexible(
                     child: Text(
                       contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
                     ),
                   ),
                 ],
@@ -282,14 +325,20 @@ class _BleedingPageState extends State<BleedingPage> {
           );
   }
 
-  Widget updateMethodContent() {
-    return Text(
-      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-      style: TextStyle(
-        fontSize: 20.0,
-        color: Colors.black,
-      )
-    );
+  // Widget updateMethodContent() {
+  //   return Text(
+  //     contentDescriptionMap[languages[languageIndex]]![methodIndex],
+  //     style: TextStyle(
+  //       fontSize: 20.0,
+  //       color: Colors.black,
+  //     )
+  //   );
+  // }
+
+  Widget getVideoContent() {
+    String asset = videoContentMap[languages[languageIndex]]![methodIndex];
+    String title = videoTitleMap[languages[languageIndex]]![0];
+    return VideoWidget(videoAsset: asset, title: title);
   }
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
