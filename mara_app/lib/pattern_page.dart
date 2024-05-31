@@ -15,11 +15,12 @@ class PatternPage extends StatefulWidget {
 }
 
 class _PatternPageState extends State<PatternPage> {
-  //String _currentLanguage = 'English';
   //Widget methodContent = Text('method content');
   // Widget methodContent = updateMethodContent();
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
+  bool overrideIndex = false;
+
   // String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
   // String videoTitle1 = 'Video 1 Language Not Selected';
   // String videoAsset2 = 'videoAudio/videos/peer/peer1E.mp4';
@@ -32,18 +33,12 @@ class _PatternPageState extends State<PatternPage> {
   //     videoAsset: 'videoAudio/videos/peer/peer1E.mp4',
   //     title: 'Video: a peer explains');
 
-  String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
-  String videoTitle1 = 'Video 1 Language Not Selected';
-  String videoAsset2 = 'videoAudio/videos/peer/peer1E.mp4';
-  String videoTitle2 = 'Video 2 Language Not Selected';
-
-  Widget video1 = VideoWidget(
-      videoAsset: 'videoAudio/videos/provider/provider1E.mp4',
-      title: 'Video: a provider explains');
-  Widget video2 = VideoWidget(
-      videoAsset: 'videoAudio/videos/peer/peer1E.mp4',
-      title: 'Video: a peer explains');
-  bool overrideIndex = false;
+  // late String videoAsset1;
+  // late String videoTitle1;
+  // late String videoAsset2;
+  // late String videoTitle2;
+  // late Widget video1 = VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
+  // late Widget video2 = VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
 
   @override
   void initState() {
@@ -165,112 +160,112 @@ class _PatternPageState extends State<PatternPage> {
   };
 
   // //Video HashMap: specifies video asset and text/title based on language and video
-  // final Map<String, List<String>> video_provider_ContentMap = {
-  //     "Kiswahili": [
-  //       'videoAudio/videos/provider/provider1KS.mp4',
-  //       'videoAudio/videos/provider/provider1KS.mp4',
-  //       'videoAudio/videos/provider/provider1KS.mp4',
-  //       'videoAudio/videos/provider/provider1KS.mp4',
-  //       'videoAudio/videos/provider/provider1KS.mp4',
-  //       'videoAudio/videos/provider/provider1KS.mp4',
-  //       'videoAudio/videos/provider/provider1KS.mp4',
-  //     ],
-  //     "Dholuo": [
-  //       'videoAudio/videos/provider/provider1DL.mp4',
-  //       'videoAudio/videos/provider/provider1DL.mp4',
-  //       'videoAudio/videos/provider/provider1DL.mp4',
-  //       'videoAudio/videos/provider/provider1DL.mp4',
-  //       'videoAudio/videos/provider/provider1DL.mp4',
-  //       'videoAudio/videos/provider/provider1DL.mp4',
-  //       'videoAudio/videos/provider/provider1DL.mp4',
-  //     ],
-  //     "English": [
-  //       'videoAudio/videos/provider/provider1E.mp4',
-  //       'videoAudio/videos/provider/provider1E.mp4',
-  //       'videoAudio/videos/provider/provider1E.mp4',
-  //       'videoAudio/videos/provider/provider1E.mp4',
-  //       'videoAudio/videos/provider/provider1E.mp4',
-  //       'videoAudio/videos/provider/provider1E.mp4',
-  //       'videoAudio/videos/provider/provider1E.mp4',
-  //     ],
-  // };
-
-  // final Map<String, List<String>> video_peer_ContentMap = {
-  //     "Kiswahili": [
-  //       'videoAudio/videos/provider/peer1KS.mp4',
-  //       'videoAudio/videos/provider/peer1KS.mp4',
-  //       'videoAudio/videos/provider/peer1KS.mp4',
-  //       'videoAudio/videos/provider/peer1KS.mp4',
-  //       'videoAudio/videos/provider/peer1KS.mp4',
-  //       'videoAudio/videos/provider/peer1KS.mp4',
-  //       'videoAudio/videos/provider/peer1KS.mp4',
-  //     ],
-  //     "Dholuo": [
-  //       'videoAudio/videos/provider/peer1DL.mp4',
-  //       'videoAudio/videos/provider/peer1DL.mp4',
-  //       'videoAudio/videos/provider/peer1DL.mp4',
-  //       'videoAudio/videos/provider/peer1DL.mp4',
-  //       'videoAudio/videos/provider/peer1DL.mp4',
-  //       'videoAudio/videos/provider/peer1DL.mp4',
-  //       'videoAudio/videos/provider/peer1DL.mp4',
-  //     ],
-  //     "English": [
-  //       'videoAudio/videos/provider/peer1E.mp4',
-  //       'videoAudio/videos/provider/peer1E.mp4',
-  //       'videoAudio/videos/provider/peer1E.mp4',
-  //       'videoAudio/videos/provider/peer1E.mp4',
-  //       'videoAudio/videos/provider/peer1E.mp4',
-  //       'videoAudio/videos/provider/peer1E.mp4',
-  //       'videoAudio/videos/provider/peer1E.mp4',
-  //     ],
-  // };
-
-  // final Map<String, List<String>> video_provider_TitleMap = {
-  //   "Kiswahili": ["Video: Jachiw thieth lero"],
-  //   "Dholuo": ["Video: Mtoa huduma wa afya anaelezea"],
-  //   "English": ["Video: a provider explains"],
-  // };
-
-  // final Map<String, List<String>> video_peer_TitleMap = {
-  //   "Kiswahili": ["Video: Mwenzio anaelezea"],
-  //   "Dholuo": ["Video: Mbasni lero"],
-  //   "English": ["Video: a peer explains"],
-  // };
-
-
-  final Map<String, Map<String, Map<String, String>>> languageToVideo = {
-    'video1': {
-      '0': {
-        // Language code 0
-        'video': 'videoAudio/videos/provider/provider1KS.mp4',
-        'text': 'Video: Jachiw thieth lero',
-      },
-      '1': {
-        // Language code 1
-        'video': 'videoAudio/videos/provider/provider1DL.mp4',
-        'text': 'Video: Mtoa huduma wa afya anaelezea',
-      },
-      '2': {
-        // Language code 2
-        'video': 'videoAudio/videos/provider/provider1E.mp4',
-        'text': 'Video: a provider explains',
-      },
-    },
-    'video2': {
-      '0': {
-        'video': 'videoAudio/videos/peer/peer1KS.mp4',
-        'text': 'Video: Mwenzio anaelezeaa',
-      },
-      '1': {
-        'video': 'videoAudio/videos/peer/peer1DL.mp4',
-        'text': 'Video: Mbasni lero',
-      },
-      '2': {
-        'video': 'videoAudio/videos/peer/peer1E.mp4',
-        'text': 'Video: a peer explains',
-      },
-    },
+  final Map<String, List<String>> video_provider_ContentMap = {
+      "Kiswahili": [
+        'videoAudio/videos/provider/provider1KS.mp4',
+        'videoAudio/videos/provider/provider1KS.mp4',
+        'videoAudio/videos/provider/provider1KS.mp4',
+        'videoAudio/videos/provider/provider1KS.mp4',
+        'videoAudio/videos/provider/provider1KS.mp4',
+        'videoAudio/videos/provider/provider1KS.mp4',
+        'videoAudio/videos/provider/provider1KS.mp4',
+      ],
+      "Dholuo": [
+        'videoAudio/videos/provider/provider1DL.mp4',
+        'videoAudio/videos/provider/provider1DL.mp4',
+        'videoAudio/videos/provider/provider1DL.mp4',
+        'videoAudio/videos/provider/provider1DL.mp4',
+        'videoAudio/videos/provider/provider1DL.mp4',
+        'videoAudio/videos/provider/provider1DL.mp4',
+        'videoAudio/videos/provider/provider1DL.mp4',
+      ],
+      "English": [
+        'videoAudio/videos/provider/provider1E.mp4',
+        'videoAudio/videos/provider/provider1E.mp4',
+        'videoAudio/videos/provider/provider1E.mp4',
+        'videoAudio/videos/provider/provider1E.mp4',
+        'videoAudio/videos/provider/provider1E.mp4',
+        'videoAudio/videos/provider/provider1E.mp4',
+        'videoAudio/videos/provider/provider1E.mp4',
+      ],
   };
+
+  final Map<String, List<String>> video_peer_ContentMap = {
+      "Kiswahili": [
+        'videoAudio/videos/provider/peer1KS.mp4',
+        'videoAudio/videos/provider/peer1KS.mp4',
+        'videoAudio/videos/provider/peer1KS.mp4',
+        'videoAudio/videos/provider/peer1KS.mp4',
+        'videoAudio/videos/provider/peer1KS.mp4',
+        'videoAudio/videos/provider/peer1KS.mp4',
+        'videoAudio/videos/provider/peer1KS.mp4',
+      ],
+      "Dholuo": [
+        'videoAudio/videos/provider/peer1DL.mp4',
+        'videoAudio/videos/provider/peer1DL.mp4',
+        'videoAudio/videos/provider/peer1DL.mp4',
+        'videoAudio/videos/provider/peer1DL.mp4',
+        'videoAudio/videos/provider/peer1DL.mp4',
+        'videoAudio/videos/provider/peer1DL.mp4',
+        'videoAudio/videos/provider/peer1DL.mp4',
+      ],
+      "English": [
+        'videoAudio/videos/provider/peer1E.mp4',
+        'videoAudio/videos/provider/peer1E.mp4',
+        'videoAudio/videos/provider/peer1E.mp4',
+        'videoAudio/videos/provider/peer1E.mp4',
+        'videoAudio/videos/provider/peer1E.mp4',
+        'videoAudio/videos/provider/peer1E.mp4',
+        'videoAudio/videos/provider/peer1E.mp4',
+      ],
+  };
+
+  final Map<String, List<String>> video_provider_TitleMap = {
+    "Kiswahili": ["Video: Jachiw thieth lero"],
+    "Dholuo": ["Video: Mtoa huduma wa afya anaelezea"],
+    "English": ["Video: a provider explains"],
+  };
+
+  final Map<String, List<String>> video_peer_TitleMap = {
+    "Kiswahili": ["Video: Mwenzio anaelezea"],
+    "Dholuo": ["Video: Mbasni lero"],
+    "English": ["Video: a peer explains"],
+  };
+
+
+  // final Map<String, Map<String, Map<String, String>>> languageToVideo = {
+  //   'video1': {
+  //     '0': {
+  //       // Language code 0
+  //       'video': 'videoAudio/videos/provider/provider1KS.mp4',
+  //       'text': 'Video: Jachiw thieth lero',
+  //     },
+  //     '1': {
+  //       // Language code 1
+  //       'video': 'videoAudio/videos/provider/provider1DL.mp4',
+  //       'text': 'Video: Mtoa huduma wa afya anaelezea',
+  //     },
+  //     '2': {
+  //       // Language code 2
+  //       'video': 'videoAudio/videos/provider/provider1E.mp4',
+  //       'text': 'Video: a provider explains',
+  //     },
+  //   },
+  //   'video2': {
+  //     '0': {
+  //       'video': 'videoAudio/videos/peer/peer1KS.mp4',
+  //       'text': 'Video: Mwenzio anaelezeaa',
+  //     },
+  //     '1': {
+  //       'video': 'videoAudio/videos/peer/peer1DL.mp4',
+  //       'text': 'Video: Mbasni lero',
+  //     },
+  //     '2': {
+  //       'video': 'videoAudio/videos/peer/peer1E.mp4',
+  //       'text': 'Video: a peer explains',
+  //     },
+  //   },
+  // };
 
   @override
   Widget build(BuildContext context) {
@@ -316,23 +311,23 @@ class _PatternPageState extends State<PatternPage> {
               SizedBox(
                 width: boxWidth / 2 - 25,
                 height: boxHeight * 0.5 * 0.6,
-                child: Center(
-                  child: video1
-                )
                 // child: Center(
-                //   child: getVideoContent(video_provider_ContentMap, video_provider_TitleMap)
+                //   child: video1
                 // )
+                child: Center(
+                  child: getVideoContent(video_provider_ContentMap, video_provider_TitleMap)
+                )
               ),
               SizedBox(width: 10.0),
               SizedBox(
                 width: boxWidth / 2 - 25,
                 height: boxHeight * 0.5 * 0.6,
-                child: Center(
-                  child: video2
-                )
                 // child: Center(
-                //   child: getVideoContent(video_peer_ContentMap, video_peer_TitleMap)
+                //   child: video2
                 // )
+                child: Center(
+                  child: getVideoContent(video_peer_ContentMap, video_peer_TitleMap)
+                )
 
               ),
             ]
@@ -397,8 +392,8 @@ class _PatternPageState extends State<PatternPage> {
           languageIndex = index;
           overrideIndex = true;
           //updateMethodContent();
-          video1 = updateVideoContent1();
-          video2 = updateVideoContent2();
+          // video1 = updateVideoContent1();
+          // video2 = updateVideoContent2();
         });
       },
       style: ElevatedButton.styleFrom(
@@ -479,7 +474,7 @@ class _PatternPageState extends State<PatternPage> {
                           importantMessageTranslations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 22.0, fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
@@ -496,7 +491,8 @@ class _PatternPageState extends State<PatternPage> {
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Learn more",
-                  style: TextStyle(color: Colors.black)),
+                  style: TextStyle(fontSize: 20.0, color: Colors.black)
+                ),
               style: TextButton.styleFrom(
                 backgroundColor: MaraColors.lavender,
                 // Button background color
@@ -576,19 +572,19 @@ class _PatternPageState extends State<PatternPage> {
   //       ));
   // }
 
-  String _getAsset(String videoKey, String language) {
-    String asset =
-        languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
-    print('Asset for $videoKey in $language: $asset');
-    return asset;
-  }
+  // String _getAsset(String videoKey, String language) {
+  //   String asset =
+  //       languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+  //   print('Asset for $videoKey in $language: $asset');
+  //   return asset;
+  // }
 
-  String _getTitle(String videoKey, String language) {
-    String title =
-        languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
-    print('Title for $videoKey in $language: $title');
-    return title;
-  }
+  // String _getTitle(String videoKey, String language) {
+  //   String title =
+  //       languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
+  //   print('Title for $videoKey in $language: $title');
+  //   return title;
+  // }
 
   void _switchLanguage(int language) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -606,39 +602,39 @@ class _PatternPageState extends State<PatternPage> {
     });
   }
 
-  Widget updateVideoContent1() {
-    if (languageIndex == 0) {
-      videoAsset1 = _getAsset('video1', '0');
-      videoTitle1 = _getTitle('video1', '0');
-    } else if (languageIndex == 1) {
-      videoAsset1 = _getAsset('video1', '1');
-      videoTitle1 = _getTitle('video1', '1');
-    } else if (languageIndex == 2) {
-      videoAsset1 = _getAsset('video1', '2');
-      videoTitle1 = _getTitle('video1', '2');
-    }
-    return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
-  }
-
-  Widget updateVideoContent2() {
-    if (languageIndex == 0) {
-      videoAsset2 = _getAsset('video2', '0');
-      videoTitle2 = _getTitle('video2', '0');
-    } else if (languageIndex == 1) {
-      videoAsset2 = _getAsset('video2', '1');
-      videoTitle2 = _getTitle('video2', '1');
-    } else if (languageIndex == 2) {
-      videoAsset2 = _getAsset('video2', '2');
-      videoTitle2 = _getTitle('video2', '2');
-    }
-    return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
-  }
-
-  // Widget getVideoContent(Map<String, List<String>> videoContentMap, Map<String, List<String>> videoTitleMap) {
-  //   String asset = videoContentMap[languages[languageIndex]]![methodIndex];
-  //   String title = videoTitleMap[languages[languageIndex]]![0];
-  //   return VideoWidget(videoAsset: asset, title: title);
+  // Widget updateVideoContent1() {
+  //   if (languageIndex == 0) {
+  //     videoAsset1 = _getAsset('video1', '0');
+  //     videoTitle1 = _getTitle('video1', '0');
+  //   } else if (languageIndex == 1) {
+  //     videoAsset1 = _getAsset('video1', '1');
+  //     videoTitle1 = _getTitle('video1', '1');
+  //   } else if (languageIndex == 2) {
+  //     videoAsset1 = _getAsset('video1', '2');
+  //     videoTitle1 = _getTitle('video1', '2');
+  //   }
+  //   return VideoWidget(videoAsset: videoAsset1, title: videoTitle1);
   // }
+
+  // Widget updateVideoContent2() {
+  //   if (languageIndex == 0) {
+  //     videoAsset2 = _getAsset('video2', '0');
+  //     videoTitle2 = _getTitle('video2', '0');
+  //   } else if (languageIndex == 1) {
+  //     videoAsset2 = _getAsset('video2', '1');
+  //     videoTitle2 = _getTitle('video2', '1');
+  //   } else if (languageIndex == 2) {
+  //     videoAsset2 = _getAsset('video2', '2');
+  //     videoTitle2 = _getTitle('video2', '2');
+  //   }
+  //   return VideoWidget(videoAsset: videoAsset2, title: videoTitle2);
+  // }
+
+  Widget getVideoContent(Map<String, List<String>> videoContentMap, Map<String, List<String>> videoTitleMap) {
+    String asset = videoContentMap[languages[languageIndex]]![methodIndex];
+    String title = videoTitleMap[languages[languageIndex]]![0];
+    return VideoWidget(videoAsset: asset, title: title);
+  }
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
     return AudioWidget(
