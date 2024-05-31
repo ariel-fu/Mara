@@ -292,16 +292,55 @@ class _ReadyPageState extends State<ReadyPage> {
             SizedBox(height: 15.0),
             methodSelectionRow(),
             SizedBox(height: 15.0),
-            contentArea(),
-            additionalTextSection(),
-            SizedBox(
-                width: boxWidth * 0.8,
-                height: availableHeight * 0.6 * 0.5,
-                child: Center(
-                  child: getVideoContent(),
-                ),
+            Expanded(
+              child: 
+                //height: containerHeight * 0.6, // Adjust as needed
+              RawScrollbar(
+                thumbColor: const Color.fromARGB(255, 232, 132, 165),
+                thumbVisibility: true,
+                trackVisibility: false,
+                thickness: 25.0,
+                radius: Radius.circular(20),
+                child: LayoutBuilder(
+                  builder: (context, constraint) {
+                    return SingleChildScrollView(
+                        child: ConstrainedBox(
+                            constraints:
+                                BoxConstraints(minHeight: constraint.maxHeight),
+                            child: IntrinsicHeight(
+                              child: Flex(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  direction: Axis.vertical,
+                                  children: [
+                                    contentArea(),
+                                    additionalTextSection(),
+                                    SizedBox(
+                                      width: boxWidth * 0.8,
+                                      height: availableHeight * 0.6 * 0.5,
+                                      child: Center(
+                                        child: getVideoContent(),
+                                      ),
+                                    ),
+                                    prep_preg_Button(),
+                                  ]
+                              )
+                            )
+                        )
+                    );
+                  }
+                )
             ),
-            prep_preg_Button(),
+            // contentArea(),
+            // additionalTextSection(),
+            // SizedBox(
+            //     width: boxWidth * 0.8,
+            //     height: availableHeight * 0.6 * 0.5,
+            //     child: Center(
+            //       child: getVideoContent(),
+            //     ),
+            // ),
+            // prep_preg_Button(),
+            )
           ]
       )
     );
@@ -447,7 +486,7 @@ class _ReadyPageState extends State<ReadyPage> {
                           importantMessage_hiv_sti_Translations[languages[languageIndex]] ??
                               "Important message not found",
                             style: TextStyle(
-                                fontFamily: 'Roboto', fontSize: 22.0, fontWeight: FontWeight.bold
+                                fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold
                             ),
                           ),
                         )
@@ -465,7 +504,7 @@ class _ReadyPageState extends State<ReadyPage> {
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Learn more",
-                  style: TextStyle(fontSize: 22.0, color: Colors.black)
+                  style: TextStyle(fontSize: 20.0, color: Colors.black)
                 ),
               style: TextButton.styleFrom(
                 backgroundColor: MaraColors.lavender,
