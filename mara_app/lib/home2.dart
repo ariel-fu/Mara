@@ -139,7 +139,7 @@ class _HomePage2State extends State<HomePage2> {
 
   // final List<bool> _selections = List.generate(6, (_) => false);
   final List<bool> _selections =
-      List.generate(7, (_) => false); //include HIV/STI page
+      List.generate(6, (_) => false); //include HIV/STI page
   bool get _allSelected => _selections.every((bool selected) => selected);
 
   void _handleTap(int index) {
@@ -176,12 +176,13 @@ class _HomePage2State extends State<HomePage2> {
         context,
         MaterialPageRoute(builder: (context) => ReadyPage()),
       );
-    } else if (index == 6) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HIVPage()),
-      );
     }
+    // } else if (index == 6) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => HIVPage()),
+    //   );
+    // }
   }
 
   void _switchLanguage(String language) async {
