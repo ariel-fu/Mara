@@ -259,7 +259,7 @@ class _WhatChanceState extends State<WhatChance> {
                 setState(() {
                   methodIndex = index;
                   //updateText();
-                  updateMethodContent();
+                  //updateMethodContent();
                 });
               },
               color: isSelected ? Colors.black : Colors.transparent,
@@ -295,7 +295,7 @@ class _WhatChanceState extends State<WhatChance> {
         setState(() {
           languageIndex = index;
           overrideIndex = true;
-          updateMethodContent();
+          //updateMethodContent();
         });
       },
       style: ElevatedButton.styleFrom(
@@ -357,7 +357,7 @@ class _WhatChanceState extends State<WhatChance> {
                           importantMessageTranslations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
@@ -384,7 +384,8 @@ class _WhatChanceState extends State<WhatChance> {
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Translation Not Found",
-                  style: TextStyle(color: Colors.black)),
+                  style: TextStyle(fontSize: 20.0, color: Colors.black),
+                  ),
             ),
           SizedBox(height: 50),
           if (methodIndex != 6)
@@ -406,7 +407,8 @@ class _WhatChanceState extends State<WhatChance> {
               label: Text(
                   whyTranslations[languages[languageIndex]] ??
                       "Translation Not Found",
-                  style: TextStyle(color: Colors.black)),
+                  style: TextStyle(fontSize: 22.0, color: Colors.black),
+                  ),
             ),
 
           if (methodIndex == 6)
@@ -457,7 +459,7 @@ class _WhatChanceState extends State<WhatChance> {
             Flexible(
               child: Text(
                 contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                 style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                 style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
               ),
             ),
           ],
@@ -466,13 +468,13 @@ class _WhatChanceState extends State<WhatChance> {
     );
   }
 
-  Widget updateMethodContent() {
-    return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(
-          fontSize: 18.0,
-          color: Colors.black,
-        ));
-  }
+  // Widget updateMethodContent() {
+  //   return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
+  //       style: TextStyle(
+  //         fontSize: 22.0,
+  //         color: Colors.black,
+  //       ));
+  // }
 
   void WhyDoPage() {
     Navigator.push(

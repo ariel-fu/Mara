@@ -166,7 +166,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                     },
                     child: Text(
                       translations2[_currentLanguage]!,
-                      style: TextStyle(color: Colors.black)
+                      style: TextStyle(fontSize: 22, color: Colors.black)
                     ),
                     style: TextButton.styleFrom(
                       backgroundColor: MaraColors.lavender,

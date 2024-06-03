@@ -321,7 +321,7 @@ class _PrivatePageState extends State<PrivatePage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                updateMethodContent();
+                //updateMethodContent();
               });
             },
             splashRadius: 40,
@@ -354,7 +354,7 @@ class _PrivatePageState extends State<PrivatePage> {
         setState(() {
           languageIndex = index;
           overrideIndex = true;
-          updateMethodContent();
+          //updateMethodContent();
           //video1 = updateVideoContent1();
         });
       },
@@ -377,7 +377,7 @@ class _PrivatePageState extends State<PrivatePage> {
                 child: Text(
                   subtitleTranslations[languages[languageIndex]] ??
                       "Translation not found",
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -422,9 +422,8 @@ class _PrivatePageState extends State<PrivatePage> {
                                     languages[languageIndex]] ??
                                 "Important message not found",
                             style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold
+                            ),
                           ),
                         )
                       ])),
@@ -439,7 +438,8 @@ class _PrivatePageState extends State<PrivatePage> {
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Learn more",
-                  style: TextStyle(color: Colors.black)),
+                  style: TextStyle(fontSize: 20.0, color: Colors.black)
+                  ),
               style: TextButton.styleFrom(
                 backgroundColor: MaraColors.lavender,
                 // Button background color
@@ -483,7 +483,7 @@ class _PrivatePageState extends State<PrivatePage> {
               Flexible(
                 child: Text(
                   contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                  style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                  style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
                 ),
               ),
             ],
@@ -493,13 +493,13 @@ class _PrivatePageState extends State<PrivatePage> {
     );
   }
 
-  Widget updateMethodContent() {
-    return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.black,
-        ));
-  }
+  // Widget updateMethodContent() {
+  //   return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
+  //       style: TextStyle(
+  //         fontSize: 22.0,
+  //         color: Colors.black,
+  //       ));
+  // }
 
   Widget getVideoContent() {
     String asset = videoContentMap[languages[languageIndex]]![methodIndex];

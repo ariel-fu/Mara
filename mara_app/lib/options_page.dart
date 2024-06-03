@@ -281,7 +281,7 @@ class _OptionsPageState extends State<OptionsPage> {
                             ? Text("Please select a method to learn more")
                             :Text(methods[methodIndex]!.name,
                                 style: TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 25.0,
                                     fontWeight: FontWeight.bold)),
                         ]
                     ), //real image of method
@@ -291,7 +291,8 @@ class _OptionsPageState extends State<OptionsPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             getAudio(),
-                          ]),
+                          ]
+                      ),
                       Flexible(
                         child: methodRef == null
                             ? SizedBox(height: 20.0)
@@ -299,7 +300,11 @@ class _OptionsPageState extends State<OptionsPage> {
                                 padding: const EdgeInsets.all(15.0),
                                 child: Text(
                                     methodDetailsData[methodRef]!['options_page']
-                                        [languages[_languageIndex]]),
+                                        [languages[_languageIndex]],                                    
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto', fontSize: 22.0
+                                    ),
+                                ),
                               ),
                       ),
                       if (methodIndex != null)
@@ -372,7 +377,7 @@ class _OptionsPageState extends State<OptionsPage> {
             }
           },
         ),
-      ),
+        )
     );
   }
 

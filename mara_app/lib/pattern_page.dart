@@ -15,8 +15,12 @@ class PatternPage extends StatefulWidget {
 }
 
 class _PatternPageState extends State<PatternPage> {
-  //String _currentLanguage = 'English';
-  Widget methodContent = Text('method content');
+  //Widget methodContent = Text('method content');
+  // Widget methodContent = updateMethodContent();
+  int methodIndex = 0; // Index of the selected icon button, 0 for default
+  int languageIndex = 2; // similar indexing for language
+  bool overrideIndex = false;
+
   String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
   String videoAsset2 = 'videoAudio/videos/peer/peer1E.mp4';
@@ -28,11 +32,6 @@ class _PatternPageState extends State<PatternPage> {
   Widget video2 = VideoWidget(
       videoAsset: 'videoAudio/videos/peer/peer1E.mp4',
       title: 'Video: a peer explains');
-  bool overrideIndex = false;
-
-  // Widget methodContent = updateMethodContent();
-  int methodIndex = 0; // Index of the selected icon button, 0 for default
-  int languageIndex = 2; // similar indexing for language
 
   @override
   void initState() {
@@ -59,15 +58,6 @@ class _PatternPageState extends State<PatternPage> {
 
   final double _aspectRatio = 16 / 10;
   final languages = ["Kiswahili", "Dholuo", "English"];
-
-  // final content = [
-  //   "method 1",
-  //   "method 2",
-  //   "method 3",
-  //   "method 4",
-  //   "method 5",
-  //   "method 6"
-  // ];
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
@@ -241,13 +231,17 @@ class _PatternPageState extends State<PatternPage> {
               SizedBox(
                 width: boxWidth / 2 - 25,
                 height: boxHeight * 0.5 * 0.6,
-                child: Center(child: video1),
+                child: Center(
+                  child: updateVideoContent1()
+                )
               ),
               SizedBox(width: 10.0),
               SizedBox(
                 width: boxWidth / 2 - 25,
                 height: boxHeight * 0.5 * 0.6,
-                child: Center(child: video2),
+                child: Center(
+                  child: updateVideoContent2()
+                )
               ),
             ]
           ),
@@ -273,9 +267,9 @@ class _PatternPageState extends State<PatternPage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                updateMethodContent();
-                video1 = updateVideoContent1();
-                video2 = updateVideoContent2();
+                //updateMethodContent();
+                // video1 = updateVideoContent1();
+                // video2 = updateVideoContent2();
               });
             },
             splashRadius: 40,
@@ -308,9 +302,9 @@ class _PatternPageState extends State<PatternPage> {
         setState(() {
           languageIndex = index;
           overrideIndex = true;
-          updateMethodContent();
-          video1 = updateVideoContent1();
-          video2 = updateVideoContent2();
+          //updateMethodContent();
+          // video1 = updateVideoContent1();
+          // video2 = updateVideoContent2();
         });
       },
       style: ElevatedButton.styleFrom(
@@ -391,7 +385,7 @@ class _PatternPageState extends State<PatternPage> {
                           importantMessageTranslations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
@@ -408,7 +402,8 @@ class _PatternPageState extends State<PatternPage> {
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Learn more",
-                  style: TextStyle(color: Colors.black)),
+                  style: TextStyle(fontSize: 20.0, color: Colors.black)
+                ),
               style: TextButton.styleFrom(
                 backgroundColor: MaraColors.lavender,
                 // Button background color
@@ -428,7 +423,7 @@ class _PatternPageState extends State<PatternPage> {
                   color: Colors.black),
               label: Text(
                 whyTranslations[languages[languageIndex]] ?? "WHY?",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(fontSize: 20.0, color: Colors.black),
               ),
               onPressed: () {
                 Navigator.push(
@@ -471,35 +466,13 @@ class _PatternPageState extends State<PatternPage> {
                   Flexible(
                     child: Text(
                       contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
                     ),
                   ),
                 ],
               ),
             ),
           );
-  }
-
-  Widget updateMethodContent() {
-    return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.black,
-        ));
-  }
-
-  String _getAsset(String videoKey, String language) {
-    String asset =
-        languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
-    print('Asset for $videoKey in $language: $asset');
-    return asset;
-  }
-
-  String _getTitle(String videoKey, String language) {
-    String title =
-        languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
-    print('Title for $videoKey in $language: $title');
-    return title;
   }
 
   void _switchLanguage(int language) async {
@@ -517,6 +490,30 @@ class _PatternPageState extends State<PatternPage> {
       languageIndex = language;
     });
   }
+
+  // Widget updateMethodContent() {
+  //   return Text(contentDescriptionMap[languages[languageIndex]]![methodIndex],
+  //       style: TextStyle(
+  //         fontSize: 22.0,
+  //         color: Colors.black,
+  //       ));
+  // }
+
+  String _getAsset(String videoKey, String language) {
+    String asset =
+        languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
+    print('Asset for $videoKey in $language: $asset');
+    return asset;
+  }
+
+  String _getTitle(String videoKey, String language) {
+    String title =
+        languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
+    print('Title for $videoKey in $language: $title');
+    return title;
+  }
+
+
 
   Widget updateVideoContent1() {
     if (languageIndex == 0) {

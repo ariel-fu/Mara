@@ -289,18 +289,58 @@ class _ReadyPageState extends State<ReadyPage> {
               imagePath: 'assets/ready_to_have_baby_pregnant.png',
               title: importantMessage_pregnant_Translations[languages[languageIndex]] ?? "Important message not found",
             ),
+            SizedBox(height: 15.0),
             methodSelectionRow(),
             SizedBox(height: 15.0),
-            contentArea(),
-            additionalTextSection(),
-            SizedBox(
-                width: boxWidth,
-                height: availableHeight * 0.6 * 0.5,
-                child: Center(
-                  child: getVideoContent(),
-                ),
+            Expanded(
+              child: 
+                //height: containerHeight * 0.6, // Adjust as needed
+              RawScrollbar(
+                thumbColor: const Color.fromARGB(255, 232, 132, 165),
+                thumbVisibility: true,
+                trackVisibility: false,
+                thickness: 25.0,
+                radius: Radius.circular(20),
+                child: LayoutBuilder(
+                  builder: (context, constraint) {
+                    return SingleChildScrollView(
+                        child: ConstrainedBox(
+                            constraints:
+                                BoxConstraints(minHeight: constraint.maxHeight),
+                            child: IntrinsicHeight(
+                              child: Flex(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  direction: Axis.vertical,
+                                  children: [
+                                    contentArea(),
+                                    additionalTextSection(),
+                                    SizedBox(
+                                      width: boxWidth * 0.8,
+                                      height: availableHeight * 0.6 * 0.5,
+                                      child: Center(
+                                        child: getVideoContent(),
+                                      ),
+                                    ),
+                                    prep_preg_Button(),
+                                  ]
+                              )
+                            )
+                        )
+                    );
+                  }
+                )
             ),
-            prep_preg_Button(),
+            // contentArea(),
+            // additionalTextSection(),
+            // SizedBox(
+            //     width: boxWidth * 0.8,
+            //     height: availableHeight * 0.6 * 0.5,
+            //     child: Center(
+            //       child: getVideoContent(),
+            //     ),
+            // ),
+            // prep_preg_Button(),
+            )
           ]
       )
     );
@@ -406,7 +446,7 @@ class _ReadyPageState extends State<ReadyPage> {
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Text(
         subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-        style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
     );
@@ -445,8 +485,9 @@ class _ReadyPageState extends State<ReadyPage> {
                           child: Text(
                           importantMessage_hiv_sti_Translations[languages[languageIndex]] ??
                               "Important message not found",
-                          style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold
+                            ),
                           ),
                         )
                       ]
@@ -463,7 +504,8 @@ class _ReadyPageState extends State<ReadyPage> {
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Learn more",
-                  style: TextStyle(color: Colors.black)),
+                  style: TextStyle(fontSize: 20.0, color: Colors.black)
+                ),
               style: TextButton.styleFrom(
                 backgroundColor: MaraColors.lavender,
                 // Button background color
@@ -508,7 +550,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 style: TextStyle(
                     fontFamily: 'Roboto',
                     color: Colors.white,
-                    fontSize: 19.0),
+                    fontSize: 22.0),
               ),
             ),
           ],
@@ -569,7 +611,7 @@ class _ReadyPageState extends State<ReadyPage> {
                               Flexible(
                                 child: Text(
                                 title,
-                                style: TextStyle(fontFamily: 'Roboto', fontSize: 19.0, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 25.0, fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ]

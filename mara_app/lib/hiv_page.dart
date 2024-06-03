@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/home2.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'home2.dart';
 import 'video.dart';
 import 'package:mara_app/design/colors.dart';
 
@@ -177,7 +177,7 @@ class _HIVPageState extends State<HIVPage> {
         children: [
           Text(subtitleContentMap[languages[languageIndex]]!,
               style: TextStyle(
-                  fontFamily: 'PoetsenOne',
+                  fontFamily: 'Montserrat',
                   color: MaraColors.magentaPurple,
                   fontSize: 30.0)),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -206,7 +206,7 @@ class _HIVPageState extends State<HIVPage> {
                   ],
                 ),
               )),
-          SizedBox(height: 20.0),
+          SizedBox(height: 10.0),
           Container(
             height: containerHeight * 0.6, // Adjust as needed
             child: Column(

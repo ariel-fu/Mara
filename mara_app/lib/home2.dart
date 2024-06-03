@@ -275,7 +275,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -298,7 +298,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -322,7 +322,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -345,7 +345,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -369,7 +369,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -393,7 +393,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -419,7 +419,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -449,41 +449,35 @@ class _HomePage2State extends State<HomePage2> {
   }
 
   void _takeQuiz() {
-    //print('Attempting to submit. Selected options: $_selectedOptions');
-    // test
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => QuizScreen()),
-    );
-    // if (_allSelected == false) {
-    //   print('incomplete');
-    //   // Show an alert dialog or a message to complete the quiz
-    //   showDialog(
-    //     context: context,
-    //     builder: (BuildContext context) {
-    //       return AlertDialog(
-    //         title: Text("Please visit all sections before taking the quiz"),
-    //         //content: Text(_t('incompleteMessage')),
-    //         actions: <Widget>[
-    //           TextButton(
-    //             child: Text("OK"),
-    //             onPressed: () {
-    //               Navigator.of(context).pop();
-    //             },
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   );
-    //   return; // Exit the function without navigating if not all questions are answered
-    // } else {
-    //   _allSelected
-    //       ? Navigator.push(
-    //           context,
-    //           MaterialPageRoute(builder: (context) => QuizScreen()),
-    //         )
-    //       : null;
-    // }
+  //print('Attempting to submit. Selected options: $_selectedOptions'); 
+    if (_allSelected == false) {
+      print('incomplete'); 
+      // Show an alert dialog or a message to complete the quiz
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Please visit all sections before taking the quiz"),
+            //content: Text(_t('incompleteMessage')),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return; // Exit the function without navigating if not all questions are answered
+    }
+    else {
+      _allSelected ? Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => QuizScreen()),
+      ) : null;
+    }
   }
 
   Widget getAudio(Map<String, List<String>> audioContentMap, int index) {
@@ -520,7 +514,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.black,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
             ),
           ),
         ),
@@ -548,7 +542,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.black,
-                      fontSize: 24.0)),
+                      fontSize: 32.0)),
             ),
           ),
         ),
