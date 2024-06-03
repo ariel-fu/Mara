@@ -223,8 +223,7 @@ class _PrivatePageState extends State<PrivatePage> {
                 style: TextStyle(
                     fontFamily: 'PoetsenOne',
                     color: MaraColors.purple,
-                    fontSize: 36.0))
-        ),
+                    fontSize: 36.0))),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
@@ -239,7 +238,9 @@ class _PrivatePageState extends State<PrivatePage> {
           ),
         ),
       ),
-      body: Column(
+      body: Expanded(
+          child: SingleChildScrollView(
+              child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: availableHeight * 0.01),
@@ -257,7 +258,7 @@ class _PrivatePageState extends State<PrivatePage> {
           ),
           additionalTextSection(),
         ],
-      ),
+      ))),
     );
   }
 
@@ -295,11 +296,13 @@ class _PrivatePageState extends State<PrivatePage> {
         children: [
           buildIconButton(MaraIcons.condom, "Condom", 0),
           buildIconButton(MaraIcons.female_condom, "Female Condom", 1),
-          buildIconButton(MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
+          buildIconButton(
+              MaraIcons.birth_control_pills, "Pills (daily pills)", 2),
           buildIconButton(MaraIcons.syringe, "Injection (depo)", 3),
           buildIconButton(MaraIcons.contraceptive_implant, "Implant", 4),
           buildIconButton(MaraIcons.iud, "IUCD (coil)", 5),
-          buildIconButton(MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
+          buildIconButton(
+              MaraIcons.double_pills, "Emergency pill (E-pill, P2)", 6),
         ],
       ),
     );
@@ -383,8 +386,7 @@ class _PrivatePageState extends State<PrivatePage> {
               ),
             ],
           ),
-        )
-    );
+        ));
   }
 
   Widget additionalTextSection() {
@@ -422,8 +424,9 @@ class _PrivatePageState extends State<PrivatePage> {
                                     languages[languageIndex]] ??
                                 "Important message not found",
                             style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold
-                            ),
+                                fontFamily: 'Roboto',
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold),
                           ),
                         )
                       ])),
@@ -438,8 +441,7 @@ class _PrivatePageState extends State<PrivatePage> {
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Learn more",
-                  style: TextStyle(fontSize: 20.0, color: Colors.black)
-                  ),
+                  style: TextStyle(fontSize: 20.0, color: Colors.black)),
               style: TextButton.styleFrom(
                 backgroundColor: MaraColors.lavender,
                 // Button background color
@@ -472,18 +474,18 @@ class _PrivatePageState extends State<PrivatePage> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                  getAudio(audioContentMap, methodIndex),
-                ]
-              ),
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                getAudio(audioContentMap, methodIndex),
+              ]),
               SizedBox(width: 10.0),
               Flexible(
                 child: Text(
                   contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                  style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      color: Colors.white,
+                      fontSize: 22.0),
                 ),
               ),
             ],
