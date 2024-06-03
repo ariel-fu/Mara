@@ -294,13 +294,13 @@ Widget contentBox(String title, String content) {
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
+                    fontSize: 25.0,
                     color: MaraColors.purple,
                   ),
                 ),
                 Text(
                   content,
-                  style: TextStyle(fontFamily: 'Roboto', fontSize: 16.0),
+                  style: TextStyle(fontFamily: 'Roboto', fontSize: 22.0),
                 ),
               ],
             ),

@@ -7,6 +7,7 @@ import 'short_summaries.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:mara_app/providers/provider_liked_methods.dart';
+import 'package:mara_app/design/colors.dart';
 import 'package:provider/provider.dart';
 
 class RecommendationScreen extends StatefulWidget {
@@ -106,7 +107,13 @@ Widget build(BuildContext context) {
           icon: Icon(Icons.arrow_back), 
           onPressed: () => Navigator.of(context).pop(), 
         ),
-      title: Text(_t('title1')), // Use _t method for translation
+      title: Text(_t('title1'),
+        style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: MaraColors.purple,
+                      fontSize: 36.0)
+      
+      ), // Use _t method for translation
       centerTitle: true,
 
       actions: <Widget>[
@@ -152,6 +159,16 @@ Widget build(BuildContext context) {
                 _buildTitleBox(),
                 SizedBox(height: 20),
                 Expanded(
+                  child: Container(
+                  //height: containerHeight * 0.6, // Adjust as needed
+                    child: RawScrollbar(
+                      thumbColor: const Color.fromARGB(255, 232, 132, 165),
+                      thumbVisibility: true,
+                      trackVisibility: false,
+                      thickness: 25.0,
+                      radius: Radius.circular(20),
+                      
+                      
   child: ListView.builder(
     itemCount: widget.recommendations.length,
     itemBuilder: (context, index) {
@@ -164,7 +181,7 @@ Widget build(BuildContext context) {
             child: Text(
               widget.introTexts.length > index ? _t(widget.introTexts[index]) : '',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ),
           SingleChildScrollView(
@@ -182,6 +199,7 @@ Widget build(BuildContext context) {
                           Icon(
                             RecommendationModel.getIconForRecommendation(RecommendationModel.getJsonRefFromName(trimmedRec)),
                             size: 80,
+                            color: MaraColors.magentaPurple 
                           ),
                         ],
                       ),
@@ -226,6 +244,10 @@ Widget build(BuildContext context) {
                                     print('No details found for $trimmedRec');
                                   }
                                 },
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                    backgroundColor: MaraColors.lavender,
+                                  ), 
                                 child: Text('Learn More'),
                               ),
 
@@ -256,7 +278,7 @@ Widget build(BuildContext context) {
             child: Container(
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: MaraColors.purple,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Row(
@@ -267,7 +289,7 @@ Widget build(BuildContext context) {
                   Expanded(
                     child: Text(
                       widget.outroTexts.length > index ? _t(widget.outroTexts[index]) : '',
-                      style: TextStyle(fontSize: 16),
+                     style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 18.0),
                     ),
                   ),
                 ],
@@ -279,7 +301,9 @@ Widget build(BuildContext context) {
       );
     },
   ),
+  )
 )
+            )
 
               ],
             ),
@@ -313,14 +337,14 @@ Widget _buildTitleBox() {
   return Container(
     padding: EdgeInsets.all(10.0),
     margin: EdgeInsets.only(top: 20.0),
-    decoration: BoxDecoration(
-      color: Colors.grey.shade200,
-      borderRadius: BorderRadius.circular(8.0),
-    ),
+    // decoration: BoxDecoration(
+    //   color: Colors.grey.shade200,
+    //   borderRadius: BorderRadius.circular(8.0),
+    // ),
     child: Text(
       _t('recommendationTitle'),
       textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      style: TextStyle(fontFamily: 'Montserrat', color: MaraColors.magentaPurple, fontSize: 27.0)
     ),
   );
  }

@@ -406,21 +406,19 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                       child: Column(children: [
                                         Text(
                                           _t('4'),
-                                          style: TextStyle(
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 22.0, fontWeight: FontWeight.bold),
                                         ),
                                         Text(
                                           _t('5'),
-                                          style: TextStyle(fontSize: 16.0),
+                                          style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 22.0),
                                         ),
                                       ]),
                                     ),
                                 
                                     Image.asset(
                                       'assets/emergency_photos.png',
-                                      width: 400,
-                                      height: 400,
+                                      width: 300,
+                                      height: 300,
                                       fit: BoxFit.cover,
                                     ),
                                   ])),
@@ -516,7 +514,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: MaraColors.purple,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey),
         ),
@@ -529,14 +527,14 @@ class _EmergencyPageState extends State<EmergencyPage> {
                 contentNum == 2) // just first 3 boxes
               Text(
                 contentKey,
-                style: TextStyle(fontSize: 30.0),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 35.0, fontWeight: FontWeight.bold),
               ),
             getAudio(audioContentMap, contentNum),
             SizedBox(width: 10.0),
             Expanded(
               child: Text(
                 _t(contentKey),
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
               ),
             ),
           ],
@@ -545,13 +543,13 @@ class _EmergencyPageState extends State<EmergencyPage> {
     );
   }
 
-  Widget updateMethodContent(String contentKey) {
-    return Text(_t(contentKey),
-        style: TextStyle(
-          fontSize: 20.0,
-          color: Colors.black,
-        ));
-  }
+  // Widget updateMethodContent(String contentKey) {
+  //   return Text(_t(contentKey),
+  //       style: TextStyle(
+  //         fontSize: 20.0,
+  //         color: Colors.black,
+  //       ));
+  // }
 
 
   Widget getVideoContent() {

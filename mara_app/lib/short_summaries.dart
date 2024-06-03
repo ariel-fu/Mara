@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/icons/misc_icons.dart';
 import 'package:mara_app/recommendation_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mara_app/design/colors.dart';
 
 class MethodDetailsScreen extends StatefulWidget {
   final String methodName;
@@ -141,7 +142,15 @@ Widget build(BuildContext context) {
         icon: Icon(Icons.arrow_back), 
         onPressed: () => Navigator.of(context).pop(), 
       ),
-      title: Text(titleTranslations[_currentLanguage] ?? "Title not found"),
+      title: Center(
+        child: Text(titleTranslations[_currentLanguage] ?? "Title not found",
+          style: TextStyle(
+                        fontFamily: 'PoetsenOne',
+                        color: MaraColors.purple,
+                        fontSize: 36.0)
+        ),
+      ),
+
     ),
     body: ListView(
       padding: EdgeInsets.all(8.0),
@@ -166,14 +175,17 @@ Widget build(BuildContext context) {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(RecommendationModel.getIconForRecommendation(widget.methodName), size: 50),
+                  Icon(
+                    RecommendationModel.getIconForRecommendation(widget.methodName), 
+                    size: 80,
+                    color: MaraColors.magentaPurple),
                   // Image.asset(iconPath, width: 50, height: 50),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(methodName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                      Text(subtitle, style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic)), // Subtitle displayed here
+                      Text(methodName, style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold)),
+                      Text(subtitle, style: TextStyle(fontSize: 25, fontStyle: FontStyle.italic)), // Subtitle displayed here
                     ],
                   ),
                 ],
@@ -246,13 +258,13 @@ Widget buildContentCard(IconData summaryIcon, String titleKey, String contentKey
     margin: EdgeInsets.only(bottom: 10),
     padding: EdgeInsets.all(10),
     decoration: BoxDecoration(
-      color: Colors.grey.shade200,
+      color: MaraColors.purple,
       borderRadius: BorderRadius.circular(10),
     ),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(summaryIcon, size: 44),
+        Icon(summaryIcon, size: 60, color: Colors.white),
         SizedBox(width: 10),
         Expanded(
           child: hasTitle
@@ -261,18 +273,18 @@ Widget buildContentCard(IconData summaryIcon, String titleKey, String contentKey
                 children: [
                   Text(
                     translatedTitle,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8),
                   Text(
                     content,
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
                   ),
                 ],
               )
             : Text(
                 content,
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
               ),
         ),
       ],
