@@ -1,4 +1,7 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
+import 'package:mara_app/design/colors.dart';
 import 'package:mara_app/emergency.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +22,9 @@ import 'audio.dart';
 
 class HomePage2 extends StatefulWidget {
   const HomePage2({Key? key}) : super(key: key);
+  static var emergencyVisited = false;
+
+  static var stiVisited = false;
 
   @override
   State<HomePage2> createState() => _HomePage2State();
@@ -97,8 +103,8 @@ class _HomePage2State extends State<HomePage2> {
     ],
   };
 
-  final Color visistedColor = Color.fromRGBO(181, 8, 153, 1);
-  final Color notVisitedColor = Color.fromRGBO(103, 16, 157, 1);
+  final Color visitedColor = MaraColors.magentaPurple;
+  final Color notVisitedColor = MaraColors.purple;
 
   String _currentLanguage = 'English';
 
@@ -275,7 +281,7 @@ class _HomePage2State extends State<HomePage2> {
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(0),
-              tileColor: _selections[0] ? visistedColor : notVisitedColor,
+              tileColor: _selections[0] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
@@ -298,7 +304,7 @@ class _HomePage2State extends State<HomePage2> {
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(1),
-              tileColor: _selections[1] ? visistedColor : notVisitedColor,
+              tileColor: _selections[1] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
@@ -322,7 +328,7 @@ class _HomePage2State extends State<HomePage2> {
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(2),
-              tileColor: _selections[2] ? visistedColor : notVisitedColor,
+              tileColor: _selections[2] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
@@ -345,7 +351,7 @@ class _HomePage2State extends State<HomePage2> {
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(3),
-              tileColor: _selections[3] ? visistedColor : notVisitedColor,
+              tileColor: _selections[3] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
@@ -369,7 +375,7 @@ class _HomePage2State extends State<HomePage2> {
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(4),
-              tileColor: _selections[4] ? visistedColor : notVisitedColor,
+              tileColor: _selections[4] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
@@ -393,7 +399,7 @@ class _HomePage2State extends State<HomePage2> {
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(5),
-              tileColor: _selections[5] ? visistedColor : notVisitedColor,
+              tileColor: _selections[5] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             getButtonRow(),
@@ -418,7 +424,7 @@ class _HomePage2State extends State<HomePage2> {
                   color: Colors.white,
                   fontSize: 28.0,
                   fontWeight: FontWeight.bold),
-              tileColor: _allSelected ? visistedColor : notVisitedColor,
+              tileColor: _allSelected ? visitedColor : notVisitedColor,
               onTap: _takeQuiz,
             ),
           ],
@@ -493,7 +499,9 @@ class _HomePage2State extends State<HomePage2> {
           child: ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromRGBO(208, 165, 229, 1)),
+                  HomePage2.emergencyVisited
+                      ? visitedColor
+                      : Color.fromRGBO(208, 165, 229, 1)),
             ),
             onPressed: () {
               // Handle button press
@@ -521,7 +529,9 @@ class _HomePage2State extends State<HomePage2> {
           child: ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromRGBO(208, 165, 229, 1)),
+                  HomePage2.stiVisited
+                      ? visitedColor
+                      : Color.fromRGBO(208, 165, 229, 1)),
             ),
             onPressed: () {
               // Handle button press

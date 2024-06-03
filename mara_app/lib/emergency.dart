@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
+import 'home2.dart';
 import 'video.dart';
 import 'audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mara_app/design/colors.dart';
-
 
 class EmergencyPage extends StatefulWidget {
   final String initialLanguage;
@@ -30,6 +30,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   bool overrideIndex = false;
+
   // late String _currentLanguage;
 
   // String _getAsset() {
@@ -229,6 +230,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
 
   @override
   Widget build(BuildContext context) {
+    HomePage2.emergencyVisited = true;
     final int? routeArgumentIndex =
         ModalRoute.of(context)?.settings.arguments as int?;
 
@@ -278,91 +280,25 @@ class _EmergencyPageState extends State<EmergencyPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(subtitleContentMap[languages[languageIndex]]!,
-            style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: MaraColors.magentaPurple,
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.bold
-            )
-          ),
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  color: MaraColors.magentaPurple,
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold)),
           Container(
-            height: containerHeight * 0.1,
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  languageButton('Kiswahili', 0),
-                  languageButton('Dholuo', 1),
-                  languageButton('English', 2),
-                ],
-              ),
-            )
-          ),
-          //children: [
-          // Container(
-          //     height: containerHeight * 0.1,
-          //     child: Container(
-          //       padding: EdgeInsets.symmetric(vertical: 8.0),
-          //       child: Row(
-          //         // children: ['Kiswahili', 'Dholuo', 'English']
-          //         //     .map((language) => languageButton(language))
-          //         //     .toList(),
-          //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //         children: [
-          //           ElevatedButton(
-          //             onPressed: () {
-          //               setState(() {
-          //                 languageIndex = 0;
-          //                 _currentLanguage = 'Kiswahili';
-          //                 overrideIndex = true;
-          //                 //updateMethodContent('content1');
-          //                 //video1 = updateVideoContent1();
-          //               });
-          //             },
-          //             style: ElevatedButton.styleFrom(
-          //               backgroundColor:
-          //                   languageIndex == 0 ? Colors.grey : null,
-          //             ),
-          //             child: Text('Kiswahili'),
-          //           ),
-          //           ElevatedButton(
-          //             onPressed: () {
-          //               setState(() {
-          //                 languageIndex = 1;
-          //                 _currentLanguage = 'Dholuo';
-          //                 overrideIndex = true;
-          //                 //updateMethodContent('content2');
-          //                 //video1 = updateVideoContent1();
-          //               });
-          //             },
-          //             style: ElevatedButton.styleFrom(
-          //               backgroundColor:
-          //                   languageIndex == 1 ? Colors.grey : null,
-          //             ),
-          //             child: Text('Dholuo'),
-          //           ),
-          //           ElevatedButton(
-          //             onPressed: () {
-          //               setState(() {
-          //                 languageIndex = 2;
-          //                 _currentLanguage = 'English';
-          //                 overrideIndex = true;
-          //                 //updateMethodContent('content3');
-          //                 //video1 = updateVideoContent1();
-          //               });
-          //             },
-          //             style: ElevatedButton.styleFrom(
-          //               backgroundColor:
-          //                   languageIndex == 2 ? Colors.grey : null,
-          //             ),
-          //             child: Text('English'),
-          //           ),
-          //         ],
-          //       ),
-          //     )),
+              height: containerHeight * 0.1,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    languageButton('Kiswahili', 0),
+                    languageButton('Dholuo', 1),
+                    languageButton('English', 2),
+                  ],
+                ),
+              )),
           SizedBox(height: 20.0),
-
           Expanded(
               child: Container(
                   //height: containerHeight * 0.6, // Adjust as needed
@@ -416,7 +352,6 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                         ),
                                       ]),
                                     ),
-                                
                                     Image.asset(
                                       'assets/emergency_photos.png',
                                       width: 400,
@@ -552,7 +487,6 @@ class _EmergencyPageState extends State<EmergencyPage> {
           color: Colors.black,
         ));
   }
-
 
   Widget getVideoContent() {
     String asset = videoContentMap[languages[languageIndex]]![methodIndex];
