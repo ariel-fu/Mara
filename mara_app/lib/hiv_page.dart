@@ -176,7 +176,7 @@ Widget build(BuildContext context) {
       children: [
         Text(
           subtitleContentMap[languages[languageIndex]]!,
-          style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.magentaPurple, fontSize: 30.0)
+          style: TextStyle(fontFamily: 'Montserrat', color: MaraColors.magentaPurple, fontSize: 30.0)
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -199,7 +199,7 @@ Widget build(BuildContext context) {
             ),
           )
         ),
-        SizedBox(height: 20.0),
+        SizedBox(height: 10.0),
         Container(
           height: containerHeight * 0.6, // Adjust as needed
           child: Column(
