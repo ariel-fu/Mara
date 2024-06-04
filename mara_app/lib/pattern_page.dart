@@ -512,14 +512,14 @@ class _PatternPageState extends State<PatternPage> {
   String _getAsset(String videoKey, String language) {
     String asset =
         languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
-    print('Asset for $videoKey in $language: $asset');
+    //print('Asset for $videoKey in $language: $asset');
     return asset;
   }
 
   String _getTitle(String videoKey, String language) {
     String title =
         languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
-    print('Title for $videoKey in $language: $title');
+    //print('Title for $videoKey in $language: $title');
     return title;
   }
 
