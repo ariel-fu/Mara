@@ -267,7 +267,9 @@ class _HomePage2State extends State<HomePage2> {
           Consumer<Likes>(
             builder: (context, likes, child) => ElevatedButton.icon(
               icon: Icon(Icons.thumb_up, color: Colors.black),
-              label: Text(_t('likedTitle')),
+              label: Text(_t('likedTitle'), 
+                style: TextStyle(color: Colors.black)
+              ),
               // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
               onPressed: () {
                 var likes = context.read<Likes>();
@@ -354,7 +356,7 @@ class _HomePage2State extends State<HomePage2> {
           //   ),
             SizedBox(height: 20.0),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -368,17 +370,17 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 25.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 25.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(0),
               tileColor: _selections[0] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -391,17 +393,17 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 25.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 25.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(1),
               tileColor: _selections[1] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -415,17 +417,17 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 25.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 25.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(2),
               tileColor: _selections[2] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -438,17 +440,17 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 25.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 25.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(3),
               tileColor: _selections[3] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -462,17 +464,17 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 25.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 25.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(4),
               tileColor: _selections[4] ? visitedColor : notVisitedColor,
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -486,10 +488,10 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 25.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 25.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               onTap: () => _handleTap(5),
               tileColor: _selections[5] ? visitedColor : notVisitedColor,
@@ -498,7 +500,7 @@ class _HomePage2State extends State<HomePage2> {
             getButtonRow(),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -512,10 +514,10 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 25.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 25.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.bold),
               tileColor: _allSelected ? visitedColor : notVisitedColor,
               onTap: _takeQuiz,
@@ -625,7 +627,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.black,
-                      fontSize: 25.0)),
+                      fontSize: 28.0)),
             ),
           ),
         ),
@@ -653,7 +655,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.black,
-                      fontSize: 25.0)),
+                      fontSize: 28.0)),
             ),
           ),
         ),
