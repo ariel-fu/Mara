@@ -157,23 +157,38 @@ Widget build(BuildContext context) {
   }
   double boxWidth = containerWidth;
   double boxHeight = containerHeight;
+  double availableHeight = boxHeight;
 
   return Scaffold(
     appBar: AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
-      title: Center(
-          child: Text(
-            titleContentMap[languages[languageIndex]] ?? "Title not found",
-            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-          )
+        centerTitle: true,
+        title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
+                languageButton('Dholuo', 1),
+                SizedBox(width: 40),
+                languageButton('English', 2),
+              ],
+            ),
+          ),
         ),
-    ),
+      ),
     body: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Center(
+          child: Text(
+            titleContentMap[languages[languageIndex]] ?? "Title not found",
+            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+            textAlign: TextAlign.center,
+          )
+        ),
         Text(
           subtitleContentMap[languages[languageIndex]]!,
           style: TextStyle(fontFamily: 'Montserrat', color: MaraColors.magentaPurple, fontSize: 30.0)
@@ -185,53 +200,69 @@ Widget build(BuildContext context) {
             SizedBox(width:100, height:100, child:ImageIcon(AssetImage('assets/misc-icons/spermcontraception.png'), color: MaraColors.magentaPurple)),
           ]
         ),
-        Container(
-          height: containerHeight * 0.1,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                languageButton('Kiswahili', 0),
-                languageButton('Dholuo', 1),
-                languageButton('English', 2),
-              ],
-            ),
-          )
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          height: containerHeight * 0.6, // Adjust as needed
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              contentBox(
-                'Male and Female Condoms', 
-                updateMethodContent1()
+        // Container(
+        //   height: containerHeight * 0.1,
+        //   child: Container(
+        //     padding: EdgeInsets.symmetric(vertical: 8.0),
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //       children: [
+        //         languageButton('Kiswahili', 0),
+        //         languageButton('Dholuo', 1),
+        //         languageButton('English', 2),
+        //       ],
+        //     ),
+        //   )
+        // ),
+        //SizedBox(height: 10.0),
+        Expanded(
+              child: Container(
+                  //height: containerHeight * 0.6, // Adjust as needed
+                child: RawScrollbar(
+                  thumbColor: const Color.fromARGB(255, 232, 132, 165),
+                  thumbVisibility: true,
+                  trackVisibility: false,
+                  thickness: 25.0,
+                  radius: Radius.circular(20),
+                  child: LayoutBuilder(
+                    builder: (context, constraint) {
+                      return SingleChildScrollView(
+          //height: containerHeight * 0.6, // Adjust as needed
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            contentBox(
+                              'Male and Female Condoms', 
+                              updateMethodContent1()
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(width:150, height:150, child:Image.asset('assets/options_images/2.png')),
+                                SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/twopeople.png', color: MaraColors.magentaPurple)),
+                                SizedBox(width:150, height:150, child:Image.asset('assets/options_images/5.png')),
+                              ],
+                            ),
+                            contentBox(
+                              'PrEP', 
+                              updateMethodContent2()
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(width:150, height:150, child:Image.asset('assets/misc-icons/prep_hands.png')),
+                                SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/preppills.png', color: MaraColors.magentaPurple)),
+                                SizedBox(width:150, height:150, child:Image.asset('assets/misc-icons/prep_text.png')),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  )
+               )
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(width:150, height:150, child:Image.asset('assets/options_images/2.png')),
-                  SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/twopeople.png', color: MaraColors.magentaPurple)),
-                  SizedBox(width:150, height:150, child:Image.asset('assets/options_images/5.png')),
-                ],
-              ),
-              contentBox(
-                'PrEP', 
-                updateMethodContent2()
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(width:150, height:150, child:Image.asset('assets/misc-icons/prep_hands.png')),
-                  SizedBox(width:120, height:120, child:Image.asset('assets/misc-icons/preppills.png', color: MaraColors.magentaPurple)),
-                  SizedBox(width:150, height:150, child:Image.asset('assets/misc-icons/prep_text.png')),
-                ],
-              ),
-            ],
-          ),
-        ),
+        )
       ],
     ),
   );

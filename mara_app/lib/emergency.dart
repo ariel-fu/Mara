@@ -251,6 +251,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
     }
     double boxWidth = containerWidth;
     double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
 
     return Scaffold(
       appBar: AppBar(
@@ -258,12 +259,23 @@ class _EmergencyPageState extends State<EmergencyPage> {
           icon: const Icon(Icons.arrow_back, size: 48.0),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Center(
-            child: Text(titleContentMap[languages[languageIndex]]!,
-                style: TextStyle(
-                    fontFamily: 'PoetsenOne',
-                    color: MaraColors.purple,
-                    fontSize: 36.0))),
+        centerTitle: true,
+        title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
+                languageButton('Dholuo', 1),
+                SizedBox(width: 40),
+                languageButton('English', 2),
+              ],
+            ),
+          ),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.home, size: 48.0),
@@ -279,88 +291,84 @@ class _EmergencyPageState extends State<EmergencyPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Center(
+            child: Text(titleContentMap[languages[languageIndex]]!,
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+            textAlign: TextAlign.center,
+            )
+          ),
           Text(subtitleContentMap[languages[languageIndex]]!,
               style: TextStyle(
                   fontFamily: 'Montserrat',
                   color: MaraColors.magentaPurple,
                   fontSize: 25.0,
-                  fontWeight: FontWeight.bold)),
-          Container(
-              height: containerHeight * 0.1,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    languageButton('Kiswahili', 0),
-                    languageButton('Dholuo', 1),
-                    languageButton('English', 2),
-                  ],
-                ),
-              )),
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+              ),
+          
           SizedBox(height: 20.0),
           Expanded(
               child: Container(
                   //height: containerHeight * 0.6, // Adjust as needed
                   child: RawScrollbar(
-            thumbColor: const Color.fromARGB(255, 232, 132, 165),
-            thumbVisibility: true,
-            trackVisibility: false,
-            thickness: 25.0,
-            radius: Radius.circular(20),
-            child: LayoutBuilder(builder: (context, constraint) {
-              return SingleChildScrollView(
-                  child: ConstrainedBox(
-                      constraints:
-                          BoxConstraints(minHeight: constraint.maxHeight),
-                      child: IntrinsicHeight(
-                        child: Flex(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            direction: Axis.vertical,
-                            children: [
-                              contentArea('1'),
-                              contentArea('2'),
-                              contentArea('3'),
-                              SizedBox(
-                                width: boxWidth * 0.8,
-                                height: boxHeight * 0.5 * 0.7,
-                                //child: Center(child: video1),
-                                //child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
-                                child: Center(
-                                  child: getVideoContent(),
-                                ),
-                              ),
-                              //place new content next to e-pill image
-                              Container(
-                                  child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                    getAudio(audioContentMap, 3),
-                                    SizedBox(width: 10.0),
-                                    Expanded(
-                                      child: Column(children: [
-                                        Text(
-                                          _t('4'),
-                                          style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 22.0, fontWeight: FontWeight.bold),
+                    thumbColor: const Color.fromARGB(255, 232, 132, 165),
+                    thumbVisibility: true,
+                    trackVisibility: false,
+                    thickness: 25.0,
+                    radius: Radius.circular(20),
+                    child: LayoutBuilder(builder: (context, constraint) {
+                      return SingleChildScrollView(
+                          child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(minHeight: constraint.maxHeight),
+                              child: IntrinsicHeight(
+                                child: Flex(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    direction: Axis.vertical,
+                                    children: [
+                                      contentArea('1'),
+                                      contentArea('2'),
+                                      contentArea('3'),
+                                      SizedBox(
+                                        width: boxWidth * 0.8,
+                                        height: boxHeight * 0.5 * 0.7,
+                                        //child: Center(child: video1),
+                                        //child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
+                                        child: Center(
+                                          child: getVideoContent(),
                                         ),
-                                        Text(
-                                          _t('5'),
-                                          style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 22.0),
-                                        ),
-                                      ]),
-                                    ),
-                                    Image.asset(
-                                      'assets/emergency_photos.png',
-                                      width: 300,
-                                      height: 300,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ])),
-                            ]),
-                      )));
-            }),
-          )))
+                                      ),
+                                      //place new content next to e-pill image
+                                      Container(
+                                          child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                            getAudio(audioContentMap, 3),
+                                            SizedBox(width: 10.0),
+                                            Expanded(
+                                              child: Column(children: [
+                                                Text(
+                                                  _t('4'),
+                                                  style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 22.0, fontWeight: FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  _t('5'),
+                                                  style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 22.0),
+                                                ),
+                                              ]),
+                                            ),
+                                            Image.asset(
+                                              'assets/emergency_photos.png',
+                                              width: 300,
+                                              height: 300,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ])),
+                                    ]),
+                              )));
+                    }),
+                  )))
         ],
       ),
     );

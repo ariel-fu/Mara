@@ -218,20 +218,18 @@ class _PrivatePageState extends State<PrivatePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-            child: Text(titleMap[languages[languageIndex]] ?? "Title not found",
-                style: TextStyle(
-                    fontFamily: 'PoetsenOne',
-                    color: MaraColors.purple,
-                    fontSize: 36.0))),
-        bottom: PreferredSize(
+        centerTitle: true,
+        title: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
                 languageButton('Dholuo', 1),
+                SizedBox(width: 40),
                 languageButton('English', 2),
               ],
             ),
@@ -241,24 +239,32 @@ class _PrivatePageState extends State<PrivatePage> {
       body: Expanded(
           child: SingleChildScrollView(
               child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: availableHeight * 0.01),
-          subtitleSection(),
-          SizedBox(height: 15.0),
-          methodSelectionRow(),
-          SizedBox(height: 15.0),
-          contentArea(),
-          SizedBox(
-            width: boxWidth * 0.8,
-            height: availableHeight * 0.6 * 0.5,
-            child: Center(
-              child: getVideoContent(),
-            ),
-          ),
-          additionalTextSection(),
-        ],
-      ))),
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(titleMap[languages[languageIndex]] ?? "Title not found",
+                      style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+                      textAlign: TextAlign.center,
+                    )
+                  ),
+                  SizedBox(height: availableHeight * 0.01),
+                  subtitleSection(),
+                  SizedBox(height: 15.0),
+                  methodSelectionRow(),
+                  SizedBox(height: 15.0),
+                  contentArea(),
+                  SizedBox(
+                    width: boxWidth * 0.8,
+                    height: availableHeight * 0.6 * 0.5,
+                    child: Center(
+                      child: getVideoContent(),
+                    ),
+                  ),
+                  additionalTextSection(),
+                ],
+              )
+          )
+      ),
     );
   }
 
@@ -380,7 +386,7 @@ class _PrivatePageState extends State<PrivatePage> {
                 child: Text(
                   subtitleTranslations[languages[languageIndex]] ??
                       "Translation not found",
-                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -391,7 +397,7 @@ class _PrivatePageState extends State<PrivatePage> {
 
   Widget additionalTextSection() {
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.only(right: 10.0),
       child: Column(
         children: [
           // Only display this section for certain method indices
@@ -435,17 +441,20 @@ class _PrivatePageState extends State<PrivatePage> {
             ),
           // Button for learning more, only shown for condoms
           if (methodIndex == 0 || methodIndex == 1)
-            TextButton.icon(
+            ElevatedButton.icon(
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
-                  color: Colors.black),
+                  color: Colors.black,
+                  size: 45
+                  ),
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Learn more",
                   style: TextStyle(fontSize: 20.0, color: Colors.black)),
-              style: TextButton.styleFrom(
+              style: ElevatedButton.styleFrom(
                 backgroundColor: MaraColors.lavender,
                 // Button background color
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                foregroundColor: Colors.black,
+                //padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               ),
               onPressed: () {
                 Navigator.push(

@@ -158,40 +158,34 @@ class _WhatChanceState extends State<WhatChance> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            titleTranslations[languages[languageIndex]] ?? "Title not found",
-            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-          )
-        ),
-         bottom: PreferredSize(
+        centerTitle: true,
+        title: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
                 languageButton('Dholuo', 1),
+                SizedBox(width: 40),
                 languageButton('English', 2),
               ],
             ),
           ),
         ),
       ),
-      //body: SingleChildScrollView(
         body: Column(
-        //child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(vertical: 8.0),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //     children: languages
-            //         .map((language) => languageButton(language))
-            //         .toList(),
-            //   ),
-            // ),
+            Center(
+              child: Text(
+                titleTranslations[languages[languageIndex]] ?? "Title not found",
+                style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+                textAlign: TextAlign.center,
+              )
+            ),
             SizedBox(height: availableHeight * 0.01),
             methodSelectionRow(),
             SizedBox(height: 15.0),
@@ -331,7 +325,7 @@ class _WhatChanceState extends State<WhatChance> {
         child: Column(children: [
           if (methodIndex == 0 || methodIndex == 1)
             Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
+              padding: EdgeInsets.only(right: 10.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -368,7 +362,7 @@ class _WhatChanceState extends State<WhatChance> {
             ),
           //SizedBox(height: 20),
           if (methodIndex == 0 || methodIndex == 1)
-            TextButton.icon(
+            ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                   backgroundColor: MaraColors.lavender,
                   // Button background color
@@ -380,7 +374,9 @@ class _WhatChanceState extends State<WhatChance> {
                 );
               },
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
-                  color: Colors.black),
+                  color: Colors.black,
+                  size: 45
+                  ),
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Translation Not Found",
@@ -389,7 +385,7 @@ class _WhatChanceState extends State<WhatChance> {
             ),
           SizedBox(height: 50),
           if (methodIndex != 6)
-            TextButton.icon(
+            ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                   backgroundColor: MaraColors.lavender,
                   // Button background color
@@ -403,7 +399,9 @@ class _WhatChanceState extends State<WhatChance> {
                 );
               },
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
-                  color: Colors.black),
+                  color: Colors.black,
+                  size: 45
+                  ),
               label: Text(
                   whyTranslations[languages[languageIndex]] ??
                       "Translation Not Found",
@@ -412,7 +410,7 @@ class _WhatChanceState extends State<WhatChance> {
             ),
 
           if (methodIndex == 6)
-            TextButton.icon(
+            ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                   backgroundColor: MaraColors.lavender,
                   // Button background color
@@ -426,11 +424,14 @@ class _WhatChanceState extends State<WhatChance> {
                 );
               },
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
-                  color: Colors.black),
+                  color: Colors.black,
+                  size: 45
+                  ),
               label: Text(
                   EpillText[languages[languageIndex]] ??
                       "Translation Not Found",
-                  style: TextStyle(color: Colors.black)),
+                  style: TextStyle(fontSize: 22.0, color: Colors.black),
+              ),
             ),
         ]));
   }
