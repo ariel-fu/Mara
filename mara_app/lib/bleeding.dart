@@ -16,8 +16,8 @@ class BleedingPage extends StatefulWidget {
 
 class _BleedingPageState extends State<BleedingPage> {
   
-  Widget methodContent = Text('DUMMY');
-  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
+  // Widget methodContent = Text('DUMMY');
+  // Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
 
   bool overrideIndex = false;
   // Widget methodContent = updateMethodContent();
@@ -48,13 +48,13 @@ class _BleedingPageState extends State<BleedingPage> {
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
-      "videoAudio/videos/peer/peer2KS.mp4", // method 1 - condom
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4", // method 1 - condom
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
     ],
     "Dholuo": [
       "videoAudio/videos/peer/peer2DL.mp4",
@@ -66,13 +66,13 @@ class _BleedingPageState extends State<BleedingPage> {
       "videoAudio/videos/peer/peer2DL.mp4",
     ],
     "English": [
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
     ],
   };
 
