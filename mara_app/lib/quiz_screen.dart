@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'recommendation_screen.dart';
 import 'recommendation_model.dart';
+import 'package:mara_app/design/colors.dart';
 
 
 class QuizScreen extends StatefulWidget {
@@ -42,6 +43,8 @@ class _QuizScreenState extends State<QuizScreen> {
       languageIndex = 0;
     }
   }
+
+  final double _aspectRatio = 16 / 10;
 
   final List<String> subQuestionKeys = [
     'q1', 
@@ -719,20 +722,51 @@ bool _areAllQuestionsAnswered() {
 
 @override
   Widget build(BuildContext context) {
+
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(_t('title')),
-        centerTitle: true,
+        //title: Text(_t('title')),
+        title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                languageButton('Kiswahili', 0),
+                languageButton('Dholuo', 1),
+                languageButton('English', 2),
+              ],
+            ),
+          ),
+        ),
+        //centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              languageButton('Kiswahili'),
-              languageButton('Dholuo'),
-              languageButton('English'),
-            ],
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: <Widget>[
+          //     languageButton('Kiswahili'),
+          //     languageButton('Dholuo'),
+          //     languageButton('English'),
+          //   ],
+          // ),
+          Center(
+            child: Text(_t('title'),
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+                textAlign: TextAlign.center,
+            ),
           ),
           Expanded(
             child: RawScrollbar(
@@ -774,17 +808,51 @@ bool _areAllQuestionsAnswered() {
 
 
 
-Widget languageButton(String language) {
-  bool isSelected = _currentLanguage == language;
-  return ElevatedButton(
-    onPressed: () => _changeLanguage(language),
-    style: ElevatedButton.styleFrom(
-      backgroundColor: isSelected ? Colors.grey : null,
-      foregroundColor: isSelected ? Colors.white : Colors.black, // Optional: change text color based on selection
-    ),
-    child: Text(language),
-  );
-}
+// Widget languageButton(String language) {
+//   bool isSelected = _currentLanguage == language;
+//   return ElevatedButton(
+//     onPressed: () => _changeLanguage(language),
+//     style: ElevatedButton.styleFrom(
+//       backgroundColor: isSelected ? Colors.grey : null,
+//       foregroundColor: isSelected ? Colors.white : Colors.black, // Optional: change text color based on selection
+//     ),
+//     child: Text(language),
+//   );
+// }
+
+void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      _currentLanguage = temp;
+    });
+  }
+
+  Widget languageButton(String language, int index) {
+    bool isSelected = languages[languageIndex] == language;
+
+    return ElevatedButton(
+      onPressed: () {
+        _switchLanguage(index);
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
 
 
 Widget subQuestionSection(BuildContext context, String questionKey, List<String> options) {

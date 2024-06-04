@@ -40,6 +40,8 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   int languageIndex = 2; // similar indexing for language
   String _currentLanguage = 'English';
 
+  final double _aspectRatio = 16 / 10;
+
   @override
   void initState() {
     super.initState();
@@ -101,20 +103,45 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
 
 @override
 Widget build(BuildContext context) {
+
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
   return Scaffold(
     appBar: AppBar(
       leading: IconButton(
           icon: Icon(Icons.arrow_back), 
           onPressed: () => Navigator.of(context).pop(), 
         ),
-      title: Text(_t('title1'),
-        style: TextStyle(
-                      fontFamily: 'PoetsenOne',
-                      color: MaraColors.purple,
-                      fontSize: 36.0)
+        title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                languageButton('Kiswahili', 0),
+                languageButton('Dholuo', 1),
+                languageButton('English', 2),
+              ],
+            ),
+          ),
+        ),
+      // title: Text(_t('title1'),
+      //   style: TextStyle(
+      //                 fontFamily: 'PoetsenOne',
+      //                 color: MaraColors.purple,
+      //                 fontSize: 36.0)
       
-      ), // Use _t method for translation
-      centerTitle: true,
+      // ), // Use _t method for translation
+      // centerTitle: true,
 
       actions: <Widget>[
         ElevatedButton.icon(
@@ -148,13 +175,19 @@ Widget build(BuildContext context) {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    languageButton('Kiswahili'),
-                    languageButton('Dholuo'),
-                    languageButton('English'),
-                  ],
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     languageButton('Kiswahili'),
+                //     languageButton('Dholuo'),
+                //     languageButton('English'),
+                //   ],
+                // ),
+                Center(
+                  child: Text(_t('title1'),
+                    style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+                      textAlign: TextAlign.center,
+                  ),
                 ),
                 _buildTitleBox(),
                 SizedBox(height: 20),
@@ -317,21 +350,54 @@ Widget build(BuildContext context) {
   );
 }
 
+void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      _currentLanguage = temp;
+    });
+  }
 
+  Widget languageButton(String language, int index) {
+    bool isSelected = languages[languageIndex] == language;
 
-Widget languageButton(String language) {
-  bool isSelected = _currentLanguage == language;
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-    child: ElevatedButton(
-      onPressed: () => _changeLanguage(language),
+    return ElevatedButton(
+      onPressed: () {
+        _switchLanguage(index);
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+        });
+      },
       style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected ? Colors.grey : null, // Grey if selected
+        backgroundColor: isSelected ? Colors.grey : null,
       ),
       child: Text(language),
-    ),
-  );
-}
+    );
+  }
+
+
+// Widget languageButton(String language) {
+//   bool isSelected = _currentLanguage == language;
+//   return Padding(
+//     padding: const EdgeInsets.symmetric(horizontal: 8.0),
+//     child: ElevatedButton(
+//       onPressed: () => _changeLanguage(language),
+//       style: ElevatedButton.styleFrom(
+//         backgroundColor: isSelected ? Colors.grey : null, // Grey if selected
+//       ),
+//       child: Text(language),
+//     ),
+//   );
+// }
 
 Widget _buildTitleBox() {
   return Container(
