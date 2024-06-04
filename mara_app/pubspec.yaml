@@ -131,6 +131,10 @@ flutter:
     - videoAudio/videos/provider/provider1DL.mp4
     - videoAudio/videos/provider/provider1E.mp4
 
+    - videoAudio/videos/provider/provider2KS.mp4
+    # - videoAudio/videos/provider/provider2DL.mp4
+    - videoAudio/videos/provider/provider2E.mp4
+
     - videoAudio/videos/provider/provider3KS.mp4
     - videoAudio/videos/provider/provider3DL.mp4
     - videoAudio/videos/provider/provider3E.mp4
