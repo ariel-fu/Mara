@@ -42,6 +42,8 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
   //     _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
   //   });
   // }
+  final double _aspectRatio = 16 / 10;
+
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -80,19 +82,7 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     return widget.translations[_currentLanguage]?[key] ?? key;
 }
 
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ElevatedButton(
-        onPressed: () => _changeLanguage(language),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : null, // Grey if selected
-        ),
-        child: Text(language),
-      ),
-    );
-  }
+  
   // Widget _languageButton(String language) {
   //   asyncmethod(language);
   //   bool isSelected = _currentLanguage == language;
@@ -123,6 +113,18 @@ void asyncmethod(String language) async{
 
 @override
 Widget build(BuildContext context) {
+
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
   if (widget.methodDetails == null) {
     return Scaffold(
       appBar: AppBar(
@@ -142,30 +144,49 @@ Widget build(BuildContext context) {
         icon: Icon(Icons.arrow_back), 
         onPressed: () => Navigator.of(context).pop(), 
       ),
-      title: Center(
-        child: Text(titleTranslations[_currentLanguage] ?? "Title not found",
-          style: TextStyle(
-                        fontFamily: 'PoetsenOne',
-                        color: MaraColors.purple,
-                        fontSize: 36.0)
-        ),
-      ),
-
-    ),
-    body: ListView(
-      padding: EdgeInsets.all(8.0),
-      children: [
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              languageButton('Kiswahili'),
-              languageButton('Dholuo'),
-              languageButton('English'),
-            ]
+      title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                languageButton('Kiswahili', 0),
+                languageButton('Dholuo', 1),
+                languageButton('English', 2),
+              ],
+            ),
           ),
         ),
+      // title: Center(
+      //   child: Text(titleTranslations[_currentLanguage] ?? "Title not found",
+      //     style: TextStyle(
+      //                   fontFamily: 'PoetsenOne',
+      //                   color: MaraColors.purple,
+      //                   fontSize: 36.0)
+      //   ),
+      // ),
+
+    ),
+    body: Column(
+      //padding: EdgeInsets.all(8.0),
+      children: <Widget> [
+        // Padding(
+        //   padding: EdgeInsets.all(8.0),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //     children: [
+        //       languageButton('Kiswahili'),
+        //       languageButton('Dholuo'),
+        //       languageButton('English'),
+        //     ]
+        //   ),
+        // ),
+        Center(
+        child: Text(titleTranslations[_currentLanguage] ?? "Title not found",
+          style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+            textAlign: TextAlign.center,
+        ),
+      ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 16.0),
           child: Column(
@@ -193,17 +214,63 @@ Widget build(BuildContext context) {
             ],
           ),
         ),
-        buildContentCard(MiscIcons.birth_control, '', 'how_it_works'),
-        buildContentCard(MiscIcons.period, 'what_period', 'side_effects'),
-        buildContentCard(MiscIcons.calendar, 'how_long', 'lasts'),
-        buildContentCard(MiscIcons.chance, 'how_effective', 'effectiveness'),
-        buildContentCard(MiscIcons.private, 'can_private', 'privacy'),
-        buildContentCard(MiscIcons.pregnant_woman, 'ready_to_have_baby', 'fertility'),
+        Expanded(
+            child: RawScrollbar(
+              thumbColor: const Color.fromARGB(255, 232, 132, 165),
+              thumbVisibility: true,
+              trackVisibility: false,
+              thickness: 25.0,
+              radius: Radius.circular(20),
+            child: ListView(
+              children: <Widget>[
+                buildContentCard(MiscIcons.birth_control, '', 'how_it_works'),
+                buildContentCard(MiscIcons.period, 'what_period', 'side_effects'),
+                buildContentCard(MiscIcons.calendar, 'how_long', 'lasts'),
+                buildContentCard(MiscIcons.chance, 'how_effective', 'effectiveness'),
+                buildContentCard(MiscIcons.private, 'can_private', 'privacy'),
+                buildContentCard(MiscIcons.pregnant_woman, 'ready_to_have_baby', 'fertility'),
+              ]
+            )
+            )
+        )
       ],
     ),
   );
 }
 
+void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      _currentLanguage = temp;
+    });
+  }
+
+  Widget languageButton(String language, int index) {
+    bool isSelected = languages[languageIndex] == language;
+
+    return ElevatedButton(
+      onPressed: () {
+        _switchLanguage(index);
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
 
 
 
