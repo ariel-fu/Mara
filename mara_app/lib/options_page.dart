@@ -239,7 +239,7 @@ class _OptionsPageState extends State<OptionsPage> {
                     return ConstrainedBox(
                       // width: boxWidth,
                       // height: boxHeight * 0.25,
-                      constraints: BoxConstraints(maxHeight: containerHeight * 0.25, maxWidth: containerWidth),
+                      constraints: BoxConstraints(maxHeight: containerHeight * 0.238, maxWidth: containerWidth),
                       child: Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -253,13 +253,13 @@ class _OptionsPageState extends State<OptionsPage> {
                           ? Text("Please select a method to learn more")
                           :Text(methods[methodIndex]!.name,
                               style: TextStyle(
-                                  fontSize: 22.0,
+                                  fontSize: 20.0,
                                   fontWeight: FontWeight.bold)
                           ),
                         ]
                     ),
                     Expanded(
-                      child: Container(
+                      //child: Container(
                           //height: containerHeight * 0.6, // Adjust as needed
                           child: RawScrollbar(
                             thumbColor: const Color.fromARGB(255, 232, 132, 165),
@@ -294,7 +294,7 @@ class _OptionsPageState extends State<OptionsPage> {
                                                       methodDetailsData[methodRef]!['options_page']
                                                           [languages[languageIndex]],                                    
                                                       style: TextStyle(
-                                                        fontFamily: 'Roboto', fontSize: 20.0
+                                                        fontFamily: 'Roboto', fontSize: 18.0
                                                       ),
                                                   ),
                                                 ),
@@ -369,7 +369,7 @@ class _OptionsPageState extends State<OptionsPage> {
 
                             )
                           )
-                      )
+                      //)
                     ) 
                   // Row(
                   //   crossAxisAlignment: CrossAxisAlignment.start, 
@@ -547,7 +547,7 @@ class _OptionsPageState extends State<OptionsPage> {
         "assets/options_images/$methodIndex.png";
     return Image.asset(
       imageNum,
-      width: MediaQuery.of(context).size.width * 0.2,
+      width: MediaQuery.of(context).size.width * 0.15,
     );
   }
 }
