@@ -148,6 +148,7 @@ class _HIVPageState extends State<HIVPage> {
   @override
   Widget build(BuildContext context) {
     HomePage2.stiVisited = true;
+
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
     if (containerHeight / containerWidth > _aspectRatio) {
