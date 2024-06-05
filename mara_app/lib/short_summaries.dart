@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/icons/misc_icons.dart';
 import 'package:mara_app/recommendation_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mara_app/design/colors.dart';
 
 class MethodDetailsScreen extends StatefulWidget {
   final String methodName;
@@ -41,6 +42,8 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
   //     _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
   //   });
   // }
+  final double _aspectRatio = 16 / 10;
+
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -79,19 +82,7 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     return widget.translations[_currentLanguage]?[key] ?? key;
 }
 
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ElevatedButton(
-        onPressed: () => _changeLanguage(language),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : null, // Grey if selected
-        ),
-        child: Text(language),
-      ),
-    );
-  }
+  
   // Widget _languageButton(String language) {
   //   asyncmethod(language);
   //   bool isSelected = _currentLanguage == language;
@@ -122,6 +113,18 @@ void asyncmethod(String language) async{
 
 @override
 Widget build(BuildContext context) {
+
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
   if (widget.methodDetails == null) {
     return Scaffold(
       appBar: AppBar(
@@ -141,22 +144,53 @@ Widget build(BuildContext context) {
         icon: Icon(Icons.arrow_back), 
         onPressed: () => Navigator.of(context).pop(), 
       ),
-      title: Text(titleTranslations[_currentLanguage] ?? "Title not found"),
-    ),
-    body: ListView(
-      padding: EdgeInsets.all(8.0),
-      children: [
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              languageButton('Kiswahili'),
-              languageButton('Dholuo'),
-              languageButton('English'),
-            ]
+      centerTitle: true,
+        title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
+                languageButton('Dholuo', 1),
+                SizedBox(width: 40),
+                languageButton('English', 2),
+              ],
+            ),
           ),
         ),
+      // title: Center(
+      //   child: Text(titleTranslations[_currentLanguage] ?? "Title not found",
+      //     style: TextStyle(
+      //                   fontFamily: 'PoetsenOne',
+      //                   color: MaraColors.purple,
+      //                   fontSize: 36.0)
+      //   ),
+      // ),
+
+    ),
+    body: Column(
+      //padding: EdgeInsets.all(8.0),
+      children: <Widget> [
+        // Padding(
+        //   padding: EdgeInsets.all(8.0),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //     children: [
+        //       languageButton('Kiswahili'),
+        //       languageButton('Dholuo'),
+        //       languageButton('English'),
+        //     ]
+        //   ),
+        // ),
+        Center(
+        child: Text(titleTranslations[_currentLanguage] ?? "Title not found",
+          style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+            textAlign: TextAlign.center,
+        ),
+      ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 16.0),
           child: Column(
@@ -166,14 +200,17 @@ Widget build(BuildContext context) {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(RecommendationModel.getIconForRecommendation(widget.methodName), size: 50),
+                  Icon(
+                    RecommendationModel.getIconForRecommendation(widget.methodName), 
+                    size: 80,
+                    color: MaraColors.magentaPurple),
                   // Image.asset(iconPath, width: 50, height: 50),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(methodName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                      Text(subtitle, style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic)), // Subtitle displayed here
+                      Text(methodName, style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold)),
+                      Text(subtitle, style: TextStyle(fontSize: 25, fontStyle: FontStyle.italic)), // Subtitle displayed here
                     ],
                   ),
                 ],
@@ -181,17 +218,63 @@ Widget build(BuildContext context) {
             ],
           ),
         ),
-        buildContentCard(MiscIcons.birth_control, '', 'how_it_works'),
-        buildContentCard(MiscIcons.period, 'what_period', 'side_effects'),
-        buildContentCard(MiscIcons.calendar, 'how_long', 'lasts'),
-        buildContentCard(MiscIcons.chance, 'how_effective', 'effectiveness'),
-        buildContentCard(MiscIcons.private, 'can_private', 'privacy'),
-        buildContentCard(MiscIcons.pregnant_woman, 'ready_to_have_baby', 'fertility'),
+        Expanded(
+            child: RawScrollbar(
+              thumbColor: const Color.fromARGB(255, 232, 132, 165),
+              thumbVisibility: true,
+              trackVisibility: false,
+              thickness: 25.0,
+              radius: Radius.circular(20),
+            child: ListView(
+              children: <Widget>[
+                buildContentCard(MiscIcons.birth_control, '', 'how_it_works'),
+                buildContentCard(MiscIcons.period, 'what_period', 'side_effects'),
+                buildContentCard(MiscIcons.calendar, 'how_long', 'lasts'),
+                buildContentCard(MiscIcons.chance, 'how_effective', 'effectiveness'),
+                buildContentCard(MiscIcons.private, 'can_private', 'privacy'),
+                buildContentCard(MiscIcons.pregnant_woman, 'ready_to_have_baby', 'fertility'),
+              ]
+            )
+            )
+        )
       ],
     ),
   );
 }
 
+void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      _currentLanguage = temp;
+    });
+  }
+
+  Widget languageButton(String language, int index) {
+    bool isSelected = languages[languageIndex] == language;
+
+    return ElevatedButton(
+      onPressed: () {
+        _switchLanguage(index);
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
+      ),
+      child: Text(language),
+    );
+  }
 
 
 
@@ -246,13 +329,13 @@ Widget buildContentCard(IconData summaryIcon, String titleKey, String contentKey
     margin: EdgeInsets.only(bottom: 10),
     padding: EdgeInsets.all(10),
     decoration: BoxDecoration(
-      color: Colors.grey.shade200,
+      color: MaraColors.purple,
       borderRadius: BorderRadius.circular(10),
     ),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(summaryIcon, size: 44),
+        Icon(summaryIcon, size: 60, color: Colors.white),
         SizedBox(width: 10),
         Expanded(
           child: hasTitle
@@ -261,18 +344,18 @@ Widget buildContentCard(IconData summaryIcon, String titleKey, String contentKey
                 children: [
                   Text(
                     translatedTitle,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8),
                   Text(
                     content,
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
                   ),
                 ],
               )
             : Text(
                 content,
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
               ),
         ),
       ],

@@ -16,8 +16,8 @@ class BleedingPage extends StatefulWidget {
 
 class _BleedingPageState extends State<BleedingPage> {
   
-  Widget methodContent = Text('DUMMY');
-  Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
+  // Widget methodContent = Text('DUMMY');
+  // Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
 
   bool overrideIndex = false;
   // Widget methodContent = updateMethodContent();
@@ -48,13 +48,13 @@ class _BleedingPageState extends State<BleedingPage> {
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
-      "videoAudio/videos/peer/peer2KS.mp4", // method 1 - condom
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
-      "videoAudio/videos/peer/peer2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4", // method 1 - condom
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/peer/provider2KS.mp4",
     ],
     "Dholuo": [
       "videoAudio/videos/peer/peer2DL.mp4",
@@ -66,13 +66,13 @@ class _BleedingPageState extends State<BleedingPage> {
       "videoAudio/videos/peer/peer2DL.mp4",
     ],
     "English": [
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
-      "videoAudio/videos/peer/peer2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/peer/provider2E.mp4",
     ],
   };
 
@@ -151,21 +151,19 @@ class _BleedingPageState extends State<BleedingPage> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        
-        title: Center(
-          child: Text(
-            titleTranslations[languages[languageIndex]] ?? "Title not found",
-            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-          )
-        ),
-        bottom: PreferredSize(
+
+        centerTitle: true,
+        title: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
                 languageButton('Dholuo', 1),
+                SizedBox(width: 40),
                 languageButton('English', 2),
               ],
             ),
@@ -175,6 +173,12 @@ class _BleedingPageState extends State<BleedingPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Center(
+            child: Text(
+              titleTranslations[languages[languageIndex]] ?? "Title not found",
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
+            )
+          ),
           SizedBox(height: availableHeight * 0.01),
           methodSelectionRow(),
           SizedBox(

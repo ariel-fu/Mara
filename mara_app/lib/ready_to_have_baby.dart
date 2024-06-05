@@ -262,20 +262,18 @@ class _ReadyPageState extends State<ReadyPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            titleMap[languages[languageIndex]] ?? "Title not found",
-            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-          )
-        ),
-        bottom: PreferredSize(
+        centerTitle: true,
+        title: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
                 languageButton('Dholuo', 1),
+                SizedBox(width: 40),
                 languageButton('English', 2),
               ],
             ),
@@ -284,7 +282,14 @@ class _ReadyPageState extends State<ReadyPage> {
       ),
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [           
+          children: [   
+            Center(
+              child: Text(
+                titleMap[languages[languageIndex]] ?? "Title not found",
+                style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+                textAlign: TextAlign.center,
+              )
+            ),        
             customListTile(
               imagePath: 'assets/ready_to_have_baby_pregnant.png',
               title: importantMessage_pregnant_Translations[languages[languageIndex]] ?? "Important message not found",
@@ -446,7 +451,7 @@ class _ReadyPageState extends State<ReadyPage> {
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Text(
         subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-        style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
     );
@@ -460,7 +465,8 @@ class _ReadyPageState extends State<ReadyPage> {
           // Only display this section for certain method indices
           if (methodIndex == 0 || methodIndex == 1)
             Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
+              padding: EdgeInsets.only(right: 10.0),
+              //padding: EdgeInsets.all(20.0),
               child: Row(
                 //Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -498,26 +504,52 @@ class _ReadyPageState extends State<ReadyPage> {
             ),
           // Button for learning more, only shown for condoms
           if (methodIndex == 0 || methodIndex == 1)
-            TextButton.icon(
+            ElevatedButton.icon(
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
-                  color: Colors.black),
-              label: Text(
-                  learnMoreTranslations[languages[languageIndex]] ??
-                      "Learn more",
+                  color: Colors.black,
+                  size:45
+                  ),
+              label: Text(learnMoreTranslations[languages[languageIndex]] ?? "Learn More", 
                   style: TextStyle(fontSize: 20.0, color: Colors.black)
                 ),
-              style: TextButton.styleFrom(
+              style: ElevatedButton.styleFrom(
                 backgroundColor: MaraColors.lavender,
                 // Button background color
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                foregroundColor: Colors.black,
               ),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HIVPage()),
+                  MaterialPageRoute(
+                    builder: (context) => HIVPage(),
+                  ),
                 );
               },
             ),
+
+
+            // ElevatedButton.icon(
+            //   icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
+            //       color: Colors.black,
+            //       size:45
+            //       ),
+            //   label: Text(
+            //       learnMoreTranslations[languages[languageIndex]] ??
+            //           "Learn more",
+            //       style: TextStyle(fontSize: 20.0, color: Colors.black)
+            //     ),
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: MaraColors.lavender,
+            //     // Button background color
+            //     padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+            //   ),
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => HIVPage()),
+            //     );
+            //   },
+            // ),
         ],
       ),
     );
@@ -571,7 +603,7 @@ class _ReadyPageState extends State<ReadyPage> {
       //required String header,
       required String title}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -585,7 +617,6 @@ class _ReadyPageState extends State<ReadyPage> {
                 height: 200, // Adjust height
                 fit: BoxFit.contain,
               ),
-              //SizedBox(width: 5.0),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -611,7 +642,7 @@ class _ReadyPageState extends State<ReadyPage> {
                               Flexible(
                                 child: Text(
                                 title,
-                                style: TextStyle(fontFamily: 'Roboto', fontSize: 25.0, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ]
@@ -634,7 +665,9 @@ class _ReadyPageState extends State<ReadyPage> {
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: ElevatedButton.icon(
         icon: ImageIcon(AssetImage('assets/misc-icons/check_mark.png'),
-            color: Colors.black),
+            color: Colors.black,
+            size:45
+            ),
         label: Text(prep_preg_Translations[languages[languageIndex]] ?? "Label not found", 
             style: TextStyle(fontSize: 24.0),
           ),

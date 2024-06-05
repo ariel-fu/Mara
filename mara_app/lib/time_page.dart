@@ -159,20 +159,18 @@ class _TimePageState extends State<TimePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            titleTranslations[languages[languageIndex]] ?? "Title not found",
-            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-          )
-        ),
-        bottom: PreferredSize(
+        centerTitle: true,
+        title: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
                 languageButton('Dholuo', 1),
+                SizedBox(width: 40),
                 languageButton('English', 2),
               ],
             ),
@@ -182,6 +180,13 @@ class _TimePageState extends State<TimePage> {
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Center(
+              child: Text(
+                titleTranslations[languages[languageIndex]] ?? "Title not found",
+                style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+                textAlign: TextAlign.center,
+              )
+            ),
             methodSelectionRow(),
             SizedBox(height: 15.0),
             contentArea(),
@@ -304,7 +309,7 @@ class _TimePageState extends State<TimePage> {
         // Only display this section for certain method indices
         if (methodIndex == 0 || methodIndex == 1)
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
+            padding: EdgeInsets.only(right: 10.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -339,15 +344,19 @@ class _TimePageState extends State<TimePage> {
           ),
         // Button for learning more, only shown for condoms
         if (methodIndex == 0 || methodIndex == 1)
-          TextButton.icon(
-            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), color: Colors.black),
+          ElevatedButton.icon(
+            icon: ImageIcon(AssetImage('assets/misc-icons/question.png'), 
+              color: Colors.black,
+              size: 45
+            ),
             label: Text(
               learnMoreTranslations[languages[languageIndex]] ?? "Learn more",
               style: TextStyle(fontSize: 20.0, color: Colors.black),
             ),
-            style: TextButton.styleFrom(
+            style: ElevatedButton.styleFrom(
               backgroundColor: MaraColors.lavender, // Button background color
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              //padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              foregroundColor: Colors.black,
             ),
             onPressed: () {
               Navigator.push(

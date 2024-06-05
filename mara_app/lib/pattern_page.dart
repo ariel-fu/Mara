@@ -198,20 +198,18 @@ class _PatternPageState extends State<PatternPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-            child: Text(
-              titleTranslations[languages[languageIndex]] ?? "Title not found",
-              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-            )
-        ),
-        bottom: PreferredSize(
+        centerTitle: true,
+        title: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
                 languageButton('Dholuo', 1),
+                SizedBox(width: 40),
                 languageButton('English', 2),
               ],
             ),
@@ -221,6 +219,13 @@ class _PatternPageState extends State<PatternPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Center(
+            child: Text(
+              titleTranslations[languages[languageIndex]] ?? "Title not found",
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+              textAlign: TextAlign.center,
+            )
+        ),
           SizedBox(height: availableHeight * 0.01),
           methodSelectionRow(),
           SizedBox(height: 15.0),
@@ -354,7 +359,7 @@ class _PatternPageState extends State<PatternPage> {
 
   Widget additionalTextSection() {
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.only(right: 10.0),
       child: Column(
         children: [
           // Only display this section for certain method indices
@@ -396,18 +401,20 @@ class _PatternPageState extends State<PatternPage> {
             ),
           // Button for learning more, only shown for condoms
           if (methodIndex == 0 || methodIndex == 1)
-            TextButton.icon(
+            ElevatedButton.icon(
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
-                  color: Colors.black),
+                  color: Colors.black,
+                  size: 45
+                  ),
               label: Text(
-                  learnMoreTranslations[languages[languageIndex]] ??
-                      "Learn more",
+                  learnMoreTranslations[languages[languageIndex]] ?? "Learn more",
                   style: TextStyle(fontSize: 20.0, color: Colors.black)
                 ),
-              style: TextButton.styleFrom(
+              style: ElevatedButton.styleFrom(
                 backgroundColor: MaraColors.lavender,
                 // Button background color
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                foregroundColor: Colors.black,
+                //padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               ),
               onPressed: () {
                 Navigator.push(
@@ -418,9 +425,11 @@ class _PatternPageState extends State<PatternPage> {
             ),
           // Additional button section for other methods
           if (methodIndex != 0 && methodIndex != 1)
-            TextButton.icon(
+            ElevatedButton.icon(
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
-                  color: Colors.black),
+                  color: Colors.black,
+                  size:45
+                  ),
               label: Text(
                 whyTranslations[languages[languageIndex]] ?? "WHY?",
                 style: TextStyle(fontSize: 20.0, color: Colors.black),
@@ -431,8 +440,9 @@ class _PatternPageState extends State<PatternPage> {
                   MaterialPageRoute(builder: (context) => BleedingPage()),
                 );
               },
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.deepPurple[100],
+              style: ElevatedButton.styleFrom(
+                backgroundColor: MaraColors.lavender,
+                foregroundColor: Colors.black,
               ),
             ),
         ],
@@ -502,14 +512,14 @@ class _PatternPageState extends State<PatternPage> {
   String _getAsset(String videoKey, String language) {
     String asset =
         languageToVideo[videoKey]?[language]?['video'] ?? 'Asset not found';
-    print('Asset for $videoKey in $language: $asset');
+    //print('Asset for $videoKey in $language: $asset');
     return asset;
   }
 
   String _getTitle(String videoKey, String language) {
     String title =
         languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
-    print('Title for $videoKey in $language: $title');
+    //print('Title for $videoKey in $language: $title');
     return title;
   }
 

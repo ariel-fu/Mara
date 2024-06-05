@@ -2,7 +2,6 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:mara_app/design/colors.dart';
-import 'package:mara_app/emergency.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mara_app/options_page.dart';
@@ -13,6 +12,7 @@ import 'package:mara_app/time_page.dart';
 import 'package:mara_app/private_page.dart';
 import 'package:mara_app/WhatChance.dart';
 import 'package:mara_app/hiv_page.dart';
+import 'package:mara_app/emergency.dart';
 
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:mara_app/new_liked_methods.dart';
@@ -31,6 +31,12 @@ class HomePage2 extends StatefulWidget {
 }
 
 class _HomePage2State extends State<HomePage2> {
+
+  bool overrideIndex = false;
+  int languageIndex = 2; // similar indexing for language
+  final languages = ["Kiswahili", "Dholuo", "English"];
+
+
   final Map<String, List<String>> menuOptions = {
     "Kiswahili": [
       "Chaguzi zangu ni zipi?",
@@ -114,11 +120,25 @@ class _HomePage2State extends State<HomePage2> {
     _loadCurrentLanguage();
   }
 
+  // Future<void> _loadCurrentLanguage() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
+  //   });
+  // }
+
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
+    if (_currentLanguage.contains('English')) {
+      languageIndex = 2;
+    } else if (_currentLanguage.contains('Dholuo')) {
+      languageIndex = 1;
+    } else {
+      languageIndex = 0;
+    }
   }
 
   // copied from options_page
@@ -145,7 +165,7 @@ class _HomePage2State extends State<HomePage2> {
 
   // final List<bool> _selections = List.generate(6, (_) => false);
   final List<bool> _selections =
-      List.generate(7, (_) => false); //include HIV/STI page
+      List.generate(6, (_) => false); 
   bool get _allSelected => _selections.every((bool selected) => selected);
 
   void _handleTap(int index) {
@@ -182,32 +202,74 @@ class _HomePage2State extends State<HomePage2> {
         context,
         MaterialPageRoute(builder: (context) => ReadyPage()),
       );
-    } else if (index == 6) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HIVPage()),
-      );
     }
+    // } else if (index == 6) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => HIVPage()),
+    //   );
+    // }
   }
 
-  void _switchLanguage(String language) async {
+  // void _switchLanguage(String language) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString('selectedLanguage', language);
+  //   setState(() {
+  //     _currentLanguage = language;
+  //   });
+  // }
+  void _switchLanguage(int language) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedLanguage', language);
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
     setState(() {
-      _currentLanguage = language;
+      _currentLanguage = temp;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final double containerWidth = MediaQuery.of(context).size.width;
+    final double containerHeight = MediaQuery.of(context).size.height;
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
     _loadCurrentLanguage();
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: PreferredSize(
+              preferredSize: Size.fromHeight(availableHeight * 0.05),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    languageButton('Kiswahili', 0),
+                    SizedBox(width: 40),
+                    languageButton('Dholuo', 1),
+                    SizedBox(width: 40),
+                    languageButton('English', 2),
+                  ],
+                ),
+              ),
+            ),
         actions: <Widget>[
           Consumer<Likes>(
             builder: (context, likes, child) => ElevatedButton.icon(
               icon: Icon(Icons.thumb_up, color: Colors.black),
-              label: Text(_t('likedTitle')),
+              label: Text(_t('likedTitle'), 
+                style: TextStyle(color: Colors.black)
+              ),
               // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
               onPressed: () {
                 var likes = context.read<Likes>();
@@ -231,17 +293,7 @@ class _HomePage2State extends State<HomePage2> {
             ),
           ),
         ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(60),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              languageButton('Kiswahili'),
-              languageButton('Dholuo'),
-              languageButton('English'),
-            ],
-          ),
-        ),
+        
       ),
       // body: ListView.builder( // List view with builder to create dynamic list items
       //   itemBuilder: (context, index) =>
@@ -259,9 +311,52 @@ class _HomePage2State extends State<HomePage2> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            // PreferredSize(
+            //   preferredSize: Size.fromHeight(availableHeight * 0.05),
+            //   child: Container(
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //       children: [
+            //         languageButton('Kiswahili', 0),
+            //         languageButton('Dholuo', 1),
+            //         languageButton('English', 2),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+          //   Padding(
+          //     padding: EdgeInsets.only(left: 500.0),
+          //   child: Consumer<Likes>(
+          //     builder: (context, likes, child) => ElevatedButton.icon(
+          //       icon: Icon(Icons.thumb_up, color: Colors.black),
+          //       label: Text(_t('likedTitle')),
+          //       // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
+          //       onPressed: () {
+          //         var likes = context.read<Likes>();
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (context) => LikedMethodsScreen(
+          //               initialLanguage: _currentLanguage,
+          //               translations: _translations,
+          //             ),
+          //           ),
+          //         );
+          //       },
+          //       style: ElevatedButton.styleFrom(
+          //         backgroundColor: Colors.deepPurple[100],
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(18.0),
+          //         ),
+          //         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          //         alignment: Alignment.topRight,
+          //       ),
+          //     ),
+          //   ),
+          //   ),
             SizedBox(height: 20.0),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -275,7 +370,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 32.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -285,7 +380,7 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,7 +393,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 32.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -308,7 +403,7 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,7 +417,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 32.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -332,7 +427,7 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -345,7 +440,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 32.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -355,7 +450,7 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -369,7 +464,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 32.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -379,7 +474,7 @@ class _HomePage2State extends State<HomePage2> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -393,7 +488,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 32.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -405,7 +500,7 @@ class _HomePage2State extends State<HomePage2> {
             getButtonRow(),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.symmetric(vertical: 30.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 28.0),
               leading: IntrinsicWidth(
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -419,7 +514,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.white,
-                      fontSize: 32.0)),
+                      fontSize: 28.0)),
               titleTextStyle: TextStyle(
                   color: Colors.white,
                   fontSize: 28.0,
@@ -428,21 +523,39 @@ class _HomePage2State extends State<HomePage2> {
               onTap: _takeQuiz,
             ),
           ],
+        
         ),
       ),
     );
   }
 
   // originally from quiz screen; factor out
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
+  // Widget languageButton(String language) {
+  //   bool isSelected = _currentLanguage == language;
+  //   return ElevatedButton(
+  //     onPressed: () => _switchLanguage(language),
+  //     style: ElevatedButton.styleFrom(
+  //       backgroundColor: isSelected ? Colors.grey : null,
+  //       foregroundColor: isSelected
+  //           ? Colors.white
+  //           : null, // Optional: change text color based on selection
+  //     ),
+  //     child: Text(language),
+  //   );
+  // }
+  Widget languageButton(String language, int index) {
+    bool isSelected = languages[languageIndex] == language;
+
     return ElevatedButton(
-      onPressed: () => _switchLanguage(language),
+      onPressed: () {
+        _switchLanguage(index);
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+        });
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: isSelected ? Colors.grey : null,
-        foregroundColor: isSelected
-            ? Colors.white
-            : null, // Optional: change text color based on selection
       ),
       child: Text(language),
     );
@@ -514,7 +627,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.black,
-                      fontSize: 32.0)),
+                      fontSize: 28.0)),
             ),
           ),
         ),
@@ -542,7 +655,7 @@ class _HomePage2State extends State<HomePage2> {
                   style: TextStyle(
                       fontFamily: 'PoetsenOne',
                       color: Colors.black,
-                      fontSize: 32.0)),
+                      fontSize: 28.0)),
             ),
           ),
         ),
