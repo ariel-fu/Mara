@@ -216,8 +216,8 @@ class _BleedingPageState extends State<BleedingPage> {
                   //updateMethodContent();
                 });
               },
-              color: Colors.black, //all text is black
-              iconSize: 60, //all text is black
+              color: Colors.black, 
+              iconSize: 60, 
               padding: EdgeInsets.all(10),
               splashRadius: 40,
               splashColor: Colors.grey.withOpacity(0.5),
@@ -231,7 +231,7 @@ class _BleedingPageState extends State<BleedingPage> {
                   softWrap: true, // Wrap text to the next line if needed
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.grey,
+                    color: Colors.black, //all text is black
                   ),
                 )
             )
