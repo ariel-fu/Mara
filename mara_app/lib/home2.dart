@@ -361,7 +361,7 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/birth_control_white.png',
+                  Image.asset('assets/home_icons/white/birth_control_white.png',
                       width: 90, height: 90),
                   getAudio(audioContentMap, 0),
                 ],
@@ -385,9 +385,9 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/period_white.png', width: 90, height: 90),
+                  Image.asset('assets/home_icons/white/period_white.png', width: 90, height: 90),
                   getAudio(audioContentMap, 1),
-                ],
+                ], 
               )),
               title: Text(menuOptions[_currentLanguage]![1],
                   style: TextStyle(
@@ -408,7 +408,7 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/calendar_white.png',
+                  Image.asset('assets/home_icons/white/calendar_white.png',
                       width: 90, height: 90),
                   getAudio(audioContentMap, 2),
                 ],
@@ -432,7 +432,7 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/chance_white.png', width: 90, height: 90),
+                  Image.asset('assets/home_icons/white/chance_white.png', width: 90, height: 90),
                   getAudio(audioContentMap, 3),
                 ],
               )),
@@ -455,7 +455,7 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/privacy_white.png',
+                  Image.asset('assets/home_icons/white/privacy_white.png',
                       width: 90, height: 90),
                   getAudio(audioContentMap, 4),
                 ],
@@ -479,7 +479,7 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/ready_to_have_baby_pregnant_white.png',
+                  Image.asset('assets/home_icons/white/ready_to_have_baby_pregnant_white.png',
                       width: 90, height: 90),
                   getAudio(audioContentMap, 5),
                 ],
@@ -505,7 +505,7 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/take_quiz_white.png',
+                  Image.asset('assets/home_icons/white/take_quiz_white.png',
                       width: 90, height: 90),
                   getAudio(audioContentMap, 7),
                 ],
