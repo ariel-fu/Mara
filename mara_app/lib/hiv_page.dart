@@ -3,6 +3,7 @@ import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 import 'package:mara_app/design/colors.dart';
+import 'home2.dart';
 
 class HIVPage extends StatefulWidget {
   const HIVPage({Key? key}) : super(key: key);
@@ -157,6 +158,7 @@ class _HIVPageState extends State<HIVPage> {
     }
     double boxWidth = containerWidth;
     double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
 
     return Scaffold(
       appBar: AppBar(
