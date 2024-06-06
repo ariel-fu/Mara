@@ -53,6 +53,21 @@ class _LaunchScreenState extends State<LaunchScreen> {
     'Dholuo': "Puonjri matut ewi yiero ma in godo!",
   };
 
+    Map<String, String> translations3 = {
+    'English': "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.",
+    'Kiswahili': "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.",
+    'Dholuo': "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.!",
+  };
+
+  // Map<String, TextSpan> translations3 = {
+  //   'English': TextSpan(
+  //     text: "MARA Divas was inspired the "
+  //   ),
+  //   "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.",
+  //   'Kiswahili': "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.",
+  //   'Dholuo': "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.!",
+  // };
+
   final Map<String, List<String>> textAudioContentMap = {
     "English": [
       'videoAudio/audio/launch_intermediate/launch_text_E.mp3',
@@ -164,19 +179,52 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         MaterialPageRoute(builder: (context) => imLaunchScreen()),
                       );
                     },
-                    child: Text(
-                      translations2[_currentLanguage]!,
-                      style: TextStyle(fontSize: 22, color: Colors.black)
-                    ),
                     style: TextButton.styleFrom(
                       backgroundColor: MaraColors.lavender,
                       // Button background color
                       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                    )
+                    ),
+                    child: Text(
+                      translations2[_currentLanguage]!,
+                      style: TextStyle(fontSize: 22, color: Colors.black)
+                    ),
                   )
                 ]
               )
             ),
+
+            const SizedBox(height: 80),
+            IntrinsicWidth(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 25.0),
+                                  Text(translations3[_currentLanguage]!,
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.black,
+                                        fontSize: 15
+                                      ),
+                                      overflow: TextOverflow.visible,
+                                      textAlign: TextAlign.center),
+                                ]
+                              )
+                          )
+                        ],
+                      ),
+                    ),
+
+                  ]
+                ),
+              ),
           ],
         ),
       ),
@@ -197,6 +245,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
       child: Text(language),
     );
   }
+
 
   Widget getAudio(Map<String, List<String>> audioContentMap) {
     return AudioWidget(audioAsset: audioContentMap[_currentLanguage]![0]);
