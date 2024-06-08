@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/design/colors.dart';
 import 'main.dart'; // Import your main.dart file
 import 'package:just_audio/just_audio.dart';
 
@@ -15,6 +16,7 @@ class AudioWidget extends StatefulWidget {
 class _AudioWidgetState extends State<AudioWidget> {
   final AudioPlayer player1 = AudioPlayer();
   bool isPlaying1 = false;
+  final double size = 60;
 
   @override
   void dispose() {
@@ -38,14 +40,15 @@ class _AudioWidgetState extends State<AudioWidget> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: Image.asset(
-        "assets/audio/new_audio.png",
-        width: 60,
-        height: 60,
+        isPlaying1
+            ? "assets/audio/audio_pause.png"
+            : "assets/audio/new_audio.png",
+        width: size,
+        height: size,
       ),
       onPressed: () => _toggleAudio1(),
     );

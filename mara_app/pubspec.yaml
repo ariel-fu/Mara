@@ -115,7 +115,7 @@ flutter:
     # - assets/iud_picture_of_woman.png
     # - assets/ready_to_have_baby_pregnant.png
     # - assets/period_white.png
-    
+
     - videoAudio/videos/peer/peer1KS.mp4
     - videoAudio/videos/peer/peer1DL.mp4
     - videoAudio/videos/peer/peer1E.mp4
@@ -133,7 +133,7 @@ flutter:
     - videoAudio/videos/provider/provider1E.mp4
 
     - videoAudio/videos/provider/provider2KS.mp4
-    - videoAudio/videos/provider/provider2DL.mp4
+    #    - videoAudio/videos/provider/provider2DL.mp4
     - videoAudio/videos/provider/provider2E.mp4
 
     - videoAudio/videos/provider/provider3KS.mp4
