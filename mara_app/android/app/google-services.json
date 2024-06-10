@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "584920761858",
+    "firebase_url": "https://mara-e6a5b-default-rtdb.firebaseio.com",
+    "project_id": "mara-e6a5b",
+    "storage_bucket": "mara-e6a5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584920761858:android:1b141f599f36e4a21ec91b",
+        "android_client_info": {
+          "package_name": "com.example.mara_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOQyLr9Ky177xRAQCJUSWTfAdixz7wYyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
