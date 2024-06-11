@@ -122,14 +122,19 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        bottom: PreferredSize(
+
+        centerTitle: true,
+        title: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
           child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
                 languageButton('Dholuo', 1),
+                SizedBox(width: 40),
                 languageButton('English', 2),
               ],
             ),

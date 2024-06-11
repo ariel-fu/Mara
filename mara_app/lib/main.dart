@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 // import 'home.dart';
 // import 'package:google_fonts/google_fonts.dart';
-
+import 'thank_you.dart';
 import 'package:mara_app/quiz_screen.dart';
 import 'home2.dart';
 import 'launch_screen2.dart';
@@ -47,6 +47,7 @@ class _MaraAppState extends State<MaraApp> {
         '/private': (BuildContext context) => const PrivatePage(),
         '/ready_baby': (BuildContext context) => ReadyPage(),
         '/quiz': (BuildContext context) => QuizScreen(),
+        '/thank_you': (BuildContext context) => ThankYouScreen(),
         //'/learnmore': (BuildContext context) => const LearnMoreFertility(),
       },
       debugShowCheckedModeBanner: false,
