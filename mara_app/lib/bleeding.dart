@@ -3,9 +3,8 @@ import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/video.dart';
 import 'package:mara_app/audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'pattern_page.dart';
-import 'package:mara_app/design/colors.dart';
 
+import 'package:mara_app/design/colors.dart';
 
 class BleedingPage extends StatefulWidget {
   const BleedingPage({Key? key}) : super(key: key);
@@ -15,17 +14,13 @@ class BleedingPage extends StatefulWidget {
 }
 
 class _BleedingPageState extends State<BleedingPage> {
-  
-  // Widget methodContent = Text('DUMMY');
-  // Widget video1 = VideoWidget(videoAsset: 'videoAudio/videos/funnyCat.mp4', title:'Video 1 Language Not Selected');
-
   bool overrideIndex = false;
-  // Widget methodContent = updateMethodContent();
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
 
   String _currentLanguage = 'English';
+
   @override
   void initState() {
     super.initState();
@@ -38,7 +33,7 @@ class _BleedingPageState extends State<BleedingPage> {
       _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
     if (_currentLanguage.contains('English')) {
-      languageIndex= 2;
+      languageIndex = 2;
     } else if (_currentLanguage.contains('Dholuo')) {
       languageIndex = 1;
     } else {
@@ -48,31 +43,32 @@ class _BleedingPageState extends State<BleedingPage> {
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
-      "videoAudio/videos/peer/provider2KS.mp4", // method 1 - condom
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
     ],
     "Dholuo": [
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
+      // TODO - Ariel: uncomment after getting provider2 in Dholuo
+      // "videoAudio/videos/provider/provider2DL.mp4",
+      // "videoAudio/videos/provider/provider2DL.mp4",
+      // "videoAudio/videos/provider/provider2DL.mp4",
+      // "videoAudio/videos/provider/provider2DL.mp4",
+      // "videoAudio/videos/provider/provider2DL.mp4",
+      // "videoAudio/videos/provider/provider2DL.mp4",
+      // "videoAudio/videos/provider/provider2DL.mp4",
     ],
     "English": [
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
     ],
   };
 
@@ -83,8 +79,8 @@ class _BleedingPageState extends State<BleedingPage> {
   };
 
   final Map<String, String> titleTranslations = {
-    "English": "Period changes EXPLAINED", 
-    "Kiswahili": "Mabadiliko ya hedhi IMEELEZWA", 
+    "English": "Period changes EXPLAINED",
+    "Kiswahili": "Mabadiliko ya hedhi IMEELEZWA",
     "Dholuo": "Lokruok e chwer mar remb dwe OLER"
   };
 
@@ -129,9 +125,7 @@ class _BleedingPageState extends State<BleedingPage> {
   @override
   Widget build(BuildContext context) {
     final int? routeArgumentIndex =
-    ModalRoute.of(context)?.settings.arguments as int?;
-
-  
+        ModalRoute.of(context)?.settings.arguments as int?;
 
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
@@ -151,7 +145,6 @@ class _BleedingPageState extends State<BleedingPage> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-
         centerTitle: true,
         title: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
@@ -174,11 +167,13 @@ class _BleedingPageState extends State<BleedingPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Text(
-              titleTranslations[languages[languageIndex]] ?? "Title not found",
-              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-            )
-          ),
+              child: Text(
+                  titleTranslations[languages[languageIndex]] ??
+                      "Title not found",
+                  style: TextStyle(
+                      fontFamily: 'PoetsenOne',
+                      color: MaraColors.purple,
+                      fontSize: 36.0))),
           SizedBox(height: availableHeight * 0.01),
           methodSelectionRow(),
           SizedBox(
@@ -216,15 +211,15 @@ class _BleedingPageState extends State<BleedingPage> {
                   //updateMethodContent();
                 });
               },
-              color: Colors.black, 
-              iconSize: 60, 
+              color: Colors.black,
+              iconSize: 60,
               padding: EdgeInsets.all(10),
               splashRadius: 40,
               splashColor: Colors.grey.withOpacity(0.5),
               highlightColor: Colors.transparent,
             ),
             SizedBox(height: 5),
-            Container (
+            Container(
                 width: 100,
                 child: Text(
                   caption,
@@ -233,8 +228,7 @@ class _BleedingPageState extends State<BleedingPage> {
                   style: TextStyle(
                     color: Colors.black, //all text is black
                   ),
-                )
-            )
+                ))
           ],
         ),
       ],
@@ -277,67 +271,56 @@ class _BleedingPageState extends State<BleedingPage> {
     );
   }
 
-
-  void _switchLanguage(int language) async{
+  void _switchLanguage(int language) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String temp;
-    if (language == 0 ) {
-      temp =  'Kiswahili';
+    if (language == 0) {
+      temp = 'Kiswahili';
     } else if (language == 1) {
       temp = 'Dholuo';
     } else {
-      temp =  'English';
+      temp = 'English';
     }
     await prefs.setString('selectedLanguage', temp);
-    setState(()  { 
+    setState(() {
       _currentLanguage = temp;
     });
   }
 
   Widget contentArea() {
     return Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-              decoration: BoxDecoration(
-                //color: Colors.grey.shade200,
-                color: MaraColors.purple,
-                borderRadius: BorderRadius.circular(10),
-                //border: Border.all(color: Colors.grey),
-                border:Border.all(color: Colors.grey)
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-                      getAudio(audioContentMap, 0),
-                    ],
-                  ),
-                  SizedBox(width: 10.0),
-                  Flexible(
-                    child: Text(
-                      contentDescriptionMap[languages[languageIndex]]![methodIndex],
-                      style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
-                    ),
-                  ),
-                ],
+      padding: EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+        decoration: BoxDecoration(
+            //color: Colors.grey.shade200,
+            color: MaraColors.purple,
+            borderRadius: BorderRadius.circular(10),
+            //border: Border.all(color: Colors.grey),
+            border: Border.all(color: Colors.grey)),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                getAudio(audioContentMap, 0),
+              ],
+            ),
+            SizedBox(width: 10.0),
+            Flexible(
+              child: Text(
+                contentDescriptionMap[languages[languageIndex]]![methodIndex],
+                style: TextStyle(
+                    fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
               ),
             ),
-          );
+          ],
+        ),
+      ),
+    );
   }
-
-  // Widget updateMethodContent() {
-  //   return Text(
-  //     contentDescriptionMap[languages[languageIndex]]![methodIndex],
-  //     style: TextStyle(
-  //       fontSize: 20.0,
-  //       color: Colors.black,
-  //     )
-  //   );
-  // }
 
   Widget getVideoContent() {
     String asset = videoContentMap[languages[languageIndex]]![methodIndex];
