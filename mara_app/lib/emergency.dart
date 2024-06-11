@@ -359,7 +359,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                               ]),
                                             ),
                                             Image.asset(
-                                              'assets/emergency_photos.png',
+                                              'assets/options_images/6.png',
                                               width: 300,
                                               height: 300,
                                               fit: BoxFit.cover,
