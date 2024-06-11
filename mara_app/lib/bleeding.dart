@@ -48,31 +48,31 @@ class _BleedingPageState extends State<BleedingPage> {
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
-      "videoAudio/videos/peer/provider2KS.mp4", // method 1 - condom
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
-      "videoAudio/videos/peer/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4", // method 1 - condom
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
+      "videoAudio/videos/provider/provider2KS.mp4",
     ],
     "Dholuo": [
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
-      "videoAudio/videos/peer/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
     ],
     "English": [
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
-      "videoAudio/videos/peer/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
+      "videoAudio/videos/provider/provider2E.mp4",
     ],
   };
 
