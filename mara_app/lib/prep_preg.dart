@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
-
+// import 'package:firebase_analytics/firebase_analytics.dart';
+import 'session_manager.dart';
 import 'package:mara_app/icons/misc_icons.dart';
 import 'package:mara_app/design/colors.dart';
 
@@ -16,10 +17,13 @@ class PrepPage extends StatefulWidget {
 
 class _PrepPageState extends State<PrepPage> {
   String _currentLanguage = "English";
-
+  DateTime? _entryTime;
   @override
   void initState() {
     super.initState();
+    _entryTime = DateTime.now();  // Set entry time when the screen is loaded
+    SessionManager.logScreenEntry('PrepPage'); // Log screen entry
+    debugPrint('Screen Entry: PrepPage at ${_entryTime!.toIso8601String()}'); // debug print st
     _loadCurrentLanguage();
   }
 
@@ -29,6 +33,19 @@ class _PrepPageState extends State<PrepPage> {
       _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
   }
+
+  @override
+  void dispose() {
+    DateTime exitTime = DateTime.now(); 
+    if (_entryTime != null) {
+      int durationInSeconds = exitTime.difference(_entryTime!).inSeconds;
+      debugPrint('Duration on PrepPage: $durationInSeconds seconds');
+    }
+    SessionManager.logScreenExit('PrepPage'); // Log the screen exit
+    debugPrint('Screen Exit: PrepPage at ${exitTime.toIso8601String()}'); // debug exit
+    super.dispose();
+  }
+
 
   final Map<String, Map<String, String>> importantAudioContentMap = {
     'content1': {
