@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 // import 'home.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'thank_you.dart';
@@ -15,12 +15,29 @@ import 'ready_to_have_baby.dart';
 //import 'learn_more.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:mara_app/providers/provider_liked_methods.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'session_manager.dart'; 
 
-void main() {
+
+Future<void> requestPermissions() async {
+  var status = await Permission.storage.status;
+  if (!status.isGranted) {
+    await Permission.storage.request();
+  }
+}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferences.getInstance(); 
+  await requestPermissions(); // Request storage permissions
+  await SessionManager.startNewSession(); // Start a new session
   runApp(
-    ChangeNotifierProvider<Likes>(create: (_) => Likes(), child: MaraApp()),
+    ChangeNotifierProvider<Likes>(
+      create: (_) => Likes(),
+      child: MaraApp(),
+    ),
   );
 }
+
 
 class MaraApp extends StatefulWidget {
   const MaraApp({super.key});
@@ -47,78 +64,10 @@ class _MaraAppState extends State<MaraApp> {
         '/private': (BuildContext context) => const PrivatePage(),
         '/ready_baby': (BuildContext context) => ReadyPage(),
         '/quiz': (BuildContext context) => QuizScreen(),
-        '/thank_you': (BuildContext context) => ThankYouScreen(),
         //'/learnmore': (BuildContext context) => const LearnMoreFertility(),
+        '/thank_you': (BuildContext context) => ThankYouScreen(),
       },
       debugShowCheckedModeBanner: false,
-      // remove if install works
-      // theme: ThemeData(
-      //   textTheme: GoogleFonts.getFont('PoetsenOne') != null
-      //       ? GoogleFonts.getFont('PoetsenOne')
-      //       : GoogleFonts.abel,
-      // ),
     );
   }
 }
-
-// based on MDC 104 tutorial
-final ThemeData _maraTheme = _buildMaraTheme();
-
-ThemeData _buildMaraTheme() {
-  final ThemeData base = ThemeData.light(useMaterial3: true,);
-  return base.copyWith(
-    iconTheme: const IconThemeData(color: MaraColors.magentaPurple),
-    // colorScheme: base.colorScheme.copyWith(
-    //   primary: kShrinePink100,
-    //   onPrimary: kShrineBrown900,
-    //   secondary: kShrineBrown900,
-    //   error: kShrineErrorRed,
-    // ),
-    textTheme: _buildMaraTextTheme(base.textTheme),
-    // textSelectionTheme: const TextSelectionThemeData(
-    //   selectionColor: kShrinePink100,
-    // ),
-    // appBarTheme: const AppBarTheme(
-    //   foregroundColor: kShrineBrown900,
-    //   backgroundColor: kShrinePink100,
-    // ),
-    // inputDecorationTheme: const InputDecorationTheme(
-    //   border: CutCornersBorder(),
-    //   focusedBorder: CutCornersBorder(
-    //     borderSide: BorderSide(
-    //       width: 2.0,
-    //       color: kShrineBrown900,
-    //     ),
-    //   ),
-    //   floatingLabelStyle: TextStyle(
-    //     color: kShrineBrown900,
-    //   ),
-    // ),
-  );
-}
-
-TextTheme _buildMaraTextTheme(TextTheme base) {
-  return base
-      .copyWith(
-        headlineSmall: base.headlineSmall!.copyWith(
-          fontWeight: FontWeight.w500,
-        ),
-        titleLarge: base.titleLarge!.copyWith(
-          fontSize: 18.0,
-        ),
-        // bodySmall: base.bodySmall!.copyWith(
-        //   fontWeight: FontWeight.w400,
-        //   fontSize: 14.0,
-        // ),
-        // bodyLarge: base.bodyLarge!.copyWith(
-        //   fontWeight: FontWeight.w500,
-        //   fontSize: 16.0,
-        // ),
-      )
-      .apply(
-        fontFamily: 'PoetsenOne',
-        displayColor: MaraColors.purple,
-        // bodyColor: kShrineBrown900,
-      );
-}
-
