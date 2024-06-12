@@ -32,7 +32,9 @@ class SessionManager {
     String? currentSession = prefs.getString(_currentSessionKey);
     if (currentSession != null) {
       String entryTimeKey = '$currentSession-$screenName-entry';
-      await prefs.setString(entryTimeKey, DateTime.now().toIso8601String());
+      String entryTime = DateTime.now().toIso8601String();
+      await prefs.setString(entryTimeKey, entryTime);
+      debugPrint('Logged Screen Entry: $screenName at $entryTime');
     }
   }
 
@@ -41,13 +43,15 @@ class SessionManager {
     String? currentSession = prefs.getString(_currentSessionKey);
     if (currentSession != null) {
       String exitTimeKey = '$currentSession-$screenName-exit';
+      DateTime exitTime = DateTime.now();
       String durationKey = '$currentSession-$screenName-duration';
       String? entryTime = prefs.getString('$currentSession-$screenName-entry');
       if (entryTime != null) {
         DateTime entryDateTime = DateTime.parse(entryTime);
-        int duration = DateTime.now().difference(entryDateTime).inSeconds;
-        await prefs.setString(exitTimeKey, DateTime.now().toIso8601String());
+        int duration = exitTime.difference(entryDateTime).inSeconds;
+        await prefs.setString(exitTimeKey, exitTime.toIso8601String());
         await prefs.setInt(durationKey, duration);
+        debugPrint('Logged Screen Exit: $screenName at ${exitTime.toIso8601String()} Duration: $duration seconds');
       }
     }
   }
@@ -57,7 +61,9 @@ class SessionManager {
     String? currentSession = prefs.getString(_currentSessionKey);
     if (currentSession != null) {
       String choiceKey = '$currentSession-$screenName-quiz-$questionKey';
-      await prefs.setString(choiceKey, '$optionKey ($language)');
+      String choiceValue = '$optionKey ($language)';
+      await prefs.setString(choiceKey, choiceValue);
+      debugPrint('Logged Quiz Choice: Screen - $screenName, Question - $questionKey, Option - $optionKey, Language - $language');
     }
   }
 
