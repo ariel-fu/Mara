@@ -324,18 +324,15 @@ class _WhatChanceState extends State<WhatChance> {
         padding: EdgeInsets.all(10.0),
         child: Column(children: [
           if (methodIndex == 0 || methodIndex == 1)
-            Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: Row(
+            // Padding(
+            //   padding: EdgeInsets.only(bottom: 10.0),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                      //     size: 24.0, color: Colors.black),
                       getAudio(heyThisAudioMap, 0),
                     ],
                   ),
@@ -346,19 +343,20 @@ class _WhatChanceState extends State<WhatChance> {
                       children: [
                         ImageIcon(AssetImage('assets/misc-icons/important.png'),
                             size: 50.0, color: Colors.black),
+                        SizedBox(width: 10),
                         Flexible(
                           child: Text(
                           importantMessageTranslations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 17.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
                     )
                   ),
                 ],
-              ),
+              // ),
             ),
           //SizedBox(height: 20),
           if (methodIndex == 0 || methodIndex == 1)

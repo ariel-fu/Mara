@@ -308,19 +308,19 @@ class _EmergencyPageState extends State<EmergencyPage> {
           
           SizedBox(height: 20.0),
           Expanded(
-              child: Container(
-                  //height: containerHeight * 0.6, // Adjust as needed
-                  child: RawScrollbar(
-                    thumbColor: const Color.fromARGB(255, 232, 132, 165),
-                    thumbVisibility: true,
-                    trackVisibility: false,
-                    thickness: 25.0,
-                    radius: Radius.circular(20),
-                    child: LayoutBuilder(builder: (context, constraint) {
-                      return SingleChildScrollView(
-                          child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(minHeight: constraint.maxHeight),
+              // child: Container(
+              //     //height: containerHeight * 0.6, // Adjust as needed
+              //     child: RawScrollbar(
+              //       thumbColor: const Color.fromARGB(255, 232, 132, 165),
+              //       thumbVisibility: true,
+              //       trackVisibility: false,
+              //       thickness: 25.0,
+              //       radius: Radius.circular(20),
+              //       child: LayoutBuilder(builder: (context, constraint) {
+              //         return SingleChildScrollView(
+              //             child: ConstrainedBox(
+              //                 constraints:
+              //                     BoxConstraints(minHeight: constraint.maxHeight),
                               child: IntrinsicHeight(
                                 child: Flex(
                                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -360,15 +360,20 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                             ),
                                             Image.asset(
                                               'assets/options_images/6.png',
-                                              width: 300,
-                                              height: 300,
+                                              width: 280,
+                                              height: 280,
                                               fit: BoxFit.cover,
                                             ),
                                           ])),
                                     ]),
-                              )));
-                    }),
-                  )))
+                              )
+                  //             )
+                  //             );
+                  //   }
+                  //   ),
+                  // )
+                  // )
+                  )
         ],
       ),
     );
@@ -453,7 +458,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
   Widget contentArea(String contentKey) {
     var contentNum = int.parse(contentKey) - 1;
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      // padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
@@ -464,20 +470,16 @@ class _EmergencyPageState extends State<EmergencyPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-            if (contentNum == 0 ||
-                contentNum == 1 ||
-                contentNum == 2) // just first 3 boxes
-              Text(
-                contentKey,
-                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 35.0, fontWeight: FontWeight.bold),
-              ),
+            Text( //number
+              contentKey,
+              style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 33.0, fontWeight: FontWeight.bold),
+            ),
             getAudio(audioContentMap, contentNum),
             SizedBox(width: 10.0),
-            Expanded(
+            Expanded( //content text
               child: Text(
                 _t(contentKey),
-                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
               ),
             ),
           ],

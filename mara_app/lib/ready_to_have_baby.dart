@@ -294,24 +294,24 @@ class _ReadyPageState extends State<ReadyPage> {
               imagePath: 'assets/ready_to_have_baby_pregnant.png',
               title: importantMessage_pregnant_Translations[languages[languageIndex]] ?? "Important message not found",
             ),
-            SizedBox(height: 15.0),
+            // SizedBox(height: 5.0),
             methodSelectionRow(),
             SizedBox(height: 15.0),
             Expanded(
-              child: 
+              // child: 
                 //height: containerHeight * 0.6, // Adjust as needed
-              RawScrollbar(
-                thumbColor: const Color.fromARGB(255, 232, 132, 165),
-                thumbVisibility: true,
-                trackVisibility: false,
-                thickness: 25.0,
-                radius: Radius.circular(20),
-                child: LayoutBuilder(
-                  builder: (context, constraint) {
-                    return SingleChildScrollView(
-                        child: ConstrainedBox(
-                            constraints:
-                                BoxConstraints(minHeight: constraint.maxHeight),
+              // RawScrollbar(
+              //   thumbColor: const Color.fromARGB(255, 232, 132, 165),
+              //   thumbVisibility: true,
+              //   trackVisibility: false,
+              //   thickness: 25.0,
+              //   radius: Radius.circular(20),
+              //   child: LayoutBuilder(
+              //     builder: (context, constraint) {
+              //       return SingleChildScrollView(
+              //           child: ConstrainedBox(
+              //               constraints:
+              //                   BoxConstraints(minHeight: constraint.maxHeight),
                             child: IntrinsicHeight(
                               child: Flex(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -330,11 +330,11 @@ class _ReadyPageState extends State<ReadyPage> {
                                   ]
                               )
                             )
-                        )
-                    );
-                  }
-                )
-            ),
+            //             )
+            //         );
+            //       }
+            //     )
+            // ),
             // contentArea(),
             // additionalTextSection(),
             // SizedBox(
@@ -464,19 +464,15 @@ class _ReadyPageState extends State<ReadyPage> {
         children: [
           // Only display this section for certain method indices
           if (methodIndex == 0 || methodIndex == 1)
-            Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              //padding: EdgeInsets.all(20.0),
-              child: Row(
-                //Row(
+            // Padding(
+              // padding: EdgeInsets.only(bottom: 10.0),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                      //     size: 24.0, color: Colors.black),
                       getAudio(heyThisAudioMap, 0),
                     ],
                   ),
@@ -487,13 +483,13 @@ class _ReadyPageState extends State<ReadyPage> {
                       children: [
                         ImageIcon(AssetImage('assets/misc-icons/important.png'),
                             size: 50.0, color: Colors.black),
+                        SizedBox(width: 10),
                         Flexible(
                           child: Text(
                           importantMessage_hiv_sti_Translations[languages[languageIndex]] ??
                               "Important message not found",
-                            style: TextStyle(
-                                fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold
-                            ),
+                          style: TextStyle(
+                              fontFamily: 'Roboto', fontSize: 17.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
@@ -501,9 +497,8 @@ class _ReadyPageState extends State<ReadyPage> {
                   ),
                 ],
               ),
-            ),
+            // ),
           // Button for learning more, only shown for condoms
-          if (methodIndex == 0 || methodIndex == 1)
             ElevatedButton.icon(
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
                   color: Colors.black,
@@ -526,6 +521,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 );
               },
             ),
+            SizedBox(height: 10)
 
 
             // ElevatedButton.icon(

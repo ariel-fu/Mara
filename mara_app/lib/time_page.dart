@@ -308,19 +308,18 @@ class _TimePageState extends State<TimePage> {
       children: [
         // Only display this section for certain method indices
         if (methodIndex == 0 || methodIndex == 1)
-          Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //ImageIcon(AssetImage('assets/misc-icons/important.png'), size: 24.0, color: Colors.black),
-                    getAudio(heyThisAudioMap, 0),
-                  ],
-                ),
+          // Padding(
+          //     padding: EdgeInsets.only(bottom: 10.0),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      getAudio(heyThisAudioMap, 0),
+                    ],
+                  ),
                   SizedBox(width: 10),
                   Expanded(
                     child: Row(
@@ -328,20 +327,21 @@ class _TimePageState extends State<TimePage> {
                       children: [
                         ImageIcon(AssetImage('assets/misc-icons/important.png'),
                             size: 50.0, color: Colors.black),
+                        SizedBox(width: 10),
                         Flexible(
                           child: Text(
                           importantMessageTranslations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 17.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
                     )
                   ),
-              ],
-            ),
-          ),
+                ],
+              ),
+            // ),
         // Button for learning more, only shown for condoms
         if (methodIndex == 0 || methodIndex == 1)
           ElevatedButton.icon(
