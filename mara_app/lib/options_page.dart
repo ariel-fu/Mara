@@ -12,7 +12,7 @@ import 'new_liked_methods.dart';
 import 'model/method_repository.dart';
 import 'providers/provider_liked_methods.dart';
 import 'package:mara_app/design/colors.dart';
-
+import 'session_manager.dart';
 class OptionsPage extends StatefulWidget {
   const OptionsPage({Key? key}) : super(key: key);
 
@@ -26,7 +26,7 @@ class _OptionsPageState extends State<OptionsPage> {
   bool overrideIndex = false; // Used to override language selection from route
   int? methodIndex;
   final methods = MethodRepository.loadMethods();
-
+  DateTime? screenEntryTime; // Variable to track screen entry time
   final Map<String, Map<String, String>> _translations = {
     'English': {
       'title': 'What are my options?',
@@ -78,8 +78,35 @@ class _OptionsPageState extends State<OptionsPage> {
   @override
   void initState() {
     super.initState();
+    screenEntryTime = DateTime.now();
+    _logScreenEntry(); // Log the screen entry time
     _loadCurrentLanguage();
     _methodDetailsDataFuture = loadMethodDetails();
+  }
+
+  void _logScreenEntry() {
+    SessionManager.logScreenEntry('OptionsPage'); 
+    if (screenEntryTime != null) {
+      debugPrint('Screen Entry: OptionsPage at ${screenEntryTime!.toIso8601String()}');
+    }
+  }
+
+
+  void _logScreenExit() {
+    DateTime exitTime = DateTime.now(); 
+    if (screenEntryTime != null) {
+      int durationInSeconds = exitTime.difference(screenEntryTime!).inSeconds;
+      SessionManager.logScreenExit('OptionsPage'); 
+      debugPrint('Screen Exit: OptionsPage at ${exitTime.toIso8601String()}');
+      debugPrint('Duration on OptionsPage: $durationInSeconds seconds'); // debug print
+    }
+  }
+
+
+  @override
+  void dispose() {
+    _logScreenExit();
+    super.dispose();
   }
 
   String _currentLanguage = 'English';
@@ -232,19 +259,19 @@ class _OptionsPageState extends State<OptionsPage> {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (snapshot.hasData) {
                 final Map<String, dynamic> methodDetailsData = snapshot.data!;
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    // ConstrainedBox(
-                    //   // width: boxWidth,
-                    //   // height: boxHeight * 0.25,
-                    //   constraints: BoxConstraints(maxHeight: containerHeight * 0.34, maxWidth: containerWidth),
-                    //   child: Container(
-                    //     child: Column(
-                    //       mainAxisAlignment: MainAxisAlignment.center,
-                    //       mainAxisSize: MainAxisSize.min,
-                    //       children: <Widget>[
+                // return Column(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   mainAxisSize: MainAxisSize.min,
+                //   children: <Widget>[
+                    return ConstrainedBox(
+                      // width: boxWidth,
+                      // height: boxHeight * 0.25,
+                      constraints: BoxConstraints(maxHeight: containerHeight * 0.238, maxWidth: containerWidth),
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -253,106 +280,124 @@ class _OptionsPageState extends State<OptionsPage> {
                           ? Text("Please select a method to learn more")
                           :Text(methods[methodIndex]!.name,
                               style: TextStyle(
-                                  fontSize: 19.0,
+                                  fontSize: 20.0,
                                   fontWeight: FontWeight.bold)
                           ),
                         ]
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start, 
-                      children: [
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              getAudio(),
-                            ]
-                        ),
-                        Flexible(
-                          child: methodRef == null
-                              ? SizedBox(height: 20.0)
-                              : Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Text(
-                                      methodDetailsData[methodRef]!['options_page']
-                                          [languages[languageIndex]],                                    
-                                      style: TextStyle(
-                                        fontFamily: 'Roboto', fontSize: 19.0
-                                      ),
-                                  ),
-                                ),
-                        ),
-                        if (methodIndex != null)
-                          getPic(),
-                      ]
-                    ),
-                                    // SizedBox(height: 70.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(width: 20),
-                      ElevatedButton(
-                        onPressed: () => {
-                          setState(() {
-                            methodIndex = null;
-                          })
-                        },
-                        child: Text('Clear'),
-                      ),
-                      SizedBox(width: 20),
-                      ElevatedButton(
-                        onPressed: methodIndex == null
-                            ? null
-                            : () => {
-                                  if (methodDetailsData.containsKey(methodRef))
-                                    {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              MethodDetailsScreen(
-                                            methodName:
-                                                methods[methodIndex]!.name,
-                                            methodDetails:
-                                                methodDetailsData[methodRef],
-                                            currentLanguage:
-                                                languages[languageIndex],
-                                            translations: _translations,
-                                            // TODO: delete unused parameters
-                                            onChangeLanguage: (newLang) {
-                                              _changeLanguage(
-                                                  newLang); // Call _changeLanguage from RecommendationScreen
-                                            },
-                                          ),
+                    Expanded(
+                      //child: Container(
+                          //height: containerHeight * 0.6, // Adjust as needed
+                          child: RawScrollbar(
+                            thumbColor: const Color.fromARGB(255, 232, 132, 165),
+                            thumbVisibility: true,
+                            trackVisibility: false,
+                            thickness: 25.0,
+                            radius: Radius.circular(20),
+                            child: LayoutBuilder(builder: (context, constraint) {
+                              return SingleChildScrollView(
+                                child: ConstrainedBox(
+                                  constraints:
+                                    BoxConstraints(minHeight: constraint.maxHeight),
+                                    child: Flex(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      direction: Axis.vertical,
+                                      children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start, 
+                                      children: [
+                                        Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              getAudio(),
+                                            ]
                                         ),
-                                      ),
-                                      // methodIndex = null,
-                                    }
-                                  else
-                                    {
-                                      // Handle the case where method details are not found
-                                      print('No details found for $methodRef'),
-                                    }
-                                },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          backgroundColor: MaraColors.lavender,
-                        ),
-                        child: Text('Learn more'),
-                      ),
-                      SizedBox(height: 20.0),
-                      
-                    ]
-                  )
-                    //       ]
-                    //     )
-                    //   )
-                    // )
-                  ]
-                );
-                                  
-                          //)
+                                        Flexible(
+                                          child: methodRef == null
+                                              ? SizedBox(height: 20.0)
+                                              : Padding(
+                                                  padding: const EdgeInsets.all(15.0),
+                                                  child: Text(
+                                                      methodDetailsData[methodRef]!['options_page']
+                                                          [languages[languageIndex]],                                    
+                                                      style: TextStyle(
+                                                        fontFamily: 'Roboto', fontSize: 18.0
+                                                      ),
+                                                  ),
+                                                ),
+                                        ),
+                                        if (methodIndex != null)
+                                          getPic(),
+                                      ]
+                                    ),
+                                    // SizedBox(height: 70.0),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(width: 20),
+                                        ElevatedButton(
+                                          onPressed: () => {
+                                            setState(() {
+                                              methodIndex = null;
+                                            })
+                                          },
+                                          child: Text('Clear'),
+                                        ),
+                                        SizedBox(width: 20),
+                                        ElevatedButton(
+                                          onPressed: methodIndex == null
+                                              ? null
+                                              : () => {
+                                                    if (methodDetailsData.containsKey(methodRef))
+                                                      {
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                MethodDetailsScreen(
+                                                              methodName:
+                                                                  methods[methodIndex]!.name,
+                                                              methodDetails:
+                                                                  methodDetailsData[methodRef],
+                                                              currentLanguage:
+                                                                  languages[languageIndex],
+                                                              translations: _translations,
+                                                              // TODO: delete unused parameters
+                                                              onChangeLanguage: (newLang) {
+                                                                _changeLanguage(
+                                                                    newLang); // Call _changeLanguage from RecommendationScreen
+                                                              },
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        // methodIndex = null,
+                                                      }
+                                                    else
+                                                      {
+                                                        // Handle the case where method details are not found
+                                                        print('No details found for $methodRef'),
+                                                      }
+                                                  },
+                                          style: ElevatedButton.styleFrom(
+                                            foregroundColor: Colors.black,
+                                            backgroundColor: MaraColors.lavender,
+                                          ),
+                                          child: Text('Learn more'),
+                                        ),
+                                        SizedBox(height: 20.0),
+                                        
+                                      ]
+                                    )
+                                      ]
+                                    )
+                                )
+                              );
+                            }
+
+                            )
+                          )
                       //)
-                     
+                    ) 
                   // Row(
                   //   crossAxisAlignment: CrossAxisAlignment.start, 
                   //   children: [
@@ -435,7 +480,16 @@ class _OptionsPageState extends State<OptionsPage> {
                   //       ),
                   //       child: Text('Learn more'),
                   //     ),
-                 
+                    ],
+                  ),
+                      )
+                    );
+                  // SizedBox(height: 20.0),
+                // ],
+                
+                    
+                
+              // );
             } else {
               // Otherwise, if no data is present, display a placeholder
               return Center(child: Text('No data available'));
@@ -520,7 +574,7 @@ class _OptionsPageState extends State<OptionsPage> {
         "assets/options_images/$methodIndex.png";
     return Image.asset(
       imageNum,
-      width: MediaQuery.of(context).size.width * 0.13,
+      width: MediaQuery.of(context).size.width * 0.15,
     );
   }
 }
