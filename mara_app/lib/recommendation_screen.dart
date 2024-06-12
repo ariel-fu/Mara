@@ -9,7 +9,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:provider/provider.dart';
+// import 'package:firebase_analytics/firebase_analytics.dart';
 import 'thank_you.dart';
+import 'session_manager.dart'; // Import the SessionManager
 class RecommendationScreen extends StatefulWidget {
   final List<String> recommendations;
   final List<String> introTexts;
@@ -42,19 +44,46 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
 
   final double _aspectRatio = 16 / 10;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadCurrentLanguage();
-    _methodDetailsDataFuture = loadMethodDetails();
-  }
-
-  // Future<void> _loadCurrentLanguage() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
-  //   });
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // _entryTime = DateTime.now();  // Set entry time when the screen is loaded
+  //   SessionManager.logScreenEntry('RecommendationScreen'); // Log screen entry
+  //   _loadCurrentLanguage();
+  //   _methodDetailsDataFuture = loadMethodDetails();
   // }
+
+  @override
+void initState() {
+  super.initState();
+  _logScreenEntry();
+  _loadCurrentLanguage();
+  _methodDetailsDataFuture = loadMethodDetails();
+}
+
+  void _logScreenEntry() {
+    DateTime entryTime = DateTime.now();  // Set entry time when the screen is loaded
+    SessionManager.logScreenEntry('RecommendationScreen'); // Log screen entry
+    debugPrint('Screen Entry: RecommendationScreen at ${entryTime.toIso8601String()}'); // debug print
+}
+
+void _logScreenExit() {
+  DateTime exitTime = DateTime.now(); 
+  SessionManager.logScreenExit('RecommendationScreen'); // Log screen exit
+  debugPrint('Screen Exit: RecommendationScreen at ${exitTime.toIso8601String()}'); // Print the exit time
+}
+
+
+
+
+@override
+void dispose() {
+  _logScreenExit();
+  super.dispose();
+}
+
+
+ 
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -100,33 +129,64 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   setState(() {});
 }
 
+// Widget _endSessionButton() {
+//   return Padding(
+//     padding: const EdgeInsets.symmetric(vertical: 20.0),
+//     child: ElevatedButton(
+//       onPressed: () async {
+//         await SessionManager.endCurrentSession(); // End session and export data
+//         Navigator.of(context).pushReplacement(
+//           MaterialPageRoute(builder: (context) => ThankYouScreen()),
+//         );
+//       },
+//       style: ElevatedButton.styleFrom(
+//         backgroundColor: MaraColors.magentaPurple,
+//         foregroundColor: Colors.white,
+//         textStyle: TextStyle(
+//           fontSize: 18, 
+//           fontWeight: FontWeight.bold, // Bold font
+//         ),
+//       ),
+//       child: const Text(
+//         "END SESSION",
+//         style: TextStyle(
+//           fontSize: 20, 
+//           letterSpacing: 2, 
+//         ),
+//       ),
+//     ),
+//   );
+// }
+
+
 Widget _endSessionButton() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 20.0),
-    child: ElevatedButton(
-      onPressed: () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => ThankYouScreen()),
-        );
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: MaraColors.magentaPurple,
-        foregroundColor: Colors.white,
-        textStyle: TextStyle(
-          fontSize: 18, 
-          fontWeight: FontWeight.bold, // Bold font
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: ElevatedButton(
+        onPressed: () async {
+          await SessionManager.endCurrentSession(); // THIS WILL TRIGGER EXPRT DATA
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => ThankYouScreen()),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: MaraColors.magentaPurple,
+          foregroundColor: Colors.white,
+          textStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold, // Bold font
+          ),
+        ),
+        child: const Text(
+          "END SESSION",
+          style: TextStyle(
+            fontSize: 20,
+            letterSpacing: 2,
+          ),
         ),
       ),
-      child: const Text(
-        "END SESSION",
-        style: TextStyle(
-          fontSize: 20, 
-          letterSpacing: 2, 
-        ),
-      ),
-    ),
-  );
-}
+    );
+  }
 
 
 @override
@@ -368,8 +428,8 @@ Widget build(BuildContext context) {
   ),
   )
 )
-            ), 
-                _endSessionButton(), 
+            ),
+            _endSessionButton(), 
 
               ],
             ),
