@@ -47,6 +47,26 @@ class SessionManager {
     }
   }
 
+  static Future<void> logVideoStart(String videoName, DateTime startTime) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? currentSession = prefs.getString('current_session');
+    if (currentSession != null) {
+      String startTimeKey = '$currentSession-video-$videoName-start';
+      await prefs.setString(startTimeKey, startTime.toIso8601String());
+    }
+  }
+
+  static Future<void> logVideoStop(String videoName, DateTime endTime, int duration) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? currentSession = prefs.getString('current_session');
+    if (currentSession != null) {
+      String endTimeKey = '$currentSession-video-$videoName-end';
+      String durationKey = '$currentSession-video-$videoName-duration';
+      await prefs.setString(endTimeKey, endTime.toIso8601String());
+      await prefs.setInt(durationKey, duration);
+    }
+  }
+
   static Future<void> logQuizChoice(String screenName, String questionKey, String optionKey, String language) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? currentSession = prefs.getString('current_session');
