@@ -93,6 +93,11 @@ flutter:
     - assets/methods.json
     - assets/maralogo.png
     - assets/mara_divas.png
+    - assets/ready_to_have_baby_pregnant.png
+    - assets/intermediate_launchscreen.png
+    - assets/iud_picture_of_woman.png
+    - assets/woman.png
+    - assets/options-icons/
 
     # - assets/string-resources/method_1.png
     # - assets/string-resources/method_2.png
@@ -108,14 +113,10 @@ flutter:
     # - assets/depo.png
     # - assets/implant.png
     # - assets/iucd.png
-    # - assets/woman.png
-    # - assets/options-icons/
     # - assets/preg_woman.png
 
     # - assets/imlaunchscreenimg.png
     # - assets/intermediate_launchscreen.png
-    # - assets/iud_picture_of_woman.png
-    # - assets/ready_to_have_baby_pregnant.png
     # - assets/period_white.png
 
     - videoAudio/videos/peer/peer1KS.mp4
@@ -135,7 +136,7 @@ flutter:
     - videoAudio/videos/provider/provider1E.mp4
 
     - videoAudio/videos/provider/provider2KS.mp4
-    #    - videoAudio/videos/provider/provider2DL.mp4
+    - videoAudio/videos/provider/provider2DL.mp4
     - videoAudio/videos/provider/provider2E.mp4
 
     - videoAudio/videos/provider/provider3KS.mp4
@@ -413,14 +414,6 @@ flutter:
     - videoAudio/audio/3things_K.mp3
     - videoAudio/audio/3things_L.mp3
 
-    # - assets/ready_to_have_baby_pregnant.png
-    # - assets/ready_to_have_baby_pregnant_white.png
-    # - assets/birth_control_white.png
-    # - assets/calendar_white.png
-    # - assets/chance_white.png
-    # - assets/privacy_white.png
-    # - assets/take_quiz_white.png
-    # - assets/emergency_photos.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

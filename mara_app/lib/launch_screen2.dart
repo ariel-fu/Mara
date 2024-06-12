@@ -93,6 +93,8 @@ class _LaunchScreenState extends State<LaunchScreen> {
     ],
   };
 
+  final double _aspectRatio = 16 / 10;
+
   void _switchLanguage(String language) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('selectedLanguage', language);
@@ -103,18 +105,35 @@ class _LaunchScreenState extends State<LaunchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
+
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
     return Scaffold(
       appBar: AppBar(
-        leading: Container(),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              languageButton('Kiswahili'),
-              languageButton('Dholuo'),
-              languageButton('English'),
-            ],
+        centerTitle: true,
+        title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                languageButton('Kiswahili'),
+                SizedBox(width: 40),
+                languageButton('Dholuo'),
+                SizedBox(width: 40),
+                languageButton('English'),
+              ],
+            ),
           ),
         ),
       ),

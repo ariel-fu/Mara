@@ -9,7 +9,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:provider/provider.dart';
-
+import 'thank_you.dart';
 class RecommendationScreen extends StatefulWidget {
   final List<String> recommendations;
   final List<String> introTexts;
@@ -98,6 +98,34 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   likes.toggleLikedMethod(jsonRef);  // Toggle the liked state
   print("Liked Methods after toggle: ${likes.likedMethods}");
   setState(() {});
+}
+
+Widget _endSessionButton() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 20.0),
+    child: ElevatedButton(
+      onPressed: () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => ThankYouScreen()),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: MaraColors.magentaPurple,
+        foregroundColor: Colors.white,
+        textStyle: TextStyle(
+          fontSize: 18, 
+          fontWeight: FontWeight.bold, // Bold font
+        ),
+      ),
+      child: const Text(
+        "END SESSION",
+        style: TextStyle(
+          fontSize: 20, 
+          letterSpacing: 2, 
+        ),
+      ),
+    ),
+  );
 }
 
 
@@ -340,7 +368,8 @@ Widget build(BuildContext context) {
   ),
   )
 )
-            )
+            ), 
+                _endSessionButton(), 
 
               ],
             ),

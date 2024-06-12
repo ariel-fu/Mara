@@ -228,14 +228,14 @@ class _HIVPageState extends State<HIVPage> {
           Expanded(
             child: Container(
                 //height: containerHeight * 0.6, // Adjust as needed
-                child: RawScrollbar(
-                    thumbColor: const Color.fromARGB(255, 232, 132, 165),
-                    thumbVisibility: true,
-                    trackVisibility: false,
-                    thickness: 25.0,
-                    radius: Radius.circular(20),
-                    child: LayoutBuilder(builder: (context, constraint) {
-                      return SingleChildScrollView(
+                // child: RawScrollbar(
+                //     thumbColor: const Color.fromARGB(255, 232, 132, 165),
+                //     thumbVisibility: true,
+                //     trackVisibility: false,
+                //     thickness: 25.0,
+                //     radius: Radius.circular(20),
+                //     child: LayoutBuilder(builder: (context, constraint) {
+                //       return SingleChildScrollView(
                         //height: containerHeight * 0.6, // Adjust as needed
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -287,8 +287,8 @@ class _HIVPageState extends State<HIVPage> {
                             ),
                           ],
                         ),
-                      );
-                    }))),
+                      )
+                    // }))),
           )
         ],
       ),

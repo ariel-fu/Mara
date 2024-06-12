@@ -52,14 +52,13 @@ class _BleedingPageState extends State<BleedingPage> {
       "videoAudio/videos/provider/provider2KS.mp4",
     ],
     "Dholuo": [
-      // TODO - Ariel: uncomment after getting provider2 in Dholuo
-      // "videoAudio/videos/provider/provider2DL.mp4",
-      // "videoAudio/videos/provider/provider2DL.mp4",
-      // "videoAudio/videos/provider/provider2DL.mp4",
-      // "videoAudio/videos/provider/provider2DL.mp4",
-      // "videoAudio/videos/provider/provider2DL.mp4",
-      // "videoAudio/videos/provider/provider2DL.mp4",
-      // "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
+      "videoAudio/videos/provider/provider2DL.mp4",
     ],
     "English": [
       "videoAudio/videos/provider/provider2E.mp4",
