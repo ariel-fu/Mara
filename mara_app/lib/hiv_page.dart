@@ -246,19 +246,19 @@ class _HIVPageState extends State<HIVPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 SizedBox(
-                                    width: 150,
-                                    height: 150,
+                                    width: 140,
+                                    height: 140,
                                     child: Image.asset(
                                         'assets/options_images/2.png')),
                                 SizedBox(
-                                    width: 120,
-                                    height: 120,
+                                    width: 110,
+                                    height: 110,
                                     child: Image.asset(
                                         'assets/misc-icons/twopeople.png',
                                         color: MaraColors.magentaPurple)),
                                 SizedBox(
-                                    width: 150,
-                                    height: 150,
+                                    width: 140,
+                                    height: 140,
                                     child: Image.asset(
                                         'assets/options_images/5.png')),
                               ],
@@ -268,19 +268,19 @@ class _HIVPageState extends State<HIVPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 SizedBox(
-                                    width: 150,
-                                    height: 150,
+                                    width: 140,
+                                    height: 140,
                                     child: Image.asset(
                                         'assets/misc-icons/prep_hands.png')),
                                 SizedBox(
-                                    width: 120,
-                                    height: 120,
+                                    width: 110,
+                                    height: 110,
                                     child: Image.asset(
                                         'assets/misc-icons/preppills.png',
                                         color: MaraColors.magentaPurple)),
                                 SizedBox(
-                                    width: 150,
-                                    height: 150,
+                                    width: 140,
+                                    height: 140,
                                     child: Image.asset(
                                         'assets/misc-icons/prep_text.png')),
                               ],
@@ -352,13 +352,13 @@ class _HIVPageState extends State<HIVPage> {
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.bold,
-                      fontSize: 25.0,
+                      fontSize: 24.0,
                       color: MaraColors.purple,
                     ),
                   ),
                   Text(
                     content,
-                    style: TextStyle(fontFamily: 'Roboto', fontSize: 22.0),
+                    style: TextStyle(fontFamily: 'Roboto', fontSize: 20.0),
                   ),
                 ],
               ),

@@ -320,8 +320,8 @@ class _ReadyPageState extends State<ReadyPage> {
                                     contentArea(),
                                     additionalTextSection(),
                                     SizedBox(
-                                      width: boxWidth * 0.8,
-                                      height: availableHeight * 0.6 * 0.5,
+                                      width: boxWidth * 0.7,
+                                      height: availableHeight * 0.55 * 0.45,
                                       child: Center(
                                         child: getVideoContent(),
                                       ),
@@ -451,7 +451,7 @@ class _ReadyPageState extends State<ReadyPage> {
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Text(
         subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
     );
@@ -489,7 +489,7 @@ class _ReadyPageState extends State<ReadyPage> {
                           importantMessage_hiv_sti_Translations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 17.0, fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
@@ -578,7 +578,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 style: TextStyle(
                     fontFamily: 'Roboto',
                     color: Colors.white,
-                    fontSize: 22.0),
+                    fontSize: 19.0),
               ),
             ),
           ],
@@ -599,7 +599,7 @@ class _ReadyPageState extends State<ReadyPage> {
       //required String header,
       required String title}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -609,8 +609,8 @@ class _ReadyPageState extends State<ReadyPage> {
             children: [
               Image.asset(
                 imagePath,
-                width: 200, // Adjust width
-                height: 200, // Adjust height
+                width: 170, // Adjust width
+                height: 170, // Adjust height
                 fit: BoxFit.contain,
               ),
               Expanded(
@@ -638,7 +638,7 @@ class _ReadyPageState extends State<ReadyPage> {
                               Flexible(
                                 child: Text(
                                 title,
-                                style: TextStyle(fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ]
@@ -665,7 +665,7 @@ class _ReadyPageState extends State<ReadyPage> {
             size:45
             ),
         label: Text(prep_preg_Translations[languages[languageIndex]] ?? "Label not found", 
-            style: TextStyle(fontSize: 24.0),
+            style: TextStyle(fontSize: 22.0),
           ),
         style: ElevatedButton.styleFrom(
           backgroundColor: MaraColors.lavender,
