@@ -412,6 +412,14 @@ flutter:
     - videoAudio/audio/heyThis_HIV_STI_K.mp3
     - videoAudio/audio/heyThis_HIV_STI_L.mp3
 
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_E.mp3
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_K.mp3
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_L.mp3
+
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_E.mp3
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_K.mp3
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_L.mp3
+
     - videoAudio/audio/3things_E.mp3
     - videoAudio/audio/3things_K.mp3
     - videoAudio/audio/3things_L.mp3

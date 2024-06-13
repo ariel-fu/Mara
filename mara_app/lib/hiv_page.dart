@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'video.dart';
+import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
 import 'home2.dart';
 
@@ -55,95 +55,105 @@ class _HIVPageState extends State<HIVPage> {
     "Dholuo": "In gi teko mar geng'ri iwuon!"
   };
 
-  final Map<String, List<String>> contentDescriptionMap1 = {
+  // final Map<String, List<String>> contentDescriptionMap1 = {
+  //   "Kiswahili": [
+  //     "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+  //     "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+  //     "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+  //     "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+  //     "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+  //     "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+  //     "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+  //   ],
+  //   "Dholuo": [
+  //     "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+  //     "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+  //     "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+  //     "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+  //     "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+  //     "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+  //     "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+  //   ],
+  //   "English": [
+  //     "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+  //     "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+  //     "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+  //     "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+  //     "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+  //     "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+  //     "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+  //   ],
+  // };
+
+  // final Map<String, List<String>> contentDescriptionMap2 = {
+  //   "Kiswahili": [
+  //     "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+  //     "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+  //     "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+  //     "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+  //     "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+  //     "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+  //     "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+  //   ],
+  //   "Dholuo": [
+  //     "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+  //     "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+  //     "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+  //     "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+  //     "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+  //     "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+  //     "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+  //   ],
+  //   "English": [
+  //     "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+  //     "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+  //     "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+  //     "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+  //     "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+  //     "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+  //     "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
+  //   ],
+  // };
+
+  final Map<String, Map<String, String>> _translations = {
+    "1": {
+      "Kiswahili":
+           "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+      "Dholuo":
+          "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
+      "English":
+           "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+    },
+    "2": {
+      "Kiswahili":
+          "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
+      "Dholuo":
+          "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
+      "English":
+          "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis."
+    },
+    
+  };
+
+  final Map<String, List<String>> audioContentMap = {
+    "English": [
+      'videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_E.mp3',
+      'videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_E.mp3',
+    ],
     "Kiswahili": [
-      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
-      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
-      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
-      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
-      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
-      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
-      "Kutumia kondomu kila wakati unapojamiiana kutasaidia kuzuia Virusi Vya Ukimwi na maambukizo mengine kama vile warts, klamidia, gonorrhea na kaswende. Kama unavyojua, kondomu pia husaidia kuzuia mimba! Ikiwa kondomu itapasuka, unaweza kwenda kliniki haraka iwezekanavyo lakini ndani ya siku 3 kuomba dawa za kuzuia Virusi Vya Ukimwi (PEP).",
+      'videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_K.mp3',
+      'videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_K.mp3',
     ],
     "Dholuo": [
-      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
-      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
-      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
-      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
-      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
-      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
-      "Tiyo gi rabo yunga kinde duto ma ibedo e achiel biro konyi geng'o kute mag ayaki kod tuoche mamoko kaka warts, chlamydia, gonorrhea, kod syphilis. Kaka ing'eyo, rabo yunga bende konyo e geng'o ich! Ka rabo yunga obwasore, inyalo dhi e klinik mapiyo kaka nyalore to ekind ndalo 3 mondo ikwa yedhe mag geng'o kute mag ayaki [PEP]",
-    ],
-    "English": [
-      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
-      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
-      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
-      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
-      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
-      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
-      "Using a condom every time you have sex will help prevent HIV and other infections like warts, chlamydia, gonorrhea, and syphilis. As you know, condoms also help to prevent pregnancy! If a condom breaks, you can go to the clinic as soon as possible but within 3 days to ask for medications to prevent HIV (PEP).",
+      'videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_L.mp3',
+      'videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_L.mp3',
     ],
   };
 
-  final Map<String, List<String>> contentDescriptionMap2 = {
-    "Kiswahili": [
-      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
-      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
-      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
-      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
-      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
-      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
-      "PrEP ni kidonge cha kila siku unachotumia kuzuia VVU. Inafanya kazi tu ikiwa unainywa, kama vile vidonge vya kila siku vya kuzuia mimba. Unaweza kuipata kwenye kliniki nyingi na kwenye maduka ya dawa. Hili ni chaguo bora kwa watu ambao hawawezi kutumia kondomu na wapenzi wao au kama wanataka kupata mimba. Haizuii maambukizo mengine ingawa, kama vile warts, chlamydia, gonorrhea, na kaswende.",
-    ],
-    "Dholuo": [
-      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
-      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
-      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
-      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
-      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
-      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
-      "PrEP en pill ma imuonyo pile ka pile mondo ogeng kute mag ayaki. Otiyo mana ka imuonye, odwaro chalo gi pills ma pile ka pile mag geng'o ich. Inyalo yude e ng'eny kliniks kod ute yath moko. Ma en yo maber ahinya ne jogo ma ok nyal tiyo gi rabo yunga gi joheragi kata ka gidwaro mako ich. Ok ogeng tuoche mamoko, kaka warts, chlamydia, gonorrhea kod syphilis.",
-    ],
-    "English": [
-      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
-      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
-      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
-      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
-      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
-      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
-      "PrEP is a daily pill you take to prevent HIV. It only works if you take it, sort of like the daily pills for pregnancy prevention. You can get it at most clinics and at some pharmacies. This is a great option for people who can't use condoms with their partners or if they want to get pregnant. It doesn't prevent the other infections though, like warts, chlamydia, gonorrhea, and syphilis.",
-    ],
-  };
-
-  Widget buildIconButton(IconData iconData, int index) {
-    bool isSelected = index == methodIndex;
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IconButton(
-          icon: Icon(
-            iconData,
-            size: isSelected ? 60 : 60,
-            color: isSelected ? Colors.black : Colors.grey,
-          ),
-          onPressed: () {
-            setState(() {
-              methodIndex = index;
-              updateMethodContent1();
-              updateMethodContent2();
-            });
-          },
-          color: isSelected ? Colors.black : Colors.transparent,
-          iconSize: isSelected ? 60 : 60,
-          padding: EdgeInsets.all(10),
-          splashRadius: 40,
-          splashColor: Colors.grey.withOpacity(0.5),
-          highlightColor: Colors.transparent,
-        ),
-      ],
-    );
+  String _t(String key) {
+    return _translations[key]?[_currentLanguage] ?? key;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -240,8 +250,7 @@ class _HIVPageState extends State<HIVPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            contentBox('Male and Female Condoms',
-                                updateMethodContent1()),
+                            contentBox('Male and Female Condoms', '1'),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -263,7 +272,7 @@ class _HIVPageState extends State<HIVPage> {
                                         'assets/options_images/5.png')),
                               ],
                             ),
-                            contentBox('PrEP', updateMethodContent2()),
+                            contentBox('PrEP', '2'),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -302,8 +311,8 @@ class _HIVPageState extends State<HIVPage> {
         setState(() {
           languageIndex = index;
           overrideIndex = true;
-          updateMethodContent1();
-          updateMethodContent2();
+          // updateMethodContent1();
+          // updateMethodContent2();
           if (index == 0) {
             _switchLanguage('Kiswahili');
           } else if (index == 1) {
@@ -328,7 +337,8 @@ class _HIVPageState extends State<HIVPage> {
     });
   }
 
-  Widget contentBox(String title, String content) {
+  Widget contentBox(String title, String contentKey) {
+    var contentNum = int.parse(contentKey) - 1;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -341,13 +351,15 @@ class _HIVPageState extends State<HIVPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-            SizedBox(width: 10.0),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                Row(
+                  children: [
+                    Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
+                    SizedBox(width: 10.0),
+                    Text(
                     title,
                     style: TextStyle(
                       fontFamily: 'Montserrat',
@@ -356,12 +368,23 @@ class _HIVPageState extends State<HIVPage> {
                       color: MaraColors.purple,
                     ),
                   ),
-                  Text(
-                    content,
-                    style: TextStyle(fontFamily: 'Roboto', fontSize: 20.0),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      getAudio(audioContentMap, contentNum),
+                      SizedBox(width: 10.0),
+                      Expanded( //
+                        child: Text(
+                          _t(contentKey),
+                          style: TextStyle(fontFamily: 'Roboto', fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  )
+                ]
+              )
             ),
           ],
         ),
@@ -369,11 +392,15 @@ class _HIVPageState extends State<HIVPage> {
     );
   }
 
-  String updateMethodContent1() {
-    return contentDescriptionMap1[languages[languageIndex]]![methodIndex];
-  }
+  // String updateMethodContent1() {
+  //   return contentDescriptionMap1[languages[languageIndex]]![methodIndex];
+  // }
 
-  String updateMethodContent2() {
-    return contentDescriptionMap2[languages[languageIndex]]![methodIndex];
+  // String updateMethodContent2() {
+  //   return contentDescriptionMap2[languages[languageIndex]]![methodIndex];
+  // }
+
+  Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
+    return AudioWidget(audioAsset: audioMap[_currentLanguage]![audioIndex]);
   }
 }
