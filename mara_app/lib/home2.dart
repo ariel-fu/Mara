@@ -507,7 +507,7 @@ class _HomePage2State extends State<HomePage2> {
                 children: [
                   Image.asset('assets/home_icons/white/take_quiz_white.png',
                       width: 90, height: 90),
-                  getAudio(audioContentMap, 7),
+                  // getAudio(audioContentMap, 7),
                 ],
               )),
               title: Text(menuOptions[_currentLanguage]![7],
@@ -631,7 +631,7 @@ class _HomePage2State extends State<HomePage2> {
             ),
           ),
         ),
-        getAudio(audioContentMap, 6),
+        // getAudio(audioContentMap, 6),
         Expanded(
           child: ElevatedButton(
             style: ButtonStyle(
