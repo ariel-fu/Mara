@@ -386,7 +386,7 @@ class _PrivatePageState extends State<PrivatePage> {
                 child: Text(
                   subtitleTranslations[languages[languageIndex]] ??
                       "Translation not found",
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
