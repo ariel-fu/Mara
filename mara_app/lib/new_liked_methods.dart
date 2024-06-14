@@ -6,6 +6,7 @@ import 'short_summaries.dart';
 import 'recommendation_model.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:mara_app/design/colors.dart';
 
 class LikedMethodsScreen extends StatefulWidget {
   final String initialLanguage; // renamed from currentLanguage for clarity
@@ -31,16 +32,16 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
 
   final Map<String, Map<String, String>> _likedTranslations = {
     'English': {
-      'noneLiked': 'No liked methods yet! Visit "What are my options?" to start adding some.',
-      'summaryPage': 'Summary Page',
+      'noneLiked': 'No favorite methods yet! Visit "What are my options?" to favorite a method.',
+      // 'summaryPage': 'Summary Page',
     },
     'Dholuo': {
-      'noneLiked': 'Hakuna',
-      'summaryPage': 'Oboke ma lero weche e yo machuok',
+      'noneLiked': 'No favorite methods yet! Visit "What are my options?" to favorite a method.',
+      // 'summaryPage': 'Oboke ma lero weche e yo machuok',
     },
     'Kiswahili': {
-      'noneLiked': 'Onge',
-      'summaryPage': 'Ukurasa wa muhtasari',
+      'noneLiked': 'No favorite methods yet! Visit "What are my options?" to favorite a method.',
+      // 'summaryPage': 'Ukurasa wa muhtasari',
     },
   };
 
@@ -98,26 +99,63 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double containerWidth = MediaQuery.of(context).size.width;
+    final double containerHeight = MediaQuery.of(context).size.height;
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
     return Scaffold(
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     icon: Icon(Icons.arrow_back), 
+      //     onPressed: () => Navigator.of(context).pop(), 
+      //   ),
+      //   title: Center(child: Text(_t2('likedTitle'))), // or use _t2('liked_methods') for translations
+      // ),
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back), 
           onPressed: () => Navigator.of(context).pop(), 
         ),
-        title: Center(child: Text(_t2('likedTitle'))), // or use _t2('liked_methods') for translations
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+        title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 _languageButton('Kiswahili'),
+                SizedBox(width: 40),
                 _languageButton('Dholuo'),
+                SizedBox(width: 40),
                 _languageButton('English'),
               ],
             ),
+          ),
+        ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: <Widget>[
+          //       _languageButton('Kiswahili'),
+          //       _languageButton('Dholuo'),
+          //       _languageButton('English'),
+          //     ],
+          //   ),
+          // ),
+          Center(
+            child: Text(
+              _t2('likedTitle'),
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+              textAlign: TextAlign.center,
+            )
           ),
           Consumer<Likes>(
             builder: (context, likes, child) {
@@ -167,7 +205,13 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                     );
                                 }
                             },
-                            child: Text(_t2('learnMore')),
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.black,
+                              backgroundColor: MaraColors.lavender,
+                            ),
+                            child: Text(
+                              _t2('learnMore'),
+                            ),
                         ),
                         IconButton(
                             icon: Icon(Icons.delete, color: Colors.red),
