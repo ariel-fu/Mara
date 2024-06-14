@@ -75,11 +75,11 @@ class _ReadyPageState extends State<ReadyPage> {
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
       "videoAudio/videos/provider/provider4KS.mp4", // method 1 - condom
-      "videoAudio/videos/provider/provider4KS.mp4"
-      "videoAudio/videos/provider/provider4KS.mp4"
-      "videoAudio/videos/provider/provider4KS.mp4"
-      "videoAudio/videos/provider/provider4KS.mp4"
-      "videoAudio/videos/provider/provider4KS.mp4"
+      "videoAudio/videos/provider/provider4KS.mp4",
+      "videoAudio/videos/provider/provider4KS.mp4",
+      "videoAudio/videos/provider/provider4KS.mp4",
+      "videoAudio/videos/provider/provider4KS.mp4",
+      "videoAudio/videos/provider/provider4KS.mp4",
       "videoAudio/videos/provider/provider4KS.mp4"
     ],
     "Dholuo": [
@@ -320,8 +320,8 @@ class _ReadyPageState extends State<ReadyPage> {
                                     contentArea(),
                                     additionalTextSection(),
                                     SizedBox(
-                                      width: boxWidth * 0.7,
-                                      height: availableHeight * 0.55 * 0.45,
+                                      width: boxWidth * 0.6,
+                                        height: boxHeight * 0.4 * 0.6,
                                       child: Center(
                                         child: getVideoContent(),
                                       ),
@@ -499,6 +499,7 @@ class _ReadyPageState extends State<ReadyPage> {
               ),
             // ),
           // Button for learning more, only shown for condoms
+          if (methodIndex == 0 || methodIndex == 1)
             ElevatedButton.icon(
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
                   color: Colors.black,
