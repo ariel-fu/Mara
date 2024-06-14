@@ -75,13 +75,13 @@ class _HomePage2State extends State<HomePage2> {
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
-      'videoAudio/audio/title_audio/title_options_E.mp3', // todo - get tese
+      'videoAudio/audio/title_audio/title_options_E.mp3', 
       'videoAudio/audio/title_audio/title_period_E.mp3',
       'videoAudio/audio/title_audio/title_how_long_E.mp3',
       'videoAudio/audio/title_audio/title_what_chance_E.mp3',
       'videoAudio/audio/title_audio/title_private_E.mp3',
       'videoAudio/audio/title_audio/title_ready_baby_E.mp3',
-      'videoAudio/audio/heyThis_HIV_STI_E.mp3',
+      'videoAudio/audio/heyThis_HIV_STI_E.mp3', // unused
       'videoAudio/audio/title_audio/quiz_E.mp3', // these are fake
       'videoAudio/audio/3things_E.mp3',
     ],
@@ -89,10 +89,10 @@ class _HomePage2State extends State<HomePage2> {
       'videoAudio/audio/title_audio/title_options_K.mp3',
       'videoAudio/audio/title_audio/title_period_K.mp3',
       'videoAudio/audio/title_audio/title_how_long_K.mp3',
-      'videoAudio/audio/title_audio/title_what_chance_K.np4',
+      'videoAudio/audio/title_audio/title_what_chance_K.mp3',
       'videoAudio/audio/title_audio/title_private_K.mp3',
       'videoAudio/audio/title_audio/title_ready_baby_K.mp3',
-      'videoAudio/audio/heyThis_HIV_STI_K.mp3',
+      'videoAudio/audio/heyThis_HIV_STI_K.mp3', // unused
       'videoAudio/audio/title_audio/quiz_K.mp3', // these are fake
       'videoAudio/audio/3things_K.mp3',
     ],
@@ -100,10 +100,10 @@ class _HomePage2State extends State<HomePage2> {
       'videoAudio/audio/title_audio/title_options_L.mp3',
       'videoAudio/audio/title_audio/title_period_L.mp3',
       'videoAudio/audio/title_audio/title_how_long_L.mp3',
-      'videoAudio/audio/title_audio/title_what_chance_L.np4',
+      'videoAudio/audio/title_audio/title_what_chance_L.mp3',
       'videoAudio/audio/title_audio/title_private_L.mp3',
       'videoAudio/audio/title_audio/title_ready_baby_L.mp3',
-      'videoAudio/audio/heyThis_HIV_STI_L.mp3',
+      'videoAudio/audio/heyThis_HIV_STI_L.mp3', // unused
       'videoAudio/audio/title_audio/quiz_L.mp3', // these are fake
       'videoAudio/audio/3things_L.mp3',
     ],
@@ -145,15 +145,15 @@ class _HomePage2State extends State<HomePage2> {
   final Map<String, Map<String, String>> _translations = {
     'English': {
       'likedTitle': 'Your Favorites',
-      'learnMore': 'Learn More',
+      // 'learnMore': 'Learn More',
     },
     'Dholuo': {
       'likedTitle': 'Ma ihero',
-      'learnMore': 'Puonjri matut',
+      // 'learnMore': 'Puonjri matut',
     },
     'Kiswahili': {
       'likedTitle': 'Vipendwa vyako',
-      'learnMore': 'Jifunze zaidi',
+      // 'learnMore': 'Jifunze zaidi',
     },
   };
 
@@ -631,6 +631,7 @@ class _HomePage2State extends State<HomePage2> {
             ),
           ),
         ),
+        SizedBox(width: 15.0),
         // getAudio(audioContentMap, 6),
         Expanded(
           child: ElevatedButton(
