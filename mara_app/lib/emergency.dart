@@ -51,7 +51,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
 
   final Map<String, String> titleContentMap = {
     "English": "It's an emergency!",
-    "Dholuo": "Mambo 3 unayohitaji kujua kuhusu E-pill (P2)",
+    "Dholuo": " En gima imuonyo e resruok!",
     "Kiswahili": "Ni ya dharura!"
   };
 
@@ -330,7 +330,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                       contentArea('2'),
                                       contentArea('3'),
                                       SizedBox(
-                                        width: boxWidth * 0.65,
+                                        width: boxWidth * 0.6,
                                         height: boxHeight * 0.4 * 0.6,
                                         //child: Center(child: video1),
                                         //child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
@@ -360,8 +360,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                             ),
                                             Image.asset(
                                               'assets/options_images/6.png',
-                                              width: 170,
-                                              height: 170,
+                                              width: 180,
+                                              height: 180,
                                               fit: BoxFit.cover,
                                             ),
                                           ])),
