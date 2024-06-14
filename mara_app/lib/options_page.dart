@@ -250,7 +250,7 @@ class _OptionsPageState extends State<OptionsPage> {
                       children: <Widget>[
                         // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
                         methodIndex == null
-                          ? Text("Please select a method to learn more")
+                          ? Text("Please tap a method to learn more")
                           :Text(methods[methodIndex]!.name,
                               style: TextStyle(
                                   fontSize: 19.0,
