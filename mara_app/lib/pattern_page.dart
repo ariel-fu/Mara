@@ -364,17 +364,15 @@ class _PatternPageState extends State<PatternPage> {
         children: [
           // Only display this section for certain method indices
           if (methodIndex == 0 || methodIndex == 1)
-            Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
-              child: Row(
+            // Padding(
+            //   padding: EdgeInsets.only(bottom: 10.0),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                      //     size: 50.0, color: Colors.black),
                       getAudio(heyThisAudioMap, 0),
                     ],
                   ),
@@ -385,12 +383,13 @@ class _PatternPageState extends State<PatternPage> {
                       children: [
                         ImageIcon(AssetImage('assets/misc-icons/important.png'),
                             size: 50.0, color: Colors.black),
+                        SizedBox(width: 10),
                         Flexible(
                           child: Text(
                           importantMessageTranslations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold),
+                              fontFamily: 'Roboto', fontSize: 17.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
@@ -398,7 +397,7 @@ class _PatternPageState extends State<PatternPage> {
                   ),
                 ],
               ),
-            ),
+            // ),
           // Button for learning more, only shown for condoms
           if (methodIndex == 0 || methodIndex == 1)
             ElevatedButton.icon(

@@ -133,21 +133,82 @@ class _imLaunchState extends State<imLaunchScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  getAudio(textAudioContentMap),
+                  // getAudio(textAudioContentMap),
                   Expanded(
-                      child: Column(children: [
-                    Text(translations[_currentLanguage]!,
-                        style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center),
-                    SizedBox(height: 50.0),
-                    Text(translations2[_currentLanguage]!,
-                        style: TextStyle(fontFamily: "Montserrat", fontSize: 24.0),
-                        textAlign: TextAlign.center),
-                    //contentTextBold(),
-                  ]))
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              getAudio(textAudioContentMap),
+                              Expanded(
+                                child: Text(translations[_currentLanguage]!,
+                                  style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center),
+                              )
+                            ],
+                          ),
+                          // Text(translations[_currentLanguage]!,
+                          //     style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
+                          //     textAlign: TextAlign.center),
+                          SizedBox(height: 50.0),
+                          Text(translations2[_currentLanguage]!,
+                              style: TextStyle(fontFamily: "Montserrat", fontSize: 22.0),
+                              textAlign: TextAlign.center),
+                          //contentTextBold(),
+                        ]
+                      )
+                  )
                 ],
               ),
             ),
+            
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            //   child: Center(
+            //     // child: IntrinsicWidth(
+            //       child: Row(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Column(
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //           children: [getAudio(textAudioContentMap),
+            //           Expanded(
+            //             child: Column(
+            //               children: [
+            //                 Text(translations[_currentLanguage]!,
+            //                     style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
+            //                     textAlign: TextAlign.center),
+            //                 SizedBox(height: 50.0),
+            //               ]
+            //             )
+            //           ),
+            //           ]
+            //           )
+            //         ]
+            //       )
+            //     // )
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            //   child: Center(
+            //     child: IntrinsicWidth(
+            //       child: Row(
+            //         children: [
+            //           Expanded(
+            //             child: Column(
+            //               children: [
+            //                 Text(translations2[_currentLanguage]!,
+            //                     style: TextStyle(fontFamily: "Montserrat", fontSize: 22.0),
+            //                     textAlign: TextAlign.center),
+            //               ]
+            //             )
+            //           ),
+            //         ]
+            //       ),
+            //     )
+            //   ),
+            // ),
             SizedBox(height: 20.0),
             Align(
               alignment: Alignment.centerRight,
@@ -165,14 +226,14 @@ class _imLaunchState extends State<imLaunchScreen> {
                                   initialLanguage: _currentLanguage)),
                         );
                       },
-                      child: Text(
-                        translations4[_currentLanguage]!,
-                        style: TextStyle(fontSize: 22, color: Colors.black)
-                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: MaraColors.lavender,
                         // Button background color
                         foregroundColor: Colors.black,
+                      ),
+                      child: Text(
+                        translations4[_currentLanguage]!,
+                        style: TextStyle(fontSize: 22, color: Colors.black)
                       ),
                     )
                   ]),
@@ -181,28 +242,35 @@ class _imLaunchState extends State<imLaunchScreen> {
             ),
             SizedBox(height: 500.0),
             Center(
-                child: IntrinsicWidth(
-              child: Row(children: [
-                getAudio(buttonAudioContentMap),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(
-                      context,
-                      '/home',
-                    );
-                  },
-                  child: Text(
-                    translations3[_currentLanguage]!,
-                    style: TextStyle(fontSize: 22, color: Colors.black)
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: MaraColors.lavender,
-                    // Button background color
-                    foregroundColor: Colors.black,
-                  ),
-                )
-              ]),
-            )),
+              child: IntrinsicWidth(
+                child: Row(
+                  children: [
+                    getAudio(buttonAudioContentMap),
+                    // Padding(
+                    //   padding: 
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                          context,
+                          '/home',
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: MaraColors.lavender,
+                        // Button background color
+                        foregroundColor: Colors.black,
+                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                      ),
+                      child: Text(
+                        translations3[_currentLanguage]!,
+                        style: TextStyle(fontSize: 30.0, color: Colors.black)
+                      ),
+                    )
+                  // )
+                  ]
+                ),
+              )
+            ),
           ],
         ),
       ),

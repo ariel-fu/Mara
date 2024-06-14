@@ -386,7 +386,7 @@ class _PrivatePageState extends State<PrivatePage> {
                 child: Text(
                   subtitleTranslations[languages[languageIndex]] ??
                       "Translation not found",
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -402,43 +402,40 @@ class _PrivatePageState extends State<PrivatePage> {
         children: [
           // Only display this section for certain method indices
           if (methodIndex == 0 || methodIndex == 1)
-            Padding(
-              padding: EdgeInsets.only(bottom: 10.0),
-              child: Row(
-                //Row(
+            // Padding(
+            //   padding: EdgeInsets.only(bottom: 10.0),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                      //     size: 24.0, color: Colors.black),
                       getAudio(heyThisAudioMap, 0),
                     ],
                   ),
                   SizedBox(width: 10),
                   Expanded(
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
                         ImageIcon(AssetImage('assets/misc-icons/important.png'),
                             size: 50.0, color: Colors.black),
+                        SizedBox(width: 10),
                         Flexible(
                           child: Text(
-                            importantMessageTranslations[
-                                    languages[languageIndex]] ??
-                                "Important message not found",
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
+                          importantMessageTranslations[languages[languageIndex]] ??
+                              "Important message not found",
+                          style: TextStyle(
+                              fontFamily: 'Roboto', fontSize: 17.0, fontWeight: FontWeight.bold),
                           ),
                         )
-                      ])),
+                      ]
+                    )
+                  ),
                 ],
               ),
-            ),
+            // ),
           // Button for learning more, only shown for condoms
           if (methodIndex == 0 || methodIndex == 1)
             ElevatedButton.icon(

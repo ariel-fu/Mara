@@ -293,7 +293,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
         children: [
           Center(
             child: Text(titleContentMap[languages[languageIndex]]!,
-              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 32.0),
             textAlign: TextAlign.center,
             )
           ),
@@ -301,26 +301,26 @@ class _EmergencyPageState extends State<EmergencyPage> {
               style: TextStyle(
                   fontFamily: 'Montserrat',
                   color: MaraColors.magentaPurple,
-                  fontSize: 25.0,
+                  fontSize: 24.0,
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
               ),
           
-          SizedBox(height: 20.0),
+          SizedBox(height: 10.0),
           Expanded(
-              child: Container(
-                  //height: containerHeight * 0.6, // Adjust as needed
-                  child: RawScrollbar(
-                    thumbColor: const Color.fromARGB(255, 232, 132, 165),
-                    thumbVisibility: true,
-                    trackVisibility: false,
-                    thickness: 25.0,
-                    radius: Radius.circular(20),
-                    child: LayoutBuilder(builder: (context, constraint) {
-                      return SingleChildScrollView(
-                          child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(minHeight: constraint.maxHeight),
+              // child: Container(
+              //     //height: containerHeight * 0.6, // Adjust as needed
+              //     child: RawScrollbar(
+              //       thumbColor: const Color.fromARGB(255, 232, 132, 165),
+              //       thumbVisibility: true,
+              //       trackVisibility: false,
+              //       thickness: 25.0,
+              //       radius: Radius.circular(20),
+              //       child: LayoutBuilder(builder: (context, constraint) {
+              //         return SingleChildScrollView(
+              //             child: ConstrainedBox(
+              //                 constraints:
+              //                     BoxConstraints(minHeight: constraint.maxHeight),
                               child: IntrinsicHeight(
                                 child: Flex(
                                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -330,8 +330,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                       contentArea('2'),
                                       contentArea('3'),
                                       SizedBox(
-                                        width: boxWidth * 0.8,
-                                        height: boxHeight * 0.5 * 0.7,
+                                        width: boxWidth * 0.65,
+                                        height: boxHeight * 0.4 * 0.6,
                                         //child: Center(child: video1),
                                         //child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
                                         child: Center(
@@ -350,25 +350,30 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                               child: Column(children: [
                                                 Text(
                                                   _t('4'),
-                                                  style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 22.0, fontWeight: FontWeight.bold),
+                                                  style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.bold),
                                                 ),
                                                 Text(
                                                   _t('5'),
-                                                  style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 22.0),
+                                                  style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 19.0),
                                                 ),
                                               ]),
                                             ),
                                             Image.asset(
                                               'assets/options_images/6.png',
-                                              width: 300,
-                                              height: 300,
+                                              width: 170,
+                                              height: 170,
                                               fit: BoxFit.cover,
                                             ),
                                           ])),
                                     ]),
-                              )));
-                    }),
-                  )))
+                              )
+                  //             )
+                  //             );
+                  //   }
+                  //   ),
+                  // )
+                  // )
+                  )
         ],
       ),
     );
@@ -453,7 +458,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
   Widget contentArea(String contentKey) {
     var contentNum = int.parse(contentKey) - 1;
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      // padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         decoration: BoxDecoration(
@@ -464,20 +470,16 @@ class _EmergencyPageState extends State<EmergencyPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //Icon(Icons.lightbulb_outline, color: Colors.amber, size: 24.0),
-            if (contentNum == 0 ||
-                contentNum == 1 ||
-                contentNum == 2) // just first 3 boxes
-              Text(
-                contentKey,
-                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 35.0, fontWeight: FontWeight.bold),
-              ),
+            Text( //number
+              contentKey,
+              style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 33.0, fontWeight: FontWeight.bold),
+            ),
             getAudio(audioContentMap, contentNum),
             SizedBox(width: 10.0),
-            Expanded(
+            Expanded( //content text
               child: Text(
                 _t(contentKey),
-                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
+                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
               ),
             ),
           ],
