@@ -87,31 +87,47 @@ class SessionManager {
     }
   }
 
-  static Future<void> exportData(String sessionId) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Map<String, dynamic> sessionData = prefs.getKeys().fold<Map<String, dynamic>>({}, (Map<String, dynamic> map, String key) {
-      if (key.startsWith(sessionId)) {
-        map[key] = prefs.get(key);
-      }
-      return map;
-    });
+  // static Future<void> exportData(String sessionId) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   Map<String, dynamic> sessionData = prefs.getKeys().fold<Map<String, dynamic>>({}, (Map<String, dynamic> map, String key) {
+  //     if (key.startsWith(sessionId)) {
+  //       map[key] = prefs.get(key);
+  //     }
+  //     return map;
+  //   });
 
-    String csvData = sessionData.entries.map((e) => '${e.key},${e.value}').join('\n');
+  //   String csvData = sessionData.entries.map((e) => '${e.key},${e.value}').join('\n');
 
-    Directory? directory = await getExternalStorageDirectory();
-    if (directory == null) {
-      throw Exception("Could not access the external storage directory.");
-    }
+  //   Directory? directory = await getExternalStorageDirectory();
+  //   if (directory == null) {
+  //     throw Exception("Could not access the external storage directory.");
+  //   }
 
-    String path = "${directory.path}/Documents/session_data_$sessionId.csv";
+  //   String path = "${directory.path}/Documents/session_data_$sessionId.csv";
     
-    // If the Documents directory does not exist, create it
-    Directory documentsDir = Directory("${directory.path}/Documents");
-    if (!documentsDir.existsSync()) {
-      documentsDir.createSync(recursive: true);
-    }
+  //   // If the Documents directory does not exist, create it
+  //   Directory documentsDir = Directory("${directory.path}/Documents");
+  //   if (!documentsDir.existsSync()) {
+  //     documentsDir.createSync(recursive: true);
+  //   }
 
-    File file = File(path);
-    await file.writeAsString(csvData);
+  //   File file = File(path);
+  //   await file.writeAsString(csvData);
+  // }
+
+  static Future<void> exportData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  List<String> sessions = prefs.getStringList(_sessionKey) ?? [];
+  String csvData = "Session ID, Key, Value\n";
+  for (String session in sessions) {
+    Map<String, dynamic> sessionData = await getSessionData(session);
+    sessionData.forEach((key, value) {
+      csvData += "$session, $key, $value\n";
+    });
   }
+
+  final directory = await getApplicationDocumentsDirectory();
+  final file = File('${directory.path}/session_data.csv');
+  await file.writeAsString(csvData);
+}
 }
