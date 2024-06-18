@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'launch_screen2.dart';
+import 'participantID.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mara_app/design/colors.dart';
@@ -96,7 +96,8 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil('/launch', (Route<dynamic> route) => false);
+                Navigator.of(context).pushNamedAndRemoveUntil('/participantID', (Route<dynamic> route) => false);
+                print('success');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: MaraColors.magentaPurple,

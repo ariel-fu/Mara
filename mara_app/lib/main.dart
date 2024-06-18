@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/participantID.dart';
 import 'package:provider/provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 // import 'home.dart';
@@ -20,11 +21,23 @@ import 'session_manager.dart';
 
 
 Future<void> requestPermissions() async {
-  var status = await Permission.storage.status;
-  if (!status.isGranted) {
-    await Permission.storage.request();
+  // var status = await Permission.storage.status;
+  // if (!status.isGranted) {
+  //   await Permission.storage.request();
+  // }
+
+  // CHANGES: this is what is making app settings to open when the app first runs. User can then enable access to all files manually.
+  final status = await Permission.manageExternalStorage.request();
+     if (status.isDenied ||
+        status.isPermanentlyDenied ||
+       status.isRestricted) {
+      print("Permission denied");
+      
+      // await openAppSettings();
   }
+  print(status);
 }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferences.getInstance(); 
@@ -53,7 +66,7 @@ class _MaraAppState extends State<MaraApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mara',
-      initialRoute: '/launch',
+      initialRoute: '/participantID',
       routes: {
         '/launch': (BuildContext context) => const LaunchScreen(),
         '/home': (BuildContext context) => const HomePage2(),
@@ -66,6 +79,7 @@ class _MaraAppState extends State<MaraApp> {
         '/quiz': (BuildContext context) => QuizScreen(),
         //'/learnmore': (BuildContext context) => const LearnMoreFertility(),
         '/thank_you': (BuildContext context) => ThankYouScreen(),
+        '/participantID': (BuildContext context) => ParticipantIDScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
