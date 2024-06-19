@@ -31,17 +31,20 @@ class _OptionsPageState extends State<OptionsPage> {
     'English': {
       'title': 'What are my options?',
       'likedTitle': 'Your Favorites',
-      'learnMore': 'Learn More'
+      'learnMore': 'Learn More',
+      'pleaseTap': 'Please tap a method to learn more',
     },
     'Dholuo': {
       'title': 'Yierona gin mage?',
       'likedTitle': 'Ma ihero',
       'learnMore': 'Puonjri matut',
+      'pleaseTap': 'Kiyie to duong\' yor geng\'o ich mondo ipuonjri matut'
     },
     'Kiswahili': {
       'title': 'Chaguzi zangu ni zipi?',
       'likedTitle': 'Vipendwa vyako',
-      'learnMore': 'Jifunze zaidi'
+      'learnMore': 'Jifunze zaidi',
+      'pleaseTap': 'Tafadhali gusa mbinu ili upate maelezo zaidi'
     },
   };
 
@@ -213,6 +216,7 @@ class _OptionsPageState extends State<OptionsPage> {
               )
             ),
             OptionsImage(containerWidth, containerHeight, methodIndex, updateIndex),
+            
           ]
         ),
         // body
@@ -236,27 +240,37 @@ class _OptionsPageState extends State<OptionsPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    // ConstrainedBox(
-                    //   // width: boxWidth,
-                    //   // height: boxHeight * 0.25,
-                    //   constraints: BoxConstraints(maxHeight: containerHeight * 0.34, maxWidth: containerWidth),
-                    //   child: Container(
-                    //     child: Column(
-                    //       mainAxisAlignment: MainAxisAlignment.center,
-                    //       mainAxisSize: MainAxisSize.min,
-                    //       children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    Stack(
                       children: <Widget>[
-                        // IconButton(icon: Icon(Icons.volume_up), onPressed: null),
-                        methodIndex == null
-                          ? Text("Please tap a method to learn more")
-                          :Text(methods[methodIndex]!.name,
+                        Center(
+                          child:
+                          methodIndex == null
+                          ? Text(_t('pleaseTap'))
+                          : Text(methods[methodIndex]!.name,
                               style: TextStyle(
                                   fontSize: 19.0,
                                   fontWeight: FontWeight.bold)
                           ),
-                        ]
+                        ),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          child: methodIndex == null 
+                          ? null
+                          : IconButton(
+                            onPressed: () => {
+                              setState(() {
+                                methodIndex = null;
+                              })
+                            },
+                            icon: Icon(Icons.close),
+                            iconSize: 30 ,
+                            style: IconButton.styleFrom(
+                              foregroundColor: Colors.black,
+                              backgroundColor: MaraColors.lightPurple,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start, 
@@ -290,14 +304,14 @@ class _OptionsPageState extends State<OptionsPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(width: 20),
-                      ElevatedButton(
-                        onPressed: () => {
-                          setState(() {
-                            methodIndex = null;
-                          })
-                        },
-                        child: Text('Clear'),
-                      ),
+                      // ElevatedButton(
+                      //   onPressed: () => {
+                      //     setState(() {
+                      //       methodIndex = null;
+                      //     })
+                      //   },
+                      //   child: Text('Clear'),
+                      // ),
                       SizedBox(width: 20),
                       ElevatedButton(
                         onPressed: methodIndex == null
@@ -337,7 +351,7 @@ class _OptionsPageState extends State<OptionsPage> {
                           foregroundColor: Colors.black,
                           backgroundColor: MaraColors.lavender,
                         ),
-                        child: Text('Learn more'),
+                        child: Text(_t('learnMore')),
                       ),
                       SizedBox(height: 20.0),
                       
