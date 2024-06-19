@@ -46,11 +46,11 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
       'button': "Start New Session",
     },
     'Dholuo': {
-      'thankYou': "DL Thank you for using Mara Divas app!",
+      'thankYou': "Erokamano kuom tiyo gi app mar Mara Divas!",
       'button': "DL Start New Session",
     },
     'Kiswahili': {
-      'thankYou': "KS Thank you for using Mara Divas app!",
+      'thankYou': "Asante kwa kutumia programu ya Mara Divas!",
       'button': "KS Start New Session",
     },
   };

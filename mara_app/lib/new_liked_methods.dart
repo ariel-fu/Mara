@@ -36,11 +36,11 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
       // 'summaryPage': 'Summary Page',
     },
     'Dholuo': {
-      'noneLiked': 'No favorite methods yet! Visit "What are my options?" to favorite a method.',
+      'noneLiked': 'Onge yor geng\'o ich mihero podi! Lim "Yierona gin mage? mondo ikete kaka mihero ',
       // 'summaryPage': 'Oboke ma lero weche e yo machuok',
     },
     'Kiswahili': {
-      'noneLiked': 'No favorite methods yet! Visit "What are my options?" to favorite a method.',
+      'noneLiked': 'Bado hakuna mbinu unazopenda! Tembelea “Chaguzi zangu ni zipi? kupenda mbinu.',
       // 'summaryPage': 'Ukurasa wa muhtasari',
     },
   };

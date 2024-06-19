@@ -796,7 +796,16 @@ bool _areAllQuestionsAnswered() {
                   child: Center(
                     child: ElevatedButton(
                       onPressed: _submitQuiz,
-                      child: Text(_t('submit')),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: MaraColors.lavender,
+                        // Button background color
+                        foregroundColor: Colors.black,
+                        //padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                      ),
+                      child: Text(
+                        _t('submit'), 
+                        style: TextStyle(fontSize: 20)
+                      ),
                     ),
                   ),
                 ),

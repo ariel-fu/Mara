@@ -145,15 +145,15 @@ class _HomePage2State extends State<HomePage2> {
   final Map<String, Map<String, String>> _translations = {
     'English': {
       'likedTitle': 'Your Favorites',
-      // 'learnMore': 'Learn More',
+      'pleaseVisit': 'Please visit all sections before taking the quiz',
     },
     'Dholuo': {
       'likedTitle': 'Ma ihero',
-      // 'learnMore': 'Puonjri matut',
+      'pleaseVisit': 'Kiyie to lim Okeng\'e te kapok itimo penj',
     },
     'Kiswahili': {
       'likedTitle': 'Vipendwa vyako',
-      // 'learnMore': 'Jifunze zaidi',
+      'pleaseVisit': 'Tafadhali tembelea sehemu zote kabla ya kuchukua chemsha bongo',
     },
   };
 
@@ -570,7 +570,7 @@ class _HomePage2State extends State<HomePage2> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Please visit all sections before taking the quiz"),
+            title: Text(_t('pleaseVisit')),
             //content: Text(_t('incompleteMessage')),
             actions: <Widget>[
               TextButton(

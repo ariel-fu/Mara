@@ -100,6 +100,24 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   setState(() {});
 }
 
+  final Map<String, String> learnMoreTranslations = {
+    "English": "Learn more",
+    "Kiswahili": "Jifunze zaidi",
+    "Dholuo": "Puonjri matut"
+  };
+
+  final Map<String, String> favoriteItTranslations = {
+    "English": "Favorite it!",
+    "Kiswahili": "Ipende!",
+    "Dholuo": "Kete obed mihero!"
+  };
+
+  final Map<String, String> endSessionTranslations = {
+    "English": "END SESSION",
+    "Kiswahili": "TIEKO OKANG'",
+    "Dholuo": "MALIZA KIKAO"
+  };
+
 Widget _endSessionButton() {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -117,8 +135,8 @@ Widget _endSessionButton() {
           fontWeight: FontWeight.bold, // Bold font
         ),
       ),
-      child: const Text(
-        "END SESSION",
+      child: Text(
+        endSessionTranslations[languages[languageIndex]] ?? "END SESSION",
         style: TextStyle(
           fontSize: 20, 
           letterSpacing: 2, 
@@ -131,7 +149,7 @@ Widget _endSessionButton() {
 
 @override
 Widget build(BuildContext context) {
-
+    _loadCurrentLanguage();
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
     if (containerHeight / containerWidth > _aspectRatio) {
@@ -313,7 +331,7 @@ Widget build(BuildContext context) {
                                   foregroundColor: Colors.black,
                                     backgroundColor: MaraColors.lavender,
                                   ), 
-                                child: Text('Learn More'),
+                                child: Text(learnMoreTranslations[languages[languageIndex]] ?? "Learn more"),
                               ),
 
                       Consumer<Likes>(
@@ -323,7 +341,7 @@ Widget build(BuildContext context) {
                               likes.likedMethods.contains(RecommendationModel.getJsonRefFromName(trimmedRec)) ? Icons.thumb_up : Icons.thumb_up_off_alt,
                               color: likes.likedMethods.contains(RecommendationModel.getJsonRefFromName(trimmedRec)) ? Colors.brown[900] : Colors.black,
                             ),
-                            label: Text("Favorite it!"),
+                            label: Text(favoriteItTranslations[languages[languageIndex]] ?? "Favorite it!"),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.deepPurple[100],
                               foregroundColor: Colors.black,
