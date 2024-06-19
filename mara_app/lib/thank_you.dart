@@ -43,15 +43,15 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
   final Map<String, Map<String, String>> _translations = {
     'English': {
       'thankYou': "Thank you for using Mara Divas app!",
-      'button': "Start New Session",
+      'button': "Start a new session",
     },
     'Dholuo': {
       'thankYou': "Erokamano kuom tiyo gi app mar Mara Divas!",
-      'button': "DL Start New Session",
+      'button': "Chak Okang' Manyien",
     },
     'Kiswahili': {
       'thankYou': "Asante kwa kutumia programu ya Mara Divas!",
-      'button': "KS Start New Session",
+      'button': "Asante kwa kutumia programu ya Mara Divas!",
     },
   };
 
