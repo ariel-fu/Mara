@@ -141,9 +141,11 @@ class _imLaunchState extends State<imLaunchScreen> {
                             children: [
                               getAudio(textAudioContentMap),
                               Expanded(
-                                child: Text(translations[_currentLanguage]!,
+                                child: Text(
+                                  translations[_currentLanguage]!,
                                   style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center),
+                                  textAlign: TextAlign.center
+                                  ),
                               )
                             ],
                           ),
@@ -151,9 +153,16 @@ class _imLaunchState extends State<imLaunchScreen> {
                           //     style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
                           //     textAlign: TextAlign.center),
                           SizedBox(height: 50.0),
-                          Text(translations2[_currentLanguage]!,
-                              style: TextStyle(fontFamily: "Montserrat", fontSize: 22.0),
-                              textAlign: TextAlign.center),
+                          if (_currentLanguage.contains('English')) 
+                            contentTextBold_E(),
+                          if (_currentLanguage.contains('Dholuo')) 
+                            contentTextBold_D(),
+                          if (_currentLanguage.contains('Kiswahili')) 
+                            contentTextBold_K(),
+                            
+                          // Text(translations2[_currentLanguage]!,
+                          //     style: TextStyle(fontFamily: "Montserrat", fontSize: 22.0),
+                          //     textAlign: TextAlign.center),
                           //contentTextBold(),
                         ]
                       )
@@ -292,40 +301,50 @@ class _imLaunchState extends State<imLaunchScreen> {
     );
   }
 
-  // Widget contentTextBold() {
-  //   var text = RichText(
-  //     text: TextSpan(
-  //       // Note: Styles for TextSpans must be explicitly defined.
-  //       // Child text spans will inherit styles from parent
-  //       style: const TextStyle(fontFamily: "Montserrat", fontSize: 24.0),
-  //       if (_currentLanguage.contains('English')) {
-  //         children: <TextSpan>[
-  //           TextSpan(text: 'MARA divas is designed especially for young women to help you '),
-  //           TextSpan(text: 'get the information you need ', style: const TextStyle(fontWeight: FontWeight.bold)),
-  //           TextSpan(text: 'to make an empowered decision, '),
-  //           TextSpan(text: 'when you need it.', style: const TextStyle(fontWeight: FontWeight.bold)),
-  //         ],
-  //       }
-  //       else if (_currentLanguage.contains('Dholuo')) {
-  //         children: <TextSpan>[
-  //           TextSpan(text: 'textDL '),
-  //           TextSpan(text: 'textDL ', style: const TextStyle(fontWeight: FontWeight.bold)),
-  //           TextSpan(text: 'textDL '),
-  //           TextSpan(text: 'textDL', style: const TextStyle(fontWeight: FontWeight.bold)),
-  //         ],
-  //       }
-  //       else {
-  //         children: <TextSpan>[
-  //           TextSpan(text: 'textKS '),
-  //           TextSpan(text: 'textKS ', style: const TextStyle(fontWeight: FontWeight.bold)),
-  //           TextSpan(text: 'textKS, '),
-  //           TextSpan(text: 'textKS', style: const TextStyle(fontWeight: FontWeight.bold)),
-  //         ],
-  //       },
-  //     ),
-  //   );
-  //   return text;
-  // }
+  Widget contentTextBold_E() {
+      return RichText(
+        text: TextSpan(
+          style: const TextStyle(fontFamily: "Montserrat", fontSize: 24.0, color:Colors.black),
+            children: <TextSpan>[
+              TextSpan(text: 'MARA divas is designed especially for young women to help you '),
+              TextSpan(text: 'get the information you need ', style: const TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: 'to make an empowered decision, '),
+              TextSpan(text: 'when you need it.', style: const TextStyle(fontWeight: FontWeight.bold)),
+            ]
+        ),
+        textAlign: TextAlign.center,
+      );
+  }
+
+  Widget contentTextBold_D() {
+      return RichText(
+        text: TextSpan(
+          style: const TextStyle(fontFamily: "Montserrat", fontSize: 24.0, color:Colors.black),
+            children: <TextSpan>[
+              TextSpan(text: 'Ka sani ok en saa maber kodi make ich, in gi yiero mang\'eny! MARA divas olos ng\'enyne ne mine matindo mondo okonyi '),
+              TextSpan(text: 'yudo weche ma idwaro ', style: const TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: 'mondo itim yiero man gi ng\'eyo ewi geng\'o ich, '),
+              TextSpan(text: 'ekinde ma idware.', style: const TextStyle(fontWeight: FontWeight.bold)),
+            ]
+        ),
+        textAlign: TextAlign.center,
+      );
+  }
+
+  Widget contentTextBold_K() {
+      return RichText(
+        text: TextSpan(
+          style: const TextStyle(fontFamily: "Montserrat", fontSize: 24.0, color:Colors.black),
+            children: <TextSpan>[
+              TextSpan(text: 'Ikiwa sasa sio wakati unaofaa kwako kupata Ujauzito, una chaguzi nyingi! MARA divas imeundwa mahsusi kwa ajili ya wanawake vijana ili kukusaidia '),
+              TextSpan(text: 'kapata taarifa unayohitaji ', style: const TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: 'ili kufanya uamuzi uliowezeshwa kuhusu kukinga mimba, '),
+              TextSpan(text: 'unapoihitaji.', style: const TextStyle(fontWeight: FontWeight.bold)),
+            ]
+        ),
+        textAlign: TextAlign.center,
+      );
+  }
 
   Widget getAudio(Map<String, List<String>> audioContentMap) {
     return AudioWidget(audioAsset: audioContentMap[_currentLanguage]![0]);
