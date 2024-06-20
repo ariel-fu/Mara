@@ -1,6 +1,8 @@
+import 'package:mara_app/participantID.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+
 class SessionManager {
 
   static const String _sessionKey = 'user_sessions';
@@ -82,9 +84,32 @@ static Future<void> exportData() async {
     });
   }
 
-  final directory = await getApplicationDocumentsDirectory();
-  final file = File('${directory.path}/session_data.csv');
-  await file.writeAsString(csvData);
+  // final directory = await getApplicationDocumentsDirectory();
+  // String? participantID = prefs.getString('participantID');
+  // final file = File('${directory!.path}/Documents/$participantID.csv');
+  // // final file = File('${directory.path}/session_data.csv');
+  // await file.writeAsString(csvData);
+
+  // CHANGES: Copy and pasting External Storage code from a previous commit Khushi made
+  final directory = await getExternalStorageDirectory();
+    if (directory == null) {
+      // throw Exception("Could not access the external storage directory.");
+      print("No access to the external storage directory.");
+    }
+    
+    //CHANGE: I refer to the participantID to name the file
+    String? participantID = prefs.getString('participantID');
+    final file = File('${directory!.path}/Documents/$participantID.csv');
+    
+    // If the Documents directory does not exist, create it
+    Directory documentsDir = Directory("${directory.path}/Documents");
+    if (!documentsDir.existsSync()) {
+      documentsDir.createSync(recursive: true);
+    }
+    // File file = File(path);
+    await file.writeAsString(csvData);
+  print("Participant ID: $participantID");
+  print("Participant File: $file");
 }
 
 
@@ -116,7 +141,9 @@ static Future<void> endCurrentSession() async {
   if (currentSession != null) {
     String endTimeKey = '$currentSession-end';
     await prefs.setString(endTimeKey, DateTime.now().toIso8601String());
+    print("Awaiting exportData starts");
     await exportData(); // Correctly called without parameters
+    print("Finished exportData");
     await prefs.remove(_currentSessionKey);
   }
 }
