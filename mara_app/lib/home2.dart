@@ -75,7 +75,7 @@ class _HomePage2State extends State<HomePage2> {
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
-      'videoAudio/audio/title_audio/title_options_E.mp3', 
+      'videoAudio/audio/title_audio/options_E.mp3', 
       'videoAudio/audio/title_audio/title_period_E.mp3',
       'videoAudio/audio/title_audio/title_how_long_E.mp3',
       'videoAudio/audio/title_audio/title_what_chance_E.mp3',
@@ -86,7 +86,7 @@ class _HomePage2State extends State<HomePage2> {
       'videoAudio/audio/3things_E.mp3',
     ],
     "Kiswahili": [
-      'videoAudio/audio/title_audio/title_options_K.mp3',
+      'videoAudio/audio/title_audio/options_K.mp3',
       'videoAudio/audio/title_audio/title_period_K.mp3',
       'videoAudio/audio/title_audio/title_how_long_K.mp3',
       'videoAudio/audio/title_audio/title_what_chance_K.mp3',
@@ -97,7 +97,7 @@ class _HomePage2State extends State<HomePage2> {
       'videoAudio/audio/3things_K.mp3',
     ],
     "Dholuo": [
-      'videoAudio/audio/title_audio/title_options_L.mp3',
+      'videoAudio/audio/title_audio/options_L.mp3',
       'videoAudio/audio/title_audio/title_period_L.mp3',
       'videoAudio/audio/title_audio/title_how_long_L.mp3',
       'videoAudio/audio/title_audio/title_what_chance_L.mp3',
