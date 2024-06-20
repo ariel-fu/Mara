@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'launch_screen2.dart';
+import 'participantID.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:mara_app/design/colors.dart';
+import 'package:mara_app/design/colors.dart';
 
 class ThankYouScreen extends StatefulWidget {
   const ThankYouScreen({Key? key}) : super(key: key);
@@ -12,16 +12,18 @@ class ThankYouScreen extends StatefulWidget {
 }
 
 class _ThankYouScreenState extends State<ThankYouScreen> {
-  int languageIndex = 2; // similar indexing for language
   bool overrideIndex = false;
 
+// class ThankYouScreen extends StatelessWidget {
+  int languageIndex = 2;
+  final languages = ["Kiswahili", "Dholuo", "English"];
+
+  String _currentLanguage = 'English';
   @override
   void initState() {
     super.initState();
     _loadCurrentLanguage();
   }
-
-  String _currentLanguage = 'English';
 
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -29,7 +31,7 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
       _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
     });
     if (_currentLanguage.contains('English')) {
-      languageIndex = 2;
+      languageIndex= 2;
     } else if (_currentLanguage.contains('Dholuo')) {
       languageIndex = 1;
     } else {
@@ -37,27 +39,17 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
     }
   }
 
-  final double _aspectRatio = 16 / 10;
-  final languages = ["Kiswahili", "Dholuo", "English"];
-
-  final Map<String, Map<String, String>> _translations = {
-    'English': {
-      'thankYou': "Thank you for using Mara Divas app!",
-      'button': "Start a new session",
-    },
-    'Dholuo': {
-      'thankYou': "Erokamano kuom tiyo gi app mar Mara Divas!",
-      'button': "Chak Okang' Manyien",
-    },
-    'Kiswahili': {
-      'thankYou': "Asante kwa kutumia programu ya Mara Divas!",
-      'button': "Asante kwa kutumia programu ya Mara Divas!",
-    },
+  final Map<String, String> titleTranslations = {
+    "English": "Thank you for using Mara Divas app!", 
+    "Kiswahili": "ks", 
+    "Dholuo": "dl"
   };
 
-  String _t(String key) {
-    return _translations[_currentLanguage]?[key] ?? key;
-  }
+  final Map<String, String> buttonTranslations = {
+    "English": "Start New Session", 
+    "Kiswahili": "ks", 
+    "Dholuo": "dl"
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +63,9 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
     return Scaffold(
       // appBar: AppBar(
       //   automaticallyImplyLeading: false, // Remove the back button
-      //   // title: Text('Thank You!'),
+      //   title: Text('Thank You!'),
       // ),
       appBar: AppBar(
-        automaticallyImplyLeading: false, 
         centerTitle: true,
         title: PreferredSize(
           preferredSize: Size.fromHeight(availableHeight * 0.05),
@@ -98,20 +89,21 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              _t('thankYou'),
+              titleTranslations[languages[languageIndex]] ?? "Title not found",
               style: TextStyle(fontSize: 24),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil('/launch', (Route<dynamic> route) => false);
+                Navigator.of(context).pushNamedAndRemoveUntil('/participantID', (Route<dynamic> route) => false);
+                print('success');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: MaraColors.magentaPurple,
               ),
               child: Text(
-                _t('button'),
+                buttonTranslations[languages[languageIndex]] ?? "Title not found",
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -146,6 +138,7 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
         setState(() {
           languageIndex = index;
           overrideIndex = true;
+          //updateMethodContent();
         });
       },
       style: ElevatedButton.styleFrom(
