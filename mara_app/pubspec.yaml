@@ -417,6 +417,14 @@ flutter:
     - videoAudio/audio/3things_K.mp3
     - videoAudio/audio/3things_L.mp3
 
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_E.mp3
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_K.mp3
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_L.mp3
+
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_E.mp3
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_K.mp3
+    - videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_L.mp3
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
