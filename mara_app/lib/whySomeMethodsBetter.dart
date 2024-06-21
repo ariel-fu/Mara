@@ -149,7 +149,7 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
           contentArea(),
           SizedBox(
             width: boxWidth * 0.8,
-            height: availableHeight * 0.6 * 0.5,
+            height: availableHeight * 0.5 * 0.6,
             child: Center(
               child: getVideoContent(),
             ),
