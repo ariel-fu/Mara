@@ -17,22 +17,15 @@ class _QuizScreenState extends State<QuizScreen> {
   bool overrideIndex = false;
   int languageIndex = 2; // similar indexing for language
   String _currentLanguage = 'English';
-  DateTime? startTime;
-
   @override
   void initState() {
     super.initState();
-    startTime = DateTime.now();  // Log start time when the screen is initialized
-    SessionManager.logScreenEntry('QuizPage', startTime!);
+    SessionManager.logScreenEntry('QuizPage'); // Log entry time when the screen is initialized
   }
 
   @override
   void dispose() {
-    if (startTime != null) {
-      var endTime = DateTime.now();
-      var duration = endTime.difference(startTime!).inSeconds;
-      SessionManager.logScreenExit('QuizPage', endTime, duration);
-    }
+    SessionManager.logScreenExit('QuizPage'); // Log exit time and calculate duration when leaving the screen
     super.dispose();
   }
 
