@@ -5,6 +5,7 @@ import 'package:mara_app/audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'pattern_page.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 
 class BleedingPage extends StatefulWidget {
