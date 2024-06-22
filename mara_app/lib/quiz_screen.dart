@@ -17,12 +17,33 @@ class _QuizScreenState extends State<QuizScreen> {
   bool overrideIndex = false;
   int languageIndex = 2; // similar indexing for language
   String _currentLanguage = 'English';
+  DateTime? startTime;
 
   @override
   void initState() {
     super.initState();
-    _loadCurrentLanguage();
+    startTime = DateTime.now();  // Log start time when the screen is initialized
+    SessionManager.logScreenEntry('QuizPage', startTime!);
   }
+
+  @override
+  void dispose() {
+    if (startTime != null) {
+      var endTime = DateTime.now();
+      var duration = endTime.difference(startTime!).inSeconds;
+      SessionManager.logScreenExit('QuizPage', endTime, duration);
+    }
+    super.dispose();
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadCurrentLanguage();
+  //   SessionManager.logScreenEntry('QuizPage');  // Log entry time
+  // }
+
+ 
 
   // Future<void> _loadCurrentLanguage() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
