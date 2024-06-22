@@ -43,14 +43,26 @@ class SessionManager {
     }
   }
 
+  // static Future<void> logQuizChoice(String screenName, String questionKey, String optionKey, String language) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? currentSession = prefs.getString(_currentSessionKey);
+  //   if (currentSession != null) {
+  //     String choiceKey = '$currentSession-$screenName-quiz-$questionKey';
+  //     await prefs.setString(choiceKey, '$optionKey ($language)');
+  //   }
+  // }
+
   static Future<void> logQuizChoice(String screenName, String questionKey, String optionKey, String language) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? currentSession = prefs.getString(_currentSessionKey);
-    if (currentSession != null) {
-      String choiceKey = '$currentSession-$screenName-quiz-$questionKey';
-      await prefs.setString(choiceKey, '$optionKey ($language)');
-    }
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? currentSession = prefs.getString(_currentSessionKey);
+  if (currentSession != null) {
+    String choiceKey = '$currentSession-$screenName-$questionKey';
+    // Including language in the logged data
+    String choiceValue = '$optionKey ($language)';
+    await prefs.setString(choiceKey, choiceValue);
   }
+}
+
 
   static Future<void> logVideoStart(String videoName, DateTime startTime) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
