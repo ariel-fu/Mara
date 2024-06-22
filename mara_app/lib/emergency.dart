@@ -7,6 +7,7 @@ import 'video.dart';
 import 'audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 class EmergencyPage extends StatefulWidget {
   final String initialLanguage;
