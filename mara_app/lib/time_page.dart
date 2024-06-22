@@ -25,6 +25,13 @@ class _TimePageState extends State<TimePage> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry('TimePage');  // Log entry time
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('TimePage');   // Log exit time and calculate duration
+    super.dispose();
   }
 
   Future<void> _loadCurrentLanguage() async {
