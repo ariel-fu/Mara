@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'recommendation_screen.dart';
 import 'recommendation_model.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 
 class QuizScreen extends StatefulWidget {
