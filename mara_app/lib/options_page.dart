@@ -79,36 +79,18 @@ class _OptionsPageState extends State<OptionsPage> {
   void initState() {
     super.initState();
     screenEntryTime = DateTime.now();
-    _logScreenEntry(); // Log the screen entry time
+     SessionManager.logScreenEntry('QuizPage'); // Log entry time when the screen is initialized
     _loadCurrentLanguage();
     _methodDetailsDataFuture = loadMethodDetails();
   }
 
-  void _logScreenEntry() {
-    SessionManager.logScreenEntry('OptionsPage'); 
-    if (screenEntryTime != null) {
-      debugPrint('Screen Entry: OptionsPage at ${screenEntryTime!.toIso8601String()}');
-    }
-  }
-
-
-  void _logScreenExit() {
-    DateTime exitTime = DateTime.now(); 
-    if (screenEntryTime != null) {
-      int durationInSeconds = exitTime.difference(screenEntryTime!).inSeconds;
-      SessionManager.logScreenExit('OptionsPage'); 
-      debugPrint('Screen Exit: OptionsPage at ${exitTime.toIso8601String()}');
-      debugPrint('Duration on OptionsPage: $durationInSeconds seconds'); // debug print
-    }
-  }
-
-
   @override
   void dispose() {
-    _logScreenExit();
+    SessionManager.logScreenExit('QuizPage'); // Log exit time and calculate duration when leaving the screen
     super.dispose();
   }
 
+ 
   String _currentLanguage = 'English';
 
   Future<void> _loadCurrentLanguage() async {
