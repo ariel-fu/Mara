@@ -343,21 +343,21 @@ void navigateToRecommendationScreen(BuildContext context, String pregnancyTiming
 //   });
 // }
 
-  // void _handleOptionSelection(String questionKey, String optionKey) {
-  //   setState(() {
-  //     _selectedOptions[questionKey] = optionKey;
-  //   });
-  //   print("Option selected: $questionKey = $optionKey");
-  // }
-
   void _handleOptionSelection(String questionKey, String optionKey) {
-  setState(() {
-    _selectedOptions[questionKey] = optionKey;
-  });
-  print("Option selected: $questionKey = $optionKey");
-  // Log the choice using SessionManager
-  SessionManager.logQuizChoice('QuizPage', questionKey, optionKey, _currentLanguage);
-}
+    setState(() {
+      _selectedOptions[questionKey] = optionKey;
+    });
+    print("Option selected: $questionKey = $optionKey");
+  }
+
+//   void _handleOptionSelection(String questionKey, String optionKey) {
+//   setState(() {
+//     _selectedOptions[questionKey] = optionKey;
+//   });
+//   print("Option selected: $questionKey = $optionKey");
+//   // Log the choice using SessionManager
+//   SessionManager.logQuizChoice('QuizPage', questionKey, optionKey, _currentLanguage);
+// }
 
 
 
