@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'recommendation_screen.dart';
 import 'recommendation_model.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 
 class QuizScreen extends StatefulWidget {
@@ -17,12 +18,26 @@ class _QuizScreenState extends State<QuizScreen> {
   bool overrideIndex = false;
   int languageIndex = 2; // similar indexing for language
   String _currentLanguage = 'English';
-
   @override
   void initState() {
     super.initState();
-    _loadCurrentLanguage();
+    SessionManager.logScreenEntry('QuizPage'); // Log entry time when the screen is initialized
   }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('QuizPage'); // Log exit time and calculate duration when leaving the screen
+    super.dispose();
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadCurrentLanguage();
+  //   SessionManager.logScreenEntry('QuizPage');  // Log entry time
+  // }
+
+ 
 
   // Future<void> _loadCurrentLanguage() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -343,12 +358,22 @@ void navigateToRecommendationScreen(BuildContext context, String pregnancyTiming
 //   });
 // }
 
+  // void _handleOptionSelection(String questionKey, String optionKey) {
+  //   setState(() {
+  //     _selectedOptions[questionKey] = optionKey;
+  //   });
+  //   print("Option selected: $questionKey = $optionKey");
+  // }
+
   void _handleOptionSelection(String questionKey, String optionKey) {
-    setState(() {
-      _selectedOptions[questionKey] = optionKey;
-    });
-    print("Option selected: $questionKey = $optionKey");
-  }
+  setState(() {
+    _selectedOptions[questionKey] = optionKey;
+  });
+  print("Option selected: $questionKey = $optionKey");
+  // Log the choice using SessionManager
+  SessionManager.logQuizChoice('QuizPage', questionKey, optionKey, _currentLanguage);
+}
+
 
 
 

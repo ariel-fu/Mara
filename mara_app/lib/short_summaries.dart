@@ -4,8 +4,8 @@ import 'package:mara_app/icons/misc_icons.dart';
 import 'package:mara_app/recommendation_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mara_app/design/colors.dart';
-
-class MethodDetailsScreen extends StatefulWidget {
+import 'session_manager.dart';
+class MethodDetailsScreen extends StatefulWidget { // new entry for each visit; timestamps not overridden 
   final String methodName;
   final Map<String, dynamic>? methodDetails;
   final String currentLanguage;
@@ -30,18 +30,33 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
   bool overrideIndex = false;
   int languageIndex = 2; // similar indexing for language
   String _currentLanguage = 'English';
-
+  DateTime? _screenEntryTime;
   @override
   void initState() {
+    super.initState();
     _loadCurrentLanguage();
+    _screenEntryTime = DateTime.now(); 
+    _logScreenEntry();
   }
 
-  // Future<void> _loadCurrentLanguage() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
-  //   });
-  // }
+  void _logScreenEntry() {
+    SessionManager.logScreenEntry('MethodDetailsScreen');
+    debugPrint('Screen Entry: MethodDetailsScreen');
+  }
+
+  void _logScreenExit() {
+    if (_screenEntryTime != null) {
+      SessionManager.logScreenExit('MethodDetailsScreen');
+      debugPrint('Screen Exit: MethodDetailsScreen');
+    }
+  }
+
+  @override
+  void dispose() {
+    _logScreenExit();
+    super.dispose();
+  }
+
   final double _aspectRatio = 16 / 10;
 
   Future<void> _loadCurrentLanguage() async {
@@ -68,6 +83,8 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
   }
 
 
+
+
   final Map<String, String>  titleTranslations = {
     'Kiswahili': 'Ukurasa wa muhtasari',
     'Dholuo': 'Oboke ma lero weche e yo machuok',
@@ -82,28 +99,6 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     return widget.translations[_currentLanguage]?[key] ?? key;
 }
 
-  
-  // Widget _languageButton(String language) {
-  //   asyncmethod(language);
-  //   bool isSelected = _currentLanguage == language;
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-  //     child: ElevatedButton(
-  //       onPressed: () {
-  //         if (!isSelected) {
-  //           setState(() {
-  //             _currentLanguage = language;
-  //           });
-  //           widget.onChangeLanguage(language);
-  //         }
-  //       },
-  //       style: ElevatedButton.styleFrom(
-  //         backgroundColor: isSelected ? Colors.grey : null,
-  //       ),
-  //       child: Text(language),
-  //     ),
-  //   );
-  // }
 
 void asyncmethod(String language) async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -256,6 +251,7 @@ void _switchLanguage(int language) async {
     setState(() {
       _currentLanguage = temp;
     });
+
   }
 
   Widget languageButton(String language, int index) {
@@ -276,47 +272,6 @@ void _switchLanguage(int language) async {
     );
   }
 
-
-
-
-// Widget buildContentCard(String iconPath, String titleKey, String contentKey) {
-//   // Fetch the translated title and content based on the current language
-//   String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? '';
-//   String content = widget.methodDetails?[contentKey]?[_currentLanguage] ?? 'No information available';
-
-//   return Container(
-//     margin: EdgeInsets.only(bottom: 10),
-//     padding: EdgeInsets.all(10),
-//     decoration: BoxDecoration(
-//       color: Colors.grey.shade200,
-//       borderRadius: BorderRadius.circular(10),
-//     ),
-//     child: Row(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         // Icon(icon, size: 44, color: Theme.of(context).primaryColor),
-//         Image.asset(iconPath, width: 44, height: 44),
-//         SizedBox(width: 10),
-//         Expanded(
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Text(
-//                 translatedTitle, // Using the translated title from the JSON
-//                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//               ),
-//               SizedBox(height: 8),
-//               Text(
-//                 content, // Displaying content in the current language from the JSON
-//                 style: TextStyle(fontSize: 16),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ],
-//     ),
-//   );
-// }
 
 Widget buildContentCard(IconData summaryIcon, String titleKey, String contentKey) {
   String translatedTitle = widget.methodDetails?[titleKey]?[_currentLanguage] ?? '';

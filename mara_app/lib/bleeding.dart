@@ -5,6 +5,7 @@ import 'package:mara_app/audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'pattern_page.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 
 class BleedingPage extends StatefulWidget {
@@ -30,7 +31,16 @@ class _BleedingPageState extends State<BleedingPage> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+     SessionManager.logScreenEntry('BleedingPage');  // Log entry time
   }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('BleedingPage');   // Log exit time and calculate duration
+    super.dispose();
+  }
+
+  
 
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -339,10 +349,30 @@ class _BleedingPageState extends State<BleedingPage> {
   //   );
   // }
 
+  // Widget getVideoContent() {
+  //   String asset = videoContentMap[languages[languageIndex]]![methodIndex];
+  //   String title = videoTitleMap[languages[languageIndex]]![0];
+  //   return VideoWidget(videoAsset: asset, title: title);
+  // }
+
   Widget getVideoContent() {
     String asset = videoContentMap[languages[languageIndex]]![methodIndex];
     String title = videoTitleMap[languages[languageIndex]]![0];
-    return VideoWidget(videoAsset: asset, title: title);
+    return VideoWidget(
+      videoAsset: asset, 
+      title: title,
+      onVideoStart: () => handleVideoStart(asset),
+      onVideoEnd: handleVideoEnd
+    );
+  }
+
+  void handleVideoStart(String videoName) {
+    SessionManager.logVideoStart(videoName, DateTime.now());
+  }
+
+  void handleVideoEnd(int duration) {
+    String videoName = videoContentMap[languages[languageIndex]]![methodIndex];
+    SessionManager.logVideoStop(videoName, DateTime.now(), duration);
   }
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {

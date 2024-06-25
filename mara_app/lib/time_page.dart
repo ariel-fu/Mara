@@ -5,6 +5,7 @@ import 'package:mara_app/hiv_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({Key? key}) : super(key: key);
@@ -25,6 +26,13 @@ class _TimePageState extends State<TimePage> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry('TimePage');  // Log entry time
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('TimePage');   // Log exit time and calculate duration
+    super.dispose();
   }
 
   Future<void> _loadCurrentLanguage() async {
