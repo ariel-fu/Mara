@@ -137,7 +137,7 @@ class _HIVPageState extends State<HIVPage> {
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
-      'videoAudio/audio/preventing_hiv_sti_audio/preventing_condom_E.mp3',
+      'videoAudio/audio/preventing_hiv_sti_audio/condom_E.mp3',
       'videoAudio/audio/preventing_hiv_sti_audio/preventing_prep_E.mp3',
     ],
     "Kiswahili": [

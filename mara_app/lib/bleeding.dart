@@ -193,7 +193,7 @@ class _BleedingPageState extends State<BleedingPage> {
           methodSelectionRow(),
           SizedBox(
             width: boxWidth * 0.8,
-            height: availableHeight * 0.6 * 0.5,
+            height: availableHeight * 0.5 * 0.6,
             child: Center(
               child: getVideoContent(),
             ),
