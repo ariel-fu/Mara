@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mara_app/participantID.dart';
 import 'package:provider/provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 // import 'home.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'thank_you.dart';
@@ -13,12 +14,12 @@ import 'pattern_page.dart';
 import 'time_page.dart';
 import 'private_page.dart';
 import 'ready_to_have_baby.dart';
+
 //import 'learn_more.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'session_manager.dart'; 
-
+import 'session_manager.dart';
 
 Future<void> requestPermissions() async {
   // var status = await Permission.storage.status;
@@ -28,21 +29,18 @@ Future<void> requestPermissions() async {
 
   // CHANGES: this is what is making app settings to open when the app first runs. User can then enable access to all files manually.
   final status = await Permission.manageExternalStorage.request();
-     if (status.isDenied ||
-        status.isPermanentlyDenied ||
-       status.isRestricted) {
-      print("Permission denied");
-      
-      // await openAppSettings();
+  if (status.isDenied || status.isPermanentlyDenied || status.isRestricted) {
+    print("Permission denied");
+
+    // await openAppSettings();
   }
   print(status);
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SharedPreferences.getInstance(); 
+  await SharedPreferences.getInstance();
   await requestPermissions(); // Request storage permissions
-  await SessionManager.startNewSession(); // Start a new session
   runApp(
     ChangeNotifierProvider<Likes>(
       create: (_) => Likes(),
@@ -50,7 +48,6 @@ void main() async {
     ),
   );
 }
-
 
 class MaraApp extends StatefulWidget {
   const MaraApp({super.key});

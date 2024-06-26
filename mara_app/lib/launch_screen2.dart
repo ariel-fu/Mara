@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/intermediate_launch_screen.dart';
+import 'package:mara_app/session_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
-
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({super.key});
@@ -19,6 +19,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.startNewSession(); // Start a new session
   }
 
   // Load the current language from SharedPreferences
@@ -30,14 +31,10 @@ class _LaunchScreenState extends State<LaunchScreen> {
   }
 
   Map<String, String> translations = {
-    'English':
-        "Divas have choices!",
-    'Kiswahili':
-        "Warembo wana chaguo!",
-    'Dholuo': 
-      "Nyibeyo nigi yiero!",
+    'English': "Divas have choices!",
+    'Kiswahili': "Warembo wana chaguo!",
+    'Dholuo': "Nyibeyo nigi yiero!",
   };
-
 
   Map<String, String> subtitle_translations = {
     'English':
@@ -53,10 +50,13 @@ class _LaunchScreenState extends State<LaunchScreen> {
     'Dholuo': "Puonjri matut ewi yiero ma in godo!",
   };
 
-    Map<String, String> translations3 = {
-    'English': "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.",
-    'Kiswahili': "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.",
-    'Dholuo': "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.!",
+  Map<String, String> translations3 = {
+    'English':
+        "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.",
+    'Kiswahili':
+        "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.",
+    'Dholuo':
+        "MARA Divas was inspired the My Birth Control contraceptive decision support tool developed by the Person-Centered Reproductive Health Program at UCSF.!",
   };
 
   // Map<String, TextSpan> translations3 = {
@@ -147,9 +147,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
                 width: MediaQuery.of(context).size.width * 0.5,
               ),
             ),
-            // Row(children: [            
-              IntrinsicWidth(
-                child: Column(
+            // Row(children: [
+            IntrinsicWidth(
+              child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
@@ -162,59 +162,51 @@ class _LaunchScreenState extends State<LaunchScreen> {
                               child: Column(children: [
                             Text(translations[_currentLanguage]!,
                                 style: TextStyle(
-                                  fontFamily: 'PoetsenOne',
-                                  color: MaraColors.purple,
-                                  fontSize: 30.0
-                                ),
+                                    fontFamily: 'PoetsenOne',
+                                    color: MaraColors.purple,
+                                    fontSize: 30.0),
                                 overflow: TextOverflow.visible,
                                 textAlign: TextAlign.center),
                             SizedBox(height: 25.0),
                             Text(subtitle_translations[_currentLanguage]!,
                                 style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black,
-                                  fontSize: 20.0
-                                ),
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.black,
+                                    fontSize: 20.0),
                                 overflow: TextOverflow.visible,
                                 textAlign: TextAlign.center),
                           ]))
                         ],
                       ),
                     ),
-
-                  ]
-                ),
-              ),
-                  
-            const SizedBox(height: 80),
-            IntrinsicWidth(
-              child: Row(
-                children: [
-                  getAudio(buttonAudioContentMap),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => imLaunchScreen()),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: MaraColors.lavender,
-                      // Button background color
-                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                    ),
-                    child: Text(
-                      translations2[_currentLanguage]!,
-                      style: TextStyle(fontSize: 22, color: Colors.black)
-                    ),
-                  )
-                ]
-              )
+                  ]),
             ),
 
             const SizedBox(height: 80),
             IntrinsicWidth(
-                child: Column(
+                child: Row(children: [
+              getAudio(buttonAudioContentMap),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => imLaunchScreen()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: MaraColors.lavender,
+                  // Button background color
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                ),
+                child: Text(translations2[_currentLanguage]!,
+                    style: TextStyle(fontSize: 22, color: Colors.black)),
+              )
+            ])),
+
+            const SizedBox(height: 80),
+            IntrinsicWidth(
+              child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
@@ -223,27 +215,21 @@ class _LaunchScreenState extends State<LaunchScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 25.0),
-                                  Text(translations3[_currentLanguage]!,
-                                      style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        color: Colors.black,
-                                        fontSize: 15
-                                      ),
-                                      overflow: TextOverflow.visible,
-                                      textAlign: TextAlign.center),
-                                ]
-                              )
-                          )
+                              child: Column(children: [
+                            SizedBox(height: 25.0),
+                            Text(translations3[_currentLanguage]!,
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.black,
+                                    fontSize: 15),
+                                overflow: TextOverflow.visible,
+                                textAlign: TextAlign.center),
+                          ]))
                         ],
                       ),
                     ),
-
-                  ]
-                ),
-              ),
+                  ]),
+            ),
           ],
         ),
       ),
@@ -264,7 +250,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
       child: Text(language),
     );
   }
-
 
   Widget getAudio(Map<String, List<String>> audioContentMap) {
     return AudioWidget(audioAsset: audioContentMap[_currentLanguage]![0]);
