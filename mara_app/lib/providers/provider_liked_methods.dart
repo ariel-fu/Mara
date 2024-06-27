@@ -10,6 +10,7 @@ class Likes extends ChangeNotifier {
   UnmodifiableSetView<String> get likedMethods => UnmodifiableSetView(_likedMethods);
 
   void toggleLikedMethod(String method) {
+    String action = _likedMethods.contains(method) ? "Disliked" : "Liked";
     if (_likedMethods.contains(method)) {
       _likedMethods.remove(method);
     } else {
