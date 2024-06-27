@@ -8,6 +8,7 @@ import 'package:mara_app/whySomeMethodsBetter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 class WhatChance extends StatefulWidget {
   const WhatChance({Key? key}) : super(key: key);
@@ -27,6 +28,13 @@ class _WhatChanceState extends State<WhatChance> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry('WhatChancePage');  // Log entry time
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('WhatChancePage');   // Log exit time and calculate duration
+    super.dispose();
   }
 
   Future<void> _loadCurrentLanguage() async {
