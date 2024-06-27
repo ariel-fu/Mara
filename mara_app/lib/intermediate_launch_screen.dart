@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 import 'design/colors.dart';
 import 'emergency.dart';
+import 'session_manager.dart';
 
 class imLaunchScreen extends StatefulWidget {
   const imLaunchScreen({super.key});
@@ -18,6 +19,13 @@ class _imLaunchState extends State<imLaunchScreen> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+     SessionManager.logScreenEntry('InterLaunchScreen'); // Log entry time when the screen is initialized
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('InterLaunch'); // Log exit time and calculate duration when leaving the screen
+    super.dispose();
   }
 
   // Load the current language from SharedPreferences
