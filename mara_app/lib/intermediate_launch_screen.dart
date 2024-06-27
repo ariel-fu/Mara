@@ -24,7 +24,7 @@ class _imLaunchState extends State<imLaunchScreen> {
 
   @override
   void dispose() {
-    SessionManager.logScreenExit('InterLaunch'); // Log exit time and calculate duration when leaving the screen
+    SessionManager.logScreenExit('InterLaunchScreen'); // Log exit time and calculate duration when leaving the screen
     super.dispose();
   }
 
