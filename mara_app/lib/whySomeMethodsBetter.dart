@@ -419,11 +419,31 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   //   return languageToVideo[videoKey]?[language]?['text'] ?? 'Text not found';
   // }
 
+  // Widget getVideoContent() {
+  //   String asset = videoContentMap[languages[languageIndex]]![0];
+  //   String title = videoTitleMap[languages[languageIndex]]![0];
+  //   return VideoWidget(videoAsset: asset, title: title);
+  // }
   Widget getVideoContent() {
     String asset = videoContentMap[languages[languageIndex]]![0];
     String title = videoTitleMap[languages[languageIndex]]![0];
-    return VideoWidget(videoAsset: asset, title: title);
+    return VideoWidget(
+      videoAsset: asset, 
+      title: title,
+      onVideoStart: () => handleVideoStart(asset),
+      onVideoEnd: handleVideoEnd
+    );
   }
+
+  void handleVideoStart(String videoName) {
+    SessionManager.logVideoStart(videoName, DateTime.now());
+  }
+
+  void handleVideoEnd(int duration) {
+    String videoName = videoContentMap[languages[languageIndex]]![0];
+    SessionManager.logVideoStop(videoName, DateTime.now(), duration);
+  }
+
     
   // Widget updateVideoContent() {
   //   String videoAsset1 = "";
