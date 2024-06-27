@@ -6,6 +6,7 @@ import 'short_summaries.dart';
 import 'recommendation_model.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'session_manager.dart';
 
 class LikedMethodsScreen extends StatefulWidget {
   final String initialLanguage; // renamed from currentLanguage for clarity
@@ -49,7 +50,15 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
     super.initState();
     _loadCurrentLanguage();
     _methodDetailsFuture = loadMethodDetails();
+    SessionManager.logScreenEntry('LikedMethods');  // Log entry time
   }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('LikedMethods');   // Log exit time and calculate duration
+    super.dispose();
+  }
+
 
   // Future<void> _loadCurrentLanguage() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
