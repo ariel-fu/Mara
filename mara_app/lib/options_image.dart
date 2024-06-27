@@ -6,6 +6,7 @@ import 'model/method_repository.dart';
 import 'providers/provider_liked_methods.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:mara_app/icons/image_asset_strings.dart';
+import 'session_manager.dart';
 
 class OptionsImage extends StatelessWidget {
   // works with an aspect ratio of 16/10
@@ -14,6 +15,7 @@ class OptionsImage extends StatelessWidget {
   final Function updateIndex;
   OptionsImage(this.containerWidth, this.containerHeight, this.methodIndex, this.updateIndex, {super.key});
   final methods = MethodRepository.loadMethods();
+  // int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +91,13 @@ class OptionsImage extends StatelessWidget {
                   iconData,
                   color: (isSelected || methodIndex == null) ? MaraColors.magentaPurple : MaraColors.lightPurple,
                 ),
+                
                 // TODO - update so that state is managed from options_page instead
                 onPressed: () {
                   updateIndex(index);
+                  
+                  SessionManager.logEvent("Method Selected $index", methods[index]!.name);
+                  print("Method Selected $index ${methods[index]!.name}");
                 },
                 color: isSelected ? Colors.black : Colors.transparent,
                 iconSize: size,

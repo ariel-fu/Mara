@@ -30,6 +30,7 @@ class _OptionsPageState extends State<OptionsPage> {
   final methods = MethodRepository.loadMethods();
   DateTime? screenEntryTime;
 
+
   final Map<String, Map<String, String>> _translations = {
     'English': {
       'title': 'What are my options?',
@@ -342,8 +343,9 @@ class _OptionsPageState extends State<OptionsPage> {
                                             },
                                           ),
                                         ),
+                                        
                                       ),
-                                    SessionManager.logEvent("Navigated to Details", "Navigated to details of ${methodName}");
+                                    // SessionManager.logEvent("Navigated to Details", "Navigated to details of ${methodName}");
                                       // methodIndex = null,
                                     }
                                   else
@@ -413,7 +415,7 @@ class _OptionsPageState extends State<OptionsPage> {
   void updateIndex(int index) {
     setState(() {
       methodIndex = index;
-      SessionManager.logEvent("Method Selected", methods[index]!.name);
+      // SessionManager.logEvent("Method Selected", methods[index]!.name);
     });
   }
 
