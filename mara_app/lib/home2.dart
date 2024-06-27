@@ -17,6 +17,7 @@ import 'package:mara_app/emergency.dart';
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:mara_app/new_liked_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'session_manager.dart';
 
 import 'audio.dart';
 
@@ -118,6 +119,13 @@ class _HomePage2State extends State<HomePage2> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+     SessionManager.logScreenEntry('Home2Page');  // Log entry time
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('Home2Page');   // Log exit time and calculate duration
+    super.dispose();
   }
 
   // Future<void> _loadCurrentLanguage() async {
