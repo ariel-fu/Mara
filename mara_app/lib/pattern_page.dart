@@ -43,7 +43,7 @@ class _PatternPageState extends State<PatternPage> {
 
   @override
   void dispose() {
-    // SessionManager.logScreenExit('PatternPage'); // Log exit time and calculate duration when leaving the screen
+    SessionManager.logScreenExit('PatternPage'); // Log exit time and calculate duration when leaving the screen
     super.dispose();
   }
 
@@ -280,9 +280,8 @@ class _PatternPageState extends State<PatternPage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                //updateMethodContent();
-                // video1 = updateVideoContent1();
-                // video2 = updateVideoContent2();
+                // SessionManager.logEvent("Method Selected $methodIndex", methodIndex!.name);
+                //   print("Method Selected $methodIndex ${methods[methodIndex]!.name}");
               });
             },
             splashRadius: 40,
