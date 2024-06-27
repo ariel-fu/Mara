@@ -7,8 +7,8 @@ class SessionManager {
 
   static const String _sessionKey = 'user_sessions';
   static const String _currentSessionKey = 'current_session';
-
-  
+  static int entryVisitCount = 0; //keep track of how many times a page is visited
+  static int exitVisitCount = 0;
 
   static Future<void> logEvent(String eventName, String details) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -17,6 +17,7 @@ class SessionManager {
       String eventKey = '$currentSession-$eventName';
       String eventData = '${DateTime.now().toIso8601String()} - $details';
       await prefs.setString(eventKey, eventData);
+      // print(eventData);
     }
   }
 
@@ -24,8 +25,10 @@ class SessionManager {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String newSessionId = DateTime.now().toIso8601String();
     List<String> sessions = prefs.getStringList(_sessionKey) ?? [];
+    String startTimeKey = '$newSessionId-start';
     sessions.add(newSessionId);
     await prefs.setStringList(_sessionKey, sessions);
+    await prefs.setString(_currentSessionKey, startTimeKey);
     await prefs.setString(_currentSessionKey, newSessionId);
     return newSessionId;
   }
@@ -33,11 +36,21 @@ class SessionManager {
   static Future<void> logScreenEntry(String screenName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? currentSession = prefs.getString(_currentSessionKey);
+    // int visitCount = 0;
     if (currentSession != null) {
-      String entryTimeKey = '$currentSession-$screenName-entry';
+      String entryTimeKey = '$currentSession-$screenName-$entryVisitCount-entry';
       List<String> entryTimes = prefs.getStringList(entryTimeKey) ?? [];
       entryTimes.add(DateTime.now().toIso8601String());
-      await prefs.setStringList(entryTimeKey, entryTimes);
+      if (prefs.getStringList(entryTimeKey) != null) { //already visited the screen
+          entryVisitCount++;
+          entryVisitCount==entryVisitCount;
+        }
+      else { //first visit 
+        entryVisitCount = 0;
+
+      }
+      entryTimeKey = '$currentSession-$screenName-$entryVisitCount-exit';
+      print("Screen Entered: $entryTimeKey");
     }
   }
 
@@ -45,10 +58,20 @@ class SessionManager {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? currentSession = prefs.getString(_currentSessionKey);
     if (currentSession != null) {
-      String exitTimeKey = '$currentSession-$screenName-exit';
+      String exitTimeKey = '$currentSession-$screenName-$exitVisitCount-exit';
       List<String> exitTimes = prefs.getStringList(exitTimeKey) ?? [];
       exitTimes.add(DateTime.now().toIso8601String());
+      if (prefs.getStringList(exitTimeKey) != null) { //already visited the screen
+          exitVisitCount++;
+          exitVisitCount==exitVisitCount;
+        }
+      else { //first visit 
+        exitVisitCount = 0;
+
+      }
+      exitTimeKey = '$currentSession-$screenName-$exitVisitCount-exit';
       await prefs.setStringList(exitTimeKey, exitTimes);
+      print("Screen Exited: $exitTimeKey");
 
       
       String entryTimeKey = '$currentSession-$screenName-entry';
@@ -175,10 +198,11 @@ static Future<void> endCurrentSession() async {
   if (currentSession != null) {
     String endTimeKey = '$currentSession-end';
     await prefs.setString(endTimeKey, DateTime.now().toIso8601String());
-    print("Awaiting exportData starts");
+    // print("Awaiting exportData starts");
     await exportData(); // Correctly called without parameters
     print("Finished exportData");
     await prefs.remove(_currentSessionKey);
+    await prefs.clear(); //clear all shared preferences
   }
 }
 
