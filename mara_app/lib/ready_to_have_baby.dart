@@ -6,7 +6,6 @@ import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'session_manager.dart';
 
 class ReadyPage extends StatefulWidget {
   @override
@@ -230,13 +229,6 @@ class _ReadyPageState extends State<ReadyPage> {
   @override
   void initState() {
     _loadCurrentLanguage();
-    SessionManager.logScreenEntry('ReadytoHaveBabyPage'); // Log entry time when the screen is initialized
-  }
-
-  @override
-  void dispose() {
-    SessionManager.logScreenExit('ReadytoHaveBabyPage'); // Log exit time and calculate duration when leaving the screen
-    super.dispose();
   }
 
   Future<void> _loadCurrentLanguage() async {
@@ -302,9 +294,24 @@ class _ReadyPageState extends State<ReadyPage> {
               imagePath: 'assets/ready_to_have_baby_pregnant.png',
               title: importantMessage_pregnant_Translations[languages[languageIndex]] ?? "Important message not found",
             ),
+            SizedBox(height: 15.0),
             methodSelectionRow(),
             SizedBox(height: 15.0),
             Expanded(
+              child: 
+                //height: containerHeight * 0.6, // Adjust as needed
+              RawScrollbar(
+                thumbColor: const Color.fromARGB(255, 232, 132, 165),
+                thumbVisibility: true,
+                trackVisibility: false,
+                thickness: 25.0,
+                radius: Radius.circular(20),
+                child: LayoutBuilder(
+                  builder: (context, constraint) {
+                    return SingleChildScrollView(
+                        child: ConstrainedBox(
+                            constraints:
+                                BoxConstraints(minHeight: constraint.maxHeight),
                             child: IntrinsicHeight(
                               child: Flex(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -313,8 +320,8 @@ class _ReadyPageState extends State<ReadyPage> {
                                     contentArea(),
                                     additionalTextSection(),
                                     SizedBox(
-                                      width: boxWidth * 0.6,
-                                        height: boxHeight * 0.4 * 0.6,
+                                      width: boxWidth * 0.8,
+                                      height: availableHeight * 0.6 * 0.5,
                                       child: Center(
                                         child: getVideoContent(),
                                       ),
@@ -323,6 +330,21 @@ class _ReadyPageState extends State<ReadyPage> {
                                   ]
                               )
                             )
+                        )
+                    );
+                  }
+                )
+            ),
+            // contentArea(),
+            // additionalTextSection(),
+            // SizedBox(
+            //     width: boxWidth * 0.8,
+            //     height: availableHeight * 0.6 * 0.5,
+            //     child: Center(
+            //       child: getVideoContent(),
+            //     ),
+            // ),
+            // prep_preg_Button(),
             )
           ]
       )
@@ -668,30 +690,10 @@ class _ReadyPageState extends State<ReadyPage> {
   }
 
 
-  // Widget getVideoContent() {
-  //   String asset = videoContentMap[languages[languageIndex]]![methodIndex];
-  //   String title = videoTitleMap[languages[languageIndex]]![0];
-  //   return VideoWidget(videoAsset: asset, title: title);
-  // }
-
   Widget getVideoContent() {
     String asset = videoContentMap[languages[languageIndex]]![methodIndex];
     String title = videoTitleMap[languages[languageIndex]]![0];
-    return VideoWidget(
-      videoAsset: asset, 
-      title: title,
-      onVideoStart: () => handleVideoStart(asset),
-      onVideoEnd: handleVideoEnd
-    );
-  }
-
-  void handleVideoStart(String videoName) {
-    SessionManager.logVideoStart(videoName, DateTime.now());
-  }
-
-  void handleVideoEnd(int duration) {
-    String videoName = videoContentMap[languages[languageIndex]]![methodIndex];
-    SessionManager.logVideoStop(videoName, DateTime.now(), duration);
+    return VideoWidget(videoAsset: asset, title: title);
   }
 
   Widget getAudio(Map<String, List<String>> audioMap, int audioIndex) {
