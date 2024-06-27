@@ -8,15 +8,7 @@ class SessionManager {
   static const String _sessionKey = 'user_sessions';
   static const String _currentSessionKey = 'current_session';
 
-  static Future<String> startNewSession() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String newSessionId = DateTime.now().toIso8601String();
-    List<String> sessions = prefs.getStringList(_sessionKey) ?? [];
-    sessions.add(newSessionId);
-    await prefs.setStringList(_sessionKey, sessions);
-    await prefs.setString(_currentSessionKey, newSessionId);
-    return newSessionId;
-  }
+  
 
   static Future<void> logEvent(String eventName, String details) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -28,12 +20,24 @@ class SessionManager {
     }
   }
 
+ static Future<String> startNewSession() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String newSessionId = DateTime.now().toIso8601String();
+    List<String> sessions = prefs.getStringList(_sessionKey) ?? [];
+    sessions.add(newSessionId);
+    await prefs.setStringList(_sessionKey, sessions);
+    await prefs.setString(_currentSessionKey, newSessionId);
+    return newSessionId;
+  }
+
   static Future<void> logScreenEntry(String screenName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? currentSession = prefs.getString(_currentSessionKey);
     if (currentSession != null) {
       String entryTimeKey = '$currentSession-$screenName-entry';
-      await prefs.setString(entryTimeKey, DateTime.now().toIso8601String());
+      List<String> entryTimes = prefs.getStringList(entryTimeKey) ?? [];
+      entryTimes.add(DateTime.now().toIso8601String());
+      await prefs.setStringList(entryTimeKey, entryTimes);
     }
   }
 
@@ -42,13 +46,21 @@ class SessionManager {
     String? currentSession = prefs.getString(_currentSessionKey);
     if (currentSession != null) {
       String exitTimeKey = '$currentSession-$screenName-exit';
-      String durationKey = '$currentSession-$screenName-duration';
-      String? entryTime = prefs.getString('$currentSession-$screenName-entry');
-      if (entryTime != null) {
-        DateTime entryDateTime = DateTime.parse(entryTime);
-        int duration = DateTime.now().difference(entryDateTime).inSeconds;
-        await prefs.setString(exitTimeKey, DateTime.now().toIso8601String());
-        await prefs.setInt(durationKey, duration);
+      List<String> exitTimes = prefs.getStringList(exitTimeKey) ?? [];
+      exitTimes.add(DateTime.now().toIso8601String());
+      await prefs.setStringList(exitTimeKey, exitTimes);
+
+      
+      String entryTimeKey = '$currentSession-$screenName-entry';
+      List<String> entryTimes = prefs.getStringList(entryTimeKey) ?? [];
+      if (entryTimes.isNotEmpty && entryTimes.length == exitTimes.length) {
+        String durationKey = '$currentSession-$screenName-duration';
+        List<String> durations = prefs.getStringList(durationKey) ?? [];
+        DateTime lastEntryTime = DateTime.parse(entryTimes.last);
+        DateTime lastExitTime = DateTime.parse(exitTimes.last);
+        int duration = lastExitTime.difference(lastEntryTime).inSeconds;
+        durations.add(duration.toString());
+        await prefs.setStringList(durationKey, durations);
       }
     }
   }
