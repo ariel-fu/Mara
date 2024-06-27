@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 class WhySomeMethodsBetter extends StatefulWidget {
   //const WhySomeMethodsBetter({Key? key}) : super(key: key);
@@ -26,6 +27,13 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry('WhySomeMethodsBetter'); // Log entry time when the screen is initialized
+  }
+
+   @override
+  void dispose() {
+    SessionManager.logScreenExit('WhySomeMethodsBetter'); // Log exit time and calculate duration when leaving the screen
+    super.dispose();
   }
 
   Future<void> _loadCurrentLanguage() async {
