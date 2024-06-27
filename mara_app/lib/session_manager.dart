@@ -18,6 +18,16 @@ class SessionManager {
     return newSessionId;
   }
 
+  static Future<void> logEvent(String eventName, String details) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? currentSession = prefs.getString('current_session');
+    if (currentSession != null) {
+      String eventKey = '$currentSession-$eventName';
+      String eventData = '${DateTime.now().toIso8601String()} - $details';
+      await prefs.setString(eventKey, eventData);
+    }
+  }
+
   static Future<void> logScreenEntry(String screenName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? currentSession = prefs.getString(_currentSessionKey);
