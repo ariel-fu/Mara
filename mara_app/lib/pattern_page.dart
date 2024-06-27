@@ -6,6 +6,7 @@ import 'bleeding.dart';
 import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/audio.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -37,6 +38,13 @@ class _PatternPageState extends State<PatternPage> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry('PatternPage'); // Log entry time when the screen is initialized
+  }
+
+  @override
+  void dispose() {
+    // SessionManager.logScreenExit('PatternPage'); // Log exit time and calculate duration when leaving the screen
+    super.dispose();
   }
 
   String _currentLanguage = 'English';
