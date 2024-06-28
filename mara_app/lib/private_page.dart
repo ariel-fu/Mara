@@ -249,13 +249,13 @@ class _PrivatePageState extends State<PrivatePage> {
                   ),
                   SizedBox(height: availableHeight * 0.01),
                   subtitleSection(),
-                  SizedBox(height: 15.0),
+                  // SizedBox(height: 5.0),
                   methodSelectionRow(),
                   SizedBox(height: 15.0),
                   contentArea(),
                   SizedBox(
-                    width: boxWidth * 0.8,
-                    height: availableHeight * 0.6 * 0.6,
+                    width: boxWidth * 0.7,
+                    height: availableHeight * 0.55 * 0.55,
                     child: Center(
                       child: getVideoContent(),
                     ),

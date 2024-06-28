@@ -385,7 +385,7 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
               Flexible(
                 child: Text(
                   contentDescriptionMap[languages[languageIndex]]![0],
-                  style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                  style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
                 ),
               ),
             ],
