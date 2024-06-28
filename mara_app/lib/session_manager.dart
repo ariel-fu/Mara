@@ -9,6 +9,7 @@ class SessionManager {
   static const String _currentSessionKey = 'current_session';
   static int entryVisitCount = 0; //keep track of how many times a page is visited
   static int exitVisitCount = 0;
+  static int eventCount = 0;
 
   static Future<void> logEvent(String eventName, String details) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -16,6 +17,14 @@ class SessionManager {
     if (currentSession != null) {
       String eventKey = '$currentSession-$eventName';
       String eventData = '${DateTime.now().toIso8601String()} - $details';
+      if (prefs.getStringList(eventKey) != null) { //already visited the screen
+          eventCount++;
+          eventCount=eventCount;
+        }
+      else { //first visit 
+        eventCount = 0;
+      }
+      eventKey = '$currentSession-$eventName-Visit$eventCount';
       await prefs.setString(eventKey, eventData);
       // print(eventData);
     }
@@ -47,9 +56,8 @@ class SessionManager {
         }
       else { //first visit 
         entryVisitCount = 0;
-
       }
-      entryTimeKey = '$currentSession-$screenName-$entryVisitCount-entry';
+      entryTimeKey = '$currentSession-$screenName-Visit$entryVisitCount-entry';
       await prefs.setStringList(entryTimeKey, entryTimes);
       print("Screen Entered: $entryTimeKey");
     }
@@ -70,13 +78,19 @@ class SessionManager {
         exitVisitCount = 0;
 
       }
-      exitTimeKey = '$currentSession-$screenName-$exitVisitCount-exit';
+      exitTimeKey = '$currentSession-$screenName-Visit$exitVisitCount-exit';
       await prefs.setStringList(exitTimeKey, exitTimes);
       print("Screen Exited: $exitTimeKey");
 
       
-      String entryTimeKey = '$currentSession-$screenName-$entryVisitCount-entry';
+      String entryTimeKey = '$currentSession-$screenName-Visit$entryVisitCount-entry';
       List<String> entryTimes = prefs.getStringList(entryTimeKey) ?? [];
+
+      print("entryTimes $entryTimes");
+      print("entryTimes.length ${entryTimes.length}");
+      print("exitTimes.length ${exitTimes.length}");
+      print("entryTimes.length == exitTimes.length ${entryTimes.length == exitTimes.length}");
+
       if (entryTimes.isNotEmpty && entryTimes.length == exitTimes.length) {
         String durationKey = '$currentSession-$screenName-duration';
         List<String> durations = prefs.getStringList(durationKey) ?? [];
