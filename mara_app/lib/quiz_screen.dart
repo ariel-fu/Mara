@@ -811,7 +811,7 @@ bool _areAllQuestionsAnswered() {
               thumbColor: const Color.fromARGB(255, 232, 132, 165),
               thumbVisibility: true,
               trackVisibility: false,
-              thickness: 25.0,
+              thickness: 15.0,
               radius: Radius.circular(20),
             child: ListView(
               children: <Widget>[

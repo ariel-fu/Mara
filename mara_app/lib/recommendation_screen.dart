@@ -291,7 +291,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                     thumbColor: const Color.fromARGB(255, 232, 132, 165),
                     thumbVisibility: true,
                     trackVisibility: false,
-                    thickness: 25.0,
+                    thickness: 15.0,
                     radius: Radius.circular(20),
                     child: ListView.builder(
                       itemCount: widget.recommendations.length,
@@ -302,7 +302,8 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              // padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.only(right: 20.0, left: 20.0, top: 10.0, bottom:10.0),
                               child: Text(
                                 widget.introTexts.length > index
                                     ? _t(widget.introTexts[index])
