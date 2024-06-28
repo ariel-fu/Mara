@@ -43,13 +43,14 @@ class SessionManager {
       entryTimes.add(DateTime.now().toIso8601String());
       if (prefs.getStringList(entryTimeKey) != null) { //already visited the screen
           entryVisitCount++;
-          entryVisitCount==entryVisitCount;
+          entryVisitCount=entryVisitCount;
         }
       else { //first visit 
         entryVisitCount = 0;
 
       }
-      entryTimeKey = '$currentSession-$screenName-$entryVisitCount-exit';
+      entryTimeKey = '$currentSession-$screenName-$entryVisitCount-entry';
+      await prefs.setStringList(entryTimeKey, entryTimes);
       print("Screen Entered: $entryTimeKey");
     }
   }
@@ -63,7 +64,7 @@ class SessionManager {
       exitTimes.add(DateTime.now().toIso8601String());
       if (prefs.getStringList(exitTimeKey) != null) { //already visited the screen
           exitVisitCount++;
-          exitVisitCount==exitVisitCount;
+          exitVisitCount=exitVisitCount;
         }
       else { //first visit 
         exitVisitCount = 0;
@@ -74,7 +75,7 @@ class SessionManager {
       print("Screen Exited: $exitTimeKey");
 
       
-      String entryTimeKey = '$currentSession-$screenName-entry';
+      String entryTimeKey = '$currentSession-$screenName-$entryVisitCount-entry';
       List<String> entryTimes = prefs.getStringList(entryTimeKey) ?? [];
       if (entryTimes.isNotEmpty && entryTimes.length == exitTimes.length) {
         String durationKey = '$currentSession-$screenName-duration';
