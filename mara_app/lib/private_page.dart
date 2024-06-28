@@ -6,6 +6,7 @@ import 'package:mara_app/audio.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'session_manager.dart';
+import 'model/method_selection_repository.dart';
 
 class PrivatePage extends StatefulWidget {
   const PrivatePage({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _PrivatePageState extends State<PrivatePage> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+  final methods = MethodSelectionRepository.loadMethods();
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
@@ -338,7 +340,8 @@ class _PrivatePageState extends State<PrivatePage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                //updateMethodContent();
+                SessionManager.logEvent("PrivatePage-Method$methodIndex", methods[methodIndex]!.name);
+                print("PrivatePage-Method$methodIndex ${methods[methodIndex]!.name}");
               });
             },
             splashRadius: 40,

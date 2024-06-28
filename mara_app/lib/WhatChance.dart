@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
 import 'session_manager.dart';
+import 'model/method_selection_repository.dart';
 
 class WhatChance extends StatefulWidget {
   const WhatChance({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class _WhatChanceState extends State<WhatChance> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
+  final methods = MethodSelectionRepository.loadMethods();
   
   @override
   void initState() {
@@ -260,8 +262,8 @@ class _WhatChanceState extends State<WhatChance> {
               onPressed: () {
                 setState(() {
                   methodIndex = index;
-                  //updateText();
-                  //updateMethodContent();
+                  SessionManager.logEvent("WhatChancePage-Method$methodIndex", methods[methodIndex]!.name);
+                  print("WhatChancePage-Method$methodIndex ${methods[methodIndex]!.name}");
                 });
               },
               color: isSelected ? Colors.black : Colors.transparent,

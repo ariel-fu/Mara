@@ -345,7 +345,8 @@ class _OptionsPageState extends State<OptionsPage> {
                                         ),
                                         
                                       ),
-                                    // SessionManager.logEvent("Navigated to Details", "Navigated to details of ${methodName}");
+                                    // SessionManager.logEvent("MethodDetailsScreen-$", "Navigated to details of ${methodName}");
+                                    SessionManager.logEvent("MethodDetailsScreen-${methods[methodIndex]!.name}", "Summary of ${methods[methodIndex]!.name}"),
                                       // methodIndex = null,
                                     }
                                   else

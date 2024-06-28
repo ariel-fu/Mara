@@ -7,6 +7,7 @@ import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/audio.dart';
 import 'package:mara_app/design/colors.dart';
 import 'session_manager.dart';
+import 'model/method_selection_repository.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _PatternPageState extends State<PatternPage> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   bool overrideIndex = false;
+  final methods = MethodSelectionRepository.loadMethods();
 
   String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
@@ -280,8 +282,8 @@ class _PatternPageState extends State<PatternPage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                // SessionManager.logEvent("Method Selected $methodIndex", methodIndex!.name);
-                //   print("Method Selected $methodIndex ${methods[methodIndex]!.name}");
+                SessionManager.logEvent("PatternPage-Method$methodIndex", methods[methodIndex]!.name);
+                print("PatternPage-Method$methodIndex ${methods[methodIndex]!.name}");
               });
             },
             splashRadius: 40,

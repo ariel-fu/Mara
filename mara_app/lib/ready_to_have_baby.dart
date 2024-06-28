@@ -7,6 +7,7 @@ import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'session_manager.dart';
+import 'model/method_selection_repository.dart';
 
 class ReadyPage extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _ReadyPageState extends State<ReadyPage> {
   int languageIndex = 2; // Index for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   bool overrideIndex = false; // Used to override language selection from route
-  // final List<String> languages = ["Kiswahili", "Dholuo", "English"];
+  final methods = MethodSelectionRepository.loadMethods();
 
   final Map<String, String> titleMap = {
       'Kiswahili': 'Je, itakuaje ikiwa niko tayari kupata mtoto?',
@@ -76,11 +77,11 @@ class _ReadyPageState extends State<ReadyPage> {
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
       "videoAudio/videos/provider/provider4KS.mp4", // method 1 - condom
-      "videoAudio/videos/provider/provider4KS.mp4"
-      "videoAudio/videos/provider/provider4KS.mp4"
-      "videoAudio/videos/provider/provider4KS.mp4"
-      "videoAudio/videos/provider/provider4KS.mp4"
-      "videoAudio/videos/provider/provider4KS.mp4"
+      "videoAudio/videos/provider/provider4KS.mp4",
+      "videoAudio/videos/provider/provider4KS.mp4",
+      "videoAudio/videos/provider/provider4KS.mp4",
+      "videoAudio/videos/provider/provider4KS.mp4",
+      "videoAudio/videos/provider/provider4KS.mp4",
       "videoAudio/videos/provider/provider4KS.mp4"
     ],
     "Dholuo": [
@@ -268,7 +269,7 @@ class _ReadyPageState extends State<ReadyPage> {
     double boxHeight = containerHeight;
     double availableHeight = boxHeight;
 
-    return Scaffold(
+return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: PreferredSize(
@@ -302,9 +303,24 @@ class _ReadyPageState extends State<ReadyPage> {
               imagePath: 'assets/ready_to_have_baby_pregnant.png',
               title: importantMessage_pregnant_Translations[languages[languageIndex]] ?? "Important message not found",
             ),
+            // SizedBox(height: 5.0),
             methodSelectionRow(),
             SizedBox(height: 15.0),
             Expanded(
+              // child: 
+                //height: containerHeight * 0.6, // Adjust as needed
+              // RawScrollbar(
+              //   thumbColor: const Color.fromARGB(255, 232, 132, 165),
+              //   thumbVisibility: true,
+              //   trackVisibility: false,
+              //   thickness: 25.0,
+              //   radius: Radius.circular(20),
+              //   child: LayoutBuilder(
+              //     builder: (context, constraint) {
+              //       return SingleChildScrollView(
+              //           child: ConstrainedBox(
+              //               constraints:
+              //                   BoxConstraints(minHeight: constraint.maxHeight),
                             child: IntrinsicHeight(
                               child: Flex(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -323,6 +339,21 @@ class _ReadyPageState extends State<ReadyPage> {
                                   ]
                               )
                             )
+            //             )
+            //         );
+            //       }
+            //     )
+            // ),
+            // contentArea(),
+            // additionalTextSection(),
+            // SizedBox(
+            //     width: boxWidth * 0.8,
+            //     height: availableHeight * 0.6 * 0.5,
+            //     child: Center(
+            //       child: getVideoContent(),
+            //     ),
+            // ),
+            // prep_preg_Button(),
             )
           ]
       )
@@ -361,7 +392,9 @@ class _ReadyPageState extends State<ReadyPage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                updateMethodContent();
+                // updateMethodContent();
+                SessionManager.logEvent("ReadytoHaveBabyPage-Method$methodIndex", methods[methodIndex]!.name);
+                print("ReadytoHaveBabyPage-Method$methodIndex ${methods[methodIndex]!.name}");
               });
             },
             splashRadius: 40,
@@ -394,7 +427,7 @@ class _ReadyPageState extends State<ReadyPage> {
         setState(() {
           languageIndex = index;
           overrideIndex = true;
-          updateMethodContent();
+          // updateMethodContent();
           //video1 = updateVideoContent1();
         });
       },
@@ -429,7 +462,7 @@ class _ReadyPageState extends State<ReadyPage> {
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Text(
         subtitleTranslations[languages[languageIndex]] ?? "Translation not found",
-        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
     );
@@ -442,19 +475,15 @@ class _ReadyPageState extends State<ReadyPage> {
         children: [
           // Only display this section for certain method indices
           if (methodIndex == 0 || methodIndex == 1)
-            Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              //padding: EdgeInsets.all(20.0),
-              child: Row(
-                //Row(
+            // Padding(
+              // padding: EdgeInsets.only(bottom: 10.0),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                      //     size: 24.0, color: Colors.black),
                       getAudio(heyThisAudioMap, 0),
                     ],
                   ),
@@ -465,13 +494,13 @@ class _ReadyPageState extends State<ReadyPage> {
                       children: [
                         ImageIcon(AssetImage('assets/misc-icons/important.png'),
                             size: 50.0, color: Colors.black),
+                        SizedBox(width: 10),
                         Flexible(
                           child: Text(
                           importantMessage_hiv_sti_Translations[languages[languageIndex]] ??
                               "Important message not found",
-                            style: TextStyle(
-                                fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold
-                            ),
+                          style: TextStyle(
+                              fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
                           ),
                         )
                       ]
@@ -479,7 +508,7 @@ class _ReadyPageState extends State<ReadyPage> {
                   ),
                 ],
               ),
-            ),
+            // ),
           // Button for learning more, only shown for condoms
           if (methodIndex == 0 || methodIndex == 1)
             ElevatedButton.icon(
@@ -504,6 +533,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 );
               },
             ),
+            SizedBox(height: 10)
 
 
             // ElevatedButton.icon(
@@ -560,7 +590,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 style: TextStyle(
                     fontFamily: 'Roboto',
                     color: Colors.white,
-                    fontSize: 22.0),
+                    fontSize: 19.0),
               ),
             ),
           ],
@@ -581,7 +611,7 @@ class _ReadyPageState extends State<ReadyPage> {
       //required String header,
       required String title}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -591,8 +621,8 @@ class _ReadyPageState extends State<ReadyPage> {
             children: [
               Image.asset(
                 imagePath,
-                width: 200, // Adjust width
-                height: 200, // Adjust height
+                width: 170, // Adjust width
+                height: 170, // Adjust height
                 fit: BoxFit.contain,
               ),
               Expanded(
@@ -620,7 +650,7 @@ class _ReadyPageState extends State<ReadyPage> {
                               Flexible(
                                 child: Text(
                                 title,
-                                style: TextStyle(fontFamily: 'Roboto', fontSize: 20.0, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 16.0, fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ]
@@ -647,7 +677,7 @@ class _ReadyPageState extends State<ReadyPage> {
             size:45
             ),
         label: Text(prep_preg_Translations[languages[languageIndex]] ?? "Label not found", 
-            style: TextStyle(fontSize: 24.0),
+            style: TextStyle(fontSize: 22.0),
           ),
         style: ElevatedButton.styleFrom(
           backgroundColor: MaraColors.lavender,

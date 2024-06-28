@@ -96,8 +96,8 @@ class OptionsImage extends StatelessWidget {
                 onPressed: () {
                   updateIndex(index);
                   
-                  SessionManager.logEvent("Method Selected $index", methods[index]!.name);
-                  print("Method Selected $index ${methods[index]!.name}");
+                  SessionManager.logEvent("OptionsPage-Method$index", methods[index]!.name);
+                  print("OptionsPage-Method$index ${methods[index]!.name}");
                 },
                 color: isSelected ? Colors.black : Colors.transparent,
                 iconSize: size,
