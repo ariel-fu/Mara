@@ -18,10 +18,14 @@ class _QuizScreenState extends State<QuizScreen> {
   bool overrideIndex = false;
   int languageIndex = 2; // similar indexing for language
   String _currentLanguage = 'English';
+  DateTime? screenEntryTime;
+
   @override
   void initState() {
     super.initState();
+    screenEntryTime = DateTime.now();
     SessionManager.logScreenEntry('QuizPage'); // Log entry time when the screen is initialized
+     _loadCurrentLanguage();
   }
 
   @override

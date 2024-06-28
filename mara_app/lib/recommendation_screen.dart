@@ -53,34 +53,48 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   //   _methodDetailsDataFuture = loadMethodDetails();
   // }
 
-  @override
-void initState() {
-  super.initState();
-  _logScreenEntry();
-  _loadCurrentLanguage();
-  _methodDetailsDataFuture = loadMethodDetails();
-}
-
-  void _logScreenEntry() {
-    DateTime entryTime = DateTime.now();  // Set entry time when the screen is loaded
-    SessionManager.logScreenEntry('RecommendationScreen'); // Log screen entry
-    debugPrint('Screen Entry: RecommendationScreen at ${entryTime.toIso8601String()}'); // debug print
-}
-
-void _logScreenExit() {
-  DateTime exitTime = DateTime.now(); 
-  SessionManager.logScreenExit('RecommendationScreen'); // Log screen exit
-  debugPrint('Screen Exit: RecommendationScreen at ${exitTime.toIso8601String()}'); // Print the exit time
-}
-
-
-
+//   @override
+// void initState() {
+//   super.initState();
+//   _logScreenEntry();
+//   _loadCurrentLanguage();
+//   _methodDetailsDataFuture = loadMethodDetails();
+// }
 
 @override
-void dispose() {
-  _logScreenExit();
-  super.dispose();
-}
+  void initState() {
+    super.initState();
+    _loadCurrentLanguage();
+    SessionManager.logScreenEntry('RecommendationScreen'); // Log entry time when the screen is initialized
+    _methodDetailsDataFuture = loadMethodDetails();
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('RecommendationScreen'); // Log exit time and calculate duration when leaving the screen
+    super.dispose();
+  }
+
+//   void _logScreenEntry() {
+//     DateTime entryTime = DateTime.now();  // Set entry time when the screen is loaded
+//     SessionManager.logScreenEntry('RecommendationScreen'); // Log screen entry
+//     debugPrint('Screen Entry: RecommendationScreen at ${entryTime.toIso8601String()}'); // debug print
+// }
+
+// void _logScreenExit() {
+//   DateTime exitTime = DateTime.now(); 
+//   SessionManager.logScreenExit('RecommendationScreen'); // Log screen exit
+//   debugPrint('Screen Exit: RecommendationScreen at ${exitTime.toIso8601String()}'); // Print the exit time
+// }
+
+
+
+
+// @override
+// void dispose() {
+//   _logScreenExit();
+//   super.dispose();
+// }
 
 
  
@@ -164,6 +178,7 @@ Widget _endSessionButton() {
       padding: const EdgeInsets.symmetric(vertical: 20.0),
       child: ElevatedButton(
         onPressed: () async {
+          SessionManager.logScreenExit('RecommendationScreen');
           await SessionManager.endCurrentSession(); // THIS WILL TRIGGER EXPRT DATA
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => ThankYouScreen()),
@@ -363,6 +378,7 @@ Widget build(BuildContext context) {
                                         ),
                                       ),
                                     );
+                                    SessionManager.logEvent("MethodDetailsScreen-${RecommendationModel.getJsonRefFromName(trimmedRec)}", "Summary of ${RecommendationModel.getJsonRefFromName(trimmedRec)}");
                                   } 
                                   else {
                                     // Handle the case where method details are not found

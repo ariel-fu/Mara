@@ -21,9 +21,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
     super.initState();
     screenEntryTime = DateTime.now();
     _loadCurrentLanguage();
+    SessionManager.startNewSession(); // Start a new session
     SessionManager.logScreenEntry(
         'LaunchPage');
-    SessionManager.startNewSession(); // Start a new session
  // Log entry time when the screen is initialized
   }
 
