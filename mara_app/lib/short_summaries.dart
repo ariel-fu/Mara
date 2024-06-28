@@ -218,7 +218,7 @@ Widget build(BuildContext context) {
               thumbColor: const Color.fromARGB(255, 232, 132, 165),
               thumbVisibility: true,
               trackVisibility: false,
-              thickness: 25.0,
+              thickness: 15.0,
               radius: Radius.circular(20),
             child: ListView(
               children: <Widget>[
@@ -282,7 +282,8 @@ Widget buildContentCard(IconData summaryIcon, String titleKey, String contentKey
 
   return Container(
     margin: EdgeInsets.only(bottom: 10),
-    padding: EdgeInsets.all(10),
+    padding: EdgeInsets.only(right: 20.0, top: 10.0, bottom:10.0),
+    // padding: EdgeInsets.all(10),
     decoration: BoxDecoration(
       color: MaraColors.purple,
       borderRadius: BorderRadius.circular(10),
