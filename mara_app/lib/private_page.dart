@@ -255,7 +255,7 @@ class _PrivatePageState extends State<PrivatePage> {
                   contentArea(),
                   SizedBox(
                     width: boxWidth * 0.8,
-                    height: availableHeight * 0.5 * 0.6,
+                    height: availableHeight * 0.6 * 0.6,
                     child: Center(
                       child: getVideoContent(),
                     ),
