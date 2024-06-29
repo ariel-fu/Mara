@@ -11,6 +11,17 @@ class SessionManager {
   static int exitVisitCount = 0;
   static int eventCount = 0;
 
+  static Future<void> logFinalLikedMethods(Set<String> likedMethods) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? currentSession = prefs.getString(_currentSessionKey);
+    if (currentSession != null) {
+      String likedMethodsKey = '$currentSession-finalLikedMethods';
+      String likedMethodsString = likedMethods.join(', ');
+      await prefs.setString(likedMethodsKey, likedMethodsString);
+      print("Final Liked Methods: $likedMethodsString");
+    }
+  }
+
   static Future<void> logEvent(String eventName, String details) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? currentSession = prefs.getString('current_session');
