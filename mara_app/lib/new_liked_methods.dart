@@ -107,6 +107,8 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // final likedMethods = Provider.of<Likes>(context, listen: false).likedMethods;
+    // SessionManager.logFinalLikedMethods(likedMethods);  // Log final liked methods
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

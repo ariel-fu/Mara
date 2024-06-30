@@ -164,6 +164,11 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
       child: ElevatedButton(
         onPressed: () async {
           SessionManager.logScreenExit('RecommendationScreen');
+          // Get the liked methods from the provider
+          final likedMethods = Provider.of<Likes>(context, listen: false).likedMethods;
+          
+          // Log the final liked methods
+          await SessionManager.logFinalLikedMethods(likedMethods);
           await SessionManager.endCurrentSession(); // THIS WILL TRIGGER EXPRT DATA
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => ThankYouScreen()),
