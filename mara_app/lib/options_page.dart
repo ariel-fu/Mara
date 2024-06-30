@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -28,6 +29,7 @@ class _OptionsPageState extends State<OptionsPage> {
   int? methodIndex;
   final methods = MethodRepository.loadMethods();
   DateTime? screenEntryTime;
+
 
   final Map<String, Map<String, String>> _translations = {
     'English': {
@@ -85,7 +87,7 @@ class _OptionsPageState extends State<OptionsPage> {
     super.initState();
     screenEntryTime = DateTime.now();
     SessionManager.logScreenEntry(
-        'QuizPage'); // Log entry time when the screen is initialized
+        'OptionsPage'); // Log entry time when the screen is initialized
     _loadCurrentLanguage();
     _methodDetailsDataFuture = loadMethodDetails();
   }
@@ -93,7 +95,7 @@ class _OptionsPageState extends State<OptionsPage> {
   @override
   void dispose() {
     SessionManager.logScreenExit(
-        'QuizPage'); // Log exit time and calculate duration when leaving the screen
+        'OptionsPage'); // Log exit time and calculate duration when leaving the screen
     super.dispose();
   }
 
@@ -341,7 +343,10 @@ class _OptionsPageState extends State<OptionsPage> {
                                             },
                                           ),
                                         ),
+                                        
                                       ),
+                                    // SessionManager.logEvent("MethodDetailsScreen-$", "Navigated to details of ${methodName}");
+                                    SessionManager.logEvent("MethodDetailsScreen-${methods[methodIndex]!.name}", "Summary of ${methods[methodIndex]!.name}"),
                                       // methodIndex = null,
                                     }
                                   else
@@ -411,6 +416,7 @@ class _OptionsPageState extends State<OptionsPage> {
   void updateIndex(int index) {
     setState(() {
       methodIndex = index;
+      // SessionManager.logEvent("Method Selected", methods[index]!.name);
     });
   }
 

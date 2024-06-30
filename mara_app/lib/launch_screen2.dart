@@ -14,12 +14,23 @@ class LaunchScreen extends StatefulWidget {
 
 class _LaunchScreenState extends State<LaunchScreen> {
   String _currentLanguage = 'English';
+  DateTime? screenEntryTime;
 
   @override
   void initState() {
     super.initState();
+    screenEntryTime = DateTime.now();
     _loadCurrentLanguage();
-    SessionManager.startNewSession(); // Start a new session
+
+    // Log entry time when the screen is initialized
+    SessionManager.logScreenEntry('LaunchPage');
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit(
+        'LaunchPage'); // Log exit time and calculate duration when leaving the screen
+    super.dispose();
   }
 
   // Load the current language from SharedPreferences

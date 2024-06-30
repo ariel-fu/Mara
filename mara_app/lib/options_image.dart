@@ -6,79 +6,43 @@ import 'model/method_repository.dart';
 import 'providers/provider_liked_methods.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:mara_app/icons/image_asset_strings.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'session_manager.dart';
 
-class OptionsImage extends StatefulWidget {
+class OptionsImage extends StatelessWidget {
+  // works with an aspect ratio of 16/10
   final double containerWidth, containerHeight;
   final int? methodIndex;
   final Function updateIndex;
-
-  OptionsImage(this.containerWidth, this.containerHeight, this.methodIndex,
-      this.updateIndex,
-      {Key? key})
-      : super(key: key);
-
-  @override
-  _OptionsImageState createState() => _OptionsImageState();
-}
-
-class _OptionsImageState extends State<OptionsImage> {
+  OptionsImage(this.containerWidth, this.containerHeight, this.methodIndex, this.updateIndex, {super.key});
   final methods = MethodRepository.loadMethods();
-  String _currentLanguage = "English";
-  int languageIndex = 2;
-  final languages = ["Kiswahili", "Dholuo", "English"];
-
-  final Map<String, String> _translations = {
-    'English': "Favorite it!",
-    'Dholuo': "Kete obed mihero!",
-    'Kiswahili': "Ipende!",
-  };
-
-  Future<void> _loadCurrentLanguage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _currentLanguage = prefs.getString('selectedLanguage') ?? 'English';
-    });
-    if (_currentLanguage.contains('English')) {
-      languageIndex = 2;
-    } else if (_currentLanguage.contains('Dholuo')) {
-      languageIndex = 1;
-    } else {
-      languageIndex = 0;
-    }
-  }
+  // int count = 0;
 
   @override
   Widget build(BuildContext context) {
-    _loadCurrentLanguage();
-    _currentLanguage = languages[languageIndex];
     var likes = context.watch<Likes>();
     Set<String> likedMethods = likes.likedMethods;
     List<Widget> result = [];
     result.add(
-      widget.methodIndex == 0
-          ? Positioned(
-              top: 0.1 * widget.containerHeight,
-              left: 0.35 * widget.containerWidth,
-              child: Image.asset(ImagePaths.iudWoman,
-                  height: 0.7 * widget.containerHeight))
-          : Positioned(
-              top: 0.1 * widget.containerHeight,
-              left: 0.35 * widget.containerWidth,
-              child: Image.asset(ImagePaths.woman,
-                  height: 0.9 * widget.containerHeight),
-            ),
+      methodIndex == 0 ? Positioned(
+        top: 0.1 * containerHeight,
+        left: 0.35 * containerWidth,
+        child: Image.asset(ImagePaths.iudWoman, height: 0.7 * containerHeight)
+      ) :
+      Positioned(
+        top: 0.1 * containerHeight,
+        left: 0.35 * containerWidth,
+        child: Image.asset(ImagePaths.woman, height: 0.9 * containerHeight),
+      ),
     );
     for (var methodId in methods.keys) {
       var curMethod = methods[methodId];
       result.add(
         Positioned(
-          top: widget.containerHeight * curMethod!.arrowTop,
-          left: widget.containerWidth * curMethod.arrowLeft,
+          top: containerHeight * curMethod!.arrowTop,
+          left: containerWidth * curMethod.arrowLeft,
           child: Visibility(
-            visible: widget.methodIndex == methodId,
-            child: SvgPicture.asset(curMethod.arrowName,
-                height: widget.containerHeight * curMethod.arrowSize),
+            visible: methodIndex == methodId,
+            child: SvgPicture.asset(curMethod.arrowName, height: containerHeight * curMethod.arrowSize),
           ),
         ),
       );
@@ -88,19 +52,26 @@ class _OptionsImageState extends State<OptionsImage> {
       var curMethod = methods[methodId];
       result.add(
         Positioned(
-          top: widget.containerHeight * curMethod!.top,
-          left: widget.containerWidth * curMethod.left,
-          child: _buildIconButton(context, likedMethods, curMethod.icon,
-              methodId, widget.containerWidth * curMethod.size),
+          top: containerHeight * curMethod!.top,
+          left: containerWidth * curMethod.left,
+          child: _buildIconButton(context, likedMethods, curMethod.icon, methodId, containerWidth * curMethod.size),
         ),
       );
+      // result.add(
+      //   Positioned(
+      //     top: containerHeight * curMethod!.top + containerWidth * curMethod.size * 1.1,
+      //     left: containerWidth * curMethod.left + containerWidth * 0.1,
+      //     child: Text('text'),
+      //   ),
+      // );
     }
 
     return Align(
       alignment: Alignment.topCenter,
       child: Container(
-        width: widget.containerWidth,
-        height: widget.containerHeight,
+        // color: Colors.lightBlue[50],
+        width: containerWidth,
+        height: containerHeight,
         child: Stack(
           children: result,
         ),
@@ -108,70 +79,86 @@ class _OptionsImageState extends State<OptionsImage> {
     );
   }
 
-  Widget _buildIconButton(BuildContext context, Set<String> likedMethods,
-      IconData iconData, int index, double size) {
+  Widget _buildIconButton(BuildContext context, Set<String> likedMethods, IconData iconData, int index, double size) {
     var likes = context.read<Likes>();
-    bool isSelected = index == widget.methodIndex;
+    bool isSelected = index == methodIndex;
 
     return Center(
       child: Column(
         children: <Widget>[
-          IconButton(
-            icon: Icon(
-              iconData,
-              color: (isSelected || widget.methodIndex == null)
-                  ? MaraColors.magentaPurple
-                  : MaraColors.lightPurple,
-            ),
-            onPressed: () {
-              widget.updateIndex(index);
-            },
-            color: isSelected ? Colors.black : Colors.transparent,
-            iconSize: size,
-            padding: EdgeInsets.all(10),
-            splashRadius: 20,
-            splashColor: Colors.grey.withOpacity(0.5),
-            highlightColor: Colors.transparent,
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                methods[index]!.name,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: (isSelected || widget.methodIndex == null)
-                      ? Colors.black
-                      : Colors.grey,
+              IconButton(
+                icon: Icon(
+                  iconData,
+                  color: (isSelected || methodIndex == null) ? MaraColors.magentaPurple : MaraColors.lightPurple,
                 ),
+                
+                // TODO - update so that state is managed from options_page instead
+                onPressed: () {
+                  updateIndex(index);
+                  
+                  SessionManager.logEvent("OptionsPage-Method$index", methods[index]!.name);
+                  print("OptionsPage-Method$index ${methods[index]!.name}");
+                },
+                color: isSelected ? Colors.black : Colors.transparent,
+                iconSize: size,
+                padding: EdgeInsets.all(10),
+                splashRadius: 20,
+                splashColor: Colors.grey.withOpacity(0.5),
+                highlightColor: Colors.transparent,
               ),
-            ],
-          ),
           Row(
-            //Thumbs up button below the method name
             children: <Widget>[
-              ElevatedButton.icon(
+            // IconButton(
+            //       icon: likes.likedMethods.contains(methods[index]!.jsonRef) ?
+            //         Icon(Icons.thumb_up) : Icon(Icons.thumb_up_off_alt),
+            //         onPressed: () {
+            //           likes.toggleLikedMethod(methods[index]!.jsonRef);
+            //         }
+            // ),
+            Text(
+              methods[index]!.name,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                // color: Colors.black,
+                color: (isSelected || methodIndex == null) ? Colors.black : Colors.grey,
+              ),
+            ),
+          ],
+        ),
+        Row( //Thumbs up button below the method name
+          children: <Widget>[
+            ElevatedButton.icon(
+                  // icon: likes.likedMethods.contains(methods[index]!.jsonRef) ? Icon(Icons.thumb_up) : Icon(Icons.thumb_up_off_alt),               
                   icon: Icon(
-                    likedMethods.contains(methods[index]!.jsonRef)
-                        ? Icons.thumb_up
-                        : Icons.thumb_up_off_alt,
-                    color: likedMethods.contains(methods[index]!.jsonRef)
-                        ? Colors.brown[900]
-                        : Colors.black,
+                    likedMethods.contains(methods[index]!.jsonRef) ? Icons.thumb_up : Icons.thumb_up_off_alt,
+                    color: likedMethods.contains(methods[index]!.jsonRef) ? Colors.brown[900] : Colors.black,
                   ),
-                  label: Text(_translations[_currentLanguage]!),
-                  // The label (text)
+                  label: Text("Favorite it!"), // The label (text)
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple[100],
-                      // Button background color
-                      foregroundColor: Colors.black),
+                     backgroundColor: Colors.deepPurple[100], // Button background color
+                     foregroundColor: Colors.black 
+                  ),
+                  // style: ButtonStyle(
+                  //   backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  //     (Set<MaterialState> states) {
+                  //       if (states.contains(MaterialState.pressed))
+                  //         return Color.fromARGB(255, 36, 128, 248);
+                  //       return Color.fromRGBO(209, 196, 233, 1);
+                  //     },
+                  //   ),
+                  //   foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                  // ),
                   onPressed: () {
-                    likes.toggleLikedMethod(methods[index]!.jsonRef);
-                  }),
-            ],
-          ),
+                      likes.toggleLikedMethod(methods[index]!.jsonRef);
+
+                  }
+            ),
+          ],
+        ),
         ],
       ),
     );
   }
+
 }

@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 import 'design/colors.dart';
 import 'emergency.dart';
+import 'session_manager.dart';
 
 class imLaunchScreen extends StatefulWidget {
   const imLaunchScreen({super.key});
@@ -18,6 +19,15 @@ class _imLaunchState extends State<imLaunchScreen> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry(
+        'InterLaunchScreen'); // Log entry time when the screen is initialized
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit(
+        'InterLaunchScreen'); // Log exit time and calculate duration when leaving the screen
+    super.dispose();
   }
 
   // Load the current language from SharedPreferences
@@ -135,42 +145,40 @@ class _imLaunchState extends State<imLaunchScreen> {
                 children: [
                   // getAudio(textAudioContentMap),
                   Expanded(
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              getAudio(textAudioContentMap),
-                              Expanded(
-                                child: Text(
-                                  translations[_currentLanguage]!,
-                                  style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center
-                                  ),
-                              )
-                            ],
-                          ),
-                          // Text(translations[_currentLanguage]!,
-                          //     style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
-                          //     textAlign: TextAlign.center),
-                          SizedBox(height: 50.0),
-                          if (_currentLanguage.contains('English')) 
-                            contentTextBold_E(),
-                          if (_currentLanguage.contains('Dholuo')) 
-                            contentTextBold_D(),
-                          if (_currentLanguage.contains('Kiswahili')) 
-                            contentTextBold_K(),
-                            
-                          // Text(translations2[_currentLanguage]!,
-                          //     style: TextStyle(fontFamily: "Montserrat", fontSize: 22.0),
-                          //     textAlign: TextAlign.center),
-                          //contentTextBold(),
-                        ]
-                      )
-                  )
+                      child: Column(children: [
+                    Row(
+                      children: [
+                        getAudio(textAudioContentMap),
+                        Expanded(
+                          child: Text(translations[_currentLanguage]!,
+                              style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 32.0,
+                                  fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center),
+                        )
+                      ],
+                    ),
+                    // Text(translations[_currentLanguage]!,
+                    //     style: TextStyle(fontFamily: "Montserrat", fontSize: 32.0, fontWeight: FontWeight.bold),
+                    //     textAlign: TextAlign.center),
+                    SizedBox(height: 50.0),
+                    if (_currentLanguage.contains('English'))
+                      contentTextBold_E(),
+                    if (_currentLanguage.contains('Dholuo'))
+                      contentTextBold_D(),
+                    if (_currentLanguage.contains('Kiswahili'))
+                      contentTextBold_K(),
+
+                    // Text(translations2[_currentLanguage]!,
+                    //     style: TextStyle(fontFamily: "Montserrat", fontSize: 22.0),
+                    //     textAlign: TextAlign.center),
+                    //contentTextBold(),
+                  ]))
                 ],
               ),
             ),
-            
+
             // Padding(
             //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
             //   child: Center(
@@ -227,23 +235,24 @@ class _imLaunchState extends State<imLaunchScreen> {
                   child: Row(children: [
                     getAudio(pillButtonAudioContentMap),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => EmergencyPage(
                                   initialLanguage: _currentLanguage)),
                         );
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setString("previousScreen", "intermediate");
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: MaraColors.lavender,
                         // Button background color
                         foregroundColor: Colors.black,
                       ),
-                      child: Text(
-                        translations4[_currentLanguage]!,
-                        style: TextStyle(fontSize: 22, color: Colors.black)
-                      ),
+                      child: Text(translations4[_currentLanguage]!,
+                          style: TextStyle(fontSize: 22, color: Colors.black)),
                     )
                   ]),
                 ),
@@ -251,35 +260,31 @@ class _imLaunchState extends State<imLaunchScreen> {
             ),
             SizedBox(height: 500.0),
             Center(
-              child: IntrinsicWidth(
-                child: Row(
-                  children: [
-                    getAudio(buttonAudioContentMap),
-                    // Padding(
-                    //   padding: 
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          '/home',
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: MaraColors.lavender,
-                        // Button background color
-                        foregroundColor: Colors.black,
-                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                      ),
-                      child: Text(
-                        translations3[_currentLanguage]!,
-                        style: TextStyle(fontSize: 30.0, color: Colors.black)
-                      ),
-                    )
-                  // )
-                  ]
-                ),
-              )
-            ),
+                child: IntrinsicWidth(
+              child: Row(children: [
+                getAudio(buttonAudioContentMap),
+                // Padding(
+                //   padding:
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      '/home',
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: MaraColors.lavender,
+                    // Button background color
+                    foregroundColor: Colors.black,
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  ),
+                  child: Text(translations3[_currentLanguage]!,
+                      style: TextStyle(fontSize: 30.0, color: Colors.black)),
+                )
+                // )
+              ]),
+            )),
           ],
         ),
       ),
@@ -302,48 +307,67 @@ class _imLaunchState extends State<imLaunchScreen> {
   }
 
   Widget contentTextBold_E() {
-      return RichText(
-        text: TextSpan(
-          style: const TextStyle(fontFamily: "Montserrat", fontSize: 24.0, color:Colors.black),
-            children: <TextSpan>[
-              TextSpan(text: 'MARA divas is designed especially for young women to help you '),
-              TextSpan(text: 'get the information you need ', style: const TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: 'to make an empowered decision, '),
-              TextSpan(text: 'when you need it.', style: const TextStyle(fontWeight: FontWeight.bold)),
-            ]
-        ),
-        textAlign: TextAlign.center,
-      );
+    return RichText(
+      text: TextSpan(
+          style: const TextStyle(
+              fontFamily: "Montserrat", fontSize: 24.0, color: Colors.black),
+          children: <TextSpan>[
+            TextSpan(
+                text:
+                    'MARA divas is designed especially for young women to help you '),
+            TextSpan(
+                text: 'get the information you need ',
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            TextSpan(text: 'to make an empowered decision, '),
+            TextSpan(
+                text: 'when you need it.',
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+          ]),
+      textAlign: TextAlign.center,
+    );
   }
 
   Widget contentTextBold_D() {
-      return RichText(
-        text: TextSpan(
-          style: const TextStyle(fontFamily: "Montserrat", fontSize: 24.0, color:Colors.black),
-            children: <TextSpan>[
-              TextSpan(text: 'Ka sani ok en saa maber kodi make ich, in gi yiero mang\'eny! MARA divas olos ng\'enyne ne mine matindo mondo okonyi '),
-              TextSpan(text: 'yudo weche ma idwaro ', style: const TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: 'mondo itim yiero man gi ng\'eyo ewi geng\'o ich, '),
-              TextSpan(text: 'ekinde ma idware.', style: const TextStyle(fontWeight: FontWeight.bold)),
-            ]
-        ),
-        textAlign: TextAlign.center,
-      );
+    return RichText(
+      text: TextSpan(
+          style: const TextStyle(
+              fontFamily: "Montserrat", fontSize: 24.0, color: Colors.black),
+          children: <TextSpan>[
+            TextSpan(
+                text:
+                    'Ka sani ok en saa maber kodi make ich, in gi yiero mang\'eny! MARA divas olos ng\'enyne ne mine matindo mondo okonyi '),
+            TextSpan(
+                text: 'yudo weche ma idwaro ',
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            TextSpan(text: 'mondo itim yiero man gi ng\'eyo ewi geng\'o ich, '),
+            TextSpan(
+                text: 'ekinde ma idware.',
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+          ]),
+      textAlign: TextAlign.center,
+    );
   }
 
   Widget contentTextBold_K() {
-      return RichText(
-        text: TextSpan(
-          style: const TextStyle(fontFamily: "Montserrat", fontSize: 24.0, color:Colors.black),
-            children: <TextSpan>[
-              TextSpan(text: 'Ikiwa sasa sio wakati unaofaa kwako kupata Ujauzito, una chaguzi nyingi! MARA divas imeundwa mahsusi kwa ajili ya wanawake vijana ili kukusaidia '),
-              TextSpan(text: 'kapata taarifa unayohitaji ', style: const TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: 'ili kufanya uamuzi uliowezeshwa kuhusu kukinga mimba, '),
-              TextSpan(text: 'unapoihitaji.', style: const TextStyle(fontWeight: FontWeight.bold)),
-            ]
-        ),
-        textAlign: TextAlign.center,
-      );
+    return RichText(
+      text: TextSpan(
+          style: const TextStyle(
+              fontFamily: "Montserrat", fontSize: 24.0, color: Colors.black),
+          children: <TextSpan>[
+            TextSpan(
+                text:
+                    'Ikiwa sasa sio wakati unaofaa kwako kupata Ujauzito, una chaguzi nyingi! MARA divas imeundwa mahsusi kwa ajili ya wanawake vijana ili kukusaidia '),
+            TextSpan(
+                text: 'kapata taarifa unayohitaji ',
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            TextSpan(
+                text: 'ili kufanya uamuzi uliowezeshwa kuhusu kukinga mimba, '),
+            TextSpan(
+                text: 'unapoihitaji.',
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+          ]),
+      textAlign: TextAlign.center,
+    );
   }
 
   Widget getAudio(Map<String, List<String>> audioContentMap) {

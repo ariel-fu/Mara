@@ -6,6 +6,8 @@ import 'bleeding.dart';
 import 'package:mara_app/hiv_page.dart';
 import 'package:mara_app/audio.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
+import 'model/method_selection_repository.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class _PatternPageState extends State<PatternPage> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   bool overrideIndex = false;
+  final methods = MethodSelectionRepository.loadMethods();
 
   String videoAsset1 = 'videoAudio/videos/provider/provider1E.mp4';
   String videoTitle1 = 'Video 1 Language Not Selected';
@@ -37,6 +40,13 @@ class _PatternPageState extends State<PatternPage> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry('PatternPage'); // Log entry time when the screen is initialized
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('PatternPage'); // Log exit time and calculate duration when leaving the screen
+    super.dispose();
   }
 
   String _currentLanguage = 'English';
@@ -272,9 +282,8 @@ class _PatternPageState extends State<PatternPage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                //updateMethodContent();
-                // video1 = updateVideoContent1();
-                // video2 = updateVideoContent2();
+                SessionManager.logEvent("PatternPage-Method$methodIndex", methods[methodIndex]!.name);
+                print("PatternPage-Method$methodIndex ${methods[methodIndex]!.name}");
               });
             },
             splashRadius: 40,

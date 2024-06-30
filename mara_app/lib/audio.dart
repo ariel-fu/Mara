@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/design/colors.dart';
+import 'package:mara_app/session_manager.dart';
 import 'main.dart'; // Import your main.dart file
 import 'package:just_audio/just_audio.dart';
 
@@ -17,6 +18,7 @@ class _AudioWidgetState extends State<AudioWidget> {
   final AudioPlayer player1 = AudioPlayer();
   bool isPlaying1 = false;
   final double size = 60;
+  DateTime? _startTime;
 
   @override
   void dispose() {
@@ -28,9 +30,15 @@ class _AudioWidgetState extends State<AudioWidget> {
   void _toggleAudio1() {
     setState(() {
       if (isPlaying1) {
+        int durationInSeconds =
+            DateTime.now().difference(_startTime!).inSeconds;
+        SessionManager.logAudioStop(
+            widget.audioAsset, DateTime.now(), durationInSeconds);
         player1.pause();
       } else {
         //set it
+        _startTime = DateTime.now();
+        SessionManager.logAudioStart(widget.audioAsset, DateTime.now());
         player1.setAsset(widget.audioAsset);
         player1.play();
       }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mara_app/design/colors.dart';
+import 'package:mara_app/session_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ParticipantIDScreen extends StatefulWidget {
@@ -10,8 +11,8 @@ class ParticipantIDScreen extends StatefulWidget {
 }
 
 class _ParticipantIDScreenState extends State<ParticipantIDScreen> {
-
   TextEditingController _participantID_Controller = TextEditingController();
+
   // String participant_ID = "";
 
   @override
@@ -42,26 +43,31 @@ class _ParticipantIDScreenState extends State<ParticipantIDScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
-                  controller: _participantID_Controller,
-                  validator: (value) {
-                    // if (value == null || value.isEmpty) {
-                    if (value == null || value.isEmpty) {
-                      return 'Enter participant ID before starting next session';
-                    }
-                    print(value);
-                    return null;
-                  },
-                  onChanged: (value) => setState(() => participantID = value),       
+                controller: _participantID_Controller,
+                validator: (value) {
+                  // if (value == null || value.isEmpty) {
+                  if (value == null || value.isEmpty) {
+                    return 'Enter participant ID before starting next session';
+                  }
+                  print(value);
+                  return null;
+                },
+                onChanged: (value) => setState(() => participantID = value),
               ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed:  _formKey.currentState == null || !_formKey.currentState!.validate() ? null :() {
-                // if (participant_ID.currentState!.validate()) {
-                    Navigator.of(context).pushNamedAndRemoveUntil('/launch', (Route<dynamic> route) => false);
-                    saveParticipantID(_participantID_Controller.text);
-                // }
-              },
+              onPressed: _formKey.currentState == null ||
+                      !_formKey.currentState!.validate()
+                  ? null
+                  : () {
+                      // if (participant_ID.currentState!.validate()) {
+                      SessionManager.startNewSession(); // Start a new session
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/launch', (Route<dynamic> route) => false);
+                      saveParticipantID(_participantID_Controller.text);
+                      // }
+                    },
               style: ElevatedButton.styleFrom(
                 backgroundColor: MaraColors.magentaPurple,
               ),

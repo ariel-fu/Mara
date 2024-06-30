@@ -15,38 +15,15 @@ class EmergencyPage extends StatefulWidget {
 
   EmergencyPage({Key? key, required this.initialLanguage}) : super(key: key);
 
-  //const EmergencyPage({Key? key}) : super(key: key);
-
   @override
-  // State<EmergencyPage> createState() => _EmergencyPageState();
   _EmergencyPageState createState() => _EmergencyPageState();
 }
 
 class _EmergencyPageState extends State<EmergencyPage> {
-  //Widget methodContent = Text('DUMMY');
-  // Widget video1 = VideoWidget(
-  //     videoAsset: 'videoAudio/videos/peer/peer3E.mp4',
-  //     title: 'Video 1 Language Not Selected');
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
   bool overrideIndex = false;
-
-  // late String _currentLanguage;
-
-  // String _getAsset() {
-  //   return _videos['assets']?[_currentLanguage] ?? 'Asset not found';
-  // }
-
-  // String _getTitle() {
-  //   return _videos['titles']?[_currentLanguage] ?? 'Title not found';
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _currentLanguage = widget.initialLanguage;
-  // }
 
   final double _aspectRatio = 16 / 10;
 
@@ -103,34 +80,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
       "English":
           "If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
     }
-    // "4": {
-    //   "Kiswahili":
-    //       "Je, unajua kwamba unaweza kuanza njia nyingine ya kuzuia mimba kwa wakati mmoja unapotumia E-pill? Ikiwa ulifanya ngono bila kinga, E-pill ndiyo hatua bora zaidi ya kwanza, na unaweza kupata sindano, kuanzisha tembe, au kuwekewa kipandikizi mara tu unapotaka baada ya kumeza E-pill - hata siku hiyo hiyo! Ukianza kutumia njia na huna uhakika kama ulipata hedhi, fanya mtihani wa ujauzito takriban wiki 2 baada ya kutumia kidonge cha E, ili tu kuwa na uhakika.",
-    //   "Dholuo":
-    //       "Be ing'eyo ni inyalo tiyo gi yore mamoko mag geng'o mako ich sama itiyo gi E-pill? Kapo ni ne inindo gi ng'ato maok iritoi maber, E-pill e okang' mokwongo maber moloyo, kendo inyalo yudo sindan, chako tiyo gi yedhe, kata tiyo gi implant mapiyo kaka idwaro bang' tiyo gi E-pill - ⁠kata mana e odiechieng'no! Kapo ni ichako tiyo gi yorni to ok ing'eyo kabe mano e kinde monego ichak tiyogo, tim nonro mar mako ich bang' jumbe 2 bang' tiyo gi E-pill, mana mondo ibed gadier",
-    //   "English":
-    //       "Did you know that you can start another pregnancy prevention method at the same time as you take the E-pill? If you had unprotected sex, the E-pill is the best first step, and you can get the injection, start pills, or have an implant inserted as soon as you want after taking the E-pill - even the same day! If you start a method and you aren’t sure if you got your period, take a pregnancy test about 2 weeks after the E-pill, just to be sure."
-    // },
   };
 
-  // String videoAsset1 = 'videoAudio/videos/peer/peer3E.mp4';
-  // String videoTitle1 = 'A Peer Perspective Language Not Selected';
-
-  // String videoAsset2 = 'videoAudio/videos/funnyCat2.mp4';
-  // String videoTitle2 = 'Video 2 Language Not Selected';
-
-  //   final Map<String, Map<String, String>> _videos = {
-  //   'assets': {
-  //     'Kiswahili': 'videoAudio/videos/peer/peer3KS.mp4',
-  //     'Dholuo': 'videoAudio/videos/peer/peer3DL.mp4',
-  //     'English': 'videoAudio/videos/peer/peer3E.mp4',
-  //   },
-  //   'titles': {
-  //     'Kiswahili': 'Video: Mwenzio anaelezea',
-  //     'Dholuo': 'Video: Mbasni lero',
-  //     'English': 'Video: a peer explains',
-  //   }
-  // };
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": ["videoAudio/videos/peer/peer3KS.mp4"],
     "Dholuo": ["videoAudio/videos/peer/peer3DL.mp4"],
@@ -164,66 +115,24 @@ class _EmergencyPageState extends State<EmergencyPage> {
     ],
   };
 
-  // final Map<String, Map<String, Map<String, String>>> languageToVideo = {
-  //   'video1': {
-  //     '0': {
-  //       // Language code 0
-  //       'video': 'videoAudio/videos/peer/peer3KS.mp4',
-  //       'text': 'Video: Mwenzio anaelezea',
-  //     },
-  //     '1': {
-  //       // Language code 1
-  //       'video': 'videoAudio/videos/peer/peer3DL.mp4',
-  //       'text': 'Video: Mbasni lero',
-  //     },
-  //     '2': {
-  //       // Language code 2
-  //       'video': 'videoAudio/videos/peer/peer3E.mp4',
-  //       'text': 'Video: a peer explains',
-  //     },
-  //   },
-  //   'video2': {
-  //     '0': {
-  //       'video': 'videoAudio/videos/chimes.mp4',
-  //       'text': 'Kiswahili Video #2',
-  //     },
-  //     '1': {
-  //       'video': 'videoAudio/videos/funnyCat.mp4',
-  //       'text': 'Dholuo Video #2',
-  //     },
-  //     '2': {
-  //       'video': 'videoAudio/videos/funnyCat2.mp4',
-  //       'text': 'English Video #2',
-  //     },
-  //   },
-  // };
-
   String _t(String key) {
     return _translations[key]?[_currentLanguage] ?? key;
   }
-
-  // void _changeLanguage(String language) {
-  //   setState(() {
-  //     _currentLanguage = language;
-  //   });
-  // }
 
   String _currentLanguage = 'English';
 
   @override
   void initState() {
     _loadCurrentLanguage();
-    SessionManager.logScreenEntry('EmergencyPage');  // Log entry time
+    SessionManager.logScreenEntry('EmergencyPage'); // Log entry time
   }
 
   @override
   void dispose() {
-    SessionManager.logScreenExit('EmergencyPage');   // Log exit time and calculate duration
+    SessionManager.logScreenExit(
+        'EmergencyPage'); // Log exit time and calculate duration
     super.dispose();
   }
-
-  
-
 
   Future<void> _loadCurrentLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -290,11 +199,18 @@ class _EmergencyPageState extends State<EmergencyPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.home, size: 48.0),
-            onPressed: () {
-              Navigator.pushReplacementNamed(
-                context,
-                '/home',
-              );
+            onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+
+              var previousScreen =
+                  prefs.getString('previousScreen') ?? 'intermediate';
+              print("previous screen " + previousScreen);
+              (previousScreen == "intermediate")
+                  ? Navigator.pushReplacementNamed(
+                      context,
+                      '/home',
+                    )
+                  : Navigator.of(context).pop();
             },
           ),
         ],
@@ -303,20 +219,23 @@ class _EmergencyPageState extends State<EmergencyPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Text(titleContentMap[languages[languageIndex]]!,
-              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 32.0),
+              child: Text(
+            titleContentMap[languages[languageIndex]]!,
+            style: TextStyle(
+                fontFamily: 'PoetsenOne',
+                color: MaraColors.purple,
+                fontSize: 32.0),
             textAlign: TextAlign.center,
-            )
+          )),
+          Text(
+            subtitleContentMap[languages[languageIndex]]!,
+            style: TextStyle(
+                fontFamily: 'Montserrat',
+                color: MaraColors.magentaPurple,
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
           ),
-          Text(subtitleContentMap[languages[languageIndex]]!,
-              style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  color: MaraColors.magentaPurple,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-              ),
-          
           SizedBox(height: 10.0),
           Expanded(
               // child: Container(
@@ -332,59 +251,65 @@ class _EmergencyPageState extends State<EmergencyPage> {
               //             child: ConstrainedBox(
               //                 constraints:
               //                     BoxConstraints(minHeight: constraint.maxHeight),
-                              child: IntrinsicHeight(
-                                child: Flex(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    direction: Axis.vertical,
-                                    children: [
-                                      contentArea('1'),
-                                      contentArea('2'),
-                                      contentArea('3'),
-                                      SizedBox(
-                                        width: boxWidth * 0.6,
-                                        height: boxHeight * 0.4 * 0.6,
-                                        //child: Center(child: video1),
-                                        //child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
-                                        child: Center(
-                                          child: getVideoContent(),
-                                        ),
-                                      ),
-                                      //place new content next to e-pill image
-                                      Container(
-                                          child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                            getAudio(audioContentMap, 3),
-                                            SizedBox(width: 10.0),
-                                            Expanded(
-                                              child: Column(children: [
-                                                Text(
-                                                  _t('4'),
-                                                  style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  _t('5'),
-                                                  style: TextStyle(fontFamily: 'Roboto', color: Colors.black, fontSize: 19.0),
-                                                ),
-                                              ]),
-                                            ),
-                                            Image.asset(
-                                              'assets/options_images/6.png',
-                                              width: 180,
-                                              height: 180,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ])),
-                                    ]),
-                              )
-                  //             )
-                  //             );
-                  //   }
-                  //   ),
-                  // )
-                  // )
-                  )
+              child: IntrinsicHeight(
+            child: Flex(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                direction: Axis.vertical,
+                children: [
+                  contentArea('1'),
+                  contentArea('2'),
+                  contentArea('3'),
+                  SizedBox(
+                    width: boxWidth * 0.6,
+                    height: boxHeight * 0.4 * 0.6,
+                    //child: Center(child: video1),
+                    //child: VideoWidget(videoAsset: _getAsset(), title: _getTitle())
+                    child: Center(
+                      child: getVideoContent(),
+                    ),
+                  ),
+                  //place new content next to e-pill image
+                  Container(
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                        getAudio(audioContentMap, 3),
+                        SizedBox(width: 10.0),
+                        Expanded(
+                          child: Column(children: [
+                            Text(
+                              _t('4'),
+                              style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.black,
+                                  fontSize: 19.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              _t('5'),
+                              style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.black,
+                                  fontSize: 19.0),
+                            ),
+                          ]),
+                        ),
+                        Image.asset(
+                          'assets/options_images/6.png',
+                          width: 180,
+                          height: 180,
+                          fit: BoxFit.cover,
+                        ),
+                      ])),
+                ]),
+          )
+              //             )
+              //             );
+              //   }
+              //   ),
+              // )
+              // )
+              )
         ],
       ),
     );
@@ -481,16 +406,23 @@ class _EmergencyPageState extends State<EmergencyPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text( //number
+            Text(
+              //number
               contentKey,
-              style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 33.0, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontFamily: 'Roboto',
+                  color: Colors.white,
+                  fontSize: 33.0,
+                  fontWeight: FontWeight.bold),
             ),
             getAudio(audioContentMap, contentNum),
             SizedBox(width: 10.0),
-            Expanded( //content text
+            Expanded(
+              //content text
               child: Text(
                 _t(contentKey),
-                style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
+                style: TextStyle(
+                    fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
               ),
             ),
           ],
@@ -516,23 +448,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
   Widget getVideoContent() {
     String asset = videoContentMap[languages[languageIndex]]![methodIndex];
     String title = videoTitleMap[languages[languageIndex]]![0];
-    return VideoWidget(
-      videoAsset: asset, 
-      title: title,
-      onVideoStart: () => handleVideoStart(asset),
-      onVideoEnd: handleVideoEnd
-    );
+    return VideoWidget(videoAsset: asset, title: title);
   }
-
-  void handleVideoStart(String videoName) {
-    SessionManager.logVideoStart(videoName, DateTime.now());
-  }
-
-  void handleVideoEnd(int duration) {
-    String videoName = videoContentMap[languages[languageIndex]]![methodIndex];
-    SessionManager.logVideoStop(videoName, DateTime.now(), duration);
-  }
-
 
   Widget getAudio(Map<String, List<String>> audioMap, int contentNum) {
     return AudioWidget(audioAsset: audioMap[_currentLanguage]![contentNum]);

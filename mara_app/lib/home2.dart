@@ -17,6 +17,7 @@ import 'package:mara_app/emergency.dart';
 import 'package:mara_app/providers/provider_liked_methods.dart';
 import 'package:mara_app/new_liked_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'session_manager.dart';
 
 import 'audio.dart';
 
@@ -31,11 +32,9 @@ class HomePage2 extends StatefulWidget {
 }
 
 class _HomePage2State extends State<HomePage2> {
-
   bool overrideIndex = false;
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-
 
   final Map<String, List<String>> menuOptions = {
     "Kiswahili": [
@@ -75,7 +74,7 @@ class _HomePage2State extends State<HomePage2> {
 
   final Map<String, List<String>> audioContentMap = {
     "English": [
-      'videoAudio/audio/title_audio/options_E.mp3', 
+      'videoAudio/audio/title_audio/options_E.mp3',
       'videoAudio/audio/title_audio/title_period_E.mp3',
       'videoAudio/audio/title_audio/title_how_long_E.mp3',
       'videoAudio/audio/title_audio/title_what_chance_E.mp3',
@@ -118,6 +117,14 @@ class _HomePage2State extends State<HomePage2> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry('Home2Page'); // Log entry time
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit(
+        'Home2Page'); // Log exit time and calculate duration
+    super.dispose();
   }
 
   // Future<void> _loadCurrentLanguage() async {
@@ -153,7 +160,8 @@ class _HomePage2State extends State<HomePage2> {
     },
     'Kiswahili': {
       'likedTitle': 'Vipendwa vyako',
-      'pleaseVisit': 'Tafadhali tembelea sehemu zote kabla ya kuchukua chemsha bongo',
+      'pleaseVisit':
+          'Tafadhali tembelea sehemu zote kabla ya kuchukua chemsha bongo',
     },
   };
 
@@ -164,8 +172,8 @@ class _HomePage2State extends State<HomePage2> {
   }
 
   // final List<bool> _selections = List.generate(6, (_) => false);
-  final List<bool> _selections =
-      List.generate(6, (_) => false); 
+  final List<bool> _selections = List.generate(6, (_) => false);
+
   bool get _allSelected => _selections.every((bool selected) => selected);
 
   void _handleTap(int index) {
@@ -200,7 +208,7 @@ class _HomePage2State extends State<HomePage2> {
     } else if (index == 5) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ReadyPage()),
+        MaterialPageRoute(builder: (context) => QuizScreen()),
       );
     }
     // } else if (index == 6) {
@@ -236,7 +244,6 @@ class _HomePage2State extends State<HomePage2> {
 
   @override
   Widget build(BuildContext context) {
-
     final double containerWidth = MediaQuery.of(context).size.width;
     final double containerHeight = MediaQuery.of(context).size.height;
     double boxWidth = containerWidth;
@@ -248,28 +255,27 @@ class _HomePage2State extends State<HomePage2> {
       appBar: AppBar(
         centerTitle: true,
         title: PreferredSize(
-              preferredSize: Size.fromHeight(availableHeight * 0.05),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    languageButton('Kiswahili', 0),
-                    SizedBox(width: 40),
-                    languageButton('Dholuo', 1),
-                    SizedBox(width: 40),
-                    languageButton('English', 2),
-                  ],
-                ),
-              ),
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
+                languageButton('Dholuo', 1),
+                SizedBox(width: 40),
+                languageButton('English', 2),
+              ],
             ),
+          ),
+        ),
         actions: <Widget>[
           Consumer<Likes>(
             builder: (context, likes, child) => ElevatedButton.icon(
               icon: Icon(Icons.thumb_up, color: Colors.black),
-              label: Text(_t('likedTitle'), 
-                style: TextStyle(color: Colors.black)
-              ),
+              label:
+                  Text(_t('likedTitle'), style: TextStyle(color: Colors.black)),
               // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
               onPressed: () {
                 var likes = context.read<Likes>();
@@ -293,7 +299,6 @@ class _HomePage2State extends State<HomePage2> {
             ),
           ),
         ],
-        
       ),
       // body: ListView.builder( // List view with builder to create dynamic list items
       //   itemBuilder: (context, index) =>
@@ -324,36 +329,36 @@ class _HomePage2State extends State<HomePage2> {
             //     ),
             //   ),
             // ),
-          //   Padding(
-          //     padding: EdgeInsets.only(left: 500.0),
-          //   child: Consumer<Likes>(
-          //     builder: (context, likes, child) => ElevatedButton.icon(
-          //       icon: Icon(Icons.thumb_up, color: Colors.black),
-          //       label: Text(_t('likedTitle')),
-          //       // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
-          //       onPressed: () {
-          //         var likes = context.read<Likes>();
-          //         Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //             builder: (context) => LikedMethodsScreen(
-          //               initialLanguage: _currentLanguage,
-          //               translations: _translations,
-          //             ),
-          //           ),
-          //         );
-          //       },
-          //       style: ElevatedButton.styleFrom(
-          //         backgroundColor: Colors.deepPurple[100],
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(18.0),
-          //         ),
-          //         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          //         alignment: Alignment.topRight,
-          //       ),
-          //     ),
-          //   ),
-          //   ),
+            //   Padding(
+            //     padding: EdgeInsets.only(left: 500.0),
+            //   child: Consumer<Likes>(
+            //     builder: (context, likes, child) => ElevatedButton.icon(
+            //       icon: Icon(Icons.thumb_up, color: Colors.black),
+            //       label: Text(_t('likedTitle')),
+            //       // label: Text(methods[methodIndex]!.name, style: TextStyle(color: Colors.black)),
+            //       onPressed: () {
+            //         var likes = context.read<Likes>();
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (context) => LikedMethodsScreen(
+            //               initialLanguage: _currentLanguage,
+            //               translations: _translations,
+            //             ),
+            //           ),
+            //         );
+            //       },
+            //       style: ElevatedButton.styleFrom(
+            //         backgroundColor: Colors.deepPurple[100],
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(18.0),
+            //         ),
+            //         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            //         alignment: Alignment.topRight,
+            //       ),
+            //     ),
+            //   ),
+            //   ),
             SizedBox(height: 20.0),
             ListTile(
               contentPadding: EdgeInsets.symmetric(vertical: 28.0),
@@ -385,9 +390,10 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/home_icons/white/period_white.png', width: 90, height: 90),
+                  Image.asset('assets/home_icons/white/period_white.png',
+                      width: 90, height: 90),
                   getAudio(audioContentMap, 1),
-                ], 
+                ],
               )),
               title: Text(menuOptions[_currentLanguage]![1],
                   style: TextStyle(
@@ -432,7 +438,8 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/home_icons/white/chance_white.png', width: 90, height: 90),
+                  Image.asset('assets/home_icons/white/chance_white.png',
+                      width: 90, height: 90),
                   getAudio(audioContentMap, 3),
                 ],
               )),
@@ -479,8 +486,10 @@ class _HomePage2State extends State<HomePage2> {
                   child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/home_icons/white/ready_to_have_baby_pregnant_white.png',
-                      width: 90, height: 90),
+                  Image.asset(
+                      'assets/home_icons/white/ready_to_have_baby_pregnant_white.png',
+                      width: 90,
+                      height: 90),
                   getAudio(audioContentMap, 5),
                 ],
               )),
@@ -523,7 +532,6 @@ class _HomePage2State extends State<HomePage2> {
               onTap: _takeQuiz,
             ),
           ],
-        
         ),
       ),
     );
@@ -562,9 +570,10 @@ class _HomePage2State extends State<HomePage2> {
   }
 
   void _takeQuiz() {
-  //print('Attempting to submit. Selected options: $_selectedOptions'); 
-    if (_allSelected == false) {
-      print('incomplete'); 
+    MaterialPageRoute(builder: (context) => QuizScreen());
+    //print('Attempting to submit. Selected options: $_selectedOptions');
+    if (false) {
+      print('incomplete');
       // Show an alert dialog or a message to complete the quiz
       showDialog(
         context: context,
@@ -584,12 +593,13 @@ class _HomePage2State extends State<HomePage2> {
         },
       );
       return; // Exit the function without navigating if not all questions are answered
-    }
-    else {
-      _allSelected ? Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => QuizScreen()),
-      ) : null;
+    } else {
+      // _allSelected
+      //     ? Navigator.push(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => QuizScreen()),
+      //       )
+      //     : null;
     }
   }
 
@@ -610,14 +620,17 @@ class _HomePage2State extends State<HomePage2> {
                       ? visitedColor
                       : Color.fromRGBO(208, 165, 229, 1)),
             ),
-            onPressed: () {
+            onPressed: () async {
               // Handle button press
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        EmergencyPage(initialLanguage: _currentLanguage)),
+                    builder: (context) => EmergencyPage(
+                          initialLanguage: _currentLanguage,
+                        )),
               );
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString("previousScreen", "home");
             },
             child: Padding(
               padding: EdgeInsets.all(8.0), // Adjust the padding as needed

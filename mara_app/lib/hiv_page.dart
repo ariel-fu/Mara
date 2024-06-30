@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
 import 'home2.dart';
+import 'session_manager.dart';
 
 class HIVPage extends StatefulWidget {
   const HIVPage({Key? key}) : super(key: key);
@@ -27,6 +28,13 @@ class _HIVPageState extends State<HIVPage> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry('HIVPage');  // Log entry time
+  }
+
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('HIVPage');   // Log exit time and calculate duration
+    super.dispose();
   }
 
   Future<void> _loadCurrentLanguage() async {

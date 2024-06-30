@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 import 'package:mara_app/audio.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 class LearnMoreFertility extends StatefulWidget {
   const LearnMoreFertility({Key? key}) : super(key: key);
@@ -120,6 +121,13 @@ class _LearnMoreFertilityState extends State<LearnMoreFertility> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+    SessionManager.logScreenEntry('LearnMorePage');  // Log entry time
+  }
+  
+  @override
+  void dispose() {
+    SessionManager.logScreenExit('LearnMorePage');   // Log exit time and calculate duration
+    super.dispose();
   }
 
   Future<void> _loadCurrentLanguage() async {

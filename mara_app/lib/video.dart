@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mara_app/session_manager.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoWidget extends StatefulWidget {
   final String videoAsset;
   final String title;
-  final VoidCallback? onVideoStart;
-  final ValueChanged<int>? onVideoEnd;
 
-  VideoWidget({
-    Key? key,
-    required this.videoAsset,
-    required this.title,
-    this.onVideoStart,
-    this.onVideoEnd,
-  }) : super(key: key);
+  VideoWidget({Key? key, required this.videoAsset, required this.title})
+      : super(key: key);
 
   @override
   State<VideoWidget> createState() => _VideoWidgetState();
@@ -27,21 +21,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(widget.videoAsset)
-      ..addListener(() {
-        if (_controller.value.position == Duration.zero && _startTime == null) {
-          _startTime = DateTime.now();
-          if (widget.onVideoStart != null) {
-            widget.onVideoStart!();
-          }
-        }
-        if (_controller.value.position == _controller.value.duration) {
-          if (widget.onVideoEnd != null && _startTime != null) {
-            int durationInSeconds = DateTime.now().difference(_startTime!).inSeconds;
-            widget.onVideoEnd!(durationInSeconds);
-          }
-        }
-      });
+    _controller = VideoPlayerController.asset(widget.videoAsset);
     _initializeVideoPlayerFuture = _controller.initialize().catchError((error) {
       print('Error initializing video player: $error');
     });
@@ -58,22 +38,9 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoAsset != widget.videoAsset) {
       _controller.dispose();
-      _controller = VideoPlayerController.asset(widget.videoAsset)
-        ..addListener(() {
-          if (_controller.value.position == Duration.zero && _startTime == null) {
-            _startTime = DateTime.now();
-            if (widget.onVideoStart != null) {
-              widget.onVideoStart!();
-            }
-          }
-          if (_controller.value.position == _controller.value.duration) {
-            if (widget.onVideoEnd != null && _startTime != null) {
-              int durationInSeconds = DateTime.now().difference(_startTime!).inSeconds;
-              widget.onVideoEnd!(durationInSeconds);
-            }
-          }
-        });
-      _initializeVideoPlayerFuture = _controller.initialize().catchError((error) {
+      _controller = VideoPlayerController.asset(widget.videoAsset);
+      _initializeVideoPlayerFuture =
+          _controller.initialize().catchError((error) {
         print('Error initializing video player: $error');
       });
       setState(() {});
@@ -83,8 +50,14 @@ class _VideoWidgetState extends State<VideoWidget> {
   void _onPressedVideo() {
     setState(() {
       if (_controller.value.isPlaying) {
+        int durationInSeconds =
+            DateTime.now().difference(_startTime!).inSeconds;
+        SessionManager.logVideoStop(
+            widget.videoAsset, DateTime.now(), durationInSeconds);
         _controller.pause();
       } else {
+        _startTime = DateTime.now();
+        SessionManager.logVideoStart(widget.videoAsset, DateTime.now());
         _controller.play();
       }
     });
@@ -120,7 +93,9 @@ class _VideoWidgetState extends State<VideoWidget> {
                 ),
                 IconButton(
                   icon: Icon(
-                    _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                    _controller.value.isPlaying
+                        ? Icons.pause
+                        : Icons.play_arrow,
                   ),
                   onPressed: () => _onPressedVideo(),
                   style: IconButton.styleFrom(
