@@ -5,8 +5,6 @@ import 'package:mara_app/video.dart';
 import 'package:mara_app/audio.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'session_manager.dart';
-import 'model/method_selection_repository.dart';
 
 class PrivatePage extends StatefulWidget {
   const PrivatePage({Key? key}) : super(key: key);
@@ -22,7 +20,6 @@ class _PrivatePageState extends State<PrivatePage> {
   int methodIndex = 0; // Index of the selected icon button, 0 for default
   int languageIndex = 2; // similar indexing for language
   final languages = ["Kiswahili", "Dholuo", "English"];
-  final methods = MethodSelectionRepository.loadMethods();
 
   final Map<String, List<String>> videoContentMap = {
     "Kiswahili": [
@@ -186,15 +183,6 @@ class _PrivatePageState extends State<PrivatePage> {
   @override
   void initState() {
     _loadCurrentLanguage();
-    SessionManager.logScreenEntry(
-        'PrivatePage'); // Log entry time when the screen is initialized
-  }
-
-  @override
-  void dispose() {
-    SessionManager.logScreenExit(
-        'PrivatePage'); // Log exit time and calculate duration when leaving the screen
-    super.dispose();
   }
 
   Future<void> _loadCurrentLanguage() async {
@@ -229,58 +217,55 @@ class _PrivatePageState extends State<PrivatePage> {
     double availableHeight = boxHeight;
 
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: PreferredSize(
-            preferredSize: Size.fromHeight(availableHeight * 0.05),
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  languageButton('Kiswahili', 0),
-                  SizedBox(width: 40),
-                  languageButton('Dholuo', 1),
-                  SizedBox(width: 40),
-                  languageButton('English', 2),
-                ],
-              ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                languageButton('Kiswahili', 0),
+                SizedBox(width: 40),
+                languageButton('Dholuo', 1),
+                SizedBox(width: 40),
+                languageButton('English', 2),
+              ],
             ),
           ),
         ),
-        body: Column(
+      ),
+      body: Column(
           // child: SingleChildScrollView(
           //     child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-                child: Text(
-              titleMap[languages[languageIndex]] ?? "Title not found",
-              style: TextStyle(
-                  fontFamily: 'PoetsenOne',
-                  color: MaraColors.purple,
-                  fontSize: 36.0),
-              textAlign: TextAlign.center,
-            )),
-            SizedBox(height: availableHeight * 0.01),
-            subtitleSection(),
-            SizedBox(height: 15.0),
-            methodSelectionRow(),
-            SizedBox(height: 15.0),
-            contentArea(),
-            SizedBox(
-              width: boxWidth * 0.8,
-              height: availableHeight * 0.5 * 0.6,
-              child: Center(
-                child: getVideoContent(),
-              ),
-            ),
-            additionalTextSection(),
-          ],
-        )
-        // )
-        // ),
-        );
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(titleMap[languages[languageIndex]] ?? "Title not found",
+                      style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+                      textAlign: TextAlign.center,
+                    )
+                  ),
+                  SizedBox(height: availableHeight * 0.01),
+                  subtitleSection(),
+                  SizedBox(height: 15.0),
+                  methodSelectionRow(),
+                  SizedBox(height: 15.0),
+                  contentArea(),
+                  SizedBox(
+                    width: boxWidth * 0.8,
+                    height: availableHeight * 0.5 * 0.6,
+                    child: Center(
+                      child: getVideoContent(),
+                    ),
+                  ),
+                  additionalTextSection(),
+                ],
+              )
+          // )
+      // ),
+    );
   }
 
   void _switchLanguage(int language) async {
@@ -345,10 +330,7 @@ class _PrivatePageState extends State<PrivatePage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                SessionManager.logEvent("PrivatePage-Method$methodIndex",
-                    methods[methodIndex]!.name);
-                print(
-                    "PrivatePage-Method$methodIndex ${methods[methodIndex]!.name}");
+                //updateMethodContent();
               });
             },
             splashRadius: 40,
@@ -422,44 +404,45 @@ class _PrivatePageState extends State<PrivatePage> {
           if (methodIndex == 0 || methodIndex == 1)
             // Padding(
             //   padding: EdgeInsets.only(bottom: 10.0),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    getAudio(heyThisAudioMap, 0),
-                  ],
-                ),
-                SizedBox(width: 10),
-                Expanded(
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      getAudio(heyThisAudioMap, 0),
+                    ],
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
                     child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                      ImageIcon(AssetImage('assets/misc-icons/important.png'),
-                          size: 50.0, color: Colors.black),
-                      SizedBox(width: 10),
-                      Flexible(
-                        child: Text(
-                          importantMessageTranslations[
-                                  languages[languageIndex]] ??
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ImageIcon(AssetImage('assets/misc-icons/important.png'),
+                            size: 50.0, color: Colors.black),
+                        SizedBox(width: 10),
+                        Flexible(
+                          child: Text(
+                          importantMessageTranslations[languages[languageIndex]] ??
                               "Important message not found",
                           style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ])),
-              ],
-            ),
-          // ),
+                              fontFamily: 'Roboto', fontSize: 17.0, fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ]
+                    )
+                  ),
+                ],
+              ),
+            // ),
           // Button for learning more, only shown for condoms
           if (methodIndex == 0 || methodIndex == 1)
             ElevatedButton.icon(
               icon: ImageIcon(AssetImage('assets/misc-icons/question.png'),
-                  color: Colors.black, size: 45),
+                  color: Colors.black,
+                  size: 45
+                  ),
               label: Text(
                   learnMoreTranslations[languages[languageIndex]] ??
                       "Learn more",

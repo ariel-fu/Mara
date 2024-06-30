@@ -40,20 +40,17 @@ class _imLaunchState extends State<imLaunchScreen> {
 
   Map<String, String> translations = {
     'English':
-        "If now isn’t the right time for you to get pregnant, you have lots of options!",
+        "If now isn't the right time for you to get pregnant, you have lots of options!",
     'Kiswahili':
-        "Ikiwa huu sio wakati unaofaa kwako kupata Ujauzito, una chaguzi nyingi!",
-    'Dholuo': "Ka ma ok en saa maber kodi mako ich, in gi yiero mang'eny!",
+        "Ikiwa sasa sio wakati unaofaa kwako kupata Ujauzito, una chaguzi nyingi!",
+    'Dholuo': "Ka sani ok en saa maber kodi make ich, in gi yiero mang'eny!",
   };
 
-  Map<String, String> translations2 = {
-    'English':
-        "MARA divas is designed especially for young women to help you get the information you need to make an empowered decision, when you need it.",
-    'Kiswahili':
-        "Mara divas imeundwa mahsusi kwa ajili ya wanawake vijana ili kukusaidia kapata taarifa unayohitaji ili kufanya uamuzi uliowezeshwa, unapoihitaji. ",
-    'Dholuo':
-        "Mara divas olos ng'enyne ne mine matindo mondo okonyi yudo weche makare ma idwaro mondo itim yiero makare, ekinde ma idware.",
-  };
+  // Map<String, String> translations2 = {
+  //   'English':  "MARA divas is designed especially for young women to help you get the information you need to make an empowered decision, when you need it.",
+  //   'Kiswahili':  "Mara divas imeundwa mahsusi kwa ajili ya wanawake vijana ili kukusaidia kapata taarifa unayohitaji ili kufanya uamuzi uliowezeshwa, unapoihitaji. ",
+  //   'Dholuo':  "Mara divas olos ng'enyne ne mine matindo mondo okonyi yudo weche makare ma idwaro mondo itim yiero makare, ekinde ma idware.",
+  // };
 
   Map<String, String> translations3 = {
     'English': "Let's get started!",
@@ -335,7 +332,7 @@ class _imLaunchState extends State<imLaunchScreen> {
           children: <TextSpan>[
             TextSpan(
                 text:
-                    'Ka sani ok en saa maber kodi make ich, in gi yiero mang\'eny! MARA divas olos ng\'enyne ne mine matindo mondo okonyi '),
+                    'MARA divas olos ng\'enyne ne mine matindo mondo okonyi '),
             TextSpan(
                 text: 'yudo weche ma idwaro ',
                 style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -356,7 +353,7 @@ class _imLaunchState extends State<imLaunchScreen> {
           children: <TextSpan>[
             TextSpan(
                 text:
-                    'Ikiwa sasa sio wakati unaofaa kwako kupata Ujauzito, una chaguzi nyingi! MARA divas imeundwa mahsusi kwa ajili ya wanawake vijana ili kukusaidia '),
+                    'MARA divas imeundwa mahsusi kwa ajili ya wanawake vijana ili kukusaidia '),
             TextSpan(
                 text: 'kapata taarifa unayohitaji ',
                 style: const TextStyle(fontWeight: FontWeight.bold)),
