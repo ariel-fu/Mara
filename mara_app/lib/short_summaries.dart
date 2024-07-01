@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:mara_app/icons/mara_icons_icons.dart';
 import 'package:mara_app/icons/misc_icons.dart';
 import 'package:mara_app/recommendation_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -83,8 +83,6 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
   }
 
 
-
-
   final Map<String, String>  titleTranslations = {
     'Kiswahili': 'Ukurasa wa muhtasari',
     'Dholuo': 'Oboke ma lero weche e yo machuok',
@@ -128,6 +126,7 @@ Widget build(BuildContext context) {
       body: Center(child: Text('No data available for ${widget.methodName}')),
     );
   }
+  print("Method Name ${widget.methodName}");
 
   String methodName = widget.methodDetails?['name']?[_currentLanguage] ?? widget.methodName;
   // String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
@@ -196,7 +195,7 @@ Widget build(BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
-                    RecommendationModel.getIconForRecommendation(widget.methodName), 
+                    RecommendationModel.getIconForRecommendation_summaryPage(widget.methodName), 
                     size: 80,
                     color: MaraColors.magentaPurple),
                   // Image.asset(iconPath, width: 50, height: 50),

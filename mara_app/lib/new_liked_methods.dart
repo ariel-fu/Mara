@@ -7,6 +7,7 @@ import 'recommendation_model.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'session_manager.dart';
+import 'package:mara_app/design/colors.dart';
 
 class LikedMethodsScreen extends StatefulWidget {
   final String initialLanguage; // renamed from currentLanguage for clarity
@@ -150,6 +151,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
               minVerticalPadding: 20,
                 leading: Icon(
                     RecommendationModel.getIconForRecommendation(method),
+                    color: MaraColors.magentaPurple,
                     size: 50,
                 ),
                 title: Text(RecommendationModel.getTitleFromJsonRef(method)),

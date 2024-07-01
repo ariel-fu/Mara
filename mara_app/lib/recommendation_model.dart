@@ -298,6 +298,20 @@ class RecommendationModel {
     return recommendationImages[recommendation] ?? MaraIcons.iud; // default image if no match found
   }
 
+  static IconData getIconForRecommendation_summaryPage(String recommendation) {
+    Map<String, IconData> recommendationImages = {
+      'Implant': MaraIcons.contraceptive_implant,
+      'Pills (daily pills)': MaraIcons.birth_control_pills,
+      'Condom': MaraIcons.condom,
+      'IUCD (coil)': MaraIcons.iud,
+      'Emergency pill (E-pill, P2)': MaraIcons.double_pills,
+      'Injection (depo)': MaraIcons.syringe,
+      'Female condom': MaraIcons.female_condom,
+    };
+
+    return recommendationImages[recommendation] ?? MaraIcons.double_pills; // default image if no match found
+  }
+
 }
 
 class Q5Recommendation {
