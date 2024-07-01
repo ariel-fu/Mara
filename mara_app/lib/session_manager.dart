@@ -27,9 +27,9 @@ class SessionManager {
 
   static Future<void> logEvent(String eventName, String details) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? currentSession = prefs.getString('current_session');
+    String? currentSession = prefs.getString('_currentSessionKey');
     if (currentSession != null) {
-      String eventKey = '$currentSession-$eventName';
+      String eventKey = '$currentSession-$eventName-Visit$eventCount';
       String eventData = '${DateTime.now().toIso8601String()} - $details';
       if (prefs.getStringList(eventKey) != null) { //already visited the screen
         eventCount++;
@@ -69,7 +69,8 @@ class SessionManager {
     String? currentSession = prefs.getString(_currentSessionKey);
     // int visitCount = 0;
     if (currentSession != null) {
-      String entryTimeKey = '$currentSession-$screenName-$entryVisitCount-entry';
+      String entryTimeKey = '$currentSession-$screenName-Visit$entryVisitCount-entry';
+      print ("Event Key: $entryTimeKey");
       List<String> entryTimes = prefs.getStringList(entryTimeKey) ?? [];
       entryTimes.add(DateTime.now().toIso8601String());
       if (prefs.getStringList(entryTimeKey) != null) {
@@ -90,7 +91,7 @@ class SessionManager {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? currentSession = prefs.getString(_currentSessionKey);
     if (currentSession != null) {
-      String exitTimeKey = '$currentSession-$screenName-$exitVisitCount-exit';
+      String exitTimeKey = '$currentSession-$screenName-Visit$exitVisitCount-exit';
       List<String> exitTimes = prefs.getStringList(exitTimeKey) ?? [];
       exitTimes.add(DateTime.now().toIso8601String());
       if (prefs.getStringList(exitTimeKey) != null) { //already visited the screen
