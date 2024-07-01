@@ -6,8 +6,7 @@ import 'dart:io';
 class SessionManager {
   static const String _sessionKey = 'user_sessions';
   static const String _currentSessionKey = 'current_session';
-  static int entryVisitCount =
-      0; //keep track of how many times a page is visited
+  static int entryVisitCount = 0; //keep track of how many times a page is visited
   static int exitVisitCount = 0;
   static int eventCount = 0;
   static int startVideoCount = 0;
@@ -32,8 +31,7 @@ class SessionManager {
     if (currentSession != null) {
       String eventKey = '$currentSession-$eventName';
       String eventData = '${DateTime.now().toIso8601String()} - $details';
-      if (prefs.getStringList(eventKey) != null) {
-        //already visited the screen
+      if (prefs.getStringList(eventKey) != null) { //already visited the screen
         eventCount++;
         eventCount = eventCount;
       } else {
@@ -71,8 +69,7 @@ class SessionManager {
     String? currentSession = prefs.getString(_currentSessionKey);
     // int visitCount = 0;
     if (currentSession != null) {
-      String entryTimeKey =
-          '$currentSession-$screenName-$entryVisitCount-entry';
+      String entryTimeKey = '$currentSession-$screenName-$entryVisitCount-entry';
       List<String> entryTimes = prefs.getStringList(entryTimeKey) ?? [];
       entryTimes.add(DateTime.now().toIso8601String());
       if (prefs.getStringList(entryTimeKey) != null) {
@@ -96,36 +93,34 @@ class SessionManager {
       String exitTimeKey = '$currentSession-$screenName-$exitVisitCount-exit';
       List<String> exitTimes = prefs.getStringList(exitTimeKey) ?? [];
       exitTimes.add(DateTime.now().toIso8601String());
-      if (prefs.getStringList(exitTimeKey) != null) {
-        //already visited the screen
+      if (prefs.getStringList(exitTimeKey) != null) { //already visited the screen
         exitVisitCount++;
         exitVisitCount = exitVisitCount;
-      } else {
-        //first visit
+      } else { //first visit
         exitVisitCount = 0;
       }
       exitTimeKey = '$currentSession-$screenName-Visit$exitVisitCount-exit';
       await prefs.setStringList(exitTimeKey, exitTimes);
       print("Screen Exited: $exitTimeKey");
 
-      String entryTimeKey =
-          '$currentSession-$screenName-Visit$entryVisitCount-entry';
+      String entryTimeKey = '$currentSession-$screenName-Visit$entryVisitCount-entry';
       List<String> entryTimes = prefs.getStringList(entryTimeKey) ?? [];
 
       print("entryTimes $entryTimes");
       print("entryTimes.length ${entryTimes.length}");
       print("exitTimes.length ${exitTimes.length}");
-      print(
-          "entryTimes.length == exitTimes.length ${entryTimes.length == exitTimes.length}");
+      print("entryTimes.length == exitTimes.length ${entryTimes.length == exitTimes.length}");
 
-      String durationKey = '$currentSession-$screenName-duration';
-      List<String> durations = prefs.getStringList(durationKey) ?? [];
-      DateTime lastEntryTime = DateTime.parse(entryTimes.last);
-      DateTime lastExitTime = DateTime.parse(exitTimes.last);
-      int duration = lastExitTime.difference(lastEntryTime).inSeconds;
-      durations.add(duration.toString());
-      prefs.setStringList(durationKey, durations);
+      if (entryTimes.isNotEmpty && entryTimes.length == exitTimes.length) {
+        String durationKey = '$currentSession-$screenName-duration';
+        List<String> durations = prefs.getStringList(durationKey) ?? [];
+        DateTime lastEntryTime = DateTime.parse(entryTimes.last);
+        DateTime lastExitTime = DateTime.parse(exitTimes.last);
+        int duration = lastExitTime.difference(lastEntryTime).inSeconds;
+        durations.add(duration.toString());
+        prefs.setStringList(durationKey, durations);
     }
+  }
   }
 
   // static Future<void> logQuizChoice(String screenName, String questionKey, String optionKey, String language) async {
@@ -137,8 +132,7 @@ class SessionManager {
   //   }
   // }
 
-  static Future<void> logQuizChoice(String screenName, String questionKey,
-      String optionKey, String language) async {
+  static Future<void> logQuizChoice(String screenName, String questionKey, String optionKey, String language) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? currentSession = prefs.getString(_currentSessionKey);
     if (currentSession != null) {
@@ -149,13 +143,11 @@ class SessionManager {
     }
   }
 
-  static Future<void> logVideoStart(
-      String videoName, DateTime startTime) async {
+  static Future<void> logVideoStart(String videoName, DateTime startTime) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? currentSession = prefs.getString('current_session');
     if (currentSession != null) {
-      String startTimeKey =
-          '$currentSession-video-$videoName-start-$startVideoCount';
+      String startTimeKey = '$currentSession-video-$videoName-start-$startVideoCount';
       startVideoCount++;
       await prefs.setString(startTimeKey, startTime.toIso8601String());
     }
@@ -168,7 +160,7 @@ class SessionManager {
     if (currentSession != null) {
       String endTimeKey = '$currentSession-video-$videoName-end-$endVideoCount';
       String durationKey =
-          '$currentSession-audio-$videoName-$endVideoCount-duration-in-seconds:';
+          '$currentSession-video-$videoName-$endVideoCount-duration-in-seconds:';
       endVideoCount++;
       await prefs.setString(endTimeKey, endTime.toIso8601String());
       await prefs.setInt(durationKey, duration);

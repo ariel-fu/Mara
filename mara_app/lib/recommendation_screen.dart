@@ -45,6 +45,12 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
 
   final double _aspectRatio = 16 / 10;
 
+  final Map<String, String> favoriteIt_translations = {
+    'English': "Favorite it!",
+    'Dholuo': "Kete obed mihero!",
+    'Kiswahili': "Ipende!",
+  };
+
   // @override
   // void initState() {
   //   super.initState();
@@ -408,6 +414,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                                                   ),
                                                 ),
                                               );
+                                              SessionManager.logEvent("MethodDetailsScreen-${RecommendationModel.getJsonRefFromName(trimmedRec)}", "Summary of ${RecommendationModel.getJsonRefFromName(trimmedRec)}");
                                             } else {
                                               // Handle the case where method details are not found
                                               print(
@@ -419,7 +426,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                                             backgroundColor:
                                                 MaraColors.lavender,
                                           ),
-                                          child: Text('Learn More'),
+                                          child: Text(_t("learnMore")),
                                         ),
                                         Consumer<Likes>(
                                             builder: (context, likes, child) {
@@ -438,7 +445,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                                                   ? Colors.brown[900]
                                                   : Colors.black,
                                             ),
-                                            label: Text("Favorite it!"),
+                                            label: Text(favoriteIt_translations[_currentLanguage]!),
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor:
                                                   Colors.deepPurple[100],

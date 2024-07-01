@@ -34,15 +34,12 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
   final Map<String, Map<String, String>> _likedTranslations = {
     'English': {
       'noneLiked': 'No liked methods yet! Visit "What are my options?" to start adding some.',
-      'summaryPage': 'Summary Page',
     },
     'Dholuo': {
-      'noneLiked': 'Hakuna',
-      'summaryPage': 'Oboke ma lero weche e yo machuok',
+      'noneLiked': 'Onge yor geng\'o ich mihero podi! Lim "Yierona gin mage? mondo ikete kaka mihero.',
     },
     'Kiswahili': {
-      'noneLiked': 'Onge',
-      'summaryPage': 'Ukurasa wa muhtasari',
+      'noneLiked': 'Bado hakuna mbinu unazopenda! Tembelea “Chaguzi zangu ni zipi? kupenda mbinu.',
     },
   };
 
@@ -110,26 +107,43 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
   Widget build(BuildContext context) {
     // final likedMethods = Provider.of<Likes>(context, listen: false).likedMethods;
     // SessionManager.logFinalLikedMethods(likedMethods);  // Log final liked methods
+    final double containerWidth = MediaQuery.of(context).size.width;    //final double containerWidth = MediaQuery.of(context).size.width;
+    final double containerHeight = MediaQuery.of(context).size.height;
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;    
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back), 
           onPressed: () => Navigator.of(context).pop(), 
         ),
-        title: Center(child: Text(_t2('likedTitle'))), // or use _t2('liked_methods') for translations
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+        title: PreferredSize(
+          preferredSize: Size.fromHeight(availableHeight * 0.05),
+          child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 _languageButton('Kiswahili'),
+                SizedBox(width: 40),
                 _languageButton('Dholuo'),
+                SizedBox(width: 40),
                 _languageButton('English'),
               ],
             ),
+          ),
+        ),
+      ),
+      body: Column(crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
+              _t2('likedTitle'),
+              style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0),
+              textAlign: TextAlign.center,
+            )
           ),
           Consumer<Likes>(
             builder: (context, likes, child) {
@@ -180,7 +194,13 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                     );
                                 }
                             },
-                            child: Text(_t2('learnMore')),
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.black,
+                              backgroundColor: MaraColors.lavender,
+                            ),
+                            child: Text(
+                              _t2('learnMore'),
+                            ),
                         ),
                         IconButton(
                             icon: Icon(Icons.delete, color: Colors.red),
@@ -208,8 +228,6 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
       ),
     );
   }
-
-
 
 Widget _languageButton(String language) {
     bool isSelected = _currentLanguage == language; // Use the local currentLanguage
