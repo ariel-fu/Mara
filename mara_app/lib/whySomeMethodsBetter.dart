@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'video.dart';
 import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
+import 'session_manager.dart';
 
 class WhySomeMethodsBetter extends StatefulWidget {
   //const WhySomeMethodsBetter({Key? key}) : super(key: key);
@@ -26,6 +27,13 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
+        SessionManager.logScreenEntry('WhySomeMethodsBetter'); // Log entry time when the screen is initialized
+  }
+
+   @override
+  void dispose() {
+    SessionManager.logScreenExit('WhySomeMethodsBetter'); // Log exit time and calculate duration when leaving the screen
+    super.dispose();
   }
 
   Future<void> _loadCurrentLanguage() async {
@@ -149,102 +157,13 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
           contentArea(),
           SizedBox(
             width: boxWidth * 0.8,
-            height: availableHeight * 0.6 * 0.6,
+            height: availableHeight * 0.6 * 0.5,
             child: Center(
               child: getVideoContent(),
             ),
           ),
         ],
       ),
-      // body: Column(
-      //   crossAxisAlignment: CrossAxisAlignment.center,
-      //   children: [
-      //     Center(
-      //       child: Text(
-      //         titleMap[languages[languageIndex]]!,
-      //         style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 30.0),
-      //         textAlign: TextAlign.center,
-      //       ),
-      //     ),
-      //     Container(
-      //         height: containerHeight * 0.1,
-      //         child: Container(
-      //           padding: EdgeInsets.symmetric(vertical: 8.0),
-      //           child: Row(
-      //             // children: ['Kiswahili', 'Dholuo', 'English']
-      //             //     .map((language) => languageButton(language))
-      //             //     .toList(),
-      //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //             children: [
-      //               ElevatedButton(
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     languageIndex = 0;
-      //                     _currentLanguage = 'Kiswahili';
-      //                     overrideIndex = true;
-      //                     // updateMethodContent('content1');
-      //                     video1 = updateVideoContent();
-      //                   });
-      //                 },
-      //                 style: ElevatedButton.styleFrom(
-      //                   backgroundColor:
-      //                   languageIndex == 0 ? Colors.grey : null,
-      //                 ),
-      //                 child: Text('Kiswahili'),
-      //               ),
-      //               ElevatedButton(
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     languageIndex = 1;
-      //                     _currentLanguage = 'Dholuo';
-      //                     overrideIndex = true;
-      //                     // updateMethodContent('content2');
-      //                     video1 = updateVideoContent();
-      //                   });
-      //                 },
-      //                 style: ElevatedButton.styleFrom(
-      //                   backgroundColor:
-      //                   languageIndex == 1 ? Colors.grey : null,
-      //                 ),
-      //                 child: Text('Dholuo'),
-      //               ),
-      //               ElevatedButton(
-      //                 onPressed: () {
-      //                   setState(() {
-      //                     languageIndex = 2;
-      //                     _currentLanguage = 'English';
-      //                     overrideIndex = true;
-      //                     // updateMethodContent('content3');
-      //                     video1 = updateVideoContent();
-      //                   });
-      //                 },
-      //                 style: ElevatedButton.styleFrom(
-      //                   backgroundColor:
-      //                   languageIndex == 2 ? Colors.grey : null,
-      //                 ),
-      //                 child: Text('English'),
-      //               ),
-      //             ],
-      //           ),
-      //         )),
-      //     SizedBox(height: 20.0),
-      //     Container (
-      //       //height: containerHeight * 0.6, // Adjust as needed
-      //       child: Flex(
-      //         crossAxisAlignment: CrossAxisAlignment.center,
-      //         direction: Axis.vertical,
-      //         children: [
-      //           contentArea(),   
-      //           SizedBox(
-      //             width: boxWidth,
-      //             height: boxHeight * 0.5 * 0.6,
-      //             child: Center(child:video1),
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
 
   }
@@ -385,7 +304,7 @@ class _WhySomeMethodsBetterState extends State<WhySomeMethodsBetter> {
               Flexible(
                 child: Text(
                   contentDescriptionMap[languages[languageIndex]]![0],
-                  style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 22.0),
+                  style: TextStyle(fontFamily: 'Roboto', color: Colors.white, fontSize: 19.0),
                 ),
               ),
             ],
