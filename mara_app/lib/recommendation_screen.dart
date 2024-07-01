@@ -51,6 +51,13 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     'Kiswahili': "Ipende!",
   };
 
+  final Map<String, String> endSession_translations = {
+    "English": "END SESSION",
+    "Kiswahili": "TIEKO OKANG'",
+    "Dholuo": "MALIZA KIKAO"
+  };
+
+
   // @override
   // void initState() {
   //   super.initState();
@@ -202,8 +209,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
             fontWeight: FontWeight.bold, // Bold font
           ),
         ),
-        child: const Text(
-          "END SESSION",
+        child: Text(endSession_translations[_currentLanguage]!,
           style: TextStyle(
             fontSize: 20,
             letterSpacing: 2,

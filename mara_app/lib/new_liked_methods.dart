@@ -33,7 +33,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
 
   final Map<String, Map<String, String>> _likedTranslations = {
     'English': {
-      'noneLiked': 'No liked methods yet! Visit "What are my options?" to start adding some.',
+      'noneLiked': 'No favorite methods yet! Visit “What are my options? to favorite a method.',
     },
     'Dholuo': {
       'noneLiked': 'Onge yor geng\'o ich mihero podi! Lim "Yierona gin mage? mondo ikete kaka mihero.',

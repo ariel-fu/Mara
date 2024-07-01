@@ -578,7 +578,7 @@ class _HomePage2State extends State<HomePage2> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Please visit all sections before taking the quiz"),
+            title: Text(_t('pleaseVisit')),
             //content: Text(_t('incompleteMessage')),
             actions: <Widget>[
               TextButton(
