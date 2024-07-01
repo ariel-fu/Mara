@@ -16,6 +16,10 @@ class PrepPage extends StatefulWidget {
 }
 
 class _PrepPageState extends State<PrepPage> {
+  int languageIndex = 2; // Index for language
+  final languages = ["Kiswahili", "Dholuo", "English"];
+  bool overrideIndex = false; // Used to override language selection from route
+
   String _currentLanguage = "English";
   DateTime? _entryTime;
   @override
@@ -155,30 +159,53 @@ class _PrepPageState extends State<PrepPage> {
     });
   }
 
+  final double _aspectRatio = 16 / 10;
+
   @override
   Widget build(BuildContext context) {
+    double containerWidth = MediaQuery.of(context).size.width;
+    double containerHeight = MediaQuery.of(context).size.height;
+    if (containerHeight / containerWidth > _aspectRatio) {
+      containerHeight = containerWidth * _aspectRatio;
+    } else {
+      containerWidth = containerHeight / _aspectRatio;
+    }
+
+    double boxWidth = containerWidth;
+    double boxHeight = containerHeight;
+    double availableHeight = boxHeight;
+
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        
-        title: Center(
-          child: Text(
-            _t('Preparing for a Healthy Pregnancy'),
-            style: TextStyle(fontFamily: 'PoetsenOne', color: MaraColors.purple, fontSize: 36.0)
-          )
-        ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: ['Kiswahili', 'Dholuo', 'English']
-                .map((language) => languageButton(language))
-                .toList(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: PreferredSize(
+            preferredSize: Size.fromHeight(availableHeight * 0.05),
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  languageButton('Kiswahili', 0),
+                  SizedBox(width: 40),
+                  languageButton('Dholuo', 1),
+                  SizedBox(width: 40),
+                  languageButton('English', 2),
+                ],
+              ),
+            ),
           ),
+        ),
+        body:  ListView(
+        children: <Widget>[
+          Center(
+            child: Text(
+             _t('Preparing for a Healthy Pregnancy'),
+            style: TextStyle(
+                fontFamily: 'PoetsenOne',
+                color: MaraColors.purple,
+                fontSize: 36.0),
+            textAlign: TextAlign.center,
+          )),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -190,14 +217,6 @@ class _PrepPageState extends State<PrepPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Text(
-                      //   _t('Preparing for a Healthy Pregnancy'),
-                      //   style: TextStyle(
-                      //     fontWeight: FontWeight.bold,
-                      //     fontSize: 18.0,
-                      //   ),
-                      // ),
-                      // SizedBox(height: 8.0),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -225,17 +244,39 @@ class _PrepPageState extends State<PrepPage> {
     );
   }
 
-  Widget languageButton(String language) {
-    bool isSelected = _currentLanguage == language;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ElevatedButton(
-        onPressed: () => _changeLanguage(language),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.grey : null,
-        ),
-        child: Text(language),
+    void _switchLanguage(int language) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String temp;
+    if (language == 0) {
+      temp = 'Kiswahili';
+    } else if (language == 1) {
+      temp = 'Dholuo';
+    } else {
+      temp = 'English';
+    }
+    await prefs.setString('selectedLanguage', temp);
+    setState(() {
+      _currentLanguage = temp;
+    });
+  }
+
+  Widget languageButton(String language, int index) {
+    bool isSelected = languages[languageIndex] == language;
+
+    return ElevatedButton(
+      onPressed: () {
+        _switchLanguage(index);
+        setState(() {
+          languageIndex = index;
+          overrideIndex = true;
+          // updateMethodContent();
+          //video1 = updateVideoContent1();
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.grey : null,
       ),
+      child: Text(language),
     );
   }
 
