@@ -208,7 +208,7 @@ class _HomePage2State extends State<HomePage2> {
     } else if (index == 5) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => QuizScreen()),
+        MaterialPageRoute(builder: (context) => ReadyPage()),
       );
     }
     // } else if (index == 6) {
@@ -570,16 +570,15 @@ class _HomePage2State extends State<HomePage2> {
   }
 
   void _takeQuiz() {
-    MaterialPageRoute(builder: (context) => QuizScreen());
     //print('Attempting to submit. Selected options: $_selectedOptions');
-    if (false) {
+    if (_allSelected == false) {
       print('incomplete');
       // Show an alert dialog or a message to complete the quiz
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(_t('pleaseVisit')),
+            title: Text("Please visit all sections before taking the quiz"),
             //content: Text(_t('incompleteMessage')),
             actions: <Widget>[
               TextButton(
@@ -594,12 +593,12 @@ class _HomePage2State extends State<HomePage2> {
       );
       return; // Exit the function without navigating if not all questions are answered
     } else {
-      // _allSelected
-      //     ? Navigator.push(
-      //         context,
-      //         MaterialPageRoute(builder: (context) => QuizScreen()),
-      //       )
-      //     : null;
+      _allSelected
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => QuizScreen()),
+            )
+          : null;
     }
   }
 
