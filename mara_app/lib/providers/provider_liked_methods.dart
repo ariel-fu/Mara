@@ -7,7 +7,8 @@ class Likes extends ChangeNotifier {
   final Set<String> _likedMethods = {};
 
   /// An unmodifiable view of the items in the cart.
-  UnmodifiableSetView<String> get likedMethods => UnmodifiableSetView(_likedMethods);
+  UnmodifiableSetView<String> get likedMethods =>
+      UnmodifiableSetView(_likedMethods);
 
   void toggleLikedMethod(String method) {
     String action = _likedMethods.contains(method) ? "Disliked" : "Liked";
@@ -35,5 +36,9 @@ class Likes extends ChangeNotifier {
       return true;
     }
     return false;
+  }
+
+  void clearMethods() {
+    _likedMethods.clear();
   }
 }

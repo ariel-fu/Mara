@@ -59,7 +59,8 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     super.initState();
     _logScreenEntry();
     _loadCurrentLanguage();
-    SessionManager.logScreenEntry('RecommendationScreen'); // Log entry time when the screen is initialized
+    SessionManager.logScreenEntry(
+        'RecommendationScreen'); // Log entry time when the screen is initialized
     _methodDetailsDataFuture = loadMethodDetails();
   }
 
@@ -80,7 +81,8 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
 
   @override
   void dispose() {
-    SessionManager.logScreenExit('RecommendationScreen'); // Log exit time and calculate duration when leaving the screen
+    SessionManager.logScreenExit(
+        'RecommendationScreen'); // Log exit time and calculate duration when leaving the screen
     super.dispose();
   }
 
@@ -129,6 +131,15 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
     setState(() {});
   }
 
+  void clearLikedMethods() {
+    final likes =
+        Provider.of<Likes>(context, listen: false); // Get the Likes instance
+
+    likes.clearMethods();
+    print("Liked Methods after toggle: ${likes.likedMethods}");
+    setState(() {});
+  }
+
 // Widget _endSessionButton() {
 //   return Padding(
 //     padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -165,11 +176,14 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
         onPressed: () async {
           SessionManager.logScreenExit('RecommendationScreen');
           // Get the liked methods from the provider
-          final likedMethods = Provider.of<Likes>(context, listen: false).likedMethods;
-          
+          final likedMethods =
+              Provider.of<Likes>(context, listen: false).likedMethods;
+
           // Log the final liked methods
           await SessionManager.logFinalLikedMethods(likedMethods);
-          await SessionManager.endCurrentSession(); // THIS WILL TRIGGER EXPRT DATA
+          this.clearLikedMethods();
+          await SessionManager
+              .endCurrentSession(); // THIS WILL TRIGGER EXPRT DATA
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => ThankYouScreen()),
           );
@@ -309,7 +323,11 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                           children: [
                             Padding(
                               // padding: const EdgeInsets.all(8.0),
-                              padding: EdgeInsets.only(right: 20.0, left: 20.0, top: 10.0, bottom:10.0),
+                              padding: EdgeInsets.only(
+                                  right: 20.0,
+                                  left: 20.0,
+                                  top: 10.0,
+                                  bottom: 10.0),
                               child: Text(
                                 widget.introTexts.length > index
                                     ? _t(widget.introTexts[index])
