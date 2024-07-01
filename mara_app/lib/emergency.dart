@@ -29,7 +29,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
 
   final Map<String, String> titleContentMap = {
     "English": "It's an emergency!",
-    "Dholuo": " En gima imuonyo e resruok!",
+    "Dholuo": "Mambo 3 unayohitaji kujua kuhusu E-pill (P2)",
     "Kiswahili": "Ni ya dharura!"
   };
 
