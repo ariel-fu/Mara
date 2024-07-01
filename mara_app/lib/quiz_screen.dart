@@ -899,6 +899,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _loadCurrentLanguage();
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
     if (containerHeight / containerWidth > _aspectRatio) {

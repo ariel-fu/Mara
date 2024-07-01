@@ -215,6 +215,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _loadCurrentLanguage();
     double containerWidth = MediaQuery.of(context).size.width;
     double containerHeight = MediaQuery.of(context).size.height;
     if (containerHeight / containerWidth > _aspectRatio) {
@@ -414,7 +415,9 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                                                   ),
                                                 ),
                                               );
-                                              SessionManager.logEvent("MethodDetailsScreen-${RecommendationModel.getJsonRefFromName(trimmedRec)}", "Summary of ${RecommendationModel.getJsonRefFromName(trimmedRec)}");
+                                              SessionManager.logEvent(
+                                                  "MethodDetailsScreen-${RecommendationModel.getJsonRefFromName(trimmedRec)}",
+                                                  "Summary of ${RecommendationModel.getJsonRefFromName(trimmedRec)}");
                                             } else {
                                               // Handle the case where method details are not found
                                               print(
@@ -445,7 +448,8 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                                                   ? Colors.brown[900]
                                                   : Colors.black,
                                             ),
-                                            label: Text(favoriteIt_translations[_currentLanguage]!),
+                                            label: Text(favoriteIt_translations[
+                                                _currentLanguage]!),
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor:
                                                   Colors.deepPurple[100],
