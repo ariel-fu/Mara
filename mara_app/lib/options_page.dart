@@ -273,6 +273,7 @@ class _OptionsPageState extends State<OptionsPage> {
                           ? null
                           : IconButton(
                             onPressed: () => {
+                              SessionManager.logEvent("OptionsPage-Method$methodIndex", methods[methodIndex]!.name),
                               setState(() {
                                 methodIndex = null;
                               })
@@ -416,7 +417,6 @@ class _OptionsPageState extends State<OptionsPage> {
   void updateIndex(int index) {
     setState(() {
       methodIndex = index;
-      // SessionManager.logEvent("Method Selected", methods[index]!.name);
     });
   }
 
