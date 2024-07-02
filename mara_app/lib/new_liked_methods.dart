@@ -34,12 +34,15 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
   final Map<String, Map<String, String>> _likedTranslations = {
     'English': {
       'noneLiked': 'No favorite methods yet! Visit “What are my options? to favorite a method.',
+      'learnMore': 'Learn More',
     },
     'Dholuo': {
       'noneLiked': 'Onge yor geng\'o ich mihero podi! Lim "Yierona gin mage? mondo ikete kaka mihero.',
+      'learnMore': 'Puonjri matut',
     },
     'Kiswahili': {
       'noneLiked': 'Bado hakuna mbinu unazopenda! Tembelea “Chaguzi zangu ni zipi? kupenda mbinu.',
+      'learnMore': 'Jifunze zaidi',
     },
   };
 
@@ -48,12 +51,12 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
     super.initState();
     _loadCurrentLanguage();
     _methodDetailsFuture = loadMethodDetails();
-    SessionManager.logScreenEntry('LikedMethods');  // Log entry time
+    SessionManager.logScreenEntry('LikedMethodsPage');  // Log entry time
   }
 
   @override
   void dispose() {
-    SessionManager.logScreenExit('LikedMethods');   // Log exit time and calculate duration
+    SessionManager.logScreenExit('LikedMethodsPage');   // Log exit time and calculate duration
     super.dispose();
   }
 
@@ -199,7 +202,7 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                               backgroundColor: MaraColors.lavender,
                             ),
                             child: Text(
-                              _t2('learnMore'),
+                              _t('learnMore'),
                             ),
                         ),
                         IconButton(
