@@ -254,12 +254,12 @@ class RecommendationModel {
     Map<String, String> recommendationTitles = {
       'implant': 'Implant',
       'pills' : 'Pills (daily pills)', 
-      'condoms': 'Condoms',
+      'condoms': 'Condom',
       'iud': 'IUCD (coil)', 
       'iucd': 'IUCD (coil)', 
       'emergency': 'Emergency pill (E-pill, P2)', 
       'depo': 'Injection (depo)', 
-      'female_condom': 'Female condoms'
+      'female_condom': 'Female condom'
     };
 
     return recommendationTitles[jsonRef] ?? 'No title found';
@@ -284,29 +284,34 @@ class RecommendationModel {
   return result;
 }
 
+  static String getJsonRefFromName_page(String name) {
+  Map<String, String> jsonName = {
+    'Implant': 'implant',
+    'Pills (daily pills)': 'pills',
+    'Condom': 'condoms',
+    'IUCD (coil)': 'iucd',
+    'IUD (coil)': 'iucd',
+    'Emergency pill': 'emergency',
+    'Injection (depo)': 'depo',
+    'Female condom': 'female_condom',
+  };
+
+  String result = jsonName[name] ?? 'emergency';
+  if (result == 'No title found') {
+    print("No title found for: $name");  // Debugging line to check input
+  }
+  return result;
+}
+
   static IconData getIconForRecommendation(String recommendation) {
     Map<String, IconData> recommendationImages = {
       'implant': MaraIcons.contraceptive_implant,
       'pills': MaraIcons.birth_control_pills,
       'condoms': MaraIcons.condom,
-      'iud': MaraIcons.iud,
+      'iucd': MaraIcons.iud,
       'emergency': MaraIcons.double_pills,
       'depo': MaraIcons.syringe,
       'female_condom': MaraIcons.female_condom,
-    };
-
-    return recommendationImages[recommendation] ?? MaraIcons.iud; // default image if no match found
-  }
-
-  static IconData getIconForRecommendation_summaryPage(String recommendation) {
-    Map<String, IconData> recommendationImages = {
-      'Implant': MaraIcons.contraceptive_implant,
-      'Pills (daily pills)': MaraIcons.birth_control_pills,
-      'Condom': MaraIcons.condom,
-      'IUCD (coil)': MaraIcons.iud,
-      'Emergency pill (E-pill, P2)': MaraIcons.double_pills,
-      'Injection (depo)': MaraIcons.syringe,
-      'Female condom': MaraIcons.female_condom,
     };
 
     return recommendationImages[recommendation] ?? MaraIcons.double_pills; // default image if no match found

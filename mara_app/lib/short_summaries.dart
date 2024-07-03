@@ -71,6 +71,7 @@ class _MethodDetailsScreenState extends State<MethodDetailsScreen> {
     } else {
       languageIndex = 0;
     }
+    // print("previousScreen_summary ${prefs.getString("previousScreen_summary")}");
   }
 
   void _changeLanguage(String language) async{
@@ -126,8 +127,6 @@ Widget build(BuildContext context) {
       body: Center(child: Text('No data available for ${widget.methodName}')),
     );
   }
-  print("Method Name ${widget.methodName}");
-
   String methodName = widget.methodDetails?['name']?[_currentLanguage] ?? widget.methodName;
   // String iconPath = widget.methodDetails?['icon'] ?? 'assets/method_default.png';
   String subtitle = widget.methodDetails?['subtitles']?[_currentLanguage] ?? '';
@@ -195,7 +194,8 @@ Widget build(BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
-                    RecommendationModel.getIconForRecommendation_summaryPage(widget.methodName), 
+                    RecommendationModel.getIconForRecommendation(widget.methodName),
+                    // RecommendationModel.getIconForRecommendation(widget.methodName),  
                     size: 80,
                     color: MaraColors.magentaPurple),
                   // Image.asset(iconPath, width: 50, height: 50),
@@ -317,6 +317,27 @@ Widget buildContentCard(IconData summaryIcon, String titleKey, String contentKey
     ),
   );
 }
+
+// void getMethodIcon () async {
+//   SharedPreferences prefs = await SharedPreferences.getInstance();
+//   String? previousScreen =  prefs.getString('previousScreen_summary');
+//   Icon icon = new Icon;
+//   if (previousScreen == 'OptionsPage') {
+//     icon = Icon(
+//       RecommendationModel.getIconForRecommendation(RecommendationModel.getJsonRefFromName_summaryPage(widget.methodName)), 
+//       size: 80,
+//       color: MaraColors.magentaPurple);
+//   }
+//   else if (previousScreen == 'OptionsPage') {
+
+//   }
+//   else { //previousScreen == 'RecommendationsPage'
+
+//   }
+
+//   return icon;
+
+// }
 
 
 

@@ -8,6 +8,7 @@ import 'package:mara_app/audio.dart';
 import 'package:mara_app/design/colors.dart';
 import 'session_manager.dart';
 import 'model/method_selection_repository.dart';
+import 'package:mara_app/recommendation_model.dart';
 
 class PatternPage extends StatefulWidget {
   const PatternPage({Key? key}) : super(key: key);
@@ -282,8 +283,8 @@ class _PatternPageState extends State<PatternPage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                SessionManager.logEvent("PatternPage-Method$methodIndex", methods[methodIndex]!.name);
-                print("PatternPage-Method$methodIndex ${methods[methodIndex]!.name}");
+                SessionManager.logEvent("PatternPage-MethodSelected", RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name));
+                print("PatternPage, Method Name ${RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name)}");
               });
             },
             splashRadius: 40,

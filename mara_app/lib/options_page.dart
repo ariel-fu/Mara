@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:mara_app/recommendation_model.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -273,7 +274,7 @@ class _OptionsPageState extends State<OptionsPage> {
                           ? null
                           : IconButton(
                             onPressed: () => {
-                              SessionManager.logEvent("OptionsPage-Method$methodIndex", methods[methodIndex]!.name),
+                              SessionManager.logEvent("OptionsPage-MethodSelected", RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name)),
                               setState(() {
                                 methodIndex = null;
                               })
@@ -331,7 +332,8 @@ class _OptionsPageState extends State<OptionsPage> {
                                           builder: (context) =>
                                               MethodDetailsScreen(
                                             methodName:
-                                                methods[methodIndex]!.name,
+                                                // methods[methodIndex]!.name,
+                                                RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name),
                                             methodDetails:
                                                 methodDetailsData[methodRef],
                                             currentLanguage:
@@ -346,9 +348,8 @@ class _OptionsPageState extends State<OptionsPage> {
                                         ),
                                         
                                       ),
-                                    // SessionManager.logEvent("MethodDetailsScreen-$", "Navigated to details of ${methodName}");
-                                    SessionManager.logEvent("MethodDetailsScreen-${methods[methodIndex]!.name}", "Summary of ${methods[methodIndex]!.name}"),
-                                      // methodIndex = null,
+                                    SessionManager.logEvent("Navigated to MethodDetailsScreen", "Summary of ${RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name)}"),
+                                    print("Summary of ${RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name)}"),
                                     }
                                   else
                                     {

@@ -195,6 +195,8 @@ class _LikedMethodsScreenState extends State<LikedMethodsScreen> {
                                             ),
                                         ),
                                     );
+                                    SessionManager.logEvent("Navigated to MethodDetailsScreen", "Summary of $method");
+                                    print("Summary of $method");
                                 }
                             },
                             style: ElevatedButton.styleFrom(

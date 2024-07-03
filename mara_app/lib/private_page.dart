@@ -7,6 +7,7 @@ import 'package:mara_app/design/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'session_manager.dart';
 import 'model/method_selection_repository.dart';
+import 'package:mara_app/recommendation_model.dart';
 
 class PrivatePage extends StatefulWidget {
   const PrivatePage({Key? key}) : super(key: key);
@@ -339,8 +340,7 @@ class _PrivatePageState extends State<PrivatePage> {
             onPressed: () {
               setState(() {
                 methodIndex = index;
-                SessionManager.logEvent("PrivatePage-Method$methodIndex", methods[methodIndex]!.name);
-                print("PrivatePage-Method$methodIndex ${methods[methodIndex]!.name}");
+                SessionManager.logEvent("PrivatePage-MethodSelected", RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name));
               });
             },
             splashRadius: 40,

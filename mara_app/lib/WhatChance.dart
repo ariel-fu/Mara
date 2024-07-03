@@ -10,6 +10,7 @@ import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
 import 'session_manager.dart';
 import 'model/method_selection_repository.dart';
+import 'package:mara_app/recommendation_model.dart';
 
 class WhatChance extends StatefulWidget {
   const WhatChance({Key? key}) : super(key: key);
@@ -262,8 +263,7 @@ class _WhatChanceState extends State<WhatChance> {
               onPressed: () {
                 setState(() {
                   methodIndex = index;
-                  SessionManager.logEvent("WhatChancePage-Method$methodIndex", methods[methodIndex]!.name);
-                  print("WhatChancePage-Method$methodIndex ${methods[methodIndex]!.name}");
+                  SessionManager.logEvent("WhatChancePage-MethodSelected", RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name));
                 });
               },
               color: isSelected ? Colors.black : Colors.transparent,

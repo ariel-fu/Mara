@@ -7,6 +7,7 @@ import 'audio.dart';
 import 'package:mara_app/design/colors.dart';
 import 'session_manager.dart';
 import 'model/method_selection_repository.dart';
+import 'package:mara_app/recommendation_model.dart';
 
 class TimePage extends StatefulWidget {
   const TimePage({Key? key}) : super(key: key);
@@ -241,8 +242,7 @@ class _TimePageState extends State<TimePage> {
               onPressed: () {
                 setState(() {
                   methodIndex = index;
-                  SessionManager.logEvent("TimePage-Method$methodIndex", methods[methodIndex]!.name);
-                  print("TimePage-Method$methodIndex ${methods[methodIndex]!.name}");
+                  SessionManager.logEvent("TimePage-MethodSelected", RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name));
                 });
               },
               color: isSelected ? Colors.black : Colors.transparent,

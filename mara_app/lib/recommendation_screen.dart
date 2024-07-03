@@ -422,8 +422,9 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                                                 ),
                                               );
                                               SessionManager.logEvent(
-                                                  "MethodDetailsScreen-${RecommendationModel.getJsonRefFromName(trimmedRec)}",
+                                                  "Navigated to MethodDetailsScreen",
                                                   "Summary of ${RecommendationModel.getJsonRefFromName(trimmedRec)}");
+                                              print("Summary of ${RecommendationModel.getJsonRefFromName(trimmedRec)}");
                                             } else {
                                               // Handle the case where method details are not found
                                               print(
@@ -586,7 +587,6 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
 
   void navigateToLikedMethodsScreen() {
     // Access the liked methods from the provider
-
     Navigator.push(
       context,
       MaterialPageRoute(

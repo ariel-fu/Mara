@@ -8,6 +8,7 @@ import 'package:mara_app/design/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'session_manager.dart';
 import 'model/method_selection_repository.dart';
+import 'package:mara_app/recommendation_model.dart';
 
 class ReadyPage extends StatefulWidget {
   @override
@@ -386,10 +387,7 @@ class _ReadyPageState extends State<ReadyPage> {
                 methodIndex = index;
                 // updateMethodContent();
                 SessionManager.logEvent(
-                    "ReadytoHaveBabyPage-Method$methodIndex",
-                    methods[methodIndex]!.name);
-                print(
-                    "ReadytoHaveBabyPage-Method$methodIndex ${methods[methodIndex]!.name}");
+                    "ReadytoHaveBabyPage-MethodSelected", RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name));
               });
             },
             splashRadius: 40,
