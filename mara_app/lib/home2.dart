@@ -117,13 +117,13 @@ class _HomePage2State extends State<HomePage2> {
   void initState() {
     super.initState();
     _loadCurrentLanguage();
-    SessionManager.logScreenEntry('Home2Page'); // Log entry time
+    SessionManager.logScreenEntry('Home'); // Log entry time
   }
 
   @override
   void dispose() {
     SessionManager.logScreenExit(
-        'Home2Page'); // Log exit time and calculate duration
+        'Home'); // Log exit time and calculate duration
     super.dispose();
   }
 
@@ -629,7 +629,7 @@ class _HomePage2State extends State<HomePage2> {
                         )),
               );
               SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.setString("previousScreen", "home");
+              prefs.setString("previousScreen", "Home");
             },
             child: Padding(
               padding: EdgeInsets.all(8.0), // Adjust the padding as needed
