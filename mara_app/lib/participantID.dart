@@ -3,6 +3,8 @@ import 'package:mara_app/design/colors.dart';
 import 'package:mara_app/session_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'home2.dart';
+
 class ParticipantIDScreen extends StatefulWidget {
   const ParticipantIDScreen({Key? key}) : super(key: key);
 
@@ -28,6 +30,9 @@ class _ParticipantIDScreenState extends State<ParticipantIDScreen> {
 
   @override
   Widget build(BuildContext context) {
+    HomePage2.emergencyVisited = false;
+    HomePage2.stiVisited = false;
+
     return Scaffold(
       body: Form(
         key: _formKey,

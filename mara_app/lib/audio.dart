@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mara_app/design/colors.dart';
 import 'package:mara_app/session_manager.dart';
@@ -19,11 +21,14 @@ class _AudioWidgetState extends State<AudioWidget> {
   bool isPlaying1 = false;
   final double size = 60;
   DateTime? _startTime;
+  StreamSubscription<PlayerState>? _playerStateSubscription;
 
   @override
   void dispose() {
     super.dispose();
     //releasing resources
+    _playerStateSubscription?.cancel();
+
     player1.dispose();
   }
 
@@ -41,6 +46,17 @@ class _AudioWidgetState extends State<AudioWidget> {
         SessionManager.logAudioStart(widget.audioAsset, DateTime.now());
         player1.setAsset(widget.audioAsset);
         player1.play();
+
+        // Add a listener to the player state
+        _playerStateSubscription =
+            player1.playerStateStream.listen((playerState) {
+          // Check if the audio has finished playing
+          if (playerState.processingState == ProcessingState.completed) {
+            setState(() {
+              isPlaying1 = false; // Update the play state
+            });
+          }
+        });
       }
       setState(() {
         isPlaying1 = !isPlaying1; // Toggle play state
