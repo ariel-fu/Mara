@@ -274,7 +274,7 @@ class _OptionsPageState extends State<OptionsPage> {
                           ? null
                           : IconButton(
                             onPressed: () => {
-                              SessionManager.logEvent("OptionsPage-MethodSelected", RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name)),
+                              // SessionManager.logEvent("OptionsPage-options_page_MethodSelected", RecommendationModel.getJsonRefFromName_page(methods[methodIndex]!.name)),
                               setState(() {
                                 methodIndex = null;
                               })

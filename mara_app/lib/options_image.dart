@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:mara_app/recommendation_model.dart';
 
 import 'model/method_repository.dart';
 import 'providers/provider_liked_methods.dart';
@@ -130,8 +131,8 @@ class _OptionsImageState extends State<OptionsImage> {
                 onPressed: () {
                   widget.updateIndex(index);
                   
-                  SessionManager.logEvent("OptionsPage-Method$index", methods[index]!.name);
-                  print("OptionsPage-Method$index ${methods[index]!.name}");
+                  SessionManager.logEvent("OptionsPage-MethodSelected", RecommendationModel.getJsonRefFromName_page(methods[index]!.name));
+                  print("OptionsPage-MethodSelected ${RecommendationModel.getJsonRefFromName_page(methods[index]!.name)}");
                 },
                 color: isSelected ? Colors.black : Colors.transparent,
                 iconSize: size,
